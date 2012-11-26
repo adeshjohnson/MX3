@@ -36,6 +36,87 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<!--date fix-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/show_user_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/providers/stats_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/stats/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Failed Locally</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2005</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>call_1</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=18</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>failed_locally_1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>asr_1</td>
+	<td>85.7143 %</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>tasr</td>
+	<td>85.7143 %</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/various_calls</td>
@@ -634,11 +715,11 @@
 <tr>
 	<td>assertText</td>
 	<td>id=failed_1</td>
-	<td>4</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=4</td>
+	<td>link=5</td>
 	<td></td>
 </tr>
 <tr>
@@ -664,7 +745,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=page_1</td>
-	<td>1 2</td>
+	<td>1 2 3</td>
 </tr>
 <tr>
 	<td>assertText</td>

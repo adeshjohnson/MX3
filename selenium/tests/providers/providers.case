@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base"" />
+<link rel="selenium.base" href=""/>
 <title>providers</title>
 </head>
 <body>
@@ -36,9 +36,7 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--PROVIDERS-->
-<!--SIP-->
-<!--create-->
+<!--create sip provider-->
 <tr>
 	<td>open</td>
 	<td>/billing/providers/new</td>
@@ -1030,13 +1028,7 @@
 	<td>Provider deleted</td>
 	<td></td>
 </tr>
-<!--dahdi-->
-<!--create-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
+<!--create dahdi-->
 <tr>
 	<td>open</td>
 	<td>/billing/providers/new</td>
@@ -1187,13 +1179,7 @@
 	<td>Provider deleted</td>
 	<td></td>
 </tr>
-<!--IAX2-->
-<!--create-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
+<!--create IAX2-->
 <tr>
 	<td>open</td>
 	<td>/billing/providers/new</td>
@@ -1844,13 +1830,7 @@
 	<td>Provider deleted</td>
 	<td></td>
 </tr>
-<!--H323-->
-<!--create-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
+<!--create H323-->
 <tr>
 	<td>open</td>
 	<td>/billing/providers/new</td>
@@ -2435,8 +2415,7 @@
 	<td></td>
 </tr>
 <!--<tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>//td[@id='active_1']/a/img</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//td[@id='active_1']/a/img</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/providers/list</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>delete_link_5</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Provider deleted</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//img[@alt='Cross']</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/edit/1</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>server_hostname</td> 	<td>127.0.0.1</td> </tr> <tr> 	<td>type</td> 	<td>server_ip</td> 	<td>127.0.0.1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
-<!--TERMINATORS-->
-<!--create-->
+<!--create TERMINATOR-->
 <tr>
 	<td>open</td>
 	<td>/billing/terminators/list</td>
@@ -2489,27 +2468,14 @@
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
-<!--SERVERS-->
-<!--create-->
+<!--create servers-->
 <!--<tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>server_id</td> 	<td>2</td> </tr> <tr> 	<td>type</td> 	<td>server_hostname</td> 	<td>127.0.0.2</td> </tr> <tr> 	<td>type</td> 	<td>server_ip</td> 	<td>127.0.0.2</td> </tr> <tr> 	<td>type</td> 	<td>server_type</td> 	<td>secondary</td> </tr> <tr> 	<td>type</td> 	<td>server_maxcalllimit</td> 	<td>300</td> </tr> <tr> 	<td>type</td> 	<td>server_ami_username</td> 	<td>mor</td> </tr> <tr> 	<td>type</td> 	<td>server_ami_secret</td> 	<td>morsecret</td> </tr> <tr> 	<td>type</td> 	<td>port</td> 	<td>5060</td> </tr> <tr> 	<td>type</td> 	<td>server_comment</td> 	<td>secondary</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//input[@type='image']</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Server created</td> 	<td></td> </tr>-->
-<!--edit-->
 <!--<tr> 	<td>open</td> 	<td>/billing/servers/edit/2</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>server_ssh_secret</td> 	<td>asd</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_id</td> 	<td>2</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_hostname</td> 	<td>127.0.0.2</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_ip</td> 	<td>127.0.0.2</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_type</td> 	<td>secondary</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_maxcalllimit</td> 	<td>300</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_ami_username</td> 	<td>mor</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_ami_secret</td> 	<td>morsecret</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_port</td> 	<td>5060</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_comment</td> 	<td>secondary</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_ssh_username</td> 	<td>root</td> </tr> <tr> 	<td>assertValue</td> 	<td>server_ssh_port</td> 	<td>22</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Server updated</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/edit/2</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>server_ssh_secret</td> 	<td>asd</td> </tr>-->
-<!--delete server-->
-<tr>
-	<td>open</td>
-	<td>/billing/servers/list</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr>-->
 <!--some security mechanism is implement, so deleting by direct links is not possible-->
 <!--<tr> 	<td>clickAndWait</td> 	<td>id=delete_link_2</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Server deleted</td> 	<td></td> </tr>-->
 <!--===========-->
 <!--Assign/unnasign Providers to Terminator -->
-<!--create provider-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/providers/new</td>
@@ -2628,11 +2594,6 @@
 <!--assign-->
 <tr>
 	<td>open</td>
-	<td>/billing/servers/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/servers/server_providers/1</td>
 	<td></td>
 </tr>
@@ -2668,7 +2629,6 @@
 	<td></td>
 </tr>
 <!--Create User, assign Providers to User -->
-<!--create user-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/new</td>
@@ -2717,17 +2677,7 @@
 <!--assign provider-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/devices/show_devices/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[@alt='Device']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2746,21 +2696,12 @@
 	<td></td>
 </tr>
 <!--unassign provider-->
-<tr>
-	<td>open</td>
-	<td>/billing/devices/show_devices/6</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/devices/show_devices/6</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>open</td> 	<td>/billing/devices/destroy/13</td> 	<td></td> </tr>-->
 <!--testing ip addres validation-->
 <tr>
 	<td>open</td>
-	<td>/billing/providers/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
+	<td>/billing/providers/edit/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3433,11 +3374,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>items_per_page</td>
 	<td>2</td>
@@ -3606,46 +3542,11 @@
 	<td></td>
 </tr>
 <!--bad ip-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/edit/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_server_ip</td>
-	<td>111.11.111.11</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/providers/edit/6</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>provider_server_ip</td> 	<td>111.11.111.11</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>click</td> 	<td>//img[@alt='Lightning']</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>waitForPopUp</td> 	<td>new_window</td> 	<td>60000</td> </tr> <tr> 	<td>selectWindow</td> 	<td>name=new_window</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>waitForPopUp</td> 	<td></td> 	<td></td> </tr> <tr> 	<td>selectWindow</td> 	<td>KolmiSoft</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>error</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Connection test failed</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Provider: SIP_provider</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Message: Connection failed</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>IP: 111.11.111.11</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Port: 5060</td> 	<td></td> </tr> <tr> 	<td>selectWindow</td> 	<td>null</td> 	<td></td> </tr>-->
-<tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--good ip-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/edit/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_server_ip</td>
-	<td>127.0.0.1</td>
-</tr>
-<!--1. ip_authentication.case testas praeina, sukuria du vienodais port ir ip providerius adminui, o testas providers.case neleidžia provider kurio id=6 ip pakeisti į 127.0.0.1-->
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>setTimeout</td> 	<td>10000</td> 	<td></td></tr> --><!--good ip--> <tr> 	<td>open</td> 	<td>/billing/providers/edit/6</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>provider_server_ip</td> 	<td>127.0.0.1</td> </tr> <!--1. ip_authentication.case testas praeina, sukuria du vienodais port ir ip providerius adminui, o testas providers.case neleidžia provider kurio id=6 ip pakeisti į 127.0.0.1--> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>click</td> 	<td>//img[@alt='Lightning']</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>waitForPopUp</td> 	<td>new_window</td> 	<td>30000</td> </tr> <tr> 	<td>selectWindow</td> 	<td>name=new_window</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>waitForTextPresent</td> 	<td>Connection test passed!: SIP_provider</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Server: MOR Softswitch (127.0.0.1)</td> 	<td></td> </tr>-->
@@ -4023,11 +3924,6 @@
 	<td>assertText</td>
 	<td>provider_1</td>
 	<td>hd_test</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/list</td>
-	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -4571,7 +4467,7 @@
 	<td>hide_8_0</td>
 	<td></td>
 </tr>
-<!------- test that exception doesn't redirect-->
+<!-- test that exception doesn't redirect-->
 <tr>
 	<td>open</td>
 	<td>/billing/test/raise_exception/Errno::ENETUNREACH</td>

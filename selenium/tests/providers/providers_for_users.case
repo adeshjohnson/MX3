@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>New Test</title>
+<title>providers_for_users.case</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -42,68 +42,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
+	<td>/billing/test/load_delta_sql/providers/provider_test_data</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>rspro</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>rspro1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,12 +74,12 @@
 <tr>
 	<td>assertText</td>
 	<td>provdevice</td>
-	<td>proforrspro - SIP /0.0.0.0 Test Provider - IAX2 /22.33.44.55</td>
+	<td>commonusepro1 - SIP /0.0.0.0 commonusepro2 - SIP /0.0.0.0 commonusepro3 - SIP /0.0.0.0 commonusepro4 - SIP /0.0.0.0 commonusepro5 - SIP /0.0.0.0 commonusepro_h323 - H323 /0.0.0.0 dahdi_provider - dahdi /0.0.0.0 Test Provider - IAX2 /22.33.44.55 Test Provider #2 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>provdevice</td>
-	<td>label=proforrspro - SIP /0.0.0.0</td>
+	<td>label=commonusepro1 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -143,158 +93,18 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro1</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro2</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro3</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro4</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>rspro</td>
+	<td>reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>rspro1</td>
+	<td>reseller21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -308,193 +118,13 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tariff_name</td>
-	<td>tariffforprovider</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=tariff_purpose_provider</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro5</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro6</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro7</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro8</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>proforrspro9</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lcr_name</td>
-	<td>newLCR</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tariff_name</td>
-	<td>usertariff</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>user_rspro</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>user_rspro1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/show_devices/7</td>
+	<td>/billing/devices/show_devices/11</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertNotText</td>
 	<td>provdevice</td>
-	<td>proforrspro - SIP /0.0.0.0 proforrspro1 - SIP /0.0.0.0 proforrspro2 - SIP /0.0.0.0 proforrspro3 - SIP /0.0.0.0 proforrspro4 - SIP /0.0.0.0 proforrspro5 - SIP /0.0.0.0 proforrspro6 - SIP /0.0.0.0 proforrspro7 - SIP /0.0.0.0 proforrspro8 - SIP /0.0.0.0 proforrspro9 - SIP /0.0.0.0</td>
+	<td>commonusepro1 - SIP /0.0.0.0 commonusepro2 - SIP /0.0.0.0 commonusepro3 - SIP /0.0.0.0 commonusepro4 - SIP /0.0.0.0 commonusepro5 - SIP /0.0.0.0 Test Provider - IAX2 /22.33.44.55 Test Provider #2 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -504,12 +134,12 @@
 <tr>
 	<td>assertText</td>
 	<td>provdevice</td>
-	<td>proforrspro5 - SIP /0.0.0.0 proforrspro6 - SIP /0.0.0.0 proforrspro7 - SIP /0.0.0.0 proforrspro8 - SIP /0.0.0.0 proforrspro9 - SIP /0.0.0.0</td>
+	<td>proforrspro1 - SIP /0.0.0.0 proforrspro2 - SIP /0.0.0.0 proforrspro3 - SIP /0.0.0.0 proforrspro4 - SIP /0.0.0.0 proforrspro5 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>provdevice</td>
-	<td>label=proforrspro7 - SIP /0.0.0.0</td>
+	<td>label=proforrspro3 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -529,12 +159,12 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='addprov_details']/table/tbody/tr/td</td>
-	<td>proforrspro5 - SIP /0.0.0.0 proforrspro6 - SIP /0.0.0.0 proforrspro8 - SIP /0.0.0.0 proforrspro9 - SIP /0.0.0.0</td>
+	<td>proforrspro1 - SIP /0.0.0.0 proforrspro2 - SIP /0.0.0.0 proforrspro4 - SIP /0.0.0.0 proforrspro5 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>provdevice</td>
-	<td>label=proforrspro8 - SIP /0.0.0.0</td>
+	<td>label=proforrspro4 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -554,12 +184,12 @@
 <tr>
 	<td>assertText</td>
 	<td>provdevice</td>
-	<td>proforrspro5 - SIP /0.0.0.0 proforrspro6 - SIP /0.0.0.0 proforrspro9 - SIP /0.0.0.0</td>
+	<td>proforrspro1 - SIP /0.0.0.0 proforrspro2 - SIP /0.0.0.0 proforrspro5 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>provdevice</td>
-	<td>label=proforrspro9 - SIP /0.0.0.0</td>
+	<td>label=proforrspro5 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -573,52 +203,52 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>description_15</td>
-	<td>proforrspro7</td>
+	<td>description_19</td>
+	<td>proforrspro3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>description_16</td>
-	<td>proforrspro8</td>
+	<td>description_20</td>
+	<td>proforrspro4</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>description_17</td>
-	<td>proforrspro9</td>
+	<td>description_21</td>
+	<td>proforrspro5</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/10</td>
+	<td>/billing/providers/edit/14</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>provider_name</td>
-	<td>proforrspro8</td>
+	<td>proforrspro4</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Edit Provider: proforrspro8</td>
+	<td>Edit Provider: proforrspro4</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/show_devices/7</td>
+	<td>/billing/devices/show_devices/11</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//a[@id='unassign_link_9']/img</td>
+	<td>//a[@id='unassign_link_13']/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@id='unassign_link_9']/img[@title=&quot;Unassign provider&quot;]</td>
+	<td>//a[@id='unassign_link_13']/img[@title=&quot;Unassign provider&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#unassign_link_11 &gt; img[alt=&quot;User_delete&quot;]</td>
+	<td>css=#unassign_link_15 &gt; img[alt=&quot;User_delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -658,12 +288,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/9</td>
+	<td>/billing/providers/edit/13</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Edit Provider: proforrspro7</td>
+	<td>Edit Provider: proforrspro3</td>
 	<td></td>
 </tr>
 <tr>
@@ -673,7 +303,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/destroy/15</td>
+	<td>/billing/devices/destroy/19</td>
 	<td></td>
 </tr>
 <tr>
@@ -688,7 +318,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/show_devices/7</td>
+	<td>/billing/devices/show_devices/11</td>
 	<td></td>
 </tr>
 <tr>
@@ -709,12 +339,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>rspro</td>
+	<td>reseller2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>rspro1</td>
+	<td>reseller21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -728,22 +358,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/show_devices/7</td>
+	<td>/billing/devices/show_devices/11</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>description_15</td>
-	<td>proforrspro7</td>
+	<td>description_19</td>
+	<td>proforrspro3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>description_16</td>
-	<td>proforrspro8</td>
+	<td>description_20</td>
+	<td>proforrspro4</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/providers_delete_device</td>
+	<td>/billing/test/load_delta_sql/providers/providers_delete_device</td>
 	<td></td>
 </tr>
 <tr>

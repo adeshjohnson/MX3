@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>New Test</title>
+<title>provider_zap.case</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -36,6 +36,16 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/providers/provider_test_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
 <!--dahdi provider with common use-->
 <tr>
 	<td>open</td>
@@ -45,7 +55,7 @@
 <tr>
 	<td>type</td>
 	<td>provider_name</td>
-	<td>dahdi_provider</td>
+	<td>dahdi_provider2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -110,7 +120,7 @@
 <!--assert is it saved-->
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/2</td>
+	<td>/billing/providers/edit/17</td>
 	<td></td>
 </tr>
 <tr>
@@ -122,52 +132,6 @@
 	<td>assertValue</td>
 	<td>provider_common_use_0</td>
 	<td>off</td>
-</tr>
-<!--new provider-->
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>dahdi_pro2</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>provider_tech_dahdi</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
 </tr>
 <!--set rspro-->
 <tr>
@@ -208,7 +172,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=dahdi_pro2 dahdi/0.0.0.0:4569</td>
+	<td>label=dahdi_provider dahdi/0.0.0.0:4569</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -226,11 +190,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/common_use_providers</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>name=select_reseller</td>
 	<td>label=Test Reseller</td>
@@ -238,7 +197,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=dahdi_provider dahdi/0.0.0.0:4569</td>
+	<td>label=dahdi_provider2 dahdi/0.0.0.0:4569</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -293,17 +252,17 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>dahdi_pro2</td>
+	<td>dahdi_provider2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>tariff_name_3</td>
+	<td>tariff_name_18</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>tariff_name_2</td>
+	<td>tariff_name_16</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <!--login-->
@@ -332,31 +291,10 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--protariff-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tariff_name</td>
-	<td>provider-tariff</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Tariff was successfully created</td>
-	<td></td>
-</tr>
 <!--edit-->
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/3</td>
+	<td>/billing/providers/edit/16</td>
 	<td></td>
 </tr>
 <tr>
@@ -375,6 +313,11 @@
 	<td>100</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -386,7 +329,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/2</td>
+	<td>/billing/providers/edit/18</td>
 	<td></td>
 </tr>
 <tr>
@@ -442,17 +385,17 @@
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
-	<td>dahdi_provider</td>
+	<td>dahdi_provider2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>dahdi_pro2</td>
+	<td>dahdi_provider</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>tariff_name_3</td>
+	<td>tariff_name_16</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 </tbody></table>

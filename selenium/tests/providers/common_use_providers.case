@@ -47,8 +47,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/providers/provider_test_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
 <tr>
@@ -102,12 +112,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertSelectedLabel</td>
 	<td>name=select_reseller</td>
 	<td>Select reseller</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertSelectedLabel</td>
 	<td>name=select_provider</td>
 	<td>Select provider</td>
 </tr>
@@ -123,278 +133,13 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>reseller2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>reseller21</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_first_name</td>
-	<td>Test Reseller</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_last_name</td>
-	<td>#2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>reseller3</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>reseller31</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_first_name</td>
-	<td>Test Reseller</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_last_name</td>
-	<td>#3</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>reseller4</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>reseller41</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_first_name</td>
-	<td>Test Reseller</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_last_name</td>
-	<td>#4</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>Test Provider #2</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>Test Provider #3</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>Test Provider #4</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/common_use_providers</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>name=select_reseller</td>
-	<td>Select reseller Test Reseller #2 Test Reseller #3</td>
+	<td>Select reseller Test Reseller #2 Test Reseller #3 Test Reselleraitis #5 Test Reselleriukas #6</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
@@ -404,7 +149,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name=select_provider</td>
-	<td>Select provider Test Provider #2 SIP/0.0.0.0:5060 Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>Select provider commonusepro1 SIP/0.0.0.0:5060 commonusepro2 SIP/0.0.0.0:5060 commonusepro3 SIP/0.0.0.0:5060 commonusepro4 SIP/0.0.0.0:5060 commonusepro5 SIP/0.0.0.0:5060 commonusepro_h323 H323/0.0.0.0:1720 dahdi_provider dahdi/0.0.0.0:4569</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -414,7 +159,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -439,7 +184,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_1</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -464,7 +209,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -489,12 +234,92 @@
 <tr>
 	<td>assertText</td>
 	<td>provider_2</td>
-	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>tariff_2</td>
 	<td>Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>commonusepro1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>commonusepro2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Select provider proforrspro1 - SIP/0.0.0.0 proforrspro2 - SIP/0.0.0.0 proforrspro3 - SIP/0.0.0.0 proforrspro4 - SIP/0.0.0.0 proforrspro5 - SIP/0.0.0.0 commonusepro1 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Select provider proforrspro1 - SIP/0.0.0.0 proforrspro2 - SIP/0.0.0.0 proforrspro3 - SIP/0.0.0.0 proforrspro4 - SIP/0.0.0.0 proforrspro5 - SIP/0.0.0.0 commonusepro1 commonusepro2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -524,12 +349,12 @@
 <tr>
 	<td>assertText</td>
 	<td>name=select_reseller</td>
-	<td>Test Reseller #2 Test Reseller #3</td>
+	<td>Test Reseller #2 Test Reseller #3 Test Reselleraitis #5 Test Reselleriukas #6</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>name=select_provider</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060 Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060 commonusepro2 SIP/0.0.0.0:5060 commonusepro3 SIP/0.0.0.0:5060 commonusepro4 SIP/0.0.0.0:5060 commonusepro5 SIP/0.0.0.0:5060 commonusepro_h323 H323/0.0.0.0:1720 dahdi_provider dahdi/0.0.0.0:4569</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -549,7 +374,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -604,12 +429,12 @@
 <tr>
 	<td>assertText</td>
 	<td>name=select_reseller</td>
-	<td>Test Reseller #2 Test Reseller #3</td>
+	<td>Test Reseller #2 Test Reseller #3 Test Reselleraitis #5 Test Reselleriukas #6</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>name=select_provider</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060 Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060 commonusepro2 SIP/0.0.0.0:5060 commonusepro3 SIP/0.0.0.0:5060 commonusepro4 SIP/0.0.0.0:5060 commonusepro5 SIP/0.0.0.0:5060 commonusepro_h323 H323/0.0.0.0:1720 dahdi_provider dahdi/0.0.0.0:4569</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -624,7 +449,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -913,186 +738,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>reseller5</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>reseller51</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_first_name</td>
-	<td>Test Reselleraitis</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_last_name</td>
-	<td>#5</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>Test Provider #5</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_username</td>
-	<td>reseller6</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=password_password</td>
-	<td>reseller61</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_first_name</td>
-	<td>Test Reselleriukas</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=user_last_name</td>
-	<td>#6</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>User successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>Test Provider #6</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/common_use_providers</td>
 	<td></td>
 </tr>
@@ -1104,7 +749,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1124,7 +769,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1149,7 +794,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1169,7 +814,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1244,7 +889,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=page_1</td>
-	<td>1 2 3 4</td>
+	<td>1 2 3 4 5 6</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1254,7 +899,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_4</td>
-	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1274,7 +919,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_4</td>
-	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1303,18 +948,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_13</td>
+	<td>id=reseller_18</td>
 	<td>Test Reselleraitis #5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_12</td>
-	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>id=provider_18</td>
+	<td>commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_12</td>
+	<td>id=tariff_18</td>
 	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=3</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1324,7 +974,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_1</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1343,23 +993,28 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=3</td>
+	<td>link=4</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_10</td>
+	<td>id=reseller_13</td>
 	<td>Test Reseller #3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_10</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>id=provider_13</td>
+	<td>commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_10</td>
+	<td>id=tariff_13</td>
 	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=5</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1369,7 +1024,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_5</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1387,11 +1042,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=4</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
 	<td>id=reseller_7</td>
 	<td>Test Reseller #2</td>
@@ -1399,7 +1049,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_7</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1419,6 +1069,11 @@
 <tr>
 	<td>assertElementNotPresent</td>
 	<td>id=reseller_10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1444,12 +1099,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_5</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=tariff_5</td>
 	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1459,7 +1119,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_1</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1467,38 +1127,18 @@
 	<td>Test Tariff for Users</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=2</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>id=reseller_9</td>
+	<td>id=reseller_12</td>
 	<td>Test Reseller #3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_9</td>
-	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>id=provider_12</td>
+	<td>commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_9</td>
-	<td>Test Tariff + 0.1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=reseller_3</td>
-	<td>Test Reselleraitis #5</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=provider_3</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=tariff_3</td>
+	<td>id=tariff_12</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1508,32 +1148,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_13</td>
+	<td>id=reseller_3</td>
 	<td>Test Reselleraitis #5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_13</td>
-	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>id=provider_3</td>
+	<td>commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_13</td>
-	<td>Test Tariff + 0.1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=reseller_15</td>
-	<td>Test Reselleriukas #6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=provider_15</td>
-	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=tariff_15</td>
+	<td>id=tariff_3</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1543,17 +1168,72 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_16</td>
+	<td>id=reseller_19</td>
+	<td>Test Reselleraitis #5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_19</td>
+	<td>commonusepro3 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tariff_19</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=reseller_24</td>
 	<td>Test Reselleriukas #6</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_16</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>id=provider_24</td>
+	<td>commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_16</td>
+	<td>id=tariff_24</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=reseller_25</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_25</td>
+	<td>commonusepro4 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tariff_25</td>
+	<td>Test Tariff + 0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=reseller_26</td>
+	<td>Test Reselleriukas #6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_26</td>
+	<td>commonusepro5 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=tariff_26</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1574,7 +1254,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_1</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1583,22 +1263,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=4</td>
+	<td>link=6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_16</td>
+	<td>id=reseller_26</td>
 	<td>Test Reselleriukas #6</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_16</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>id=provider_26</td>
+	<td>commonusepro5 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_16</td>
+	<td>id=tariff_26</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1619,7 +1299,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_1</td>
-	<td>Test Provider #2 SIP/0.0.0.0:5060</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1634,7 +1314,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_2</td>
-	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1648,17 +1328,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_12</td>
+	<td>id=reseller_18</td>
 	<td>Test Reselleraitis #5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_12</td>
-	<td>Test Provider #3 SIP/0.0.0.0:5060</td>
+	<td>id=provider_18</td>
+	<td>commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_12</td>
+	<td>id=tariff_18</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1669,7 +1349,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_4</td>
-	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1683,17 +1363,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_13</td>
+	<td>id=reseller_19</td>
 	<td>Test Reselleraitis #5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_13</td>
-	<td>Test Provider #5 SIP/0.0.0.0:5060</td>
+	<td>id=provider_19</td>
+	<td>commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_13</td>
+	<td>id=tariff_19</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1704,7 +1384,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_7</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1718,17 +1398,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=reseller_16</td>
+	<td>id=reseller_25</td>
 	<td>Test Reselleriukas #6</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_16</td>
-	<td>Test Provider #6 SIP/0.0.0.0:5060</td>
+	<td>id=provider_25</td>
+	<td>commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tariff_16</td>
+	<td>id=tariff_25</td>
 	<td>Test Tariff + 0.1</td>
 </tr>
 <tr>
@@ -1738,7 +1418,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#delete_11 &gt; img[alt=Delete]</td>
+	<td>css=#delete_17 &gt; img[alt=Delete]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1752,9 +1432,34 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_11 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_18 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=page_1</td>
-	<td>1 2 3</td>
+	<td>1 2 3 4 5</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1765,6 +1470,420 @@
 	<td>waitForTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
+</tr>
+<!--LAST CALLS CHECK-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/calls_fix_delta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_common_use_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<!--check if calls do not duplicate, by checking total sum of records-->
+<!--all calls go through common use provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_hour</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_minute</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=total_provider_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=total_reseller_price</td>
+	<td>4.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_user_price</td>
+	<td>19.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_profit</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=total_billsec</td>
+	<td>00:02:20</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=provider_12</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=provider_11</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=provider_10</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=provider_9</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>sys_ani_2</td>
+	<td>commonusepro1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>sys_ani_17</td>
+	<td>commonusepro_h323</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>provider_common_use_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider_common_use_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>provider_common_use_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>provider_common_use_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>provider_common_use_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>provider_common_use_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>sys_ani_2</td>
+	<td>commonusepro1</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>sys_ani_17</td>
+	<td>commonusepro_h323</td>
+</tr>
+<!--commoon use providers without tariff-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/common_use_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Record created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_1</td>
+	<td>commonusepro1 SIP/0.0.0.0:5060</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>9 providers are using this tariff - cannot delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/providers/common_use_providers_without_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sys_ani_2</td>
+	<td>commonusepro1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Test Tariff + 0.1</td>
+	<td>Test Tariff + 0.1</td>
 </tr>
 </tbody></table>
 </body>

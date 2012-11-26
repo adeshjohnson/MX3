@@ -38,19 +38,15 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/functions/settings</td>
+	<td>/billing/test/load_delta_sql/providers/provider_test_data</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
-<tr>
-	<td>check</td>
-	<td>disalow_duplicate_device_usernames</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td> 	<td></td> </tr> <tr> 	<td>check</td> 	<td>disalow_duplicate_device_usernames</td> 	<td></td> </tr>-->
 <!--
 <tr>
 	<td>open</td>
@@ -145,18 +141,18 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
+	<td>/billing/devices/show_devices/2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@id='show_devices_link_2']/img</td>
+	<td>link=Assign Provider</td>
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/devices/show_devices/2</td>
-	<td></td>
+	<td>select</td>
+	<td>name=provdevice</td>
+	<td>label=Test Provider - IAX2 /22.33.44.55</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -174,31 +170,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>sip_provider</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/show_devices/2</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=Assign Provider</td>
 	<td></td>
@@ -206,7 +177,7 @@
 <tr>
 	<td>select</td>
 	<td>name=provdevice</td>
-	<td>sip_provider - SIP /0.0.0.0</td>
+	<td>Test Provider #2 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -515,46 +486,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tariff_name</td>
-	<td>retail_tariff</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=tariff_purpose_provider</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>sip_provider1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/5</td>
 	<td></td>
@@ -567,7 +498,7 @@
 <tr>
 	<td>select</td>
 	<td>name=provdevice</td>
-	<td>sip_provider1 - SIP /0.0.0.0</td>
+	<td>pro1 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>New Test</title>
+<title>pro_common_use_destroy.case</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -38,162 +38,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/new</td>
+	<td>/billing/test/load_delta_sql/providers/provider_test_data</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>pro1</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>pro2</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>pro3</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>provider_name</td>
-	<td>pro4</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Provider was successfully updated</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
 <tr>
@@ -229,7 +79,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=pro1 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -254,7 +104,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=pro2 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro2 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -279,7 +129,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=pro3 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro3 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -304,7 +154,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=pro4 SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro4 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -353,22 +203,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro1</td>
+	<td>commonusepro1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro2</td>
+	<td>commonusepro2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro3</td>
+	<td>commonusepro3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro4</td>
+	<td>commonusepro4</td>
 	<td></td>
 </tr>
 <tr>
@@ -393,13 +243,13 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/providers_list/2</td>
+	<td>/billing/lcrs/providers_list/3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>select_prov</td>
-	<td>label=pro1</td>
+	<td>label=commonusepro1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -414,7 +264,7 @@
 <tr>
 	<td>select</td>
 	<td>select_prov</td>
-	<td>label=pro2</td>
+	<td>label=commonusepro2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -454,7 +304,7 @@
 <tr>
 	<td>select</td>
 	<td>provider_id</td>
-	<td>label=pro3</td>
+	<td>label=commonusepro3</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -469,7 +319,7 @@
 <tr>
 	<td>select</td>
 	<td>provider_id</td>
-	<td>label=pro1</td>
+	<td>label=commonusepro1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -488,22 +338,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro1</td>
+	<td>commonusepro1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro2</td>
+	<td>commonusepro2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro3</td>
+	<td>commonusepro3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>pro4</td>
+	<td>commonusepro4</td>
 	<td></td>
 </tr>
 <tr>
@@ -538,7 +388,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@id='delete_link_5']/img</td>
+	<td>//a[@id='delete_link_9']/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -558,12 +408,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/5</td>
+	<td>/billing/providers/edit/9</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>provider_common_use_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -578,7 +433,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/edit/5</td>
+	<td>/billing/providers/edit/9</td>
 	<td></td>
 </tr>
 <tr>
@@ -678,7 +533,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@id='delete_link_5']/img</td>
+	<td>//a[@id='delete_link_9']/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -769,7 +624,7 @@
 <tr>
 	<td>select</td>
 	<td>name=provdevice</td>
-	<td>label=pro2 - SIP /0.0.0.0</td>
+	<td>label=commonusepro2 - SIP /0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

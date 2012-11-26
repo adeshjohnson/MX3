@@ -33,12 +33,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/billing</td>
+	<td>/billing/test/load_delta_sql/providers/provider_test_data</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>css=img[alt=&quot;Money&quot;]</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/billing</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,6 +182,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=provdevice</td>
+	<td>label=Test Provider - IAX2 /22.33.44.55</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -308,46 +318,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>common_prov</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=provider_common_use_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/common_use_providers</td>
 	<td></td>
 </tr>
@@ -359,7 +329,7 @@
 <tr>
 	<td>select</td>
 	<td>name=select_provider</td>
-	<td>label=common_prov SIP/0.0.0.0:5060</td>
+	<td>label=commonusepro1 SIP/0.0.0.0:5060</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -398,52 +368,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tariff_name</td>
-	<td>tarprov</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=tariff_purpose_provider</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>provider_re</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/payments/manual_payment?provider_id=3</td>
+	<td>/billing/payments/manual_payment?provider_id=5</td>
 	<td></td>
 </tr>
 <tr>
@@ -458,7 +383,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>provider_re</td>
+	<td>pro1</td>
 	<td></td>
 </tr>
 <tr>
@@ -498,17 +423,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_3</td>
+	<td>id=balance_5</td>
 	<td>0.0000 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=a_w_v_3</td>
+	<td>id=a_w_v_5</td>
 	<td>900.0000 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=new_balance_3</td>
+	<td>id=new_balance_5</td>
 	<td>-900.0000 USD</td>
 </tr>
 <tr>
@@ -559,7 +484,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_12</td>
-	<td>provider_re</td>
+	<td>pro1</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -603,7 +528,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/payments/manual_payment?provider_id=3</td>
+	<td>/billing/payments/manual_payment?provider_id=5</td>
 	<td></td>
 </tr>
 <tr>
@@ -628,17 +553,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_3</td>
+	<td>id=balance_5</td>
 	<td>-900.0000 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=a_w_v_3</td>
+	<td>id=a_w_v_5</td>
 	<td>-1818.1818 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=new_balance_3</td>
+	<td>id=new_balance_5</td>
 	<td>918.1818 USD</td>
 </tr>
 <tr>
@@ -659,7 +584,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_13</td>
-	<td>provider_re</td>
+	<td>pro1</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -843,7 +768,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/payments/manual_payment?provider_id=3</td>
+	<td>/billing/payments/manual_payment?provider_id=5</td>
 	<td></td>
 </tr>
 <tr>
@@ -863,32 +788,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_3</td>
+	<td>id=balance_5</td>
 	<td>918.1818 DZD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_3</td>
+	<td>id=balance_5</td>
 	<td>918.1818 DZD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=exchange_rate_3</td>
+	<td>id=exchange_rate_5</td>
 	<td>0.25</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=a_w_v_c_t_3</td>
+	<td>id=a_w_v_c_t_5</td>
 	<td>440.0000 DZD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=a_w_v_3</td>
+	<td>id=a_w_v_5</td>
 	<td>400.0000 DZD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=new_balance_3</td>
+	<td>id=new_balance_5</td>
 	<td>518.1818 DZD</td>
 </tr>
 <tr>
@@ -909,7 +834,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_15</td>
-	<td>provider_re</td>
+	<td>pro1</td>
 </tr>
 <tr>
 	<td>assertText</td>
