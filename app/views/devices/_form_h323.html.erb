@@ -601,7 +601,7 @@ end
     s
   </td>
 </tr>
-<%# if (rec_active?) and !(@user and (@user.recording_enabled.to_i != 1 and @user.recording_forced_enabled.to_i != 1)) %>
+<%# if (rec_active?)# and !(@user and (@user.recording_enabled.to_i != 1 and @user.recording_forced_enabled.to_i != 1)) %>
     <%# @owner = @user.owner_id %>
     <%#= render :partial => "device_recordings" %>
 <%# end %>
@@ -633,7 +633,7 @@ end
     <% end %>
 <% end %>
 <% @owner = @user.owner_id if !@owner %>
-<%#= render :partial => "device_recordings" %>
+<%= render :partial => "device_recordings" %>
 </table>
 </td>
 </tr>

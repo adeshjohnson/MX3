@@ -1,4 +1,4 @@
-<% if show_recordings? %>
+<% if show_recordings? and rec_active? %>
     <% if ["admin", "accountant", "reseller"].include?(session[:usertype]) %>
         <% if @device
              record = @device.record.to_i

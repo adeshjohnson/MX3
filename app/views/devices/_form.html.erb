@@ -64,11 +64,10 @@
                 <%= render :partial => "device_form_debug" %>
             <% end %>
         <% end %>
-      <!-- recordings -->
-        <%# if not @new_device and @device_type != "FAX" %>
-            <%# @owner = @user.owner_id if !@owner %>
-            <%#= render :partial => "device_recordings" %>
-        <%# end %>
+        <% if not @new_device and @device_type != "FAX" and rec_active? %>
+            <% @owner = @user.owner_id if !@owner %>
+            <%= render :partial => "device_recordings" %>
+        <% end %>
       </table>
     </td>
   </tr>
