@@ -401,7 +401,7 @@ Localization.define('en') do |l|
   l.store 'Mask', 'Mask'
   l.store 'Advanced', 'Advanced'
 
-  l.store 'Provider_removed', 'Provider was removed'
+  l.store 'Provider_removed', 'Provider removed'
   l.store 'Provider_deleted', 'Provider deleted'
   l.store 'Dial_string', 'Dial string'
 
