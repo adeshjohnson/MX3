@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.11.6/billing" />
+<link rel="selenium.base" href="" />
 <title>ccshop_speedials</title>
 </head>
 <body>
@@ -119,7 +119,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>exact:Speed dial not created<br /> * Speed dial must be unique</td>
+	<td>Speed dial was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Speed dial must be unique</td>
 	<td></td>
 </tr>
 <!--check card 2-->
@@ -220,10 +225,14 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>exact:Speed dial not created<br /> * Speed dial must be unique</td>
+	<td>Speed dial was not created</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>assertTextPresent</td>
+	<td>Speed dial must be unique</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
