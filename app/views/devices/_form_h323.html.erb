@@ -601,10 +601,10 @@ end
     s
   </td>
 </tr>
-<% if (rec_active?) and !(@user and (@user.recording_enabled.to_i != 1 and @user.recording_forced_enabled.to_i != 1)) %>
-    <% @owner = @user.owner_id %>
-    <%= render :partial => "device_recordings" %>
-<% end %>
+<%# if (rec_active?) and !(@user and (@user.recording_enabled.to_i != 1 and @user.recording_forced_enabled.to_i != 1)) %>
+    <%# @owner = @user.owner_id %>
+    <%#= render :partial => "device_recordings" %>
+<%# end %>
 
 <% if !reseller? %>
     <% if not @new_device and @device_type != "FAX" and @device_type != "Virtual" %>
@@ -633,7 +633,7 @@ end
     <% end %>
 <% end %>
 <% @owner = @user.owner_id if !@owner %>
-<%= render :partial => "device_recordings" %>
+<%#= render :partial => "device_recordings" %>
 </table>
 </td>
 </tr>

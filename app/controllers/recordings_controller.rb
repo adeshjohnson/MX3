@@ -22,6 +22,7 @@ class RecordingsController < ApplicationController
     redirect_to :action => :list_recordings and return false
   end
 
+=begin
   def setup
     @page_title = _('Recordings')
     @page_icon = "music.png"
@@ -31,6 +32,7 @@ class RecordingsController < ApplicationController
     end
     @devices = Device.find_by_sql("SELECT devices.* FROM devices JOIN users ON (devices.user_id = users.id) WHERE user_id > 0 AND users.hidden = 0 ORDER BY extension ASC")
   end
+=end
 
   def update_recordings
     for dev in Device.find(:all, :order => "extension ASC")
