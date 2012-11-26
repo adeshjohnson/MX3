@@ -10,9 +10,9 @@
     <td id="call_list_<%= user.id %>" align="center">
       <%= link_to(b_call, {:controller => "stats", :action => "last_calls_stats", :s_user => user}, :id => "call_list_link_"+user.id.to_s) %>
     </td>
-
-    <td id="recordings_<%= user.id %>" align="center"> <%= link_to(b_record, {:controller => "recordings", :action => "list", :id => user.id}, :id => "recordings_link_"+user.id.to_s) %> </td>
-
+    <% if rec_active? %>
+      <td id="recordings_<%= user.id %>" align="center"> <%= link_to(b_record, {:controller => "recordings", :action => "list", :id => user.id}, :id => "recordings_link_"+user.id.to_s) %> </td>
+    <% end %>
     <% if admin? or reseller? %>
         <td id="login_as_<%= user.id %>" align="center"><%= link_to(b_login_as, {:controller => "functions", :action => 'login_as_execute', :user => user}, :id => "login_as_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => :post) if user.id != 0 %></td>
     <% end %>

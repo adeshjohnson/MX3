@@ -25,6 +25,10 @@ class RecordingsController < ApplicationController
   def setup
     @page_title = _('Recordings')
     @page_icon = "music.png"
+    if !recordings_addon_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
     @devices = Device.find_by_sql("SELECT devices.* FROM devices JOIN users ON (devices.user_id = users.id) WHERE user_id > 0 AND users.hidden = 0 ORDER BY extension ASC")
   end
 
@@ -57,6 +61,10 @@ class RecordingsController < ApplicationController
   end
 
   def show
+    if !recordings_addon_active?
+      dont_be_so_smart
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
     @device = Device.find_by_id(params[:show_rec])
     unless @device
       flash[:notice] = _('Device_not_found')
