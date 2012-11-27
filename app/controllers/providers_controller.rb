@@ -133,7 +133,7 @@ class ProvidersController < ApplicationController
     @page_title = _('New_provider')
     @page_icon = "add.png"
 
-    if current_user.usertype == 'reseller' and Confline.get_value('Create_own_providers', current_user.id).to_i != 1
+    if current_user.usertype == 'reseller' and Confline.get_value('Disallow_to_create_own_providers', current_user.id).to_i == 1
       dont_be_so_smart
       redirect_to :action => :list and return false
     end
@@ -166,7 +166,7 @@ class ProvidersController < ApplicationController
   def create
     params[:provider][:name]=params[:provider][:name].strip
 
-    if current_user.usertype == 'reseller' and Confline.get_value('Create_own_providers', current_user.id).to_i != 1
+    if current_user.usertype == 'reseller' and Confline.get_value('Disallow_to_create_own_providers', current_user.id).to_i == 1
       dont_be_so_smart
       redirect_to :action => :list and return false
     end

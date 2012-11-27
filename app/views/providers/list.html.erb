@@ -1,6 +1,6 @@
 <table width="100%">
   <tr>
-    <% if current_user.usertype != 'reseller' or (current_user.usertype == 'reseller' and Confline.get_value('Disallow_to_create_own_providers', current_user.id).to_i) == 1 %>
+    <% if current_user.usertype != 'reseller' or (current_user.usertype == 'reseller' and Confline.get_value('Disallow_to_create_own_providers', current_user.id).to_i == 0) %>
       <% if @options[:s_hidden].to_i == 0 %>
           <td nowrap><%= link_to((b_add + _('New_provider')), :action => 'new') %></td>
           <td nowrap>
