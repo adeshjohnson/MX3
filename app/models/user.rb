@@ -1867,11 +1867,11 @@ class User < ActiveRecord::Base
 
   def safe_attributtes(params, user_id)
     if ['reseller', 'user'].include?(usertype)
-      allow_params = [:time_zone, :spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id, :webphone_device_id]
+      allow_params = [:time_zone ,:recording_hdd_quota, :recordings_email,:spy_device_id, :currency_id, :password, :warning_email_balance, :warning_email_hour, :first_name, :last_name, :clientid, :taxation_country, :vat_number, :acc_group_id, :webphone_device_id]
       allow_params += [:accounting_number, :generate_invoice, :username, :tariff_id, :postpaid, :call_limit, :blocked, :agreement_number, :language, :warning_balance_sound_file_id, :warning_balance_call, :quickforwards_rule_id] if usertype == 'reseller' and self.id.to_i != user_id.to_i
       allow_params += [:lcr_id] if params[:lcr_id] and reseller_allow_providers_tariff? and self.id.to_i != user_id.to_i and User.current.load_lcrs(:first, :conditions => "id = #{params[:lcr_id]}")
       unless check_for_own_providers
-        allow_params +=[:recording_hdd_quota, :recordings_email, :hide_destination_end, :cyberplat_active,]
+        allow_params +=[:hide_destination_end, :cyberplat_active]
       end
       return params.reject { |key, value| !allow_params.include?(key.to_sym) }
     else
@@ -2653,7 +2653,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     if !params[:user][:tariff_id].blank? and !Tariff.find(:first, :conditions => {:id => params[:user][:tariff_id], :owner_id => co})
       notice = _('Tariff_not_found')
     end
-
+    
     params[:user] = params[:user].each_value(&:strip!)
     params[:address] = params[:address].each_value(&:strip!) if params[:address]
 
