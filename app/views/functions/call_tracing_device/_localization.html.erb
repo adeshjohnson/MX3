@@ -45,7 +45,7 @@
       <% if old_lcr %>
           <tr class="row2">
             <td><%= _('LCR_changed_from') %> <b><%= old_lcr.name %></b> <%= _('to') %>:</td>
-            <td id="lcr_changed_from_to" align="right"><%= new_lcr.name %> </td>
+            <td id="lcr_changed_from_to" align="right"><%= new_lcr.name if new_lcr %> </td>
           </tr>
       <% end %>
 

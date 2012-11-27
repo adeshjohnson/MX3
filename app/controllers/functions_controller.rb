@@ -582,7 +582,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         @lcr = @user_owner.load_lcrs(:first, :conditions => "id = #{@loc_lcr_id}")
       end
       @new_lcr = @lcr
-      @lcr_providers = @lcr.providers
+      @lcr_providers = @lcr.providers if @lcr
     end
 
     # tariff change from localization
@@ -811,7 +811,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     if @reseller
       @r_tariff = @reseller.tariff
       @r_lcr = @reseller.lcr
-      @r_lcr_providers = @lcr.providers
+      @r_lcr_providers = @lcr.providers if @lcr
 
       if @r_tariff.purpose == "user"
 
