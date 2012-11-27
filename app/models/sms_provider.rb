@@ -25,9 +25,9 @@ class SmsProvider < ActiveRecord::Base
     begin
       log = self.connect_to_clickatell
       if log[0].to_s == 'ERR:'
-        out = "<img title='Error' src='#{Web_Dir}/images/icons/cross.png' alt='Error' id='test_err_#{self.id}'/>"
+        out = "<img title='Error' src='#{Web_Dir}/assets/icons/cross.png' alt='Error' id='test_err_#{self.id}'/>"
       else
-        out = "<img title='Ok' src='#{Web_Dir}/images/icons/check.png' alt='Ok' id='test_ok_#{self.id}'/>"
+        out = "<img title='Ok' src='#{Web_Dir}/assets/icons/check.png' alt='Ok' id='test_ok_#{self.id}'/>"
       end
     rescue Exception => e
       MorLog.log_exception(e, Time.now.to_i, 'sms', 'providers')
