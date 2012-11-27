@@ -2388,6 +2388,7 @@ Sets default tax values for users or cardgroups
             err = ""
             warn = ""
             username = r_arr[session[:imp_user_username]].to_s.gsub("\"", "")
+            r_email = r_arr[session[:imp_user_email]].to_s.gsub("\"", "").strip
 
             if clean_value_all(r_arr[session[:imp_user_temp_id]]).to_i == ""
               err += _('Temp_User_ID_Cant_Be_Empty')+"<br />"
@@ -2412,7 +2413,7 @@ Sets default tax values for users or cardgroups
               err +=_('Please_enter_email') +"<br />"
             end
 
-            unless Email.address_validation(clean_value_all(r_arr[session[:imp_user_email]].to_s))
+            unless Email.address_validation(clean_value_all(r_email))
               err +=_('Please_enter_valid_email') +"<br />"
             end
 

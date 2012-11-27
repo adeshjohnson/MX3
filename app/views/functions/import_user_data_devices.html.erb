@@ -331,7 +331,7 @@
                 <td> <%= clean_value_all(arr[session[:imp_device_username]].to_s) if session[:imp_device_username] >= 0 %>    </td>
                 <td> <%= clean_value_all(arr[session[:imp_device_password]].to_s) if session[:imp_device_password] >= 0 %>    </td>
                 <td> <%= clean_value_all(arr[session[:imp_device_host]].to_s) if session[:imp_device_host] >= 0 %>    </td>
-                <td> <%= @msg_array[tl] %> </td>
+                <td> <%=raw @msg_array[tl] %> </td>
               </tr>
               <% tl += 1 %>
           <% end %>

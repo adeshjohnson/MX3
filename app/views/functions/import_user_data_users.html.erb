@@ -542,7 +542,7 @@
                 <td id="e_uln_<%= tl %>"> <%= clean_value_all(arr[session[:imp_user_last_name]].to_s) if session[:imp_user_last_name] >= 0 %>    </td>
                 <td id="e_c_<%= tl %>"> <%= clean_value_all(arr[session[:imp_user_country]].to_s) if session[:imp_user_country] >= 0 %>    </td>
                 <td id="e_email_<%= tl %>"> <%= clean_value_all(arr[session[:imp_user_email]].to_s) if session[:imp_user_email] >= 0 %>    </td>
-                <td id="e_message_<%= tl %>"> <%= @msg_array[tl] %> </td>
+                <td id="e_message_<%= tl %>"> <%=raw @msg_array[tl] %> </td>
               </tr>
               <% tl += 1 %>
           <% end %>
