@@ -541,7 +541,7 @@ class UsersController < ApplicationController
       @user.webphone_allow_use = params[:user][:webphone_allow_use].to_i
     end
 
-    if @user.own_providers = 1
+    if @user.own_providers == 1
       params[:own_providers] = 1
     end
 
