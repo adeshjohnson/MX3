@@ -524,7 +524,7 @@ class UsersController < ApplicationController
     @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
     @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
 
-    @create_own_providers = Confline.get_value('Create_own_providers', @user.id).to_i
+    @create_own_providers = Confline.get_value('Disallow_to_create_own_providers', @user.id).to_i
     @chanspy_disabled = Confline.chanspy_disabled?
     @devices = @user.devices(:conditions => "device_type != 'FAX'")
     
