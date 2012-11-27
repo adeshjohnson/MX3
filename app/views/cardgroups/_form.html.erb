@@ -221,7 +221,7 @@
     <td></td>
   </tr>
 </table>
-<%= hidden_field_tag(:lcr_id, @cardgroup.lcr.id) if (!@cardgroup.new_record? rescue false) %>
+<%= hidden_field_tag(:lcr_id, @cardgroup.lcr.id) if !@cardgroup.new_record? and !@cardgroup.lcr.nil?  %>
 <script type="text/javascript">
     function toggle_ghost_fields() {
         if ($("cardgroup_use_external_function_1").checked == true) {
