@@ -590,7 +590,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       @old_u_tariff = @u_tariff
       @u_tariff = Tariff.find_by_id(@loc_tariff_id)
     end
-    #device cjanhe rom localization
+    # device change from localization
     if @loc_device_id.to_i > 0
       @old_device = @device
       @new_device = Device.find_by_id(@loc_device_id)
@@ -600,12 +600,12 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     #localization
 
     @loc_dst = Location.nice_locilization(@loc_cut, @loc_add, @dst)
-
-    # read LCR Partials
-    sql = "SELECT lcr_partials.prefix as 'prefix', lcrs.id as 'lcr_id', lcrs.order FROM lcr_partials JOIN lcrs ON (lcrs.id = lcr_partials.lcr_id) WHERE main_lcr_id = '#{@lcr.id}' AND prefix=SUBSTRING('#{@loc_dst}',1,LENGTH(prefix)) ORDER BY LENGTH(prefix) DESC LIMIT 1;"
-    #my_debug sql
-    res = ActiveRecord::Base.connection.select_one(sql)
-
+    if @lcr
+      # read LCR Partials
+      sql = "SELECT lcr_partials.prefix as 'prefix', lcrs.id as 'lcr_id', lcrs.order FROM lcr_partials JOIN lcrs ON (lcrs.id = lcr_partials.lcr_id) WHERE main_lcr_id = '#{@lcr.id}' AND prefix=SUBSTRING('#{@loc_dst}',1,LENGTH(prefix)) ORDER BY LENGTH(prefix) DESC LIMIT 1;"
+      #my_debug sql
+      res = ActiveRecord::Base.connection.select_one(sql)
+    end
     #=begin
     if res
       @old_lcr_before_partials = @lcr
