@@ -22,6 +22,8 @@
            device_canreinvite = @device.canreinvite
            device_nat = @device.nat
            device_qualify = @device.qualify
+           device_type = @device.device_type.downcase
+           device_trunk = @device.trunk
          else
            device_host = Confline.get_value("Default_device_host", session[:user_id])
            device_ipaddr = Confline.get_value("Default_device_ipaddr", session[:user_id])
@@ -30,9 +32,7 @@
            device_canreinvite = Confline.get_value("Default_device_canreinvite", session[:user_id])
            device_nat = Confline.get_value("Default_device_nat", session[:user_id])
            device_qualify = Confline.get_value("Default_device_qualify", session[:user_id])
-         end
-
-      %>
+       end %>
 
 
 
@@ -131,7 +131,15 @@
           <% end %>
         </td>
       </tr>
-
+    <% if device_type == "iax2" %>
+      <tr>
+        <td colspan=2>
+          IAX2 Trunking Mode:
+          <%= radio_button_tag('iax2_trunking', 'no', checked = (device_trunk == 'no')) %> <%= _('No') %>
+          <%= radio_button_tag('iax2_trunking', 'yes', checked = (device_trunk == 'yes')) %> <%= _('Yes') %>
+        </td>
+      </tr>
+    <% end %>
     </table>
 
   </td>

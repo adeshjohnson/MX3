@@ -636,6 +636,11 @@ class DevicesController < ApplicationController
         @device.ipaddr = "0.0.0.0"
       end
 
+      # IAX2 Trunking Mode
+      if @device.device_type.downcase == "iax2"
+        @device.trunk = params[:iax2_trunking]
+      end
+
       #ticket #4978, previuosly there was a validation to disallow ports lower than 100
       #we have doubts whether this made any sense. so user now can set port to any positive integer
       @device.port = ""
