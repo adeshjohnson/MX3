@@ -35,7 +35,7 @@
                 <td id="rec_play_<%= recording.id %>" align="center"><%= link_to(b_play, {:action => :play_recording, :id => recording.id}, :popup => ['new_window', 'height=200,width=310'], :id => "rec_play_link_#{recording.id}") %></td>
                 <td id="rec_download_<%= recording.id %>" align="center">
                   <% if recording.local.to_i == 1 %>
-                      <%= link_to(b_download, @server_path.to_s + recording.mp3) %>
+                      <%= link_to(b_download, :action => :get_recording, :rec => recording.id ) %>
                   <% else %>
                       <%= link_to(b_download, @remote_server_path.to_s + recording.mp3) %>
                   <% end %>
