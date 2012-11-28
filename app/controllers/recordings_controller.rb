@@ -34,6 +34,29 @@ class RecordingsController < ApplicationController
   end
 =end
 
+  def get_recording
+    rec_id = params[:rec]
+    rec = Recording.find_by_id(params[:rec]) rescue nil
+    rec_user = User.find(:first, :conditions => "id = #{rec.user_id}") rescue nil
+    is_authorized = ( current_user.id == rec_user.owner_id or (rec.visible_to_user == 1 and current_user.id == rec.user_id) ? true : false ) rescue false
+
+    if rec_id.blank? or rec_user.blank?
+        flash[:notice] = _('Dont_be_so_smart')
+        redirect_to :controller=>"callc", :action => 'main' and return false
+    elsif !is_authorized
+        flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+        redirect_to :controller=>"callc", :action => 'main' and return false
+    else
+      rec_mp3 = File.read("/home/mor/public/recordings/#{rec.uniqueid}.mp3") rescue nil
+      unless rec and rec_mp3
+        flash[:notice] = _('Recording_was_not_found')
+        redirect_to :controller=>"callc", :action => 'main' and return false
+      else
+        send_file("/home/mor/public/recordings/#{rec.uniqueid}.mp3", :filename => rec.datetime.strftime("%F_%T_") + nice_user(rec_user).gsub(" ", "_").to_s + "_[" + rec.uniqueid + "].mp3", :x_sendfile => true, :type => "audio/mpeg")
+      end
+    end
+  end
+
   def update_recordings
     for dev in Device.find(:all, :order => "extension ASC")
       dev.record_forced = 0
