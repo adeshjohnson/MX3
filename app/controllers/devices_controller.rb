@@ -248,6 +248,7 @@ class DevicesController < ApplicationController
     return false unless check_owner_for_device(@user)
 
     @device_type = @device.device_type
+    @device_trunk = @device.trunk
 
     @cid_name = ""
     if @device.callerid
@@ -1743,12 +1744,14 @@ class DevicesController < ApplicationController
     # @new_device = true
     #@user = User.find(session[:user_id])
 
+
+
     @device = Confline.get_default_object(Device, correct_owner_id)
 
     @devicetypes = Devicetype.load_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
 
-    @device_type =Confline.get_value("Default_device_type", session[:user_id])
-
+    @device_type = Confline.get_value("Default_device_type", session[:user_id])
+    
     @global_tell_balance = Confline.get_value('Tell_Balance').to_i 
     @global_tell_time = Confline.get_value('Tell_Time').to_i 
 
@@ -1767,7 +1770,14 @@ class DevicesController < ApplicationController
                                :select => 'codecs.*, (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
                                :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'video' and owner_id =?", session[:user_id]],
                                :order => 'v2 asc')
+ 
     @owner = session[:user_id]
+    #if @device_type == 'IAX2' and !(['no','yes'].include?(Confline.get_value('Default_device_trunk', @owner).to_s))
+    #  Confline.set_value('Default_device_trunk', 'no', @owner)
+    #end
+
+    @device_trunk = Confline.get_value('Default_device_trunk', @owner)
+ 
     if session[:usertype] == 'reseller'
       collect_locations = 'user_id=? and id != 1'
     else
@@ -1849,6 +1859,7 @@ class DevicesController < ApplicationController
       end
     end
 
+    Confline.set_value("Default_device_trunk", params[:iax2_trunking], session[:user_id]) if params[:device][:device_type] == "IAX2"
     Confline.set_value("Default_device_type", params[:device][:device_type], session[:user_id])
     Confline.set_value("Default_device_dtmfmode", params[:device][:dtmfmode], session[:user_id])
     Confline.set_value("Default_device_works_not_logged", params[:device][:works_not_logged], session[:user_id])

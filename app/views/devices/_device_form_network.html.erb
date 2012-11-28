@@ -22,8 +22,8 @@
            device_canreinvite = @device.canreinvite
            device_nat = @device.nat
            device_qualify = @device.qualify
-           device_type = @device.device_type.downcase
-           device_trunk = @device.trunk
+           device_type = (@device.device_type ? @device.device_type : @device_type)
+           device_trunk = @device_trunk
          else
            device_host = Confline.get_value("Default_device_host", session[:user_id])
            device_ipaddr = Confline.get_value("Default_device_ipaddr", session[:user_id])
@@ -131,7 +131,7 @@
           <% end %>
         </td>
       </tr>
-    <% if device_type == "iax2" %>
+    <% if device_type == "IAX2" or (@device_type == "IAX2" rescue false) %>
       <tr>
         <td colspan=2>
           IAX2 Trunking Mode:
