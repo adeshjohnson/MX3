@@ -30,7 +30,7 @@
             <td id="dst_<%= recording.id %>" align="left"><%= hide_dst_for_user(current_user, "gui", recording.dst.to_s) %></td>
             <% if recording.deleted.to_i == 0 and recording.size.to_i > 0 and (call and (call.real_billsec.to_f > 0.0 or @show_recordings_with_zero_billsec)) %>
                 <td id="play_<%= recording.id %>" align="center"><%= link_to(b_play, {:action => :play_recording, :id => recording.id}, :popup => ['new_window', 'height=200,width=310']) %></td>
-                <td id="download_<%= recording.id %>" align="center"><%= link_to(b_download, @server_path.to_s + recording.mp3) %></td>
+                <td id="download_<%= recording.id %>" align="center"><%= link_to(b_download, :action => :get_recording, :rec => recording.id) %></td>
                 <td id="delete_<%= recording.id %>" align="center"><%= link_to b_delete, {:action => :destroy, :id => recording.id}, :confirm => _('Are_you_sure'), :method => "post" %></td>
             <% else %>
                 <td id="fail_<%= recording.id %>" align="center" colspan=2>
