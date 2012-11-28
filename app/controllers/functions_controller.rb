@@ -2388,7 +2388,6 @@ Sets default tax values for users or cardgroups
             err = ""
             warn = ""
             username = r_arr[session[:imp_user_username]].to_s.gsub("\"", "")
-            r_email = r_arr[session[:imp_user_email]].to_s.gsub("\"", "").strip
 
             if clean_value_all(r_arr[session[:imp_user_temp_id]]).to_i == ""
               err += _('Temp_User_ID_Cant_Be_Empty')+"<br />"
@@ -2409,11 +2408,11 @@ Sets default tax values for users or cardgroups
             if clean_value_all(r_arr[session[:imp_user_last_name]].to_s).length == 0
               err +=_('Please_enter_last_name') +"<br />"
             end
-            if clean_value_all(r_arr[session[:imp_user_email]].to_s).length == 0
+            if clean_value_all(r_arr[session[:imp_user_email]].to_s).to_s.strip.length == 0
               err +=_('Please_enter_email') +"<br />"
             end
 
-            unless Email.address_validation(clean_value_all(r_email))
+            unless Email.address_validation(clean_value_all(r_arr[session[:imp_user_email]].to_s).to_s.strip)
               err +=_('Please_enter_valid_email') +"<br />"
             end
 
@@ -2428,7 +2427,7 @@ Sets default tax values for users or cardgroups
               address.phone =clean_value_all r_arr[session[:imp_user_phone]].to_s if session[:imp_user_phone] >=0
               address.mob_phone =clean_value_all r_arr[session[:imp_user_mob_phone]] if session[:imp_user_mob_phone] >=0
               address.fax =clean_value_all r_arr[session[:imp_user_fax]].to_s if session[:imp_user_fax] >=0
-              address.email =clean_value_all r_arr[session[:imp_user_email]]
+              address.email =(clean_value_all r_arr[session[:imp_user_email]]).to_s.strip
 
               address.save
 
@@ -2480,7 +2479,7 @@ Sets default tax values for users or cardgroups
               user.agreement_date = Time.now
               user.agreement_number = next_agreement_number
               user.taxation_country = Direction.get_direction_by_country(clean_value_all(r_arr[session[:imp_user_country]]))
-              user.vat_number =clean_value_all r_arr[session[:imp_user_vat_reg_number]].to_s
+              user.vat_number = clean_value_all r_arr[session[:imp_user_vat_reg_number]].to_s if session[:imp_user_vat_reg_number] >=0
 
               user.address_id = address.id
               user.owner_id = 0
