@@ -128,7 +128,7 @@ class DevicesController < ApplicationController
     device.port = 4569 if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
     device.port = 5060 if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
     device.port = 1720 if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
-
+    
     if device.save
       # if device type = SIP and device host = dynamic and ccl_active=1 it must be assigned to sip_proxy server
       serv_dev = ServerDevice.where("server_id=? AND device_id=?", device.server_id, device.id).first
@@ -1859,7 +1859,6 @@ class DevicesController < ApplicationController
       end
     end
 
-    Confline.set_value("Default_device_trunk", params[:iax2_trunking], session[:user_id]) if params[:device][:device_type] == "IAX2"
     Confline.set_value("Default_device_type", params[:device][:device_type], session[:user_id])
     Confline.set_value("Default_device_dtmfmode", params[:device][:dtmfmode], session[:user_id])
     Confline.set_value("Default_device_works_not_logged", params[:device][:works_not_logged], session[:user_id])
@@ -1901,6 +1900,7 @@ class DevicesController < ApplicationController
 
     Confline.set_value("Default_device_qf_tell_time", params[:device][:qf_tell_time].to_i, session[:user_id]) 
     Confline.set_value("Default_device_qf_tell_balance", params[:device][:qf_tell_balance].to_i, session[:user_id]) 
+    Confline.set_value("Default_device_trunk", params[:iax2_trunking], session[:user_id]) if params[:device][:device_type] == "IAX2" and !params[:iax2_trunking].blank?
 
     #============= PERMITS ===================
     if params[:mask1]

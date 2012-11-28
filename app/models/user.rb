@@ -1318,6 +1318,7 @@ class User < ActiveRecord::Base
     device.enable_mwi = Confline.get_value("Default_device_enable_mwi", owner_id).to_i
     device.save_call_log = Confline.get_value("Default_device_save_call_log", owner_id).to_i
     device.use_ani_for_cli = Confline.get_value("Default_device_use_ani_for_cli", owner_id)
+    device.trunk = Confline.get_value("Default_device_trunk", owner_id) if options[:device_type].to_s == 'IAX2'
     device.calleridpres = Confline.get_value("Default_device_calleridpres", owner_id).to_s
     device.change_failed_code_to = Confline.get_value("Default_device_change_failed_code_to", owner_id).to_i
     device.encryption = Confline.get_value("Default_device_encryption", owner_id)
