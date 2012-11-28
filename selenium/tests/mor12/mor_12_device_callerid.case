@@ -372,9 +372,9 @@
 	<td>label=37093042422</td>
 </tr>
 <tr>
-	<td>fireEvent</td>
-	<td>id=device_number_from_did</td>
-	<td>change</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>waitForValue</td>
