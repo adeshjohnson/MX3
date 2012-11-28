@@ -323,56 +323,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/locations/location_rules/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>destrules</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>cut</td>
-	<td>80</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>add</td>
-	<td>3741</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>minlen</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>maxlen</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>tariff</td>
-	<td>label=spectariffre</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>lcr</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>add_location_rule</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Rule added</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/functions/call_tracing</td>
 	<td></td>
 </tr>
@@ -594,74 +544,6 @@
 	<td>LCR changed from Primary to:</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<!--login-->
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>admin1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
-<!--check own provider-->
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>own_providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<!--login-->
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>rspro</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>rspro1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
 <!--assert-->
 <tr>
 	<td>open</td>
@@ -669,132 +551,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>lcr_3</td>
 	<td>Primary</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>//option[@value='2']</td>
-	<td></td>
-</tr>
-<!--assert call tracing-->
-<tr>
 	<td>open</td>
-	<td>/billing/functions/call_tracing</td>
+	<td>/billing/locations/location_rule_edit/3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>user</td>
-	<td>label=user_rspro (7)</td>
+	<td>name=lcr</td>
+	<td>label=</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>destination</td>
-	<td>800017219</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Check if your user is using your lcr</td>
-	<td></td>
-</tr>
-<!--call tracing without tariff and lcr-->
-<tr>
-	<td>open</td>
-	<td>/billing/functions/call_tracing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user</td>
-	<td>label=user_rspro (7)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>destination</td>
-	<td>900017219</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Check if your user is using your lcr</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>location</td>
-	<td></td>
-</tr>
-<!--call tracing without rules-->
-<tr>
-	<td>open</td>
-	<td>/billing/functions/call_tracing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user</td>
-	<td>label=user_rspro (7)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>destination</td>
-	<td>297960017219</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Check if your user is using your lcr</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>location</td>
-	<td></td>
-</tr>
-<!--edit user-->
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/7</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>No available LCR for user. Please create LCR and assign it to user. Otherwise this user will be unable to call.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <!--create lcr-->
@@ -818,6 +591,11 @@
 	<td>open</td>
 	<td>/billing/users/edit/7</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_lcr_id</td>
+	<td>label=speclcr2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -959,7 +737,7 @@
 <!--edit rule-->
 <tr>
 	<td>open</td>
-	<td>/billing/locations/location_rule_edit/12</td>
+	<td>/billing/locations/location_rule_edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -1301,7 +1079,7 @@
 <!--get lcr from rules-->
 <tr>
 	<td>open</td>
-	<td>/billing/locations/location_rule_edit/12</td>
+	<td>/billing/locations/location_rule_edit/3</td>
 	<td></td>
 </tr>
 <tr>
