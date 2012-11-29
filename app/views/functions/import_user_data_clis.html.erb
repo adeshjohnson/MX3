@@ -1,0 +1,178 @@
+<% if @step == 1 %>
+    <br/>
+    <%= form_tag({:action => 'import_user_data_clis', :step => "2"}, {:multipart => "true", :id => "files"}) do %>
+        <%= _('Upload') %>: <%= file_field_tag "file" %>
+        <br/>
+        <%= _('Include_first_line') %>?<%= check_box_tag 'include', value = "1" %>
+        <br/>
+        <br/>
+        <%= submit_tag(_('Upload_file'), :disable_with => _('Processing..')) %>
+    <% end %>
+
+    <br>
+    <%= _('Next_step') + ": " + _('Column_assignment') %>
+<% end %>
+
+
+<% if @step == 2 %>
+    <%= _('Column_assignment') %>
+    <br/>
+    <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br>
+    <br>
+    <b><%= _('First_file_lines') %>:</b>
+    <br>
+    <br>
+    <%
+       flines = []
+       tl = 0 %>
+    <% for line in session[:file].split(/\n|\r|\rn/) %>
+        <% flines << line if tl < 5 %>
+        <% tl += 1 %>
+    <% end %>
+    <% flines << "...." if tl > 5 %>
+
+    <%= text_area_tag "body", flines, :size => "150x10", :class => "input" %>
+
+    <br>
+    <% session[:file_lines] = (tl - 1) %>
+    <b><%= _('Total_file_lines') %>: <%= session[:file_lines] %></b>
+    <br>
+    <br>
+    <br>
+    <%= form_tag :action => 'import_user_data_clis', :step => "3" do %>
+        <div>
+          <%= radio_button_tag('device_id_type', 1, {:id => "device_id_1"}) %> <%= _('use_device_id') %>
+          <%= radio_button_tag('device_id_type', 0, {:id => "device_id_2"}) %> <%= _('use_temporary_device_id') %>
+        </div>
+        <table class="maintable" width="70%">
+          <tr>
+            <th><%= _('Value') %></th>
+            <th><%= _('Select_from_CSV_file') %></th>
+          </tr>
+          <tr>
+            <td height="20" colspan="2">
+              <b><%= _('CLI_Data') %></b>
+            </td>
+          </tr>
+          <tr>
+            <td>  <%= _('CLI') %> *</td>
+            <td>
+              <div class="nb" align="center">
+                <select name="cli">
+                  <option value="-1"></option>
+                  <% i = 0 %>
+                  <% for l in @fl %>
+                      <option value="<%= i %>"> <%= clean_value_all l %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr class="row1">
+            <td>  <%= _('Device_ID') %> *</td>
+            <td>
+              <div class="nb" align="center">
+                <select name="device_id">
+                  <option value="-1"></option>
+                  <% i = 0 %>
+                  <% for l in @fl %>
+                      <option value="<%= i %>"> <%= clean_value_all l %> </option>
+                      <% i += 1 %>
+                  <% end %>
+                </select>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+        <br/>
+        <b>* - <%= _("These_fields_are_necessary_for_registration") %></b>
+        <br/>
+        <br/>
+        <%= submit_tag(_('Assign_columns'), :disable_with => _('Processing..')) %>
+    <% end %>
+    <br/>
+    <%= _('Next_step') + ": " + _('Column_confirmation') %>
+    <br/>
+    <%= link_to b_back + _('Back'), :action => "import_user_data_clis", :step => 1 %>
+
+<% end %>
+
+<% if @step == 3 %>
+    <%= _('File_size') %>: <%= session[:file_size] %> <%= _('bytes') %><br>
+    <br>
+    <b><%= _('First_file_lines') %>:</b><br><br>
+    <table class="maintable" width="100%">
+      <tr>
+        <th><%= _('CLI') %></th>
+        <th><%= _('Device_ID') %></th>
+      </tr>
+      <% tl = 0 %>
+      <% for line in session[:file].split(/\n|\r|\rn/) %>
+          <% if tl < 20 and tl != 0-@include.to_i %>
+              <% arr = line.split(@sep) %>
+              <tr class="row<%= (tl % 2 + 1).to_s %>">
+                <td> <%= clean_value_all arr[session[:imp_cli_cli]].to_s %>    </td>
+                <td> <%= clean_value_all arr[session[:imp_cli_device_id]].to_s %>    </td>
+          <% end %>
+          <% tl += 1 %>
+      <% end %>
+    </table>
+    <br/>
+    <b><%= _('Total_file_lines') %>: <%= session[:file_lines] %> </b>
+    <br/>
+    <br/>
+    <table>
+      <tr>
+        <td>
+          <%= form_tag :action => 'import_user_data_clis', :step => "2" do %>
+              <%= submit_tag(_('Back'), :disable_with => _('Processing..')) %>
+          <% end %>
+        </td>
+        <td width="20"></td>
+        <% if session[:imp_cli_device_id] >= 0 and session[:imp_cli_cli] >=0 %>
+            <td>
+              <%= form_tag :action => 'import_user_data_clis', :step => "4" do %>
+                  <%= submit_tag(_('Confirm_columns'), :disable_with => _('Processing..')) %>
+              <% end %>
+            </td>
+        <% end %>
+
+      </tr>
+    </table>
+    <%= _('Next_step') + ": " + _('Import_CLI_data') %>
+    <% MorLog.my_debug("3 iterate end") %>
+<% end %>
+
+<% if @step == 4 %>
+
+    <% if @error_array != [] %>
+        <br/>
+        <br/>
+        <%= _("Errors") %>:
+        <table class="maintable" width="100%">
+          <tr>
+            <th><%= _('Device_ID') %></th>
+            <th><%= _('CLI') %></th>
+            <th><%= _('Error') %></th>
+          </tr>
+          <% tl = 0 %>
+          <% for line in @error_array %>
+              <% arr = line.split(@sep) %>
+              <tr class="row<%= (tl % 2 + 1).to_s %>">
+                <td> <%= clean_value_all(arr[session[:imp_cli_device_id]].to_s) if session[:imp_cli_device_id] >= 0 %>    </td>
+                <td> <%= clean_value_all(arr[session[:imp_cli_cli]].to_s) if session[:imp_cli_cli] >= 0 %>    </td>
+                <td> <%= raw @msg_array[tl] %> </td>
+              </tr>
+              <% tl += 1 %>
+          <% end %>
+        </table>
+    <% end %>
+    <br/>
+    <%= link_to b_back + _('Back'), :action => "import_user_data_clis", :step => 3 %>
+<% end %>
+
+
+<br/>
+<br/>

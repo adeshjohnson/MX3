@@ -2291,6 +2291,153 @@ Sets default tax values for users or cardgroups
     @devices = Device.find(:all, :conditions => "temporary_id >= 0 AND name not like 'mor_server_%'")
   end
 
+  def import_user_data_clis
+    @step = 1
+    @step = params[:step].to_i if params[:step]
+
+    @step_name = _('File_upload')
+    @step_name = _('Column_assignment') if @step == 2
+    @step_name = _('Column_confirmation') if @step == 3
+    @step_name = _('Import_CLIs') if @step == 3
+
+    @sep, @dec = nice_action_session_csv
+    store_location
+    @page_title = _('import_user_data_clis') + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + _('Step') + ": " + @step.to_s + "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" + @step_name
+    @page_icon = 'excel.png'
+    session[:imp_cli_include] and session[:imp_cli_include]==1 ? @include = 1 : @include = 0
+
+    if @step == 2
+      if params[:include].to_i == 1
+        session[:imp_cli_include] = 1
+      else
+        session[:imp_cli_include] = 0
+      end
+      if params[:file] or session[:file]
+        if params[:file]
+          if params[:file] == ""
+            flash[:notice] = _('Please_select_file')
+            redirect_to :action => "import_user_data_clis", :step => "1" and return false
+          else
+            @file = params[:file]
+            if get_file_ext(@file.original_filename, "csv") == false
+              redirect_to :action => "import_user_data_clis", :step => "1" and return false
+            end
+            session[:file] = @file.read
+          end
+        else
+          @file = session[:file]
+        end
+        session[:file_size] = @file.size
+        if session[:file_size].to_i == 0
+          flash[:notice] = _('Please_select_file')
+          redirect_to :action => "import_user_data_clis", :step => "1" and return false
+        end
+
+        @file = session[:file]
+        check_csv_file_seperators(@file, 2)
+        arr = @file.split("\n")
+        @fl = arr[0].split(@sep)
+        flash[:status] = _('File_uploaded')
+      end
+    end
+
+    if @step == 3
+      if session[:file]
+        @file = session[:file]
+        session[:imp_cli_device_id] = params[:device_id].to_i if params[:device_id]
+        session[:imp_cli_cli] = params[:cli].to_i if params[:cli]
+        session[:imp_cli_device_id_type] = params[:device_id_type].to_i if params[:device_id_type]
+
+        flash[:status] = _('Columns_assigned')
+      end
+    end
+
+    if @step == 4
+      inc = 1 - @include.to_i
+      @error_array = []
+      @msg_array = []
+      if session[:file]
+        array = []
+        @file = session[:file]
+        array = @file.split("\n")
+        for arr in array
+          if inc == 0
+            row = []
+            row = arr.split(@sep)
+            r_arr = row
+            err = ""
+
+            device_id = clean_value_all(r_arr[session[:imp_cli_device_id]].to_s)
+            cli = clean_value_all(r_arr[session[:imp_cli_cli]].to_s)
+
+            if device_id.length == 0
+              err += _("Device_ID_Cant_Be_Empty") + "<br />"
+            else
+              if session[:imp_cli_device_id_type] == 0
+                device = Device.where("id = #{device_id.to_i}").first
+              else
+                device = Device.find(:first, :conditions => "temporary_id = #{device_id.to_i}")
+              end
+
+              if !device
+                err += _("Device_not_found") + "<br />"
+              end
+            end
+
+            if cli.length == 0
+              err += _("CLI_Cant_Be_Empty") + "<br />"
+            else
+              callerid = Callerids.where("cli = '#{cli}'").first
+
+              if callerid
+                err += _("Such_CLI_exists") + "<br />"
+              end
+            end
+
+
+            if err == ""
+              my_debug("ADDING")
+              logger.fatal params.to_yaml
+
+              new_cli = Callerid.new(params[:cli])
+              new_cli.cli = cli
+              new_cli.device_id = device.id
+              new_cli.description = ''
+              new_cli.added_at = Time.now
+              new_cli.banned = 0
+              new_cli.created_at = Time.now
+              new_cli.updated_at = Time.now
+              new_cli.ivr_id = 0
+              new_cli.comment = ''
+              new_cli.email_callback = 0
+
+
+
+              if new_cli.save
+
+              else
+                @error_array << arr
+                msq = ''
+                new_cli.errors.each { |key, value|
+                  msq += "<br> * #{_(value)}"
+                } if new_cli.respond_to?(:errors)
+                @msg_array << msq
+              end
+            else
+              @error_array << arr
+              @msg_array << err
+            end
+          else
+            inc = 0
+          end
+        end
+      end
+    end
+
+  end
+
+
+
   def import_user_data_users
     @step = 1
     @step = params[:step].to_i if params[:step]
