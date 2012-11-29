@@ -557,6 +557,17 @@
             <%= radio_button_tag('device[anti_resale_auto_answer]', '1', @device.anti_resale_auto_answer?) %> <%= _('Yes') %>
           </td>
         </tr>
+        <% if @device.device_type == 'SIP' and defined? AST_18 and AST_18.to_i == 1 %>
+            <tr>
+              <td> <%= _('Transport') %>: </td>
+              <td>
+                <%= radio_button_tag('device[transport]', 'udp', (@device.transport == 'udp')) %> <%= _('udp') %>
+                <%= radio_button_tag('device[transport]', 'tcp', (@device.transport == 'tcp')) %> <%= _('tcp') %>
+                <%= radio_button_tag('device[transport]', 'udp,tcp', (@device.transport == 'udp,tcp')) %> <%= _('udp,tcp') %>
+                <%= radio_button_tag('device[transport]', 'tcp,udp', (@device.transport == 'tcp,udp')) %> <%= _('tcp,udp') %>
+              </td>
+            </tr>
+        <% end %>
         <% if defined? PROVB_Active and PROVB_Active.to_i == 1 %>
             <tr>
               <td> <%= _('Time_limit_per_day') %> </td>
