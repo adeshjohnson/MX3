@@ -228,7 +228,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Total file lines: 3 </td>
+	<td>Total file lines: 6</td>
 	<td></td>
 </tr>
 <tr>
@@ -248,6 +248,11 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Such username is already taken</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Please enter valid email</td>
 	<td></td>
 </tr>
@@ -258,12 +263,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_link_6</td>
+	<td>id=user_link_7</td>
 	<td>jonas jonaitis</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_link_7</td>
+	<td>id=user_link_8</td>
 	<td>petras petraitis</td>
 </tr>
 <tr>
@@ -279,7 +284,7 @@
 <tr>
 	<td>type</td>
 	<td>id=id</td>
-	<td>6</td>
+	<td>7</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -290,6 +295,16 @@
 	<td>waitForText</td>
 	<td>id=username_value</td>
 	<td>jonas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_email</td>
+	<td>555f@dfghj.fgh</td>
 </tr>
 <!--no temporary_id-->
 <tr>
@@ -399,32 +414,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=paymenttype_10</td>
-	<td>Initial balance</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=paymenttype_11</td>
 	<td>Initial balance</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amount_10</td>
-	<td>1.0000</td>
+	<td>id=paymenttype_12</td>
+	<td>Initial balance</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=amount_11</td>
+	<td>1.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_12</td>
 	<td>3.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=currency_10</td>
+	<td>id=currency_11</td>
 	<td>USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=currency_11</td>
+	<td>id=currency_12</td>
 	<td>USD</td>
 </tr>
 <tr>
@@ -434,12 +449,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_6</td>
+	<td>id=balance_7</td>
 	<td>1.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_7</td>
+	<td>id=balance_8</td>
 	<td>3.0000</td>
 </tr>
 </tbody></table>
