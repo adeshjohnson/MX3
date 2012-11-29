@@ -355,9 +355,9 @@ module PdfGen
         end
         if arate_details.size > 0
           if arate_details.size > 1
-            arate_cur = nice_number(arate_cur[0], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd}).to_s + " *"
+            arate_cur = nice_number(arate_cur, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd}).to_s + " *"
           else
-            arate_cur = nice_number(arate_cur[0], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+            arate_cur = nice_number(arate_cur, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           end
           item << arate_cur
           item << arate_details[0]['round']
