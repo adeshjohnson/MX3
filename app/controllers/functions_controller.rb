@@ -2376,7 +2376,7 @@ Sets default tax values for users or cardgroups
               if session[:imp_cli_device_id_type] == 0
                 device = Device.where("id = #{device_id.to_i}").first
               else
-                device = Device.find(:first, :conditions => "temporary_id = #{device_id.to_i}")
+                device = Device.where("temporary_id = #{device_id.to_i}").first
               end
 
               if !device
@@ -2387,7 +2387,7 @@ Sets default tax values for users or cardgroups
             if cli.length == 0
               err += _("CLI_Cant_Be_Empty") + "<br />"
             else
-              callerid = Callerids.where("cli = '#{cli}'").first
+              callerid = Callerid.where("cli = '#{cli}'").first
 
               if callerid
                 err += _("Such_CLI_exists") + "<br />"
