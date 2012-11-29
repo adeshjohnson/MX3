@@ -10,12 +10,14 @@ class CronActionsController < ApplicationController
 
   def index
     @page_title = _('Cron_settings')
+    @page_icon = "clock.png"
+    
     @cron_settings = current_user.cron_settings.find(:all)
   end
 
   def new
     @page_title = _('New_Cron_setting')
-    @page_icon = "add.png"
+    @page_icon = "clock.png"
 
     @cron_setting = CronSetting.new({:user_id => current_user.id, :valid_from => Time.now, :valid_till => Time.now})
     @users = User.find_all_for_select(current_user.id)
@@ -45,7 +47,7 @@ class CronActionsController < ApplicationController
 
   def edit
     @page_title = _('Edit_Cron_Setting')
-    @page_icon = "edit.png"
+    @page_icon = "clock.png"
 
     @users = User.find_all_for_select(current_user.id)
     @tariffs = current_user.load_tariffs
