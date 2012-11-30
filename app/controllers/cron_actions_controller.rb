@@ -12,7 +12,7 @@ class CronActionsController < ApplicationController
     @page_title = _('Cron_settings')
     @page_icon = "clock.png"
     
-    @cron_settings = current_user.cron_settings.find(:all)
+    @cron_settings = current_user.cron_settings.all
   end
 
   def new
@@ -22,8 +22,9 @@ class CronActionsController < ApplicationController
     @cron_setting = CronSetting.new({:user_id => current_user.id, :valid_from => Time.now, :valid_till => Time.now})
     @users = User.find_all_for_select(current_user.id)
     @tariffs = current_user.load_tariffs
-    @providers = Provider.find(:all)
-    @provider_tariffs = Tariff.find(:all, :conditions => 'purpose = "provider"')
+    @providers = Provider.all
+    @provider_tariffs = Tariff.where('purpose = "provider"').all
+    @lcrs = Lcr.all
   end
 
   def create
@@ -38,8 +39,9 @@ class CronActionsController < ApplicationController
       flash_errors_for(_('Setting_not_created'), @cron_setting)
       @tariffs = current_user.load_tariffs
       @users = User.find_all_for_select(current_user.id)
-      @providers = Provider.find(:all)
-      @provider_tariffs = Tariff.find(:all, :conditions => 'purpose = "provider"')
+      @providers = Provider.all
+      @provider_tariffs = Tariff.where('purpose = "provider"').all
+      @lcrs = Lcr.all
       render :action => :new
     end
 
@@ -51,8 +53,9 @@ class CronActionsController < ApplicationController
 
     @users = User.find_all_for_select(current_user.id)
     @tariffs = current_user.load_tariffs
-    @providers = Provider.find(:all)
-    @provider_tariffs = Tariff.find(:all, :conditions => 'purpose = "provider"')
+    @providers = Provider.all
+    @provider_tariffs = Tariff.where('purpose = "provider"').all
+    @lcrs = Lcr.all
   end
 
   def update
@@ -66,8 +69,9 @@ class CronActionsController < ApplicationController
       flash_errors_for(_('Setting_not_updated'), @cron_setting)
       @tariffs = current_user.load_tariffs
       @users = User.find_all_for_select(current_user.id)
-      @providers = Provider.find(:all)
-      @provider_tariffs = Tariff.find(:all, :conditions => 'purpose = "provider"')
+      @providers = Provider.all
+      @provider_tariffs = Tariff.where('purpose = "provider"').all
+      @lcrs = Lcr.all
       render :action => :edit
     end
   end

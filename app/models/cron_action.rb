@@ -139,6 +139,27 @@ class CronAction < ActiveRecord::Base
               a.create_new
               Action.add_action_hash(a.cron_setting.user_id, {:action => 'error', :data => 'CronAction dont run', :data2 => a.cron_setting_id, :data3 => a.cron_setting.provider_to_target_id, :data4 => e.message.to_s + " " + e.class.to_s, :target_id => a.cron_setting.provider_target_id, :target_type => 'Provider'})
             end
+          when 'change_LCR'
+            MorLog.my_debug("---- Change user LCR into : #{a.cron_setting.lcr_id}")
+            if a.cron_setting.target_id == -1
+              sql = "UPDATE users SET lcr_id = #{a.cron_setting.lcr_id}"
+            else
+              sql = "UPDATE users SET lcr_id = #{a.cron_setting.lcr_id} WHERE id = #{a.cron_setting.target_id}"
+            end
+
+            begin
+              ActiveRecord::Base.connection.update(sql)
+              Action.add_action_hash(a.cron_setting.user_id, {:action => 'CronAction_run_successful', :data => 'CronAction successful change provider tariff', :target_id => a.cron_setting.provider_target_id, :target_type => 'Provider', :data3 => a.cron_setting_id, :data2 => a.cron_setting.provider_to_target_id})
+              a.destroy
+              MorLog.my_debug("Cron Actions completed", 1)
+            rescue Exception => e
+              a.failed_at = Time.now
+              a.last_error = e.class.to_s + ' \n ' + e.message.to_s + ' \n ' + e.try(:backtrace).to_s
+              a.attempts = a.attempts.to_i + 1
+              a.save
+              a.create_new
+              Action.add_action_hash(a.cron_setting.user_id, {:action => 'error', :data => 'CronAction dont run', :data2 => a.cron_setting_id, :data3 => a.cron_setting.lcr_id, :data4 => e.message.to_s + " " + e.class.to_s})
+            end
         end
       else
         a.failed_at = Time.now

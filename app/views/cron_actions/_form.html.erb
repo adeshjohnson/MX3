@@ -11,6 +11,10 @@
     <td><%= _('User') %></td>
     <td><%= select_tag 'cron_setting[target_id]', options_for_select([[_('All'), -1]] + @users.map { |u| [nice_user(u), u.id.to_s] }, @cron_setting.target_id.to_s) %></td>
   </tr>
+  <tr id="lcr">
+    <td><%= _('LCR') %></td>
+    <td><%= select_tag 'cron_setting[lcr_id]', options_for_select(@lcrs.map { |u| [u.name, u.id.to_s] }, @cron_setting.lcr_id.to_s) %></td>
+  </tr>
   <tr id="provider">
     <td><%= _('Provider') %></td>
     <td><%= select_tag 'cron_setting[provider_target_id]', options_for_select([[_('All'), -1]] + @providers.map { |u| [u.name, u.id.to_s] }, @cron_setting.provider_target_id.to_s) %></td>
@@ -80,17 +84,28 @@
 
     function hide_elements(value) {
 
-        if ($('cron_setting[action]').value == 'change_provider_tariff') {
+        if ($('cron_setting_action').value == 'change_provider_tariff') {
             $('user').style.display = 'none';
             $('user_tariff').style.display = 'none';
             $('provider').style.display = '';
             $('provider_tariff').style.display = '';
+            $('lcr').style.display = 'none';
         }
         else {
-            $('user').style.display = '';
-            $('user_tariff').style.display = '';
-            $('provider').style.display = 'none';
-            $('provider_tariff').style.display = 'none';
+            if ($('cron_setting_action').value == 'change_LCR') {
+                $('user').style.display = '';
+                $('user_tariff').style.display = 'none';
+                $('provider').style.display = 'none';
+                $('provider_tariff').style.display = 'none';
+                $('lcr').style.display = '';
+            }
+            else {
+                $('user').style.display = '';
+                $('user_tariff').style.display = '';
+                $('provider').style.display = 'none';
+                $('provider_tariff').style.display = 'none';
+                $('lcr').style.display = 'none';
+            }
         }
     }
     hide_elements()

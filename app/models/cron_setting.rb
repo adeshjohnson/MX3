@@ -16,6 +16,9 @@ class CronSetting < ActiveRecord::Base
       self.target_class = 'Provider'
       self.to_target_class = 'Provider_Tariff'
       self.user_id = User.current.id
+    elsif self.action == "change_LCR"
+      self.target_class = 'User'
+      self.to_target_class = 'User_LCR'
     end
 
     if (valid_from > valid_till and next_run_time > valid_till or valid_till.to_time < Time.now) and repeat_forever.to_i == 0
@@ -29,7 +32,7 @@ class CronSetting < ActiveRecord::Base
   end
 
   def CronSetting.cron_settings_actions
-    [[_('change_tariff'), 'change_tariff'], [_('change_provider_tariff'), 'change_provider_tariff']]
+    [[_('change_tariff'), 'change_tariff'], [_('change_provider_tariff'), 'change_provider_tariff'], [_('change_LCR'), 'change_LCR']]
   end
 
   def CronSetting.cron_settings_periodic_types
