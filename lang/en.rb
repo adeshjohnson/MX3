@@ -493,7 +493,7 @@ Localization.define('en') do |l|
 
   l.store 'Add_to_cart', 'Add to cart'
   l.store 'Show_my_cart', 'Show my cart'
-  l.store 'Card_added', 'Card was added'
+  l.store 'Card_added', 'Card added'
   l.store 'Qty', 'Qty'
   l.store 'Continue_shopping', 'Continue shopping'
   l.store 'Empty_cart', 'Empty cart'
@@ -2139,7 +2139,7 @@ Localization.define('en') do |l|
   l.store 'Client_was_not_created', 'Client was not created'
   l.store 'Client_Form', 'Client Form'
   l.store 'EMAIL_SENDING_ERROR', 'EMAIL SENDING ERROR'
-  l.store 'One_Or_More_Cards_Were_Not_Added', 'One or more cards were not added'
+  l.store 'One_Or_More_Cards_Were_Not_Added', 'One or more Cards were not added'
   l.store 'Update_Failed', 'Update failed'
   l.store 'Settings_Saved', 'Settings saved'
   l.store 'Did_interval_rate_edited', 'DID interval rate updated'
@@ -2963,7 +2963,7 @@ Localization.define('en') do |l|
   l.store 'No_Vouchers_found_to_delete', 'No vouchers were found to delete'
   l.store 'No_Vouchers_found_to_deactivate', 'No vouchers were found to deactivate'
   l.store 'No_Vouchers_found_to_activate', 'No vouchers were found to activate'
-  l.store 'Card_is_sold', 'The card was sold'
+  l.store 'Card_is_sold', 'Card sold'
   l.store 'Fax_device_not_found', 'Fax device was not found'
   l.store 'Email_disabled', 'E-mail has been disabled'
 
