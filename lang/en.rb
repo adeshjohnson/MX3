@@ -4043,7 +4043,7 @@ Localization.define('en') do |l|
   l.store 'Insert_cdr_in_db', 'Insert CDRs into db'
   l.store 'Hide_recordings_for_all_users', 'Hide Recordings for all users'
   l.store 'Search_for_cards_in_cardgroups', 'Search for Cards in Card Groups'
-  l.store 'Location_is_assigned_to_device_or_cardgroup', 'Location is assigned to device or Card Group'
+  l.store 'Location_is_assigned_to_device_or_cardgroup', 'Location is assigned to Device or Card Group'
   l.store 'Please_select_server', 'Please select server'
   l.store 'Resellers_can_add_their_own_DIDs', 'Resellers can add their own DIDs'
   l.store 'Default_DID_Provider', 'Default DID Provider for Resellers'
