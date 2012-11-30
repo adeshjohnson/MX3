@@ -138,7 +138,7 @@ class SmsProvider < ActiveRecord::Base
 
   def connect_to_clickatell
     begin
-      sms_url = URI.parse("api.clickatell.com/http/auth?api_id=#{self.api_id}&password=#{self.password}&user=#{self.login}")
+      sms_url = URI.parse("http://api.clickatell.com/http/auth?api_id=#{self.api_id}&password=#{self.password}&user=#{self.login}")
       if sms_url.respond_to?(:request_uri)
         login = Net::HTTP.get_response(sms_url)
         log = login.body.split(" ")
