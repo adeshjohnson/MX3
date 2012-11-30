@@ -45,7 +45,7 @@
         acc_menu.add(40, 0, '<%= _('Addons') %>');
         <% end %>
         <% if (cc_active? and session[:acc_callingcard_manage].to_i > 0) %>
-        acc_menu.add(41, 40, '<%= _('Calling_cards') %>', '<%= Web_Dir %>/cardgroups/list');
+        acc_menu.add(41, 40, '<%= _('Card_Groups') %>', '<%= Web_Dir %>/cardgroups/list');
         <% end %>
         <% if monitoring_enabled_for(current_user) %>
         acc_menu.add(42, 40, '<%= _('Monitorings') %>', '<%= Web_Dir %>/monitorings');
