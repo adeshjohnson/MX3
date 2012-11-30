@@ -485,7 +485,7 @@ class CdrController < ApplicationController
           for call in @calls
             provider = providers_cache["p_#{call.provider_id}".to_sym] ||= Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", call.provider_id])
             grace_time = Device.select("grace_time").where(:id => call.src_device_id).first
-            if provider and provider.user_id == current_user.get_corrected_owner_id and (grace_time.blank? or (grace_time rescue -1) < call.billsec)
+            if provider and provider.user_id == current_user.get_corrected_owner_id and (grace_time.blank? or ((grace_time.to_i rescue -1) < call.billsec))
 
               one_old_user_price += call.user_price.to_d
               one_old_reseller_price += call.reseller_price.to_d
