@@ -1460,6 +1460,51 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/generate_user_rates_csv/4?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Destination,Subcode,Rate(USD),Round\n&quot;}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Direction,Destination,Prefix,Subcode,Country code,Rate(USD),Connection Fee(USD),Increment,Minimal Time,Start Time,End Time,Week Day\nAfghanistan,Afghanistan </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/tariffs/generate_providers_rates_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Direction,Destination,Prefix,Subcode,Country code,Rate(USD),Connection Fee(USD),Increment,Minimal Time,Start Time,End Time,Week Day\nAfghanistan,Afghanistan </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1501,6 +1546,36 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>{&quot;filename&quot;:&quot;Rates-USD.pdf&quot;,&quot;file&quot;:&quot;File rendered&quot;}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_user_rates_csv/3?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Destination,Subcode,Rate(USD),Round\n&quot;}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/8?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Direction,Destination,Prefix,Subcode,Country code,Rate(USD),Connection Fee(USD),Increment,Minimal Time,Start Time,End Time,Week Day\nLithuania,Lithuania Mobile </td>
 	<td></td>
 </tr>
 <tr>
@@ -1566,6 +1641,51 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>{&quot;filename&quot;:&quot;Rates-USD.pdf&quot;,&quot;file&quot;:&quot;File rendered&quot;}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_user_rates_csv/4?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Destination,Subcode,Rate(USD),Round\n&quot;}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Direction,Destination,Prefix,Subcode,Country code,Rate(USD),Connection Fee(USD),Increment,Minimal Time,Start Time,End Time,Week Day\nAfghanistan,Afghanistan </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/generate_providers_rates_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Direction,Destination,Prefix,Subcode,Country code,Rate(USD),Connection Fee(USD),Increment,Minimal Time,Start Time,End Time,Week Day\nAfghanistan,Afghanistan </td>
 	<td></td>
 </tr>
 <tr>
