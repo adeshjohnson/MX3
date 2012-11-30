@@ -63,7 +63,7 @@
                   <option value="-1"></option>
                   <% i = 0 %>
                   <% for l in @fl %>
-                      <option value="<%= i %>"> <%= clean_value_all l %> </option>
+                      <option value="<%= i %>" <%= "selected" if session[:imp_cli_cli].to_i == i %>> <%= clean_value_all l %> </option>
                       <% i += 1 %>
                   <% end %>
                 </select>
@@ -78,7 +78,7 @@
                   <option value="-1"></option>
                   <% i = 0 %>
                   <% for l in @fl %>
-                      <option value="<%= i %>"> <%= clean_value_all l %> </option>
+                      <option value="<%= i %>" <%= "selected" if session[:imp_cli_device_id].to_i == i %>> <%= clean_value_all l %> </option>
                       <% i += 1 %>
                   <% end %>
                 </select>
