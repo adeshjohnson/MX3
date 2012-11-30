@@ -517,7 +517,8 @@ Localization.define('en') do |l|
   l.store 'Answer_channel', 'Answer channel'
   l.store 'Did_assigned_to_dp', 'DID assigned to Dial Plan'
   l.store 'Dialplan', 'Dial Plan'
-  l.store 'Calling_Cards', 'Card Groups'
+  l.store 'Calling_Cards', 'Calling Cards'
+  l.store 'Card_Groups', 'Card Groups'
   l.store 'Card_number', 'Card number'
 
   l.store 'USA_specifics', 'USA specifics'
@@ -645,7 +646,7 @@ Localization.define('en') do |l|
   l.store 'Account_type', 'Account type'
   l.store 'Personal_details_changed', 'Personal details changed'
 
-  l.store 'Calling_cards', 'Card Groups'
+  l.store 'Calling_cards', 'Calling Cards'
   l.store 'ACCOUNTING', 'ACCOUNTING'
   l.store 'Services', 'Services'
   l.store 'New_service', 'New service'

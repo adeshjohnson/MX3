@@ -22,7 +22,7 @@
     <% end %>
 
     <% if cc_active?%>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Calling_cards') %>', '<%= Web_Dir %>/cardgroups/list');
+    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Card_Groups') %>', '<%= Web_Dir %>/cardgroups/list');
     <% i += 1 %>
     addons_menu.add(<%= i %>, <%= i-1 %>, '<%= _('Cardgroup_Stats') %>', '<%= Web_Dir %>/cardgroups/cardgroups_stats');
     <% i += 1 %>
