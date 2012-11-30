@@ -25,12 +25,20 @@
                   <tr>
                     <th><%= _(right.permission_group) %></th>
                     <th align="center"><%= _("Disabled") %></th>
+                  <% if params[:group_type] == "reseller" %>
                     <th align="center"><%= _("Enabled") %></th>
+                  <% else %>
+                    <th align="center"><%= _("Read") %></th>
+                    <th align="center"><%= _("Read_Edit") %></th>
+                  <% end %>
                   </tr>
               <% end %>
               <tr class="row<%= (i % 2 + 1).to_s %>">
                 <td id="name_<%= right.name.downcase %>" align="left"><%= _(right.nice_name) %></td>
                 <td id="disabled_<%= right.name.downcase %>" align="center"><%= radio_button_tag("right_#{right.id}", 0, gr ? gr.value.to_i == 0 : true, {:id => "#{right.name.downcase}_0"}) %></td>
+              <% if params[:group_type] != "reseller" %>
+                <td id="read_<%= right.name.downcase %>" align="center"><%= radio_button_tag("right_#{right.id}", 1, gr ? gr.value.to_i == 1 : false, {:id => "#{right.name.downcase}_1", :disabled => right.name.to_s == 'webphone_res'}) %></td>
+              <% end %>
                 <td id="write_<%= right.name.downcase %>" align="center"><%= radio_button_tag("right_#{right.id}", 2, gr ? gr.value.to_i == 2 : false, {:id => "#{right.name.downcase}_2"}) %></td>
               </tr>
               <% old_group = right.permission_group -%>
