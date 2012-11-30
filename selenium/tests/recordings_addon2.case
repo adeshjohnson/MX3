@@ -981,6 +981,591 @@
 	<td>link=Clear search</td>
 	<td></td>
 </tr>-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_users?page=1&amp;s_acc_number=&amp;s_agr_number=&amp;s_clientid=&amp;s_first_name=&amp;s_last_name=&amp;s_username=&amp;sub_s=-1&amp;user_type=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recording_enabled_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recording_enabled_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recording_enabled_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recording_enabled_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Users updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=29</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#rec_download_12 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#rec_download_9 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#rec_download_9 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=29</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_9</td>
+	<td>2012-11-29 10:05:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_10</td>
+	<td>2012-11-29 10:06:26</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_13</td>
+	<td>2012-11-29 10:16:26</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_12</td>
+	<td>2012-11-29 10:10:39</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_11</td>
+	<td>2012-11-29 10:07:24</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#download_9 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#download_10 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=29</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_9</td>
+	<td>2012-11-29 10:05:40</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=rec_date_time_10</td>
+	<td>2012-11-29 10:06:26</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_13</td>
+	<td>2012-11-29 10:16:26</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=rec_date_time_11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rec_date_time_12</td>
+	<td>2012-11-29 10:10:39</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#rec_download_9 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#rec_download_9 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>acc_user</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=29</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_9</td>
+	<td>2012-11-29 10:05:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_10</td>
+	<td>2012-11-29 10:06:26</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_13</td>
+	<td>2012-11-29 10:16:26</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_12</td>
+	<td>2012-11-29 10:10:39</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#download_9 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#download_10 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
