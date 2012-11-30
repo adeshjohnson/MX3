@@ -434,7 +434,7 @@ Localization.define('en') do |l|
   l.store 'Created_at', 'Created at'
   l.store 'Valid_from', 'Valid from'
   l.store 'Valid_till', 'Valid till'
-  l.store 'Add_cards', 'Add cards'
+  l.store 'Add_cards', 'Add Cards'
   l.store 'Card_details', 'Card details'
   l.store 'Edit_card', 'Edit card'
   l.store 'Card_was_successfully_updated', 'Card successfully updated'
@@ -1460,10 +1460,10 @@ Localization.define('en') do |l|
   l.store 'Dialplan_name', 'Dial Plan name'
   l.store 'AD_Sounds_Folder', 'Auto-Dialer Sounds Folder'
 
-  l.store 'Add_card_payment', 'Add card payment'
+  l.store 'Add_card_payment', 'Add Card payment'
   l.store 'Card_cannot_be_deleted', 'Card cannot be deleted'
   l.store 'Batch_management', 'Batch management'
-  l.store 'New_card_balance', 'New card balance'
+  l.store 'New_card_balance', 'New Card balance'
 
   l.store 'Too_much_calls_to_show', 'Too much calls to show'
   l.store 'Pbx_functions_edit', 'PBX Function Edit'
