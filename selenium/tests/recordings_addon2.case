@@ -1098,6 +1098,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
 	<td></td>
 </tr>
@@ -1239,6 +1259,16 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
 	<td></td>
 </tr>
 <tr>
@@ -1434,6 +1464,36 @@
 <tr>
 	<td>open</td>
 	<td>/billing/recordings/list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/get_recording?rec=9</td>
 	<td></td>
 </tr>
 <tr>
