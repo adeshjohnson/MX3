@@ -707,7 +707,7 @@ class CardsController < ApplicationController
       flash[:notice] = _("Card_is_already_sold")
       redirect_to(:action => :card_pay, :id => @card.id, :cg => @cg.id) and return false
     end
-    unless @card.sell(session[:default_currency], current_user.get_corrected_owner_id, params[:description])
+    unless @card.sell(session[:show_currency], current_user.get_corrected_owner_id, params[:description])
       flash_errors_for(_('Can_not_sell_invalid_card'), @card) 
       redirect_to :action => 'list', :cg => @cg and return false 
     end 
@@ -723,7 +723,7 @@ class CardsController < ApplicationController
 
     amount = @card.balance + @cg.get_tax.count_tax_amount(@card.balance)
 
-    ccorder = Ccorder.new(:ordertype => "manual", :email => @email, :currency => session[:default_currency])
+    ccorder = Ccorder.new(:ordertype => "manual", :email => @email, :currency => session[:show_currency])
     ccorder.amount = amount
     ccorder.payer_email = @email
     ccorder.date_added = creation_time
