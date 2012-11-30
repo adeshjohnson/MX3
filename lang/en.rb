@@ -1445,7 +1445,7 @@ Localization.define('en') do |l|
   l.store 'Cards_were_successfully_activated', 'Cards successfully activated'
   l.store 'Cards_were_successfully_disabled', 'Cards successfully disabled'
   l.store 'Card_interval', 'Card interval'
-  l.store 'Active_cards', 'Active cards'
+  l.store 'Active_cards', 'Active Cards'
   l.store 'Disabled_cards', 'Disabled Cards'
   l.store 'Action', 'Action'
   l.store 'Activate', 'Activate'
