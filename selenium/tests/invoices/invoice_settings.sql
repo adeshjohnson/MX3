@@ -64,7 +64,7 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (42, 'Default_CID_Name', NULL, 0, NULL),
 (43, 'Default_CID_Number', NULL, 0, NULL),
 (62, 'Email_Sending_Enabled', NULL, 0, NULL),
-(185, 'Tax_1', 'First-tax', 0, '1'),
+(184, 'Tax_1', 'First-tax', 0, '1'),
 (185, 'Tax_2', 'Second-tax', 0, '1'),
 (186, 'Tax_3', 'Third-tax', 0, '1'),
 (187, 'Tax_4', 'Forth-tax', 0, '1'),
