@@ -93,112 +93,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/card_pay/21?cg=1</td>
+	<td>/billing/users/edit/3</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>id=description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Description</td>
+	<td>select</td>
+	<td>id=user_currency_id</td>
+	<td>label=EUR</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=description</td>
-	<td>Description</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/card_pay/21?cg=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Description 2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=description</td>
-	<td>Description 2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/payments/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#payment_description_link_11 &gt; a &gt; img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//div[@id='payment_description_link_10']/a/img[@title='Description']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=payment_description_tag_10</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=payment_description_tag_10</td>
-	<td>Description</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=payment_description_tag_10</td>
-	<td>Description 3</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=ok_10</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='payment_description_link_10']/a/img[@title='Description 3']</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,18 +203,8 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/card_pay/29?cg=4</td>
+	<td>/billing/cards/card_pay/27?cg=4</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Description reseller</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -317,39 +212,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=description</td>
-	<td>Description reseller</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>assertTextPresent</td>
+	<td>7.3853 EUR</td>
 	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/card_pay/29?cg=4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Description reseller 2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=description</td>
-	<td>Description reseller 2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -362,49 +227,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>css=img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=amout_with_tax_10</td>
+	<td>7.3853</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>css=#payment_description_link_13 &gt; a &gt; img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//div[@id='payment_description_link_12']/a/img[@title='Description reseller']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=payment_description_tag_12</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=payment_description_tag_12</td>
-	<td>Description reseller</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=payment_description_tag_12</td>
-	<td>Description reseller 3</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=ok_12</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='payment_description_link_12']/a/img[@title='Description reseller 3']</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=currency_10</td>
+	<td>EUR</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -487,24 +317,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>id=description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Description acc</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=description</td>
-	<td>Description acc</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -517,24 +332,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>id=description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Description acc 2</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=description</td>
-	<td>Description acc 2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -547,49 +347,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>css=img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=user_11</td>
+	<td>1111111019 (7484)</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>css=#payment_description_link_15 &gt; a &gt; img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//div[@id='payment_description_link_14']/a/img[@title='Description acc']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=img[alt=&quot;Comment_edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=payment_description_tag_14</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=payment_description_tag_14</td>
-	<td>Description acc</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=payment_description_tag_14</td>
-	<td>Description acc 3</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=ok_14</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='payment_description_link_14']/a/img[@title='Description acc 3']</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=user_12</td>
+	<td>1111111019 (7484)</td>
 </tr>
 </tbody></table>
 </body>
