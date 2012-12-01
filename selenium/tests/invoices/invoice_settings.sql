@@ -71,7 +71,8 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (190, 'Tax_1_Value', '10.0', 0, NULL),
 (191, 'Tax_2_Value', '10.0', 0, NULL),
 (192, 'Tax_3_Value', '20.0', 0, NULL),
-(193, 'Tax_4_Value', '30.0', 0, NULL),
+(193, 'Tax_4_Value', '30.0', 0, NULL);
+INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (205, 'Prepaid_Invoice_Number_Start', 'INV', 0, NULL),
 (206, 'Prepaid_Invoice_Number_Length', '11', 0, NULL),
 (207, 'Prepaid_Invoice_Number_Type', '1', 0, NULL),
@@ -93,7 +94,8 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (298, 'Invoice_show_additional_details_on_separate_page', '0', 0, ''),
 (299, 'Prepaid_Invoice_To_Pay_Line', '', 0, NULL),
 (300, 'Prepaid_Invoice_Add_Average_rate', '0', 0, NULL),
-(301, 'Prepaid_Invoice_Show_Time_in_Minutes', '0', 0, NULL),
+(301, 'Prepaid_Invoice_Show_Time_in_Minutes', '0', 0, NULL);
+INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (302, 'Prepaid_Invoice_Short_File_Name', '0', 0, NULL),
 (303, 'Prepaid_Invoice_user_billsec_show', '0', 0, NULL),
 (304, 'Prepaid_Invoice_show_additional_details_on_separate_page', '0', 0, ''),
@@ -114,7 +116,8 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (319, 'Show_advanced_Provider_settings', '0', 0, NULL),
 (320, 'Show_advanced_Device_settings', '0', 0, NULL),
 (321, 'Hide_payment_options_for_postpaid_users', '0', 0, NULL),
-(322, 'Hide_quick_stats', '0', 0, NULL),
+(322, 'Hide_quick_stats', '0', 0, NULL);
+INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (323, 'Hide_HELP_banner', '0', 0, NULL),
 (324, 'Hide_Iwantto', '0', 0, NULL),
 (325, 'Hide_Manual_Link', '0', 0, NULL),
@@ -126,7 +129,8 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (331, 'API_Allow_registration_ower_API', '0', 0, NULL),
 (332, 'API_Disable_hash_checking', '0', 0, NULL),
 (333, 'CSV_File_size', '0', 0, NULL),
-(334, 'Play_IVR_for_200_HGC', '0', 0, NULL),
+(334, 'Play_IVR_for_200_HGC', '0', 0, NULL);
+INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (335, 'IVR_for_200_HGC', '0', 0, NULL),
 (336, 'Registration_Agreement', '0', 0, NULL),
 (337, 'Change_ANSWER_to_FAILED_if_HGC_not_equal_to_16_for_Users', '0', 0, NULL),
@@ -147,4 +151,10 @@ INSERT INTO `locations` (`id`, `name`, `user_id`) VALUES
 DELETE FROM `subscriptions`;
 INSERT INTO `subscriptions` (`id`, `service_id`, `user_id`, `device_id`, `activation_start`, `activation_end`, `added`, `memo`) VALUES
 (1, 1, 2, NULL, '2011-01-01 00:00:00', '2013-01-31 00:00:00', '2009-04-22 09:25:00', 'Test_preriodic_service_memo');
+
+INSERT INTO `taxes` (`id`, `tax1_enabled`, `tax2_enabled`, `tax3_enabled`, `tax4_enabled`, `tax1_name`, `tax2_name`, `tax3_name`, `tax4_name`, `total_tax_name`, `tax1_value`, `tax2_value`, `tax3_value`, `tax4_value`, `compound_tax`) VALUES
+(2, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1),
+(3, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1),
+(4, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1),
+(5, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1);
 
