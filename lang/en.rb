@@ -4528,7 +4528,7 @@ Localization.define('en') do |l|
   l.store 'CLI_Data', 'CLI Data'
   l.store 'CLI_Cant_Be_Empty', 'CLI cannot be empty'
   l.store 'Device_ID_Cant_Be_Empty', 'Device ID cannot be empty'
-  l.store '', ''
+  l.store 'Accept_calls_from_any_port', 'Accept calls from any port'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

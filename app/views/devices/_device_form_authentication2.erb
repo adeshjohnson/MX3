@@ -25,6 +25,7 @@
             //<![CDATA[
             Event.observe(window, 'load', function () {
                 hide_ip_elements();
+                zero_port()
 
                 Event.observe($('ip_authentication_dynamic_1'), 'click', function () {
                     hide_ip_elements();
@@ -33,6 +34,16 @@
                 Event.observe($('ip_authentication_dynamic_2'), 'click', function () {
                     hide_ip_elements();
                 });
+
+                <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+                    Event.observe($('zero_port_0'), 'click', function () {
+                        zero_port();
+                    });
+
+                    Event.observe($('zero_port_1'), 'click', function () {
+                        zero_port();
+                    });
+                <% end %>
             });
 
             function hide_ip_elements() {
@@ -51,6 +62,11 @@
                     $('ip_dyn3').disabled = false;
                     $('ip_dyn4').disabled = false;
                     $('ip_dyn4').disabled = false;
+                    <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+                        $('ip_auth_zero_port').style.display = "none";
+                        $('zero_port_0').disabled = true;
+                        $('zero_port_1').disabled = true;
+                    <% end %>
                     <%= "$('dev_reg_line').style.display = '';$('dev_reg_line').disabled = false;" if !@device.username.blank? %>
 
                 } else {
@@ -67,10 +83,27 @@
                     $('ip_dyn3').disabled = true
                     $('ip_dyn4').disabled = true;
                     $('ip_dyn4').disabled = true;
+                    <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+                        $('ip_auth_zero_port').style.display = "";
+                        $('zero_port_0').disabled = false;
+                        $('zero_port_1').disabled = false;
+                    <% end %>
                     <%= "$('dev_reg_line').style.display = 'none';$('dev_reg_line').disabled = true;" if !@device.username.blank? %>
 
                 }
             }
+
+            <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+                function zero_port() {
+                    if ($('zero_port_1').checked) {
+                        $('port').disabled = true;
+                        $('port').value = 0;
+                    } else {
+                        $('port').disabled = false;
+                        $('port').value = <%= @device.port %>;
+                    }
+                }
+            <% end %>
             //]]>
         </script>
 
@@ -90,6 +123,15 @@
                 <td id="ip_add_name"><%= _('IP_Address') %>:</td>
                 <td id="ip_add_value">  <%= text_field_tag 'host', @device.host, "class" => "input" %></td>
               </tr>
+              <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+                <tr id="ip_auth_zero_port">
+                  <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
+                  <td id="zero_port_2">
+                    <%= radio_button_tag('zero_port', '0', @device.port > 0) %> <%= _('No') %>
+                    <%= radio_button_tag('zero_port', '1', @device.port == 0) %> <%= _('Yes') %>
+                  </td>
+                </tr>
+              <% end %>
 
               <tr id='ip_auth2'>
                 <td id="ip_port_name"><%= _('Port') %>:</td>
