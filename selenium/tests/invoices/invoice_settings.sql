@@ -79,7 +79,6 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (206, 'Prepaid_Invoice_Number_Length', '11', 0, NULL),
 (207, 'Prepaid_Invoice_Number_Type', '1', 0, NULL),
 (240, 'Tax_1', 'First-tax', 0, '1'),
-(284, 'Hide_registration_link', '', 0, NULL),
 (285, 'reCAPTCHA_enabled', '0', 0, NULL),
 (286, 'ReCAPTCHA_public_key', '', 0, NULL),
 (287, 'ReCAPTCHA_private_key', '', 0, NULL),
