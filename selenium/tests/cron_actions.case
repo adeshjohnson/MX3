@@ -50,6 +50,91 @@
 	<td>aaaaaa</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>id=cron_setting_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=cron_setting_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=cron_setting_to_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_provider_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_action</td>
+	<td>label=Change provider tariff</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_to_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=cron_setting_provider_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_provider_target_id</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td>label=Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_action</td>
+	<td>label=Change tariff</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>activation_start_year</td>
 	<td>label=2010</td>
@@ -425,6 +510,146 @@
 	<td>user_tariff_id</td>
 	<td>Wholesale - Test Tariff for Users</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>LCR1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>LCR2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cron_setting_name</td>
+	<td>Change LCR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_action</td>
+	<td>label=Change LCR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_target_id</td>
+	<td>label=Test Reseller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>label=LCR1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2022</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_4</td>
+	<td>Change LCR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=action_4</td>
+	<td>change_LCR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_4</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=cron_setting_target_id</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>LCR1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_target_id</td>
+	<td>label=System Admin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>label=LCR2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_4</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=cron_setting_target_id</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>LCR2</td>
+</tr>
 <!--import mysql with new cron actions-->
 <tr>
 	<td>setTimeout</td>
@@ -486,11 +711,6 @@
 	<td>name_124</td>
 	<td>Name</td>
 </tr>
-<tr>
-	<td>setTimeout</td>
-	<td>8000</td>
-	<td></td>
-</tr>
 <!--assert-->
 <tr>
 	<td>open</td>
@@ -533,9 +753,9 @@
 	<td>Retail - Test Tariff + 0.1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=img[alt=Edit]</td>
-	<td></td>
+	<td>assertSelectedLabel</td>
+	<td>id=user_lcr_id</td>
+	<td>LCR2</td>
 </tr>
 <tr>
 	<td>open</td>
