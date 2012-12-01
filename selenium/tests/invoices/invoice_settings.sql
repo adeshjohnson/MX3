@@ -148,9 +148,3 @@ DELETE FROM `subscriptions`;
 INSERT INTO `subscriptions` (`id`, `service_id`, `user_id`, `device_id`, `activation_start`, `activation_end`, `added`, `memo`) VALUES
 (1, 1, 2, NULL, '2011-01-01 00:00:00', '2013-01-31 00:00:00', '2009-04-22 09:25:00', 'Test_preriodic_service_memo');
 
-INSERT INTO `taxes` (`id`, `tax1_enabled`, `tax2_enabled`, `tax3_enabled`, `tax4_enabled`, `tax1_name`, `tax2_name`, `tax3_name`, `tax4_name`, `total_tax_name`, `tax1_value`, `tax2_value`, `tax3_value`, `tax4_value`, `compound_tax`) VALUES
-(2, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1),
-(3, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1),
-(4, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1),
-(5, 0, 1, 1, 1, 'First-tax', 'Second-tax', 'Third-tax', 'Forth-tax', 'Total_tax_name', 10.000000000000000, 10.000000000000000, 20.000000000000000, 30.000000000000000, 1);
-
