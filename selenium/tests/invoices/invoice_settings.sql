@@ -1,3 +1,6 @@
+INSERT INTO `acc_groups`(`id`,`name`                  ,`group_type`) VALUES
+                        ( 11 ,'Accountant_permissions','accountant'),
+                        ( 12 ,'Reseller_Permissions'  ,'reseller');
 INSERT INTO `acc_group_rights` (`id`, `acc_group_id`, `acc_right_id`, `value`) VALUES
 (1, 11, 1, 0),
 (2, 11, 2, 0),
