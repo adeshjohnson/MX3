@@ -24,7 +24,7 @@ class CronActionsController < ApplicationController
     @tariffs = current_user.load_tariffs
     @providers = Provider.all
     @provider_tariffs = Tariff.where('purpose = "provider"').all
-    @lcrs = Lcr.all
+    @lcrs = Lcr.where("user_id = ? ", current_user.id).all
   end
 
   def create
@@ -32,6 +32,18 @@ class CronActionsController < ApplicationController
     @cron_setting = CronSetting.new(params[:cron_setting].merge!({:user_id => current_user.id}))
     @cron_setting.valid_from = current_user.system_time(Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], '0', '0'))
     @cron_setting.valid_till = current_user.system_time(Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], '59', '59'))
+
+    lcr = Lcr.where("id = #{params[:cron_setting][:lcr_id].to_i} and user_id = #{current_user.id}").first
+    if lcr.blank?
+      flash_errors_for(_('Lcr_was_not_found'), @cron_setting)
+      @tariffs = current_user.load_tariffs
+      @users = User.find_all_for_select(current_user.id)
+      @providers = Provider.all
+      @provider_tariffs = Tariff.where('purpose = "provider"').all
+      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+      render :action => :new and return false
+    end
+
     if @cron_setting.save
       flash[:status]=_('Setting_saved')
       redirect_to :action => :index
@@ -41,7 +53,7 @@ class CronActionsController < ApplicationController
       @users = User.find_all_for_select(current_user.id)
       @providers = Provider.all
       @provider_tariffs = Tariff.where('purpose = "provider"').all
-      @lcrs = Lcr.all
+      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
       render :action => :new
     end
 
@@ -55,13 +67,25 @@ class CronActionsController < ApplicationController
     @tariffs = current_user.load_tariffs
     @providers = Provider.all
     @provider_tariffs = Tariff.where('purpose = "provider"').all
-    @lcrs = Lcr.all
+    @lcrs = Lcr.where("user_id = ? ", current_user.id).all
   end
 
   def update
     @cron_setting.update_attributes(params[:cron_setting])
     @cron_setting.valid_from = current_user.system_time(Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], '0', '0'))
     @cron_setting.valid_till = current_user.system_time(Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], '59', '59'))
+
+    lcr = Lcr.where("id = #{params[:cron_setting][:lcr_id].to_i} and user_id = #{current_user.id}").first
+    if lcr.blank?
+      flash_errors_for(_('Lcr_was_not_found'), @cron_setting)
+      @tariffs = current_user.load_tariffs
+      @users = User.find_all_for_select(current_user.id)
+      @providers = Provider.all
+      @provider_tariffs = Tariff.where('purpose = "provider"').all
+      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+      render :action => :new and return false
+    end
+
     if @cron_setting.save
       flash[:status]=_('Setting_updated')
       redirect_to :action => :index
@@ -71,7 +95,7 @@ class CronActionsController < ApplicationController
       @users = User.find_all_for_select(current_user.id)
       @providers = Provider.all
       @provider_tariffs = Tariff.where('purpose = "provider"').all
-      @lcrs = Lcr.all
+      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
       render :action => :edit
     end
   end
