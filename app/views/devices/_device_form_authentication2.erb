@@ -25,7 +25,9 @@
             //<![CDATA[
             Event.observe(window, 'load', function () {
                 hide_ip_elements();
-                zero_port()
+                <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+                    zero_port();
+                <% end %>
 
                 Event.observe($('ip_authentication_dynamic_1'), 'click', function () {
                     hide_ip_elements();
