@@ -130,7 +130,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=grace_time</td>
-	<td>100</td>
+	<td>150</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -286,6 +286,11 @@
 	<td>select</td>
 	<td>id=s_user</td>
 	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -463,6 +468,11 @@
 	<td>label=All</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=s_device</td>
 	<td>label=SIP/1010</td>
@@ -581,6 +591,11 @@
 	<td>select</td>
 	<td>id=s_user</td>
 	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
