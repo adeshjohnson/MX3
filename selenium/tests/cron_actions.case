@@ -743,6 +743,16 @@
 	<td>Wholesale - Test Tariff for Users</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/users/edit/2</td>
 	<td></td>
@@ -811,6 +821,21 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>Reseller_LCR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -980,6 +1005,66 @@
 	<td>waitForTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_action</td>
+	<td>label=Change LCR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>Primary LCR1 LCR2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>Primary LCR1 LCR2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>Primary LCR1 LCR2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_lcr_id</td>
+	<td>Primary LCR1 LCR2</td>
 </tr>
 </tbody></table>
 </body>
