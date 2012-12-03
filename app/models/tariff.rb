@@ -869,7 +869,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
     new_destinations = ActiveRecord::Base.connection.select_all("SELECT *, #{name}.id AS i_id FROM #{name} left join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)  WHERE not_found_in_db = 1 AND f_error = 0 AND f_lata = 0;")
     MorLog.my_debug("Use temp table : #{name}")
 
-    prefixes = Hash[*prefixes.collect { |v| [v.to_s, 1] }.flatten]
+    prefixes = Hash[prefixes.map { |v| [v.to_s, 1] }]
 
     new_destinations.each_with_index { |row, i|
       prefix = row["col_#{options[:imp_prefix]}"].to_s.strip.gsub(/\s/, '')
