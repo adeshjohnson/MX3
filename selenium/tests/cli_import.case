@@ -277,11 +277,76 @@
 	<td>//tr[2]/td[3]</td>
 	<td>Device was not found</td>
 </tr>
-<!--<tr> 	<td>assertTextPresent</td> 	<td>CLI Cant Be Empty</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Device_ID_Cant_Be_Empty</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Device id neegzistuoja</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Device jau turi tokį cli</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Jei pačiam faile yra vienodų cli priskiriamų tam pačiam device, tai pirmas įrašas įkeliamas o kiti duplicatai pateikiami su klaida, kad tokį cli jau device turi.</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device ID cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Such CLI exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[5]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[6]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[7]/td[2]</td>
+	<td>123455</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[8]/td[2]</td>
+	<td>123455</td>
+</tr>
 <tr>
 	<td>assertText</td>
 	<td>link=Back</td>
 	<td>Back</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cli_3</td>
+	<td>234227666</td>
+</tr>
+<!--Įkeltas tik 1 cli, nors tam pačiam device yra daugiau tokių pačių CLI-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cli_1</td>
+	<td>123455</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=cli_2</td>
+	<td></td>
 </tr>
 <!--importuojami cli be klaidų-->
 <tr>
@@ -396,6 +461,11 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Column Separator /</td>
 	<td></td>
 </tr>
@@ -427,6 +497,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
 	<td></td>
 </tr>
 <tr>
