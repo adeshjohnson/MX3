@@ -3580,7 +3580,7 @@ Localization.define('en') do |l|
   l.store 'Rule_not_created', 'Rule was not created'
   l.store 'Rule_not_updated', 'Rule was not updated'
   l.store 'Short_file_name', 'Use short file name'
-  l.store 'Allow_to_have_own_providers', 'Allow to have own providers'
+  l.store 'Allow_to_have_own_providers', 'Allow to have providers'
   l.store 'Cant_delete_destination_calls_to_this_destination_exist', 'Unable to edit this destination'
   l.store 'calls_to_this_destination_exist', 'calls to this destination exists'
   l.store 'rates_exist', 'there\'re assigned rates'
