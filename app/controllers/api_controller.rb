@@ -2757,6 +2757,66 @@ class ApiController < ApplicationController
     send_xml_data(out_string, params[:test].to_i)
   end
 
+  #======================================    DIDs    =======================================
+
+  def did_create
+
+    allow, values = MorApi.check_params_with_all_keys(params, request)
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
+    if allow == true
+      check_user(params[:u], params[:p])
+      if @user
+        provider = Provider.where(:id => params[:provider_id], :hidden => 0).first
+        if provider
+          user_id = @user.id
+          allow_manage_dids = true
+          if @user.usertype == 'accountant'
+            user_id = 0
+            sql = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
+            query = ActiveRecord::Base.connection.select_all(sql)[0]['result'] rescue 0
+            query.to_i == 1 ? allow_manage_dids = true : allow_manage_dids = false
+          end
+          if provider.user_id == user_id
+            if allow_manage_dids
+              did_exists = Did.where(:did => params[:did]).first
+              if !did_exists
+                if is_numeric?(params[:did]) and !params[:did].blank?
+                  did = Did.new(:did => params[:did].to_s.strip, :provider_id => params[:provider_id].to_s.strip, :reseller_id => user_id)
+                    if did.save
+                      doc.status("DID created")
+                      if params[:test].to_i == 1
+                          doc.id(did.id)
+                          doc.did(did.did)
+                      end
+                    else
+                      doc.error("DID creation failed")
+                    end
+                else
+                  doc.error("Invalid DID specified")
+                end
+              else
+                doc.error("DID already exists")
+              end
+            else
+              doc.error("You are not authorized to manage DIDs")
+            end
+          else
+            doc.error("Your are not authorized to use this Provider")
+          end         
+        else
+          doc.error("Provider was not found")
+        end
+      else
+        doc.error("Bad login")
+      end
+    else
+      doc.error("Incorrect hash")
+    end
+    }
+    send_xml_data(out_string, params[:test].to_i)
+  end
 
   #====================================== Phonebooks =======================================
 

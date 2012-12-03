@@ -2901,6 +2901,11 @@ Variables: (Names marked with * are required)
     end
   end
 
+  def is_numeric?(val=nil)
+    # Check if value is a digit
+    (!!(Float(val)) rescue false)
+  end
+
   def call_shop_active?
     defined?(CS_Active) and CS_Active == 1
   end
