@@ -4471,7 +4471,7 @@ Localization.define('en') do |l|
   l.store 'Hostname_+_IP', 'Hostname+IP'
   l.store 'Click_here_to_see_bad_numbers', 'Click here to see bad numbers'
   l.store 'Device_Autentication', 'Device Authentication'
-  l.store 'Decive_CallerID_Name ', 'Device CallerID Name '
+  l.store 'Decive_CallerID_Name', 'Device CallerID Name'
   l.store 'CCL_Active', 'Carrier Class'
   l.store 'CCL_Settings', 'Carrier Class Settings'
   l.store 'DIDs_report', 'DIDs report'
