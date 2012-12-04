@@ -290,7 +290,7 @@
 </div>
 <br/>
 </body>
-<% if Confline.set_value("Hide_Iwantto").to_i == 0 %>
+<% if Confline.get_value("Hide_Iwantto").to_i == 0 %>
   <img id="icon_info_gmaps" src="<%= Web_Dir %>/assets/icons/information.png" title="Info">
   <a id="info_google_maps_link" href="http://wiki.kolmisoft.com/index.php/Google_Maps_integration" target="_blank"><%= _('click_here_for_more_information') %></a>.
 <% else %>
