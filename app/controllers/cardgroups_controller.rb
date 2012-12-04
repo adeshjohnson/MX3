@@ -367,7 +367,7 @@ class CardgroupsController < ApplicationController
   end
 
   def upload_card_image
-    path = Actual_Dir + '/public/images/cards/'
+    path = Actual_Dir + '/app/assets/images/cards/'
     @cardgroup=Cardgroup.find_by_id(params[:id])
     unless @cardgroup
       flash[:notice] = _('Cardgroup_now_found')
@@ -386,7 +386,7 @@ class CardgroupsController < ApplicationController
           if @ext == 'jpg' or @ext == 'jpeg' or @ext == 'png' or @ext == 'gif'
             system("rm #{path}#{@cardgroup.image}")
             @filename=(@cardgroup.id).to_s + "."+@ext.to_s
-            File.open(Actual_Dir + '/public/images/cards/' + @filename, "wb") do |f|
+            File.open(Actual_Dir + '/app/assets/images/cards/' + @filename, "wb") do |f|
               f.write(params[:Card_image].read)
             end
             @cardgroup.image = @filename
