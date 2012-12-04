@@ -114,7 +114,7 @@ class PermissionsController < ApplicationController
     end
 
     if (permis and permis.size.to_i > 0) or @group.group_type != 'reseller'
-      @rights = AccRight.find(:all, :conditions => [cond.join(" AND ")].concat(var), :order => "permission_group")
+      @rights = AccRight.find(:all, :conditions => [cond.join(" AND ")].concat(var), :order => "permission_group, id DESC")
     else
       @rights = []
     end
