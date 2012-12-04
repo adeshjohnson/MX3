@@ -2759,6 +2759,150 @@ class ApiController < ApplicationController
 
   #======================================    DIDs    =======================================
 
+  def did_assign_device
+
+    allow, values = MorApi.check_params_with_all_keys(params, request)
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
+    if allow == true
+      check_user(params[:u], params[:p])
+      if @user
+        device = Device.where(:id => params[:device_id]).first
+        if device 
+          user_id = @user.id
+          permissions = true
+          if @user.usertype == 'accountant'
+            user_id = 0
+
+            sql_device = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_manage') and value IN (2,1) limit 1"
+            sql_did = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
+            sql_user = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'user_manage') and value IN (2,1) limit 1"
+
+            query_device = ActiveRecord::Base.connection.select_all(sql_device)[0]['result'].to_i rescue 0
+            query_did = ActiveRecord::Base.connection.select_all(sql_did)[0]['result'].to_i rescue 0
+            query_user = ActiveRecord::Base.connection.select_all(sql_user)[0]['result'].to_i rescue 0
+
+            ((query_device.to_i + query_did.to_i + query_user.to_i) == 3 ? permissions = true : permissions = false)
+          end
+          did = Did.where(:did => params[:did]).first
+          device_user_owner = User.where(:id => device.user_id,:owner_id => user_id).size
+          if device_user_owner == 1
+            if permissions 
+              if is_numeric?(params[:did]) and !params[:did].blank?
+                 if did
+                   did_owner = ( did.reseller_id == user_id ? true : false )
+                   if did_owner
+                     if did.status == "free" or (did.user_id == device.user_id and did.status == "reserved")
+                       did.device_id = params[:device_id].to_s.strip
+                       did.status = "active"
+                       if did.save
+                         doc.status("Device assigned to DID")
+                         if params[:test].to_i == 1
+                             doc.did_id(did.id)
+                             doc.device_id(device.id)
+                         end
+                       else
+                         doc.error("Device was not assigned")
+                       end
+                     else
+                       doc.error("DID is not free")
+                     end
+                   else
+                     doc.error("Dont be so smart")
+                   end
+                 else
+                   doc.error("DID does not exist")
+                 end
+              else
+                doc.error("Invalid DID specified")
+              end
+            else
+              doc.error("You are not authorized to manage DIDs")
+            end
+          else
+            doc.error("Your are not authorized to use this Device")
+          end         
+        else
+          doc.error("Device was not found")
+        end
+      else
+        doc.error("Bad login")
+      end
+    else
+      doc.error("Incorrect hash")
+    end
+    }
+    send_xml_data(out_string, params[:test].to_i)
+  end
+
+  def did_unassign_device
+
+    allow, values = MorApi.check_params_with_all_keys(params, request)
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
+    if allow == true
+      check_user(params[:u], params[:p])
+      if @user
+          user_id = @user.id
+          permissions = true
+          if @user.usertype == 'accountant'
+            user_id = 0
+
+            sql_device = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_manage') and value IN (2,1) limit 1"
+            sql_did = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
+            sql_user = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'user_manage') and value IN (2,1) limit 1"
+
+            query_device = ActiveRecord::Base.connection.select_all(sql_device)[0]['result'].to_i rescue 0
+            query_did = ActiveRecord::Base.connection.select_all(sql_did)[0]['result'].to_i rescue 0
+            query_user = ActiveRecord::Base.connection.select_all(sql_user)[0]['result'].to_i rescue 0
+
+            ((query_device.to_i + query_did.to_i + query_user.to_i) == 3 ? permissions = true : permissions = false)
+          end
+          did = Did.where(:did => params[:did]).first
+            if permissions 
+              if is_numeric?(params[:did]) and !params[:did].blank? and did
+                did_owner = ( did.reseller_id == user_id ? true : false )
+                if did_owner
+                  if did.status == "active"
+                    if did.dialplan_id == 0
+                      did.device_id = 0
+                      did.status = "free"
+                      if did.save
+                        doc.status("Device was unassigned from DID")
+                        if params[:test].to_i == 1
+                          doc.did_id(did.id)
+                        end
+                      else
+                        doc.error("Failed to unassign DID")
+                      end
+                    else
+                      doc.error("DID is assigned to dialplan")
+                    end
+                  else
+                    doc.error("DID is already free")
+                  end
+                else
+                  doc.error("Dont be so smart")
+                end
+              else
+                doc.error("Invalid DID specified")
+              end
+            else
+              doc.error("You are not authorized to manage DIDs")
+            end
+      else
+        doc.error("Bad login")
+      end
+    else
+      doc.error("Incorrect hash")
+    end
+    }
+    send_xml_data(out_string, params[:test].to_i)
+  end
+
+
   def did_create
 
     allow, values = MorApi.check_params_with_all_keys(params, request)
@@ -2777,6 +2921,10 @@ class ApiController < ApplicationController
             sql = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
             query = ActiveRecord::Base.connection.select_all(sql)[0]['result'] rescue 0
             query.to_i == 1 ? allow_manage_dids = true : allow_manage_dids = false
+          end
+          if @user.usertype == 'reseller'
+            query = Confline.get_value('Resellers_can_add_their_own_DIDs',0)
+            query.to_i == 1 ? allow_manage_dids = true : allow_manage_dids = false            
           end
           if provider.user_id == user_id
             if allow_manage_dids
