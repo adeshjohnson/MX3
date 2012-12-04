@@ -613,7 +613,7 @@ class CardgroupsController < ApplicationController
     @gmp.percent = percent
     @gmp.save
 
-    flash[:notice] = _('Record_updated')
+    flash[:status] = _('Record_updated')
     redirect_to :action => 'gmp_list', :id => @cg.id
 
   end
