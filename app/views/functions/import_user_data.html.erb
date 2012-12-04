@@ -1,8 +1,8 @@
 <%= link_to b_csv + _('Import_Users_From_CSV'), :action => "import_user_data_users" %>
 <br/>
-<%= link_to b_csv + _('Import_Devices_From_CSV'), :action => "import_user_data_devices" %>
+<%= link_to_if(@users.size > 0, b_csv + _('Import_Devices_From_CSV'), {:action => "import_user_data_devices"}) %>
 <br/>
-<%= link_to b_csv + _('Import_DID_From_CSV'), :action => "import_user_data_dids" %>
+<%= link_to_if(@users.size > 0 and @devices.size > 0, b_csv + _('Import_DID_From_CSV'), {:action => "import_user_data_dids"}) %>
 <br/>
 <%= link_to b_csv + _('Import_CLIs_From_CSV'), :action => "import_user_data_clis" %>
 <br/>

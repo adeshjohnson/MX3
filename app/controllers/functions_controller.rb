@@ -2432,6 +2432,12 @@ Sets default tax values for users or cardgroups
           end
         end
       end
+      if @error_array.blank?
+        flash[:status] = _('CLIs_were_successfully_imported')
+        redirect_to :action => :import_user_data
+      else
+        flash[:notice] = _("There_were_errors")
+      end
     end
 
   end
@@ -2653,6 +2659,12 @@ Sets default tax values for users or cardgroups
           end
         end
       end
+      if @error_array.blank?
+        flash[:status] = _('Users_were_successfully_imported')
+        redirect_to :action => :import_user_data
+      else
+        flash[:notice] = _("There_were_errors")
+      end
     end
 
   end
@@ -2871,6 +2883,12 @@ Sets default tax values for users or cardgroups
           end
         end
       end
+      if @error_array.blank?
+        flash[:status] = _('Devices_were_successfully_imported')
+        redirect_to :action => :import_user_data
+      else
+        flash[:notice] = _("There_were_errors")
+      end
     end
   end
 
@@ -3004,7 +3022,8 @@ Sets default tax values for users or cardgroups
         end
       end
       if @error_array == []
-        flash[:status] = _("DIDs_were_successfully_created")
+        flash[:status] = _('DIDs_were_successfully_imported')
+        redirect_to :action => :import_user_data
       else
         flash[:notice] = _("There_were_errors")
       end
