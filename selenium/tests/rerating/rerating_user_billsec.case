@@ -134,6 +134,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/391</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>1.155</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate detail successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
 	<td></td>
 </tr>
@@ -286,11 +306,6 @@
 	<td>select</td>
 	<td>id=s_user</td>
 	<td>label=Test User #1</td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>10000</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -468,9 +483,9 @@
 	<td>label=All</td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>10000</td>
+	<td>click</td>
+	<td>id=s_device</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -593,11 +608,6 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>10000</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=s_device</td>
 	<td>label=SIP/1011</td>
@@ -665,12 +675,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=provider_rate_49</td>
-	<td>0.1200</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=provider_price_49</td>
-	<td>0.3660</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -685,12 +695,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=user_rate_49</td>
-	<td>0.5200</td>
+	<td>1.1550</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=user_price_49</td>
-	<td>1.5860</td>
+	<td>3.5227</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -705,7 +715,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=profit_49</td>
-	<td>1.2200</td>
+	<td>3.5227</td>
 </tr>
 </tbody></table>
 </body>
