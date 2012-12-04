@@ -6,7 +6,8 @@
             <table class="simple">
               <tr>
                 <td><%= _("From") %></td>
-                <td><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+                <td><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %> <%= link_to b_cross + _('Clear_search'), :action => :summary, :clean => 1 %>
+ </td>
               </tr>
               <tr>
                 <td><%= _("Till") %></td>
@@ -65,12 +66,11 @@
                 </td>
               </tr>
 
-
             </table>
-            <span style='float: right;'>
+            <span style='float: left;'>
             <%= submit_tag(_("Search"), :disable_with => _('Processing..')) -%>
             <%= observe_field("s_user", :update => "user_devices", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search", :did_search=>1}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
-            <%= link_to b_cross + _('Clear_search'), :action => :summary, :clean => 1 %>  </span>
+            </span>
           </td>
 
         </tr>
