@@ -47,11 +47,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>//body</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=email_sending_enabled</td> 	<td></td> </tr> <tr> 	<td>waitForValue</td> 	<td>id=email_sending_enabled</td> 	<td>on</td> </tr> <tr> 	<td>type</td> 	<td>id=email_login</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_password</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_smtp_server</td> 	<td>vilnius.balt.net</td> </tr> <tr> 	<td>type</td> 	<td>id=email_from</td> 	<td>no-reply@kolmisoft.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>id=email_sending_enabled</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=email_sending_enabled</td> 	<td>on</td> </tr> <tr> 	<td>type</td> 	<td>id=email_login</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_password</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_smtp_server</td> 	<td>vilnius.balt.net</td> </tr> <tr> 	<td>type</td> 	<td>id=email_from</td> 	<td>no-reply@kolmisoft.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
@@ -133,7 +133,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -233,7 +233,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter username</td>
 	<td></td>
 </tr>
@@ -248,7 +248,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Password is too short</td>
 	<td></td>
 </tr>
@@ -263,7 +263,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Passwords do not match</td>
 	<td></td>
 </tr>
@@ -278,7 +278,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter first name</td>
 	<td></td>
 </tr>
@@ -293,7 +293,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter last name</td>
 	<td></td>
 </tr>
@@ -308,7 +308,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please select country</td>
 	<td></td>
 </tr>
@@ -342,7 +342,7 @@
 	<td>//error</td>
 	<td>Enter device type</td>
 </tr>
-<!--<tr> 	<td>open</td> 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;device_type=SIP&amp;test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Tariff was not found cannot create</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>open</td> 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;device_type=SIP&amp;test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Tariff was not found cannot create</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
@@ -459,7 +459,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>This email address is already in use.</td>
 	<td></td>
 </tr>
@@ -474,7 +474,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>This email address is already in use.</td>
 	<td></td>
 </tr>
@@ -1520,7 +1520,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
@@ -1570,7 +1570,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter first name</td>
 	<td></td>
 </tr>
@@ -1580,7 +1580,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter last name</td>
 	<td></td>
 </tr>
@@ -1590,7 +1590,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please select country</td>
 	<td></td>
 </tr>
