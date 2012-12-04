@@ -24,7 +24,7 @@ class ProvidersController < ApplicationController
     @options = clear_options(@options) if params[:clear].to_i == 1
     @options[:s_user_id] ||= current_user.id
     params[:s_hidden] = params[:s_hidden].to_i
-    [:s_tech, :s_name, :s_hidden].each { |key|
+    [:s_tech, :s_name, :s_server_ip, :s_hidden].each { |key|
       params[key] ? @options[key] = params[key].to_s : (@options[key] = "" if !@options[key])
     }
     # page number is an exception because it defaults to 1
@@ -41,7 +41,7 @@ class ProvidersController < ApplicationController
     cond = []
     cond_param = []
     #conditions
-    ["name"].each { |col|
+    ["name","server_ip"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s+"%", "providers.#{col} LIKE ?", cond, cond_param) }
     ["tech", "hidden", "owner_id"].each { |col|
       add_contition_and_param(@options["s_#{col}".to_sym], @options["s_#{col}".intern].to_s, "providers.#{col} = ?", cond, cond_param) }

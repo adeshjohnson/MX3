@@ -22,7 +22,10 @@
           <td>
             <%= _('Name') %>
             : <%= text_field_tag 's_name', @options[:s_name], "class" => "input", :size => "15", :maxlength => "30" %>
-
+            &nbsp;
+            <%= _('server_ip') %>
+            : <%= text_field_tag 's_server_ip', @options[:s_server_ip], "class" => "input", :size => "15", :maxlength => "30" %>
+            &nbsp;&nbsp;
             <%= _('Type') %>:
             <select name="s_tech">
               <option value="" selected> <%= _('All') %></option>
