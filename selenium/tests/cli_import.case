@@ -124,12 +124,12 @@
 <tr>
 	<td>select</td>
 	<td>name=cli</td>
-	<td>label=Clid</td>
+	<td>label=Device id</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>name=device_id</td>
-	<td>label=Device id</td>
+	<td>label=Clid</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -153,12 +153,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=tr.row2 &gt; td</td>
+	<td>//tr[2]/td[2]</td>
 	<td>123455</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[2]/td[2]</td>
+	<td>css=tr.row2 &gt; td</td>
 	<td>2</td>
 </tr>
 <tr>
@@ -201,11 +201,6 @@
 	<td>assertValue</td>
 	<td>id=device_id_type_0</td>
 	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=device_id_type_1</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -265,17 +260,32 @@
 <tr>
 	<td>assertText</td>
 	<td>css=tr.row1 &gt; td</td>
-	<td>2</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//tr[2]/td[2]</td>
-	<td>123455</td>
+	<td>234567</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//tr[2]/td[3]</td>
-	<td>Device was not found</td>
+	<td>Such CLI exists</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[7]/td</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[7]/td[2]</td>
+	<td>123455</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[8]/td[3]</td>
+	<td>Such CLI exists</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -289,33 +299,8 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Such CLI exists</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
 	<td>Device was not found</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//tr[5]/td</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//tr[6]/td[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//tr[7]/td[2]</td>
-	<td>123455</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//tr[8]/td[2]</td>
-	<td>123455</td>
 </tr>
 <tr>
 	<td>assertText</td>
