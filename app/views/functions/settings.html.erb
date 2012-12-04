@@ -44,6 +44,11 @@
           <td valign="top"><b><%= _('Frontpage_Text') %>:</b></td>
           <td>      <%= text_area_tag('frontpage_text', h(Confline.get_value2("Frontpage_Text", session[:user_id])), "class" => "input", :cols => "32", :rows => "4") %>                </td>
         </tr>
+        <tr>
+          <td></td>
+          <td valign="top"><b><%= _('Login_page_Text') %>:</b></td>
+          <td>      <%= text_area_tag('login_page_text', h(Confline.get_value2("Login_page_Text", session[:user_id])), "class" => "input", :cols => "32", :rows => "4") %>                </td>
+        </tr>
       </table>
     </div>
     <div class="dhtmlgoodies_aTab">

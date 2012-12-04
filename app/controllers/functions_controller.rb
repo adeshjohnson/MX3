@@ -1003,6 +1003,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Copyright_Title", params[:copyright_title])
     update_confline("Admin_Browser_Title", params[:admin_browser_title])
     Confline.set_value2("Frontpage_Text", params[:frontpage_text].to_s, session[:user_id])
+    Confline.set_value2("Login_page_Text", params[:login_page_text].to_s, session[:user_id])
     #Registration
 
     update_confline("Registration_enabled", params[:registration_enabled])
