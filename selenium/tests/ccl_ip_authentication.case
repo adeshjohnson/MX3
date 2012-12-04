@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.1.122" />
+<link rel="selenium.base" href="http://192.168.1.109" />
 <title>ccl_ip_authentication</title>
 </head>
 <body>
@@ -902,6 +902,11 @@
 	<td>off</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>id=host</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
 	<td>assertEditable</td>
 	<td>id=port</td>
 	<td></td>
@@ -910,6 +915,31 @@
 	<td>assertValue</td>
 	<td>id=port</td>
 	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -932,6 +962,11 @@
 	<td>off</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>id=host</td>
+	<td>127.0.0.2</td>
+</tr>
+<tr>
 	<td>assertEditable</td>
 	<td>id=port</td>
 	<td></td>
@@ -940,6 +975,31 @@
 	<td>assertValue</td>
 	<td>id=port</td>
 	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -960,6 +1020,11 @@
 	<td>assertElementNotPresent</td>
 	<td>id=zero_port_1</td>
 	<td>off</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=host</td>
+	<td>127.0.0.3</td>
 </tr>
 <tr>
 	<td>assertEditable</td>
