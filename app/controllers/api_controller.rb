@@ -2865,7 +2865,7 @@ class ApiController < ApplicationController
               if is_numeric?(params[:did]) and !params[:did].blank? and did
                 did_owner = ( did.reseller_id == user_id ? true : false )
                 if did_owner
-                  if ["active","terminated"].includes? did.status
+                  if ["active","terminated"].include? did.status
                     if did.dialplan_id == 0
                       did.device_id = 0
                       did.status = "free"
