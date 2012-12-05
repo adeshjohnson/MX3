@@ -51,10 +51,9 @@ class Card < ActiveRecord::Base
                JOIN (SELECT cards.id
                      FROM cards
                      LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
-                     LEFT JOIN calls ON (calls.card_id = cards.id)
                      LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
                      WHERE activecalls.id IS NULL AND
-                           calls.id IS NULL AND
+                           cards.call_count = 0 AND
                            payments.id IS NULL AND
                            cards.cardgroup_id = #{options[:cardgroup_id]} AND
                            cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
@@ -69,10 +68,9 @@ class Card < ActiveRecord::Base
                FROM  (SELECT cards.id
                       FROM cards
                       LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
-                      LEFT JOIN calls ON (calls.card_id = cards.id)
                       LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
                       WHERE (activecalls.id IS NOT NULL OR
-                             calls.id IS NOT NULL OR
+                             cards.call_count != 0 OR
                              payments.id IS NOT NULL) AND
                              cards.cardgroup_id = #{options[:cardgroup_id]} AND
                              cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
@@ -103,10 +101,9 @@ class Card < ActiveRecord::Base
                JOIN (SELECT cards.id
                      FROM cards
                      LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
-                     LEFT JOIN calls ON (calls.card_id = cards.id)
                      LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
                      WHERE (activecalls.id IS NOT NULL OR
-                           calls.id IS NOT NULL OR
+                           cards.call_count != 0 OR
                            payments.id IS NOT NULL) AND
                            cards.cardgroup_id = #{options[:cardgroup_id]} AND
                            cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}

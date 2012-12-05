@@ -202,7 +202,7 @@ class CardsController < ApplicationController
     user_id = get_user_id()
     case (action)
       when 0
-        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ? AND sold = 1 AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.where(["hidden = 0 AND number >= ? AND number <= ? AND sold = 1 AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id]).all
         for card in cards
           card.sold = 0
           card.save
@@ -211,7 +211,7 @@ class CardsController < ApplicationController
         cards_deleted, cards_not_deleted = Card.delete_from_sql({:cardgroup_id => @cg.id, :start_num => start_num, :end_num => end_num})
       when 3
         creation_time = Time.now
-        list = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id])
+        list = Card.where(["hidden = 0 AND number >= ? and number <= ? and sold = 0 AND owner_id = ? AND cardgroup_id = ? ", start_num, end_num, user_id, @cg.id]).all
         @email = params[:email].to_s
 
         gross = 0
@@ -227,7 +227,7 @@ class CardsController < ApplicationController
       #        Payment.create(:paymenttype => "manual", :amount => tax+gross, :currency => currency, :email => @email, :completed => 1, :date_added => creation_time, :shipped_at => creation_time, :fee => 0, :gross => gross, :payer_email => @email, :tax => tax, :owner_id => session[:user_id], :card => 1, :user_id => list.first.id)
       #      end
       when 4
-        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.where(["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id]).all
         for card in cards
           card.user_id = params[:user].to_i
           card.save
@@ -235,13 +235,13 @@ class CardsController < ApplicationController
       when 5
         cards_deleted, cards_hidden = Card.delete_and_hide_from_sql({:cardgroup_id => @cg.id, :start_num => start_num, :end_num => end_num})
       when 6
-        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.where(["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id]).all
         for card in cards
           card.min_balance = params[:min_balance].to_d
           card.save
         end
       when 7
-        cards = Card.find(:all, :conditions => ["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id])
+        cards = Card.where(["hidden = 0 AND number >= ? AND number <= ?  AND owner_id = ? AND cardgroup_id = ?", start_num, end_num, user_id, @cg.id]).all
         for card in cards
           card.language = params[:language].to_s
           card.save
@@ -393,14 +393,30 @@ class CardsController < ApplicationController
       cards_created = 0
       #for pin counter
       i = 0
+
+      sql = "INSERT INTO cards (`user_id`, `balance`, `cardgroup_id`, `sold`, `number`, `pin`, `owner_id`, `language`) VALUES "
       for n in start_num..end_num
-        card = Card.new({:user_id => params[:user_id], :balance => @cg.price, :cardgroup_id => @cg.id, :sold => false, :number => n, :pin => card_pins[i], :owner_id => owner_id, :language => params[:card_language]})
-        i += 1
-        if card.save
-          cards_created += 1
+        @card = Card.select("cards.*, cardgroups.name AS 'ccg_name'").where(["number = ?", n]).joins("LEFT JOIN cardgroups ON (cards.cardgroup_id = cardgroups.id)").first
+        if @card.blank? and !card_pins[i].to_s.blank?
+          sql << "('#{params[:user_id]}','#{@cg.price}','#{@cg.id}','#{false}','#{n}','#{card_pins[i]}','#{owner_id}','#{params[:card_language]}'"
+          i += 1
+          if n == end_num
+            sql << ")"
+          else
+            sql << "),"
+          end
         else
-          @cards_with_errors << card
+          if @card
+            @card.errors.add(:number, _("Card_with_this_number_already_exists") + " : " + n.to_s + " (#{@card.ccg_name}) ") if (@card.owner_id.to_i == owner_id.to_i or owner_id.to_i == 0) and @card.cardgroup_id.to_i == @cg.id.to_i
+          end
+          if card_pins[i].blank?
+            @card.errors.add(:pin, _("Card_pin_is_blank") + " : " + n.to_s)
+          end
+          @cards_with_errors << @card
         end
+      end
+      if i > 0
+        ActiveRecord::Base.connection.execute(sql)
       end
 
       flash[:status] = _('Cards_created') + ": " + cards_created.to_s
