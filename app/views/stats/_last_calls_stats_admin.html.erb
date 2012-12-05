@@ -1,4 +1,4 @@
-<% can_see_finances? ? colspan = 4 : colspan = 1 -%>
+<% can_see_finances? ? colspan = 3 : colspan = 1 -%>
 <% can_see_finances? ? cc = 12 : cc = 9 %>
 <% cc = 13 + (colspan * 2) %>
 <% cc += colspan if (rs_active?) %>
