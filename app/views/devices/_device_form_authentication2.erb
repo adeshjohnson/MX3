@@ -99,11 +99,11 @@
                 function zero_port() {
                     if ($('zero_port_1').checked) {
                         $('port').disabled = true;
-                        $('port').hidden = true;
+                        $('ip_auth2').hidden = true;
                         $('port').value = 0;
                     } else {
                         $('port').disabled = false;
-                        $('port').hidden = false;
+                        $('ip_auth2').hidden = false;
                         $('port').value = <%= @device.port %>;
                     }
                 }
