@@ -1,116 +1,126 @@
-<% can_see_finances? ? colspan = 3 : colspan = 1 -%>
+<% can_see_finances? ? colspan = 4 : colspan = 1 -%>
 <% can_see_finances? ? cc = 12 : cc = 9 %>
 <% cc = 13 + (colspan * 2) %>
 <% cc += colspan if (rs_active?) %>
 <%= form_tag :action => params[:action] do %>
-    <div id="search_details">
-    <span style="text-align: right;FLOAT: right; ">
-      <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear => 1 %>
-    </span>
-      <br/>
-      <%= hidden_field_tag 'search_on', 1 %>
+    <%= hidden_field_tag 'search_on', 1 %>
+    <table class="bordered" style="width: 65%">
+      <tr>
+        <td>
+          <table id="search_details" class="simple">
+            <tr>
+              <td><%= _('From') %>:</td>
+              <td nowrap="true" colspan=5><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+              <td>
+                <span style="text-align: right;FLOAT: right; ">
+                  <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear => 1 %>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td><%= _('Till') %>:</td>
+              <td nowrap="true" colspan=5><%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><%= _('User') %>:</td>
+              <% options = @users.map{|u| [nice_user(u), u.id.to_s]} %>
+              <% options.insert(0, [_('All'), "all"]) if @users.size > 0 %>
+              <td nowrap="true"><%= select_tag("s_user", options_for_select(options, @options[:s_user].to_s)) %></td>
+              <td><%= _('Device') %>:</td>
+              <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %>
+              <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %>
+              <td nowrap="true" colspan=2>
+                <span id="s_device_span">
+                  <%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %>
+                </span>
+              </td>
+              <td><%= _('Status') %>:</td>
+              <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
+              <td nowrap="true"><%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s)) %></td>
+            </tr>
+            <tr>
+              <td nowrap="true"><%= _('hangup_cause') %>:</td>
+              <td nowrap="true" colspan=4><%= select_tag("s_hgc", options_for_select([[_('All'), 0]]+@hgcs.map { |h| [h.clean_description[0..45], h.id] }, @options[:s_hgc].to_i)) %></td>
+              <td><%= _('Provider') %>:</td>
+              <% options = @providers.map{|p| [p.name, p.id]} %>
+              <% options.insert(0, [_('All'), "all"]) if @providers.size > 0 %>
+              <td nowrap="true"><%= select_tag("s_provider", options_for_select(options, @options[:s_provider].to_i), :disabled => @providers.empty?)  %></td>
+            </tr>
+            <tr>
+              <td><%= _('Source') %>:</td>
+              <td nowrap="true"><%= text_field_tag("s_source", h(@options[:source].to_s)) %></td>
+              <td><%= _("Destination") %>:</td>
+              <td nowrap="true" colspan=2><%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %></td>
+              <td><%= _("DID") %>:</td>
+              <td nowrap="true">
+                <span width=100px>
+                  <input title="DID live search" type="text" size="30" id="s_did_pattern" name="s_did_pattern" autocomplete="off" value="<%=raw params[:s_did_pattern].to_s %>" />
+                  <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td><%= _('Reseller') %>:</td>
+              <% options = @resellers.map{|u| [nice_user(u), u.id]} %>
+              <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %>
+              <td nowrap="true"><%= select_tag("s_reseller", options_for_select(options, @options[:s_reseller].to_i), :disabled => @resellers.empty?)  %></td>
+              <td nowrap="true" colspan=2><%= _('Reseller_in_any_dids') %>:</td>
+              <% options = @resellers_with_dids.map{|u| [nice_user(u), u.id.to_i]} %>
+              <% options.insert(0, [_('All'), "all"]) if @resellers_with_dids.size > 0 %>
+              <td nowrap="true"><%= select_tag("s_reseller_did", options_for_select(options, @options[:s_reseller_did].to_i), :disabled => @resellers_with_dids.empty?)  %></td>
+            </tr>
+            <% if cc_active? %>
+                <tr>
+                  <td><%= _('Card_number') %>:</td>
+                  <td><%= text_field_tag("s_card_number", h(@options[:s_card_number].to_s)) %></td>
+                  <td><%= _('Card_pin') %>:</td>
+                  <td colspan=2><%= text_field_tag("s_card_pin", h(@options[:s_card_pin].to_s)) %></td>
+                  <td nowrap="true"><%= _('Card_id') %>:</td>
+                  <td><%= text_field_tag("s_card_id", h(@options[:s_card_id].to_s)) %></td>
+                </tr>
+            <% end %>
+            <tr>
+              <td><%= submit_tag _('Search'), :disable_with => _('Processing..') %></td>
+              <td><%= observe_field("s_user", :update => "s_device_span", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <script type='text/javascript'>
+          Event.observe(window, 'load',  function() {
+              Event.observe($('s_did_pattern'), 'click', function(){
+                  if ($('s_did_pattern').value == "") {
+                      $('did_list').innerHTML = "";
+                  <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+                  }
+                  Event.observe($('s_did_pattern'), 'keyup', function(){
+                      $('did_list').innerHTML = "";
+                      <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('s_did_pattern').value") %>
+                  });
 
-      <%= _('From') %>
-      : <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('to') %>
-      : <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-      <br/>
-      <br/>
-      <%= _("User") %>:
-      <% options = @users.map{|u| [nice_user(u), u.id.to_s]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @users.size > 0 %> 
-      <%= select_tag("s_user", options_for_select(options, @options[:s_user].to_s)) %> 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('Device') %>:
-      <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %> 
-      <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _("DID") %>:
-      <span width=100px style="position:absolute;">
-      <input title="DID live search" type="text" size="30" id="s_did_pattern" name="s_did_pattern" autocomplete="off" value="<%=raw params[:s_did_pattern].to_s %>" />
-      <table id="did_list" style='margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
-      </span>
-   <script type='text/javascript'>
-      Event.observe(window, 'load',  function() {
-        Event.observe($('s_did_pattern'), 'click', function(){
-          if ($('s_did_pattern').value == "") {
-            $('did_list').innerHTML = "";
-            <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
-          }
-            Event.observe($('s_did_pattern'), 'keyup', function(){
-              $('did_list').innerHTML = "";
-              <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('s_did_pattern').value") %>
-            });
-
-            Event.observe($('did_list'), 'mouseover', function(){
-              var el = document.getElementById('did_list').getElementsByTagName('td');
-              for(var i=0;i<el.length;i++){
-                  el[i].onclick=function(){
-                      if (this.id != -2) {
-                          document.getElementById('s_did_pattern').value = this.innerHTML
-                        <%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+                  Event.observe($('did_list'), 'mouseover', function(){
+                      var el = document.getElementById('did_list').getElementsByTagName('td');
+                      for(var i=0;i<el.length;i++){
+                          el[i].onclick=function(){
+                              if (this.id != -2) {
+                                  document.getElementById('s_did_pattern').value = this.innerHTML
+                              <%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+                              }
+                          }
+                          el[i].onmouseover=function(){
+                              this.style.backgroundColor="#BBBBBB";
+                          }
+                          el[i].onmouseout=function(){
+                              this.style.backgroundColor="rgb(255, 255, 255)";
+                          }
                       }
-                  }
-                  el[i].onmouseover=function(){
-                      this.style.backgroundColor="#BBBBBB";
-                  }
-                  el[i].onmouseout=function(){
-                      this.style.backgroundColor="rgb(255, 255, 255)";
-                  }
-              }
-            });
+                  });
 
-        });
-    }); 
-    </script> 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <br/>
-      <br/>
-      <%= _('hangup_cause') %>:
-      <%= select_tag("s_hgc", options_for_select([[_('All'), 0]]+@hgcs.map { |h| [h.clean_description[0..45], h.id] }, @options[:s_hgc].to_i)) %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('Status') %>:
-      <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
-      <%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s)) %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _("Destination") %>:
-      <%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('Provider') %>:
-      <% options = @providers.map{|p| [p.name, p.id]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @providers.size > 0 %> 
-      <%= select_tag("s_provider", options_for_select(options, @options[:s_provider].to_i), :disabled => @providers.empty?)  %> 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <br/>
-      <br/>
-      <%= _('Reseller') %>:
-      <% options = @resellers.map{|u| [nice_user(u), u.id]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @resellers.size > 0 %> 
-      <%= select_tag("s_reseller", options_for_select(options, @options[:s_reseller].to_i), :disabled => @resellers.empty?)  %> 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('Source') %>:
-      <%= text_field_tag("s_source", h(@options[:source].to_s)) %>
-      <%= _('Reseller_in_any_dids') %>
-      <% options = @resellers_with_dids.map{|u| [nice_user(u), u.id.to_i]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @resellers_with_dids.size > 0 %> 
-      <%= select_tag("s_reseller_did", options_for_select(options, @options[:s_reseller_did].to_i), :disabled => @resellers_with_dids.empty?)  %> 
-      <% if cc_active? %>
-        <br/>
-        <br/>
-        <%= _('Card_number') %>:
-        <%= text_field_tag("s_card_number", h(@options[:s_card_number].to_s)) %>
-        <%= _('Card_pin') %>:
-        <%= text_field_tag("s_card_pin", h(@options[:s_card_pin].to_s)) %>
-        <%= _('Card_id') %>:
-        <%= text_field_tag("s_card_id", h(@options[:s_card_id].to_s)) %>
-      <% end %>
-      <br/>
-      <br/>
-       <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
-      <%= observe_field("s_user", :update => "s_device_span", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %>
-    </div>
+              });
+          });
+      </script>
+    </table>
 <% end %>
 <br/>
 <% if @calls.size > 0 %>
