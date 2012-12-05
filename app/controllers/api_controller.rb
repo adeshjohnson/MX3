@@ -2865,10 +2865,11 @@ class ApiController < ApplicationController
               if is_numeric?(params[:did]) and !params[:did].blank? and did
                 did_owner = ( did.reseller_id == user_id ? true : false )
                 if did_owner
-                  if did.status == "active"
+                  if ["active","terminated"].includes? did.status
                     if did.dialplan_id == 0
                       did.device_id = 0
                       did.status = "free"
+                      did.user_id = 0
                       if did.save
                         doc.status("Device was unassigned from DID")
                         if params[:test].to_i == 1
