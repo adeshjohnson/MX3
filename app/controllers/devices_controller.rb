@@ -1262,7 +1262,7 @@ class DevicesController < ApplicationController
     params[:s_description] ? @options[:search_description] = params[:s_description].to_s : (@options[:search_description] = "" if !@options[:search_description])
     params[:s_extension] ? @options[:search_extension] = params[:s_extension].to_s : (@options[:search_extension] = "" if !@options[:search_extension])
     params[:s_username] ? @options[:search_username] = params[:s_username].to_s : (@options[:search_username] = "" if !@options[:search_username])
-    params[:s_host] ? @options[:search_host] = params[:s_host].to_s : (@options[:search_host] = "" if !@options[:search_host])
+    params[:s_host] ? @options[:search_host] = params[:s_host].to_s.strip : (@options[:search_host] = "" if !@options[:search_host])
     @options[:search_cli] = params[:s_cli].to_s if params[:s_cli]
 
     #if pinless option is selected, than there shouldnt be pin parameter specified.

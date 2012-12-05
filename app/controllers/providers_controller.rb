@@ -24,9 +24,10 @@ class ProvidersController < ApplicationController
     @options = clear_options(@options) if params[:clear].to_i == 1
     @options[:s_user_id] ||= current_user.id
     params[:s_hidden] = params[:s_hidden].to_i
-    [:s_tech, :s_name, :s_server_ip, :s_hidden].each { |key|
-      params[key] ? @options[key] = params[key].to_s : (@options[key] = "" if !@options[key])
+    [:s_tech, :s_name, :s_hidden].each { |key|
+      params[key] ? @options[key] = (params[key].to_s) : (@options[key] = "" if !@options[key])
     }
+    params[:s_server_ip] ? (@options[:s_server_ip] = params[:s_server_ip].to_s.strip) : (@options[:s_server_ip] = "" if !@options[:s_server_ip])
     # page number is an exception because it defaults to 1
     if params[:page] and params[:page].to_i > 0
       @options[:page] = params[:page].to_i
