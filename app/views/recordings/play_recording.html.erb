@@ -14,7 +14,13 @@
 
     <br>
     <br>
-    <div class="nb"><%= link_to b_download + _('Download'), @recording %></div>
+    <div class="nb">
+    <% if @rec.local.to_i == 1 %>
+      <%= link_to(b_download + _('Download'), :action => :get_recording, :rec => @rec.id ) %>
+    <% else %>
+      <%= link_to b_download + _('Download'), @recording %>
+    <% end %>
+    </div>
 <% else %>
     <%= _("Recording_was_not_found") %>
 <% end %>
