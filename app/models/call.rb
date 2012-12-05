@@ -1425,6 +1425,12 @@ class Call < ActiveRecord::Base
 
       end
 
+      # Checking if billsec is lower than source device grace time.
+      grace_time_from_src = Device.where(:id => self.src_device_id).first.grace_time rescue 0
+      if (user_billsec.to_i < grace_time_from_src.to_i)
+        self.user_price = 0
+      end
+
       # tmp hack to handle dids for reseller
       # disabled because
 =begin
