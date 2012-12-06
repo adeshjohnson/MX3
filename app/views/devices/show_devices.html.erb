@@ -31,6 +31,9 @@
     <% elsif session[:usertype] == "reseller" %>
         <th></th>
     <% end %>
+    <% if rec_active? %>
+      <th></th>
+    <% end %>
     <th></th>
     <% if @allow_edit %>
         <th></th>
