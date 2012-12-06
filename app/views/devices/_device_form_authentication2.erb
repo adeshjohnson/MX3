@@ -104,7 +104,7 @@
                     } else {
                         $('port').disabled = false;
                         $('ip_auth2').hidden = false;
-                        $('port').value = <%= @device.port %>;
+                        $('port').value = <%= @device.port == 0 ? Device::DefaultPort["SIP"] : @device.port %>;
                     }
                 }
             <% end %>
