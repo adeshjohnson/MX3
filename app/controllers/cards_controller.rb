@@ -397,9 +397,10 @@ class CardsController < ApplicationController
       sql = "INSERT INTO cards (`user_id`, `balance`, `cardgroup_id`, `sold`, `number`, `pin`, `owner_id`, `language`) VALUES "
       for n in start_num..end_num
         @card = Card.select("cards.*, cardgroups.name AS 'ccg_name'").where(["number = ?", n]).joins("LEFT JOIN cardgroups ON (cards.cardgroup_id = cardgroups.id)").first
+        i += 1
         if @card.blank? and !card_pins[i].to_s.blank?
+          cards_created += 1
           sql << "('#{params[:user_id]}','#{@cg.price}','#{@cg.id}','#{false}','#{n}','#{card_pins[i]}','#{owner_id}','#{params[:card_language]}'"
-          i += 1
           if n == end_num
             sql << ")"
           else
