@@ -416,7 +416,7 @@ class CardsController < ApplicationController
         end
         i += 1
       end
-      if i > 0
+      if cards_created > 0
         ActiveRecord::Base.connection.execute(sql)
       end
 
