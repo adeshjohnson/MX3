@@ -39,7 +39,7 @@
           <br/>
           <br/>
 
-          <%= b_info + _('Rerating_testing_notification') %>
+          <%= b_info + _('Rerating_testing_notification').html_safe %>
           <br/><br/>
           <%= b_testing + _('Testing_mode') %>
           : <%= check_box_tag 'rerating_testing', value = "1", checked = session[:rerating_testing].to_i == 1 %>
