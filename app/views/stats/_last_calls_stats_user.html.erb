@@ -1,35 +1,50 @@
 <%= form_tag :action => params[:action] do %>
-    <div id="search_details" <%= "style='display:none;'" if @options[:search_on] == 0 %>>
-    <span style="text-align: right;FLOAT: right; ">
-      <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear => 1 %>
-    </span>
-      <br/>
-      <%= hidden_field_tag 'search_on', 1 %>
 
-      <%= _('From') %>
-      : <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-      &nbsp;&nbsp;<%= _('to') %>
-      : <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-      <br/>
-      <br/>
-      <%= _('Status') %>:
-      <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
-      <%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s)) %>
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _('Device') %>:
-      <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %> 
-      <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %> 
-      <span id="s_device_span"><%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?) %></span> 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= _("Destination") %>:
-      <%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %>
-      <%= _('Source') %>:
-      <%= text_field_tag("s_source", h(@options[:source].to_s)) %>
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= submit_tag _('Search'), :disable_with => _('Processing..') %>
-    </div>
+    <%= hidden_field_tag 'search_on', 1 %>
+    <table class="bordered">
+      <tr>
+        <td>
+          <table id="search_details" class="simple">
+            <tr>
+              <td><%= _('From') %>:</td>
+              <td nowrap="true" colspan=5><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+              <td>
+                <span style="text-align: right;FLOAT: right; ">
+                  <%= link_to b_cross + _('Clear_search'), :action => 'last_calls_stats', :clear => 1 %>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td><%= _('Till') %>:</td>
+              <td nowrap="true" colspan=5><%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><%= _('Device') %>:</td>
+              <% options = @devices.map{|dev| [nice_device(dev, {:image => false}) ,dev.id.to_s ]} %>
+              <% options.insert(0, [_('All'), "all"]) if @devices.size > 0 %>
+              <td nowrap="true">
+                <span id="s_device_span">
+                  <%= select_tag("s_device", options_for_select(options, @options[:s_device].to_s), :disabled => @devices.empty?, :style => "width:100px") %>
+                </span>
+              </td>
+              <td><%= _('Status') %>:</td>
+              <% call_types = [[_('All'), "all"], [_('Answered'), "answered"], [_('No_Answer'), "no answer"], [_('Failed'), "failed"], [_('Busy'), "busy"]] %>
+              <td nowrap="true"><%= select_tag("s_call_type", options_for_select(call_types, @options[:s_call_type].to_s), :style => "width:100px") %></td>
+            </tr>
+            <tr>
+              <td><%= _('Source') %>:</td>
+              <td nowrap="true"><%= text_field_tag("s_source", h(@options[:source].to_s)) %></td>
+              <td><%= _("Destination") %>:</td>
+              <td nowrap="true" colspan=2><%= text_field_tag("s_destination", h(@options[:s_destination].to_s)) %></td>
+            </tr>
+            <tr>
+              <td><%= submit_tag _('Search'), :disable_with => _('Processing..') %></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
 <% end %>
 <br/>
 <% if @calls.size > 0 %>
