@@ -2828,7 +2828,7 @@ class ApiController < ApplicationController
           doc.error("Device was not found")
         end
        else
-         doc.error("Dont be so smart")
+         doc.error("Don\'t be so smart")
        end
       else
         doc.error("Bad login")
@@ -2899,7 +2899,7 @@ class ApiController < ApplicationController
               doc.error("You are not authorized to manage DIDs")
             end
         else
-          doc.error("Dont be so smart")
+          doc.error("Don\'t be so smart")
         end
       else
         doc.error("Bad login")
@@ -2967,7 +2967,7 @@ class ApiController < ApplicationController
           doc.error("Provider was not found")
         end
        else
-         doc.("Dont be so smart")
+         doc.("Don\'t be so smart")
        end
       else
         doc.error("Bad login")
