@@ -2797,6 +2797,7 @@ class ApiController < ApplicationController
                      if did.status == "free" or (did.user_id == device.user_id and did.status == "reserved")
                        did.device_id = params[:device_id].to_s.strip
                        did.status = "active"
+                       did.user_id = device.user_id
                        if did.save
                          doc.status("Device assigned to DID")
                          if params[:test].to_i == 1
