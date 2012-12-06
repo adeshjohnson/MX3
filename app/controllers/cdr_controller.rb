@@ -484,9 +484,12 @@ class CdrController < ApplicationController
 
           for call in @calls
             provider = providers_cache["p_#{call.provider_id}".to_sym] ||= Provider.find(:first, :include => [:tariff], :conditions => ["providers.id = ?", call.provider_id])
-            if provider and provider.user_id == current_user.get_corrected_owner_id
+            grace_time = Device.where(:id => call.src_device_id).first.grace_time.to_i rescue 0
+            grace = ((call.billsec.to_i > grace_time) ? false : true)
 
-              one_old_user_price += call.user_price.to_d
+            if provider and provider.user_id == current_user.get_corrected_owner_id 
+
+              one_old_user_price += call.user_price.to_d 
               one_old_reseller_price += call.reseller_price.to_d
               one_old_provider_price += call.provider_price.to_d
             
@@ -494,13 +497,14 @@ class CdrController < ApplicationController
               logger.fatal one_old_reseller_price
               logger.fatal one_old_provider_price
              
-              call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id
+              call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id and !grace
+              call.user_price = 0.to_d and call.user_rate = 0.to_d if grace
 
               if testing == 0
                 call.save
               end
 
-              one_user_price += call.user_price.to_d
+              one_user_price += call.user_price.to_d 
               one_reseller_price += call.reseller_price.to_d
 
               @billsec += call.billsec
