@@ -4516,7 +4516,7 @@ Localization.define('en') do |l|
   l.store 'Did_owner_profit', 'DID Owner Profit'
   l.store 'DID_matches_quickforward_rule', 'DID matches Quickforward rule'
   l.store 'Backslash_cannot_be_separator', 'Backslash cannot be separator'
-  l.store 'Disallow_to_create_own_providers', 'Forbid to create own providers'
+  l.store 'Disallow_to_create_own_providers', 'Forbid to create own Providers'
   l.store 'Import_CLIs_From_CSV', 'Import CLIs from CSV'
   l.store 'Import_CLIs', 'Import CLIs'
   l.store 'Import_CLI_data', 'Import CLI data'
