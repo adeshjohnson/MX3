@@ -407,7 +407,7 @@ class CardsController < ApplicationController
           end
         else
           if @card
-            @card.errors.add(:number, _("Card_with_this_number_already_exists") + " : " + n.to_s + " (#{@card.ccg_name}) ") if (@card.owner_id.to_i == owner_id.to_i or owner_id.to_i == 0) and @card.cardgroup_id.to_i == @cg.id.to_i
+            @card.errors.add(:number, _("Card_with_this_number_already_exists") + " : " + n.to_s + " (#{@card.ccg_name}) ") if (@card.owner_id.to_i == owner_id.to_i or owner_id.to_i == 0)
           end
           if card_pins[i].blank?
             @card.errors.add(:pin, _("Card_pin_is_blank") + " : " + n.to_s)
