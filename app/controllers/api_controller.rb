@@ -2768,6 +2768,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
+       if @user.usertype != "user"
         device = Device.where(:id => params[:device_id]).first
         if device 
           user_id = @user.id
@@ -2809,7 +2810,7 @@ class ApiController < ApplicationController
                        doc.error("DID is not free")
                      end
                    else
-                     doc.error("Dont be so smart")
+                     doc.error("Your are not authorized to use this DID")
                    end
                  else
                    doc.error("DID does not exist")
@@ -2826,6 +2827,9 @@ class ApiController < ApplicationController
         else
           doc.error("Device was not found")
         end
+       else
+         doc.error("Dont be so smart")
+       end
       else
         doc.error("Bad login")
       end
@@ -2845,6 +2849,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
+        if @user.usertype != "user"
           user_id = @user.id
           permissions = true
           if @user.usertype == 'accountant'
@@ -2885,7 +2890,7 @@ class ApiController < ApplicationController
                     doc.error("DID is already free")
                   end
                 else
-                  doc.error("Dont be so smart")
+                  doc.error("You are not authorized to use this DID")
                 end
               else
                 doc.error("Invalid DID specified")
@@ -2893,6 +2898,9 @@ class ApiController < ApplicationController
             else
               doc.error("You are not authorized to manage DIDs")
             end
+        else
+          doc.error("Dont be so smart")
+        end
       else
         doc.error("Bad login")
       end
@@ -2913,6 +2921,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
+       if @user.usertype != "user"
         provider = Provider.where(:id => params[:provider_id], :hidden => 0).first
         if provider
           user_id = @user.id
@@ -2957,6 +2966,9 @@ class ApiController < ApplicationController
         else
           doc.error("Provider was not found")
         end
+       else
+         doc.("Dont be so smart")
+       end
       else
         doc.error("Bad login")
       end
