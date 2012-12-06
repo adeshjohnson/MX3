@@ -873,6 +873,7 @@ class CallcController < ApplicationController
           @sd.each do |s|
             dup_count = ServerDevice.select("count(*) as how_many").where(:device_id => s.device_id.to_s).first.how_many.to_i rescue 0
             dev = Device.where(:id => s.device_id.to_s).first
+            old_dev_port = -1
             if dev.device_type.to_s == "SIP" and dev.port.to_i == 0
               old_dev_port = dev.port.to_i
               dev.port.to_i = Device::DefaultPort["SIP"]
