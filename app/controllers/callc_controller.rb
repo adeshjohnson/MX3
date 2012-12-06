@@ -873,6 +873,10 @@ class CallcController < ApplicationController
           @sd.each do |s|
             dup_count = ServerDevice.select("count(*) as how_many").where(:device_id => s.device_id.to_s).first.how_many.to_i rescue 0
             dev = Device.where(:id => s.device_id.to_s).first
+            if dev.device_type.to_s == "SIP" and dev.port.to_i == 0
+              old_dev_port = dev.port.to_i
+              dev.port.to_i = Device::DefaultPort["SIP"]
+            end
             if dups.include?(s.device_id)
               s.delete
             elsif dup_count > 1 or (dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP")
@@ -887,7 +891,7 @@ class CallcController < ApplicationController
                 serv_error =s.errors
               end
             end
-            if (dev.server_id != s.server_id) or (dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP")
+            if (dev.server_id != s.server_id) or (dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP") or (old_dev_port == 0)
               if dev.host.to_s == "dynamic" and dev.device_type.to_s == "SIP"
                 dev.insecure = 'no'
               end
