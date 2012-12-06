@@ -72,6 +72,36 @@
 	<td>/billing/functions/import_user_data</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import DIDs from CSV </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import DIDs from CSV </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Import Users from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Import CLIs from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Import Devices from CSV </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Import DIDs from CSV </td>
+	<td></td>
+</tr>
 <!--Set default tax before importing-->
 <tr>
 	<td>open</td>
@@ -241,7 +271,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Users were successfully imported</td>
+	<td>Users successfully imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import user data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Import Devices from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Import DIDs from CSV </td>
 	<td></td>
 </tr>
 <tr>
@@ -331,6 +376,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Devices successfully imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Import DIDs from CSV</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/functions/import_user_data</td>
 	<td></td>
@@ -393,7 +448,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>DIDs were successfully imported</td>
+	<td>DIDs successfully imported</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import user data</td>
 	<td></td>
 </tr>
 <!--USER DATA bad seperators-->
@@ -544,7 +604,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Users were successfully imported</td>
+	<td>Users successfully imported</td>
 	<td></td>
 </tr>
 <tr>
@@ -1513,6 +1573,81 @@
 <tr>
 	<td>assertElementNotPresent</td>
 	<td>update_dest_names</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/import_user_data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Clear temporary information</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Temporary information cleared</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import DIDs from CSV </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import DIDs from CSV </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Import Users from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Import CLIs from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Import Devices from CSV </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Import DIDs from CSV </td>
 	<td></td>
 </tr>
 </tbody></table>
