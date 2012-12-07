@@ -2871,7 +2871,8 @@ class ApiController < ApplicationController
               if is_numeric?(params[:did]) and !params[:did].blank? and did
                 did_owner = ( did.reseller_id == user_id ? true : false )
                 if did_owner
-                  if ["active","terminated"].include? did.status
+                 if did.status != "terminated"
+                  if did.status == "active"
                     if did.dialplan_id == 0
                       did.device_id = 0
                       did.status = "free"
@@ -2890,6 +2891,9 @@ class ApiController < ApplicationController
                   else
                     doc.error("DID is already free")
                   end
+                 else
+                   doc.error("DID is terminated")
+                 end
                 else
                   doc.error("You are not authorized to use this DID")
                 end
