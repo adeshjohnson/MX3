@@ -154,3 +154,16 @@ INSERT INTO `users`
 (`id`, `username` , `password`                               , `usertype`, `logged`, `first_name`, `last_name`, `calltime_normative`, `show_in_realtime_stats`, `balance`, `frozen_balance`, `lcr_id`, `postpaid`, `blocked`, `tariff_id`, `month_plan_perc`, `month_plan_updated`, `sales_this_month`, `sales_this_month_planned`, `show_billing_info`, `primary_device_id`, `credit`, `clientid`, `agreement_number`, `agreement_date`, `language`, `taxation_country`, `vat_number`, `vat_percent`, `address_id`, `accounting_number`, `owner_id`, `hidden`, `allow_loss_calls`, `vouchers_disabled_till`, `uniquehash`, `temporary_id`, `send_invoice_types`, `call_limit`, `sms_tariff_id`, `sms_lcr_id`, `sms_service_active`, `cyberplat_active`, `call_center_agent`, `generate_invoice`, `tax_1`, `tax_2`, `tax_3`, `tax_4`, `block_at`, `block_at_conditional`, `block_conditional_use`, `recording_enabled`, `recording_forced_enabled`, `recordings_email`, `recording_hdd_quota`, `warning_email_active`, `warning_email_balance`, `warning_email_sent`, `tax_id`, `invoice_zero_calls`, `acc_group_id`) VALUES 
 (6   ,'user_rspro','6a9f8db8df3143d212fe44572d51576c66b0dca7','user'     ,0        ,'User'       ,'RSPRO'     ,3                    ,0                        ,0         ,0                , 12      ,1          ,0         ,3           ,0                 ,NULL                 ,0                  ,0                          ,1                   ,0                   ,-1       ,''         ,'0000000004'       ,'2011-03-31'     ,''         ,1                  ,''           ,19            ,4            ,''                  ,3          ,0        ,0                 ,  '20011-01-01 00:00:00'  ,NULL         ,NULL           ,0                    ,0            ,NULL           ,NULL          ,0                   ,0                  ,0                        ,1               ,0         ,0         ,0    ,0    ,'2009-01-01',15                    ,0                       ,0                   ,0                          ,NULL               ,100                   ,0                      ,0                        ,0                   ,3           ,1                          ,0);
 UPDATE users SET lcr_id=11 where id=5;
+#update call_count for cards
+UPDATE cards SET call_count = 14 where id = 121;
+UPDATE cards SET call_count = 2 where id = 122;
+UPDATE cards SET call_count = 1 where id = 123;
+UPDATE cards SET call_count = 1 where id = 124;
+UPDATE cards SET call_count = 2 where id = 125;
+UPDATE cards SET call_count = 10 where id = 126;
+UPDATE cards SET call_count = 2 where id = 130;
+UPDATE cards SET call_count = 6 where id = 133;
+UPDATE cards SET call_count = 6 where id = 138;
+UPDATE cards SET call_count = 5 where id = 139;
+UPDATE cards SET call_count = 3 where id = 140;
+UPDATE cards SET call_count = 4 where id = 142;
