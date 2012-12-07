@@ -840,12 +840,14 @@
         function Reseller(val) {
             if ($('reseller_providers')) {
                 $('reseller_providers').style.display = 'none';
+                $('reseller_create_providers').style.display = 'none';
             }
             $('reseller_type_select').style.display = 'none';
             $('accountant_type_select').style.display = 'none';
             if (val == 'reseller') {
                 if ($('reseller_providers')) {
                     $('reseller_providers').style.display = '';
+                    $('reseller_create_providers').style.display = '';
                 }
                 Disab('reseller');
             }
