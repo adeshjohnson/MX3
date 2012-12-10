@@ -358,6 +358,151 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>SIP provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=zero_port_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=ip_authentication</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Accept calls from any port:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -473,7 +618,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/10</td>
+	<td>/billing/devices/device_edit/11</td>
 	<td></td>
 </tr>
 <tr>
@@ -523,7 +668,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/10</td>
+	<td>/billing/devices/device_edit/11</td>
 	<td></td>
 </tr>
 <tr>
@@ -573,7 +718,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/10</td>
+	<td>/billing/devices/device_edit/11</td>
 	<td></td>
 </tr>
 <tr>
@@ -595,6 +740,146 @@
 	<td>assertValue</td>
 	<td>id=port</td>
 	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>kkk</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>kkk</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=zero_port_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=ip_authentication</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Accept calls from any port:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -713,7 +998,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/11</td>
+	<td>/billing/devices/device_edit/13</td>
 	<td></td>
 </tr>
 <tr>
@@ -763,7 +1048,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/11</td>
+	<td>/billing/devices/device_edit/13</td>
 	<td></td>
 </tr>
 <tr>
@@ -813,7 +1098,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/11</td>
+	<td>/billing/devices/device_edit/13</td>
 	<td></td>
 </tr>
 <tr>
@@ -943,7 +1228,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/10</td>
+	<td>/billing/devices/device_edit/11</td>
 	<td></td>
 </tr>
 <tr>
@@ -1003,7 +1288,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/11</td>
+	<td>/billing/devices/device_edit/13</td>
 	<td></td>
 </tr>
 <tr>
