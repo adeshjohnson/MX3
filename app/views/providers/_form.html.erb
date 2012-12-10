@@ -610,7 +610,7 @@
 </table>
 <br/>
 <script type="text/javascript">
-    <% if ccl_active? and @device_type.to_s == "SIP" %>
+    <% if ccl_active? and @device and @device.device_type.to_s == "SIP" %>
         function zero_port() {
             if ($('zero_port_1').checked) {
                 $('server_port_row').disabled = true;
