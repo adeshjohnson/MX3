@@ -2949,8 +2949,8 @@ class ApiController < ApplicationController
                   did = Did.new(:did => params[:did].to_s.strip, :provider_id => params[:provider_id].to_s.strip, :reseller_id => user_id)
                     if did.save
                       doc.status("DID created")
+                      doc.id(did.id)
                       if params[:test].to_i == 1
-                          doc.id(did.id)
                           doc.did(did.did)
                       end
                     else
