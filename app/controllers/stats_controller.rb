@@ -183,7 +183,12 @@ class StatsController < ApplicationController
     @users = User.find(:all, :conditions => "hidden = 0") #, :conditions => "usertype = 'user'") #, :limit => 6)
     @help_link = "http://wiki.kolmisoft.com/index.php/Integrity_Check"
 
-    call_stats = Call.total_calls_by_direction_and_disposition(session_from_date, session_till_date)
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
+    call_stats = Call.total_calls_by_direction_and_disposition(session_from_datetime, session_till_datetime)
 
     @o_answered_calls = 0
     @o_no_answer_calls = 0
@@ -195,23 +200,23 @@ class StatsController < ApplicationController
     @i_failed_calls = 0
     for stats in call_stats
       if  stats['direction'] == 'outgoing'
-        if stats['disposition'] == 'ANSWERED'
+        if stats['disposition'].upcase == 'ANSWERED'
           @o_answered_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'NO ANSWER'
+        elsif stats['disposition'].upcase == 'NO ANSWER'
           @o_no_answer_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'BUSY'
+        elsif stats['disposition'].upcase == 'BUSY'
           @o_busy_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'FAILED'
+        elsif stats['disposition'].upcase == 'FAILED'
           @o_failed_calls = stats['total_calls'].to_i
         end
       elsif stats['direction'] == 'incoming'
-        if stats['disposition'] == 'ANSWERED'
+        if stats['disposition'].upcase == 'ANSWERED'
           @i_answered_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'NO ANSWER'
+        elsif stats['disposition'].upcase == 'NO ANSWER'
           @i_no_answer_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'BUSY'
+        elsif stats['disposition'].upcase == 'BUSY'
           @i_busy_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'FAILED'
+        elsif stats['disposition'].upcase == 'FAILED'
           @i_failed_calls = stats['total_calls'].to_i
         end
       end
@@ -220,8 +225,8 @@ class StatsController < ApplicationController
     @incoming_calls = @i_answered_calls + @i_no_answer_calls + @i_busy_calls + @i_failed_calls
     @total_calls = @incoming_calls + @outgoing_calls
 
-    sfd = session_from_date
-    std = session_till_date
+    sfd = session_from_datetime
+    std = session_till_datetime
 
     @outgoing_perc = 0
     @outgoing_perc = @outgoing_calls.to_d / @total_calls * 100 if @total_calls > 0
@@ -260,7 +265,7 @@ class StatsController < ApplicationController
     @t_failed_perc = 0
     @t_failed_perc = @t_failed_calls.to_d / @total_calls * 100 if @total_calls > 0
 
-    @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(session_from_date, session_till_date)
+    @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(sfd, std)
 
     @t_calls = @a_calls.last.to_i
     @t_billsec = @a_billsec.last.to_i
@@ -268,7 +273,7 @@ class StatsController < ApplicationController
 
     @a_calls.delete_at(@a_calls.length - 1)
     @a_billsec.delete_at(@a_billsec.length - 1)
-    @a_avg_billsec.delete_at(@a_billsec.length - 1)
+    @a_avg_billsec.delete_at(@a_billsec.length)
 
     index = @a_date.length - 1
 
@@ -518,6 +523,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 =begin
 in before filter : user (:find_user_from_id_or_session, :authorize_user)
 =end
+
   def user_stats
 
     change_date
@@ -530,7 +536,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @months_normative = @user.months_normative(Time.now.strftime("%Y-%m"))
     @new_calls_today = @user.new_calls(Time.now.strftime("%Y-%m-%d")).size
 
-    call_stats = Call.total_calls_by_direction_and_disposition(session_from_date, session_till_date, [@user.id])
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
+    call_stats = Call.total_calls_by_direction_and_disposition(session_from_datetime, session_till_datetime, [@user.id])
 
     @o_answered_calls = 0
     @o_no_answer_calls = 0
@@ -542,24 +553,24 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @i_failed_calls = 0
     for stats in call_stats
       if  stats['direction'] == 'outgoing'
-        if stats['disposition'] == 'ANSWERED'
+        if stats['disposition'].upcase == 'ANSWERED'
           @o_answered_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'NO ANSWER'
+        elsif stats['disposition'].upcase == 'NO ANSWER'
           @o_no_answer_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'BUSY'
+        elsif stats['disposition'].upcase == 'BUSY'
           @o_busy_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'FAILED'
+        elsif stats['disposition'].upcase == 'FAILED'
           @o_failed_calls = stats['total_calls'].to_i
         end
       end
       if  stats['direction'] == 'incoming'
-        if stats['disposition'] == 'ANSWERED'
+        if stats['disposition'].upcase == 'ANSWERED'
           @i_answered_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'NO ANSWER'
+        elsif stats['disposition'].upcase == 'NO ANSWER'
           @i_no_answer_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'BUSY'
+        elsif stats['disposition'].upcase == 'BUSY'
           @i_busy_calls = stats['total_calls'].to_i
-        elsif stats['disposition'] == 'FAILED'
+        elsif stats['disposition'].upcase == 'FAILED'
           @i_failed_calls = stats['total_calls'].to_i
         end
       end
@@ -625,7 +636,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @t_norm_days = 0
     @t_avg_normative = 0
 
-    @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(session_from_date, session_till_date, [@user.id])
+    sfd = session_from_datetime
+    std = session_till_datetime
+
+    @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(sfd, std, [@user.id])
 
     @t_calls = @a_calls.last.to_i
     @t_billsec = @a_billsec.last.to_i
@@ -633,7 +647,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     @a_calls.delete_at(@a_calls.length - 1)
     @a_billsec.delete_at(@a_billsec.length - 1)
-    @a_avg_billsec.delete_at(@a_billsec.length - 1)
+    @a_avg_billsec.delete_at(@a_billsec.length)
 
     index = @a_date.length - 1
 

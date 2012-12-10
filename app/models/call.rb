@@ -167,6 +167,9 @@ class Call < ActiveRecord::Base
     #interval for specified users or if no user is specified - for all users
     day_by_day_stats = Call.total_calls_by(['ANSWERED'], {:outgoing => true, :incoming => true}, start_date, end_date, {:date => true}, users)
 
+    start_date = (start_date.to_time + Time.zone.now.utc_offset().second - Time.now.utc_offset().second).to_s(:db)
+    end_date = (end_date.to_time + Time.zone.now.utc_offset().second - Time.now.utc_offset().second).to_s(:db)
+
     start_date = Date.strptime(start_date, "%Y-%m-%d").to_date
     end_date = Date.strptime(end_date, "%Y-%m-%d").to_date
     date = []
@@ -220,7 +223,7 @@ class Call < ActiveRecord::Base
     select << "AVG(calls.billsec) AS 'average_billsec'"
 
     condition = []
-    condition << "calls.calldate BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s} 23.59.59'"
+    condition << "calls.calldate BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s}'"
     #if disposition is not specified or it is all 4 types(answered, failed, busy, no answer),
     #there is no need to filter it
     condition << "calls.disposition IN ('#{disposition.join(', ')}')" if !disposition.empty? and disposition.length < 4
@@ -254,7 +257,7 @@ class Call < ActiveRecord::Base
     #accordingly, we should select those fields from table
     group = []
     if group_options[:date]
-      select << "DATE(calls.calldate) AS 'calldate'"
+      select << "(calls.calldate) AS 'calldate'"
       group << 'DATE(calls.calldate)'
     end
     if group_options[:disposition]
@@ -278,7 +281,14 @@ class Call < ActiveRecord::Base
       end
     end
 
-    statistics = Call.find(:all, :select => select.join(', '), :joins => join.join(' '), :conditions => condition.join(' AND '), :group => group.join(', '))
+    if group_options[:date]
+      statistics = Call.select(select.join(', ')).joins(join.join(' ')).where(condition.join(' AND ')).all
+      statistics.each do |st|
+        st.calldate = (st.calldate.to_time + Time.zone.now.utc_offset().second - Time.now.utc_offset().second).to_s(:db) if !st.calldate.blank?
+      end
+    else
+      statistics = Call.find(:all, :select => select.join(', '), :joins => join.join(' '), :conditions => condition.join(' AND '), :group => group.join(', '))
+    end
 
     #calculating total billsec, total calls and average billsec
     total_calls = 0
