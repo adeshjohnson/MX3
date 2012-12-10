@@ -908,8 +908,10 @@ class CallcController < ApplicationController
             prov = Provider.where("id = #{p.provider_id}").first
             prov_dev = Device.where("id = #{prov.device_id}").first
             if prov_dev.port == 0 and prov_dev.device_type == "SIP"
+              prov.port = Device::DefaultPort["SIP"]
               prov_dev.port = Device::DefaultPort["SIP"]
               prov_dev.save(:validate => false)
+              prov.save(:validate => false)
             end
           end
 
