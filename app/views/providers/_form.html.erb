@@ -274,6 +274,15 @@
             <%= observe_field :device_ipaddr, :function => "format_register();", :frequency => 1 %>
           </td>
         </tr>
+        <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+          <tr id="ip_auth_zero_port">
+            <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
+            <td id="zero_port_2">
+              <%= radio_button_tag('zero_port', '0', @device.port > 0) %> <%= _('No') %>
+     	      <%= radio_button_tag('zero_port', '1', @device.port == 0) %> <%= _('Yes') %>
+            </td>
+          </tr>
+        <% end %>
         <tr id="server_port_row">
           <td> <%= _('Port') %>:</td>
           <td>
@@ -601,12 +610,49 @@
 </table>
 <br/>
 <script type="text/javascript">
+    <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+        function zero_port() {
+            if ($('zero_port_1').checked) {
+                $('server_port_row').disabled = true;
+                $('server_port_row').hidden = true;
+                $('provider_port').value = 0;
+            } else {
+                $('server_port_row').disabled = false;
+                $('server_port_row').hidden = false;
+                $('provider_port').value = <%= @device.port == 0 ? Device::DefaultPort["SIP"] : @device.port %>;
+            }
+        }
+
+        function zero_call_setting() {
+            if ($('hostname_ip_dynamic').checked == false && $('ip_authentication').checked == true) {
+                $('ip_auth_zero_port').style.display = "";
+                $('zero_port_0').disabled = false;
+                $('zero_port_1').disabled = false;
+            } else {
+                $('ip_auth_zero_port').style.display = "none";
+                $('zero_port_0').disabled = true;
+                $('zero_port_1').disabled = true;
+            }
+        }
+
+    Event.observe(window, 'load', function () {
+        zero_port();
+        Event.observe($('zero_port_0'), 'click', function () {
+            zero_port();
+        });
+
+        Event.observe($('zero_port_1'), 'click', function () {
+            zero_port();
+        });
+    });
+    <% end %>
 
     function show_hostname_lines(value) {
         if ($('hostname_ip_dynamic').checked == false) {
             $('reg_line_row').style.display = '';
             $('reg_extension_row').style.display = '';
             $('registration_check_prov').style.display = '';
+            zero_call_setting();
         }
         if (value == 'hostname') {
             $('server_hostname_row').style.display = "";
@@ -614,6 +660,7 @@
             $('server_port_row').style.display = "";
             //$('ip_authentication').disabled = true;
             $('reg_notice_dynamic').style.display = "none";
+            zero_call_setting();
         }
         if (value == 'ip') {
             $('server_hostname_row').style.display = "";
@@ -621,6 +668,7 @@
             $('server_port_row').style.display = "";
             $('ip_authentication').disabled = false;
             $('reg_notice_dynamic').style.display = "none";
+            zero_call_setting();
         }
         if (value == 'dynamic') {
             $('server_hostname_row').style.display = "none";
@@ -635,6 +683,7 @@
             $('reg_line_row').style.display = "none";
             $('reg_register_row').style.display = "none";
             $('reg_notice_dynamic').style.display = "";
+            zero_call_setting();
             // $('register').checked = false;
         }
     }

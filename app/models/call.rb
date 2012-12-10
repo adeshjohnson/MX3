@@ -220,7 +220,7 @@ class Call < ActiveRecord::Base
     select << "AVG(calls.billsec) AS 'average_billsec'"
 
     condition = []
-    condition << "calls.calldate BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s}'"
+    condition << "calls.calldate BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s} 23.59.59'"
     #if disposition is not specified or it is all 4 types(answered, failed, busy, no answer),
     #there is no need to filter it
     condition << "calls.disposition IN ('#{disposition.join(', ')}')" if !disposition.empty? and disposition.length < 4
