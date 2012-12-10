@@ -652,7 +652,7 @@
             $('reg_line_row').style.display = '';
             $('reg_extension_row').style.display = '';
             $('registration_check_prov').style.display = '';
-            <% if ccl_active? and @device_type.to_s == "SIP" %>
+            <% if ccl_active? and @device and @device.device_type.to_s == "SIP" %>
                 zero_call_setting();
             <% end %>
         }
