@@ -652,7 +652,9 @@
             $('reg_line_row').style.display = '';
             $('reg_extension_row').style.display = '';
             $('registration_check_prov').style.display = '';
-            zero_call_setting();
+            <% if ccl_active? and @device_type.to_s == "SIP" %>
+                zero_call_setting();
+            <% end %>
         }
         if (value == 'hostname') {
             $('server_hostname_row').style.display = "";
@@ -660,7 +662,9 @@
             $('server_port_row').style.display = "";
             //$('ip_authentication').disabled = true;
             $('reg_notice_dynamic').style.display = "none";
-            zero_call_setting();
+            <% if ccl_active? and @device_type.to_s == "SIP" %>
+                zero_call_setting();
+            <% end %>
         }
         if (value == 'ip') {
             $('server_hostname_row').style.display = "";
@@ -668,7 +672,9 @@
             $('server_port_row').style.display = "";
             $('ip_authentication').disabled = false;
             $('reg_notice_dynamic').style.display = "none";
-            zero_call_setting();
+            <% if ccl_active? and @device_type.to_s == "SIP" %>
+                zero_call_setting();
+            <% end %>
         }
         if (value == 'dynamic') {
             $('server_hostname_row').style.display = "none";
@@ -683,7 +689,9 @@
             $('reg_line_row').style.display = "none";
             $('reg_register_row').style.display = "none";
             $('reg_notice_dynamic').style.display = "";
-            zero_call_setting();
+            <% if ccl_active? and @device_type.to_s == "SIP" %>
+                zero_call_setting();
+            <% end %>
             // $('register').checked = false;
         }
     }
