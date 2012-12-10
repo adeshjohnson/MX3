@@ -274,7 +274,7 @@
             <%= observe_field :device_ipaddr, :function => "format_register();", :frequency => 1 %>
           </td>
         </tr>
-        <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+        <% if ccl_active? and @device_type.to_s == "SIP" %>
           <tr id="ip_auth_zero_port">
             <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
             <td id="zero_port_2">
@@ -610,7 +610,7 @@
 </table>
 <br/>
 <script type="text/javascript">
-    <% if ccl_active? and @device.device_type.to_s == "SIP" %>
+    <% if ccl_active? and @device_type.to_s == "SIP" %>
         function zero_port() {
             if ($('zero_port_1').checked) {
                 $('server_port_row').disabled = true;
