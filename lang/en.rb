@@ -436,7 +436,7 @@ Localization.define('en') do |l|
   l.store 'Valid_till', 'Valid till'
   l.store 'Add_cards', 'Add Cards'
   l.store 'Card_details', 'Card details'
-  l.store 'Edit_card', 'Edit card'
+  l.store 'Edit_card', 'Edit Card'
   l.store 'Card_was_successfully_updated', 'Card successfully updated'
   l.store 'Bad_number_length_should_be', 'Bad number length, should be'
   l.store 'Description', 'Description'
