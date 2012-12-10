@@ -166,7 +166,7 @@ class CallsController < ApplicationController
       @result << @result_full[i] if @result_full[i]
     }
 
-    session[:aggregate_list_options] = @options
+    #session[:aggregate_list_options] = @options
     # no need to store these 2 in session as they are not options but values from database.
     @options = load_parties(@options)
 
