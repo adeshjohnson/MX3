@@ -363,14 +363,14 @@ class ProvidersController < ApplicationController
     @provider.set_old
 
     unless @provider.is_dahdi?
-      params[:provider][:login]= params[:provider][:login].strip if params[:provider][:login]
-      params[:provider][:password]= params[:provider][:password].strip if params[:provider][:password]
-      params[:provider][:server_ip]= params[:provider][:server_ip].strip if params[:provider][:server_ip]
-      params[:provider][:port]= params[:provider][:port].strip if params[:provider][:port]
-      params[:cid_number]= params[:cid_number].strip if params[:cid_number]
-      params[:cid_name]=params[:cid_name].strip if params[:cid_name]
-      params[:fromdomain]=params[:fromdomain].strip if params[:fromdomain]
-      params[:fromuser]=params[:fromuser].strip if params[:fromuser]
+      params[:provider][:login]= params[:provider][:login].to_s.strip if params[:provider][:login]
+      params[:provider][:password]= params[:provider][:password].to_s.strip if params[:provider][:password]
+      params[:provider][:server_ip]= params[:provider][:server_ip].to_s.strip if params[:provider][:server_ip]
+      params[:provider][:port]= params[:provider][:port].to_s.strip if params[:provider][:port]
+      params[:cid_number]= params[:cid_number].to_s.strip if params[:cid_number]
+      params[:cid_name]=params[:cid_name].to_s.strip if params[:cid_name]
+      params[:fromdomain]=params[:fromdomain].to_s.strip if params[:fromdomain]
+      params[:fromuser]=params[:fromuser].to_s.strip if params[:fromuser]
     else
       params[:provider][:channel]= params[:provider][:channel].strip if params[:provider][:channel]
     end
@@ -439,6 +439,9 @@ class ProvidersController < ApplicationController
     @device.insecure = "port" if params[:insecure_port] == "1" and params[:insecure_invite] != "1"
     @device.insecure = "port,invite" if params[:insecure_port] == "1" and params[:insecure_invite] == "1"
     @device.insecure = "invite" if params[:insecure_port] != "1" and params[:insecure_invite] == "1"
+    if ccl_active? and !params[:provider][:port] and @device.device_type.to_s == "SIP"
+      @device.port = 0
+    end
 
     @device.fullcontact = ""
 

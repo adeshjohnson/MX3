@@ -857,9 +857,10 @@ class CallcController < ApplicationController
     if def_asterisk.to_i == 0
       def_asterisk = first_srv
     end
-    @sd = ServerDevice.all
 
     if ccl.to_s != ccl_old.to_s and params[:indirect].to_i == 1
+      @sd = ServerDevice.all
+      @sp = Serverprovider.all
         
         if ccl.to_i == 0
           p_srv_id = Server.where(:server_type => "sip_proxy").first.id.to_s rescue nil
@@ -903,12 +904,18 @@ class CallcController < ApplicationController
               dev.save
             end
           end
+          @sp.each do |p|
+            prov = Provider.where("id = #{p.provider_id}").first
+            prov_dev = Device.where("id = #{prov.device_id}").first
+            if prov_dev.port == 0 and prov_dev.device_type == "SIP"
+              prov_dev.port = Device::DefaultPort["SIP"]
+              prov_dev.save(:validate => false)
+            end
+          end
 
-
- 
-            Confline.set_value("CCL_Active", ccl.to_i)
-            flash[:status] = "CCL turned off"
-            redirect_to :action => :additional_modules and return true
+          Confline.set_value("CCL_Active", ccl.to_i)
+          flash[:status] = "CCL turned off"
+          redirect_to :action => :additional_modules and return true
 
         elsif ccl.to_i == 1
 
