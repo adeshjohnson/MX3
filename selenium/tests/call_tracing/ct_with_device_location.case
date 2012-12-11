@@ -61,7 +61,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rate detail successfully updated</td>
 	<td></td>
 </tr>
@@ -82,7 +82,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rate detail successfully updated</td>
 	<td></td>
 </tr>
@@ -103,7 +103,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Location added</td>
 	<td></td>
 </tr>
@@ -135,7 +135,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rule updated</td>
 	<td></td>
 </tr>
@@ -166,7 +166,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rule added</td>
 	<td></td>
 </tr>
@@ -187,7 +187,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -203,7 +203,7 @@
 </tr>
 <!--As expected if device's location is set to global, global location rules will apply - according to it prefix 000987 wil be cut and 54 added. Rates set to Argentina 54 Fix will be applied.-->
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SUCCESS! Based on given data call will go through!</td>
 	<td></td>
 </tr>
@@ -228,12 +228,12 @@
 	<td>000987</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>54</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>54</td>
 	<td></td>
 </tr>
@@ -243,7 +243,7 @@
 	<td>54</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Tariff changed from Test Tariff for Users to:</td>
 	<td></td>
 </tr>
@@ -279,7 +279,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
@@ -300,7 +300,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -316,7 +316,7 @@
 </tr>
 <!--it is expected that if device has some other location than global. and some rule for 'other' location applies for dialed destination it's tariff will be applied. in this case devices location is 'vilnius' and it has a rule to cut perfix 000987, to add 1684 and apply 'WHAT RULE????'-->
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SUCCESS! Based on given data call will go through!</td>
 	<td></td>
 </tr>
@@ -429,7 +429,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Logoff</td>
 	<td></td>
 </tr>
@@ -475,7 +475,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rates updated</td>
 	<td></td>
 </tr>
@@ -696,12 +696,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>297</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Aruba</td>
 	<td></td>
 </tr>
@@ -771,7 +771,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>IAX2/105</td>
 	<td></td>
 </tr>
@@ -883,7 +883,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
@@ -1040,7 +1040,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
@@ -1055,7 +1055,7 @@
 	<td>label=vilnius</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>select_location_id_3</td>
 	<td>vilnius</td>
 </tr>
@@ -1070,7 +1070,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device location changed</td>
 	<td></td>
 </tr>
@@ -1085,7 +1085,7 @@
 	<td>label=vilnius</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>select_location_id_5</td>
 	<td>vilnius</td>
 </tr>
@@ -1100,12 +1100,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device location was not changed</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Name and password cannot be equal</td>
 	<td></td>
 </tr>
@@ -1115,7 +1115,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Device configuration</td>
 	<td></td>
 </tr>
