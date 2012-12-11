@@ -354,10 +354,14 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     ############
 
-    @sdate = Time.mktime(session[:year_from], session[:month_from], session[:day_from])
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
 
     year, month, day = last_day_month('till')
     @edate = Time.mktime(year, month, day)
+
 
     @a_date = []
     @a_calls = []
@@ -388,39 +392,42 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     for user in @users
       #@new_calls_today += user.new_calls(Time.now.strftime("%Y-%m-%d")).size
-      @outgoing_calls += user.total_calls("outgoing", session_from_date, session_till_date)
-      @incoming_calls += user.total_calls("incoming", session_from_date, session_till_date)
-      @total_calls += user.total_calls("all", session_from_date, session_till_date)
+      @outgoing_calls += user.total_calls("outgoing", session_from_datetime, session_till_datetime)
+      @incoming_calls += user.total_calls("incoming", session_from_datetime, session_till_datetime)
+      @total_calls += user.total_calls("all", session_from_datetime, session_till_datetime)
 
-      @o_answered_calls += user.total_calls("answered_out", session_from_date, session_till_date)
-      @o_no_answer_calls += user.total_calls("no_answer_out", session_from_date, session_till_date)
-      @o_busy_calls += user.total_calls("busy_out", session_from_date, session_till_date)
-      @o_failed_calls += user.total_calls("failed_out", session_from_date, session_till_date)
+      @o_answered_calls += user.total_calls("answered_out", session_from_datetime, session_till_datetime)
+      @o_no_answer_calls += user.total_calls("no_answer_out", session_from_datetime, session_till_datetime)
+      @o_busy_calls += user.total_calls("busy_out", session_from_datetime, session_till_datetime)
+      @o_failed_calls += user.total_calls("failed_out", session_from_datetime, session_till_datetime)
 
-      @i_answered_calls += user.total_calls("answered_inc", session_from_date, session_till_date)
-      @i_no_answer_calls += user.total_calls("no_answer_inc", session_from_date, session_till_date)
-      @i_busy_calls += user.total_calls("busy_inc", session_from_date, session_till_date)
-      @i_failed_calls += user.total_calls("failed_inc", session_from_date, session_till_date)
+      @i_answered_calls += user.total_calls("answered_inc", session_from_datetime, session_till_datetime)
+      @i_no_answer_calls += user.total_calls("no_answer_inc", session_from_datetime, session_till_datetime)
+      @i_busy_calls += user.total_calls("busy_inc", session_from_datetime, session_till_datetime)
+      @i_failed_calls += user.total_calls("failed_inc", session_from_datetime, session_till_datetime)
 
       i = 0
       @sdate = Time.mktime(session[:year_from], session[:month_from], session[:day_from])
       @edate = Time.mktime(year, month, day)
 
       while @sdate < @edate
-        @a_date[i] = @sdate.strftime("%Y-%m-%d")
+        @start_date = (@sdate - Time.zone.now.utc_offset().second + Time.now.utc_offset().second).to_s(:db)
+        @a_date[i] = @start_date
         unless @a_calls[i]
           @a_calls[i] = 0
           @a_billsec[i] = 0
           @a_normative[i] = 0
         end
 
-        @a_calls[i] += user.total_calls("answered_out", @a_date[i], @a_date[i]) + @user.total_calls("answered_inc", @a_date[i], @a_date[i])
-        @a_billsec[i] += user.total_billsec("answered_out", @a_date[i], @a_date[i]) + @user.total_duration("answered_inc", @a_date[i], @a_date[i])
-        @a_normative[i] += user.normative_perc(@sdate).to_i
+        @end_date = (@a_date[i].to_time + 23.hour + 59.minute + 59.second).to_s(:db)
+        @a_calls[i] += user.total_calls("answered_out", @a_date[i], @end_date) + @user.total_calls("answered_inc", @a_date[i], @end_date)
+        @a_billsec[i] += user.total_billsec("answered_out", @a_date[i], @end_date) + @user.total_duration("answered_inc", @a_date[i], @end_date)
+        @a_normative[i] += user.normative_perc(@start_date).to_i
         @sdate += (60 * 60 * 24)
         i+=1
       end
     end
+
     @a_calls.each_with_index { |calls, index|
       @a_avg_billsec[index] = @a_billsec[index] / @a_calls[index] if @a_calls[index] > 0
       @t_calls += @a_calls[index]

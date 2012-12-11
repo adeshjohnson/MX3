@@ -199,7 +199,7 @@
         </tr>
         <% for i in 0..@a_calls.size-1 %>
             <tr class="row<%= (i % 2 + 1).to_s %>">
-              <td id="row_<%= i %>_date" align="center"><%= nice_date(@a_date[i],0) %></td>
+              <td id="row_<%= i %>_date" align="center"><%= nice_date(@a_date[i],(params[:action].to_s == 'reseller_all_user_stats' ? 1 : 0)) %></td>
               <td id="row_<%= i %>_calls" align="right"><%= @a_calls[i] %></td>
               <td id="row_<%= i %>_billsec" align="center"><%= nice_time @a_billsec[i] %></td>
               <td id="row_<%= i %>_avg_billsec" align="center"><%= nice_time @a_avg_billsec[i] %></td>

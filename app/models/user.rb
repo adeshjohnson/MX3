@@ -581,12 +581,13 @@ class User < ActiveRecord::Base
 
 
   def normative_perc(date)
-    date_s = date.strftime("%Y-%m-%d")
+    date_s = date
+    date_e = (date.to_time + 23.hour + 59.minute + 59.second).to_s(:db)
 
     sql =
         'SELECT users.id, users.calltime_normative as \'normative\', COUNT(distinct calls.id) as \'calls\', SUM(calls.duration) as \'duration\'' +
             'FROM users join devices on (users.id = devices.user_id AND users.id = '+ id.to_s + ') left join calls on ((calls.src_device_id = devices.id OR calls.dst_device_id = devices.id)' +
-            'AND calls.calldate BETWEEN \'' + date_s + ' 00:00:00\' AND \'' + date_s + ' 23:59:59\') AND disposition = \'ANSWERED\''+
+            'AND calls.calldate BETWEEN \'' + date_s.to_s + '\' AND \'' + date_e.to_s + '\') AND disposition = \'ANSWERED\''+
             'GROUP BY users.id, users.calltime_normative'
 
     res = ActiveRecord::Base.connection.select_all(sql)
