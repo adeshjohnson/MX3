@@ -2794,6 +2794,7 @@ class ApiController < ApplicationController
                  if did
                    did_owner = ( did.reseller_id == user_id ? true : false )
                    if did_owner
+                    if did.status != "terminated"
                      if did.status == "free" or (did.user_id == device.user_id and did.status == "reserved")
                        did.device_id = params[:device_id].to_s.strip
                        did.status = "active"
@@ -2810,6 +2811,9 @@ class ApiController < ApplicationController
                      else
                        doc.error("DID is not free")
                      end
+                    else
+                      doc.error("DID is terminated")
+                    end
                    else
                      doc.error("Your are not authorized to use this DID")
                    end
