@@ -142,9 +142,9 @@ class ProvidersController < ApplicationController
     @provider = Provider.new
     @provider.tech = "SIP"
     @providertypes = Providertype.find(:all)
-    @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
+    @tariffs = Tariff.where(["purpose = 'provider' AND owner_id = ?", session[:user_id]]).all
     @locations = current_user.locations
-    @servers= Server.find(:all, :order => "server_id")
+    @servers = Server.where("server_type = 'asterisk'").order("server_id").all
     @serverproviders = []
     @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
