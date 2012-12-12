@@ -778,7 +778,7 @@ class ApplicationController < ActionController::Base
           
           sip_proxy = Server.where('server_type = "sip_proxy"').first
           if sip_proxy
-            Extline.mcreate(default_context, i, default_app, "SIP/" + sip_proxy.server_ip.to_s + "/" + @device.name, @device.extension, device_id)
+            Extline.mcreate(default_context, i, default_app, "SIP/mor_server_" + sip_proxy.server_id.to_s + "/" + @device.name, @device.extension, device_id)
           end
         
         else
