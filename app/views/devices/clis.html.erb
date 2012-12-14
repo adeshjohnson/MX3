@@ -34,7 +34,7 @@
       <%= _('User') %>:
       <select name="user" id="user">
         <option value="-1" <%= "selected" if @search_user == nil or (@search_user.to_i == -1) %>><%= _('Select_user') %> </option>
-        <% for user in @users %>
+        <% @users.each do |user| %>
             <option value="<%= user.id %>" <%= "selected" if @search_user.to_i == user.id.to_i %>><%= nice_user(user) %> </option>
         <% end %>
       </select>
