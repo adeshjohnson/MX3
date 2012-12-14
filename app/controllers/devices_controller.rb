@@ -133,14 +133,14 @@ class DevicesController < ApplicationController
       # if device type = SIP and device host = dynamic and ccl_active=1 it must be assigned to sip_proxy server
       serv_dev = ServerDevice.where("server_id=? AND device_id=?", device.server_id, device.id).first
       if device.device_type == "SIP" and device.host == "dynamic" and @sip_proxy_server and ccl_active?
-        if not serv_dev
+        unless serv_dev
           server_device = ServerDevice.new
           server_device.server_id = @sip_proxy_server.id
           server_device.device_id = device.id
           server_device.save
         end
       else
-        if not serv_dev
+        unless serv_dev
           server_device = ServerDevice.new
           server_device.server_id = device.server_id
           server_device.device_id = device.id
@@ -153,10 +153,10 @@ class DevicesController < ApplicationController
       #return false if !a
     else
       flash_errors_for(_('device_not_created'), device)
-      redirect_to :controller => "devices", :action => 'show_devices', :id => user.id and return false
+      redirect_to :controller => :devices, :action => :show_devices, :id => user.id and return false
     end
 
-    redirect_to :controller => "devices", :action => 'device_edit', :id => device.id and return false
+    redirect_to :controller => :devices, :action => :device_edit, :id => device.id and return false
   end
 
   def edit
@@ -199,7 +199,7 @@ class DevicesController < ApplicationController
     @user=User.where(["id = ? AND (owner_id = ? or users.id = ?)", params[:id], correct_owner_id, current_user.id]).includes(:devices).first
     if !@user
       flash[:notice] = _("User_not_found")
-      redirect_to :controller => "callc", :action => "main" and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     a = check_owner_for_device(@user)
@@ -308,8 +308,8 @@ class DevicesController < ApplicationController
 
     set_voicemail_variables(@device)
 
-    render :action => 'device_edit_h323' if @device.device_type == "H323"
-    render :action => 'device_edit_skype' if @device.device_type == "Skype"
+    render :action => :device_edit_h323 if @device.device_type == "H323"
+    render :action => :device_edit_skype if @device.device_type == "Skype"
   end
 
   # in before filter : device (:find_device)
@@ -318,8 +318,8 @@ class DevicesController < ApplicationController
       flash[:notice] = _('You_have_no_editing_permission')
       redirect_to :controller => :callc, :action => :main and return false
     end
-    if not params[:device]
-      redirect_to :controller => "callc", :action => 'main' and return false
+    unless params[:device]
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     change_pin = !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i != 2)
@@ -356,7 +356,7 @@ class DevicesController < ApplicationController
 
     if params[:add_to_servers].blank? and params[:device][:server_id].blank?
       flash[:notice] = _('Please_select_server')
-      redirect_to :action => 'device_edit', :id => @device.id and return false
+      redirect_to :action => :device_edit, :id => @device.id and return false
     end
 
     #============multi server support===========
@@ -412,7 +412,7 @@ class DevicesController < ApplicationController
       end
       params[:device][:timeout]=params[:device_timeout].to_s.strip
     end
-    if not @new_device and @device.device_type != "Virtual"
+    if !@new_device and @device.device_type == "Virtual"
       unless @device.is_dahdi?
         if change_opt_2 == true
           params[:device][:name]=params[:device][:name].to_s.strip
@@ -429,7 +429,7 @@ class DevicesController < ApplicationController
       end
     end
 
-    if not @new_device and @device.device_type != "FAX"
+    if !@new_device and @device.device_type == "FAX"
       if change_opt_3 == true
         params[:cid_number]=params[:cid_number].to_s.strip
         params[:device_caller_id_number] = params[:device_caller_id_number].to_i
@@ -440,7 +440,7 @@ class DevicesController < ApplicationController
       change_opt_4 == true ? params[:cid_name]=params[:cid_name].to_s.strip : params[:cid_name]= nice_cid(@device.callerid)
     end
 
-    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
       unless @device.is_dahdi?
         params[:host]=params[:host].to_s.strip
         if @device.host != "dynamic"
@@ -463,19 +463,19 @@ class DevicesController < ApplicationController
     end
 
 
-    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
       params[:callgroup]=params[:callgroup].to_s.strip
       params[:pickupgroup]=params[:pickupgroup].to_s.strip
     end
 
-    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
       if @device.voicemail_box
         params[:vm_email]=params[:vm_email].to_s.strip
         params[:vm_psw]=params[:vm_psw].to_s.strip
       end
     end
 
-    if not @new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
+    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
       unless @device.is_dahdi?
         params[:ip1]=params[:ip1].to_s.strip
         params[:mask1]=params[:mask1].to_s.strip
@@ -490,7 +490,7 @@ class DevicesController < ApplicationController
       end
     end
 
-    if not @new_device and @device.device_type != "FAX"
+    if !@new_device and @device.device_type == "FAX"
       params[:device][:tell_rtime_when_left]=params[:device][:tell_rtime_when_left].to_s.strip
       params[:device][:repeat_rtime_every]=params[:device][:repeat_rtime_every].to_s.strip
       params[:device][:qf_tell_time] = params[:device][:qf_tell_time].to_i
@@ -528,16 +528,16 @@ class DevicesController < ApplicationController
 
     if params[:device][:extension] and Device.where(["id != ? and extension = ?", @device.id, params[:device][:extension]]).first
       flash[:notice] = _('Extension_is_used')
-      redirect_to :action => 'device_edit', :id => @device.id and return false
+      redirect_to :action => :device_edit, :id => @device.id and return false
     else
       #pin
       if (Device.where(["id != ? AND pin = ?", @device.id, params[:device][:pin]]).first and params[:device][:pin].to_s != "")
         flash[:notice] = _('Pin_is_already_used')
-        redirect_to :action => 'device_edit', :id => @device.id and return false
+        redirect_to :action => :device_edit, :id => @device.id and return false
       end
       if params[:device][:pin].to_s.strip.scan(/[^0-9]/).compact.size > 0
         flash[:notice] = _('Pin_must_be_numeric')
-        redirect_to :action => 'device_edit', :id => @device.id and return false
+        redirect_to :action => :device_edit, :id => @device.id and return false
       end
       @device.device_ip_authentication_record = params[:ip_authentication].to_i
       params[:device] = params[:device].reject { |key, value| ['extension'].include?(key.to_s) } if current_user.usertype == 'reseller' and Confline.get_value('Allow_resellers_to_change_extensions_for_their_user_devices').to_i == 0
@@ -607,7 +607,7 @@ class DevicesController < ApplicationController
       if params[:mask1]
         if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
           flash[:notice] = _('Allowed_IP_is_not_valid')
-          redirect_to :action => 'device_edit', :id => @device.id and return false
+          redirect_to :action => :device_edit, :id => @device.id and return false
         else
           @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
         end
@@ -625,7 +625,7 @@ class DevicesController < ApplicationController
       #------- Network related -------
       if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/
         flash[:notice] = _('Invalid_IP_address')
-        redirect_to :action => 'device_edit', :id => @device.id and return false
+        redirect_to :action => :device_edit, :id => @device.id and return false
       end
 
       @device.host = params[:host]
@@ -679,18 +679,18 @@ class DevicesController < ApplicationController
       if admin? or accountant?
         #------- Groups -------
         @device.callgroup = params[:callgroup]
-        @device.callgroup = nil if not params[:callgroup]
+        @device.callgroup = nil unless params[:callgroup]
 
         @device.pickupgroup = params[:pickupgroup]
-        @device.pickupgroup = nil if not params[:pickupgroup]
+        @device.pickupgroup = nil unless params[:pickupgroup]
       end
 
       #------- Advanced -------
       @device.fromuser = params[:fromuser]
-      @device.fromuser = nil if not params[:fromuser] or params[:fromuser].length < 1
+      @device.fromuser = nil if !params[:fromuser] or params[:fromuser].length >= 1
 
       @device.fromdomain = params[:fromdomain]
-      @device.fromdomain = nil if not params[:fromdomain] or params[:fromdomain].length < 1
+      @device.fromdomain = nil if !params[:fromdomain] or params[:fromdomain].length >= 1
       @device.grace_time = params[:grace_time]
 
       @device.insecure = nil
@@ -706,21 +706,17 @@ class DevicesController < ApplicationController
       end
 
       # check for errors
-      @device.host = "dynamic" if not @device.host
-      @device.transfer = "no" if not @device.transfer
-      @device.canreinvite = "no" if not @device.canreinvite
-      @device.port = "0" if not @device.port
-      @device.ipaddr = "0.0.0.0" if not @device.ipaddr
-
+      @device.host = "dynamic" unless @device.host
+      @device.transfer = "no" unless @device.transfer
+      @device.canreinvite = "no" unless @device.canreinvite
+      @device.port = "0" unless @device.port
+      @device.ipaddr = "0.0.0.0" unless @device.ipaddr
       @device.timeout = 10 if @device.timeout.to_i < 10
 
-      #my_debug @device.port
-      #MorLog.my_debug("Before_save", true)
-      #MorLog.my_debug(@device.name, true)
       if params[:vm_email].to_s != ""
         if !Email.address_validation(params[:vm_email])
           flash[:notice] = _("Email_address_not_correct")
-          redirect_to :action => 'device_edit', :id => @device.id and return false
+          redirect_to :action => :device_edit, :id => @device.id and return false
         end
       end
 
@@ -738,31 +734,32 @@ class DevicesController < ApplicationController
         if !(session[:usertype] == "accountant" and session[:acc_voicemail_password].to_i != 2)
           vm.password = params[:vm_psw]
         end
+
         sql = "UPDATE voicemail_boxes SET mailbox = '#{@device.extension}', email = '#{vm.email}', password = '#{vm.password}' WHERE uniqueid = #{vm.id}"
         ActiveRecord::Base.connection.update(sql)
 
         @device = check_context(@device)
         a=configure_extensions(@device.id, {:current_user => current_user})
-        return false if !a
-        @devices_to_reconf = Callflow.where(:device_id => @device.id, :action => 'forward', :data2 => 'local')
+        return false unless a
+        @devices_to_reconf = Callflow.where(:device_id => @device.id, :action => :forward, :data2 => 'local')
         @devices_to_reconf.each { |call_flow|
           if call_flow.data.to_i > 0
             a=configure_extensions(call_flow.data.to_i, {:current_user => current_user})
-            return false if !a
+            return false unless a
           end
         }
         flash[:status] = _('phones_settings_updated')
         # actions to report who changed what in device settings.
         if @device_old.pin != @device.pin
-          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_pin_changed", :data => @device_old.pin, :data2 => @device.pin})
+          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => :device_pin_changed, :data => @device_old.pin, :data2 => @device.pin})
         end
         if @device_old.secret != @device.secret
-          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_secret_changed", :data => @device_old.secret, :data2 => @device.secret})
+          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => :device_secret_changed, :data => @device_old.secret, :data2 => @device.secret})
         end
         if old_vm.password != vm.password
-          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => "device_voice_mail_password_changed", :data => old_vm.password, :data2 => vm.password})
+          Action.add_action_hash(session[:user_id], {:target_id => @device.id, :target_type => "device", :action => :device_voice_mail_password_changed, :data => old_vm.password, :data2 => vm.password})
         end
-        redirect_to :action => 'show_devices', :id => @device.user_id and return false
+        redirect_to :action => :show_devices, :id => @device.user_id and return false
       else
         flash_errors_for(_('Device_not_updated'), @device)
 
@@ -828,8 +825,6 @@ class DevicesController < ApplicationController
     end
 
     @user = @device.user
-
-    #render(:layout => "layouts/realtime_stats")
 
     if params[:context] == :show
       render(:layout => false)
@@ -899,23 +894,16 @@ class DevicesController < ApplicationController
         flash[:status] = _('device') + ' ' + @device.name.to_s + ' ' + _('forward_removed')
       end
 
-      #my_debug @fwd_to
-      #my_debug @device.id
-
       @device.forward_to = @fwd_to
-      if @device.save
-        #my_debug "device saved"
-      else
-        #my_debug "device not saved"
-      end
+      @device.save
 
       a=configure_extensions(@device.id, {:current_user => current_user})
-      return false if !a
+      return false unless a
     else
       flash[:notice] = _('device') +' ' + @device.name.to_s + ' ' + _('not_forwarded_close_circle')
     end
 
-    redirect_to :action => 'device_forward', :id => @device
+    redirect_to :action => :device_forward, :id => @device
   end
 
 
@@ -980,34 +968,34 @@ class DevicesController < ApplicationController
 
   def cli_add
     create_cli
-    redirect_to :action => 'clis'
+    redirect_to :action => :clis
   end
 
   def cli_device_add
     create_cli
-    redirect_to :action => 'device_clis', :id => params[:device_id] and return false
+    redirect_to :action => :device_clis, :id => params[:device_id] and return false
   end
 
   def cli_user_add
     create_cli
-    redirect_to :action => 'user_device_clis' and return false
+    redirect_to :action => :user_device_clis and return false
   end
 
   def change_email_callback_status
     Callerid.use_for_callback(@cli, params[:email_callback])
-    redirect_to :action => 'clis' and return false
+    redirect_to :action => :clis and return false
   end
 
   def change_email_callback_status_device
     Callerid.use_for_callback(@cli, params[:email_callback])
-    redirect_to :action => 'device_clis', :id => @cli.device_id and return false
+    redirect_to :action => :device_clis, :id => @cli.device_id and return false
   end
 
   def cli_delete
     cli_cli = @cli.cli
     @cli.destroy
     flash[:status] = _('CLI_deleted') + ": #{cli_cli}"
-    redirect_to :action => 'clis' and return false
+    redirect_to :action => :clis and return false
 
   end
 
@@ -1015,7 +1003,7 @@ class DevicesController < ApplicationController
     cli_cli = @cli.cli
     @cli.destroy
     flash[:status] = _('CLI_deleted') + ": #{cli_cli}"
-    redirect_to :action => 'user_device_clis' and return false
+    redirect_to :action => :user_device_clis and return false
   end
 
   def cli_device_delete
@@ -1027,7 +1015,7 @@ class DevicesController < ApplicationController
       flash_errors_for(_('CLI_is_not_deleted'), @cli)
     end
     flash[:status] = _('CLI_deleted') + ": #{cli_cli}"
-    redirect_to :action => 'device_clis', :id => device_id and return false
+    redirect_to :action => :device_clis, :id => device_id and return false
   end
 
   def cli_edit
@@ -1039,7 +1027,7 @@ class DevicesController < ApplicationController
     @user = @device.user
     unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant" or session[:usertype] == "reseller"
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
@@ -1052,7 +1040,7 @@ class DevicesController < ApplicationController
     if @cli.save
       Callerid.use_for_callback(@cli, params[:email_callback])
       flash[:status] = _('CLI_updated')
-      redirect_to :action => 'clis' and return false
+      redirect_to :action => :clis and return false
     else
       flash_errors_for(_("CLI_not_created"), @cli)
       redirect_to :action => :cli_edit, :id => @cli.id
@@ -1068,7 +1056,7 @@ class DevicesController < ApplicationController
     @user = @device.user
     unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant"
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
@@ -1080,7 +1068,7 @@ class DevicesController < ApplicationController
     @user = @device.user
     unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant"
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
@@ -1093,7 +1081,7 @@ class DevicesController < ApplicationController
     if @cli.save
       Callerid.use_for_callback(@cli, params[:email_callback])
       flash[:status] = _('CLI_updated')
-      redirect_to :action => 'device_clis', :id => @cli.device_id
+      redirect_to :action => :device_clis, :id => @cli.device_id
     else
       flash_errors_for(_("CLI_not_created"), @cli)
       redirect_to :action => :cli_device_edit, :id => @cli.id
@@ -1118,7 +1106,7 @@ class DevicesController < ApplicationController
     if cli.save
       Callerid.use_for_callback(cli, params[:email_callback])
       flash[:status] = _('CLI_updated')
-      redirect_to :action => 'user_device_clis' and return false
+      redirect_to :action => :user_device_clis and return false
     else
       flash_errors_for(_("CLI_not_created"), cli)
       redirect_to :action => :cli_user_edit, :id => cli.id
@@ -1199,10 +1187,10 @@ class DevicesController < ApplicationController
 
   def clis_banned_status
     @cl = Callerid.where(:id => params[:id]).first
-    @cl.created_at = Time.now if not @cl.created_at
+    @cl.created_at = Time.now unless @cl.created_at
     @cl.banned.to_i == 1 ? @cl.banned = 0 : @cl.banned = 1
     @cl.save
-    redirect_to :action => 'clis'
+    redirect_to :action => :clis
   end
 
   def cli_user_devices
@@ -1364,7 +1352,7 @@ class DevicesController < ApplicationController
         if @device.user_id != @user.id
 
           dont_be_so_smart
-          redirect_to :controller => "callc", :action => 'main'
+          redirect_to :controller => :callc, :action => :main
         end
       else
         #group manager
@@ -1377,9 +1365,9 @@ class DevicesController < ApplicationController
           end
         end
 
-        if not can_check
+        unless can_check
           dont_be_so_smart
-          redirect_to :controller => "callc", :action => 'main'
+          redirect_to :controller => :callc, :action => :main
         end
       end
     end
@@ -1389,7 +1377,7 @@ class DevicesController < ApplicationController
 
       if @user.owner_id != session[:user_id] and @user.id != session[:user_id]
         dont_be_so_smart
-        redirect_to :controller => "callc", :action => 'main'
+        redirect_to :controller => :callc, :action => :main
       end
 
     end
@@ -1436,11 +1424,11 @@ class DevicesController < ApplicationController
     if  ['user', 'reseller'].include?(current_user.usertype)
       if @device.user_id != current_user.id and current_user.usertype == 'user'
         dont_be_so_smart
-        redirect_to :controller => "callc", :action => 'main' and return false
+        redirect_to :controller => :callc, :action => :main and return false
       end
       if current_user.usertype == 'reseller' and (@device.user_id != current_user.id and @device.user.owner_id != current_user.id)
         dont_be_so_smart
-        redirect_to :controller => "callc", :action => 'main' and return false
+        redirect_to :controller => :callc, :action => :main and return false
       end
     else
       check_owner_for_device(@user)
@@ -1480,11 +1468,11 @@ class DevicesController < ApplicationController
         if  params[:cf_data].to_i == 6
           if  params[:ext_number].to_i == @device.extension.to_i
             flash[:notice] = _('Devices_callflow_external_number_cant_match_extension')
-            redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type and return false
+            redirect_to :action => :callflow_edit, :id => @device.id, :cft => @cf_type and return false
           end
           if  params[:ext_number].to_s.blank?
             flash[:notice] = _('Devices_callflow_external_number_cant_be_blank')
-            redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type and return false
+            redirect_to :action => :callflow_edit, :id => @device.id, :cft => @cf_type and return false
           end
           cf.data = params[:ext_number].to_s.strip
           cf.data2 = "external"
@@ -1537,10 +1525,10 @@ class DevicesController < ApplicationController
           for group in session[:manager_in_groups]
             for user in group.users
               for device in user.devices
-                @devices << device if not @devices.include?(device)
+                @devices << device unless @devices.include?(device)
               end
               for fdevice in user.fax_devices
-                @fax_devices << fdevice if not @fax_devices.include?(fdevice)
+                @fax_devices << fdevice unless @fax_devices.include?(fdevice)
               end
             end
           end
@@ -1556,7 +1544,7 @@ class DevicesController < ApplicationController
       end
     else
       flash[:notice]= _('Please_select_device')
-      redirect_to :action => 'callflow_edit', :id => @device.id, :cft => @cf_type
+      redirect_to :action => :callflow_edit, :id => @device.id, :cft => @cf_type
     end
   end
 
@@ -1597,11 +1585,11 @@ class DevicesController < ApplicationController
     end
     if @device.user_id != @user.id
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => 'main' and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
     if @device.device_type == "FAX"
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => 'main' and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
     @dids = @device.dids
     @cid_name = ""
@@ -1626,7 +1614,7 @@ class DevicesController < ApplicationController
     @user = User.where(:id => session[:user_id]).first
     if @device.user_id != @user.id
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => 'main' and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     if @device.device_type !="FAX" and (params[:cid_name] or params[:cid_number] or (params[:cid_number_from_did] and params[:cid_number_from_did].length > 0))
@@ -1684,7 +1672,7 @@ class DevicesController < ApplicationController
       end
     end
 
-    redirect_to :action => 'device_edit', :id => @device.id
+    redirect_to :action => :device_edit, :id => @device.id
 
   end
 
@@ -1709,7 +1697,7 @@ class DevicesController < ApplicationController
       flash[:notice] = _('Email_not_updated')
     end
 
-    redirect_to :action => 'device_edit', :id => @email.device.id
+    redirect_to :action => :device_edit, :id => @email.device.id
 
   end
 
@@ -1719,7 +1707,7 @@ class DevicesController < ApplicationController
     @email.destroy
 
     flash[:status] = _('Email_deleted') + ": " + email
-    redirect_to :action => 'device_edit', :id => device_id
+    redirect_to :action => :device_edit, :id => device_id
   end
 
   def default_device
@@ -1840,7 +1828,7 @@ class DevicesController < ApplicationController
     if params[:vm_email].to_s != ""
       if !Email.address_validation(params[:vm_email])
         flash[:notice] = _("Email_address_not_correct")
-        redirect_to :action => 'default_device' and return false
+        redirect_to :action => :default_device and return false
       end
     end
 
@@ -1891,7 +1879,7 @@ class DevicesController < ApplicationController
     if params[:mask1]
       if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
         flash[:notice] = _('Allowed_IP_is_not_valid')
-        redirect_to :action => 'default_device' and return false
+        redirect_to :action => :default_device and return false
       else
         Confline.set_value("Default_device_permits", Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]}), session[:user_id])
       end
@@ -1942,7 +1930,7 @@ class DevicesController < ApplicationController
     #----------- Codecs ------------------
     if params[:device][:device_type] == 'FAX' and (!params[:codec] or !(params[:codec][:alaw].to_i == 1 or params[:codec][:ulaw].to_i == 1))
       flash[:notice]=_("Fax_device_has_to_have_at_least_one_codec_enabled")
-      redirect_to :action => 'default_device' and return false
+      redirect_to :action => :default_device and return false
     end
     if params[:codec]
       for codec in Codec.all
@@ -1979,19 +1967,19 @@ class DevicesController < ApplicationController
 
     #------- Groups -------
     Confline.set_value("Default_device_callgroup", params[:callgroup], session[:user_id])
-    Confline.set_value("Default_device_callgroup", nil, session[:user_id]) if not params[:callgroup]
+    Confline.set_value("Default_device_callgroup", nil, session[:user_id]) unless params[:callgroup]
 
     Confline.set_value("Default_device_pickupgroup", params[:pickupgroup], session[:user_id])
-    Confline.set_value("Default_device_pickupgroup", nil, session[:user_id]) if not params[:pickupgroup]
+    Confline.set_value("Default_device_pickupgroup", nil, session[:user_id]) unless params[:pickupgroup]
 
     #------- Advanced -------
 
 
     Confline.set_value("Default_device_fromuser", params[:fromuser], session[:user_id])
-    Confline.set_value("Default_device_fromuser", nil, session[:user_id]) if not params[:fromuser] or params[:fromuser].length < 1
+    Confline.set_value("Default_device_fromuser", nil, session[:user_id]) unless params[:fromuser] or params[:fromuser].length < 1
 
     Confline.set_value("Default_device_fromdomain", params[:fromdomain], session[:user_id])
-    Confline.set_value("Default_device_fromdomain", nil, session[:user_id]) if not params[:fromdomain] or params[:fromdomain].length < 1
+    Confline.set_value("Default_device_fromdomain", nil, session[:user_id]) unless params[:fromdomain] or params[:fromdomain].length < 1
 
     Confline.set_value("Default_device_grace_time", params[:grace_time], session[:user_id])
 
@@ -2020,7 +2008,7 @@ class DevicesController < ApplicationController
     Confline.set_value("Default_device_tell_rate", params[:device][:tell_rate].to_s, session[:user_id])
 
     flash[:status]=_("Settings_Saved")
-    redirect_to :action => 'default_device' and return false
+    redirect_to :action => :default_device and return false
   end
 
 
@@ -2037,25 +2025,9 @@ class DevicesController < ApplicationController
     else
       flash[:notice] = _("Provider_Not_Found")
     end
-    redirect_to :action => 'show_devices', :id => params[:id]
+    redirect_to :action => :show_devices, :id => params[:id]
   end
 
-=begin
- AJAX action.
-
- Returns list of devices.
- If post contains 'all' then all devices are returned.
- Other way it returns devices for single user.
- Fax devices are skipped.
-
- *Params*
-
- Post request with 'all' or id of the user.
-
- *Return*
-
- List of devices.
-=end
   def get_user_devices
     owner_id = correct_owner_id
     @user = request.raw_post.gsub("=", "")
@@ -2228,7 +2200,7 @@ class DevicesController < ApplicationController
   def check_for_accountant_create_device
     if session[:usertype] == "accountant" and session[:acc_device_create] != 2
       dont_be_so_smart
-      redirect_to(:controller => "callc", :action => "main") and return false
+      redirect_to(:controller => :callc, :action => :main) and return false
     end
   end
 
@@ -2329,7 +2301,7 @@ class DevicesController < ApplicationController
   def verify_params
     unless params[:device]
       dont_be_so_smart
-      redirect_to :controller => "callc", :action => "main" and return false
+      redirect_to :controller => :callc, :action => :main and return false
     end
   end
 
