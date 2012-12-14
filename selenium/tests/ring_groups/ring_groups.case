@@ -1641,8 +1641,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>exten =&gt; $5t5tr4,2,Dial(Local/virtual_10@mor_local,0,#$@TYG45tw4) </td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exten =&gt; $5t5tr4,2,Dial(Local/virtual_10@mor_local/n,0,#$@TYG45tw4) </td>
 	<td></td>
 </tr>
 <tr>
