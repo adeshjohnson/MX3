@@ -150,7 +150,6 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
-    #logger.fatal session[:time_zone_offset].to_i
     User.system_time_offset = session[:time_zone_offset].to_i
   end
 
@@ -160,7 +159,7 @@ class ApplicationController < ActionController::Base
 
   def set_charset
     headers["Content-Type"] = "text/html; charset=utf-8"
-    session[:flash_not_redirect] = 0 if session # HACK!!
+    session[:flash_not_redirect] = 0 if session
   end
 
   #def adjust_json_formatting
@@ -196,7 +195,7 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    out
+    return out
   end
 
   def invoice_params_for_user
@@ -230,13 +229,12 @@ class ApplicationController < ActionController::Base
     else
       flash[:notice] = "Calls table already fixed. Not fixing again."
     end
-
   end
 
   def show_agent_progress
     if session[:user_id]
       if !session[:user_cc_agent]
-        agent = User.find(:first, :conditions => "id = #{session[:user_id]}")
+        agent = User.where(:id => session[:user_id]).first
         session[:user_cc_agent] = agent.call_center_agent
       end
       if session[:user_cc_agent].to_i == 1
@@ -272,7 +270,7 @@ class ApplicationController < ActionController::Base
         if current_user
           translation = current_user.default_translation
         else
-          user_tr = UserTranslation.find(:first, :include => [:translation], :conditions => "user_translations.active = 1 AND user_translations.user_id = 0", :order => "user_translations.position ASC")
+          user_tr = UserTranslation.where(:active => 1, :user_id => 0).includes(:translation).order("position ASC").first
           translation = user_tr.translation if user_tr
         end
 
@@ -287,7 +285,7 @@ class ApplicationController < ActionController::Base
 
     # ---- currency ------
     if params[:currency]
-      if curr = Currency.find(:first, :conditions => {:name => params[:currency].gsub(/[^A-Za-z]/, '')})
+      if curr = Currency.where(:name => params[:currency].gsub(/[^A-Za-z]/, '')).first
         session[:show_currency] = curr.name
       end
     end
@@ -326,15 +324,14 @@ class ApplicationController < ActionController::Base
 
   # Method to store all HangupCauseCodes in session. Possible uses : before massive hangupcausecodes analysis or on session start
   def store_codes_in_session
-    codes = Hangupcausecode.find(:all)
+    codes = Hangupcausecode.all
     for code in codes do
       session["hangup#{code.code.to_i}".intern] = code.description
     end
   end
 
   def authorize
-    # logger.fatal session.to_yaml
-    if session[:usertype].to_s != "admin" #and session[:usertype].to_s != "accountant"
+    if session[:usertype].to_s != "admin" 
       c = controller_name.to_s.gsub(/"|'|\\/, '')
       a = action_name.to_s.gsub(/"|'|\\/, '')
       if !session["#{c}_#{a}".intern] or
@@ -342,7 +339,7 @@ class ApplicationController < ActionController::Base
           session["#{c}_#{a}".intern].to_i != 1
         # handle guests
         if !session[:usertype_id] or session[:usertype] == "guest" or session[:usertype].to_s == ""
-          session[:usertype_id] = Role.find(:first, :conditions => "name = 'guest'").id
+          session[:usertype_id] = Role.where(:name => 'guest').first.id
           session[:usertype] = "guest"
         end
         roleright = RoleRight.get_authorization(session[:usertype_id], c, a).to_i
@@ -352,7 +349,6 @@ class ApplicationController < ActionController::Base
         MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{c}::#{a}")
         MorLog.my_debug("   Session(#{c}_#{a}):"+ session["#{c}_#{a}".intern].to_s)
         if params[:lang]  and  !params[:lang].blank?
-        logger.fatal("********** TRANSLATION !!!! Localization.lang => #{Localization.lang} ; lang => #{params[:lang]}")
         Localization.lang = params[:lang]
         end
         flash[:notice] = _('You_are_not_authorized_to_view_this_page')
@@ -604,7 +600,7 @@ class ApplicationController < ActionController::Base
     chanunavail_extension = 301
 
 
-    @user = User.find(@device.user_id) if @device.user_id.to_i > -1
+    @user = User.where(:id => @device.user_id).first if @device.user_id.to_i > -1
 
     user_id = 0
     user_id = @device.user.id if @user
@@ -651,7 +647,7 @@ class ApplicationController < ActionController::Base
 
 
       #======================  B E F O R E   C A L L  ======================
-      before_call_cfs = Callflow.find(:all, :conditions => "cf_type = 'before_call' AND device_id = #{@device.id}", :order => "priority ASC")
+      before_call_cfs = Callflow.where("cf_type = 'before_call' AND device_id = #{@device.id}").order("priority ASC")
       for cf in before_call_cfs
 
         case cf.action
@@ -665,7 +661,7 @@ class ApplicationController < ActionController::Base
               when 2
                 forward_callerid = ""
               when 3
-                found_did = Did.find(:first, :conditions => ["id = ?", cf.data4])
+                found_did = Did.where(:id => cf.data4).first
                 forward_callerid = found_did.did if found_did
               when 4
                 forward_callerid = cf.data4
@@ -680,7 +676,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev = Device.find(:first, :conditions => {:id => cf.data})
+                dev = Device.where(:id => cf.data).first
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -831,7 +827,7 @@ class ApplicationController < ActionController::Base
       Extline.mcreate(default_context, i, "NoOp", "NO ANSWER", @device.extension, device_id)
       i+=1
 
-      no_answer_cfs = Callflow.find(:all, :conditions => "cf_type = 'no_answer' AND device_id = #{@device.id}", :order => "priority ASC")
+      no_answer_cfs = Callflow.where("cf_type = 'no_answer' AND device_id = #{@device.id}").order("priority ASC")
       for cf in no_answer_cfs
 
         case cf.action
@@ -845,7 +841,7 @@ class ApplicationController < ActionController::Base
               when 2
                 forward_callerid = ""
               when 3
-                forward_callerid = Did.find(:first, :conditions => ["id = ?", cf.data4]).did
+                forward_callerid = Did.where(:id => cf.data4).first.did
               when 4
                 forward_callerid = cf.data4
             end
@@ -859,7 +855,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev = Device.find(:first, :conditions => {:id => cf.data})
+                dev = Device.where(:id => cf.data).first
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -901,7 +897,7 @@ class ApplicationController < ActionController::Base
       Extline.mcreate(default_context, i, "NoOp", "BUSY", @device.extension, device_id)
       i+=1
 
-      busy_cfs = Callflow.find(:all, :conditions => "cf_type = 'busy' AND device_id = #{@device.id}", :order => "priority ASC")
+      busy_cfs = Callflow.where(["cf_type = 'busy' AND device_id = ?", @device.id]).order("priority ASC")
       for cf in busy_cfs
 
         case cf.action
@@ -915,7 +911,7 @@ class ApplicationController < ActionController::Base
               when 2
                 forward_callerid = ""
               when 3
-                forward_callerid = Did.find(:first, :conditions => "id = #{cf.data4}").did
+                forward_callerid = Did.where(:id => cf.data4).first.did
               when 4
                 forward_callerid = cf.data4
             end
@@ -929,7 +925,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev = Device.find(:first, :conditions => {:id => cf.data})
+                dev = Device.where(:id => cf.data).first
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -986,7 +982,7 @@ class ApplicationController < ActionController::Base
       Extline.mcreate(default_context, i, "NoOp", "FAILED", @device.extension, device_id)
       i+=1
 
-      failed_cfs = Callflow.find(:all, :conditions => "cf_type = 'failed' AND device_id = #{@device.id}", :order => "priority ASC")
+      failed_cfs = Callflow.where(["cf_type = 'failed' AND device_id = ?",@device.id]).order("priority ASC")
       for cf in failed_cfs
 
         case cf.action
@@ -1000,7 +996,7 @@ class ApplicationController < ActionController::Base
               when 2
                 forward_callerid = ""
               when 3
-                forward_callerid = Did.find(:first, :conditions => "id = #{cf.data4}").did
+                forward_callerid = Did.where(:id => cf.data4).first.did
               when 4
                 forward_callerid = cf.data4
             end
@@ -1014,7 +1010,7 @@ class ApplicationController < ActionController::Base
 
             case cf.data2
               when "local"
-                dev = Device.find(:first, :conditions => {:id => cf.data})
+                dev = Device.where(:id => cf.data).first
                 if dev
                   Extline.mcreate(default_context, i, "Goto", "#{dev.extension}|1", @device.extension, device_id)
                   i+=1
@@ -1074,7 +1070,7 @@ class ApplicationController < ActionController::Base
         end
 
         if dev.device_type == "H323"
-          for server in Server.find(:all)
+          for server in Server.all
             server.ami_cmd('h.323 reload')
             server.ami_cmd('extensions reload')
           end
@@ -1146,7 +1142,7 @@ class ApplicationController < ActionController::Base
 
     new_pin_auth_dp
 
-    dp = Dialplan.find(:first, :conditions => "dptype = 'authbypin'")
+    dp = Dialplan.where(:dptype => 'authbypin').first
 
     dp_ext = "dp"+dp.id.to_s
 
@@ -1160,7 +1156,7 @@ class ApplicationController < ActionController::Base
 
   def new_pin_auth_dp
 
-    return if Dialplan.find(:first, :conditions => "dptype = 'authbypin'")
+    return if Dialplan.where(:dptype => 'authbypin').first
 
     dp = Dialplan.new
     dp.name = "Authenticate by PIN Dial-Plan"
@@ -1256,15 +1252,15 @@ class ApplicationController < ActionController::Base
   #================== C O D E C S =============================
 
   def audio_codecs
-    Codec.find(:all, :conditions => "codec_type = 'audio'", :order => "id ASC")
+    Codec.where(:codec_type => 'audio').order("id ASC")
   end
 
   def video_codecs
-    Codec.find(:all, :conditions => "codec_type = 'video'", :order => "id ASC")
+    Codec.where(:codec_type => 'video').order("id ASC")
   end
 
   def image_codecs
-    Codec.find(:all, :conditions => "codec_type = 'image'", :order => "id ASC")
+    Codec.where(:codec_type => 'image').order("id ASC")
   end
 
 
@@ -1497,7 +1493,7 @@ class ApplicationController < ActionController::Base
 
     while good == 0
       number = random_digit_password(length)
-      good = 1 if not Voucher.find(:first, :conditions => "number = #{number}")
+      good = 1 if not Voucher.where(:number => number).first
     end
 
     number
@@ -1575,16 +1571,11 @@ class ApplicationController < ActionController::Base
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     else
       sql = 'select HOUR(timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\'))) as u;'
-      #logger.fatal "ddddddddddddddddddddddddddddddd"
       z = ActiveRecord::Base.connection.select_all(sql)[0]['u']
-      # logger.fatal "ddddddddddddddddddddddddddddddd"
       t = z.to_s.to_i
-      #logger.fatal "ddddddddddddddddddddddddddddddd"
       Confline.set_value('System_time_zone_offset', t.to_i, 0)
-      # logger.fatal "ddddddddddddddddddddddddddddddd"
       session[:time_zone_offset] = Confline.get_value('System_time_zone_ofset').to_i
     end
-    #logger.fatal session[:time_zone_offset].to_i
 
     ["Hide_Iwantto", "Hide_Manual_Link"].each { |option|
       session[option.downcase.to_sym] = Confline.get_value(option).to_i
@@ -1594,7 +1585,7 @@ class ApplicationController < ActionController::Base
       session[option.downcase.to_sym] = Confline.get_value(option, user.owner_id).to_i
     }
 
-    c = Currency.find(1)
+    c = Currency.where(:id => 1).first
     session[:default_currency] = c.name
     Currency.check_first_for_active if c.active.to_i == 0
     session[:show_currency] = user.currency.name
@@ -1730,7 +1721,7 @@ class ApplicationController < ActionController::Base
       if current_user
         @translations = current_user.active_translations
       else
-        tra = UserTranslation.find(:all, :include => [:translation], :conditions => "user_translations.active = 1 AND user_translations.user_id = 0", :order => "user_translations.position ASC")
+        tra = UserTranslation.where(:active => 1, :user_id => 0).includes(:translation).order("position ASC")
         @translations = tra.map(&:translation)
       end
     else
@@ -1749,7 +1740,7 @@ class ApplicationController < ActionController::Base
 
     while good == 0
       pin = random_digit_password(pin_length)
-      good = 1 if not Device.find(:first, :conditions => "pin = #{pin}")
+      good = 1 unless Device.where(:pin => pin).first
     end
     pin
   end
@@ -1784,7 +1775,7 @@ class ApplicationController < ActionController::Base
     # server_id - on which server activate callback
 
     # --------- USING AMI ----------
-    @server = Server.find(:first, :conditions => "server_id = #{server_id}")
+    @server = Server.where(:server_id => server_id).first
     if  !@server or @server.active != 1
       connection_status = 1
     else
@@ -1841,7 +1832,7 @@ Variables: (Names marked with * are required)
     if session["hangup#{code.to_i}".intern]
       return session["hangup#{code.to_i}".intern].html_safe
     else
-      line = Hangupcausecode.find(:first, :conditions => "code = #{code.to_i}")
+      line = Hangupcausecode.where(:code => code).first
       if line
         session["hangup#{code.to_i}".intern] = line.description.html_safe
       else
@@ -2065,7 +2056,6 @@ Variables: (Names marked with * are required)
           flash_notice = _("Payment_Error_Contact_Administrator_enter_merchant_id")
           flash_help_link = ''
           exception_send_email = 0
-          logger.fatal flash_notice
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
@@ -2198,16 +2188,12 @@ Variables: (Names marked with * are required)
           MorLog.my_debug("    >> Contained explanation. Flash: #{ flash_help_link}", true) if flash_help_link
         end
 
-        logger.fatal flash_notice
         if !flash_help_link.blank?
           flash[:notice] = _('Something_is_wrong_please_consult_help_link')
           flash[:notice] += "<a id='exception_info_link' href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>".html_safe
         else
           flash[:notice] = flash_notice.to_s.blank? ? "INTERNAL ERROR. - ID: #{id} - #{exception_class}" : flash_notice
         end
-
-        logger.fatal flash_notice
-        logger.fatal flash[:notice]
 
         if session and session[:forgot_pasword] == 1
           session[:forgot_pasword] = 0
@@ -2289,12 +2275,8 @@ Variables: (Names marked with * are required)
     short = {"accountant" => "acc", "reseller" => "res"}
     if group = user.acc_group
       group.only_view ? session[:acc_only_view] = 1 : session[:acc_only_view] = 0
-      rights = AccRight.find(
-          :all,
-          :select => "acc_rights.name, acc_group_rights.value",
-          :joins => "LEFT JOIN acc_group_rights ON (acc_group_rights.acc_right_id = acc_rights.id AND acc_group_rights.acc_group_id = #{group.id})",
-          :conditions => ["acc_rights.right_type = ?", group.group_type]
-      )
+      rights = AccRight.select(:name, :value).where(:right_type => group.group_type).
+               joins(["LEFT JOIN acc_group_rights ON (acc_group_rights.acc_right_id = acc_rights.id AND acc_group_rights.acc_group_id = ?)", group.id])
 
       rights.each { |right|
         name = "#{short[user.usertype]}_#{right[:name].downcase}".to_sym
@@ -2346,17 +2328,9 @@ Variables: (Names marked with * are required)
       cond_str = ["SUBSTRING(number,1,?) = ?", "users.owner_id = ?"]
       cond_var = [ls, start.to_s, owner_id]
       cond_str << ["number_type = 1"]
-      invoice = Invoice.find(:first, :joins => "LEFT JOIN users ON (invoices.user_id = users.id)", :conditions => [cond_str.join(" AND ")]+cond_var, :order => "CAST(SUBSTRING(number,#{ls+1},255) AS SIGNED) DESC")
+      invoice = Invoice.where([cond_str.join(" AND ")]+cond_var).joins("LEFT JOIN users ON (invoices.user_id = users.id)").order("CAST(SUBSTRING(number,#{ls+1},255) AS SIGNED) DESC").first
 
       invoice ? number = (invoice.number[ls, invoice.number.length - ls].to_i + 1) : number = 1
-      #
-      #      logger.fatal "----------------------- \n l #{length}"
-      #      logger.fatal '21999'[2,'21999'.length - 2].to_i + 1
-      #      logger.fatal "s #{start}"
-      #      logger.fatal "sl #{start.length}"
-      #      logger.fatal "n #{number}"
-      #      logger.fatal "nl #{number.to_s.length}"
-
       zl = length - start.length - number.to_s.length
       z = ""
       1..zl.times { z += "0" }
@@ -2369,14 +2343,15 @@ Variables: (Names marked with * are required)
       cond_str = ["SUBSTRING(number,1,?) = '#{start.to_s}#{date.to_s}' AND users.owner_id = ?"]
       cond_var = [ls, owner_id]
       cond_str << ["number_type = 2"]
-      pinv = Invoice.find(:first, :joins => "LEFT JOIN users ON (invoices.user_id = users.id)", :conditions => [cond_str.join(" AND ")]+cond_var, :order => "CAST(SUBSTRING(number,#{ls+1},255) AS SIGNED) DESC")
+      pinv = Invoice.where([cond_str.join(" AND ")]+cond_var).joins("LEFT JOIN users ON (invoices.user_id = users.id)").order("CAST(SUBSTRING(number,#{ls+1},255) AS SIGNED) DESC").first
+
       pinv ? nn = (pinv.number[ls, pinv.number.length - ls].to_i + 1) : nn = 1
       zl = length - start.length - nn.to_s.length - 6
       z = ""
       1..zl.times { z += "0" }
       invnum = "#{start}#{date}#{z}#{nn}"
     end
-    invnum
+    return invnum
   end
 
   def flash_errors_for(message, object)
@@ -2418,7 +2393,6 @@ Variables: (Names marked with * are required)
   end
 
   def check_owner_for_device(user, r = 1, cu = nil)
-    #logger.fatal r
     a = true
     if user.class != User
       user = User.find_by_id(user)
@@ -2457,7 +2431,6 @@ Variables: (Names marked with * are required)
         end
       end
     end
-    #logger.fatal a
     return a
   end
 
@@ -2506,7 +2479,7 @@ Variables: (Names marked with * are required)
   end
 
   def current_user
-    @current_user ||= User.find(:first, :include => [:tax, :address, :currency], :conditions => ["users.id = ?", session[:user_id]])
+    @current_user ||= User.where(:id => session[:user_id]).includes(:tax, :address, :currency).first
     User.current_user = @current_user
     @current_user
   end
@@ -2516,7 +2489,7 @@ Variables: (Names marked with * are required)
     max_def = max.to_d unless max_def
     value = min_def.to_d if value.to_d < min.to_d
     value = max_def.to_d if value.to_d > max.to_d
-    value
+    return value
   end
 
   def archive_file_if_size(filename, extension, size, path = "/tmp")
@@ -2554,7 +2527,7 @@ Variables: (Names marked with * are required)
     if !can_see
       (session[:usertype] == "accountant" and session[:acc_see_financial_data].to_i == 0) ? can_see = false : can_see = true
     end
-    can_see
+    return can_see
   end
 
 =begin
@@ -2638,7 +2611,7 @@ Variables: (Names marked with * are required)
       end
       render :file => "layouts/_csv_import_confirm", :layout => "callc.html.erb", :locals => {:sep => sep, :dec => dec, :sep1 => sep1, :dec1 => dec1, :return_type => return_type.to_i, :action_to => params[:action].to_s, :fl => objc, :min_collum_size => min_collum_size, :disable_next => disable_next, :opts => opts} and return false
     end
-    true
+    return true
   end
 
 
@@ -2698,8 +2671,6 @@ Variables: (Names marked with * are required)
   def nice_date_time(time, ofset=1)
     if time
       format = (session and !session[:date_time_format].to_s.blank?) ? session[:date_time_format].to_s : "%Y-%m-%d %H:%M:%S"
-      #logger.fatal time
-      #logger.fatal format
       if time.respond_to?(:strftime)
         t = time
       else
@@ -2713,7 +2684,7 @@ Variables: (Names marked with * are required)
     else
       d=''
     end
-    d
+    return d
   end
 
 =begin
@@ -2730,7 +2701,7 @@ Variables: (Names marked with * are required)
     else
       d=''
     end
-    d
+    return d
   end
 
 =begin
@@ -2776,7 +2747,7 @@ Variables: (Names marked with * are required)
   def correct_page_number(page, total_pages, min_pages = 1)
     page = total_pages.to_i if page.to_i > total_pages.to_i
     page = min_pages.to_i if page.to_i < min_pages.to_i
-    page
+    return page
   end
 
   def allow_manage_providers_tariffs?
@@ -2874,7 +2845,7 @@ Variables: (Names marked with * are required)
   end
 
   def find_provider
-    @provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:id]])
+    @provider = current_user.providers.where(providers.id => params[:id]).first
     unless @provider
       flash[:notice] = _('Provider_not_found')
       redirect_to :controller => "providers", :action => 'list' and return false
@@ -3049,7 +3020,7 @@ Variables: (Names marked with * are required)
     number_array = []
     number = number.to_s.gsub(/\D/, "")
     number.size.times { |i| number_array << number[0..i] }
-    number_array
+    return number_array
   end
 
 =begin
