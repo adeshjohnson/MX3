@@ -1161,6 +1161,7 @@ class AccountingController < ApplicationController
     min_type = (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1) ? 1 : 0
     csv_string = []
 
+    sub = 0
     idetails.each { |id|
       if id.invdet_type > 0 or id.name == _("Did_owner_cost")
         sub = 1
