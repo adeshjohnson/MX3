@@ -1976,10 +1976,10 @@ class DevicesController < ApplicationController
 
 
     Confline.set_value("Default_device_fromuser", params[:fromuser], session[:user_id])
-    Confline.set_value("Default_device_fromuser", nil, session[:user_id]) unless params[:fromuser] or params[:fromuser].length < 1
+    Confline.set_value("Default_device_fromuser", nil, session[:user_id]) if !params[:fromuser] or params[:fromuser].length < 1
 
     Confline.set_value("Default_device_fromdomain", params[:fromdomain], session[:user_id])
-    Confline.set_value("Default_device_fromdomain", nil, session[:user_id]) unless params[:fromdomain] or params[:fromdomain].length < 1
+    Confline.set_value("Default_device_fromdomain", nil, session[:user_id]) if !params[:fromdomain] or params[:fromdomain].length < 1
 
     Confline.set_value("Default_device_grace_time", params[:grace_time], session[:user_id])
 
