@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.119" />
+<link rel="selenium.base" href="" />
 <title>search_dids</title>
 </head>
 <body>
@@ -52,12 +52,12 @@
 	<td>label=System Admin (0)</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>css=#quickforwards_user &gt; option[value=&quot;0&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
@@ -102,7 +102,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval successfully created</td>
 	<td></td>
 </tr>
@@ -122,7 +122,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
 </tr>
@@ -137,7 +137,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID assigned to Dial Plan: qf_dp</td>
 	<td></td>
 </tr>
@@ -152,7 +152,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID terminated</td>
 	<td></td>
 </tr>
@@ -167,7 +167,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
 </tr>
@@ -182,7 +182,7 @@
 	<td>label=User Resellers</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user_id</td>
 	<td>User Resellers</td>
 </tr>
@@ -192,7 +192,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
 </tr>
@@ -212,7 +212,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
 </tr>

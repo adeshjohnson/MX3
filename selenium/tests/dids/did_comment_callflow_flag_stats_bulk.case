@@ -201,7 +201,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>css=#login_as_link_3 &gt; img[alt=&quot;Application_key&quot;]</td>
 	<td></td>
 </tr>
@@ -211,17 +211,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>30000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/dids/edit/1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
@@ -241,7 +236,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=did_cid_name_prefix</td>
 	<td>456</td>
 </tr>
@@ -271,7 +266,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=did_cid_name_prefix</td>
 	<td>456</td>
 </tr>
@@ -303,7 +298,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID successfully created</td>
 	<td></td>
 </tr>
@@ -323,7 +318,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Details changed</td>
 	<td></td>
 </tr>
@@ -343,7 +338,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Allow this DID to be assigned to other users/dialplans</td>
 	<td></td>
 </tr>
@@ -379,7 +374,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID: 37093042423 </td>
 	<td></td>
 </tr>
@@ -409,7 +404,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Details changed</td>
 	<td></td>
 </tr>
@@ -482,7 +477,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -492,7 +487,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>successfully created</td>
 	<td></td>
 </tr>

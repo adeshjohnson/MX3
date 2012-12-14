@@ -43,7 +43,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Here you can add DID interval:</td>
 	<td></td>
 </tr>
@@ -154,7 +154,7 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>s_user</td>
 	<td>Test User #1</td>
 </tr>
@@ -211,7 +211,7 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>Test User #1</td>
 </tr>
@@ -241,12 +241,12 @@
 	<td>label=System Admin</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>s_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>s_device</td>
 	<td>All,IAX2/103</td>
 </tr>
@@ -276,7 +276,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>6 DIDs updated</td>
 	<td></td>
 </tr>
@@ -307,7 +307,7 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>Test User #1</td>
 </tr>
@@ -322,7 +322,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>No DIDs found. Please check interval</td>
 	<td></td>
 </tr>
@@ -352,7 +352,7 @@
 	<td>Active</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=IAX2/103</td>
 	<td></td>
 </tr>
@@ -383,9 +383,9 @@
 	<td>label=System Admin</td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
-	<td>device</td>
-	<td>All,IAX2/103</td>
+	<td>waitForText</td>
+	<td>id=device</td>
+	<td>All IAX2/103</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -393,7 +393,7 @@
 	<td>label=IAX2/103</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>System Admin</td>
 </tr>
@@ -433,7 +433,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID made available</td>
 	<td></td>
 </tr>
@@ -484,7 +484,7 @@
 	<td>label=System Admin</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>System Admin</td>
 </tr>
@@ -565,12 +565,12 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
-	<td>device</td>
-	<td>All,IAX2/101,FAX/102,IAX2/1002</td>
+	<td>waitForText</td>
+	<td>id=device</td>
+	<td>All IAX2/101 FAX/102 IAX2/1002</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>Test User #1</td>
 </tr>
@@ -691,7 +691,7 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>Test User #1</td>
 </tr>
@@ -848,7 +848,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>11 DIDs updated</td>
 	<td></td>
 </tr>
@@ -888,9 +888,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
-	<td>s_device</td>
-	<td>All,IAX2/101,FAX/102,IAX2/1002</td>
+	<td>waitForText</td>
+	<td>id=s_device</td>
+	<td>All IAX2/101 FAX/102 IAX2/1002</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -928,14 +928,14 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>user</td>
 	<td>Test User #1</td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
-	<td>device</td>
-	<td>All,IAX2/101,FAX/102,IAX2/1002</td>
+	<td>assertText</td>
+	<td>id=device</td>
+	<td>All IAX2/101 FAX/102 IAX2/1002</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -963,7 +963,7 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=s_device</td>
 	<td></td>
 </tr>
@@ -1004,7 +1004,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Allow this DID to be assigned to other users/dialplans</td>
 	<td></td>
 </tr>
@@ -1050,7 +1050,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>No DIDs found. Please check interval</td>
 	<td></td>
 </tr>
@@ -1106,7 +1106,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>did_action_6</td>
 	<td></td>
 </tr>
@@ -1161,7 +1161,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>did_action_6</td>
 	<td></td>
 </tr>
@@ -1291,22 +1291,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>//select[@name='dp_id']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>document.forms[1].elements[0]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>document.forms[2].elements[0]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>document.forms[4].elements[0]</td>
 	<td></td>
 </tr>
@@ -1381,27 +1381,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000004</td>
 	<td>100000000004</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000005</td>
 	<td>100000000005</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000006</td>
 	<td>100000000006</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000007</td>
 	<td>100000000007</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000008</td>
 	<td>100000000008</td>
 </tr>
@@ -1436,12 +1436,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>pin_pd</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>document.forms[1].elements[0]</td>
 	<td></td>
 </tr>
@@ -1491,12 +1491,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>document.forms[4].elements[0]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>ivr_pd</td>
 	<td></td>
 </tr>
@@ -1521,37 +1521,37 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000000</td>
 	<td>100000000000</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000001</td>
 	<td>100000000001</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000002</td>
 	<td>100000000002</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000003</td>
 	<td>100000000003</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000009</td>
 	<td>100000000009</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>link=100000000010</td>
 	<td>100000000010</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>c_dp_did_4</td>
 	<td>100000000000</td>
 </tr>
@@ -1616,7 +1616,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000009 - 100000000010</td>
 	<td></td>
 </tr>
@@ -1626,7 +1626,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
@@ -1666,7 +1666,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1706,7 +1706,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1756,7 +1756,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Enter DID interval</td>
 	<td></td>
 </tr>
@@ -1776,7 +1776,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval</td>
 	<td></td>
 </tr>
@@ -1796,7 +1796,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Enter DID interval</td>
 	<td></td>
 </tr>
@@ -1816,7 +1816,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group created</td>
 	<td></td>
 </tr>
@@ -1886,7 +1886,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group updated</td>
 	<td></td>
 </tr>
@@ -1901,7 +1901,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test Accountant</td>
 	<td></td>
 </tr>
@@ -1951,7 +1951,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>No DIDs found. Please check interval</td>
 </tr>
@@ -1981,7 +1981,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval: 100000000997 - 100000001000</td>
 	<td></td>
 </tr>
@@ -1996,7 +1996,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=s_device</td>
 	<td></td>
 </tr>
@@ -2016,7 +2016,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>4 DIDs updated</td>
 	<td></td>
 </tr>
@@ -2082,7 +2082,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
@@ -2173,7 +2173,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID interval has to be equal in length</td>
 	<td></td>
 </tr>
