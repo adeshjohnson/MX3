@@ -2845,7 +2845,7 @@ Variables: (Names marked with * are required)
   end
 
   def find_provider
-    @provider = current_user.providers.where(:providers.id => params[:id]).first
+    @provider = current_user.providers.where(:id => params[:id]).first
     unless @provider
       flash[:notice] = _('Provider_not_found')
       redirect_to :controller => "providers", :action => 'list' and return false
