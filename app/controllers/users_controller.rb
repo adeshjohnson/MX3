@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 =end
   def find_responsible_accountants
     if current_user.is_admin? or current_user.is_accountant?#and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0))
-      @responsible_accountants = User.find(:all, :conditions => {:hidden => '0', :usertype =>'accountant'}, :order => 'username')
+      @responsible_accountants = User.where(:hidden => '0', :usertype =>'accountant').order('username')
     end
   end
 
@@ -49,8 +49,8 @@ class UsersController < ApplicationController
     @page_icon = 'vcard.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Users"
 
-    @default_currency = Currency.find(:first).name
-    @roles = Role.find(:all, :conditions => ["name !='guest'"])
+    @default_currency = Currency.first.name
+    @roles = Role.where(["name !='guest'"])
 
     default = {
         :items_per_page => session[:items_per_page].to_i,
@@ -111,14 +111,14 @@ class UsersController < ApplicationController
     joins << "LEFT JOIN tariffs ON users.tariff_id = tariffs.id"
 
     # page params
-    @user_size = User.find(:all, :select => select.join(","), :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :group => group_by)
+    @user_size = User.select(select.join(",")).joins(joins.join(" ")).where([cond.join(" AND "), *var]).group(group_by)
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
     @total_pages = (@user_size.size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
     # Mapping accountants with appointed users
-    @responsible_accountants = User.find(:all, :select => 'accountants.*', :joins => ['JOIN users accountants ON(accountants.id = users.responsible_accountant_id)'], :conditions => "accountants.hidden = 0 and accountants.usertype = 'accountant'", :group => 'accountants.id', :order => 'accountants.username')
+    @responsible_accountants = User.select('accountants.*').joins(['JOIN users accountants ON(accountants.id = users.responsible_accountant_id)']).where("accountants.hidden = 0 and accountants.usertype = 'accountant'").group('accountants.id').order('accountants.username')
 
     #we need to left join acc_groups, addreses and lcrs. When COUNTING users this data is irelevant,
     #so no need for extra joins there
@@ -134,7 +134,7 @@ class UsersController < ApplicationController
     select << "tariffs.name AS tariff_name"
     select << "acc_groups.name AS acc_group_name"
 
-    @users = User.find(:all, :select => select.join(","), :joins => joins.join(" "), :conditions => [cond.join(" AND "), *var], :order => @options[:order], :group => group_by, :limit => "#{fpage}, #{session[:items_per_page].to_i}")
+    @users = User.select(select.join(",")).joins(joins.join(" ")).where([cond.join(" AND "), *var]).group(group_by).order(@options[:order]).limit("#{fpage}, #{session[:items_per_page].to_i}")
     @search = ((cond.size > 1 or @options[:sub_s].to_i > -1) ? 1 : 0)
 
     session[:user_list_stats] = @options
@@ -145,8 +145,8 @@ class UsersController < ApplicationController
     @page_title = _('Reseller_users')
     @page_icon = 'vcard.png'
 
-    @reseller = User.find(:first, :conditions => ["id = ?", params[:id]]) if params[:id].to_i > 0
-    if not @reseller
+    @reseller = User.where(:id => params[:id]).first if params[:id].to_i > 0
+    unless @reseller
       flash[:notice] = _("Not_found")
       redirect_to :controller => "stats", :action => "resellers" and return false
     end
@@ -159,8 +159,8 @@ class UsersController < ApplicationController
     @page_icon = 'vcard.png'
     #    @user_pages, @users = paginate :users, :per_page => 40
 
-    @default_currency = Currency.find(:first).name
-    @roles = Role.find(:all, :conditions => ["name !='guest'"])
+    @default_currency = Currency.first.name
+    @roles = Role.where(["name !='guest'"])
 
     default = {
         :items_per_page => session[:items_per_page].to_i,
@@ -218,14 +218,14 @@ class UsersController < ApplicationController
     joins and joins.size > 0 ? joins = joins.join(" ") : joins = nil
 
     # page params
-    @user_size = User.find(:all, :select => select.join(","), :joins => joins, :conditions => [cond.join(" AND "), *var], :group => group_by)
+    @user_size = User.select(select.join(",")).joins(joins).where([cond.join(" AND "), *var]).group(group_by)
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
     @total_pages = (@user_size.size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
 
 
-    @users = User.find(:all, :select => select.join(","), :joins => joins, :conditions => [cond.join(" AND "), *var], :order => @options[:order], :group => group_by, :limit => "#{fpage}, #{session[:items_per_page].to_i}")
+    @users = User.select(select.join(",")).joins(joins).where([cond.join(" AND "), *var]).order(@options[:order]).group(group_by).limit("#{fpage}, #{session[:items_per_page].to_i}")
     @search = ((cond.size > 1 or @options[:sub_s].to_i > -1) ? 1 : 0)
 
     session[:user_hiden_stats] = @options
@@ -233,7 +233,7 @@ class UsersController < ApplicationController
 
 
   def hide
-    user = User.find(:first, :conditions => ["id = ?", params[:id]])
+    user = User.where(:id => params[:id]).first
     unless user
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => 'list' and return false
@@ -242,12 +242,12 @@ class UsersController < ApplicationController
     if user.hidden == 1
       user.hidden = 0
       user.save
-      flash[:status] = _('User_unhidden')+": "+nice_user(user)
+      flash[:status] = _('User_unhidden') + ": " + nice_user(user)
       redirect_to :action => 'list'
     else
       user.hidden = 1
       user.save
-      flash[:status] = _('User_hidden')+": "+nice_user(user)
+      flash[:status] = _('User_hidden') + ": " + nice_user(user)
       redirect_to :action => 'hidden'
     end
 
@@ -255,7 +255,7 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = User.find(:first, :conditions => ["id = ?", params[:id]])
+    @user = User.where(:id => params[:id]).first
   end
 
   def new
@@ -265,23 +265,18 @@ class UsersController < ApplicationController
 
     check_for_accountant_create_user
     @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
-    @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
-    @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
-    #@sms_lcrs = SmsLcr.find(:all)
-    if session[:usertype] == "accountant"
-      owner = User.find(session[:user_id].to_i).owner_id.to_i
-    else
-      owner = session[:user_id]
-    end
-    #@sms_tariffs = SmsTariff.find(:all, :conditions => "(tariff_type = 'user') AND owner_id = '#{owner}' ", :order => "tariff_type ASC, name ASC")
+    @groups = AccGroup.where(:group_type => 'accountant')
+    @groups_resellers = AccGroup.where(:group_type => 'reseller')
+    owner = (session[:usertype] == "accountant" ? 0 : session[:user_id])
+
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
       cond = " AND purpose = 'user' "
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs = Tariff.find(:all, :conditions => "owner_id = '#{owner}' #{cond} ", :order => "purpose ASC, name ASC")
+    @tariffs = Tariff.where("owner_id = '#{owner}' #{cond} ").order("purpose ASC, name ASC")
 
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order(:name)
     @default_country_id = Confline.get_value("Default_Country_ID").to_i
     if @lcrs.empty? and allow_manage_providers?
       flash[:notice] = _('No_lcrs_found_user_not_functional')
@@ -362,11 +357,11 @@ class UsersController < ApplicationController
       redirect_to :controller => "callc", :action => 'main' and return false
     end
     @user = Confline.get_default_object(User, owner_id)
-    @user.attributes= params[:user]
+    @user.attributes = params[:user]
     @user.owner_id = owner_id
     @user.warning_email_balance = params[:user][:warning_email_balance].to_d
     @user.warning_email_active = params[:user][:warning_email_active].to_i
-    @user.password = Digest::SHA1.hexdigest(params[:password][:password].strip)
+    @user.password = Digest::SHA1.hexdigest(params[:password][:password].to_s.strip)
     @user.recording_hdd_quota = (params[:user][:recording_hdd_quota].to_d * 1048576).to_i
     @user.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
 
@@ -382,8 +377,8 @@ class UsersController < ApplicationController
     end
 
     @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
-    @tariffs = Tariff.find(:all, :conditions => "purpose = 'user' AND owner_id = '#{session[:user_id]}'")
-    @countries = Direction.find(:all, :order => "name ASC")
+    @tariffs = Tariff.where(:purpose => 'user', :owner_id => session[:user_id])
+    @countries = Direction.order(:name)
 
     @user.block_conditional_use = params[:block_conditional_use].to_i
     @user.allow_loss_calls = params[:allow_loss_calls].to_i
@@ -403,7 +398,7 @@ class UsersController < ApplicationController
 
     #reseller support
     if @user.owner_id != 0
-      reseller = User.find(@user.owner_id)
+      reseller = User.where(:id => @user.owner_id).first
       unless reseller.can_own_providers?
         @user.lcr_id = reseller.lcr_id
       end
@@ -458,8 +453,8 @@ class UsersController < ApplicationController
         @user.address.destroy if @user.address
         @user.fix_when_is_rendering
         @i = @user.get_invoices_status
-        @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
-        @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
+        @groups = AccGroup.where(:group_type => 'accountant')
+        @groups_resellers = AccGroup.where(:group_type => 'reseller')
         flash_errors_for(_('User_was_not_created'), @user_create)
         render :action => 'new' and return false
       end
@@ -468,8 +463,8 @@ class UsersController < ApplicationController
       @user.address.destroy if @user.address
       @user.fix_when_is_rendering
       @i = @user.get_invoices_status
-      @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
-      @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
+      @groups = AccGroup.where(:group_type => 'accountant')
+      @groups_resellers = AccGroup.where(:group_type => 'reseller')
       flash_errors_for(_('User_was_not_created'), @user)
       render :action => 'new' and return false
     end
@@ -481,13 +476,13 @@ class UsersController < ApplicationController
     @return_controller = params[:return_to_controller] if params[:return_to_controller]
     @return_action = params[:return_to_action] if params[:return_to_action]
 
-    redirect_to :action => 'list' and return false if not params[:id]
-    @user = User.find(:first, :include => [:address, :tax], :conditions => ["users.id = ?", params[:id]])
-    redirect_to :action => 'list' and return false if not @user
+    redirect_to :action => 'list' and return false unless params[:id]
+    @user = User.includes([:address, :tax]).where(["users.id = ?", params[:id]]).first
+    redirect_to :action => 'list' and return false unless @user
 
     check_owner_for_user(@user.id)
 
-    @page_title = _('users_settings')+": "+nice_user(@user)
+    @page_title = _('users_settings') + ": " + nice_user(@user)
     @page_icon = "edit.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/User_Details"
 
@@ -498,18 +493,17 @@ class UsersController < ApplicationController
 
     session[:usertype] == "accountant" ? owner = 0 : owner = session[:user_id]
 
-    #@sms_tariffs = SmsTariff.find(:all, :conditions => "(tariff_type = 'user') AND owner_id = '#{owner}' ", :order => "tariff_type ASC, name ASC")
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
       cond = " AND purpose = 'user' "
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs = Tariff.find(:all, :conditions => "owner_id = '#{owner}' #{cond} ", :order => "purpose ASC, name ASC")
+    @tariffs = Tariff.where("owner_id = '#{owner}' #{cond} ").order("purpose ASC, name ASC")
 
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order(:name)
 
     #for backwards compatibility - user had no address before, so let's give it to him
-    if not @user.address
+    unless @user.address
       address = Address.new
       address.save
       @user.address_id = address.id
@@ -519,17 +513,17 @@ class UsersController < ApplicationController
     if !@user.tax or @user.tax_id.to_i == 0
       @user.assign_default_tax
     end
-    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_d
+    @total_recordings_size = Recording.select("SUM(size) AS 'total_size'").where(:user_id => @user.id, :deleted => 0).first["total_size"].to_d
     @address = @user.address
-    @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
-    @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
+    @groups = AccGroup.where(:group_type => 'accountant')
+    @groups_resellers = AccGroup.where(:group_type => 'reseller')
 
     @create_own_providers = Confline.get_value('Disallow_to_create_own_providers', @user.id).to_i
     @chanspy_disabled = Confline.chanspy_disabled?
     @devices = @user.devices(:conditions => "device_type != 'FAX'")
     
-    flash[:notice] = _('No_lcrs_found_user_not_functional') if @lcrs.empty?
-    flash[:notice] = _('No_tariffs_found_user_not_functional') if @tariffs.empty?
+    flash[:notice] = _('No_lcrs_found_user_not_functional') if @lcrs.blank?
+    flash[:notice] = _('No_tariffs_found_user_not_functional') if @tariffs.blank?
   end
 
   # sets @user in before filter
@@ -567,8 +561,8 @@ class UsersController < ApplicationController
       end
       # @user.address.update_attributes(params[:address])
       @user.address.save
-      #my_debug @user.send_invoice_types
-      flash[:status] = _('user_details_changed')+": "+nice_user(@user)
+
+      flash[:status] = _('user_details_changed') + ": " + nice_user(@user)
       redirect_to(:action => :edit, :id => @user.id) and return false
     else
       check_owner_for_user(@user.id)
@@ -576,9 +570,8 @@ class UsersController < ApplicationController
       @i = @user.get_invoices_status
 
       @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
-      #@sms_lcrs = SmsLcr.find(:all)
       if session[:usertype] == "accountant"
-        owner = User.find(session[:user_id].to_i).get_owner.id.to_i
+        owner = User.where(:id => session[:user_id].to_i).first.get_owner.id.to_i
       else
         owner = session[:user_id]
       end
@@ -588,14 +581,12 @@ class UsersController < ApplicationController
       else
         cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
       end
-      @tariffs = Tariff.find(:all, :conditions => "owner_id = '#{owner}' #{cond} ", :order => "purpose ASC, name ASC")
+      @tariffs = Tariff.where("owner_id = '#{owner}' #{cond} ").order("purpose ASC, name ASC")
 
-      @countries = Direction.find(:all, :order => "name ASC")
-
-      
+      @countries = Direction.order(:name)
 
       #for backwards compatibility - user had no address before, so let's give it to him
-      if not @user.address
+      unless @user.address
         address = Address.new
         address.save
         @user.address_id = address.id
@@ -603,15 +594,12 @@ class UsersController < ApplicationController
       end
       @user.fix_when_is_rendering
       @user.assign_default_tax if !@user.tax or @user.tax_id.to_i == 0
-      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ? AND deleted = 0", @user.id])[0]["total_size"].to_d
+      @total_recordings_size = Recording.select("SUM(size) AS 'total_size'").where(:user_id => @user.id, :deleted => 0).first["total_size"].to_d
       @address = @user.address
-      @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
-      @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
-      #if @user.usertype == 'user' or @user.usertype == 'accountant'
+      @groups = AccGroup.where(:group_type => 'accountant')
+      @groups_resellers = AccGroup.where(:group_type => 'reseller')
       @devices = @user.devices(:conditions => "device_type != 'FAX'")
-      #      else
-      #        @devices = Device.find_all_for_select(corrected_user_id)
-      #      end
+
       flash_errors_for(_('User_was_not_updated'), @user)
       render :action => 'edit'
     end
@@ -623,7 +611,7 @@ class UsersController < ApplicationController
     return_controller = params[:return_to_controller] if params[:return_to_controller]
     return_action = params[:return_to_action] if params[:return_to_action]
 
-    user = User.find(:first, :conditions => ["id = ?", params[:id]])
+    user = User.where(:id => params[:id]).first
     unless user
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => "list" and return false
@@ -634,19 +622,12 @@ class UsersController < ApplicationController
     end
 
     devices = user.devices
-    for device in devices
+    devices.each { |device|
       if device.has_forwarded_calls
         flash[:notice] = _('Cant_delete_user_has_forwarded_calls')
         redirect_to :controller => return_controller, :action => return_action and return false
       end
-    end
-
-    #    actions = Action.find(:all, :conditions=> "data = '#{user.id}' AND (action != 'did%' OR action ='did_reserved')")
-    #    my_debug("data = '#{user.id}' AND (action != 'did%' OR action ='did_reserved')")
-    #    for action in actions
-    #        flash[:notice] = _('Cant_delete_user_has_actions_data')
-    #        redirect_to :controller => return_controller, :action => return_action and return false
-    #    end
+    }
 
     if user.id.to_i == session[:user_id]
       flash[:notice] = _('Cant_delete_self')
@@ -670,7 +651,7 @@ class UsersController < ApplicationController
     end
 
     if user.usertype == 'reseller'
-      rusers = User.count(:all, :conditions => ["owner_id = ?", user.id]).to_i
+      rusers = User.where(:owner_id => user.id).count.to_i
       if rusers > 0
         flash[:notice] = _('Cant_delete_reseller_whit_users')
         redirect_to :controller => return_controller, :action => return_action and return false
@@ -678,7 +659,7 @@ class UsersController < ApplicationController
     end
 
     if user.usertype == 'accountant'
-      accountant_users = User.count(:all, :conditions => ["responsible_accountant_id = ?", user.id]).to_i
+      accountant_users = User.where(:responsible_accountant_id => user.id).count.to_i
       if accountant_users > 0
         flash[:notice] = _('Cant_delete_accountant_with_users')
         redirect_to :controller => return_controller, :action => return_action and return false
@@ -706,7 +687,7 @@ in before filter : user (:find_user)
 
     @devicegroups = @user.devicegroups
     #for backwards compatibility - user had no device group before, so let's create one for him
-    if not @user.primary_device_group
+    unless @user.primary_device_group
       devgroup = Devicegroup.new
       devgroup.init_primary(@user.id, "primary", @user.address_id)
     end
@@ -720,7 +701,7 @@ in before filter : devicegroup (:find_devicegroup)
     @page_icon = "edit.png"
 
     @user = @devicegroup.user
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order(:name)
     @address = @devicegroup.address
   end
 
@@ -739,7 +720,7 @@ in before filter : devicegroup (:find_devicegroup)
       redirect_to :action => 'device_groups', :id => @devicegroup.user.id
     else
       @user = @devicegroup.user
-      @countries = Direction.find(:all, :order => "name ASC")
+      @countries = Direction.order(:name)
 
       flash_errors_for(_('Dev_group_details_not_changed'), @address)
       render :action => :device_group_edit
@@ -757,7 +738,7 @@ in before filter : user (:find_user)
     @devicegroup.added = Time.now
     @devicegroup.name = _('Please_change')
 
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order(:name)
   end
 
 =begin
@@ -776,13 +757,13 @@ in before filter : user (:find_user)
         redirect_to :action => 'device_groups', :id => @devicegroup.user.id and return false
       else
 
-        @countries = Direction.find(:all, :order => "name ASC")
+        @countries = Direction.order(:name)
         flash_errors_for(_('Dev_group_not_created'), @devicegroup)
         render :action => :device_group_new
       end
     else
 
-      @countries = Direction.find(:all, :order => "name ASC")
+      @countries = Direction.order(:name)
       flash_errors_for(_('Dev_group_not_created'), @address)
       render :action => :device_group_new
     end
@@ -807,13 +788,13 @@ in before filter : devicegroup (:find_devicegroup)
     @page_icon = "edit.png"
 
     @address = @user.address
-    @countries = Direction.find(:all, :order => "name ASC")
-    @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_d
+    @countries = Direction.order(:name)
+    @total_recordings_size = Recording.select("SUM(size) AS 'total_size'").where(:user_id => @user.id).first["total_size"].to_d
     @i = @user.get_invoices_status
 
     @disallow_email_editing = Confline.get_value("Disallow_Email_Editing", current_user.owner.id) == "1"
 
-    if not @user.address
+    unless @user.address
       address = Address.new
       address.save
       @user.address_id = address.id
@@ -869,8 +850,8 @@ in before filter : devicegroup (:find_devicegroup)
       else
         @devices = Device.find_all_for_select(corrected_user_id)
       end
-      @countries = Direction.find(:all, :order => "name ASC")
-      @total_recordings_size = Recording.find(:all, :first, :select => "SUM(size) AS 'total_size'", :conditions => ["user_id = ?", @user.id])[0]["total_size"].to_d
+      @countries = Direction.order(:name)
+      @total_recordings_size = Recording.select("SUM(size) AS 'total_size'").where(:user_id => @user.id).first["total_size"].to_d
       @i = @user.get_invoices_status
       @address = @user.address
       flash_errors_for(_('User_was_not_updated'), @user)
@@ -890,17 +871,20 @@ in before filter : user (:find_user)
 
     @tariff = @user.tariff
     @crates = @user.customrates
-    sql = "SELECT destinationgroups.id FROM destinationgroups, users, customrates WHERE customrates.user_id = users.id AND customrates.destinationgroup_id = destinationgroups.id AND user_id = #{@user.id} ORDER BY destinationgroups.name"
-    udestgroups = ActiveRecord::Base.connection.select_all(sql)
+    udestgroups = Destinationgroup.select("destinationgroups.id").
+                                   joins("LEFT JOIN customrates ON customrates.destinationgroup_id = destinationgroups.id " <<
+                                         "LEFT JOIN users ON customrates.user_id = users.id").
+                                   where("user_id = #{@user.id}").order("destinationgroups.name")
+
     udg = []
-    for i in udestgroups
+    udestgroups.each { |i|
       udg << i["id"].to_i
-    end
+    }
 
     @destgroups = []
-    for dg in Destinationgroup.find(:all, :order => "name ASC")
-      @destgroups << dg if not udg.include?(dg.id)
-    end
+    Destinationgroup.order(:name).each { |dg|
+      @destgroups << dg unless udg.include?(dg.id)
+    }
   end
 
 =begin
@@ -944,9 +928,9 @@ in before filter : customrate (:find_customrate) ; ards (:find_ard_all)
 
     @ards.eatch { |a| a.destroy }
 
-    pards = Acustratedetail.find(:all, :conditions => ["customrate_id = ? AND end_time = ? AND daytype = ?", @customrate.id, pet, dt])
+    pards = Acustratedetail.where(:customrate_id => @customrate.id, :end_time => pet, :daytype => dt)
 
-    if not pards or (pards and pards.size.to_i == 0)
+    unless pards or (pards and pards.size.to_i == 0)
       flash[:notice] = _('Acustratedetails_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
@@ -965,31 +949,31 @@ in before filter : customrate (:find_customrate)
     rdaction = params[:rdaction]
 
     if rdaction == "COMB_WD"
-      for rd in rdetails
+      rdetails.each { |rd|
         if rd.daytype == "WD"
           rd.daytype = ""
           rd.save
         else
           rd.destroy
         end
-      end
+      }
       flash[:status] = _('Rate_details_combined')
     end
 
     if rdaction == "COMB_FD"
-      for rd in rdetails
+      rdetails.each { |rd|
         if rd.daytype == "FD"
           rd.daytype = ""
           rd.save
         else
           rd.destroy
         end
-      end
+      }
       flash[:status] = _('Rate_details_combined')
     end
 
     if rdaction == "SPLIT"
-      for rd in rdetails
+      rdetails.each { |rd|
         nrd = Acustratedetail.new
         nrd.start_time = rd.start_time
         nrd.end_time = rd.end_time
@@ -1004,7 +988,7 @@ in before filter : customrate (:find_customrate)
 
         rd.daytype = "WD"
         rd.save
-      end
+      }
       flash[:status] = _('Rate_details_split')
     end
     redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
@@ -1017,40 +1001,37 @@ in before filter : user (:find_user)
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
 
-    @dgroup = Destinationgroup.find(params[:dg])
+    @dgroup = Destinationgroup.where(:id => params[:dg]).first
     @custrate = @dgroup.custom_rate(@user.id)
     @rate = @custrate
     @ards = @custrate.acustratedetails
 
     if @ards[0].daytype == ""
       @WDFD = true
-      sql = "SELECT start_time, end_time FROM acustratedetails WHERE daytype = '' AND customrate_id = #{@custrate.id}  GROUP BY start_time ORDER BY start_time ASC"
-      res = ActiveRecord::Base.connection.select_all(sql)
+      res = Acustratedetail.select("start_time, end_time").where(:daytype => '', :customrate_id => @custrate.id).group(:start_time).order(:start_time)
       @st_arr = []
       @et_arr = []
-      for r in res
+      res.each { |r|
         @st_arr << r["start_time"].strftime("%H:%M:%S")
         @et_arr << r["end_time"].strftime("%H:%M:%S")
-      end
+      }
     else
       @WDFD = false
-      sql = "SELECT start_time, end_time FROM acustratedetails WHERE daytype = 'WD' AND customrate_id = #{@custrate.id}  GROUP BY start_time ORDER BY start_time ASC"
-      res = ActiveRecord::Base.connection.select_all(sql)
+      res = Acustratedetail.select("start_time, end_time").where(:daytype => 'WD', :customrate_id => @custrate.id).group(:start_time).order(:start_time)
       @Wst_arr = []
       @Wet_arr = []
-      for r in res
+      res.each { |r|
         @Wst_arr << r["start_time"].strftime("%H:%M:%S")
         @Wet_arr << r["end_time"].strftime("%H:%M:%S")
-      end
+      }
 
-      sql = "SELECT start_time, end_time FROM acustratedetails WHERE daytype = 'FD' AND customrate_id = #{@custrate.id} GROUP BY start_time ORDER BY start_time ASC"
-      res = ActiveRecord::Base.connection.select_all(sql)
+      res = Acustratedetail.select("start_time, end_time").where(:daytype => 'FD', :customrate_id => @custrate.id).group(:start_time).order(:start_time)
       @Fst_arr = []
       @Fet_arr = []
-      for r in res
+      res.each { |r|
         @Fst_arr << r["start_time"].strftime("%H:%M:%S")
         @Fet_arr << r["end_time"].strftime("%H:%M:%S")
-      end
+      }
     end
   end
 
@@ -1068,7 +1049,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
     end
 
     rdetails = @customrate.acustratedetails_by_daytype(params[:daytype])
-    ard = Acustratedetail.find(:first, :conditions => ["customrate_id = ? AND start_time = ? AND daytype = ?", @customrate.id, st, dt])
+    ard = Acustratedetail.where(:customrate_id => @customrate.id, :start_time => st, :daytype => dt).first
 
     unless ard
       flash[:notice] = _('Acustratedetail_not_found')
@@ -1078,7 +1059,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
     # we need to create new rd to cover all day
     if (et != "23:59:59") and ((rdetails[(rdetails.size - 1)].start_time == ard.start_time))
       nst = Time.mktime('2000', '01', '01', params[:date][:hour], params[:date][:minute], params[:date][:second]) + 1.second
-      for a in @ards
+      @ards.each { |a|
         na = Acustratedetail.new
         na.from = a.from
         na.duration = a.duration
@@ -1093,7 +1074,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
 
         a.end_time = et
         a.save
-      end
+      }
     end
 
     flash[:status] = _('Rate_details_updated')
@@ -1178,7 +1159,7 @@ in before filter : customrate (:find_customrate)
     st = params[:st]
     et = params[:et]
     dt = params[:dt]
-    dt = "" if not params[:dt]
+    dt = "" unless params[:dt]
 
     @ard.from = params[:from]
     @ard.artype = artype
@@ -1216,12 +1197,12 @@ in before filter : ard (:find_ard)
     @page_title = _('Default_user')
     @page_icon = "edit.png"
     owner = correct_owner_id
-    if Confline.find(:all, :conditions => ["name LIKE 'Default_Tax_%' AND owner_id = ?", owner]).size > 0
+    if Confline.where(["name LIKE 'Default_Tax_%' AND owner_id = ?", owner]).count > 0
       @tax = Confline.get_default_object(Tax, owner)
     else
       @tax = Tax.new
       if session[:usertype] == "reseller"
-        reseller = User.find_by_id(owner)
+        reseller = User.where(:id => owner).first
         @tax = reseller.get_tax.dup
       else
         @tax.assign_default_tax({}, {:save => false})
@@ -1233,8 +1214,8 @@ in before filter : ard (:find_ard)
     @address = Confline.get_default_object(Address, owner)
     @user.tax = @tax
     @user.address = @address
-    @groups = AccGroup.find(:all, :conditions => "group_type = 'accountant'")
-    @groups_resellers = AccGroup.find(:all, :conditions => "group_type = 'reseller'")
+    @groups = AccGroup.where(:group_type => 'accountant')
+    @groups_resellers = AccGroup.where(:group_type => 'reseller')
 
     @lcrs = current_user.load_lcrs(:all, :order => "name ASC")
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
@@ -1242,9 +1223,9 @@ in before filter : ard (:find_ard)
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs = Tariff.find(:all, :conditions => "owner_id = '#{owner}' #{cond} ", :order => "purpose ASC, name ASC")
+    @tariffs = Tariff.where("owner_id = '#{owner}' #{cond} ").order("purpose ASC, name ASC")
 
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order(:name)
 
     @password_length = Confline.get_value("Default_User_password_length", owner).to_i
     @password_lenght = 8 if @password_length < 1
@@ -1268,7 +1249,6 @@ in before filter : ard (:find_ard)
   def default_user_update
     owner = correct_owner_id
 
-    #User.set_default_user(owner, params[:user])
     @invoice = invoice_params_for_user
 
     params[:user][:send_invoice_types] = @invoice
@@ -1284,7 +1264,7 @@ in before filter : ard (:find_ard)
     params[:user][:cyberplat_active] = params[:cyberplat_active].to_i
     params[:user][:balance] = current_user.convert_curr(params[:user][:balance].to_d)
     params[:user][:recording_hdd_quota] = (params[:user][:recording_hdd_quota].to_d*1048576).to_i
-    #    params[:user][:agreement_date] = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
+
     if params[:unlimited].to_i == 1
       params[:user][:credit] = -1
     else
@@ -1349,7 +1329,7 @@ in before filter : ard (:find_ard)
 
     if current_user.usertype == 'admin'
       select, join = users_sql
-      @users = User.find(:all, :select => select, :joins => join, :conditions => ["password = SHA1('') or password = SHA1(username)"])
+      @users = User.select(select).joins(join).where(["password = SHA1('') or password = SHA1(username)"])
     end
 
   end
@@ -1357,7 +1337,7 @@ in before filter : ard (:find_ard)
   def users_postpaid_and_allowed_loss_calls
     if current_user.is_admin?
       select, join = users_sql
-      @users_postpaid_and_loss_calls = User.find(:all, :select => select, :joins => join, :conditions => ["postpaid = 1 and allow_loss_calls = 1"])
+      @users_postpaid_and_loss_calls = User.select(select).joins(join).where(["postpaid = 1 and allow_loss_calls = 1"])
     end
 
   end
@@ -1367,7 +1347,7 @@ in before filter : ard (:find_ard)
       select, join = users_sql
       ownr = Confline.get_default_user_pospaid_errors
       ids = []; ownr.each { |o| ids << o['owner_id'] }
-      @users_postpaid_and_loss_calls = User.find(:all, :select => select, :joins => join, :conditions => ["users.id in (#{ids.join(',')})"])
+      @users_postpaid_and_loss_calls = User.select(select).joins(join).where(["users.id in (#{ids.join(',')})"])
     end
     render :action => :users_postpaid_and_allowed_loss_calls
   end
@@ -1376,7 +1356,6 @@ in before filter : ard (:find_ard)
 
   def check_owner_for_user(user)
     if user.class != User
-      #user = User.find(:first, :conditions => ["id = ? ", user])
       user = User.where({:id => user}).first
     end
 
@@ -1386,7 +1365,7 @@ in before filter : ard (:find_ard)
     end
 
     if session[:usertype] == "accountant"
-      owner_id = User.find(session[:user_id].to_i).get_owner.id.to_i
+      owner_id = User.where(:id => session[:user_id].to_i).first.get_owner.id.to_i
       if user.usertype == "admin" or user.usertype == "accountant"
         flash[:notice] = _('You_have_no_permission')
         redirect_to :action => "list" and return false
@@ -1453,7 +1432,7 @@ in before filter : ard (:find_ard)
 
   def find_user
 
-      @user = User.where({:id=>params[:id]}).first
+      @user = User.where(:id => params[:id]).first
 
       unless @user and @user.owner_id == current_user.get_correct_owner_id
       flash[:notice] = _('User_not_found')
@@ -1462,7 +1441,7 @@ in before filter : ard (:find_ard)
   end
 
   def find_user_from_session
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
 
     unless @user
       flash[:notice] = _('User_not_found')
@@ -1479,7 +1458,7 @@ in before filter : ard (:find_ard)
   end
 
   def find_customrate
-    @customrate =Customrate.find_by_id(params[:id])
+    @customrate = Customrate.where(:id => params[:id]).first
 
     unless @customrate
       flash[:notice] = _('Customrate_not_found')
@@ -1488,7 +1467,7 @@ in before filter : ard (:find_ard)
   end
 
   def find_ard
-    @ard = Acustratedetail.find_by_id(params[:id])
+    @ard = Acustratedetail.where(:id => params[:id]).first
 
     unless @ard
       flash[:notice] = _('Acustratedetail_not_found')
@@ -1502,8 +1481,8 @@ in before filter : ard (:find_ard)
     else
       dt = params[:dt] ? params[:dt] : ''
     end
-    @ards = Acustratedetail.find(:all, :conditions => ["customrate_id = ? AND start_time = ? AND daytype = ?", @customrate.id, params[:st], dt], :order => "acustratedetails.from ASC, artype ASC")
-    if not @ards or (@ards and @ards.size.to_i == 0)
+    @ards = Acustratedetail.where(["customrate_id = ? AND start_time = ? AND daytype = ?", @customrate.id, params[:st], dt], :order => "acustratedetails.from ASC, artype ASC")
+    unless @ards or (@ards and @ards.size.to_i == 0)
       flash[:notice] = _('Acustratedetails_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
