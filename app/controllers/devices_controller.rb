@@ -33,11 +33,11 @@ class DevicesController < ApplicationController
     @page_icon = "add.png"
 
     if session[:usertype] == 'reseller'
-      reseller = User.find_by_id(session[:user_id])
+      reseller = User.where(:id => session[:user_id]).first
       check_reseller_conflines(reseller)
     end
 
-    @user = User.find_by_id(params[:user_id])
+    @user = User.where(:id => params[:user_id]).first
     unless @user
       flash[:notice]=_('User_was_not_found')
       redirect_to :action => :index and return false
@@ -66,7 +66,6 @@ class DevicesController < ApplicationController
 
     @devgroups = @user.devicegroups
     #Not using this parameter
-    #@locations = Location.find(:all, :conditions=>['user_id=? or id = 1', correct_owner_id], :order => "name ASC")
     #------ permits --------
 
     @ip1, @mask1, @ip2, @mask2, @ip3, @mask3 = @device.perims_split
@@ -86,7 +85,8 @@ class DevicesController < ApplicationController
   def create
 
     sanitize_device_params_by_accountant_permissions
-    user = User.find(:first, :include => [:address], :conditions => ["users.id = ?", params[:user_id]])
+    user = User.where(:id => params[:user_id]).includes(:address).first
+
     unless user
       flash[:notice]=_('User_was_not_found')
       redirect_to :action => :index and return false
@@ -160,7 +160,7 @@ class DevicesController < ApplicationController
   end
 
   def edit
-    @user = User.find_by_id(params[:id])
+    @user = User.where(:id => params[:id]).first
     unless @user
       flash[:notice]=_('User_was_not_found')
       redirect_to :action => :index and return false
@@ -196,7 +196,7 @@ class DevicesController < ApplicationController
     @page_icon = "device.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Devices"
 
-    @user=User.find_by_id(params[:id], :include => [:devices], :conditions => ['owner_id = ? or users.id =?', correct_owner_id, current_user.id])
+    @user=User.where(["id = ? AND (owner_id = ? or users.id = ?)", params[:id], correct_owner_id, current_user.id]).includes(:devices).first
     if !@user
       flash[:notice] = _("User_not_found")
       redirect_to :controller => "callc", :action => "main" and return false
@@ -222,10 +222,10 @@ class DevicesController < ApplicationController
     page_no = total_pages < page_no ? total_pages : page_no
     offset = total_pages < 1 ? 0 : items_per_page * (page_no -1)
 
-    @devices = @user.devices.find(:all, :limit => items_per_page, :offset => offset)
+    @devices = @user.devices.limit(items_per_page).offset(offset)
     @page = page_no
     @total_pages = total_pages
-    @provdevices = Device.find_by_sql("SELECT devices.* FROM devices JOIN providers ON (providers.device_id = devices.id) WHERE devices.user_id = '-1' AND providers.user_id = #{current_user.id} AND providers.hidden = 0 ORDER BY providers.name;")
+    @provdevices = Device.where(["devices.user_id = '-1' AND providers.user_id = ? AND providers.hidden = 0", current_user.id]).joins("JOIN providers ON (providers.device_id = devices.id)").order("providers.name")
 
     store_location
   end
@@ -240,7 +240,7 @@ class DevicesController < ApplicationController
     @return_action = params[:return_to_action] if params[:return_to_action]
 
     if session[:usertype] == 'reseller'
-      reseller = User.find_by_id(session[:user_id])
+      reseller = User.where(:id => session[:user_id]).first
       check_reseller_conflines(reseller)
     end
 
@@ -273,7 +273,7 @@ class DevicesController < ApplicationController
     else
       collect_locations = 'user_id=? or id = 1'
     end
-    @locations = Location.find(:all, :conditions => [collect_locations, correct_owner_id], :order => "name ASC")
+    @locations = Location.where([collect_locations, correct_owner_id]).order(:name)
 
     @dids = @device.dids
     @all_dids = Did.forward_dids_for_select
@@ -526,12 +526,12 @@ class DevicesController < ApplicationController
       end
     end
 
-    if params[:device][:extension] and Device.find(:first, :conditions => ["id != ? and extension = ?", @device.id, params[:device][:extension]])
+    if params[:device][:extension] and Device.where(["id != ? and extension = ?", @device.id, params[:device][:extension]]).first
       flash[:notice] = _('Extension_is_used')
       redirect_to :action => 'device_edit', :id => @device.id and return false
     else
       #pin
-      if (Device.find(:first, :conditions => ["id != ? AND pin = ?", @device.id, params[:device][:pin]]) and params[:device][:pin].to_s != "")
+      if (Device.where(["id != ? AND pin = ?", @device.id, params[:device][:pin]]).first and params[:device][:pin].to_s != "")
         flash[:notice] = _('Pin_is_already_used')
         redirect_to :action => 'device_edit', :id => @device.id and return false
       end
@@ -580,7 +580,7 @@ class DevicesController < ApplicationController
         @device.secret = ""
         if !@device.name.include?('ipauth')
           name = @device.generate_rand_name('ipauth', 8)
-          while Device.find(:first, :conditions => ['name= ? and id != ?', name, @device.id])
+          while Device.where(['name= ? and id != ?', name, @device.id]).first
             name = @device.generate_rand_name('ipauth', 8)
           end
           @device.name = name
@@ -744,7 +744,7 @@ class DevicesController < ApplicationController
         @device = check_context(@device)
         a=configure_extensions(@device.id, {:current_user => current_user})
         return false if !a
-        @devices_to_reconf = Callflow.find(:all, :conditions => ["device_id = ? AND action = 'forward' AND data2 = 'local'", @device.id])
+        @devices_to_reconf = Callflow.where(:device_id => @device.id, :action => 'forward', :data2 => 'local')
         @devices_to_reconf.each { |call_flow|
           if call_flow.data.to_i > 0
             a=configure_extensions(call_flow.data.to_i, {:current_user => current_user})
@@ -788,7 +788,7 @@ class DevicesController < ApplicationController
         else
           collect_locations = 'user_id=? or id = 1'
         end
-        @locations = Location.find(:all, :conditions => [collect_locations, correct_owner_id], :order => "name ASC")
+        @locations = Location.where([collect_locations, correct_owner_id]).order(:name)
 
         @dids = @device.dids
 
@@ -856,7 +856,7 @@ class DevicesController < ApplicationController
     @page_icon = "forward.png"
 
     if params[:group]
-      @group = Group.find(params[:group])
+      @group = Group.where(:id => params[:group]).first
       @devices = []
       for user in @group.users
         for device in user.devices
@@ -864,10 +864,10 @@ class DevicesController < ApplicationController
         end
       end
     else
-      @devices = Device.find(:all, :conditions => "name not like 'mor_server_%'", :order => "extension ASC")
+      @devices = Device.where("name not like 'mor_server_%'").order(:extension)
     end
 
-    @device = Device.find(params[:id])
+    @device = Device.where(:id => params[:id]).first
     @user = @device.user
   end
 
@@ -880,11 +880,11 @@ class DevicesController < ApplicationController
     if @fwd_to != "0"
 
       #checking can we forward
-      d = Device.find(@fwd_to)
+      d = Device.where(:id => @fwd_to).first
       can_fwd = false if d.forward_to == @device.id
 
       while !(d.forward_to == 0 or d.forward_to == @device.id)
-        d = Device.find(d.forward_to)
+        d = Device.where(:id => d.forward_to).first
         can_fwd = false if d.forward_to == @device.id
       end
 
@@ -894,7 +894,7 @@ class DevicesController < ApplicationController
     if can_fwd
 
       if @fwd_to != "0"
-        flash[:status] = _('device') + ' '+@device.name.to_s + ' ' +_('forwarded_to')+ ' ' + Device.find(@fwd_to).name.to_s
+        flash[:status] = _('device') + ' '+@device.name.to_s + ' ' +_('forwarded_to')+ ' ' + Device.where(:id => @fwd_to).first.name.to_s
       else
         flash[:status] = _('device') + ' ' + @device.name.to_s + ' ' + _('forward_removed')
       end
@@ -922,12 +922,12 @@ class DevicesController < ApplicationController
   def forwards
     @page_title = _('Forwards')
     @page_icon = "forward.png"
-    @devices = Device.find(:all, :conditions => "user_id != 0 AND name not like 'mor_server_%'", :order => "name ASC")
+    @devices = Device.where("user_id != 0 AND name not like 'mor_server_%'").order(:name)
   end
 
 
   def group_forwards
-    @group = Group.find(params[:id])
+    @group = Group.where(:id => params[:id]).first
     @page_icon = "forward.png"
 
     @page_title = _('Forwards')+": " + @group.name
@@ -949,18 +949,16 @@ class DevicesController < ApplicationController
     @page_title = _('CallerIDs')
     @page_icon = "cli.png"
 
-    @user = User.find(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
     @devices = @user.devices
     @clis = []
 
-    sql = "SELECT callerids.* , devices.user_id , devices.name, devices.device_type, devices.istrunk, ivrs.name as 'ivr_name' FROM callerids
-                       JOIN devices on (devices.id = callerids.device_id)
-                       LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)
-               WHERE devices.user_id = '#{@user.id}'"
-    @clis = Callerid.find_by_sql(sql)
+    @clis = Callerid.select("callerids.* , devices.user_id , devices.name, devices.device_type, devices.istrunk, ivrs.name as 'ivr_name'").
+                     joins("JOIN devices on (devices.id = callerids.device_id)").
+                     joins("LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)").
+                     where("devices.user_id = '#{@user.id}'")
 
-
-    @all_ivrs = Ivr.find(:all)
+    @all_ivrs = Ivr.all
   end
 
   # in before filter : device (:find_device)
@@ -971,12 +969,12 @@ class DevicesController < ApplicationController
       dont_be_so_smart
       redirect_to :action => "devices_all" and return false
     end
-    sql = "SELECT callerids.* , ivrs.name as 'ivr_name' FROM callerids
-      LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)
-      WHERE device_id = '#{@device.id}'"
-    @clis = Callerid.find_by_sql(sql)
+    @clis = Callerid.select("callerids.* , ivrs.name as 'ivr_name'").
+                     joins("LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)").
+                     where(:device_id => @device.id)
+
     @user = @device.user
-    @all_ivrs = Ivr.find(:all)
+    @all_ivrs = Ivr.all
     check_owner_for_device(@user.id)
   end
 
@@ -1065,7 +1063,7 @@ class DevicesController < ApplicationController
     @page_title = _('CLI_edit')
     @page_icon = 'edit.png'
 
-    @all_ivrs = Ivr.find(:all)
+    @all_ivrs = Ivr.all
     @device = @cli.device
     @user = @device.user
     unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant"
@@ -1077,7 +1075,7 @@ class DevicesController < ApplicationController
   def cli_user_edit
     @page_title = _('CLI_edit')
     @page_icon = 'edit.png'
-    @all_ivrs = Ivr.find(:all)
+    @all_ivrs = Ivr.all
     @device = @cli.device
     @user = @device.user
     unless @user and @user.id == session[:user_id].to_i or @user.owner_id == session[:user_id].to_i or session[:usertype] == "admin" or session[:usertype] == "accountant"
@@ -1103,7 +1101,7 @@ class DevicesController < ApplicationController
   end
 
   def cli_user_update
-    cli = Callerid.find_by_id(params[:id])
+    cli = Callerid.where(:id => params[:id]).first
     unless cli
       flash[:notice]=_('Callerid_was_not_found')
       redirect_to :action => :index and return false
@@ -1147,7 +1145,8 @@ class DevicesController < ApplicationController
     @search_description = params[:s_description] if params[:s_description]
     @search_comment = params[:s_comment] if params[:s_comment]
     @search_email_callback = params[:s_email_callback] if params[:s_email_callback]
-    cond=""
+
+    cond = ""
 
     if @search_user.to_i != -1
       cond = "  AND devices.user_id = '#{@search_user}' "
@@ -1157,39 +1156,27 @@ class DevicesController < ApplicationController
     end
 
     cond += " AND callerids.cli = '#{@search_cli}' " if @search_cli.length > 0
-
     cond += " AND callerids.banned =  '#{@search_banned}' " if @search_banned.to_i != -1
-
     cond += " AND callerids.ivr_id =  '#{@search_ivr}' " if @search_ivr.to_i != -1
-
     cond += " AND callerids.description LIKE '#{@search_description}%' " if @search_description.length > 0
-
     cond += " AND callerids.comment LIKE  '#{@search_comment}%' " if @search_comment.length > 0
-
     cond += " AND callerids.email_callback =  '#{@search_email_callback}' " if @search_email_callback.to_i != -1
 
     current_user.usertype == "accountant" ? @current_user_id = 0 : @current_user_id = current_user.id
 
-      sql = "SELECT callerids.* , devices.user_id , devices.name, devices.extension, devices.device_type, devices.istrunk, ivrs.name as 'ivr_name' FROM callerids
-             JOIN devices on (devices.id = callerids.device_id)
-             JOIN users on (users.id = devices.user_id)
-             LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)
-             WHERE callerids.id > 0 #{cond} AND users.id = devices.user_id and users.owner_id = '#{@current_user_id}'"
-
-    #MorLog.my_debug sql
-
-    @clis = Callerid.find_by_sql(sql) #if cond.length > 0
+    @clis = Callerid.select("callerids.* , devices.user_id , devices.name, devices.extension, devices.device_type, devices.istrunk, ivrs.name as 'ivr_name'").
+                     joins("JOIN devices on (devices.id = callerids.device_id)").
+                     joins("JOIN users on (users.id = devices.user_id)").
+                     joins("LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)").
+                     where(["callerids.id > 0 " << cond << " AND users.id = devices.user_id and users.owner_id = ?", @current_user_id])
 
 
-    #MorLog.my_debug @clis.to_yaml
+    @users = User.where(:owner_id => @current_user_id)
 
-      @users = User.find(:all, :conditions => "owner_id = '#{@current_user_id}'" )
+    @ivrs = Ivr.select("DISTINCT(callerids.ivr_id), ivrs.name, ivrs.id").
+                joins("LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)").
+                where(["ivrs.user_id = ?", @current_user_id])
 
-      sql2="SELECT DISTINCT(callerids.ivr_id), ivrs.name, ivrs.id FROM ivrs
-          LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)
-          WHERE ivrs.user_id = '#{@current_user_id}'"
-
-    @ivrs = Ivr.find_by_sql(sql2)
     @all_ivrs = @ivrs
 
     @search = 0
@@ -1211,7 +1198,7 @@ class DevicesController < ApplicationController
   end
 
   def clis_banned_status
-    @cl = Callerid.find(params[:id])
+    @cl = Callerid.where(:id => params[:id]).first
     @cl.created_at = Time.now if not @cl.created_at
     @cl.banned.to_i == 1 ? @cl.banned = 0 : @cl.banned = 1
     @cl.save
@@ -1222,12 +1209,7 @@ class DevicesController < ApplicationController
     @num = request.raw_post.to_s.gsub("=", "")
     @num = params[:id] if params[:id]
     @include_cli = params[:cli] if params[:cli]
-    #    if params[:cli]
-    #      @add = 1
-    #      @devices = Device.find(:all, :select=>"devices.*", :joins=>"LEFT JOIN callerids ON (callerids.device_id = devices.id)",:conditions => ["user_id = ? AND callerids.id IS NULL", @num]) if @num.to_i != -1
-    #    else
-    @devices = Device.find(:all, :conditions => ["user_id = ? AND name not like 'mor_server_%' AND name NOT LIKE 'prov%'", @num]) if @num.to_i != -1
-    #    end
+    @devices = Device.where(["user_id = ? AND name not like 'mor_server_%' AND name NOT LIKE 'prov%'", @num]) if @num.to_i != -1
 
     if params[:add]
       @add =1
@@ -1343,15 +1325,13 @@ class DevicesController < ApplicationController
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
     @options[:page] = 1 if @options[:page].to_i < 1
 
-    @devices = Device.find(:all,
-                           :select => "devices.*, IF(LENGTH(CONCAT(users.first_name, users.last_name)) > 0,CONCAT(users.first_name, users.last_name), users.username) AS 'nice_user'",
-                           :joins => join.join(" "),
-                           :conditions => [cond.join(" AND ")] + cond_par,
-                           :group => 'devices.id',
-                           :order => order_by,
-                           :offset => session[:items_per_page]*(@options[:page]-1),
-                           :limit => session[:items_per_page]
-    )
+    @devices = Device.select("devices.*, IF(LENGTH(CONCAT(users.first_name, users.last_name)) > 0,CONCAT(users.first_name, users.last_name), users.username) AS 'nice_user'").
+                           joins(join.join(" ")).
+                           where([cond.join(" AND ")] + cond_par).
+                           group('devices.id').
+                           order(order_by).
+                           offset(session[:items_per_page]*(@options[:page]-1)).
+                           limit(session[:items_per_page])
 
     if default and (session[:devices_all_options] == nil or session[:devices_all_options][:order_by] == nil)
       @options.delete(:order_by)
@@ -1380,7 +1360,7 @@ class DevicesController < ApplicationController
     if session[:usertype] == "user" or session[:usertype] == "accountant"
       if session[:manager_in_groups].size == 0
         #simple user
-        @user = User.find(session[:user_id])
+        @user = User.where(:id => session[:user_id]).first
         if @device.user_id != @user.id
 
           dont_be_so_smart
@@ -1418,10 +1398,10 @@ class DevicesController < ApplicationController
       @user = @device.user
     end
 
-    @before_call_cfs = Callflow.find(:all, :conditions => "cf_type = 'before_call' AND device_id = #{@device.id}", :order => "priority ASC")
-    @no_answer_cfs = Callflow.find(:all, :conditions => "cf_type = 'no_answer' AND device_id = #{@device.id}", :order => "priority ASC")
-    @busy_cfs = Callflow.find(:all, :conditions => "cf_type = 'busy' AND device_id = #{@device.id}", :order => "priority ASC")
-    @failed_cfs = Callflow.find(:all, :conditions => "cf_type = 'failed' AND device_id = #{@device.id}", :order => "priority ASC")
+    @before_call_cfs = Callflow.where(:cf_type => 'before_call', :device_id => @device.id).order(:priority)
+    @no_answer_cfs = Callflow.where(:cf_type => 'no_answer', :device_id => @device.id).order(:priority)
+    @busy_cfs = Callflow.where(:cf_type => 'busy', :device_id => @device.id).order(:priority)
+    @failed_cfs = Callflow.where(:cf_type => 'failed', :device_id => @device.id).order(:priority)
 
     if @before_call_cfs.empty?
       cf = create_empty_callflow(@device.id, "before_call")
@@ -1466,14 +1446,14 @@ class DevicesController < ApplicationController
       check_owner_for_device(@user)
     end
 
-    @dids = Did.find(:all, :conditions => ["device_id = ?", @device.id])
+    @dids = Did.where(:device_id => @device.id)
     @cf_type = params[:cft]
 
     @fax_enabled = Confline.get_value("Fax_Device_Enabled").to_i
 
 
     whattodo = params[:whattodo]
-    cf = Callflow.find(:first, :conditions => {:id => params[:cf], :device_id => @device}) if params[:cf]
+    cf = Callflow.where(:id => params[:cf], :device_id => @device).first if params[:cf]
     if !cf and params[:cf]
       flash[:notice]=_('Callflow_was_not_found')
       redirect_to :action => :index and return false
@@ -1542,7 +1522,7 @@ class DevicesController < ApplicationController
     if err.to_i == 0
       flash[:status] = _('Callflow_updated') if params[:whattodo] and params[:whattodo].length > 0
 
-      @cfs = Callflow.find(:all, :conditions => ["cf_type = ? AND device_id = ?", @cf_type, @device.id], :order => "priority ASC")
+      @cfs = Callflow.where(:cf_type => @cf_type, :device_id => @device.id).order(:priority)
 
       if session[:usertype] != "admin" and session[:usertype] != "accountant"
         if session[:usertype] == "user" and session[:manager_in_groups].size == 0
@@ -1551,8 +1531,9 @@ class DevicesController < ApplicationController
           @fax_devices = @user.fax_devices
         else
           #group manager or reseller can forward devices to same groups devices
-          @devices = Device.find(:all, :include => [:user], :conditions => ["(users.owner_id = ? OR users.id = ? ) AND devices.accountcode > 0 AND name not like 'mor_server_%'", session[:user_id], session[:user_id]], :order => "name ASC")
-          @fax_devices = Device.find(:all, :include => [:user], :conditions => ["(users.owner_id = ? OR users.id = ? ) AND devices.device_type = 'FAX' AND name not like 'mor_server_%'", session[:user_id], session[:user_id]], :order => "name ASC")
+          @devices = Device.where(["(users.owner_id = ? OR users.id = ? ) AND devices.accountcode > 0 AND name not like 'mor_server_%'", session[:user_id], session[:user_id]]).includes(:user).order(:name)
+
+          @fax_devices = Device.where(["(users.owner_id = ? OR users.id = ? ) AND devices.device_type = 'FAX' AND name not like 'mor_server_%'", session[:user_id], session[:user_id]]).includes(:user).order(:name)
           for group in session[:manager_in_groups]
             for user in group.users
               for device in user.devices
@@ -1566,8 +1547,8 @@ class DevicesController < ApplicationController
         end
       else
         #admin
-        @devices = Device.find(:all, :conditions => "user_id != -1 AND accountcode > 0 AND name not like 'mor_server_%'", :order => "name ASC")
-        @fax_devices = Device.find(:all, :conditions => "user_id != -1 AND device_type = 'FAX' AND name not like 'mor_server_%'", :order => "name ASC")
+        @devices = Device.where("user_id != -1 AND accountcode > 0 AND name not like 'mor_server_%'").order(:name)
+        @fax_devices = Device.where("user_id != -1 AND device_type = 'FAX' AND name not like 'mor_server_%'").order(:name)
       end
       if params[:whattodo] and params[:whattodo].to_s.length > 0
         a=configure_extensions(@device.id, {:current_user => current_user})
@@ -1584,7 +1565,7 @@ class DevicesController < ApplicationController
   def user_devices
     @page_title = _('Devices')
     @page_icon = "device.png"
-    @devices = current_user.devices #Device.find(:all,:include => [:user, :provider], :conditions => ["devices.user_id = ?", session[:user_id]], :order => "devices.name")
+    @devices = current_user.devices
   end
 
 =begin rdoc
@@ -1598,7 +1579,7 @@ class DevicesController < ApplicationController
   # in before filter : device (:find_device)
 
   def find_provider
-    @provider = Provider.find(:first, :conditions => ["device_id = #{@device.id}"])
+    @provider = Provider.where(:device_id => @device.id).first
   end
 
   def user_device_edit
@@ -1608,8 +1589,8 @@ class DevicesController < ApplicationController
       @page_title = _('Provider_settings')
     end
     @page_icon = "edit.png"
-    @user = User.find_by_id(session[:user_id])
-    @owner = User.find_by_id(@user.owner_id)
+    @user = User.where(:id => session[:user_id]).first
+    @owner = User.where(:id => @user.owner_id).first
     unless @user
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => :index and return false
@@ -1642,7 +1623,7 @@ class DevicesController < ApplicationController
 =end
   # in before filter : device (:find_device)
   def user_device_update
-    @user = User.find(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
     if @device.user_id != @user.id
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -1748,39 +1729,32 @@ class DevicesController < ApplicationController
     @help_link = "http://wiki.kolmisoft.com/index.php/Default_device_settings"
 
     if session[:usertype] == 'reseller'
-      reseller = User.find(session[:user_id])
+      reseller = User.where(:id => session[:user_id]).first
       check_reseller_conflines(reseller)
       reseller.check_default_user_conflines
     end
-    # @new_device = true
-    #@user = User.find(session[:user_id])
-
-
 
     @device = Confline.get_default_object(Device, correct_owner_id)
-
     @devicetypes = Devicetype.load_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
-
     @device_type = Confline.get_value("Default_device_type", session[:user_id])
-    
     @global_tell_balance = Confline.get_value('Tell_Balance').to_i 
     @global_tell_time = Confline.get_value('Tell_Time').to_i 
 
     if @device_type == 'FAX'
-      @audio_codecs = Codec.find(:all,
-                                 :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => "LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, 'Default_device_codec_', '') and owner_id = #{session[:user_id]})",
-                                 :conditions => "conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and codecs.name IN ('alaw', 'ulaw')",
-                                 :order => 'v2 asc')
+      @audio_codecs = Codec.select('codecs.*,  (conflines.value2 + 0) AS v2').
+                            where("conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and codecs.name IN ('alaw', 'ulaw')").
+                            joins("LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, 'Default_device_codec_', '') and owner_id = #{session[:user_id]})").
+                            order(:v2)
     else
-      @audio_codecs = Codec.find(:all,
-                                 :select => 'codecs.*,  (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
-                                 :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]],
-                                 :order => 'v2 asc')
+      @audio_codecs = Codec.select('codecs.*,  (conflines.value2 + 0) AS v2').
+                            joins('LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))').
+                            where(["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'audio' and owner_id =?", session[:user_id]]).
+                            order(:v2)
     end
-    @video_codecs = Codec.find(:all,
-                               :select => 'codecs.*, (conflines.value2 + 0) AS v2', :joins => 'LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))',
-                               :conditions => ["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'video' and owner_id =?", session[:user_id]],
-                               :order => 'v2 asc')
+    @video_codecs = Codec.select('codecs.*, (conflines.value2 + 0) AS v2').
+                          joins('LEFT Join conflines ON (codecs.name = REPLACE(conflines.name, "Default_device_codec_", ""))').
+                          where(["conflines.name like 'Default_device_codec%' and codecs.codec_type = 'video' and owner_id =?", session[:user_id]]).
+                          order(:v2)
  
     @owner = session[:user_id]
     #if @device_type == 'IAX2' and !(['no','yes'].include?(Confline.get_value('Default_device_trunk', @owner).to_s))
@@ -1794,7 +1768,7 @@ class DevicesController < ApplicationController
     else
       collect_locations = 'user_id=? or id = 1'
     end
-    @locations = Location.find(:all, :conditions => [collect_locations, correct_owner_id], :order => "name ASC")
+    @locations = Location.where([collect_locations, correct_owner_id]).order(:name)
     @default = 1
     @cid_name = Confline.get_value("Default_device_cid_name", session[:user_id])
     @cid_number = Confline.get_value("Default_device_cid_number", session[:user_id])
@@ -1971,7 +1945,7 @@ class DevicesController < ApplicationController
       redirect_to :action => 'default_device' and return false
     end
     if params[:codec]
-      for codec in Codec.find(:all)
+      for codec in Codec.all
         if params[:codec][codec.name] == "1"
           Confline.set_value("Default_device_codec_#{codec.name}", 1, session[:user_id])
         else
@@ -1983,7 +1957,7 @@ class DevicesController < ApplicationController
 
       end
     else
-      for codec2 in Codec.find(:all)
+      for codec2 in Codec.all
         Confline.set_value("Default_device_codec_#{codec2.name}", 0, session[:user_id])
 
       end
@@ -2051,7 +2025,7 @@ class DevicesController < ApplicationController
 
 
   def assign_provider
-    device = Device.find(:first, :include => [:provider], :conditions => ["devices.id = ? AND providers.user_id = ?", params[:provdevice], current_user.id])
+    device = Device.includes(:provider).where(["devices.id = ? AND providers.user_id = ?", params[:provdevice], current_user.id]).first
     if device
       device.description = device.provider.name if device.provider
       device.user_id = params[:id]
@@ -2086,9 +2060,9 @@ class DevicesController < ApplicationController
     owner_id = correct_owner_id
     @user = request.raw_post.gsub("=", "")
     if @user == "all"
-      @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
+      @devices = Device.select("devices.*").joins("LEFT JOIN users ON (users.id = devices.user_id)").where(["users.owner_id = ? AND device_type != 'FAX' AND name not like 'mor_server_%'", owner_id])
     else
-      @devices = Device.find(:all, :select => "devices.*", :joins => "LEFT JOIN users ON (users.id = devices.user_id)", :conditions => ["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
+      @devices = Device.select("devices.*").joins("LEFT JOIN users ON (users.id = devices.user_id)").where(["users.owner_id = ? AND device_type != 'FAX' AND user_id = ? AND name not like 'mor_server_%'", owner_id, @user])
     end
     render :layout => false
   end
@@ -2106,11 +2080,7 @@ class DevicesController < ApplicationController
     cond << "user_id = ?" and var << @user.to_i if @user != 'all' and @user.to_i.to_s == @user
     cond << "device_type != 'FAX'" if @fax == true
 
-    @devices = Device.find(
-        :all,
-        :select => "devices.*",
-        :joins => "LEFT JOIN users ON (users.id = devices.user_id)",
-        :conditions => [cond.join(" AND ")].concat(var))
+    @devices = Device.select("devices.*").joins("LEFT JOIN users ON (users.id = devices.user_id)").where([cond.join(" AND ")].concat(var))
     render :layout => false
   end
 
@@ -2128,9 +2098,9 @@ class DevicesController < ApplicationController
         @devices = Device.find_all_for_select(corrected_user_id, options)
       end
     else
-      @user = User.find(params[:user_id])
+      @user = User.where(:id => params[:user_id]).first
       if @user and (["admin", "accountant"].include?(session[:usertype]) or @user.owner_id = corrected_user_id)
-        @devices = params[:did_search].to_i == 0 ? @user.devices(:conditions => "device_type != 'FAX'")  : @user.devices(:conditions => "device_type != 'FAX'").select('devices.*').joins('JOIN dids ON (dids.device_id = devices.id)').group('devices.id').all
+        @devices = params[:did_search].to_i == 0 ? @user.devices("device_type != 'FAX'")  : @user.devices("device_type != 'FAX'").select('devices.*').joins('JOIN dids ON (dids.device_id = devices.id)').group('devices.id').all
       else
         @devices = []
       end
@@ -2140,7 +2110,7 @@ class DevicesController < ApplicationController
 
   def devicecodecs_sort
     if params[:id].to_i > 0
-      @device = Device.find(:first, :conditions => {:id => params[:id]})
+      @device = Device.where(:id => params[:id]).first
       unless @device
         flash[:notice] = _('Device_was_not_found')
         redirect_back_or_default("/callc/main")
@@ -2157,13 +2127,13 @@ class DevicesController < ApplicationController
             logger.fatal 'could not save codec, may be unique constraint was violated?'
           end
         else
-          pc = Devicecodec.find(:first, :conditions => ['device_id=? AND codec_id=?', params[:id], params[:codec_id]])
+          pc = Devicecodec.where(:device_id => params[:id], :codec_id => params[:codec_id]).first
           pc.destroy if pc
         end
       end
 
       params["#{params[:ctype]}_sortable_list".to_sym].each_with_index do |i, index|
-        item = Devicecodec.find(:first, :conditions => ['device_id=? AND codec_id=?', params[:id], i])
+        item = Devicecodec.where(:device_id => params[:id], :codec_id => i).first
         if item
           item.priority = index.to_i
           item.save
@@ -2172,7 +2142,7 @@ class DevicesController < ApplicationController
       end
     else
       params["#{params[:ctype]}_sortable_list".to_sym].each_with_index do |i, index|
-        codec = Codec.find(:first, :conditions => ['id=?', i])
+        codec = Codec.where(:id => i).first
         if codec
           val = params[:val] == 'true' ? 1 : 0
           Confline.set_value("Default_device_codec_#{codec.name}", val, session[:user_id]) if params[:val] and params[:codec_id].to_i == codec.id
@@ -2189,9 +2159,11 @@ class DevicesController < ApplicationController
     session[:devices_devices_weak_passwords_options] ? @options = session[:devices_devices_weak_passwords_options] : @options = {}
     params[:page] ? @options[:page] = params[:page].to_i : (@options[:page] = 1 if !@options[:page] or @options[:page] <= 0)
 
-    @total_pages = (Device.count(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'").to_d/session[:items_per_page].to_d).ceil
+    @total_pages = (Device.where("LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%'").count.to_d/session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
-    @devices = Device.find(:all, :conditions => "LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%' AND user_id != -1", :offset => session[:items_per_page]*(@options[:page]-1), :limit => session[:items_per_page])
+    @devices = Device.where("LENGTH(secret) < 8 AND LENGTH(username) > 0 AND device_type != 'H323' AND username NOT LIKE 'mor_server_%' AND user_id != -1").
+                      limit(session[:items_per_page]).
+                      offset(session[:items_per_page]*(@options[:page]-1))
 
     session[:devices_devices_weak_passwords_options] = @options
   end
@@ -2206,7 +2178,7 @@ class DevicesController < ApplicationController
     @total_pages = (Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'").to_d/session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages.to_i if @total_pages.to_i < @options[:page].to_i and @total_pages > 0
 
-    @devices = Device.find(:all, :include=>[:user], :conditions => "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'")
+    @devices = Device.includes(:user).where("host='dynamic' and insecure like '%invite%'  and insecure != 'invite'")
     session[:devices_insecure_devices_options] = @options
   end
 
@@ -2233,7 +2205,7 @@ class DevicesController < ApplicationController
 
 
   def check_reseller_conflines(reseller)
-    if !Confline.find(:first, :conditions => "name LIKE 'Default_device_%' AND owner_id = '#{reseller.id}'")
+    if !Confline.where(["name LIKE 'Default_device_%' AND owner_id = ?", reseller.id]).first
       reseller.create_reseller_conflines
     end
   end
@@ -2327,7 +2299,7 @@ class DevicesController < ApplicationController
   end
 
   def find_email
-    @email = Pdffaxemail.find_by_id(params[:id])
+    @email = Pdffaxemail.where(:id => params[:id]).first
 
     unless @email
       flash[:notice] = _('Email_was_not_found')
@@ -2336,7 +2308,7 @@ class DevicesController < ApplicationController
   end
 
   def find_cli
-    @cli = Callerid.find(:first, :include => [:device], :conditions => {:id => params[:id]})
+    @cli = Callerid.includes(:device).where(:id => params[:id]).first
     unless @cli
       flash[:notice]=_('Callerid_was_not_found')
       redirect_to :controller => :callc, :action => :main and return false
