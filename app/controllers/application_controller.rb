@@ -2275,7 +2275,7 @@ Variables: (Names marked with * are required)
     short = {"accountant" => "acc", "reseller" => "res"}
     if group = user.acc_group
       group.only_view ? session[:acc_only_view] = 1 : session[:acc_only_view] = 0
-      rights = AccRight.select("name, value").where(:right_type => group.group_type).joins(["LEFT JOIN acc_group_rights ON (acc_group_rights.acc_right_id = acc_rights.id AND acc_group_rights.acc_group_id = ?)", group.id])
+      rights = AccRight.select("name, value").where(:right_type => group.group_type).joins("LEFT JOIN acc_group_rights ON (acc_group_rights.acc_right_id = acc_rights.id AND acc_group_rights.acc_group_id = #{group.id})")
 
       rights.each { |right|
         name = "#{short[user.usertype]}_#{right[:name].downcase}".to_sym
