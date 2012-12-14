@@ -36,9 +36,9 @@ class Ringgroup < ActiveRecord::Base
         # all devices will be dialed over Local, not only Virtual for CCL compatibility
         #if d.device_type.to_s == 'Virtual'
           if i > 0
-            appdata += "&Local/#{d.name}@mor_local"
+            appdata += "&Local/#{d.name}@mor_local/n"
           else
-            appdata += "Local/#{d.name}@mor_local"
+            appdata += "Local/#{d.name}@mor_local/n"
           end
         #else
           #if i > 0
