@@ -1295,7 +1295,7 @@ class AccountingController < ApplicationController
     csv_string << ""
     csv_string << ""
 
-
+    sub = 0
     idetails.each { |id|
       if id.name != 'Calls' and id.name != 'Calls_To_Dids'
         sub = 1
