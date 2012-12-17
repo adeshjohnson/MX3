@@ -111,7 +111,7 @@ class UsersController < ApplicationController
     joins << "LEFT JOIN tariffs ON users.tariff_id = tariffs.id"
 
     # page params
-    @user_size = User.select(select.join(",")).joins(joins.join(" ")).where([cond.join(" AND "), *var]).group(group_by)
+    @user_size = User.select(select.join(",")).joins(joins.join(" ")).where([cond.join(" AND "), *var]).group(group_by).all
     @options[:page] = @options[:page].to_i < 1 ? 1 : @options[:page].to_i
     @total_pages = (@user_size.size.to_d / session[:items_per_page].to_d).ceil
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
@@ -134,7 +134,7 @@ class UsersController < ApplicationController
     select << "tariffs.name AS tariff_name"
     select << "acc_groups.name AS acc_group_name"
 
-    @users = User.select(select.join(",")).joins(joins.join(" ")).where([cond.join(" AND "), *var]).group(group_by).order(@options[:order]).limit("#{fpage}, #{session[:items_per_page].to_i}")
+    @users = User.select(select.join(",")).joins(joins.join(" ")).where([cond.join(" AND "), *var]).group(group_by).order(@options[:order]).limit("#{fpage}, #{session[:items_per_page].to_i}").all
     @search = ((cond.size > 1 or @options[:sub_s].to_i > -1) ? 1 : 0)
 
     session[:user_list_stats] = @options
@@ -1481,8 +1481,8 @@ in before filter : ard (:find_ard)
     else
       dt = params[:dt] ? params[:dt] : ''
     end
-    @ards = Acustratedetail.where(["customrate_id = ? AND start_time = ? AND daytype = ?", @customrate.id, params[:st], dt], :order => "acustratedetails.from ASC, artype ASC")
-    unless @ards or (@ards and @ards.size.to_i == 0)
+    @ards = Acustratedetail.where(:customrate_id => @customrate.id, :start_time => params[:st], :daytype => dt).order("acustratedetails.from ASC, artype ASC")
+    if !@ards or (@ards and @ards.size.to_i == 0)
       flash[:notice] = _('Acustratedetails_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
