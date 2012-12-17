@@ -32,10 +32,10 @@
   <% if @destinations and @destinations.size.to_i > 0 %>
       <% for destination in @destinations %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
-            <td><%= destination.prefix %></td>
-            <td><%= destination.subcode %></td>
-            <td><%= destination.name %></td>
-            <td>
+            <td id='<%= destination.id.to_s %>_prefix'><%= destination.prefix %></td>
+            <td id='<%= destination.id.to_s %>_subcode'><%= destination.subcode %></td>
+            <td id='<%= destination.id.to_s %>_name'><%= destination.name %></td>
+            <td id='<%= destination.id.to_s %>_dgname'>
               <% if destination.dg_name %>
                   <%= destination.dg_name %> <%= destination.desttype %>
               <% else %>
