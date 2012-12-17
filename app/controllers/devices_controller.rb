@@ -412,7 +412,7 @@ class DevicesController < ApplicationController
       end
       params[:device][:timeout]=params[:device_timeout].to_s.strip
     end
-    if !@new_device and @device.device_type == "Virtual"
+    if !@new_device and @device.device_type != "Virtual"
       unless @device.is_dahdi?
         if change_opt_2 == true
           params[:device][:name]=params[:device][:name].to_s.strip
@@ -429,7 +429,7 @@ class DevicesController < ApplicationController
       end
     end
 
-    if !@new_device and @device.device_type == "FAX"
+    if !@new_device and @device.device_type != "FAX"
       if change_opt_3 == true
         params[:cid_number]=params[:cid_number].to_s.strip
         params[:device_caller_id_number] = params[:device_caller_id_number].to_i
@@ -440,7 +440,7 @@ class DevicesController < ApplicationController
       change_opt_4 == true ? params[:cid_name]=params[:cid_name].to_s.strip : params[:cid_name]= nice_cid(@device.callerid)
     end
 
-    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
+    if !@new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       unless @device.is_dahdi?
         params[:host]=params[:host].to_s.strip
         if @device.host != "dynamic"
@@ -463,19 +463,19 @@ class DevicesController < ApplicationController
     end
 
 
-    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
+    if !@new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       params[:callgroup]=params[:callgroup].to_s.strip
       params[:pickupgroup]=params[:pickupgroup].to_s.strip
     end
 
-    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
+    if !@new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       if @device.voicemail_box
         params[:vm_email]=params[:vm_email].to_s.strip
         params[:vm_psw]=params[:vm_psw].to_s.strip
       end
     end
 
-    if !@new_device and @device.device_type == "FAX" and @device.device_type == "Virtual"
+    if !@new_device and @device.device_type != "FAX" and @device.device_type != "Virtual"
       unless @device.is_dahdi?
         params[:ip1]=params[:ip1].to_s.strip
         params[:mask1]=params[:mask1].to_s.strip
@@ -490,7 +490,7 @@ class DevicesController < ApplicationController
       end
     end
 
-    if !@new_device and @device.device_type == "FAX"
+    if !@new_device and @device.device_type != "FAX"
       params[:device][:tell_rtime_when_left]=params[:device][:tell_rtime_when_left].to_s.strip
       params[:device][:repeat_rtime_every]=params[:device][:repeat_rtime_every].to_s.strip
       params[:device][:qf_tell_time] = params[:device][:qf_tell_time].to_i
