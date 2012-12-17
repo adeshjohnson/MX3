@@ -118,8 +118,8 @@
           <% if tl < 20 and tl != 0-@include.to_i %>
               <% arr = line.split(@sep) %>
               <tr class="row<%= (tl % 2 + 1).to_s %>">
-                <td> <%= clean_value_all arr[session[:imp_cli_cli]].to_s %>    </td>
-                <td> <%= clean_value_all arr[session[:imp_cli_device_id]].to_s %>    </td>
+                <td id="imp_cli_<%= tl %>"> <%= clean_value_all arr[session[:imp_cli_cli]].to_s %>    </td>
+                <td id="imp_dev_id_<%= tl %>"> <%= clean_value_all arr[session[:imp_cli_device_id]].to_s %>    </td>
           <% end %>
           <% tl += 1 %>
       <% end %>
@@ -170,9 +170,9 @@
           <% for line in @error_array %>
               <% arr = line.split(@sep) %>
               <tr class="row<%= (tl % 2 + 1).to_s %>">
-                <td> <%= clean_value_all(arr[session[:imp_cli_device_id]].to_s) if session[:imp_cli_device_id] >= 0 %>    </td>
-                <td> <%= clean_value_all(arr[session[:imp_cli_cli]].to_s) if session[:imp_cli_cli] >= 0 %>    </td>
-                <td> <%= raw @msg_array[tl] %> </td>
+                <td id="imp_dev_id_<%= tl %>"> <%= clean_value_all(arr[session[:imp_cli_device_id]].to_s) if session[:imp_cli_device_id] >= 0 %>    </td>
+                <td id="imp_cli_<%= tl %>"> <%= clean_value_all(arr[session[:imp_cli_cli]].to_s) if session[:imp_cli_cli] >= 0 %>    </td>
+                <td id="imp_message_<%= tl %>"> <%= raw @msg_array[tl] %> </td>
               </tr>
               <% tl += 1 %>
           <% end %>
