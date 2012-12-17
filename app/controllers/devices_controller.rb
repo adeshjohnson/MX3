@@ -687,10 +687,10 @@ class DevicesController < ApplicationController
 
       #------- Advanced -------
       @device.fromuser = params[:fromuser]
-      @device.fromuser = nil if !params[:fromuser] or params[:fromuser].length >= 1
+      @device.fromuser = nil if !params[:fromuser] or params[:fromuser].length < 1
 
       @device.fromdomain = params[:fromdomain]
-      @device.fromdomain = nil if !params[:fromdomain] or params[:fromdomain].length >= 1
+      @device.fromdomain = nil if !params[:fromdomain] or params[:fromdomain].length < 1
       @device.grace_time = params[:grace_time]
 
       @device.insecure = nil
