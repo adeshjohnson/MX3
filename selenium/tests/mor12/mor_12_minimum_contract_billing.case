@@ -67,22 +67,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>assertVisible</td>
 	<td>id=minimal_charge_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=minimal_charge_name</td>
 	<td>Minimal Charge for Calls:</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>css=#minimal_charge_date_row &gt; td</td>
 	<td>Minimal Charge for Calls Date:</td>
 </tr>
@@ -107,27 +107,27 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForEditable</td>
+	<td>assertEditable</td>
 	<td>id=minimal_charge_value</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_value</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=minimal_charge_date_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=minimal_charge_date_month</td>
 	<td></td>
 </tr>
@@ -157,27 +157,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_value</td>
 	<td>100</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=minimal_charge_date_year</td>
 	<td>2008</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=minimal_charge_date_month</td>
 	<td>1</td>
 </tr>
@@ -222,12 +222,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>minimal_charge_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>minimal_charge_enabled</td>
 	<td></td>
 </tr>
@@ -312,7 +312,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -397,7 +397,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -442,18 +442,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/accountant_minimal_charge</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -527,7 +517,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -567,22 +557,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>assertVisible</td>
 	<td>id=minimal_charge_enabled</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=minimal_charge_name</td>
 	<td>Minimal Charge for Calls:</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>css=#minimal_charge_date_row &gt; td</td>
 	<td>Minimal Charge for Calls Date:</td>
 </tr>
@@ -617,7 +607,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -682,7 +672,7 @@
 	<td>label=1</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -692,7 +682,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -787,7 +777,7 @@
 	<td>label=1</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -797,7 +787,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -862,22 +852,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>assertVisible</td>
 	<td>id=minimal_charge_name</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=minimal_charge_name</td>
 	<td>Minimal Charge for Calls:</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>off</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>css=#minimal_charge_date_row &gt; td</td>
 	<td>Minimal Charge for Calls Date:</td>
 </tr>
@@ -892,27 +882,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForEditable</td>
+	<td>assertEditable</td>
 	<td>id=minimal_charge_value</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_value</td>
 	<td>0</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=minimal_charge_date_year</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=minimal_charge_date_month</td>
 	<td></td>
 </tr>
@@ -942,27 +932,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: User Resellers</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_value</td>
 	<td>50</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=minimal_charge_date_year</td>
 	<td>2008</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=minimal_charge_date_month</td>
 	<td>2</td>
 </tr>
@@ -977,7 +967,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=minimal_charge_enabled</td>
 	<td>on</td>
 </tr>
@@ -1012,7 +1002,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User successfully created</td>
 	<td></td>
 </tr>
@@ -1037,7 +1027,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -1107,7 +1097,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -1197,7 +1187,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 2</td>
 	<td></td>
 </tr>
@@ -1302,7 +1292,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
@@ -1377,7 +1367,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -1442,7 +1432,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices recalculated: 4</td>
 	<td></td>
 </tr>
