@@ -42,18 +42,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/simultaneous_calls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,18 +52,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_8 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
@@ -173,7 +153,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -503,7 +483,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>css=#delete_link_1 &gt; img</td>
 	<td></td>
 </tr>
@@ -513,7 +493,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Monitoring deleted successfully</td>
 	<td></td>
 </tr>

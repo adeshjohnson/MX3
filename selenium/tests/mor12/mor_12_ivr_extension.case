@@ -62,7 +62,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>IVR created</td>
 	<td></td>
 </tr>
@@ -88,12 +88,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=change_action_1</td>
 	<td>Playback,Change Voice,Delay,Hangup,Transfer To,Debug,Set Accountcode,Change CallerID (Number),Action log</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=option[value=&quot;Transfer To&quot;]</td>
 	<td></td>
 </tr>
@@ -108,22 +108,22 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=change_action_1</td>
 	<td>Transfer To</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=action_1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=action_1</td>
 	<td>IVR,DID,Device,Block,Extension</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=option[value=&quot;Extension&quot;]</td>
 	<td></td>
 </tr>
@@ -138,7 +138,7 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=action_1</td>
 	<td>Extension</td>
 </tr>
@@ -153,7 +153,7 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=action_param_1</td>
 	<td>s0s0s0s0s0s0</td>
 </tr>
@@ -163,22 +163,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Manual</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
 	<td></td>
 </tr>
@@ -193,7 +193,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=action_param_1</td>
 	<td>s0s0s0s0s0s0</td>
 </tr>
@@ -208,12 +208,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=change_action_2</td>
 	<td>Playback,Change Voice,Delay,Hangup,Transfer To,Debug,Set Accountcode,Change CallerID (Number),Action log</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#change_action_2 &gt; option[value=&quot;Transfer To&quot;]</td>
 	<td></td>
 </tr>
@@ -228,17 +228,17 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=change_action_2</td>
 	<td>Transfer To</td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=action_2</td>
 	<td>IVR,DID,Device,Block,Extension</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#action_2 &gt; option[value=&quot;Extension&quot;]</td>
 	<td></td>
 </tr>
@@ -253,17 +253,17 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=action_2</td>
 	<td>Extension</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=action_param_2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=action_param_2</td>
 	<td>1</td>
 </tr>
@@ -278,7 +278,7 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=action_param_2</td>
 	<td>0101010101</td>
 </tr>
@@ -288,7 +288,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Manual</td>
 	<td></td>
 </tr>
@@ -298,7 +298,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local,0101010101,1)</td>
 	<td></td>
 </tr>
@@ -318,7 +318,7 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=action_param_1</td>
 	<td>riririririririririririr</td>
 </tr>
@@ -328,17 +328,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Manual</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local,riririririririririririr,1)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local,0101010101,1)</td>
 	<td></td>
 </tr>
@@ -388,7 +388,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>IVR Voice created</td>
 	<td></td>
 </tr>
@@ -403,7 +403,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>IVR Voice deleted</td>
 	<td></td>
 </tr>
@@ -420,11 +420,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/ivr_list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -448,7 +443,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -509,7 +504,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=ivr_7_name</td>
 	<td>!&amp; aaaaivrs</td>
 </tr>

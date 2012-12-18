@@ -42,11 +42,6 @@
 	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
 	<td></td>
 </tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
 <!--set api settings-->
 <tr>
 	<td>open</td>
@@ -89,7 +84,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -121,7 +116,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Currency update disabled</td>
 	<td></td>
 </tr>
@@ -141,7 +136,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Currency details updated</td>
 	<td></td>
 </tr>
@@ -151,7 +146,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Currency update enabled</td>
 	<td></td>
 </tr>
@@ -413,7 +408,7 @@
 	<td>label=31</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -423,7 +418,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 2</td>
 	<td></td>
 </tr>
@@ -568,11 +563,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/accounting/financial_statements</td>
 	<td></td>
@@ -595,11 +585,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/payments/payments</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -628,7 +613,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>3456754123457653</td>
 	<td></td>
 </tr>
@@ -858,12 +843,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=payment_status</td>
 	<td>All</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=user_id</td>
 	<td>All</td>
 </tr>
@@ -978,7 +963,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Personal details changed</td>
 	<td></td>
 </tr>
@@ -1124,7 +1109,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -1144,7 +1129,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please press here to pay* 10.0000 EUR</td>
 	<td></td>
 </tr>
@@ -1578,7 +1563,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -1598,7 +1583,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -1643,7 +1628,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -1653,7 +1638,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices generated: 1</td>
 	<td></td>
 </tr>
@@ -1958,7 +1943,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -1995,7 +1980,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dont be so smart</td>
 	<td></td>
 </tr>
@@ -2240,7 +2225,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dont be so smart</td>
 	<td></td>
 </tr>
@@ -2394,7 +2379,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dont be so smart</td>
 	<td></td>
 </tr>
@@ -2492,7 +2477,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dont be so smart</td>
 	<td></td>
 </tr>
@@ -2503,7 +2488,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dont be so smart</td>
 	<td></td>
 </tr>
@@ -2514,7 +2499,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -2525,7 +2510,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -2536,7 +2521,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -2547,7 +2532,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -2558,7 +2543,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -2569,7 +2554,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Bad login</td>
 	<td></td>
 </tr>
@@ -3451,7 +3436,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Credit note created</td>
 	<td></td>
 </tr>
@@ -3461,7 +3446,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_paid</td>
 	<td></td>
 </tr>
@@ -3486,12 +3471,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Credit note created</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=image_not_paid</td>
 	<td></td>
 </tr>

@@ -36,7 +36,7 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--MOR11 <tr>	<td>open</td>	<td>/billing/dialplans/new</td>	<td></td></tr><tr>	<td>type</td>	<td>//input[@id='quickforward_dp_name']</td>	<td>qfdp</td></tr><tr>	<td>select</td>	<td>id=quickforwards_user</td>	<td>label=System Admin (0)</td></tr><tr>	<td>waitForElementPresent</td>	<td>name=users_device</td>	<td></td></tr><tr>	<td>select</td>	<td>name=users_device</td>	<td>label=IAX2/103</td></tr><tr>	<td>clickAndWait</td>	<td>id=cb_add</td>	<td></td></tr><tr>	<td>assertText</td>	<td>id=status</td>	<td>Dial Plan successfully created</td></tr><tr>	<td>open</td>	<td>/billing/dids/edit/1</td>	<td></td></tr><tr>	<td>assertElementPresent</td>	<td>name=dp_id</td>	<td></td></tr><tr>	<td>assertText</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>assertSelectedLabel</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>clickAndWait</td>	<td>css=input[type=&quot;image&quot;]</td>	<td></td></tr><tr>	<td>waitForTextPresent</td>	<td>DID assigned to Dial Plan: qfdp</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>Allow this DID to be assigned to other users/dialplans</td>	<td></td></tr><tr>	<td>open</td>	<td>/billing/dids/list</td>	<td></td></tr><tr>	<td>assertText</td>	<td>id=dialplan_1</td>	<td>qfdp (quickforwarddids)</td></tr><tr>	<td>assertElementNotPresent</td>	<td>link=Quick Forward DIDs DP (quickforwarddids)</td>	<td></td></tr><tr>	<td>open</td>	<td>/billing/dids/edit/1</td>	<td></td></tr><tr>	<td>clickAndWait</td>	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>	<td></td></tr><tr>	<td>waitForTextPresent</td>	<td>DID made available</td>	<td></td></tr><tr>	<td>assertText</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>assertSelectedLabel</td>	<td>name=dp_id</td>	<td>qfdp</td></tr>-->
+<!--MOR11 <tr>	<td>open</td>	<td>/billing/dialplans/new</td>	<td></td></tr><tr>	<td>type</td>	<td>//input[@id='quickforward_dp_name']</td>	<td>qfdp</td></tr><tr>	<td>select</td>	<td>id=quickforwards_user</td>	<td>label=System Admin (0)</td></tr><tr>	<td>assertElementPresent</td>	<td>name=users_device</td>	<td></td></tr><tr>	<td>select</td>	<td>name=users_device</td>	<td>label=IAX2/103</td></tr><tr>	<td>clickAndWait</td>	<td>id=cb_add</td>	<td></td></tr><tr>	<td>assertText</td>	<td>id=status</td>	<td>Dial Plan successfully created</td></tr><tr>	<td>open</td>	<td>/billing/dids/edit/1</td>	<td></td></tr><tr>	<td>assertElementPresent</td>	<td>name=dp_id</td>	<td></td></tr><tr>	<td>assertText</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>assertSelectedLabel</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>clickAndWait</td>	<td>css=input[type=&quot;image&quot;]</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>DID assigned to Dial Plan: qfdp</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>Allow this DID to be assigned to other users/dialplans</td>	<td></td></tr><tr>	<td>open</td>	<td>/billing/dids/list</td>	<td></td></tr><tr>	<td>assertText</td>	<td>id=dialplan_1</td>	<td>qfdp (quickforwarddids)</td></tr><tr>	<td>assertElementNotPresent</td>	<td>link=Quick Forward DIDs DP (quickforwarddids)</td>	<td></td></tr><tr>	<td>open</td>	<td>/billing/dids/edit/1</td>	<td></td></tr><tr>	<td>clickAndWait</td>	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>DID made available</td>	<td></td></tr><tr>	<td>assertText</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>assertSelectedLabel</td>	<td>name=dp_id</td>	<td>qfdp</td></tr>-->
 <!--MOR12-->
 <tr>
 	<td>open</td>
@@ -44,7 +44,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>//body</td>
 	<td></td>
 </tr>
@@ -151,7 +151,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter name</td>
 	<td></td>
 </tr>
@@ -186,22 +186,22 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test User #1 (2)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used,IAX2/101,FAX/102,IAX2/1002</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#quickforwards_device &gt; #users_device &gt; option[value=&quot;3&quot;]</td>
 	<td></td>
 </tr>
@@ -231,7 +231,7 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=data10</td>
 	<td>on</td>
 </tr>
@@ -241,7 +241,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan successfully created</td>
 	<td></td>
 </tr>
@@ -276,7 +276,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter name</td>
 	<td></td>
 </tr>
@@ -341,27 +341,27 @@
 	<td>label=Test Accountant (4)</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Accountant (4)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#quickforwards_device &gt; #users_device &gt; option</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
 </tr>
@@ -376,22 +376,22 @@
 	<td>label=System Admin (0)</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>System Admin (0)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used,IAX2/103</td>
 </tr>
@@ -421,7 +421,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=quickforward_dp_2</td>
 	<td>qf_dp</td>
 </tr>
@@ -498,7 +498,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=data10</td>
 	<td>off</td>
 </tr>
@@ -508,17 +508,17 @@
 	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=users_device</td>
 	<td>Not used,IAX2/101,FAX/102,IAX2/1002</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#users_device &gt; option[value=&quot;4&quot;]</td>
 	<td></td>
 </tr>
@@ -533,7 +533,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan successfully updated</td>
 	<td></td>
 </tr>
@@ -548,7 +548,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>name=dialplan[name]</td>
 	<td>qf_dp2</td>
 </tr>
@@ -558,7 +558,7 @@
 	<td>Not used,System Admin (0),Test Accountant (4),Test Reseller (3),Test User #1 (2)</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>System Admin (0)</td>
 </tr>
@@ -568,7 +568,7 @@
 	<td>change</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=users_device</td>
 	<td>IAX2/103</td>
 </tr>
@@ -583,7 +583,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=data10</td>
 	<td>on</td>
 </tr>
@@ -593,7 +593,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan successfully updated</td>
 	<td></td>
 </tr>
@@ -633,7 +633,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID assigned to Dial Plan: qf_dp2</td>
 	<td></td>
 </tr>
@@ -658,7 +658,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID made available</td>
 	<td></td>
 </tr>
@@ -698,7 +698,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID successfully created</td>
 	<td></td>
 </tr>
@@ -718,7 +718,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID reserved</td>
 	<td></td>
 </tr>
@@ -873,7 +873,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter name</td>
 	<td></td>
 </tr>
@@ -908,7 +908,7 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Reseller (6)</td>
 </tr>
@@ -918,12 +918,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used,SIP/1001</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=option[value=&quot;6&quot;]</td>
 	<td></td>
 </tr>
@@ -953,7 +953,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan successfully created</td>
 	<td></td>
 </tr>
@@ -988,7 +988,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Please enter name</td>
 	<td></td>
 </tr>
@@ -1023,27 +1023,27 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Reseller (6)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used,SIP/1001</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=#quickforwards_device &gt; #users_device &gt; option</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>name=users_device</td>
 	<td>Not used</td>
 </tr>
@@ -1078,22 +1078,22 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Reseller (6)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used,SIP/1001</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=option[value=&quot;6&quot;]</td>
 	<td></td>
 </tr>
@@ -1128,22 +1128,22 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>User Resellers (5)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>name=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>name=users_device</td>
 	<td>Not used,IAX2/105</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=option[value=&quot;7&quot;]</td>
 	<td></td>
 </tr>
@@ -1158,7 +1158,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan successfully created</td>
 	<td></td>
 </tr>
@@ -1208,7 +1208,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -1218,7 +1218,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -1228,7 +1228,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -1238,7 +1238,7 @@
 	<td></td>
 </tr>
 <!--Konvertavus vistiek mato kaip supratau-->
-<!--<tr> 	<td>waitForNotVisible</td> 	<td>name=users_device</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertNotVisible</td> 	<td>name=users_device</td> 	<td></td> </tr>-->
 <tr>
 	<td>assertValue</td>
 	<td>name=dialplan[name]</td>
@@ -1255,7 +1255,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=data10</td>
 	<td>off</td>
 </tr>
@@ -1290,7 +1290,7 @@
 	<td>blur</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Reseller (6)</td>
 </tr>
@@ -1315,22 +1315,22 @@
 	<td>change</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=quickforwards_user</td>
 	<td>Test Reseller (6)</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=users_device</td>
 	<td>Not used,SIP/1001</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>css=option[value=&quot;6&quot;]</td>
 	<td></td>
 </tr>
@@ -1380,22 +1380,22 @@
 	<td>change</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=users_device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForSelectOptions</td>
+	<td>assertSelectOptions</td>
 	<td>id=users_device</td>
 	<td>Not used,IAX2/105</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>assertSelectedLabel</td>
 	<td>id=users_device</td>
 	<td>IAX2/105</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>id=data10</td>
 	<td></td>
 </tr>
@@ -1435,7 +1435,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=data10</td>
 	<td>on</td>
 </tr>
@@ -1445,7 +1445,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan successfully updated</td>
 	<td></td>
 </tr>
@@ -1455,7 +1455,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Quick Forwards Dial Plan</td>
 	<td></td>
 </tr>
@@ -1485,7 +1485,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID assigned to Dial Plan: qf_dp2</td>
 	<td></td>
 </tr>
@@ -1530,7 +1530,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1615,7 +1615,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1645,7 +1645,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1700,7 +1700,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
@@ -1786,7 +1786,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>smart</td>
 	<td></td>
 </tr>
@@ -1796,7 +1796,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>smart</td>
 	<td></td>
 </tr>
@@ -1816,7 +1816,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Cannot delete Dial Plan. It is assigned to DID(s)</td>
 	<td></td>
 </tr>
@@ -1831,7 +1831,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>DID made available</td>
 	<td></td>
 </tr>
@@ -1841,7 +1841,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>css=#quickforward_dp_delete_3 &gt; a &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -1851,7 +1851,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan deleted: qf_dp2</td>
 	<td></td>
 </tr>
@@ -1861,7 +1861,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -1871,7 +1871,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -1881,7 +1881,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -1891,7 +1891,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Dial Plan was not found</td>
 	<td></td>
 </tr>
