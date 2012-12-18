@@ -16,5 +16,5 @@
         <span id='add_device_<%= @did %>' onclick="new Ajax.Updater('select_device_<%=@did%>', '<%=Web_Dir %>/cdr/cli_add/<%=@did%>?device_id=' + document.getElementById('device_id_<%=@did%>').value, {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"><%= b_add %></span>
     <% end %>
 <% else %>
-    <%= _('No_devices') %>
+    <%= _('No_devices') if params[:id].to_i != -1%>
 <% end %>

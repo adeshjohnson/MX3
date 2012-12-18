@@ -728,7 +728,12 @@ class Device < ActiveRecord::Base
   end
 
   def dialplans
-    Dialplan.find(:all, :conditions => ["data3 = ?", self.id])
+    Dialplan.where(:data3 => self.id)
+  end
+
+  # Check if device is used by location rules
+  def used_by_location_rules
+    Locationrule.where(:device_id => self.id).first
   end
 
   def username_must_be_unique_on_creation
@@ -951,6 +956,10 @@ class Device < ActiveRecord::Base
 
     if self.dialplans.size > 0 and notice.blank?
       notice = _('Cant_delete_device_has_dialplans')
+    end
+
+    if self.used_by_location_rules and notice.blank?
+      notice = _('One_or_more_location_rules_are_using_this_device')
     end
     notice
   end

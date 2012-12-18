@@ -60,7 +60,7 @@ Called from views location_rules and location_rule_edit, to update DID list from
   def get_did_map
     output = []
     style = "width='177px' style='margin-left:20px;padding-left:6px;font-size:10px;font-weight: normal;'"
-    params[:callback].to_s == "true" ? @did_str = params[:did_livesearch].split("-")[0].to_s.strip rescue "" : @did_str = params[:did_livesearch].to_s
+    params[:callback].to_s == "true" ? (@did_str = params[:did_livesearch].split("-")[0].to_s.strip rescue "") : @did_str = params[:did_livesearch].to_s
     if !@did_str.blank?
       cond = ["dids.id > 0"]
       var = []
@@ -148,7 +148,11 @@ in before filter : rule (:find_location_rule)
     @rule.lcr_id = params[:lcr] if params[:lcr]
     @did = Did.where("did LIKE ?", params[:did].to_s).first if params[:did]
     @rule.did_id = @did ? @did.id : ""
-    @rule.device_id = params[:s_device] ? params[:s_device] : (params[:device_id_from_js] if params[:device_id_from_js])
+    if params[:user].to_i == -1
+      @rule.device_id = ""
+    else
+      @rule.device_id = params[:s_device] ? params[:s_device] : (params[:device_id_from_js] if params[:device_id_from_js])
+    end
     @rule.save ? flash[:status] = _('Rule_updated') : flash_errors_for(_('Rule_not_updated'), @rule)
     redirect_to :action => 'location_rules', :id => @rule.location_id
   end

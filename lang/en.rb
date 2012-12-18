@@ -4535,6 +4535,7 @@ Localization.define('en') do |l|
   l.store 'Users_were_successfully_imported', 'Users successfully imported'
   l.store 'Devices_were_successfully_imported', 'Devices successfully imported'
   l.store 'Login_page_Text', 'Login Page Text'
+  l.store 'One_or_more_location_rules_are_using_this_device', 'One or more Location rules are using this Device'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
