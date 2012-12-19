@@ -1336,6 +1336,101 @@
 	<td>Location is assigned to Device or Card Group</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_device</td>
+	<td>label=Select device</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>User has no Device, CDR import is not possible</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>User has no Device, CDR import is not possible</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Test Retail User</td>
+</tr>
+<tr>
+	<td>waitForSelectedLabel</td>
+	<td>id=device_id_8</td>
+	<td>SIP/1008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=owner_4</td>
+	<td>SIP/1008</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_user</td>
+	<td>label=Select user</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>User has no Device, CDR import is not possible</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rule updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>User has no Device, CDR import is not possible</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=owner_4</td>
+	<td>SIP/1008</td>
+</tr>
 </tbody></table>
 </body>
 </html>
