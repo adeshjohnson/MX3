@@ -496,6 +496,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>1.47706208 EUR</td>
 	<td></td>
@@ -648,7 +653,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertCondition</td>
+	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
 	<td>10000</td>
 </tr>
@@ -671,6 +676,11 @@
 	<td>click</td>
 	<td>//tr[@id='booth-6']/td[10]/div/div/span[1]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -1217,6 +1227,11 @@
 	<td></td>
 </tr>
 <!--12.126 returns 14.81 while in invoice it's 14.80. mor12 returns 14.80 in both.-->
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
+	<td>15000</td>
+</tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>14.80 EUR</td>
