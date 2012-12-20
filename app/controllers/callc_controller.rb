@@ -930,27 +930,29 @@ class CallcController < ApplicationController
           else
 
             old_id = Server.select("MAX(server_id) AS last_old_id").first.last_old_id rescue 0
-            new_id = old_id + 1
+            new_id = old_id.to_i + 1
 
             if (created_server = Server.create(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" ) rescue false)
               
-                  dev = Device.new
-                  dev.name = "mor_server_" + new_id.to_s
-                  dev.fromuser = dev.name
-                  dev.host = host
-                  dev.context = "mor_direct"
-                  dev.ipaddr = ip
-                  dev.device_type = "SIP" 
-                  dev.port = 5060 
-                  dev.extension = dev.name
-                  dev.username = dev.name
-                  dev.user_id = 0
-                  dev.allow = "all"
-                  dev.nat = "no"
-                  dev.canreinvite = "no"
-                  dev.server_id = new_id
-                  dev.description = 'DO NOT EDIT'
-                  dev.save          
+                  Device.new
+#                  dev.secret = ApplicationController::random_password(10).to_s
+#                  dev.name = "mor_server_" + new_id.to_s
+#                  dev.fromuser = dev.name
+#                  dev.host = host
+#                  dev.context = "mor_direct"
+#                  dev.ipaddr = ip
+#                  dev.device_type = "SIP" 
+#                  dev.port = 5060 
+#                  dev.extension = dev.name
+#                  dev.username = dev.name
+#                  dev.user_id = 0
+#                  dev.allow = "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722"
+#                  dev.nat = "yes"
+#                  dev.canreinvite = "no"
+#                  dev.server_id = new_id
+#                  dev.description = 'DO NOT EDIT'
+                  Device.where(:name => "mor_server_" + new_id.to_s).update_all(:nat => "yes", :allow => "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722") 
+
 
               @sd.each do |d|
                  cur_dev = Device.where(:id => d.device_id.to_s).first
