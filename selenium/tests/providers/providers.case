@@ -110,7 +110,7 @@
 	<td>SIP_provider</td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
+	<td>assertNotVisible</td>
 	<td>registration_notice</td>
 	<td>Registration can be used when at least Username is entered</td>
 </tr>
@@ -843,7 +843,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>assertVisible</td>
 	<td>reg_register</td>
 	<td></td>
 </tr>
@@ -908,7 +908,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt;</td>
 </tr>
@@ -918,7 +918,7 @@
 	<td>new_regline</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; new_regline</td>
 </tr>
@@ -928,7 +928,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt; test_login:test_password@127.0.0.1:9999/</td>
 </tr>
@@ -968,7 +968,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>reg_register</td>
 	<td>register =&gt;</td>
 </tr>
@@ -2414,7 +2414,7 @@
 	<td>INTERNAL ERROR</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>//td[@id='active_1']/a/img</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//td[@id='active_1']/a/img</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/providers/list</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>delete_link_5</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Provider deleted</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//img[@alt='Cross']</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/edit/1</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>server_hostname</td> 	<td>127.0.0.1</td> </tr> <tr> 	<td>type</td> 	<td>server_ip</td> 	<td>127.0.0.1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>//td[@id='active_1']/a/img</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//td[@id='active_1']/a/img</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/providers/list</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>delete_link_5</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Provider deleted</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/list</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//img[@alt='Cross']</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/servers/edit/1</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>server_hostname</td> 	<td>127.0.0.1</td> </tr> <tr> 	<td>type</td> 	<td>server_ip</td> 	<td>127.0.0.1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
 <!--create TERMINATOR-->
 <tr>
 	<td>open</td>
@@ -2681,7 +2681,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>addprov_details</td>
 	<td></td>
 </tr>
@@ -3544,8 +3544,8 @@
 <!--bad ip-->
 <!--<tr> 	<td>open</td> 	<td>/billing/providers/edit/6</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>provider_server_ip</td> 	<td>111.11.111.11</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>click</td> 	<td>//img[@alt='Lightning']</td> 	<td></td> </tr>-->
-<!--<tr> 	<td>waitForPopUp</td> 	<td>new_window</td> 	<td>60000</td> </tr> <tr> 	<td>selectWindow</td> 	<td>name=new_window</td> 	<td></td> </tr>-->
-<!--<tr> 	<td>waitForPopUp</td> 	<td></td> 	<td></td> </tr> <tr> 	<td>selectWindow</td> 	<td>KolmiSoft</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>error</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Connection test failed</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Provider: SIP_provider</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Message: Connection failed</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>IP: 111.11.111.11</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Port: 5060</td> 	<td></td> </tr> <tr> 	<td>selectWindow</td> 	<td>null</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertPopUp</td> 	<td>new_window</td> 	<td>60000</td> </tr> <tr> 	<td>selectWindow</td> 	<td>name=new_window</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertPopUp</td> 	<td></td> 	<td></td> </tr> <tr> 	<td>selectWindow</td> 	<td>KolmiSoft</td> 	<td></td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>error</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Connection test failed</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Provider: SIP_provider</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Message: Connection failed</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>IP: 111.11.111.11</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Port: 5060</td> 	<td></td> </tr> <tr> 	<td>selectWindow</td> 	<td>null</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>setTimeout</td> 	<td>10000</td> 	<td></td></tr> -->
 <!--good ip-->
 <tr>
@@ -3565,8 +3565,8 @@
 	<td></td>
 </tr>
 <!--<tr> 	<td>click</td> 	<td>//img[@alt='Lightning']</td> 	<td></td> </tr>-->
-<!--<tr> 	<td>waitForPopUp</td> 	<td>new_window</td> 	<td>30000</td> </tr> <tr> 	<td>selectWindow</td> 	<td>name=new_window</td> 	<td></td> </tr>-->
-<!--<tr> 	<td>waitForTextPresent</td> 	<td>Connection test passed!: SIP_provider</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Server: MOR Softswitch (127.0.0.1)</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertPopUp</td> 	<td>new_window</td> 	<td>30000</td> </tr> <tr> 	<td>selectWindow</td> 	<td>name=new_window</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertTextPresent</td> 	<td>Connection test passed!: SIP_provider</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Server: MOR Softswitch (127.0.0.1)</td> 	<td></td> </tr>-->
 <!--No INTERNAL ERROR-->
 <tr>
 	<td>open</td>
@@ -3652,7 +3652,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>registration_notice</td>
 	<td></td>
 </tr>
@@ -3693,7 +3693,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>provider_reg_line</td>
 	<td></td>
 </tr>
@@ -3722,7 +3722,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--<tr> 	<td>waitForTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>assertTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/servers/edit/1</td>
@@ -3749,7 +3749,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>provider_reg_extension</td>
 	<td></td>
 </tr>
@@ -3784,7 +3784,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>provider_reg_line</td>
 	<td></td>
 </tr>
@@ -3855,7 +3855,7 @@
 	<td></td>
 </tr>
 <!--uzkomentuota kol pavyks pataisyti-->
-<!--<tr> 	<td>open</td> 	<td>/billing/providers/edit/1</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>waitForElementPresent</td> 	<td>exception_info_link</td> 	<td></td> </tr> <tr> 	<td>waitForTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
+<!--<tr> 	<td>open</td> 	<td>/billing/providers/edit/1</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>exception_info_link</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Configuration error.</td> 	<td></td> </tr>-->
 <!--HIDE TEST-->
 <tr>
 	<td>open</td>
@@ -4379,7 +4379,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>s_tech</td>
 	<td></td>
 </tr>
