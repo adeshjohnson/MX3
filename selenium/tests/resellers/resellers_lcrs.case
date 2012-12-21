@@ -398,7 +398,7 @@
 	<td>label=Algeria</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>213 - FIX Algeria proper</td>
 	<td></td>
 </tr>
@@ -433,7 +433,7 @@
 	<td>label=Albania</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>355 - FIX Albania proper</td>
 	<td></td>
 </tr>
@@ -461,6 +461,11 @@
 	<td>assertText</td>
 	<td>lname_2</td>
 	<td>test_re_lcr</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -608,7 +613,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Provider disabled</td>
 	<td></td>
 </tr>
@@ -618,7 +623,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Provider enabled</td>
 	<td></td>
 </tr>

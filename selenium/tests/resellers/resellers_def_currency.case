@@ -663,7 +663,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>//tr[@id='booth-6']/td[8]/span</td>
 	<td>POSTPAID (18.33)</td>
 </tr>
@@ -1156,6 +1156,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>1.0 EUR</td>
 	<td></td>
@@ -1192,6 +1197,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>//input[@value='End Session and Generate Invoice']</td>
 	<td></td>
@@ -1217,6 +1227,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
 	<td>assertElementNotPresent</td>
 	<td>//input[@value='End Session and Generate Invoice']</td>
 	<td></td>
@@ -1229,8 +1244,8 @@
 <!--12.126 returns 14.81 while in invoice it's 14.80. mor12 returns 14.80 in both.-->
 <tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0 </td>
-	<td>15000</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>10000</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
