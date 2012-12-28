@@ -58,7 +58,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group updated</td>
 	<td></td>
 </tr>
@@ -73,7 +73,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test Reseller</td>
 	<td></td>
 </tr>
@@ -140,7 +140,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SMS Tariff created</td>
 	<td></td>
 </tr>
@@ -181,7 +181,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rates updated</td>
 	<td></td>
 </tr>
@@ -196,7 +196,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SMS Rate updated</td>
 	<td></td>
 </tr>
@@ -212,7 +212,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>No available SMS LCR. Please contact Administrator</td>
 	<td></td>
 </tr>
@@ -264,7 +264,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>LCR successfully created</td>
 	<td></td>
 </tr>
@@ -306,7 +306,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User subscribed to SMS service: User Resellers</td>
 	<td></td>
 </tr>
@@ -372,7 +372,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SMS list</td>
 	<td></td>
 </tr>
@@ -432,7 +432,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>No available SMS Provider</td>
 	<td></td>
 </tr>
@@ -483,7 +483,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SMS Tariff created</td>
 	<td></td>
 </tr>
@@ -509,7 +509,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SMS Provider created</td>
 	<td></td>
 </tr>
@@ -530,7 +530,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Provider added</td>
 	<td></td>
 </tr>
@@ -610,7 +610,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Albania FIX Albania proper / 1 SMS: 3.0 USD</td>
 	<td></td>
 </tr>
@@ -625,7 +630,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 3 USD</td>
 	<td></td>
 </tr>
@@ -650,7 +655,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 6 USD</td>
 	<td></td>
 </tr>
@@ -675,7 +680,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 9 USD</td>
 	<td></td>
 </tr>
@@ -695,7 +700,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>1 - failed, system owner does not have rate for this destination</td>
 	<td></td>
 </tr>
@@ -746,7 +751,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>SMS Tariff created</td>
 	<td></td>
 </tr>
@@ -771,7 +776,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rates updated</td>
 	<td></td>
 </tr>
@@ -791,7 +796,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User subscribed to SMS service: Test Reseller</td>
 	<td></td>
 </tr>
@@ -837,7 +842,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Albania MOB Albania mobile / 1 SMS: 6.0 USD</td>
 	<td></td>
 </tr>
@@ -852,7 +862,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 6 USD</td>
 	<td></td>
 </tr>
@@ -862,7 +872,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2 - failed, reseller does not have rate for this destination</td>
 	<td></td>
 </tr>
@@ -882,7 +892,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Albania MOB Albania Mobile / 1 SMS: 3.0 USD</td>
 	<td></td>
 </tr>
@@ -897,7 +912,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 3 USD</td>
 	<td></td>
 </tr>
@@ -907,7 +922,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>2 - failed, reseller does not have rate for this destination</td>
 	<td></td>
 </tr>
@@ -958,7 +973,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Rates updated</td>
 	<td></td>
 </tr>
@@ -1005,7 +1020,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Albania MOB Albania mobile / 1 SMS: 6.0 USD</td>
 	<td></td>
 </tr>
@@ -1020,7 +1040,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 6 USD</td>
 	<td></td>
 </tr>
@@ -1040,7 +1060,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Albania MOB Albania Mobile / 1 SMS: 3.0 USD</td>
 	<td></td>
 </tr>
@@ -1055,7 +1080,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 3 USD</td>
 	<td></td>
 </tr>
@@ -1076,7 +1101,12 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Unable to send SMS - no rate for this Destination</td>
 	<td></td>
 </tr>
@@ -1091,7 +1121,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Total SMS Price : 0 USD</td>
 	<td></td>
 </tr>
