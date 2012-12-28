@@ -114,7 +114,7 @@
         <%end%>
     <th align="right"><%= ordered_list_header("calls", "calls", "Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("billed_duration", "billed_duration", "Billed_Duration", @options.merge({:order_by => @options[:order_by_name]})) %></th>
-    <!--<th align="right"><%#= ordered_list_header("incoming_price", "incoming_price", "Incoming_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>-->
+    <th align="right"><%= ordered_list_header("incoming_price", "incoming_price", "Incoming_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("owner_price", "owner_price", "Owner_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("provider_price", "provider_price", "Provider_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
 
@@ -151,7 +151,7 @@
             <%end%>
             <td id="calls_<%= row.did_id %>" align="right"><%= row.total_calls %></td>
             <td id="dur_<%= row.did_id %>" align="right"><%= nice_time(row.dids_billsec) %></td>
-            <!--<td id="inc_<%#= row.did_id %>" align="right"><%#= nice_number(row.inc_price) %></td>-->
+            <td id="inc_<%= row.did_id %>" align="right"><%= nice_number(row.inc_price) %></td>
             <td id="own_<%= row.did_id %>" align="right"><%= nice_number(row.own_price) %></td>
             <td id="prov_<%= row.did_id %>" align="right"><%= nice_number(row.d_prov_price) %></td>
 
@@ -163,7 +163,7 @@
     <th align="left" colspan='1'><%= _("Total") %>:</th>
     <th id="t_calls" align="right"><%= @total[:calls] %></th>
     <th id="t_billsec" align="right"><%= nice_time(@total[:min]) %></th>
-    <!--<th id="t_inc" align="right"><%#= nice_number(@total[:inc]) %></th>-->
+    <th id="t_inc" align="right"><%= nice_number(@total[:inc]) %></th>
     <th id="t_own" align="right"><%= nice_number(@total[:own]) %></th>
     <th id="t_prov" align="right"><%= nice_number(@total[:prov]) %></th>
 

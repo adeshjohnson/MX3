@@ -204,12 +204,12 @@ class Device < ActiveRecord::Base
 
   # checks if server with such id exists
   def ensure_server_id
-    if self.server_id.blank? or !Server.find(:first, :conditions => ["id = ?", self.server_id])
+    if self.server_id.blank? or !Server.where(:id => self.server_id).first
       default = Confline.get_value("Default_device_server_id")
       if !default.blank?
         self.server_id = default
       else
-        if server = Server.find(:first, :order => "id ASC")
+        if server = Server.order("id ASC").first
           Confline.set_value("Default_device_server_id", server.id)
           self.server_id = server.id
         else
@@ -249,14 +249,14 @@ class Device < ActiveRecord::Base
   def check_device_username
     if self.username_must_be_unique_on_creation
       username = self.username; name = self.username
-      while Device.find(:first, :conditions => {:username => username})
+      while Device.where(:username => username).first
         username = self.generate_rand_name(name, 2)
       end
       self.username = username
     end
     if self.virtual?
       username = self.username;
-      while Device.find(:first, :conditions => {:username => username})
+      while Device.where(:username => username).first
         username = self.generate_rand_name('', 12)
       end
       self.username = username
@@ -323,7 +323,7 @@ class Device < ActiveRecord::Base
 
   def create_codecs
     owner = self.user_id > 0 ? self.user.owner_id : 0
-    for codec in Codec.find(:all)
+    for codec in Codec.all
       if Confline.get_value("Default_device_codec_#{codec.name}", owner).to_i == 1
         pc = Devicecodec.new
         pc.codec_id = codec.id
@@ -336,17 +336,16 @@ class Device < ActiveRecord::Base
   end
 
   def codec?(codec)
-    sql = "SELECT codecs.name FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id GROUP BY codecs.name HAVING COUNT(*) = 1"
-    self.tmp_codec_cache = (self.tmp_codec_cache || ActiveRecord::Base.connection.select_values(sql))
+    @codecs = Codec.select("codecs.name").joins("LEFT JOIN devicecodecs ON (devicecodecs.codec_id = codecs.id)").where("devicecodecs.device_id = #{self.id.to_s}").group("codecs.name HAVING COUNT(*) = 1").all
+    self.tmp_codec_cache = (self.tmp_codec_cache || @codecs)
     self.tmp_codec_cache.include? codec.to_s
   end
 
   def codecs
-    sql = "SELECT * FROM codecs, devicecodecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id ORDER BY devicecodecs.priority"
-    res = ActiveRecord::Base.connection.select_all(sql)
+    res = Codec.joins("LEFT JOIN devicecodecs ON (devicecodecs.codec_id = codecs.id)").where("devicecodecs.device_id = #{self.id.to_s}").order("devicecodecs.priority").all
     codecs = []
     for i in 0..res.size-1
-      codecs << Codec.find(res[i]["codec_id"])
+      codecs << Codec.where(:id => res[i]["codec_id"]).first
     end
     codecs
   end

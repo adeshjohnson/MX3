@@ -72,14 +72,14 @@ begin
       out = 0
       if usertype == 'reseller'
         c = Call.find(:all,
-                      :select => "SUM(if((reseller_price + did_price + did_prov_price) between -10000 and 10000 , (reseller_price + did_price + did_prov_price), 0 )) as u_p", #"SUM(if((IF(calls.user_id = #{id},user_price,reseller_price) + did_price + did_inc_price + did_prov_price) > 10000 , 0,(IF(calls.user_id = #{id},user_price,reseller_price) + did_price + did_inc_price + did_prov_price) )) as u_p",
+                      :select => "SUM(if((reseller_price + did_inc_price + did_price + did_prov_price) between -10000 and 10000 , (reseller_price + did_price + did_inc_price + did_prov_price), 0 )) as u_p", #"SUM(if((IF(calls.user_id = #{id},user_price,reseller_price) + did_price + did_inc_price + did_prov_price) > 10000 , 0,(IF(calls.user_id = #{id},user_price,reseller_price) + did_price + did_inc_price + did_prov_price) )) as u_p",
                       :joins => "LEFT JOIN devices AS dst_device ON (dst_device.id = calls.dst_device_id)",
                       :conditions => ["(calls.reseller_id = ? OR calls.user_id = ? OR dst_device.user_id = ?) #{cond}", id, id, id]
         )
         #    puts "(calls.reseller_id = ? OR calls.user_id = ? OR dst_device.user_id = ?) #{cond}"
       else
         c = Call.find(:all,
-                      :select => "SUM(if((user_price + did_price + did_prov_price) between -10000 and 10000 , (user_price + did_price + did_prov_price), 0 )) as u_p",
+                      :select => "SUM(if((user_price + did_price + did_inc_price + did_prov_price) between -10000 and 10000 , (user_price + did_price + did_inc_price + did_prov_price), 0 )) as u_p",
                       :joins => "LEFT JOIN devices AS dst_device ON (dst_device.id = calls.dst_device_id)",
                       :conditions => ["(calls.user_id = ? OR dst_device.user_id = ?) #{cond}", id, id]
         )

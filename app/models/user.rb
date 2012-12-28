@@ -503,7 +503,8 @@ class User < ActiveRecord::Base
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.provider_price')}, 0)) AS 'total_provider_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.reseller_price')}, 0)) AS 'total_reseller_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_price')}, 0)) AS 'total_did_price',
-          SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_prov_price')}, 0)) AS 'total_did_prov_price'
+          SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_prov_price')}, 0)) AS 'total_did_prov_price',
+          SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_inc_price')}, 0)) AS 'total_did_inc_price'
           FROM calls JOIN devices ON (devices.id = calls.dst_device_id) LEFT JOIN dids ON (calls.did_id = dids.id) WHERE (calls.card_id = 0 AND (devices.user_id = #{id} OR (dids.user_id = #{id}) )#{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')));"
       #MorLog.my_debug(sql)
       calls = Call.find_by_sql(sql)
@@ -518,7 +519,8 @@ class User < ActiveRecord::Base
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.provider_price')}, 0)) AS 'total_provider_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.reseller_price')}, 0)) AS 'total_reseller_price',
           SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_price')}, 0)) AS 'total_did_price',
-          SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_prov_price')}, 0)) AS 'total_did_prov_price'
+          SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_prov_price')}, 0)) AS 'total_did_prov_price',
+          SUM(IF(calls.disposition = 'ANSWERED',#{SqlExport.replace_price('calls.did_inc_price')}, 0)) AS 'total_did_inc_price'
           FROM calls WHERE (calls.card_id = 0 AND (calls.user_id = #{id} #{reseller_sql}) #{call_type_sql} #{device_sql} #{hgc_sql} AND ((calldate BETWEEN '#{date_from.to_s}' AND '#{date_till.to_s}')));")
     end
     calls[0]
@@ -945,11 +947,11 @@ class User < ActiveRecord::Base
       stt_month = month_t + "-#{last_day} 23:59:59"
 
       # calls from admin users
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id = 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price + calls.did_inc_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id = 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id != 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.reseller_price + calls.did_inc_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id != 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -964,11 +966,11 @@ class User < ActiveRecord::Base
       stt = day_t + " 23:59:59"  # till
 
       # calls from admin users
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id = 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price + calls.did_inc_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id = 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id != 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.provider_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.reseller_price + calls.did_inc_price)', {:reference => 'call_cost'})}, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE reseller_id != 0 AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       day_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -987,11 +989,11 @@ class User < ActiveRecord::Base
       stt_month = month_t + "-#{last_day} 23:59:59"
 
       # calls from reseller
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price + calls.did_inc_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price + calls.did_inc_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -1005,11 +1007,11 @@ class User < ActiveRecord::Base
       stt = day_t + " 23:59:59"  # till
 
       # calls from reseller
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price + calls.did_inc_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(calls.billsec) as 'sum_billsec', #{SqlExport.replace_price('SUM(calls.reseller_price)', {:reference => 'call_selfcost'})}, #{SqlExport.replace_price('SUM(calls.user_price + calls.did_inc_price)', {:reference => 'call_cost'})} FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       day_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -1175,7 +1177,7 @@ class User < ActiveRecord::Base
     # this sql uses calls.dst_user_id field which allows increase speed a lot
     sql = "SELECT count(calls.id) as calls, #{SqlExport.replace_price("SUM(#{SqlExport.user_price_sql})", {:reference => 'price'})}
                   FROM calls
-                  WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND calls.dst_user_id = #{id};"
+                  WHERE disposition = 'ANSWERED' AND calldate BETWEEN '#{period_start}' AND '#{period_end}' AND calls.dst_user_id = #{id} AND calls.did_inc_price > 0;"
 
     res = ActiveRecord::Base.connection.select_all(sql)
 
@@ -1553,7 +1555,7 @@ class User < ActiveRecord::Base
           # select2 << SqlExport.replace_price("#{n1}(user_price3+provider_price3+did_price3)#{n2}", {:reference => 'profit'})
           select2 << SqlExport.replace_price("#{n1}(user_price3+did_price3)#{n2}", {:reference => 'profit'})
           select << "#{n1}calls.did_prov_price#{c1}#{n2} as 'user_price3'"
-          # select << "#{n1}calls.did_inc_price#{c1}#{n2} as 'provider_price3'"
+          select << "#{n1}calls.did_inc_price#{c1}#{n2} as 'provider_price3'"
           select << "#{n1}calls.did_price#{c1}#{n2} as 'did_price3'"
         end
         if options[:usertype] == "reseller"

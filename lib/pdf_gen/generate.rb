@@ -53,7 +53,7 @@ module PdfGen
 
           headers2 << {:text => _('Number')}
           headers2 << {:text => _('Provider')}
-          # headers2 << {:text => _('Incoming')}
+          headers2 << {:text => _('Incoming')}
           headers2 << {:text => _('Owner')}
           #  headers << headers2
         end
@@ -85,7 +85,7 @@ module PdfGen
         if usertype == "admin"
           if direction == "incoming"
             headers << {:text => _('Provider')}.merge(top_options)
-            # headers << {:text => _('Incoming')}.merge(top_options)
+            headers << {:text => _('Incoming')}.merge(top_options)
             headers << {:text => _('Owner')}.merge(top_options)
             headers << {:text => _('Profit')}.merge(top_options)
           else
@@ -734,7 +734,7 @@ module PdfGen
         if main_options[:can_see_finances]
 
           item << nice_number(call['did_prov_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-          # item << nice_number(call['did_inc_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+          item << nice_number(call['did_inc_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
           item << nice_number(call['did_price'], {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         end
       else
@@ -782,7 +782,7 @@ module PdfGen
         item << nice_number(total_calls.total_user_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => ''}
         item << nice_number(total_calls.total_did_prov_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        # item << nice_number(total_calls.total_did_inc_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+        item << nice_number(total_calls.total_did_inc_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << nice_number(total_calls.total_did_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
       end
       if usertype == 'reseller'

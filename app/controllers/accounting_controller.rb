@@ -1154,7 +1154,7 @@ class AccountingController < ApplicationController
     user_price = SqlExport.replace_price(up, {:ex => ex})
     reseller_price = SqlExport.replace_price(rp, {:ex => ex})
     did_sql_price = SqlExport.replace_price('calls.did_price', {:ex => ex, :reference => 'did_price'})
-    # did_inc_sql_price = SqlExport.replace_price('calls.did_inc_price', {:ex => ex, :reference => 'did_inc_price'})
+    did_inc_sql_price = SqlExport.replace_price('calls.did_inc_price', {:ex => ex, :reference => 'did_inc_price'})
     #did_sql_price = SqlExport.replace_price('calls.did_price', 'did_price')
     selfcost = SqlExport.replace_price(pp, {:ex => ex, :reference => 'selfcost'})
     user_rate = SqlExport.replace_price('calls.user_rate', {:ex => ex, :reference => 'user_rate'})
@@ -1202,9 +1202,9 @@ class AccountingController < ApplicationController
 
     sql = "SELECT #{user_rate}, destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{billsec_cond}) as 'billsec', #{selfcost}, SUM(#{user_price}) as 'price'  " +
         "FROM calls "+
-        "JOIN devices ON (calls.src_device_id = devices.id)
+        "LEFT JOIN devices ON (calls.src_device_id = devices.id)
         LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  "+
-        "JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
+        "LEFT JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
         "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
         " AND devices.user_id = '#{user.id}' AND calls.card_id = 0  #{zero_calls_sql}" +
         "GROUP BY destinationgroups.id, calls.user_rate "+
@@ -1213,7 +1213,7 @@ class AccountingController < ApplicationController
     if user.usertype == "reseller"
       sql2 = "SELECT calls.dst,  COUNT(*) as 'count_calls', SUM(#{billsec_cond}) as 'sum_billsec', #{selfcost}, SUM(#{reseller_price}) as 'price', #{user_rate}  " +
           "FROM calls "+
-          "#{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
+          "#{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN destinations ON (destinations.prefix = calls.prefix) LEFT JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) "+
           "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
           " AND (calls.reseller_id = '#{user.id}' ) #{zero_calls_sql}" +
           "GROUP BY destinationgroups.id, calls.user_rate "+
@@ -1231,7 +1231,7 @@ class AccountingController < ApplicationController
 
     res.each { |r|
 
-      country = r["dg_name"]
+      country = r["dg_name"].to_s.blank? ? _('Calls_To_Dids') : r["dg_name"]
       type = r["dg_type"]
       calls = r["calls"]
       billsec = r["billsec"]
@@ -1788,6 +1788,9 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         if (incoming_received_calls_price > 0)
           invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_received_calls_price.to_d, :quantity => incoming_received_calls, :invdet_type => 0)
           price += incoming_received_calls_price.to_d
+        elsif (incoming_calls_by_users_price > 0)
+          invoice.invoicedetails.create(:name => _('Did_owner_cost'), :price => incoming_calls_by_users_price.to_d, :quantity => incoming_calls_by_users, :invdet_type => 0)
+          price += incoming_calls_by_users_price.to_d
         end
       end
 

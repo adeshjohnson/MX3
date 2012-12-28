@@ -1120,7 +1120,7 @@ in before filter : user (:find_user_from_id_or_session)
 
     #incoming
     @total_inc_prov_price = @total_stats.total_did_prov_price.to_d * exchange_rate
-    # @total_inc_price = @total_stats.total_did_inc_price.to_d * exchange_rate
+    @total_inc_price = @total_stats.total_did_inc_price.to_d * exchange_rate
     @total_price2 = @total_stats.total_did_price.to_d * exchange_rate
 
 
@@ -1159,7 +1159,7 @@ in before filter : user (:find_user_from_id_or_session)
 
         @curr_rate2[call.id] = call.did_price * exchange_rate if call.did_price
         @curr_prov_rate2[call.id] = call.did_prov_price * exchange_rate if call.did_prov_price
-        # @curr_inc_rate[call.id] = call.did_inc_price * exchange_rate if call.did_inc_price
+        @curr_inc_rate[call.id] = call.did_inc_price * exchange_rate if call.did_inc_price
       else
         # outgoing calls
 
@@ -1334,7 +1334,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     total_prov_price = 0
     total_prfit = 0
     total_did_provider = 0
-    # total_did_inc = 0
+    total_did_inc = 0
     total_did_own = 0
     total_did_prof = 0
 
@@ -1355,7 +1355,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       end
 
       @rate_did_pr = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_prov_price.to_d]})
-      # @rate_did_ic = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_inc_price.to_d]})
+      @rate_did_ic = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_inc_price.to_d]})
       @rate_did_ow = Currency.count_exchange_prices({:exrate => exrate, :prices => [call.did_price.to_d]})
 
       item << call.calldate.strftime("%Y-%m-%d %H:%M:%S")
@@ -1374,9 +1374,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       if session[:usertype] == "admin"
         if @direction == "incoming"
           item << nice_number(@rate_did_pr)
-          # item << nice_number(@rate_did_ic)
+          item << nice_number(@rate_did_ic)
           item << nice_number(@rate_did_ow)
-          # item << nice_number(@rate_did_pr + @rate_did_ic + @rate_did_ow)
+          item << nice_number(@rate_did_pr + @rate_did_ic + @rate_did_ow)
           item << nice_number(@rate_did_pr + @rate_did_ow)
         else
           item << nice_number(@rate_cur3)
@@ -1418,10 +1418,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       total_prfit += @rate_cur3.to_d - @rate_prov.to_d
       total_billsec += call.nice_billsec
       total_did_provider += @rate_did_pr
-      # total_did_inc += @rate_did_ic
+      total_did_inc += @rate_did_ic
       total_did_own += @rate_did_ow
-      # total_did_prof += @rate_did_pr.to_d + @rate_did_ic.to_d + @rate_did_ow.to_d
-      total_did_prof += @rate_did_pr.to_d + @rate_did_ow.to_d
+      total_did_prof += @rate_did_pr.to_d + @rate_did_ic.to_d + @rate_did_ow.to_d
 
       items << item
     end
@@ -1433,7 +1432,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     if session[:usertype] == "admin" or session[:usertype] == "reseller"
       if @direction == "incoming"
         item << nice_number(total_did_provider)
-        # item << nice_number(total_did_inc)
+        item << nice_number(total_did_inc)
         item << nice_number(total_did_own)
         item << nice_number(total_did_prof)
       else
@@ -2835,7 +2834,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     #@direction = params[:direction]
     direction = '' #" AND calls.callertype = '#{dir}'"
     # end
-    sql = "SELECT dids.*, SUM(calls.did_price) as did_price , SUM(calls.did_prov_price) as did_prov_price, COUNT(calls.id) as 'calls_size', providers.name, users.username, users.first_name, users.last_name, actions.date FROM dids
+    sql = "SELECT dids.*, SUM(calls.did_price) as did_price , SUM(calls.did_prov_price) as did_prov_price, SUM(calls.did_inc_price) as did_inc_price, COUNT(calls.id) as 'calls_size', providers.name, users.username, users.first_name, users.last_name, actions.date FROM dids
     JOIN calls on (calls.did_id = dids.id)
     JOIN providers on (dids.provider_id = providers.id)
     JOIN users on (dids.user_id = users.id)
@@ -2875,7 +2874,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       for r in @res
         @dids_total_price += r['did_price'].to_d
         @dids_total_price_provider += r['did_prov_price'].to_d
-        # @dids_total_inc_price += r['did_inc_price'].to_d
+        @dids_total_inc_price += r['did_inc_price'].to_d
         @dids_total_profit += r['did_price'].to_d + r['did_prov_price'].to_d # + r['did_inc_price'].to_d
         @dids_total_calls += r['calls_size'].to_i
       end
@@ -3344,16 +3343,16 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if params[:provider_id]
       if params[:provider_id].to_i != -1
-        @provider = Provider.find(:first, :conditions => ["id = ? ", params[:provider_id]])
+        @provider = Provider.where(:id => params[:provider_id]).first
         @prov = @provider.id
         cond +=" (calls.provider_id = '#{params[:provider_id].to_i}' OR calls.did_provider_id = '#{params[:provider_id].to_i}') AND "
       end
     end
-    @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => 'name ASC')
+    @providers = Provider.where(:hidden => 0).order('name ASC').all
 
     if params[:user_id]
       if params[:user_id].to_i != -1
-        @user = User.find(:first, :conditions => ["id = ?", params[:user_id]])
+        @user = User.where(:id => params[:user_id]).first
         cond +=" calls.user_id = '#{@user.id}' AND "
         @user_id = @user.id
       end
@@ -3362,12 +3361,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if params[:reseller_id]
       if params[:reseller_id].to_i != -1
-        @reseller = User.find(:first, :conditions => ["id = ?", params[:reseller_id]])
+        @reseller = User.where(:id => params[:reseller_id]).first
         cond +=" calls.reseller_id = '#{@reseller.id}' AND "
         @reseller_id = @reseller.id
       end
     end
-    @resellers = User.find(:all, :conditions => 'usertype = "reseller"', :order => 'first_name ASC')
+    @resellers = User.where(:usertype => "reseller").order('first_name ASC').all
 
     if params[:direction]
       if params[:direction].to_i != -1
@@ -3386,14 +3385,14 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if @country_id
       if @country_id.to_i != -1
-        @country = Direction.find(@country_id)
+        @country = Direction.where(:id => @country_id).first
         @coun = @country.id
         des3 += "destinations JOIN"
         des2 += "ON (calls.prefix = destinations.prefix)"
         des +=" AND destinations.direction_code ='#{@country.code}' "
       end
     end
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order("name ASC").all
 
     change_date
 
