@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.51" />
+<link rel="selenium.base" href="" />
 <title>resellers_translations</title>
 </head>
 <body>
@@ -72,7 +72,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>id=translation_32_1</td>
 	<td></td>
 </tr>
@@ -192,17 +197,17 @@
 	<td>Refresh translations in upper right corner without relogin</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>translation_2_0</td>
 	<td>Lithuanian</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>translation_3_0</td>
 	<td>Spanish</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=translation_32_1</td>
 	<td>Czech</td>
 </tr>
@@ -212,7 +217,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>id=translation_1_1</td>
 	<td></td>
 </tr>
@@ -397,7 +407,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>translation_2_1</td>
 	<td>Lithuanian</td>
 </tr>
@@ -407,7 +422,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>translation_3_1</td>
 	<td>Spanish</td>
 </tr>
@@ -492,7 +512,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>translation_2_0</td>
 	<td>Lithuanian</td>
 </tr>
@@ -502,7 +527,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>translation_3_0</td>
 	<td></td>
 </tr>

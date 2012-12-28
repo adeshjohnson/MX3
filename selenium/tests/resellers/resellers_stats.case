@@ -47,7 +47,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>results</td>
 	<td></td>
 </tr>
@@ -67,7 +67,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>results</td>
 	<td></td>
 </tr>
@@ -87,7 +87,7 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>results</td>
 	<td></td>
 </tr>
@@ -97,12 +97,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>results</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Lithuania FIX Lithuania proper</td>
 	<td></td>
 </tr>
@@ -117,17 +122,22 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>country_results</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Liberia</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Lithuania</td>
 	<td></td>
 </tr>
@@ -192,7 +202,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group created</td>
 	<td></td>
 </tr>
@@ -212,7 +222,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -247,7 +257,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Group updated</td>
 	<td></td>
 </tr>
@@ -282,7 +292,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed</td>
 	<td></td>
 </tr>
