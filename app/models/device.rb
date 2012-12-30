@@ -342,7 +342,7 @@ class Device < ActiveRecord::Base
   end
 
   def codecs
-    res = Codec.joins("LEFT JOIN devicecodecs ON (devicecodecs.codec_id = codecs.id)").where("devicecodecs.device_id = #{self.id.to_s}").order("devicecodecs.priority").all
+    res = Codec.select("*").joins("LEFT JOIN devicecodecs ON (devicecodecs.codec_id = codecs.id)").where("devicecodecs.device_id = #{self.id.to_s}").order("devicecodecs.priority").all
     codecs = []
     for i in 0..res.size-1
       codecs << Codec.where(:id => res[i]["codec_id"]).first
