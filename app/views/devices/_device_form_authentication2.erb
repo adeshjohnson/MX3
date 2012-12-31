@@ -104,7 +104,7 @@
                     } else {
                         $('port').disabled = false;
                         $('ip_auth2').hidden = false;
-                        $('port').value = <%= @device.port == 0 ? Device::DefaultPort["SIP"] : @device.port %>;
+                        $('port').value = <%= @device.proxy_port == 0 ? Device::DefaultPort["SIP"] : @device.port %>;
                     }
                 }
             <% end %>
@@ -131,8 +131,8 @@
                 <tr id="ip_auth_zero_port">
                   <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
                   <td id="zero_port_2">
-                    <%= radio_button_tag('zero_port', '0', @device.port > 0) %> <%= _('No') %>
-                    <%= radio_button_tag('zero_port', '1', @device.port == 0) %> <%= _('Yes') %>
+                    <%= radio_button_tag('zero_port', '0', @device.proxy_port > 0) %> <%= _('No') %>
+                    <%= radio_button_tag('zero_port', '1', @device.proxy_port == 0) %> <%= _('Yes') %>
                   </td>
                 </tr>
               <% end %>

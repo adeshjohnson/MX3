@@ -863,7 +863,7 @@ class CallcController < ApplicationController
       @sp = Serverprovider.all
         
         if ccl.to_i == 0
-          p_srv_id = Server.where(:server_type => "sip_proxy").first.id.to_s rescue nil
+          p_srv_id = Server.where(:server_type => "sip_proxy").first.server_id.to_s rescue nil
           if !p_srv_id.blank? 
             Server.delete_all(:server_type => "sip_proxy")
             Device.delete_all(:name => "mor_server_" + p_srv_id.to_s)
@@ -875,8 +875,8 @@ class CallcController < ApplicationController
             dup_count = ServerDevice.select("count(*) as how_many").where(:device_id => s.device_id.to_s).first.how_many.to_i rescue 0
             dev = Device.where(:id => s.device_id.to_s).first
 
-            if dev.device_type.to_s == "SIP" and dev.port.to_i == 0 and dev.name.include?('ipauth')
-              dev.port = Device::DefaultPort["SIP"]
+            if dev.device_type.to_s == "SIP" and dev.proxy_port.to_i == 0 and dev.name.include?('ipauth')
+              dev.proxy_port = Device::DefaultPort["SIP"]
               dev.save(:validate => false)
             end
 
@@ -907,9 +907,9 @@ class CallcController < ApplicationController
           @sp.each do |p|
             prov = Provider.where("id = #{p.provider_id}").first
             prov_dev = Device.where("id = #{prov.device_id}").first
-            if prov_dev.port == 0 and prov_dev.device_type == "SIP"
-              prov.port = Device::DefaultPort["SIP"]
-              prov_dev.port = Device::DefaultPort["SIP"]
+            if prov_dev.proxy_port == 0 and prov_dev.device_type == "SIP"
+              prov.port = prov_dev.port
+              prov_dev.proxy_port = prov_dev.port
               prov_dev.save(:validate => false)
               prov.save(:validate => false)
             end
@@ -933,26 +933,7 @@ class CallcController < ApplicationController
             new_id = old_id.to_i + 1
 
             if (created_server = Server.create(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" ) rescue false)
-              
-                  Device.new
-#                  dev.secret = ApplicationController::random_password(10).to_s
-#                  dev.name = "mor_server_" + new_id.to_s
-#                  dev.fromuser = dev.name
-#                  dev.host = host
-#                  dev.context = "mor_direct"
-#                  dev.ipaddr = ip
-#                  dev.device_type = "SIP" 
-#                  dev.port = 5060 
-#                  dev.extension = dev.name
-#                  dev.username = dev.name
-#                  dev.user_id = 0
-#                  dev.allow = "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722"
-#                  dev.nat = "yes"
-#                  dev.canreinvite = "no"
-#                  dev.server_id = new_id
-#                  dev.description = 'DO NOT EDIT'
-                  Device.where(:name => "mor_server_" + new_id.to_s).update_all(:nat => "yes", :allow => "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722") 
-
+              Device.where(:name => "mor_server_" + new_id.to_s).update_all(:nat => "yes", :allow => "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722")
 
               @sd.each do |d|
                  cur_dev = Device.where(:id => d.device_id.to_s).first

@@ -127,8 +127,10 @@ class DevicesController < ApplicationController
     
     device.port = 4569 if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
     device.port = 5060 if device.device_type == 'SIP' and not Device.valid_port? device.port, device.device_type                      
-    device.port = 1720 if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type    
-    
+    device.port = 1720 if device.device_type == 'H323' and not Device.valid_port? params[:port], device.device_type
+
+    device.proxy_port = device.port
+
     if device.save
       # if device type = SIP and device host = dynamic and ccl_active=1 it must be assigned to sip_proxy server
       serv_dev = ServerDevice.where("server_id=? AND device_id=?", device.server_id, device.id).first
@@ -646,12 +648,17 @@ class DevicesController < ApplicationController
       #we have doubts whether this made any sense. so user now can set port to any positive integer
       @device.port = ""
       @device.port = params[:port] if params[:port]
-      if ccl_active? and params[:port].blank? and @device.device_type == 'SIP' and params[:zero_port].to_i == 1
-        @device.port = 0
+      @device.port = Device::DefaultPort["IAX2"] if @device.device_type == 'IAX2' and not Device.valid_port? params[:port], @device.device_type
+      @device.port = Device::DefaultPort["SIP"] if @device.device_type == 'SIP' and not Device.valid_port? params[:port], @device.device_type
+      @device.port = Device::DefaultPort["H323"] if @device.device_type == 'H323' and not Device.valid_port? params[:port], @device.device_type
+      if ccl_active?
+        if params[:port].blank? and @device.device_type == 'SIP' and params[:zero_port].to_i == 1
+          @device.proxy_port = 0
+        else
+          @device.proxy_port = @device.port
+        end
       else
-        @device.port = Device::DefaultPort["IAX2"] if @device.device_type == 'IAX2' and not Device.valid_port? params[:port], @device.device_type
-        @device.port = Device::DefaultPort["SIP"] if @device.device_type == 'SIP' and not Device.valid_port? params[:port], @device.device_type
-        @device.port = Device::DefaultPort["H323"] if @device.device_type == 'H323' and not Device.valid_port? params[:port], @device.device_type
+        @device.proxy_port = @device.port
       end
 
       @device.canreinvite = params[:canreinvite]

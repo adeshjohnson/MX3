@@ -134,6 +134,7 @@ class Server < ActiveRecord::Base
     dev.ipaddr = server_ip
     dev.device_type = "SIP" #IAX2 sux
     dev.port = 5060 #make dynamic later
+    dev.proxy_port = 5060 #proxy_port == port (if not changed manually)
     dev.extension = dev.name
     dev.username = dev.name
     dev.user_id = 0

@@ -235,6 +235,7 @@ class ProvidersController < ApplicationController
                         #temp until taken from provider's table
       dev.istrunk = 1   #mark as trunk by default when call will be send to this provider, to send Destination info to it also
       dev.port = @provider.port.strip
+      dev.proxy_port = @provider.port.strip
       dev.works_not_logged = 1
       dev.nat = "no"
                         #temp
@@ -440,7 +441,9 @@ class ProvidersController < ApplicationController
     @device.insecure = "port,invite" if params[:insecure_port] == "1" and params[:insecure_invite] == "1"
     @device.insecure = "invite" if params[:insecure_port] != "1" and params[:insecure_invite] == "1"
     if ccl_active? and !params[:provider][:port] and @device.device_type.to_s == "SIP"
-      @device.port = 0
+      @device.proxy_port = 0
+    else
+      @device.proxy_port = @device.port
     end
 
     @device.fullcontact = ""

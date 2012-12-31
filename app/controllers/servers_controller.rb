@@ -199,6 +199,7 @@ class ServersController < ApplicationController
         dev.ipaddr = @server.server_ip
         #dev.port = 5060 #make dynamic later
         dev.port = @server.port
+        dev.proxy_port = dev.port
         #dev.extension = dev.name
         #dev.username = dev.name
         #dev.user_id = 0
