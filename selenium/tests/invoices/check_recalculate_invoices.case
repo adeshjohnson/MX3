@@ -39,6 +39,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
 	<td></td>
 </tr>
@@ -59,33 +64,33 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=4</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=March</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=March</td>
+	<td>id=date_from_day</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=4</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2007</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2011</td>
+	<td>id=date_till_day</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -99,7 +104,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Generating invoices for period: 2007-03-04 - 2011-03-04</td>
+	<td>Generating invoices for period: 2012-11-21 - 2012-11-21</td>
 	<td></td>
 </tr>
 <tr>
@@ -120,7 +125,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_price_1</td>
-	<td>3.0000</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -130,7 +135,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_price_3</td>
-	<td>33.0000</td>
+	<td>8.1410</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -140,7 +145,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_price_2</td>
-	<td>246.5161</td>
+	<td>10.7220</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -155,22 +160,32 @@
 <tr>
 	<td>select</td>
 	<td>activation_start_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>activation_end_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_end_day</td>
-	<td>label=1</td>
+	<td>activation_start_month</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>activation_start_day</td>
-	<td>label=11</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_day</td>
+	<td>label=30</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -179,18 +194,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>activation_end_year</td>
-	<td>label=2011</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_start_month</td>
-	<td>label=March</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>activation_end_hour</td>
-	<td>label=09</td>
+	<td>label=22</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -215,7 +220,7 @@
 <tr>
 	<td>select</td>
 	<td>activation_start_year</td>
-	<td>label=2007</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -230,7 +235,7 @@
 <tr>
 	<td>select</td>
 	<td>activation_end_year</td>
-	<td>label=2009</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -260,17 +265,17 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_price_1</td>
-	<td>3.0000</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_price_3</td>
-	<td>33.0000</td>
+	<td>8.1410</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_price_2</td>
-	<td>246.5161</td>
+	<td>10.7220</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -280,7 +285,7 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2004</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -300,17 +305,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=inv_price_1</td>
-	<td>220.0968</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_price_3</td>
-	<td>33.0000</td>
+	<td>inv_price_3</td>
+	<td>8.1410</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_price_2</td>
-	<td>456.1828</td>
+	<td>11.0553</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -390,7 +395,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2007</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -470,7 +475,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2007</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>select</td>
