@@ -110,7 +110,7 @@ class DevicesController < ApplicationController
     @sip_proxy_server = Server.where("server_type = 'sip_proxy'").first
     if session[:usertype] == "reseller"
       if ccl_active? and device.device_type == "SIP" and device.host == "dynamic"
-        device.server_id = @sip_proxy_server
+        device.server_id = @sip_proxy_server.id
       else
         first_srv = Server.first.id
         def_asterisk = Confline.get_value('Resellers_server_id').to_i
