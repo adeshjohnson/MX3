@@ -614,7 +614,7 @@ class ApiController < ApplicationController
           doc.page {
             doc.pagename("#{_('Personal_details')}")
             doc.language("en")
-            doc.userid("#{@user_logged.id}")
+            doc.userid("#{@user.id}")
             doc.details {
               doc.main_detail {
                 @user.postpaid == 1 ? doc.account("#{_('Postpaid')}") : doc.account("#{_('Prepaid')}")
