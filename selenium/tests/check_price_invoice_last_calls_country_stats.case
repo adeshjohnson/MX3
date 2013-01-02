@@ -43,18 +43,23 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -64,7 +69,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -89,17 +94,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_billsec</td>
-	<td>00:10:50</td>
+	<td>00:39:26</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_provider_price</td>
-	<td>17.0000</td>
+	<td>1.2540</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>69.0000</td>
+	<td>27.5617</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -107,24 +112,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>css=table.maintable.3.4</td>
-	<td>17.0000</td>
+	<td>assertText</td>
+	<td>id=billsec</td>
+	<td>00:10:27</td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>css=table.maintable.3.6</td>
-	<td>61.0000</td>
+	<td>assertText</td>
+	<td>id=selfcost</td>
+	<td>1.2540</td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>css=table.maintable.3.2</td>
-	<td>17</td>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>5.4340</td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>css=table.maintable.3.3</td>
-	<td>00:10:50</td>
+	<td>assertText</td>
+	<td>id=calls_profit</td>
+	<td>4.1800</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -134,12 +139,12 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -149,17 +154,17 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=1</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -169,7 +174,7 @@
 <tr>
 	<td>select</td>
 	<td>id=s_user</td>
-	<td>label=System Admin</td>
+	<td>label=Test User #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -182,12 +187,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_did_price</td>
-	<td>0.0000</td>
+	<td>13.1400</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_user_price</td>
-	<td>10.0000</td>
+	<td>4.9313</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -217,7 +222,7 @@
 <tr>
 	<td>select</td>
 	<td>id=user_id</td>
-	<td>label=System Admin</td>
+	<td>label=Test User #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -231,7 +236,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2008-01-01 - 2009-01-01</td>
+	<td>2012-11-01 - 2012-11-30</td>
 	<td></td>
 </tr>
 <tr>
@@ -257,13 +262,13 @@
 <tr>
 	<td>assertText</td>
 	<td>id=id_quantity_1</td>
-	<td>2</td>
+	<td>9</td>
 </tr>
 <!--sum=13-->
 <tr>
 	<td>assertText</td>
 	<td>id=id_price_1</td>
-	<td>10.0000</td>
+	<td>7.7647</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -272,7 +277,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>price: 10.0</td>
+	<td>price: 26.6547</td>
 	<td></td>
 </tr>
 <tr>
@@ -282,7 +287,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>'10.0000'</td>
+	<td>'26.6547'</td>
 	<td></td>
 </tr>
 <tr>
@@ -292,7 +297,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;10.0000&quot;</td>
+	<td>&quot;26.6547&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -303,7 +308,7 @@
 <tr>
 	<td>select</td>
 	<td>name=user_id</td>
-	<td>label=admin - System Admin</td>
+	<td>label=101 - Test User #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -313,19 +318,19 @@
 <tr>
 	<td>assertText</td>
 	<td>calls</td>
-	<td>2</td>
+	<td>4</td>
 </tr>
 <!--sum=13-->
 <tr>
 	<td>assertText</td>
 	<td>price</td>
-	<td>10.0000</td>
+	<td>4.9313</td>
 </tr>
 <!--check if time select works-->
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=2</td>
+	<td>label=22</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -345,7 +350,7 @@
 <tr>
 	<td>assertText</td>
 	<td>calls</td>
-	<td>2</td>
+	<td>3</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -360,7 +365,7 @@
 <tr>
 	<td>assertText</td>
 	<td>calls</td>
-	<td>1</td>
+	<td>3</td>
 </tr>
 </tbody></table>
 </body>
