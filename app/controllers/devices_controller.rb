@@ -635,8 +635,6 @@ class DevicesController < ApplicationController
 
       if @device.host != "dynamic"
         @device.ipaddr = @device.host
-      else
-        @device.ipaddr = "0.0.0.0"
       end
 
       # IAX2 Trunking Mode

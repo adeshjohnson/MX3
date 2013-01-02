@@ -125,7 +125,7 @@
 
               <tr id='ip_auth1'>
                 <td id="ip_add_name"><%= _('IP_Address') %>:</td>
-                <td id="ip_add_value">  <%= text_field_tag 'host', @device.host, "class" => "input" %></td>
+                <td id="ip_add_value">  <%= text_field_tag 'host', @device.ipaddr, "class" => "input" %></td>
               </tr>
               <% if ccl_active? and @device.device_type.to_s == "SIP" %>
                 <tr id="ip_auth_zero_port">
@@ -155,7 +155,7 @@
 
               <tr id='ip_dyn3'>
                 <td id="ip_add_name_d"><%= _('IP_Address') %>:</td>
-                <td id="ip_add_value_d">  <%= @device.host%></td>
+                <td id="ip_add_value_d">  <%= @device.ipaddr%></td>
               </tr>
 
               <tr id='ip_dyn4'>
