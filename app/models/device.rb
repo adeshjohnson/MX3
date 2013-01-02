@@ -336,8 +336,8 @@ class Device < ActiveRecord::Base
   end
 
   def codec?(codec)
-    @codecs = Codec.select("codecs.name").joins("LEFT JOIN devicecodecs ON (devicecodecs.codec_id = codecs.id)").where("devicecodecs.device_id = #{self.id.to_s}").group("codecs.name HAVING COUNT(*) = 1").all
-    self.tmp_codec_cache = (self.tmp_codec_cache || @codecs)
+    sql = "SELECT codecs.name FROM devicecodecs, codecs WHERE devicecodecs.device_id = '" + self.id.to_s + "' AND devicecodecs.codec_id = codecs.id GROUP BY codecs.name HAVING COUNT(*) = 1"
+    self.tmp_codec_cache = (self.tmp_codec_cache || ActiveRecord::Base.connection.select_values(sql))
     self.tmp_codec_cache.include? codec.to_s
   end
 
