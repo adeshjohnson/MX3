@@ -62,9 +62,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=ip_add_value_d</td>
-	<td>dynamic</td>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>mor_server_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=nat_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -98,6 +128,41 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>mor_server_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=nat_value</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=allow_value</td>
+	<td>alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/servers/list</td>
 	<td></td>
 </tr>
@@ -125,11 +190,6 @@
 	<td>assertValue</td>
 	<td>id=insecure_invite</td>
 	<td>on</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=ip_add_value_d</td>
-	<td>dynamic</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -164,6 +224,41 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>CCL turned off</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>mor_server_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=nat_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722</td>
 	<td></td>
 </tr>
 <tr>
@@ -2438,7 +2533,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/device_edit/25</td>
+	<td>/billing/devices/device_edit/26</td>
 	<td></td>
 </tr>
 <tr>
