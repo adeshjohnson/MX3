@@ -108,6 +108,7 @@ class LcrsController < ApplicationController
     if @lcr.respond_to?(:errors) and @lcr.errors.size == 0
       @lcr.destroy_all
       @lcr.destroy
+      LcrPartial.where(:main_lcr_id => @lcr.id).destroy_all
       flash[:status] = _('Lcr_deleted')
     else
       flash_errors_for(_('Lcr_not_deleted'), @lcr)
