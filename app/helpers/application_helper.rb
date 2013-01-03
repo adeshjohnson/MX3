@@ -1448,6 +1448,8 @@ conf_name - name of confline that will be represented by checkbox.
   def nice_user_tooltip(user)
     if user
       user_details = raw "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('LCR')}:</b> #{user.try(:lcr_name)}<br> <b>#{_('Credit')}:</b> #{nice_credit(user)}".html_safe
+      reseller_user_details = raw "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('Credit')}:</b> #{nice_credit(user)}".html_safe 
+      user_details = reseller_user_details if current_user.usertype == "reseller" and Lcr.where(:id => user.lcr_id).first.user_id != current_user.id
       address_details = raw "<br> <b>#{_('Country')}:</b> #{user.try(:county)}<br> <b>#{_('City')}:</b> #{user.try(:city)}".html_safe
       tooltip('User details', (user_details + address_details).html_safe)
     end
