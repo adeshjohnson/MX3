@@ -360,7 +360,7 @@ class Call < ActiveRecord::Base
       originator_price = "SUM(IF(calls.user_price IS NULL AND calls.disposition = 'ANSWERED', 0, #{SqlExport.replace_price(SqlExport.user_price_sql)})) AS 'originator_price'"
     else
       originator_billsec= "SUM(IF(owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originator_billsec'"
-      originator_price = "SUM(#{SqlExport.replace_price(SqlExport.admin_user_price_sql)}) AS 'originator_price'"
+      originator_price = "SUM(#{SqlExport.replace_price(SqlExport.admin_user_price_no_dids_sql)}) AS 'originator_price'"
     end
 
     #limit terminators to allowed ones.

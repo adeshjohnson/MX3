@@ -188,7 +188,11 @@ module SqlExport
   end
 
   def SqlExport.admin_user_price_no_dids_sql
-    "#{SqlExport.user_price_no_dids_sql}"
+    if (defined?(RS_Active) and RS_Active.to_i == 1)
+      "IF(calls.reseller_id > 0,#{SqlExport.admin_reseller_price_no_dids_sql},#{SqlExport.user_price_no_dids_sql})"
+    else
+      "#{SqlExport.user_price_no_dids_sql}"
+    end
   end
 
   def SqlExport.admin_profit_no_dids_sql
