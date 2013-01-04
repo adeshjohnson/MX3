@@ -2039,6 +2039,14 @@ Variables: (Names marked with * are required)
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Payment_Gateway_Error', :data2 => exception.message).save
         end
 
+        # database not updated
+        if exception_class.include?("NoMethodError") and !exception.message.include?("nil:NilClass") and exception.message.include?("for #<")
+          flash_notice = _('Database_Error')
+          flash_help_link = ''
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Database_Error', :data2 => exception.message).save
+        end
+        #
+
         if exception_class.include?("GoogleCheckoutError") and exception.message.include?("The currency used in the cart must match the currency of the seller account.")
           flash_notice = _('Internal_Error_Contact_Administrator')
           flash_help_link = ''
