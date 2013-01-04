@@ -2712,11 +2712,15 @@ class ApiController < ApplicationController
             params[:device][:devicegroup_id] = params[:devicegroup_id]
             params[:device][:device_type] = params[:type]
             params[:device][:pin] = params[:pin] if  params[:pin]
-
+            params[:device][:caller_id] = params[:caller_id] if params[:caller_id]
 
             az, av = @user.alow_device_types_dahdi_virt
 
             notice, params2 = Device.validate_before_create(@user, user_u, params, az, av)
+
+            callerid = "<#{params[:caller_id].to_s.strip}>" if params[:caller_id]
+            notice = "CallerID_must_be_numeric" unless !!Float(params[:caller_id].to_s.strip) rescue false
+
             if !notice.blank?
               doc.error(_(notice).gsub('_', ' '))
             else
@@ -2729,6 +2733,7 @@ class ApiController < ApplicationController
               params2[:device][:pin] = new_device_pin if !params2[:device][:pin]
               fextension = free_extension()
               device = user_u.create_default_device({:device_ip_authentication_record => params2[:ip_authentication].to_i, :description => params2[:device][:description], :device_type => params2[:device][:device_type], :dev_group => params2[:device][:devicegroup_id], :free_ext => fextension, :secret => random_password(12), :username => fextension, :pin => params2[:device][:pin]})
+              device.callerid = callerid if callerid
               if device.save
                 a = Thread.new { configure_extensions(device.id, {:api => 1, :current_user => @user}) }
                 doc.status(device.check_callshop_user(_('device_created')))
