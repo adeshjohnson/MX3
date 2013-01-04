@@ -241,7 +241,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>When IP Authentication checked Host cannot be &quot;dynamic&quot;</td>
+	<td>You must specify proper host name in case IP authentication is used</td>
 	<td></td>
 </tr>
 <tr>
@@ -333,7 +333,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>When IP Authentication checked Host cannot be &quot;dynamic&quot;</td>
+	<td>You must specify proper host name in case IP authentication is used</td>
 	<td></td>
 </tr>
 <tr>
@@ -1829,25 +1829,10 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>id=ip_authentication_dynamic_2</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=ip_add_value_d</td>
-	<td>6.6.6.6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=ip_port_value_d</td>
-	<td>5061</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>id=host</td>
 	<td>6.6.6.6</td>
@@ -1858,33 +1843,28 @@
 	<td>5061</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/16</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
+	<td>assertVisible</td>
 	<td>id=host</td>
-	<td>6.6.6.6</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertVisible</td>
 	<td>id=port</td>
-	<td>5061</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>id=ip_authentication_dynamic_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=ip_add_value_d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=ip_port_value_d</td>
 	<td></td>
 </tr>
 <tr>
@@ -1918,6 +1898,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertVisible</td>
+	<td>id=ip_add_value_d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=ip_port_value_d</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=ip_add_value_d</td>
 	<td>6.6.6.6</td>
@@ -1930,6 +1920,71 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=ip_authentication_dynamic_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=host</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=host</td>
+	<td>6.6.6.6</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=host</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=host</td>
+	<td>6.6.6.6</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>5061</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td>on</td>
 </tr>
 <tr>
