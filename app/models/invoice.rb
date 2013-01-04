@@ -191,7 +191,7 @@ class Invoice < ActiveRecord::Base
     #
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
-    pdf = PdfGen::Generate.invoice_header_pdf(self, pdf, company, current_user.currency.name)
+    pdf = PdfGen::Generate.invoice_header_pdf(self, pdf, company, dc)
     items = []
     idetails.each do |item|
       items << [
@@ -215,7 +215,7 @@ class Invoice < ActiveRecord::Base
     pdf.table(items,
               :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
               :font_size => 10,
-              :headers => [_('Service'), _('Quantity'), _('Price') + " (#{current_user.currency.name})", _('Total') + " (#{current_user.currency.name})"],
+              :headers => [_('Service'), _('Quantity'), _('Price') + " (#{dc})", _('Total') + " (#{dc})"],
               :align_headers => {0 => :left, 1 => :right, 2 => :right, 3 => :right},
               :column_widths => {0 => 300}) do
       column(0).style(:align => :left, :height => 15, :width => 450)
@@ -565,7 +565,7 @@ class Invoice < ActiveRecord::Base
           aa << {:text => dc} if type == 3
           items << aa
         end
-        tax_amount += self.nice_invoice_number(self.price_with_vat, nice_number_hash.merge({:no_repl => 1})).to_d
+        tax_amount += self.nice_invoice_number(self.price_with_vat * ex, nice_number_hash.merge({:no_repl => 1})).to_d
 
       }
       price_with_tax = tax_amount.to_d
