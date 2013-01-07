@@ -2050,7 +2050,7 @@ Variables: (Names marked with * are required)
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Database_Error', :data2 => exception.message).save
         end
-        if exception_class.include? "ActiveRecord::StatementInvalid"
+        if exception_class.include?("ActiveRecord::StatementInvalid") and exception.message.include?("Unknown column")
           flash_notice = _('Database_Error')
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Database_Error', :data2 => exception.message).save
