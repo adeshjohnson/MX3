@@ -2045,6 +2045,16 @@ Variables: (Names marked with * are required)
           flash_help_link = ''
           Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Database_Error', :data2 => exception.message).save
         end
+        if exception_class.include? "ActiveModel::MissingAttributeError"
+          flash_notice = _('Database_Error')
+          flash_help_link = ''
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Database_Error', :data2 => exception.message).save
+        end
+        if exception_class.include? "ActiveRecord::StatementInvalid"
+          flash_notice = _('Database_Error')
+          flash_help_link = ''
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'Database_Error', :data2 => exception.message).save
+        end
         #
 
         if exception_class.include?("GoogleCheckoutError") and exception.message.include?("The currency used in the cart must match the currency of the seller account.")
