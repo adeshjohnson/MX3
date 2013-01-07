@@ -889,11 +889,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ip_authentication_dynamic_1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextPresent</td>
 	<td>Device was not updated</td>
 	<td></td>
@@ -901,6 +896,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>This IP and port is not available.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1988,6 +1988,16 @@
 	<td>on</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=ip_authentication_dynamic_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
 	<td></td>
@@ -2030,6 +2040,21 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=host</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=host</td>
+	<td>6.6.6.6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2215,6 +2240,21 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=host</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=host</td>
+	<td>7.7.7.7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 </tbody></table>
