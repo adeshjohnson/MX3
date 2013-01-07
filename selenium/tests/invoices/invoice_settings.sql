@@ -56,6 +56,7 @@ delete from `conflines` where id=193;
 delete from `conflines` where id=205;
 delete from `conflines` where id=206;
 delete from `conflines` where id=207;
+delete from `conflines` where id=209;
 delete from `conflines` where id=240;
 delete from `conflines` where id=240;
 INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
@@ -80,13 +81,8 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (205, 'Prepaid_Invoice_Number_Start', 'INV', 0, NULL),
 (206, 'Prepaid_Invoice_Number_Length', '11', 0, NULL),
 (207, 'Prepaid_Invoice_Number_Type', '1', 0, NULL),
+(209, 'Prepaid_Invoice_Show_Calls_In_Detailed', '1', 0, NULL),
 (240, 'Tax_1', 'First-tax', 0, '1'),
-(285, 'reCAPTCHA_enabled', '0', 0, NULL),
-(286, 'ReCAPTCHA_public_key', '', 0, NULL),
-(287, 'ReCAPTCHA_private_key', '', 0, NULL),
-(288, 'Allow_registration_username_passwords_in_devices', '0', 0, NULL),
-(289, 'Active_calls_show_did', '0', 0, NULL),
-(290, 'Registration_Enable_VAT_checking', '0', 0, NULL),
 (291, 'Registration_allow_vat_blank', '0', 0, NULL),
 (292, 'Invoice_To_Pay_Line', '', 0, NULL),
 (293, 'Invoice_Add_Average_rate', '0', 0, NULL),
@@ -141,7 +137,20 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (339, 'Tell_Time', '0', 0, NULL),
 (340, 'API_Allow_payments_ower_API', '0', 0, NULL),
 (341, 'API_payment_confirmation', '0', 0, NULL),
-(342, 'Hide_Destination_End', '0', 0, NULL);
+(342, 'Hide_Destination_End', '0', 0, NULL),
+(413, 'Prepaid_Invoice_Number_Start', 'INV', 0, NULL),
+(414, 'Prepaid_Invoice_Number_Length', '11', 0, NULL),
+(415, 'Prepaid_Invoice_Number_Type', '1', 0, NULL),
+(416, 'Prepaid_Invoice_To_Pay_Line', '', 0, NULL),
+(417, 'Prepaid_Invoice_Add_Average_rate', '0', 0, NULL),
+(418, 'Prepaid_Invoice_Show_Time_in_Minutes', '0', 0, NULL),
+(419, 'Prepaid_Invoice_Short_File_Name', '0', 0, NULL),
+(420, 'Prepaid_Invoice_user_billsec_show', '0', 0, NULL),
+(421, 'Prepaid_Invoice_show_additional_details_on_separate_page', '0', 0, ''),
+(422, 'Invoice_allow_recalculate_after_send', '0', 0, NULL),
+(633, 'Prepaid_Invoice_Number_Start', 'INV', 0, NULL),
+(634, 'Prepaid_Invoice_Number_Length', '11', 0, NULL),
+(635, 'Prepaid_Invoice_Number_Type', '1', 0, NULL);
 
 UPDATE `devices` set location_id=2 where id=7;
 
