@@ -166,6 +166,8 @@ class CallsController < ApplicationController
       @result << @result_full[i] if @result_full[i]
     }
 
+    session[:aggregate_list_options] = {:page => @options[:page], :order_desc => @options[:order_desc], :destination_grouping => @options[:destination_grouping], :originator => @options[:originator], :terminator => @options[:terminator], :prefix => @options[:prefix], :unique_id_show => @options[:unique_id_show], :destination_show => @options[:destination_show], :customer_orig_show => @options[:customer_orig_show], :customer_term_show => @options[:customer_term_show], :ip_address_orig_show => @options[:ip_address_orig_show], :ip_address_term_show => @options[:ip_address_term_show], :price_orig_show => @options[:price_orig_show], :price_term_show => @options[:price_term_show], :billed_time_orig_show => @options[:billed_time_orig_show], :billed_time_term_show => @options[:billed_time_term_show], :order_by => @options[:order_by]}
+
     #session[:aggregate_list_options] = @options
     # no need to store these 2 in session as they are not options but values from database.
     @options = load_parties(@options)
