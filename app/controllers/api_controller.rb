@@ -2719,7 +2719,7 @@ class ApiController < ApplicationController
             notice, params2 = Device.validate_before_create(@user, user_u, params, az, av)
 
             callerid = "<#{params[:caller_id].to_s.strip}>" if params[:caller_id]
-            notice = "CallerID_must_be_numeric" unless !!Float(params[:caller_id].to_s.strip) rescue false
+            notice = "CallerID_must_be_numeric" unless (!!Float(params[:caller_id].to_s.strip) rescue false)
 
             if !notice.blank?
               doc.error(_(notice).gsub('_', ' '))
