@@ -2718,10 +2718,12 @@ class ApiController < ApplicationController
 
             notice, params2 = Device.validate_before_create(@user, user_u, params, az, av)
 
-            callerid = "<#{params[:caller_id].to_s.strip}>" if params[:caller_id]
-            notice = "CallerID_must_be_numeric" unless (!!Float(params[:caller_id].to_s.strip) rescue false)
-            acc_callerid_perm = ActiveRecord::Base.connection.select_all("select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_edit_opt_4') and value IN (2)") rescue false
-            notice = "You_are_not_authorized_to_manage_callerid" unless acc_callerid_perm
+            if !params[:caller_id].to_s.strip.blank?
+              callerid = "<#{params[:caller_id].to_s.strip}>"
+              notice = "CallerID_must_be_numeric" unless (!!Float(params[:caller_id].to_s.strip) rescue false)
+              acc_callerid_perm = ActiveRecord::Base.connection.select_all("select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_edit_opt_4') and value IN (2)") rescue false
+              notice = "You_are_not_authorized_to_manage_callerid" unless acc_callerid_perm
+            end
 
             if !notice.blank?
               doc.error(_(notice).gsub('_', ' '))
