@@ -56,7 +56,7 @@
     <% i += 1 %>
     <% end %>
     <%end%>
-    <% if ad_active?%>
+    <% if (ad_active? and !current_user.owner.is_reseller?) or (current_user.owner.is_reseller? and current_user.owner.reseller_right("autodialer").to_i == 2 and ad_active?) %>
     personal_menu.add(<%= i %>, <%= ii%>, '<%= _('Auto_Dialer') %>', '<%= Web_Dir %>/autodialer/user_campaigns');
     <% i += 1 %>
     <% end %>

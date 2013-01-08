@@ -29,7 +29,7 @@
     personal_menu.add(16, 0, '<%= _('Calling_cards') %>', '<%= Web_Dir %>/cards/user_list');
     <% end %>
     personal_menu.add(17, 0,'<%= _('Recordings') %>','<%= Web_Dir %>/recordings/list_recordings','', '', '<%= Web_Dir %>/assets/dtree/musicfolder.gif');
-    <% if ad_active?%> 
+    <% if (ad_active? and !current_user.owner.is_reseller?) or (current_user.owner.is_reseller? and current_user.owner.reseller_right("autodialer").to_i == 2 and ad_active?) %> 
       personal_menu.add(18,0,'<%= _('Auto_Dialer') %>','<%= Web_Dir %>/autodialer/user_campaigns'); 
     <% end %>
     personal_menu.add(19, 0, '<%= _('Logout') %>', '<%= Web_Dir %>/callc/logout');

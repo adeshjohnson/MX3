@@ -104,6 +104,7 @@ class PermissionsController < ApplicationController
       permis << "'SMS'" if sms_active?
       permis << "'Monitorings'" if monitorings_addon_active?
       permis << "'Webphone'" if web_phone_active?
+      permis << "'Autodialer'" if ad_active?
 
       cond << " nice_name IN (#{permis.join(' , ')})" if permis.size.to_i > 0
     elsif @group.group_type != 'reseller'
