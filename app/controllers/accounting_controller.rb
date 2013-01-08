@@ -470,7 +470,7 @@ class AccountingController < ApplicationController
         invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
-        invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type))
+        invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type), 1)
         MorLog.my_debug("    Invoice number: #{invoice.number}", 1)
         invoice.save
         @invoices_generated += 1

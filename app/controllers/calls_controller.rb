@@ -93,17 +93,17 @@ class CallsController < ApplicationController
     # terminator requires other conditions
 
     if reseller?
-      originating_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), 0))", {:reference => 'originating_billed'})
+      originating_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, #{SqlExport.user_price_sql}), 0))", {:reference => 'originating_billed'})
       originating_billsec = "SUM(IF(calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), 0)) AS 'originating_billsec'"
 
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_price, 0))", {:reference => 'terminating_billed'})
+      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', #{SqlExport.reseller_provider_price_sql}, 0))", {:reference => 'terminating_billed'})
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_billsec, 0)) AS 'terminating_billsec'"
     else
       # Check if call belongs to resellers user if yes then admins income is reseller perice
-      originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, calls.user_price), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference => 'originating_billed'})
+      originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, #{SqlExport.user_price_sql}), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference => 'originating_billed'})
       originating_billsec = "SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originating_billsec'"
 
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', calls.provider_price, 0))", {:reference => 'terminating_billed'})
+      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', #{SqlExport.admin_provider_price_sql}, 0))", {:reference => 'terminating_billed'})
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'terminating_billsec'"
     end
 

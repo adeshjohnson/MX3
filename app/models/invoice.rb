@@ -359,7 +359,7 @@ class Invoice < ActiveRecord::Base
       pdf.table(items,
                 :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
                 :font_size => 10,
-                :headers => [_('Direction'), ' ', _('Calls'), _('Time'), _('Total') + " (#{current_user.currency.name})"],
+                :headers => [_('Direction'), ' ', _('Calls'), _('Time'), _('Total') + " (#{dc})"],
                 :align_headers => {0 => :left, 1 => :center, 2 => :right, 3 => :center, 4 => :right},
                 :column_widths => {0 => 300}) do
         column(0).style(:align => :left, :height => 15)
@@ -372,7 +372,7 @@ class Invoice < ActiveRecord::Base
       pdf.table(items,
                 :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
                 :font_size => 10,
-                :headers => [_('Direction'), ' ', _('Calls'), _('Time'), _('Avg_rate'), _('Total') + " (#{current_user.currency.name})"],
+                :headers => [_('Direction'), ' ', _('Calls'), _('Time'), _('Avg_rate'), _('Total') + " (#{dc})"],
                 :align_headers => {0 => :left, 1 => :center, 2 => :right, 3 => :center, 4 => :right, 5 => :right},
                 :column_widths => {0 => 300}) do
         column(0).style(:align => :left, :height => 15)
@@ -829,13 +829,17 @@ class Invoice < ActiveRecord::Base
   end
 
 
-  def generate_taxes_for_invoice(nc)
+  def generate_taxes_for_invoice(nc, ex = 0)
     taxes = self.tax.applied_tax_list(self.price, {:precision => nc})
     self.tax_1_value = self.nice_invoice_number(taxes[0][:tax] , {:nc => nc, :apply_rounding=>true})
     self.tax_2_value =  self.nice_invoice_number(taxes[1][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[1]
     self.tax_3_value =  self.nice_invoice_number(taxes[2][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[2]
     self.tax_4_value =   self.nice_invoice_number(taxes[3][:tax] , {:nc => nc, :apply_rounding=>true})   if   taxes[3]
-    self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc}) , {:nc => nc, :apply_rounding=>true})
+    if ex != 0
+      self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc, :ex => ex}) , {:nc => nc, :apply_rounding=>true})
+    else
+      self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc}) , {:nc => nc, :apply_rounding=>true})
+    end
     self
   end
 

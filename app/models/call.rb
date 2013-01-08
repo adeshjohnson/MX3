@@ -531,7 +531,7 @@ class Call < ActiveRecord::Base
         select << "(#{SqlExport.reseller_provider_rate_sql} * #{options[:exchange_rate]} ) AS provider_rate_exrate"
         select << "(#{SqlExport.reseller_provider_price_sql} * #{options[:exchange_rate]} ) AS provider_price_exrate"
       end
-      select << "(#{SqlExport.user_price_sql} * #{options[:exchange_rate]} ) AS user_price_exrate"
+      select << "(#{SqlExport.user_price_no_dids_sql} * #{options[:exchange_rate]} ) AS user_price_exrate"
       select << "(#{SqlExport.reseller_price_no_dids_sql} * #{options[:exchange_rate]} ) AS reseller_price_exrate"
       select << "(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) AS user_rate_exrate"
       select << "(#{SqlExport.reseller_profit_sql} * #{options[:exchange_rate]} ) AS profit"
@@ -540,7 +540,7 @@ class Call < ActiveRecord::Base
         select << "(IF(calls.user_id = #{options[:current_user].id}, #{SqlExport.user_price_sql}, #{SqlExport.user_did_price_sql}) * #{options[:exchange_rate]} ) AS user_price_exrate"
         select << "(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) AS user_rate_exrate"
       else
-        select << "(#{SqlExport.admin_user_price_no_dids_sql} * #{options[:exchange_rate]} ) AS user_price_exrate"
+        select << "(#{SqlExport.user_price_no_dids_sql} * #{options[:exchange_rate]} ) AS user_price_exrate"
         select << "(#{SqlExport.admin_reseller_price_no_dids_sql} * #{options[:exchange_rate]} ) AS reseller_price_exrate"
         select << "(#{SqlExport.admin_user_rate_sql} * #{options[:exchange_rate]} ) AS user_rate_exrate"
         select << "(#{SqlExport.admin_provider_rate_sql} * #{options[:exchange_rate]}) AS provider_rate_exrate "
@@ -569,7 +569,7 @@ class Call < ActiveRecord::Base
     else
       prov_price = "(SUM(#{SqlExport.admin_provider_price_sql}) * #{options[:exchange_rate].to_d}) as total_provider_price"
       profit = "(SUM(#{SqlExport.admin_profit_sql} + #{options[:s_user] == 'all' ? 'calls.did_price' : '(IF(calls.user_id = ' + options[:s_user].to_s + ', 0, calls.did_price - calls.did_inc_price))'}) * #{options[:exchange_rate].to_d}) AS total_profit"
-      user_price = SqlExport.admin_user_price_no_dids_sql
+      user_price = SqlExport.user_price_no_dids_sql
       reseller_price = SqlExport.admin_reseller_price_no_dids_sql
     end
     Call.find(
@@ -631,7 +631,7 @@ class Call < ActiveRecord::Base
       s << "IF(calls.card_id = 0 ,CONCAT(IF(users.first_name IS NULL, '', users.first_name), ' ', IF(users.last_name IS NULL, '', users.last_name)), CONCAT('Card#', IF(cards.number IS NULL, '', cards.number))) as 'user'"
       if options[:can_see_finances]
         s << SqlExport.replace_dec("(IF(calls.user_rate IS NULL, 0, #{SqlExport.user_rate_sql}) * #{options[:exchange_rate]} )", options[:column_dem], 'user_rate')
-        s << SqlExport.replace_dec("(IF(calls.user_price IS NULL, 0, #{SqlExport.user_price_sql}) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
+        s << SqlExport.replace_dec("(IF(calls.user_price IS NULL, 0, #{SqlExport.user_price_no_dids_sql}) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
       end
       s << "IF(dids.did IS NULL, '' , dids.did) AS 'did'"
       if options[:can_see_finances]
