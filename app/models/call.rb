@@ -1505,7 +1505,7 @@ class Call < ActiveRecord::Base
       max_rate = 0.0
       for r in res
 
-        if res[0]['acid'] and res[0]['acid'].length > 0
+        if res[0]['acid'] and res[0]['acid'].to_i > 0
           #my_debug "custom rates"
 
           custom_rates = 1
