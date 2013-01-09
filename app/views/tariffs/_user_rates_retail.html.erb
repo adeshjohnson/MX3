@@ -62,7 +62,7 @@
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="name_<%= dg.id.to_s %>"><%= draw_flag_by_code(dg.flag) %>&nbsp;<%= h(dg.name) %></td>
         <td id="type_<%= dg.id.to_s %>"><%= h(dg.desttype) %></td>
-        <td id="view_img_<%= dg.id.to_s %>" align="center"><%= link_to b_view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, :popup => true %></td>
+        <td id="view_img_<%= dg.id.to_s %>" align="center"><%= link_to b_view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, :onclick => "window.open(this.href,'new_window','height=400,width=600');return false;" %></td>
         <% if show_rr %>
             <% if @show_rates_without_tax.to_i == 1 %>
                 <td align="center"><%= nice_number_currency(price, exchange_rate) if arates_size > 0 %></td>

@@ -52,7 +52,7 @@
       <tr class="row1">
         <td id="new_destinations"><%= _('New_destinations_in_csv_file') %></td>
         <td id="number_of_new_destinations" align="right"><%= session[:new_destinations_in_csv_file] %></td>
-        <td id="number_of_bad_destinations" align="center"><%= session[:bad_destinations] %> <%= _('bad_dst') %><%= link_to "(#{_('Press_here_to_get_list')})", {:action => "bad_rows_from_csv"}, :popup => true %></td>
+        <td id="number_of_bad_destinations" align="center"><%= session[:bad_destinations] %> <%= _('bad_dst') %><%= link_to "(#{_('Press_here_to_get_list')})", {:action => "bad_rows_from_csv"}, :onclick => "window.open(this.href,'new_window','height=400,width=600');return false;" %></td>
       </tr>
   <% end %>
 </table>
@@ -64,7 +64,7 @@
         <td width="50%"><%= _('Destinations_to_create') %> </td>
         <td id="destinations_to_create" align="right" width="15%"><b><%= session[:destinations_to_create] %> </b></td>
         <td id="dest_create_step_number" align="center" width="35%"><%= _('Step') %>
-          5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_create_from_csv"}, :popup => true if session[:destinations_to_create].to_i > 0 %></td>
+          5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_create_from_csv"}, :onclick => "window.open(this.href,'new_window','height=400,width=600');return false;" if session[:destinations_to_create].to_i > 0 %></td>
       </tr>
       <% if session[:imp_update_dest_names].to_i == 1 %>
           <tr class="row1">
@@ -72,7 +72,7 @@
             <td id="destinations_to_update" align="right" width="15%">
               <b><%= session[:destinations_to_update].to_i %> </b></td>
             <td id="dest_update_step_number" align="center" width="35%"><%= _('Step') %>
-              5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_update_from_csv"}, :popup => true if session[:destinations_to_update].to_i > 0 %></td>
+              5 <%= link_to "(#{_('Press_here_to_get_list')})", {:action => "dst_to_update_from_csv"}, :onclick => "window.open(this.href,'new_window','height=400,width=600');return false;" if session[:destinations_to_update].to_i > 0 %></td>
           </tr>
       <% end %>
   <% end %>

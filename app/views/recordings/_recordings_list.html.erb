@@ -32,7 +32,7 @@
             <td id="rec_size_<%= recording.id %>" align="center"><%= nice_bytes(recording.size) %></td>
             <td id="rec_edit_<%= recording.id %>" align="center"><%= link_to(b_edit, {:action => :edit_recording, :id => recording.id}, :id => "rec_edit_link_#{recording.id}") %></td>
             <% if recording.deleted.to_i == 0 and recording.size.to_i > 0 and (call and (call.real_billsec.to_f > 0.0 or @show_recordings_with_zero_billsec)) %>
-                <td id="rec_play_<%= recording.id %>" align="center"><%= link_to(b_play, {:action => :play_recording, :id => recording.id}, :popup => ['new_window', 'height=200,width=310'], :id => "rec_play_link_#{recording.id}") %></td>
+                <td id="rec_play_<%= recording.id %>" align="center"><%= link_to(b_play, {:action => :play_recording, :id => recording.id}, :onclick => "window.open(this.href,'new_window','height=200,width=400');return false;", :id => "rec_play_link_#{recording.id}") %></td>
                 <td id="rec_download_<%= recording.id %>" align="center">
                   <% if recording.local.to_i == 1 %>
                       <%= link_to(b_download, :action => :get_recording, :rec => recording.id ) %>

@@ -33,7 +33,7 @@
             <td></td>
         <% end %>
 
-        <td align="center"><%= link_to b_view, {:action => 'lcrpartial_destinations', :id => lp['id'], :prefix => lp['prefix'].to_s, :lcrp => lp['lid']}, :id => "lcr_destinations_#{lp['lid']}", :popup => ['new_window', 'scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600'] %></td>
+        <td align="center"><%= link_to b_view, {:action => 'lcrpartial_destinations', :id => lp['id'], :prefix => lp['prefix'].to_s, :lcrp => lp['lid']}, :id => "lcr_destinations_#{lp['lid']}", :onclick => "window.open(this.href,'new_window','scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600');return false;" %></td>
         <td align="center"><%= link_to b_edit, {:action => 'lcrpartial_edit', :id => lp['lid']}, :id => "lcr_edit_#{lp['lid']}" %></td>
         <td align="center"><%= link_to b_delete, {:action => 'lcrpartial_destroy', :id => lp['lid']}, :id => "lcr_delete_#{lp['lid']}", :confirm => _('Are_you_sure'), :method => :post %></td>
       </tr>

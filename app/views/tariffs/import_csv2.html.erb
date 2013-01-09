@@ -403,4 +403,4 @@
 <% end %>
 <br/>
 <br/>
-<% link_to _('Rate_import_status'), {:action => "rate_import_status"}, :popup => ['new_window', 'height=300,width=600'] %>
+<% link_to _('Rate_import_status'), {:action => "rate_import_status"}, :onclick => "window.open(this.href,'new_window','height=300,width=600');return false;" %>

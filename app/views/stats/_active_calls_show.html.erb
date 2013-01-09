@@ -120,7 +120,7 @@
                 <% end %>
             <% end %>
             <% if session[:usertype] == "admin" or allow_manage_providers? %>
-                <td id="hangup_<%= i %>" align="center"><%= link_to b_hangup, {:controller => "calls", :action => "active_call_soft_hangup", :channel => call["channel"].to_s, :server_id => call["server_id"].to_s}, :popup => ['new_window', 'height=50,width=200'], :confirm => _('are_you_sure') if call["providers_owner_id"].to_i==current_user.id or call["common_use"].to_i == 1 %></td>
+                <td id="hangup_<%= i %>" align="center"><%= link_to b_hangup, {:controller => "calls", :action => "active_call_soft_hangup", :channel => call["channel"].to_s, :server_id => call["server_id"].to_s}, :onclick => "window.open(this.href,'new_window','height=50,width=200');return false;", :confirm => _('are_you_sure') if call["providers_owner_id"].to_i==current_user.id or call["common_use"].to_i == 1 %></td>
             <% end %>
           </tr>
       <% } %>

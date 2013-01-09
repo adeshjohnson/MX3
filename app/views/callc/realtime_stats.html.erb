@@ -7,7 +7,7 @@
 <% end %>
 --->
 
-<%= link_to b_call + _('more_calltime_made_users'), {:action => "show_ranks", :id => "duration"}, :popup => true %>
+<%= link_to b_call + _('more_calltime_made_users'), {:action => "show_ranks", :id => "duration"}, :onclick => "window.open(this.href,'new_window','height=400,width=600');return false;" %>
 <br>
 <br>
 <%= link_to b_call + _('Active_Calls'), :controller => "stats", :action => "active_calls" %>

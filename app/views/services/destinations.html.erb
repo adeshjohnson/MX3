@@ -13,7 +13,7 @@
       <tr>
         <th colspan="4"><%= draw_flag(direction.code) %> <%= direction.name %></th>
         <th><%= _('Active_Destinations') %>:</th>
-        <th id="show_destinations_<%= dir %>" align="center"><%= link_to b_view, {:action => 'destination_prefixes', :id => @service.id, :direction => dir}, :popup => ['new_window', 'scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600'], :id => "show_destinations_link_" +dir %></th>
+        <th id="show_destinations_<%= dir %>" align="center"><%= link_to b_view, {:action => 'destination_prefixes', :id => @service.id, :direction => dir}, :onclick => "window.open(this.href,'new_window','scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600');return false;", :id => "show_destinations_link_" +dir %></th>
       </tr>
       <tr>
         <th><%= _('Name') %></th>

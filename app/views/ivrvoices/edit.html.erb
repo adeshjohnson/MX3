@@ -49,7 +49,7 @@
             <td id="path_<%= file.id %>" align="left"><%= file.path %></td>
             <td id="size_<%= file.id %>" align="left"><%= file.nice_size %></td>
             <td id="created_at_<%= file.id %>" align="left"><%= nice_date_time(file.created_at) %></td>
-            <td id="play_<%= file.id %>" align="center"><%= link_to b_play, {:controller => :ivr_sound_files, :action => "play_sound", :id => file.id}, :popup => ['new_window', 'height=200,width=310'] %></td>
+            <td id="play_<%= file.id %>" align="center"><%= link_to b_play, {:controller => :ivr_sound_files, :action => "play_sound", :id => file.id}, :onclick => "window.open(this.href,'new_window','height=200,width=310');return false;" %></td>
             <td id="edit_<%= file.id %>" align="center"><%= link_to b_edit, :controller => :ivr_sound_files, :action => 'edit', :id => file.id %></td>
             <td id="delete_<%= file.id %>" align="center"><%= link_to b_delete, {:controller => :ivr_sound_files, :action => 'destroy', :id => file.id}, :confirm => _('are_you_sure'), :method => "post" if file.readonly.to_i == 0 %></td>
           </tr>

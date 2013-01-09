@@ -55,7 +55,7 @@
                 <td align="left"> <%= rec.provider_name %> </td>
                 <% if call.billsec > 0 or @show_recordings_with_zero_billsec %>
                     <td align="center"><%= nice_time call.billsec %> </td>
-                    <td align="center"> <%= link_to b_play, {:action => "play_rec", :rec => rec.id}, :popup => ['new_window', 'height=200,width=310'] %></td>
+                    <td align="center"> <%= link_to b_play, {:action => "play_rec", :rec => rec.id}, :onclick => "window.open(this.href,'new_window','height=200,width=310');return false;" %></td>
                     <td align="center"> <%= link_to b_download, Recordings_Folder+call.uniqueid.to_s+".mp3" %> </td>
                 <% else %>
                     <td align="center" colspan=3>      <%= b_exclamation + _('Recording_failed') %>

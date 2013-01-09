@@ -67,7 +67,7 @@
             <td align="right">        <%= fax.size %> </td>
             <td align="center">
               <% if fax.status == "good" %>
-                  <%= link_to(b_pdf, @Fax2Email_Folder+fax.filename, :popup => ['new_window', 'scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600']) %>
+                  <%= link_to(b_pdf, @Fax2Email_Folder+fax.filename, :onclick => "window.open(this.href,'new_window','scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600');return false;") %>
               <% end %>
             </td>
           </tr>

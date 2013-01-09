@@ -27,7 +27,7 @@
            end %>
         <td><%= draw_flag_by_code(dg.flag) %>&nbsp;<%= h(dg.name) %></td>
         <td><%= h(dg.desttype) %></td>
-        <td id="view_img_<%= dg.id.to_s %>" align="center"><%= link_to(view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, {:popup => true}) %></td>
+        <td id="view_img_<%= dg.id.to_s %>" align="center"><%= link_to(view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, {:onclick => "window.open(this.href,'new_window','height=400,width=600');return false;"}) %></td>
         <td id="details_img_<%= dg.id.to_s %>" align="center"><%= link_to(view + _('Details'), {:action => 'user_rates_detailed', :id => dg.id}) if arates_size > 0 %></td>
       </tr>
   <% } %>
