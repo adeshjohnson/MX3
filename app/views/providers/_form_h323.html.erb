@@ -139,6 +139,13 @@
             <%= text_field 'device', 'ipaddr', "class" => "input" %>
           </td>
         </tr>
+        <tr id="ip_auth_zero_port">
+          <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
+          <td id="zero_port_2">
+            <%= radio_button_tag('zero_port', '0', @device.port > 0) %> <%= _('No') %>
+            <%= radio_button_tag('zero_port', '1', @device.port == 0) %> <%= _('Yes') %>
+          </td>
+        </tr>
         <tr id="server_port_row">
           <td> <%= _('Port') %>:</td>
           <td>
@@ -317,3 +324,31 @@
     show_hostname_lines("<%= @hostname_ip %>");
 </script>
 <!--[eoform:provider]-->
+
+<script type="text/javascript">
+    function zero_port() {
+        if ($('zero_port_1').checked) {
+            $('provider_port').disabled = true;
+            $('provider_port').hidden = true;
+            $('server_port_row').hidden = true;
+            $('provider_port').value = 0;
+        } else {
+            $('provider_port').disabled = false;
+            $('provider_port').hidden = false;
+            $('server_port_row').hidden = false;
+            $('provider_port').value = <%= @device.port == 0 ? Device::DefaultPort["H323"] : @device.port %>;
+        }
+    }
+
+    Event.observe(window, 'load', function () {
+        zero_port();
+
+        Event.observe($('zero_port_0'), 'click', function () {
+            zero_port();
+        });
+
+        Event.observe($('zero_port_1'), 'click', function () {
+            zero_port();
+        });
+    });
+</script>

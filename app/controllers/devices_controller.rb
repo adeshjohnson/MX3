@@ -659,6 +659,10 @@ class DevicesController < ApplicationController
         @device.proxy_port = @device.port
       end
 
+      if params[:port].blank? and @device.device_type == 'H323' and params[:zero_port].to_i == 1
+        @device.port = 0
+      end
+
       @device.canreinvite = params[:canreinvite]
       @device.transfer = params[:canreinvite]
 

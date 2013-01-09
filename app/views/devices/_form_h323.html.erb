@@ -183,11 +183,45 @@
 <tr>
   <td height="10"></td>
 </tr>
+<script type="text/javascript">
+    function zero_port() {
+        if ($('zero_port_1').checked) {
+            $('port').disabled = true;
+            $('port').hidden = true;
+            $('ip_auth2').hidden = true;
+            $('port').value = 0;
+        } else {
+            $('port').disabled = false;
+            $('port').hidden = false;
+            $('ip_auth2').hidden = false;
+            $('port').value = <%= @device.port == 0 ? Device::DefaultPort["H323"] : @device.port %>;
+        }
+    }
+
+    Event.observe(window, 'load', function () {
+        zero_port();
+
+        Event.observe($('zero_port_0'), 'click', function () {
+            zero_port();
+        });
+
+        Event.observe($('zero_port_1'), 'click', function () {
+            zero_port();
+        });
+    });
+</script>
 <tr>
   <td> <%= _('IP_Address') %>: </td>
   <td> <%= text_field_tag 'host', @device.host, "class" => "input" %> </td>
 </tr>
-<tr>
+<tr id="ip_auth_zero_port">
+  <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
+  <td id="zero_port_2">
+    <%= radio_button_tag('zero_port', '0', @device.port > 0) %> <%= _('No') %>
+    <%= radio_button_tag('zero_port', '1', @device.port == 0) %> <%= _('Yes') %>
+  </td>
+</tr>
+<tr id="ip_auth2">
   <td> <%= _('Port') %>:</td>
   <td> <%= text_field_tag 'port', @device.port, "class" => "input" %> </td>
 </tr>

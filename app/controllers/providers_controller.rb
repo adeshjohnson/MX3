@@ -375,6 +375,9 @@ class ProvidersController < ApplicationController
     else
       params[:provider][:channel]= params[:provider][:channel].strip if params[:provider][:channel]
     end
+    if !params[:provider][:port] and @provider.tech == "H323" and params[:provider][:zero_port].to_i == 1
+      params[:provider][:port] = 0
+    end
     params[:provider][:hidden] = (params[:provider][:hidden] == '1' ? 1 : 0)
     @provider.attributes = params[:provider]
     @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip, params[:provider][:port].to_s.strip)
@@ -444,6 +447,10 @@ class ProvidersController < ApplicationController
       @device.proxy_port = 0
     else
       @device.proxy_port = @device.port
+    end
+
+    if !params[:provider][:port] and @device.device_type.to_s == "H323"
+      @device.port = 0
     end
 
     @device.fullcontact = ""
