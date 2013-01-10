@@ -1,0 +1,1707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.1.105" />
+<title>H323_port</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">H323_port</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>new_device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=zero_port</td>
+	<td>Accept calls from any port:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=providers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Provider successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=providers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=providers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>test_device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=zero_port</td>
+	<td>Accept calls from any port:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>acc_permissions</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>new_tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>new_device2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=zero_port</td>
+	<td>Accept calls from any port:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=providers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Provider successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=providers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=providers</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>test_device2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=zero_port</td>
+	<td>Accept calls from any port:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>test_device3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=zero_port</td>
+	<td>Accept calls from any port:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=zero_port_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=port</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>1720</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=zero_port_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=port_value</td>
+	<td>0</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
