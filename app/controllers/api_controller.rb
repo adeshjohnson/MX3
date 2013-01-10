@@ -2721,8 +2721,8 @@ class ApiController < ApplicationController
             if !params[:caller_id].to_s.strip.blank?
               callerid = "<#{params[:caller_id].to_s.strip}>"
               notice = "CallerID_must_be_numeric" unless (!!Float(params[:caller_id].to_s.strip) rescue false)
-              acc_callerid_perm = ActiveRecord::Base.connection.select_all("select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_edit_opt_4') and value IN (2)") rescue false
-              notice = "You_are_not_authorized_to_manage_callerid" unless acc_callerid_perm
+              acc_callerid_perm = ActiveRecord::Base.connection.select_all("select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_edit_opt_4') and value IN (2)").first['result'] rescue 0 
+              notice = "You_are_not_authorized_to_manage_callerid" if acc_callerid_perm < 1 and @user.usertype == "accountant"
             end
 
             if !notice.blank?
