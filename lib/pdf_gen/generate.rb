@@ -250,7 +250,7 @@ module PdfGen
       end
       pdf.table(items,
                 :width => 550, :border_width => 0,
-                :font_size => 7,
+                :font_size => 9,
                 :headers => [_('Name'), _('Type'), _('Rate'), _('Rate_with_VAT')],
                 :align_headers => {0 => :left, 1 => :left, 2 => :right, 3 => :right}) do
         column(0).style(:align => :left)
@@ -313,7 +313,7 @@ module PdfGen
 
       pdf.table(items,
                 :width => 550, :border_width => 0,
-                :font_size => 7,
+                :font_size => 9,
                 :headers => [_('Destination'), _('Subcode'), _('Prefix'), _('Rate'), _('Connection_Fee'), _('Increment'), _('Min_Time')],
                 :align_headers => {0 => :left, 1 => :left, 2 => :left, 3 => :right, 4 => :right, 5 => :right, 6 => :right}) do
         column(0).style(:align => :left)
@@ -808,7 +808,7 @@ module PdfGen
 
     pdf.table(items,
               :width => 540, :border_width => 0,
-              :font_size => 3, :padding => 1,
+              :font_size => 4, :padding => 1,
               :headers => h) do
     end
 

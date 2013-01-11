@@ -1462,7 +1462,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     pdf.table(items,
               :width => 550, :border_width => 0,
-              :font_size => 6,
+              :font_size => 7,
               :headers => headers) do
     end
 
@@ -2350,7 +2350,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     logger.fatal items.to_yaml
     pdf.table(items,
               :width => 550, :border_width => 0,
-              :font_size => 8) do
+              :font_size => 9) do
       column(0).style(:align => :left)
       column(1).style(:align => :left)
       column(2).style(:align => :left)
