@@ -797,7 +797,6 @@ class AccountingController < ApplicationController
   end
 
   def user_invoices
-    @Show_Currency_Selector = 1
     @ex = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
     @page_title = _('Invoices')
     @page_icon = "view.png"
@@ -906,7 +905,6 @@ class AccountingController < ApplicationController
   end
 
   def user_invoice_details
-    @Show_Currency_Selector = 1
     @ex = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
     @invoice = Invoice.includes([:tax, :user]).where(:id => params[:id]).first
     @invoice_invoicedetails = @invoice.invoicedetails if @invoice
