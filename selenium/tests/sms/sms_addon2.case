@@ -132,6 +132,36 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/1?page=11&amp;st=I</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&lt; 6 7 8 9 10 11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>225</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/1?page=12&amp;st=I</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&lt; 7 8 9 10 11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>225</td>
+	<td></td>
+</tr>
 <!--create a provider-->
 <tr>
 	<td>open</td>
