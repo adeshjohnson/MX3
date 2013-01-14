@@ -829,7 +829,7 @@ class Device < ActiveRecord::Base
   end
 
   def username_must_be_unique
-    Confline.get_value("Disalow_Duplicate_Device_Usernames").to_i == 1 and self.device_ip_authentication_record.to_i == 0 and !self.provider
+    Confline.get_value("Disalow_Duplicate_Device_Usernames").to_i == 1 and self.device_ip_authentication_record.to_i == 0 #and !self.provider
   end
 
   def Device.validate_perims(options={})
