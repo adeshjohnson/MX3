@@ -1094,10 +1094,39 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/subcodes_to_update_from_csv?csv2=1&amp;tariff_id=1</td>
+	<td>/billing/tariffs/subcode_to_update_from_csv?csv2=1&amp;tariff_id=1</td>
 	<td></td>
 </tr>
-<!--#7048-->
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>Prefix</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[2]</td>
+	<td>Old Subcode</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[3]</td>
+	<td>New Subcode</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[9]/td</td>
+	<td>131</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[9]/td[2]</td>
+	<td>1DHFDH</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[9]/td[3]</td>
+	<td>USA</td>
+</tr>
 <tr>
 	<td>goBackAndWait</td>
 	<td></td>
