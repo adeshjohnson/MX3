@@ -565,7 +565,7 @@ class Invoice < ActiveRecord::Base
           aa << {:text => dc} if type == 3
           items << aa
         end
-        tax_amount += self.nice_invoice_number(self.price_with_vat * ex, nice_number_hash.merge({:no_repl => 1})).to_d
+        tax_amount += self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_d
 
       }
       price_with_tax = tax_amount.to_d
