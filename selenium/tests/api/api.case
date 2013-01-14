@@ -324,6 +324,131 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/generate_hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>/billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=0&amp;period_start=1136073600&amp;period_end=1266537599&amp;hash=31b1c56a63668aee98bbf5c9b52b8f43eaacf5a2&amp;test=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>31b1c56a63668aee98bbf5c9b52b8f43eaacf5a2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=param_value_s_user</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=param_value_period_end</td>
+	<td>1266537599</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=param_value_period_start</td>
+	<td>1136073600</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>/billing/api/user_calls?u=101&amp;p=1011&amp;s_user=2&amp;period_start=1136073600&amp;period_end=1266537599&amp;hash=43f2db87819904038ee86e2f56cd156c541d2521&amp;test=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>31b1c56a63668aee98bbf5c9b52b8f43eaacf5a2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>43f2db87819904038ee86e2f56cd156c541d2521</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=param_value_s_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>/billing/api/user_calls?s_user=2&amp;period_start=1136073600&amp;period_end=1266537599&amp;hash=43f2db87819904038ee86e2f56cd156c541d2521&amp;test=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>43f2db87819904038ee86e2f56cd156c541d2521</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=param_value_s_user</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>/billing/api/user_calls?s_user=2&amp;period_start=1136073600&amp;hash=43f2db87819904038ee86e2f56cd156c541d2521&amp;test=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>3a8c4b680687fdd4ce69b603cc70cbb56530cb2b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>/billing/api/user_calls?s_user=5&amp;period_start=1136073600&amp;hash=43f2db87819904038ee86e2f56cd156c541d2521&amp;test=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>acf03a685806e4a924653f13e93a8fa43751768e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=link</td>
+	<td>/billing/api/user_calls?s_user=5&amp;hash=43f2db87819904038ee86e2f56cd156c541d2521&amp;test=1</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>acf03a685806e4a924653f13e93a8fa43751768e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -433,6 +558,26 @@
 	<td>System Admin</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2009-01-02 00:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-01 00:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=dst</td>
+	<td>123123</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/dst</td>
+	<td>37063042438</td>
+</tr>
 <!--admin ->101-->
 <tr>
 	<td>open</td>
@@ -510,6 +655,16 @@
 	<td>Test Reseller</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-01 00:00:03</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2009-01-02 00:00:03</td>
+</tr>
 <!--admin -> accountant-->
 <tr>
 	<td>open</td>
@@ -577,6 +732,26 @@
 	<td>User Resellers</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2009-01-02 00:00:04</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[3]/calldate2</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[4]/calldate2</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
 <!--101->101-->
 <tr>
 	<td>open</td>
@@ -607,6 +782,31 @@
 	<td>assertText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2007-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2008-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[3]/calldate2</td>
+	<td>2009-01-01 00:00:02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[4]/calldate2</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[5]/calldate2</td>
+	<td>2010-02-18 00:00:01</td>
 </tr>
 <!--101->reseller-->
 <tr>
@@ -648,6 +848,31 @@
 	<td>assertText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2007-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2008-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[3]/calldate2</td>
+	<td>2009-01-01 00:00:02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[4]/calldate2</td>
+	<td>2009-01-02 00:00:02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[5]/calldate2</td>
+	<td>2010-02-18 00:00:01</td>
 </tr>
 <!--reseller->101-->
 <tr>
@@ -747,6 +972,21 @@
 	<td>User Resellers</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-01 00:00:04</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[3]/calldate2</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
 <!--accountant->reseller-->
 <tr>
 	<td>open</td>
@@ -787,6 +1027,16 @@
 	<td>assertText</td>
 	<td>//period_end</td>
 	<td>2010-02-19 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=calldate2</td>
+	<td>2009-01-01 00:00:03</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//call[2]/calldate2</td>
+	<td>2009-01-02 00:00:03</td>
 </tr>
 <!--admin ->admin-->
 <tr>
