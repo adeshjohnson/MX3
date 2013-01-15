@@ -36,7 +36,7 @@
     <th align="left"><%= _('Destination_Details') %></th>
     <td id="dest_det" align="right">
 
-      <% dest = Destination.find(:first, :conditions => "prefix = '#{@call.prefix}'") %>
+      <% dest = Destination.where(:prefix => @call.prefix.to_s).first %>
       <% if dest %>
           <%= dest.direction.name if dest.direction %>    <%= dest.subcode %> <%= dest.name %>
       <% end %>
@@ -74,7 +74,7 @@
 
   <tr class="row1">
     <th align="left" nowrap><%= _('Hangup_cause_description') %></th>
-    <td id="HC_msg" align="right"> <%= get_hangup_cause_message(@call.hangupcause.to_i) %>  </td>
+    <td id="HC_msg" align="right"> <%= raw get_hangup_cause_message(@call.hangupcause.to_i) %>  </td>
   </tr>
 
 
@@ -122,7 +122,7 @@
       <tr>
         <th align="left"><%= b_user + _('User') %></th>
         <td id="user" align="right">
-          <%= ((owner = User.find(:first, :conditions => ['id = ?', @user.owner_id]) and owner.usertype != "reseller" and !owner.blank?) ? (link_nice_user @user) : nice_user(@user) ) %>
+          <%= ((owner = User.where(:id => @user.owner_id).first and owner.usertype != "reseller" and !owner.blank?) ? (link_nice_user @user) : nice_user(@user) ) %>
         </td>
       </tr>
   <% end %>
@@ -146,7 +146,7 @@
       <tr>
         <th align="left"><%= _('Tariff') %></th>
         <td id="user_tariff" align="right">
-          <%= ((t_owner = User.find(:first, :conditions => ['id = ?', user_tariff.owner_id]) and t_owner.usertype != "reseller" and !t_owner.blank?) ? (link_to user_tariff.name + " (" + user_tariff.purpose + ")" , :controller => "tariffs", :action => "rates_list", :id => @user.tariff_id) : (user_tariff.name + " (" + user_tariff.purpose + ")") ) %>
+          <%= ((t_owner = User.where(:id => user_tariff.owner_id).first and t_owner.usertype != "reseller" and !t_owner.blank?) ? (link_to user_tariff.name + " (" + user_tariff.purpose + ")" , :controller => "tariffs", :action => "rates_list", :id => @user.tariff_id) : (user_tariff.name + " (" + user_tariff.purpose + ")") ) %>
         </td>
       </tr>
   <% end %>
@@ -198,7 +198,7 @@
       <tr>
         <th align="left"><%= b_provider + _('Provider') %></th>
         <td id="provider" align="right"> 
-          <%= ((p_owner = User.find(:first, :conditions => ['id = ?', @provider.user_id]) and p_owner.usertype != "reseller" and !p_owner.blank?) ? (link_to @provider.name, :controller => "providers", :action => "list") : (@provider.name)) %> 
+          <%= ((p_owner = User.where(:id => @provider.user_id).first and p_owner.usertype != "reseller" and !p_owner.blank?) ? (link_to @provider.name, :controller => "providers", :action => "list") : (@provider.name)) %>
         </td>
       </tr>
 
@@ -389,7 +389,7 @@
     <% if @call_log %>
         <%
            log = @call_log.log.to_s
-           log = log.split("<br>").collect { |line| line =~ /WARNING\:/ ? line.gsub("WARNING:", "<span style='font-weight:bold'>WARNING:")+"</span >" : line }.collect { |line| line =~ /ERORR\:/ ? line.gsub("ERROR:", "<span style='color: red;font-weight:bold'>ERROR:")+"</span >" : line }.join("<br>")
+           log = log.split("<br>").collect { |line| line =~ /WARNING\:/ ? line.gsub("WARNING:", "<span style='font-weight:bold'>WARNING:")+"</span >" : line }.collect { |line| line =~ /ERORR\:/ ? line.gsub("ERROR:", "<span style='color: red;font-weight:bold'>ERROR:")+"</span >" : line }.join("<br>").html_safe
         %>
         <td align="left" colspan=2><%= log %></td>
     <% else %>
