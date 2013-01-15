@@ -327,6 +327,7 @@ class CallcController < ApplicationController
       @page_title = _('Quick_stats')
     end
 
+    @ex = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
 
     @user=User.find(:first, :include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
 
