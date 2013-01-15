@@ -133,7 +133,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>xpath=(//img[@alt='Delete'])[5]</td>
 	<td></td>
 </tr>
@@ -143,7 +143,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Call booth successfully removed</td>
 	<td></td>
 </tr>
@@ -319,14 +319,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>//tr[@id='booth-7']/td[10]/div/div</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//tr[@id='booth-7']/td[10]/div/div/span[2]</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
@@ -340,7 +355,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -370,6 +390,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>test comment</td>
 	<td></td>
@@ -379,6 +404,11 @@
 	<td>click</td>
 	<td>css=#booth-8 a.end-session</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -391,7 +421,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -404,6 +439,11 @@
 	<td>click</td>
 	<td>//input[@value='End Session']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -419,6 +459,11 @@
 	<td>click</td>
 	<td>css=span.yes</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -437,7 +482,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -447,7 +497,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>calls_made</td>
 	<td>2</td>
 </tr>
@@ -477,6 +527,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>css=div.question</td>
 	<td></td>
@@ -492,7 +547,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
 	<td>//tr[@id='booth-7']/td[9]</td>
 	<td>komentaras</td>
 </tr>
@@ -648,7 +708,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -695,7 +760,12 @@
 </tr>
 -->
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
 	<td>css=tr.occupied</td>
 	<td></td>
 </tr>
@@ -706,7 +776,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -741,7 +816,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -761,7 +841,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -796,6 +881,11 @@
 	<td>postpaid fully paid</td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>waitForNotText</td>
 	<td>//tr[@id='booth-8']/td[9]</td>
 	<td>postpaid fully paid</td>
@@ -828,7 +918,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -843,7 +938,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -869,7 +969,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -884,7 +989,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -1084,7 +1194,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -1104,7 +1219,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.reserved</td>
 	<td></td>
 </tr>
@@ -1119,7 +1239,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>css=tr.slide</td>
 	<td></td>
 </tr>
@@ -1134,7 +1259,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>abc</td>
 	<td></td>
 </tr>
@@ -1241,7 +1371,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>css=#delete-0</td>
 	<td></td>
 </tr>
@@ -1476,7 +1606,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>User type</td>
 	<td></td>
 </tr>
