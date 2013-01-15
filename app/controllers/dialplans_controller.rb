@@ -175,7 +175,7 @@ class DialplansController < ApplicationController
       elsif params[:dialplan][:data3].to_i == 0 and params[:dialplan][:data1].to_i == 0
         @dp.data1 = 1
       end
-      @dp.data2 = params[:dialplan][:data2].to_s.strip if params[:dialplan][:data2].to_i > 0
+      @dp.data2 = params[:dialplan][:data2].to_s.strip if !params[:dialplan][:data2].blank?
 
       @dp.data3 = params[:dialplan][:data3] ? 1 : 0
       @dp.data4 = params[:dialplan][:data4] ? 1 : 0
