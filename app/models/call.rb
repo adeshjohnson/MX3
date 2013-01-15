@@ -177,7 +177,7 @@ class Call < ActiveRecord::Base
     billsec = []
     avg_billsec = []
     index = 0
-    i = 0
+    i = 1
     start_date.upto(end_date) do |day|
       day_stats = day_by_day_stats[i]
       if day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
@@ -282,12 +282,12 @@ class Call < ActiveRecord::Base
     end
 
     if group_options[:date]
-      statistics = Call.select(select.join(', ')).joins(join.join(' ')).where(condition.join(' AND ')).all
+      statistics = Call.select(select.join(', ')).joins(join.join(' ')).where(condition.join(' AND ')).group(group.join(', ')).all
       statistics.each do |st|
         st.calldate = (st.calldate.to_time + Time.zone.now.utc_offset().second - Time.now.utc_offset().second).to_s(:db) if !st.calldate.blank?
       end
     else
-      statistics = Call.find(:all, :select => select.join(', '), :joins => join.join(' '), :conditions => condition.join(' AND '), :group => group.join(', '))
+      statistics = Call.select(select.join(', ')).joins(join.join(' ')).where(condition.join(' AND ')).group(group.join(', ')).all
     end
 
     #calculating total billsec, total calls and average billsec
