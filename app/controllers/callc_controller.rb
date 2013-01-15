@@ -1086,8 +1086,8 @@ class CallcController < ApplicationController
     tables = ActiveRecord::Base.connection.select_all(select.join(' '))
     if tables
       tables.each { |t|
-        MorLog.my_debug("Found table : #{t.values}", 1)
-        Tariff.clean_after_import(t.values)
+        MorLog.my_debug("Found table : #{t['table_name']}", 1)
+        Tariff.clean_after_import(t['table_name'])
       }
     end
   end
