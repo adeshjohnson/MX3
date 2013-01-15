@@ -42,7 +42,7 @@ class Device < ActiveRecord::Base
   validates_presence_of :name, :message => _('Device_must_have_name')
   validates_presence_of :extension, :message => _('Device_must_have_extension')
   validates_uniqueness_of :extension, :message => _('Device_extension_must_be_unique')
-  validates_uniqueness_of :username, :message => _('Device_Username_Must_Be_Unique'), :if => :username_must_be_unique
+  validates_uniqueness_of :username, :message => _('Device_Username_Must_Be_Unique'), :if => :username_must_be_unique_check
   # validates_format_of :name, :with => /^\w+$/,  :on=>:create, :message => _('Device_username_must_consist_only_of_digits_and_letters')
   validates_format_of :max_timeout, :with => /^[0-9]+$/, :message => _('Device_Call_Timeout_must_be_greater_than_or_equal_to_0')
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{ |o| not o.port.blank? }
@@ -829,7 +829,15 @@ class Device < ActiveRecord::Base
   end
 
   def username_must_be_unique
-    Confline.get_value("Disalow_Duplicate_Device_Usernames").to_i == 1 and self.device_ip_authentication_record.to_i == 0 #and !self.provider
+    Confline.get_value("Disalow_Duplicate_Device_Usernames").to_i == 1 and self.device_ip_authentication_record.to_i == 0 and !self.provider
+  end
+
+  def provider_device_username_unique?
+    Confline.get_value("Disalow_Duplicate_Device_Usernames").to_i == 1 and self.device_ip_authentication_record.to_i == 0 and self.provider and !self.username.blank?
+  end
+
+  def username_must_be_unique_check
+    self.username_must_be_unique or self.provider_device_username_unique?
   end
 
   def Device.validate_perims(options={})

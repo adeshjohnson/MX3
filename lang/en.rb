@@ -705,7 +705,7 @@ Localization.define('en') do |l|
 
   l.store 'Change_device', 'Change device'
   l.store 'Provider_was_not_created', 'Provider was not created'
-  l.store 'Providers_settings_bad', 'Provider\'s settings bad'
+  l.store 'Providers_settings_bad', 'Provider was not updated'
   l.store 'Card_was_deleted ', 'Card deleted'
   l.store 'Inbound_traffic', 'Inbound traffic'
   l.store 'Outbound_traffic', 'Outbound traffic'
@@ -1601,7 +1601,7 @@ Localization.define('en') do |l|
   l.store 'Invalid_Device_type', 'Invalid device type'
   l.store 'Device_Extension_Cant_Be_Empty', 'Device Extension cannot be empty'
   l.store 'Device_Extension_Must_Be_Unique', 'Device Extension must be unique'
-  l.store 'Device_Username_Must_Be_Unique', 'Device Username must be unique'
+  l.store 'Device_Username_Must_Be_Unique', 'Such username already used in Device or Provider'
   l.store 'Username_Cant_Be_Empty', 'Username cannot be empty'
   l.store 'Host_Cant_Be_Empty', 'Host cannot be empty'
   l.store 'CLI_Name_Cant_Be_Empty', 'CLI Name cannot be empty'
