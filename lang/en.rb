@@ -705,7 +705,7 @@ Localization.define('en') do |l|
 
   l.store 'Change_device', 'Change device'
   l.store 'Provider_was_not_created', 'Provider was not created'
-  l.store 'Providers_settings_bad', 'Provider was not updated'
+  l.store 'Providers_settings_bad', 'Provider was not updated'
   l.store 'Card_was_deleted ', 'Card deleted'
   l.store 'Inbound_traffic', 'Inbound traffic'
   l.store 'Outbound_traffic', 'Outbound traffic'
