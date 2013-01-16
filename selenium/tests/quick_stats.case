@@ -439,7 +439,27 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/callc/show_quick_stats</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hide_quick_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/</td>
 	<td></td>
 </tr>
 <tr>
@@ -469,6 +489,91 @@
 	<td>4.8037</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_did_owner_cost</td>
+	<td>4.4016</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_did_owner_cost</td>
+	<td>4.4016</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_cost</td>
+	<td>3.5477</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_cost</td>
+	<td>3.5477</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_cross_curr_active_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_chech_curr_upd_disable_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=exchange_rate</td>
+	<td>104.865</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_did_owner_cost</td>
+	<td>624.9954</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_did_owner_cost</td>
+	<td>624.9954</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_cost</td>
+	<td>503.7366</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_cost</td>
+	<td>503.7366</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
 	<td></td>
@@ -476,6 +581,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=USD</td>
 	<td></td>
 </tr>
 <tr>
@@ -516,11 +626,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/callc/show_quick_stats</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextNotPresent</td>
 	<td>DID Owner Cost</td>
 	<td></td>
@@ -536,6 +641,36 @@
 	<td>4.8233</td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_cost</td>
+	<td>3.5622</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_cost</td>
+	<td>3.5622</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_cost</td>
+	<td>505.7989</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_cost</td>
+	<td>505.7989</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/stats/last_calls_stats</td>
 	<td></td>
@@ -543,6 +678,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=USD</td>
 	<td></td>
 </tr>
 <tr>
