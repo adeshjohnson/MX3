@@ -180,7 +180,7 @@ class Call < ActiveRecord::Base
     i = 1
     start_date.upto(end_date) do |day|
       day_stats = day_by_day_stats[i]
-      if day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
+      if day_stats and day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
         date[index] = day_stats['calldate'].strftime("%Y-%m-%d")
         calls[index] = day_stats['total_calls'].to_i
         billsec[index] = day_stats['total_billsec'].to_i
