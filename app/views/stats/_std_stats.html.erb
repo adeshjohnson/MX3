@@ -88,7 +88,7 @@
           so.addVariable("path", "<%= Web_Dir %>/swf/");
           so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie1.xml"));
           so.addParam("wmode", "transparent");
-          so.addVariable("chart_data", <%=  @Out_in_calls_graph %>);
+          so.addVariable("chart_data", escape(<%=raw  @Out_in_calls_graph %>));
           so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b></b>]]></text></label></labels></settings>");
           so.write("flashcontent1");
           // ]]>
@@ -106,7 +106,7 @@
           so.addVariable("path", "<%= Web_Dir %>/swf/");
           so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie2.xml"));
           so.addParam("wmode", "transparent");
-          so.addVariable("chart_data", <%=  @Out_in_calls_graph2 %>);
+          so.addVariable("chart_data", escape(<%=raw  @Out_in_calls_graph2 %>));
           so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b></b>]]></text></label></labels></settings>");
           so.write("flashcontent2");
           // ]]>
