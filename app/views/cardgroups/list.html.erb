@@ -59,10 +59,12 @@
             <td id="description_<%= cg.id %>" align="left" colspan=<%= length %>><%= cg.description[0..100] %></td>
             <td id="num_pin_length_<%= cg.id %>" align="center" colspan=3><%= cg.number_length.to_s + "/" + cg.pin_length.to_s %></td>
           </tr>
-
+          <% lcr_owner = true if (current_user.usertype == "reseller" and cg.lcr.user_id == current_user.id) or (current_user.usertype == "admin" and cg.lcr.user_id == current_user.id) %>
           <tr>
             <th id="tariff_<%= cg.id %>" align="left"><%= _('Tariff') %></th>
-            <th id="lcr_<%= cg.id %>" align="left"><%= _('LCR') %></th>
+            <% if lcr_owner %>
+              <th id="lcr_<%= cg.id %>" align="left"><%= _('LCR') %></th>
+            <% end %>
             <% if can_see_finances? -%>
                 <th id="price_<%= cg.id %>" align="right"><%= _('Price') %> <%= current_user.currency.name %></th>
                 <th id="without_vat_<%= cg.id %>" align="right"><%= _('Without_VAT') %> <%= current_user.currency.name %></th>
@@ -80,7 +82,9 @@
 
           <tr class="row1">
             <td id="tariff_name_<%= cg.id %>" align="left"><%= h cg.tariff.name if cg.tariff %></td>
-            <td id="lcr_name_<%= cg.id %>" align="left"><%= h cg.lcr.name if cg.lcr %></td>
+            <% if lcr_owner %>
+              <td id="lcr_name_<%= cg.id %>" align="left"><%= h cg.lcr.name if cg.lcr %></td>
+            <% end %>
             <% if can_see_finances? -%>
                 <% cg.get_tax %>
                 <td id="count_tax_amount_<%= cg.id %>" align="right"><%= nice_number(cg.price + cg.get_tax.count_tax_amount(cg.price)) %></td>
