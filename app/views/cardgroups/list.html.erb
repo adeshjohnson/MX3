@@ -59,7 +59,7 @@
             <td id="description_<%= cg.id %>" align="left" colspan=<%= length %>><%= cg.description[0..100] %></td>
             <td id="num_pin_length_<%= cg.id %>" align="center" colspan=3><%= cg.number_length.to_s + "/" + cg.pin_length.to_s %></td>
           </tr>
-          <% lcr_owner = true if cg.lcr and (current_user.usertype == "reseller" and cg.lcr.user_id == current_user.id) or (current_user.usertype == "admin" and cg.lcr.user_id == current_user.id) %>
+          <% lcr_owner = true if cg.lcr and ((current_user.usertype == "reseller" and cg.lcr.user_id == current_user.id) or (current_user.usertype == "admin" and cg.lcr.user_id == current_user.id)) %>
           <tr>
             <th id="tariff_<%= cg.id %>" align="left"><%= _('Tariff') %></th>
             <% if lcr_owner %>
