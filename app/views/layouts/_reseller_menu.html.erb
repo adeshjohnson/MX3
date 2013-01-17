@@ -117,6 +117,11 @@
     reseller_menu_addons.add(15,0 ,'<%= _('Webphone') %>', '<%= Web_Dir %>/functions/webphone_settings');
     <% end %>
 
+    <% if res_campaigns? and ad_active? %>
+      reseller_menu_addons.add(16,0 ,'<%= _('Campaigns') %>', '');
+      reseller_menu_addons.add(17,16 ,'<%= _('Autodialer') %>','<%= Web_Dir %>/autodialer/campaigns');
+    <% end %>
+
     $("reseller_menu_addons_div").innerHTML = reseller_menu_addons.toString();
     <% else %>
     $("reseller_menu_addons_div").remove();

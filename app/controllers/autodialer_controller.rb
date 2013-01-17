@@ -12,12 +12,12 @@ class AutodialerController < ApplicationController
   before_filter :check_params_campaign, :only => [:campaign_create, :campaign_update]
 
   def index
-    if session[:usertype] == 'admin'
-      redirect_to :action => :campaigns and return false
-    else
+#    if session[:usertype] == 'admin'
+#      redirect_to :action => :campaigns and return false
+#    else
       user_campaigns
       redirect_to :action => :user_campaigns and return false
-    end
+#    end
   end
 
   # --------- Admin campaigns -------------
@@ -27,7 +27,7 @@ class AutodialerController < ApplicationController
 
     @users = []
 
-    @all_users = User.find(:all, :conditions => "hidden = 0")
+    @all_users = User.find(:all, :conditions => {:hidden => 0, :owner_id => current_user.id})
     for user in @all_users
       @users << user if user.campaigns.size > 0
     end
