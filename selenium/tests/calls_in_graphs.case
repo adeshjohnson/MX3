@@ -38,17 +38,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/calls_for_user_graphs</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/accountant_calls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,12 +59,12 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -73,23 +73,13 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=date_from_hour</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_minute</td>
-	<td>label=01</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_month</td>
-	<td>label=December</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -102,8 +92,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Total calls: 51</td>
+	<td>waitForTextPresent</td>
+	<td>Total calls: 23</td>
 	<td></td>
 </tr>
 <tr>
@@ -117,8 +107,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Total calls: 16</td>
+	<td>waitForTextPresent</td>
+	<td>Total calls: 0</td>
 	<td></td>
 </tr>
 <tr>
@@ -132,7 +122,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Total calls: 4</td>
 	<td></td>
 </tr>
@@ -147,8 +137,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Total calls: 6</td>
+	<td>waitForTextPresent</td>
+	<td>Total calls: 2</td>
 	<td></td>
 </tr>
 <tr>
@@ -159,17 +149,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=answered_o</td>
-	<td>24</td>
+	<td>17</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=no_answer_o</td>
-	<td>16</td>
+	<td>0</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=busy_o</td>
-	<td>6</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -179,7 +169,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=all_calls_o</td>
-	<td>50</td>
+	<td>23</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -264,32 +254,32 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=October</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=27</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_month</td>
-	<td>label=October</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=27</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -299,28 +289,33 @@
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_date</td>
-	<td>2010-10-27</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_calls</td>
-	<td>7</td>
+	<td>12</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_billsec</td>
-	<td>00:00:24</td>
+	<td>00:27:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_0_avg_billsec</td>
+	<td>00:02:19</td>
 </tr>
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=26</td>
+	<td>label=22</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=26</td>
+	<td>label=22</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -330,7 +325,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_date</td>
-	<td>2010-10-26</td>
+	<td>2012-11-22</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -869,32 +864,32 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=December</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=26</td>
+	<td>label=29</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_month</td>
-	<td>label=December</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=26</td>
+	<td>label=29</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -904,28 +899,28 @@
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_date</td>
-	<td>2010-12-26</td>
+	<td>2012-11-29</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_calls</td>
-	<td>1</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_billsec</td>
-	<td>00:00:50</td>
+	<td>00:11:27</td>
 </tr>
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=25</td>
+	<td>label=28</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=25</td>
+	<td>label=28</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -935,7 +930,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_date</td>
-	<td>2010-12-25</td>
+	<td>2012-11-28</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1083,32 +1078,32 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=1</td>
+	<td>label=29</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=1</td>
+	<td>label=29</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1118,48 +1113,48 @@
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_date</td>
-	<td>2008-01-01</td>
+	<td>2012-11-29</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_calls</td>
-	<td>2</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_billsec</td>
-	<td>00:01:20</td>
+	<td>00:11:27</td>
 </tr>
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2007</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=December</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=31</td>
+	<td>label=30</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2007</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_month</td>
-	<td>label=December</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=31</td>
+	<td>label=30</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1169,7 +1164,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=row_0_date</td>
-	<td>2007-12-31</td>
+	<td>2012-11-30</td>
 </tr>
 <tr>
 	<td>assertText</td>
