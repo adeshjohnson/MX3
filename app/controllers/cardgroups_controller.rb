@@ -106,6 +106,7 @@ class CardgroupsController < ApplicationController
     @help_link = "http://wiki.kolmisoft.com/index.php/Calling_Card_Groups"
 
     @cardgroup = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ?", params[:id]])
+    @lcr_owner = true if @cardgroup.lcr and ((current_user.usertype == "reseller" and @cardgroup.lcr.user_id == current_user.id) or (current_user.usertype == "admin" and @cardgroup.lcr.user_id == current_user.id))
 
     unless @cardgroup
       flash[:notice] = _("Cardgroup_not_found")

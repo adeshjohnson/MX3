@@ -80,11 +80,13 @@
         </tr>
         <% i+=1 %>
     <% end %>
+    <% if @lcr_owner %>
     <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left"><%= _('LCR') %></th>
       <td align="right" id="lcr">    <%= @cardgroup.lcr.name if @cardgroup.lcr %>   </td>
     </tr>
     <% i+=1 %>
+    <% end %>
     <tr class="row<%= (i.to_i % 2).to_i %>">
       <th align="left"><%= _('Tariff') %></th>
       <td align="right" id="tariff">   <%= @cardgroup.tariff.name if @cardgroup.tariff %>   </td>
