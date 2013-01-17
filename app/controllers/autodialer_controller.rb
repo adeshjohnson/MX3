@@ -23,6 +23,7 @@ class AutodialerController < ApplicationController
   # --------- Admin campaigns -------------
 
   def campaigns
+    (dont_be_so_smart and redirect_to :controller => :callc, :action => :main) if (current_user.usertype == "reseller" and current_user.reseller_right('autodialer').to_i != 2)
     @page_title = _('Campaigns')
 
     @users = []
