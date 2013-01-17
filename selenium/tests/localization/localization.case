@@ -1377,7 +1377,12 @@
 	<td>label=Test Retail User</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
 	<td>id=device_id_8</td>
 	<td>SIP/1008</td>
 </tr>

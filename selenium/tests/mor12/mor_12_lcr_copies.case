@@ -118,12 +118,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>id=select_reseller_b</td>
 	<td>No resellers were found</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>wrspro_primary_LCR</td>
 	<td></td>
 </tr>
@@ -178,7 +183,12 @@
 	<td>label=Test Wholesale Reseller</td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
 	<td>wrspro_primary_LCR</td>
 	<td></td>
 </tr>
@@ -188,7 +198,12 @@
 	<td>label=Test Retail RSPRO</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>rrspro_primary_LCR</td>
 	<td></td>
 </tr>
@@ -245,7 +260,12 @@
 	<td>label=Test Retail RSPRO</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>rrspro_primary_LCR</td>
 	<td></td>
 </tr>
@@ -403,7 +423,12 @@
 	<td>label=Test Retail RSPRO</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>No resellers were found</td>
 	<td></td>
 </tr>
@@ -560,7 +585,12 @@
 	<td>label=Test Retail RSPRO</td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>10000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Select reseller Test Wholesale RSPRO</td>
 	<td></td>
 </tr>

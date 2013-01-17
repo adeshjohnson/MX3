@@ -83,7 +83,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>id=change_action_1</td>
 	<td></td>
 </tr>
@@ -203,7 +208,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>id=change_action_2</td>
 	<td></td>
 </tr>
@@ -224,13 +234,18 @@
 </tr>
 <tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
 	<td>5000</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=change_action_2</td>
 	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>assertSelectOptions</td>
