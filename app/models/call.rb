@@ -177,7 +177,7 @@ class Call < ActiveRecord::Base
     billsec = []
     avg_billsec = []
     index = 0
-    i = 1
+    i = 0
     start_date.upto(end_date) do |day|
       day_stats = day_by_day_stats[i]
       if day_stats and day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
