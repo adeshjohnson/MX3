@@ -87,7 +87,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
 	<td></td>
 </tr>
@@ -137,7 +137,7 @@
 	<td>label=ProvID</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>* - Indicates required fields</td>
 	<td></td>
 </tr>
@@ -147,12 +147,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>2009-01-05 10:06:09</td>
 	<td></td>
 </tr>
@@ -197,12 +197,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Analysis completed</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Next step: Fix CLI</td>
 	<td></td>
 </tr>
@@ -262,17 +262,17 @@
 	<td>30000</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=(Press here to get the list)</td>
+	<td>windowFocus</td>
+	<td>selenium.getAllWindowNames()[selenium.getAllWindowNames().length-1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPopUp</td>
-	<td>new_window</td>
-	<td>30000</td>
+	<td>selectWindow</td>
+	<td>KolmiSoft</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Provider ID was not found in DB</td>
 	<td></td>
 </tr>
@@ -282,8 +282,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>goBackAndWait</td>
+	<td>close</td>
 	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
@@ -292,7 +297,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Fix CLI</td>
 	<td></td>
 </tr>
@@ -397,7 +402,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
+	<td>waitForElementNotPresent</td>
 	<td>id=cdr_cli_15</td>
 	<td></td>
 </tr>
@@ -472,7 +477,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=provider_19</td>
 	<td>4</td>
 </tr>
@@ -537,7 +542,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>id=provider_11</td>
 	<td>6</td>
 </tr>
@@ -547,7 +552,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Create CLI</td>
 	<td></td>
 </tr>
@@ -602,7 +607,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>this cli created from csv</td>
 	<td></td>
 </tr>
@@ -622,17 +627,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=select_device_1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>5000</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Device or CLI was not found</td>
 	<td></td>
 </tr>
@@ -713,7 +713,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Provider successfully updated</td>
 	<td></td>
 </tr>
@@ -774,7 +774,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Tariff successfully created</td>
 	<td></td>
 </tr>
@@ -794,7 +794,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Provider successfully created</td>
 	<td></td>
 </tr>
@@ -814,7 +814,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
 	<td></td>
 </tr>
@@ -859,7 +859,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -904,12 +904,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Analysis completed</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Next step: Fix CLI</td>
 	<td></td>
 </tr>
@@ -964,7 +964,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Fix CLI</td>
 	<td></td>
 </tr>
@@ -1044,7 +1044,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Create CLI: 8</td>
 	<td></td>
 </tr>
@@ -1119,7 +1119,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>this cli created from csv</td>
 	<td></td>
 </tr>
@@ -1139,7 +1139,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=select_device_16</td>
 	<td></td>
 </tr>
@@ -1149,7 +1149,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=user_17</td>
 	<td></td>
 </tr>
@@ -1204,7 +1204,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Provider successfully updated</td>
 	<td></td>
 </tr>
@@ -1249,7 +1249,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
 	<td></td>
 </tr>
@@ -1299,7 +1299,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Columns assigned</td>
 	<td></td>
 </tr>
@@ -1329,7 +1329,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Analysis completed</td>
 	<td></td>
 </tr>
@@ -1379,18 +1379,43 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/cdr/bad_rows_from_csv?csv2=1&amp;name=import_csv__crd__1357740405</td>
+	<td>click</td>
+	<td>link=(Press here to get the list)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForPopUp</td>
+	<td>new_window</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td>selenium.getAllWindowNames()[selenium.getAllWindowNames().length-1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>KolmiSoft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
 	<td>Provider ID was not found in DB</td>
 	<td></td>
 </tr>
 <tr>
-	<td>goBackAndWait</td>
+	<td>assertTextPresent</td>
+	<td>CLI is not a number</td>
 	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
@@ -1449,7 +1474,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Create CLI: 2</td>
 	<td></td>
 </tr>
@@ -1509,7 +1534,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=device_id_16</td>
 	<td></td>
 </tr>
@@ -1539,7 +1564,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=device_id_19</td>
 	<td></td>
 </tr>
@@ -1569,7 +1594,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=device_id_22</td>
 	<td></td>
 </tr>
@@ -1599,7 +1624,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=device_id_31</td>
 	<td></td>
 </tr>
@@ -1629,7 +1654,7 @@
 	<td>10000</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>id=device_id_32</td>
 	<td></td>
 </tr>
