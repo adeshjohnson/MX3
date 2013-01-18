@@ -232,12 +232,27 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>link=(Press here to get the list)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForPopUp</td>
+	<td>new_window</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td>selenium.getAllWindowNames()[selenium.getAllWindowNames().length-1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>KolmiSoft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
 	<td>Provider ID was not found in DB</td>
 	<td></td>
 </tr>
@@ -247,8 +262,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>goBackAndWait</td>
+	<td>close</td>
 	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
