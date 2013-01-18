@@ -351,10 +351,11 @@ class CdrController < ApplicationController
 
   def bad_rows_from_csv
     @page_title = _('Bad_rows_from_CSV_file')
-          if ActiveRecord::Base.connection.tables.include?(params[:name])
+      if ActiveRecord::Base.connection.tables.include?(params[:name])
         @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{params[:name]} WHERE f_error = 1")
       end
 
+    session[:company] = Confline.get_value("Company", 0)
     render(:layout => "layouts/mor_min")
   end
 
