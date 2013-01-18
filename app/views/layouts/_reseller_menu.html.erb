@@ -67,7 +67,6 @@
     <%##3396%>
     reseller_menu.add(85, 80, '<%= _('Call_Stats') %>', '<%= Web_Dir %>/stats/show_user_stats');
     reseller_menu.add(90, 0, '<%= _('Google_maps') %>', '<%= Web_Dir %>/stats/google_maps');
-
     <%
       sms = (sms_active? and ((session[:sms_service_active].to_i == 1) or (session[:res_sms_addon].to_i == 2)))
       calling_cards = (calling_cards_active? and (session[:res_calling_cards].to_i == 2))
@@ -75,7 +74,7 @@
       payment_gateway = (payment_gateway_active? and session[:res_payment_gateways].to_i == 2 and gateways_enabled_for(current_user))
     %>
     $("reseller_menu_div").innerHTML = reseller_menu.toString();
-    <% if payment_gateway or call_shop or sms or calling_cards or erp_active? or monitoring_enabled_for(current_user) or (provider_billing_active? and current_user.reseller_allow_providers_tariff?) or (web_phone_active? and current_user.simple_get_acc_res_permission('webphone_res') > 0) %>
+    <% if payment_gateway or call_shop or sms or calling_cards or erp_active? or monitoring_enabled_for(current_user) or (provider_billing_active? and current_user.reseller_allow_providers_tariff?) or (web_phone_active? and current_user.simple_get_acc_res_permission('webphone_res') > 0) or (res_campaigns? and ad_active?) %>
 
     reseller_menu_addons = new dTree('reseller_menu_addons');
     reseller_menu_addons.config.inOrder = true;
@@ -118,8 +117,8 @@
     <% end %>
 
     <% if res_campaigns? and ad_active? %>
-      reseller_menu_addons.add(16,0 ,'<%= _('Campaigns') %>', '');
-      reseller_menu_addons.add(17,16 ,'<%= _('Autodialer') %>','<%= Web_Dir %>/autodialer/campaigns');
+      reseller_menu_addons.add(16,0 ,'<%= _('Auto_Dialer') %>', '<%= Web_Dir %>/autodialer/campaigns');
+      reseller_menu_addons.add(17,16 ,'<%= _('Campaign_Stats') %>','<%= Web_Dir %>/autodialer/campaign_statistics');
     <% end %>
 
     $("reseller_menu_addons_div").innerHTML = reseller_menu_addons.toString();

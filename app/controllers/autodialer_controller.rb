@@ -50,7 +50,6 @@ class AutodialerController < ApplicationController
     @campaigns = @user.campaigns
   end
 
-
   def campaign_new
     @user = current_user
 
@@ -80,7 +79,6 @@ class AutodialerController < ApplicationController
     @till_hour = t1.hour
     @till_min = t1.min
   end
-
 
   def campaign_create
     @campaign = Campaign.new(params[:campaign])
@@ -387,7 +385,7 @@ class AutodialerController < ApplicationController
     #seems that campaigns.user_id is representing creator/owner of the campaign
     campaign_owner_id = ((@current_user.is_admin? or @current_user.is_accountant?) ? 0 : @current_user.id)
     @campaigns = Campaign.find(:all, :conditions => "user_id = #{campaign_owner_id}")
-    @Calltime_graph =""
+    @Calltime_graph = ""
     @answered_percent = @no_answer_percent = @failed_percent = @busy_percent = 0
     @calls_busy = @calls_failed = @calls_no_answer = @calls_answered = 0
     @numbers = []
