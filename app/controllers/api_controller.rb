@@ -2720,9 +2720,8 @@ class ApiController < ApplicationController
 
             if !params[:caller_id].to_s.strip.blank?
               callerid = "<#{params[:caller_id].to_s.strip}>"
-              notice = "CallerID_must_be_numeric" unless (!!Float(params[:caller_id].to_s.strip) rescue false)
-              acc_callerid_perm = ActiveRecord::Base.connection.select_all("select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_edit_opt_4') and value IN (2)").first['result'] rescue 0 
-              notice = "You_are_not_authorized_to_manage_callerid" if acc_callerid_perm < 1 and @user.usertype == "accountant"
+              notice = "CallerID_must_be_numeric" unless is_numeric? params[:caller_id].to_s.strip 
+              notice = "You_are_not_authorized_to_manage_callerid" if @user.is_accountant? and !@user.accountant_allow_edit('device_edit_opt_4')
             end
 
             if !notice.blank?
@@ -2782,18 +2781,9 @@ class ApiController < ApplicationController
         if device 
           user_id = @user.id
           permissions = true
-          if @user.usertype == 'accountant'
+          if @user.is_accountant?
             user_id = 0
-
-            sql_device = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_manage') and value IN (2,1) limit 1"
-            sql_did = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
-            sql_user = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'user_manage') and value IN (2,1) limit 1"
-
-            query_device = ActiveRecord::Base.connection.select_all(sql_device)[0]['result'].to_i rescue 0
-            query_did = ActiveRecord::Base.connection.select_all(sql_did)[0]['result'].to_i rescue 0
-            query_user = ActiveRecord::Base.connection.select_all(sql_user)[0]['result'].to_i rescue 0
-
-            ((query_device.to_i + query_did.to_i + query_user.to_i) == 3 ? permissions = true : permissions = false)
+            permissions = true if @user.accountant_allow_read('device_manage') and @user.accountant_allow_edit('manage_dids_opt_1') and @user.accountant_allow_read('user_manage')
           end
           did = Did.where(:did => params[:did]).first
           device_user_owner = User.where(:id => device.user_id,:owner_id => user_id).size
@@ -2866,18 +2856,9 @@ class ApiController < ApplicationController
         if @user.usertype != "user"
           user_id = @user.id
           permissions = true
-          if @user.usertype == 'accountant'
+          if @user.is_accountant?
             user_id = 0
-
-            sql_device = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'device_manage') and value IN (2,1) limit 1"
-            sql_did = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
-            sql_user = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'user_manage') and value IN (2,1) limit 1"
-
-            query_device = ActiveRecord::Base.connection.select_all(sql_device)[0]['result'].to_i rescue 0
-            query_did = ActiveRecord::Base.connection.select_all(sql_did)[0]['result'].to_i rescue 0
-            query_user = ActiveRecord::Base.connection.select_all(sql_user)[0]['result'].to_i rescue 0
-
-            ((query_device.to_i + query_did.to_i + query_user.to_i) == 3 ? permissions = true : permissions = false)
+            permissions = true if @user.accountant_allow_read('device_manage') and @user.accountant_allow_edit('manage_dids_opt_1') and @user.accountant_allow_read('user_manage')
           end
           did = Did.where(:did => params[:did]).first
             if permissions 
@@ -2944,11 +2925,9 @@ class ApiController < ApplicationController
         if provider
           user_id = @user.id
           allow_manage_dids = true
-          if @user.usertype == 'accountant'
+          if @user.is_accountant?
             user_id = 0
-            sql = "select count(*) as result from acc_group_rights where acc_group_id = (select acc_group_id from users where id = #{@user.id}) and acc_right_id = (select id from acc_rights where name = 'manage_dids_opt_1') and value = 2 limit 1"
-            query = ActiveRecord::Base.connection.select_all(sql)[0]['result'] rescue 0
-            query.to_i == 1 ? allow_manage_dids = true : allow_manage_dids = false
+            allow_manage_dids = false unless @user.accountant_allow_edit('manage_dids_opt_1')
           end
           if @user.usertype == 'reseller'
             query = Confline.get_value('Resellers_can_add_their_own_DIDs',0)

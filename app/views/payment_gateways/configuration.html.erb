@@ -85,7 +85,7 @@
             <%= form_tag(Web_Dir + '/payment_gateways/'+gatewayengine.post_to, :multipart => true) do %>
             <% for engine, gateways in gatewayengine.gateways %>
                 <% for name, gateway in gateways %>
-                    <% if  allow_pg_extension(gateway.settings['name']) and ((!gateway.settings['testing']) || (gateway.settings['testing'] && Confline.get_value("test_production_environment") == "true")) %>
+                    <% if ((!gateway.settings['testing']) || (gateway.settings['testing'] && Confline.get_value("test_production_environment") == "true")) %>
                         <div name="<%=gateway.settings['name'].gsub(" ","_").downcase%>_toggle" class="accordion-toggle <%= "error" if gateway.errors.size > 0 %>">
                           <%= gateway_logo(gateway) %>
                           <%= gateway.settings['name'] %>

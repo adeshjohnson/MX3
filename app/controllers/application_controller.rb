@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
-  helper_method :allow_pg_extension, :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?, :web_phone_active?, :res_campaigns?
+  helper_method :erp_active?, :admin?, :reseller?, :user?, :accountant?, :reseller_pro_active?, :show_recordings?, :ast_18?, :provider_billing_active?, :providers_enabled_for_reseller?, :web_phone_active?, :res_campaigns?
   before_filter :log_session_size, :set_charset
   before_filter :set_current_user, :set_timezone
   before_filter :redirect_callshop_manager
@@ -3014,11 +3014,6 @@ Variables: (Names marked with * are required)
   def ccl_active?
     ccl_active = Confline.get_value("CCL_Active") rescue NIL
     (!ccl_active.blank? and ccl_active.to_i == 1)
-  end
-
-  # technine_skola :D
-  def allow_pg_extension(name)
-    true
   end
 
   def last_day_month(date)
