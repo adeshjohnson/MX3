@@ -33,7 +33,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/warning_email</td>
+	<td>/billing/test/load_delta_sql/swarning_email</td>
 	<td></td>
 </tr>
 <tr>
@@ -252,6 +252,17 @@
 	<td>assertValue</td>
 	<td>email_warning_sent_test</td>
 	<td>0</td>
+</tr>
+<!--SEND TEST EMAIL CONFIRM-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/raise_exception?id=OpenSSL::SSL::SSLError</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please verify that SMTP server details are correct or try alternative server</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>

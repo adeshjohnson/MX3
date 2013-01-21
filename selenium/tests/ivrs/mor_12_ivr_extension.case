@@ -98,24 +98,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>keyDown</td>
-	<td>id=change_action_1</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>id=change_action_1</td>
 	<td>label=Transfer To</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=change_action_1</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=change_action_1</td>
+	<td>Transfer To</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=action_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectOptions</td>
+	<td>id=action_1</td>
+	<td>IVR,DID,Device,Block,Extension</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=option[value=&quot;Extension&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>keyDown</td>
@@ -136,6 +146,11 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=action_1</td>
+	<td>Extension</td>
 </tr>
 <tr>
 	<td>focus</td>
@@ -158,14 +173,34 @@
 	<td>15000</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/ivr/ivr_extlines?block_id=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>15000</td>
+	<td>assertElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,1,NoOp(IVR_BLOCK_1_REACHED)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,2,Set(TIMEOUT(digit)=3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,3,Set(TIMEOUT(response)=10)</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -178,6 +213,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=action_param_1</td>
+	<td>s0s0s0s0s0s0</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Add new Action</td>
 	<td></td>
@@ -186,6 +226,21 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=change_action_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectOptions</td>
+	<td>id=change_action_2</td>
+	<td>Playback,Change Voice,Delay,Hangup,Transfer To,Debug,Set Accountcode,Change CallerID (Number),Action log</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#change_action_2 &gt; option[value=&quot;Transfer To&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -198,6 +253,16 @@
 	<td>15000</td>
 </tr>
 <tr>
+	<td>assertSelectOptions</td>
+	<td>id=action_2</td>
+	<td>IVR,DID,Device,Block,Extension</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#action_2 &gt; option[value=&quot;Extension&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=action_2</td>
 	<td>label=Extension</td>
@@ -208,19 +273,34 @@
 	<td>15000</td>
 </tr>
 <tr>
+	<td>assertSelectedLabel</td>
+	<td>id=action_2</td>
+	<td>Extension</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=action_param_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=action_param_2</td>
+	<td>1</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=action_param_2</td>
 	<td>0101010101</td>
 </tr>
 <tr>
-	<td>keyUp</td>
-	<td>id=action_param_1</td>
-	<td>w</td>
-</tr>
-<tr>
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=action_param_2</td>
+	<td>0101010101</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -228,13 +308,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>15000</td>
+	<td>assertElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local,s0s0s0s0s0s0,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local,0101010101,1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -253,6 +338,11 @@
 	<td>15000</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=action_param_1</td>
+	<td>riririririririririririr</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/ivr/ivr_extlines?block_id=1</td>
 	<td></td>
@@ -261,6 +351,21 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Manual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,4,Goto(mor_local,riririririririririririr,1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>[ivr_block1] exten =&gt; s,5,Goto(mor_local,0101010101,1)</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
