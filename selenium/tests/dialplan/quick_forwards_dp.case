@@ -36,6 +36,406 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/quickforwards_rules/settings')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call via Quick forward DID will not play Balance and Time:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tell Balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tell Time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=tell_balance_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=tell_balance_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=tell_time_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=tell_time_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tell_balance_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tell_time_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=conflines</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>286</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tell_Balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=value_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>287</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tell_Time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=value_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=dialplans</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dptype_value</td>
+	<td>quickforwarddids</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data1_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tell_balance_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=dialplans</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dptype_value</td>
+	<td>quickforwarddids</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data1_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tell_time_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=dialplans</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dptype_value</td>
+	<td>quickforwarddids</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data1_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tell_balance_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=dialplans</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quick Forward DIDs DP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dptype_value</td>
+	<td>quickforwarddids</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data1_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_balance_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=tell_time_1</td>
+	<td>off</td>
+</tr>
 <!--MOR11 <tr>	<td>open</td>	<td>/billing/dialplans/new</td>	<td></td></tr><tr>	<td>type</td>	<td>//input[@id='quickforward_dp_name']</td>	<td>qfdp</td></tr><tr>	<td>select</td>	<td>id=quickforwards_user</td>	<td>label=System Admin (0)</td></tr><tr>	<td>assertElementPresent</td>	<td>name=users_device</td>	<td></td></tr><tr>	<td>select</td>	<td>name=users_device</td>	<td>label=IAX2/103</td></tr><tr>	<td>clickAndWait</td>	<td>id=cb_add</td>	<td></td></tr><tr>	<td>assertText</td>	<td>id=status</td>	<td>Dial Plan successfully created</td></tr><tr>	<td>open</td>	<td>/billing/dids/edit/1</td>	<td></td></tr><tr>	<td>assertElementPresent</td>	<td>name=dp_id</td>	<td></td></tr><tr>	<td>assertText</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>assertSelectedLabel</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>clickAndWait</td>	<td>css=input[type=&quot;image&quot;]</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>DID assigned to Dial Plan: qfdp</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>Allow this DID to be assigned to other users/dialplans</td>	<td></td></tr><tr>	<td>open</td>	<td>/billing/dids/list</td>	<td></td></tr><tr>	<td>assertText</td>	<td>id=dialplan_1</td>	<td>qfdp (quickforwarddids)</td></tr><tr>	<td>assertElementNotPresent</td>	<td>link=Quick Forward DIDs DP (quickforwarddids)</td>	<td></td></tr><tr>	<td>open</td>	<td>/billing/dids/edit/1</td>	<td></td></tr><tr>	<td>clickAndWait</td>	<td>css=#make_did_free &gt; input[name=&quot;commit&quot;]</td>	<td></td></tr><tr>	<td>assertTextPresent</td>	<td>DID made available</td>	<td></td></tr><tr>	<td>assertText</td>	<td>name=dp_id</td>	<td>qfdp</td></tr><tr>	<td>assertSelectedLabel</td>	<td>name=dp_id</td>	<td>qfdp</td></tr>-->
 <!--MOR12-->
 <tr>
