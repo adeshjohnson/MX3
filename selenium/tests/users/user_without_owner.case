@@ -68,6 +68,57 @@
 	<td>Bad username and/or password</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/users/user_bad_owner_id</td>
+	<td></td>
+</tr>
+<!--login as user who has bad owner id-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>test_u</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>asddsdfdfds</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad username and/or password</td>
+	<td></td>
+</tr>
 <!--Login as admin and delete user admin-->
 <tr>
 	<td>open</td>
