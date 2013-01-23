@@ -146,7 +146,7 @@ class CdrController < ApplicationController
 
           if @step == 4
             my_debug_time "step 4"
-            @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "LEFT JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
+            @users = User.select("users.*, #{SqlExport.nice_user_sql}").joins("LEFT JOIN devices ON (users.id = devices.user_id)").where("hidden = 0 AND owner_id = #{correct_owner_id}").order("nice_user ASC").group('users.id').all
             @providers = current_user.load_providers(:all, :conditions => 'hidden=0')
             if !@providers or @providers.size.to_i < 1
               flash[:notice] = _('No_Providers')
@@ -168,7 +168,7 @@ class CdrController < ApplicationController
             if session[:cdr_import_csv2][:import_type].to_i == 0
               session[:cdr_import_csv2][:import_user] = params[:user].to_i
               session[:cdr_import_csv2][:import_device] = params[:device_id].to_i
-              if User.find(:first, :conditions => {:id => params[:user]}) and Device.find(:first, :conditions => {:id => params[:device_id]})
+              if User.where(:id => params[:user]).first and Device.where(:id => params[:device_id]).first
                 @cdr_analize = Call.analize_cdr_import(session[:temp_cdr_import_csv], session[:cdr_import_csv2])
                 @new_step = 9
                 @cdr_analize[:file_lines] = session[:cdr_import_csv2][:file_lines]
@@ -238,7 +238,7 @@ class CdrController < ApplicationController
               fpage, @total_pages, @options = pages_validator(@options, Callerid.count(:all, :conditions => {:device_id => -1}).to_d, params[:page])
               @clis = Callerid.find(:all, :conditions => {:device_id => -1}, :offset => fpage, :limit => session[:items_per_page])
 
-              @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
+              @users = User.select("users.*, #{SqlExport.nice_user_sql}").joins("JOIN devices ON (users.id = devices.user_id)").where("hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}").order("nice_user ASC").group('users.id')
             end
           else
             if @step == 7 or @step == 8
@@ -280,15 +280,13 @@ class CdrController < ApplicationController
     @dev = Device.where({:id => params[:device_id].to_i}).first
     @cli = Callerid.where({:id => params[:id].to_i}).first
 
-    logger.fatal @dev
-    logger.fatal @cli
     if @dev and @cli
       @cli.device_id = @dev.id
       @cli.added_at = Time.now
       @cli.save
     else
       @error = _('Device_or_Cli_not_found')
-      @users = User.find(:all, :select => "users.*, #{SqlExport.nice_user_sql}", :joins => "JOIN devices ON (users.id = devices.user_id)", :conditions => "hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}", :order => "nice_user ASC", :group => 'users.id')
+      @users = User.select("users.*, #{SqlExport.nice_user_sql}").joins("JOIN devices ON (users.id = devices.user_id)").where("hidden = 0 and devices.id > 0 AND owner_id = #{correct_owner_id}").order("nice_user ASC").group('users.id').all
     end
     render :layout => false and return false
   end
@@ -368,8 +366,8 @@ class CdrController < ApplicationController
     @page_icon = 'coins.png';
 
     if @step == 1
-      @users = User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "hidden = 0", :order => "nice_user ASC")
-      @tariffs = Tariff.find(:all, :conditions => "purpose != 'provider' ", :order => "name ASC")
+      @users = User.select("*, #{SqlExport.nice_user_sql}").where("hidden = 0").order("nice_user ASC").all
+      @tariffs = Tariff.where("purpose != 'provider' ").order("name ASC").all
     end
 
     if @step == 2
@@ -381,9 +379,9 @@ class CdrController < ApplicationController
       users = []
 
       if params[:user].to_i == -1
-        users = User.find(:all)
+        users = User.all
       else
-        user = User.find(:first, :conditions => ["users.id = ?", params[:user]])
+        user = User.where(:id => params[:user]).first
         users << user if user
       end
 
@@ -434,9 +432,9 @@ class CdrController < ApplicationController
       users = []
 
       if params[:user].to_i == -1
-        users = User.find(:all, :include => [:tariff])
+        users = User.includes(:tariff).all
       else
-        user = User.find(:first, :include => [:tariff], :conditions => ["users.id = ?", params[:user]])
+        user = User.includes(:tariff).where("users.id = ?", params[:user]).first
         users << user if user
       end
 
@@ -465,7 +463,6 @@ class CdrController < ApplicationController
 
       providers_cache = {}
 
-
       for @user in users
 
         if @user
@@ -493,11 +490,7 @@ class CdrController < ApplicationController
               one_old_user_price += call.user_price.to_d 
               one_old_reseller_price += call.reseller_price.to_d
               one_old_provider_price += call.provider_price.to_d
-            
-              logger.fatal one_old_user_price
-              logger.fatal one_old_reseller_price
-              logger.fatal one_old_provider_price
-             
+
               call = call.count_cdr2call_details(provider.tariff, @user, test_tariff_id) if provider and call.user_id and !grace
               call.user_price = 0.to_d and call.user_rate = 0.to_d if grace
 
@@ -527,10 +520,6 @@ class CdrController < ApplicationController
           @old_reseller_price += one_old_reseller_price.to_d
           @old_user_price += one_old_user_price.to_d
 
-          logger.fatal @old_user_price
-          logger.fatal @old_reseller_price
-          logger.fatal @old_provider_price
-
           #update prepaid user balance  (why only prepaid? - postpaid should be also edited)
           #if @user.postpaid == 0
           @user.balance = @user.balance - (one_user_price - one_old_user_price)
@@ -541,7 +530,7 @@ class CdrController < ApplicationController
           # handle resellers balance
           if @user.owner_id > 0
             @reseller == nil
-            @reseller = User.find(:first, :conditions => ["id = ?", @user.owner_id])
+            @reseller = User.where(:id => @user.owner_id).first
             if @reseller
               @reseller.balance = @reseller.balance - (one_reseller_price - one_old_reseller_price)
               if testing == 0
