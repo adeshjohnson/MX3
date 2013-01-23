@@ -778,7 +778,7 @@ module PdfGen
         item << nice_number(total_calls.total_provider_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_reseller_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << {:text => '', :colspan => 2}
+        item << {:text => '', :colspan => 3}
         item << nice_number(total_calls.total_user_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => ''}
         item << nice_number(total_calls.total_did_prov_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
