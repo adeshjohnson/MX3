@@ -250,6 +250,10 @@ class Invoice < ActiveRecord::Base
 
     options = self.genereate_options(current_user, ex)
     user = options[:user]
+    limit = Confline.get_value("#{type}Invoice_page_limit", user.owner).to_i
+    # 71 = number of rows on the page
+    page_limit = (71 * limit) - 1
+    page_limit_error = 0
     #    begin
     #
     ###### Generate PDF ########
@@ -426,10 +430,12 @@ class Invoice < ActiveRecord::Base
                   nice_invoice_number(item["user_price"].to_d, nice_number_hash).to_s
               ]
               tprice += item["user_price"].to_d
+              break if items2.size > page_limit
             end
             tcalls += calls2.size.to_i
           end
         end
+        break if items2.size > page_limit
         if (user.usertype == "reseller" and rcalls.size > 0)
           if (rcalls.size > 0)
 
@@ -444,20 +450,25 @@ class Invoice < ActiveRecord::Base
                   nice_invoice_number(item["reseller_price"].to_d, nice_number_hash).to_s
               ]
               tprice += item["reseller_price"].to_d
+              break if items2.size > page_limit
             end
             tcalls += rcalls.size.to_i
           end
         end
         items2 << [_('Total_calls_invoice') + ": " + tcalls.to_s + ", " + _('price_invoice') + ": " + nice_invoice_number(tprice).to_s + " (" + nice_invoice_number(user.get_tax.count_tax_amount(tprice)).to_s + ")"]
         items2 << [' ', '', '', '']
+        break if items2.size > page_limit
       }
-
+      page_limit_error = 1 if items2.size > page_limit
+      items2 =  items2[0..page_limit]
       pdf.table(items2,
                 :width => 550,
                 :font_size => 7, :border_width => 0, :vertical_padding => 1,
                 :align => {0 => :left, 1 => :right, 2 => :left, 3 => :right})
+    end
 
-
+    if page_limit_error == 1
+      pdf = PdfGen::Count.error_message_from_limit(pdf, limit, current_user, self)
     end
 
     pdf = pdf_end(pdf, options)
