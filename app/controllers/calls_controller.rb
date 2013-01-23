@@ -22,6 +22,7 @@ class CallsController < ApplicationController
 =end
 
   def aggregate
+
     @page_title = _('Aggregate')
     @help_link = 'http://wiki.kolmisoft.com/index.php/Last_Calls#Call_information_representation'
     change_date
@@ -177,6 +178,7 @@ class CallsController < ApplicationController
     else
       @terminator_providers_count = terminator_providers_count(@options[:terminators], @options[:terminator])
     end
+
   end
 
 =begin rdoc
@@ -243,7 +245,11 @@ class CallsController < ApplicationController
       @originator_lines << @originator_lines_full[i] if @originator_lines_full[i]
     }
 
-    session[:summary_list_options] = @options
+    # NEVER DO IT LIKE THIS. It keeps all results within session and fills it.
+    # session[:summary_list_options] = @options
+
+    session[:summary_list_options] = {:page => @options[:page],:term_order_desc => @options[:term_order_desc], :order_desc => @options[:order_desc], :order_by => @options[:order_by_name], :originator => @options[:originator], :terminator => @options[:terminator], :prefix => @options[:prefix]}
+
     @options = load_parties(@options)
 
     if @options[:terminator] == "any"

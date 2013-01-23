@@ -1,11 +1,14 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 
+  require 'localization.rb'
   include SqlExport
   include UniversalHelpers
   require "digest/sha2"
   require 'uri'
   require 'net/http'
+
+  Localization.load
 
   cattr_accessor :current
   cattr_accessor :current_user

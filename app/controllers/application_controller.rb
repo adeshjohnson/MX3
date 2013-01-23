@@ -1,9 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
 
-
   require 'builder/xmlbase'
-
 
   if !Rails.env.development?
     rescue_from Exception do |exc|
@@ -51,7 +49,7 @@ class ApplicationController < ActionController::Base
   include UniversalHelpers
 
   require 'digest/sha1'
-  require "localization.rb"
+  #require 'localization.rb'
   require 'net/smtp'
   require 'enumerator'
   require 'smtp_tls'
@@ -59,7 +57,7 @@ class ApplicationController < ActionController::Base
   require "net/http"
 
 
-  Localization.load
+  #Localization.load
 
   # Pick a unique cookie name to distinguish our session data from others'
   # session :session_key => '_mor_session_id'
