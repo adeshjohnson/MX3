@@ -248,7 +248,7 @@ class CallsController < ApplicationController
     # NEVER DO IT LIKE THIS. It keeps all results within session and fills it.
     # session[:summary_list_options] = @options
 
-    session[:summary_list_options] = {:page => @options[:page],:term_order_desc => @options[:term_order_desc], :order_desc => @options[:order_desc], :order_by => @options[:order_by_name], :originator => @options[:originator], :terminator => @options[:terminator], :prefix => @options[:prefix]}
+    session[:summary_list_options] = {:page => @options[:page], :term_order_desc => @options[:term_order_desc], :order_desc => @options[:order_desc], :order_by => @options[:order_by], :order_by_name => @options[:order_by_name], :originator => @options[:originator], :terminator => @options[:terminator], :prefix => @options[:prefix]}
 
     @options = load_parties(@options)
 
