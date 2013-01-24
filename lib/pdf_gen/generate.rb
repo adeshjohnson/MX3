@@ -771,14 +771,14 @@ module PdfGen
 
     item << {:text => _('Total'), :colspan => 3}
     item << nice_time(total_calls.total_duration)
-    item << {:text => ' ', :colspan => usertype == 'user' ? 2 : 3}
+    item << {:text => ' ', :colspan => (usertype == 'user' or usertype == 'reseller') ? 2 : 4}
     if main_options[:can_see_finances]
       if ['admin', 'accountant'].include?(usertype)
 
         item << nice_number(total_calls.total_provider_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_reseller_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << {:text => '', :colspan => 3}
+        item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_user_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => ''}
         item << nice_number(total_calls.total_did_prov_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
@@ -792,6 +792,7 @@ module PdfGen
         end
 
         item << nice_number(total_calls.total_reseller_price_with_dids, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+        item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_user_price_with_dids, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
       end
       if usertype == 'user'
