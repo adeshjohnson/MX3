@@ -339,6 +339,29 @@ class EmailsController < ApplicationController
     end
   end
 
+  def EmailsController::send_invoices(email, to, from, files = [], number)
+     
+     smtp_server = Confline.get_value("Email_Smtp_Server", email[:owner_id].to_i).to_s.strip
+     smtp_user = Confline.get_value("Email_Login", email[:owner_id].to_i).to_s.strip
+     smtp_pass = Confline.get_value("Email_Password", email[:owner_id].to_i).to_s.strip
+     smtp_port = Confline.get_value("Email_Port", email[:owner_id].to_i).to_s.strip
+
+     begin
+	     files.each do |file| 
+	       File.open("/home/mor/tmp/cache/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_"), 'wb') {|f| f.write(file[:file]) }
+	     end
+
+	     filenames = files.map { |file| "'/home/mor/tmp/cache/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_") + "'" }.join(" ").to_s
+	     system_call = "/usr/local/mor/sendEmail -s '#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}' -t '#{to.to_s}' -f '#{from.to_s}' -m '#{email.body.to_s}' -u '#{email.subject.to_s}' -a #{filenames}"
+	     system(system_call)
+
+	     files.each do |file|
+               File.delete("/home/mor/tmp/cache/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_"))
+	     end
+     rescue
+       return false
+     end
+  end
 
   def EmailsController::send_email_with_attachment(email, email_from, user, attachments, assigns = {})
     num = []

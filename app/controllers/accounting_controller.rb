@@ -189,17 +189,20 @@ class AccountingController < ApplicationController
             variables = email_variables(user)
             email= Email.where(["name = 'invoices' AND owner_id = ?", user.owner_id]).first
             MorLog.my_debug("Try send invoice to : #{user.address.email}, Invoice : #{invoice.id}, User : #{user.id}, Email : #{email.id}", 1)
-            @num = EmailsController.send_email_with_attachment(email, email_from, user, attach, variables)
+            #@num = EmailsController.send_email_with_attachment(email, email_from, user, attach, variables)
+
+            @num = EmailsController.send_invoices(email, user.email.to_s, email_from, attach, invoice.number.to_s)
+
             MorLog.my_debug @num
-            if @num and @num[0].to_i != 0
-              @number += @num[0].to_i
+            if @num
+              @number += 1
               invoice.sent_email = 1
               invoice.save
             else
               Action.create_email_sending_action(user, 'error', email, {:er_type => 1, :err_message => @num})
             end
           else
-            not_sent +=1
+            not_sent += 1
             email= Email.where(["name = 'invoices' AND owner_id = ?", user.owner_id]).first
             Action.create_email_sending_action(user, 'error', email, {:er_type => 1})
           end
