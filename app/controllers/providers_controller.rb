@@ -206,14 +206,13 @@ class ProvidersController < ApplicationController
     if @provider.save
 
       #======= creating device for IAX2 and SIP provaiders ==========
-      #if (@provider.tech == "IAX2" or @provider.tech == "SIP")
-      #prov_name = @provider.name.strip#.downcase.gsub(/\s/, '') -- atrodo nereikalingas
+
       dev = Device.new
       dev.device_ip_authentication_record = params[:ip_authentication].to_i
       if params[:ip_authentication].to_s == "1"
         if !dev.name.include?('ipauth')
           name = dev.generate_rand_name('ipauth', 8)
-          while Device.find(:first, :conditions => ['name= ? and id != ?', name, dev.id])
+          while Device.where(['name= ? and id != ?', name, dev.id]).first
             name = dev.generate_rand_name('ipauth', 8)
           end
           dev.name = name
@@ -268,10 +267,10 @@ class ProvidersController < ApplicationController
   def edit
     @page_title = _('Provider_edit') + ": " + @provider.name
     @page_icon = "edit.png"
-    @servers= Server.find(:all, :conditions => "server_type = 'asterisk'", :order => "server_id")
+    @servers= Server.where(:server_type => 'asterisk').order(:server_id).all
     @prules = @provider.providerrules
 
-    @providertypes = Providertype.find(:all)
+    @providertypes = Providertype.all
     @curr = current_user.currency
 
     if @provider.tech == "Skype"
@@ -282,7 +281,7 @@ class ProvidersController < ApplicationController
 
     @video_codecs = @provider.codecs_order('video')
 
-    @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
+    @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id]).all
 
     @locations = current_user.locations
 
@@ -290,8 +289,8 @@ class ProvidersController < ApplicationController
     @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
     @is_common_use_used = false
-    provider_used_by_resellers_terminator = Provider.find(:all, :conditions => ["id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id])
-    provider_used_by_resellers_lcr = Lcrprovider.find(:all, :conditions => ["(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id])
+    provider_used_by_resellers_terminator = Provider.where(["id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id]).all
+    provider_used_by_resellers_lcr = Lcrprovider.where(["(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id]).all
     if provider_used_by_resellers_terminator.size > 0 or provider_used_by_resellers_lcr.size > 0
       @is_common_use_used = true
     end
@@ -363,6 +362,9 @@ class ProvidersController < ApplicationController
 
     @provider.set_old
 
+    # if higher than zero -> do not update provider
+    provider_update_errors = 0
+
     unless @provider.is_dahdi?
       params[:provider][:login]= params[:provider][:login].to_s.strip if params[:provider][:login]
       params[:provider][:password]= params[:provider][:password].to_s.strip if params[:provider][:password]
@@ -383,19 +385,19 @@ class ProvidersController < ApplicationController
     @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip, params[:provider][:port].to_s.strip)
     unless @provider.valid?
       flash_errors_for(_('Providers_was_not_saved'), @provider)
-      redirect_to :action => 'edit', :id => @provider.id and return false
+      provider_update_errors += 1
     end
 
     if (params[:hostname_ip] == 'hostname' and params[:provider][:server_ip].blank?) or (params[:hostname_ip] == 'ip' and (params[:provider][:server_ip].blank? or params[:device][:ipaddr].blank?))
       @hostname_ip = "ip"
       flash[:notice] = _('Hostname/IP_is_blank')
-      redirect_to :action => 'edit', :id => @provider.id and return false
+      provider_update_errors += 1
     end
 
     params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
       flash[:notice] = _('Please_select_server')
-      redirect_to :action => 'edit', :id => @provider.id and return false
+      provider_update_errors += 1
     end
     #========= codecs =======
 
@@ -404,14 +406,14 @@ class ProvidersController < ApplicationController
     @device = @provider.device
     @device.set_old_name
     @device.device_ip_authentication_record = params[:ip_authentication].to_i
-    #logger.info @device.device_ip_authentication_record
+
     @device.update_cid(params[:cid_name], params[:cid_number])
     @device.attributes = params[:device]
 
     if params[:mask1]
       if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
         flash[:notice] = _('Allowed_IP_is_not_valid')
-        redirect_to :action => 'device_edit', :id => @provider.id and return false
+        provider_update_errors += 1
       else
         @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
       end
@@ -465,7 +467,7 @@ class ProvidersController < ApplicationController
       @device.secret = ""
       if !@device.name.include?('ipauth')
         name = @device.generate_rand_name('ipauth', 8)
-        while Device.find(:first, :conditions => ['name= ? and id != ?', name, @device.id])
+        while Device.where(['name= ? and id != ?', name, @device.id]).first
           name = @device.generate_rand_name('ipauth', 8)
         end
         @device.name = name
@@ -493,20 +495,16 @@ class ProvidersController < ApplicationController
 
     if not @provider.device.save
       flash_errors_for(_('Providers_settings_bad'), @provider.device)
-      redirect_to :action => :edit, :id => @provider.id and return false
+      provider_update_errors += 1
     end
 
     @provider.create_serverproviders(params[:add_to_servers])
 
-    if @provider.save
+    if provider_update_errors == 0 and @provider.save
       session[:flash_not_redirect] = 0
       # update asterisk configuration
       if @provider.tech == "SIP" or @provider.tech == "IAX2"
-        #        if @provider.change_register_params?
-        exceptions = @provider.reload
-        #else
         exceptions = @device.prune_device_in_all_servers
-        #end
         raise exceptions[0] if exceptions.size > 0
       end
 
@@ -525,7 +523,79 @@ class ProvidersController < ApplicationController
       redirect_to :action => 'list', :id => @provider, :s_hidden => @provider.hidden.to_i and return false
     else
       flash_errors_for(_('Providers_was_not_saved'), @provider)
-      redirect_to :action => 'edit', :id => @provider.id and return false
+
+      @servers= Server.where(:server_type => 'asterisk').order(:server_id).all
+      @prules = @provider.providerrules
+
+      @providertypes = Providertype.all
+      @curr = current_user.currency
+
+      if @provider.tech == "Skype"
+        @audio_codecs = @provider.codecs_order('audio', {:skype => true})
+      else
+        @audio_codecs = @provider.codecs_order('audio')
+      end
+
+      @video_codecs = @provider.codecs_order('video')
+
+      @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id]).all
+
+      @locations = current_user.locations
+
+      @serverproviders = []
+      @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
+
+      @is_common_use_used = false
+      provider_used_by_resellers_terminator = Provider.where("id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id).all
+      provider_used_by_resellers_lcr = Lcrprovider.where("(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id).all
+      if provider_used_by_resellers_terminator.size > 0 or provider_used_by_resellers_lcr.size > 0
+        @is_common_use_used = true
+      end
+
+      @device = @provider.device
+      if @device
+        @cid_name = ""
+        if @device.callerid
+          @cid_name = nice_cid(@device.callerid)
+          @cid_number = cid_number(@device.callerid)
+        end
+
+        if @device.qualify == "yes" or @device.qualify == "no"
+          @qualify_time = 2000
+        else
+          @qualify_time = @device.qualify
+        end
+      end
+
+      #------ permits --------
+
+      @ip1 = ""
+      @mask1 = ""
+      @ip2 = ""
+      @mask2 = ""
+      @ip3 = ""
+      @mask3 = ""
+
+      if @provider.device
+        data = @provider.device.permit.split(';')
+        if data[0]
+          permit = data[0].split('/')
+          @ip1 = permit[0]
+          @mask1 = permit[1]
+        end
+        if data[1]
+          permit = data[1].split('/')
+          @ip2 = permit[0]
+          @mask2 = permit[1]
+        end
+        if data[2]
+          permit = data[2].split('/')
+          @ip3 = permit[0]
+          @mask3 = permit[1]
+        end
+      end
+
+      render :action => 'edit'
     end
   end
 
@@ -601,8 +671,8 @@ class ProvidersController < ApplicationController
     @page_icon = 'page_white_gear.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Provider_Rules"
     @rules = @provider.providerrules
-    @rules_dst = Providerrule.find(:all, :conditions => ["provider_id = ? and pr_type = ?", @provider.id, "dst"])
-    @rules_src = Providerrule.find(:all, :conditions => ["provider_id = ? and pr_type = ?", @provider.id, "src"])
+    @rules_dst = Providerrule.where(:provider_id => @provider.id, :pr_type => "dst").all
+    @rules_src = Providerrule.where(:provider_id => @provider.id, :pr_type => "src").all
   end
 
   # in before filter @provider (find_provider), @providerrule  (find_providerrule)
@@ -691,7 +761,7 @@ class ProvidersController < ApplicationController
     @provider = Provider.new
     @provider.tech = ""
     @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
-    @servers= Server.find(:all, :order => "server_id")
+    @servers= Server.order(:server_id).all
 
     if not @tariffs
       flash[:notice] = _('No_tariffs_available')

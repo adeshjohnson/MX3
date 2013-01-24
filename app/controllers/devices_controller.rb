@@ -324,6 +324,9 @@ class DevicesController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
 
+    # if higher than zero -> do not update device
+    device_update_errors = 0
+
     change_pin = !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i != 2)
     change_opt_1 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_1].to_i != 2)
     change_opt_2 = !(session[:usertype] == "accountant" and session[:acc_device_edit_opt_2].to_i != 2)
@@ -358,7 +361,7 @@ class DevicesController < ApplicationController
 
     if params[:add_to_servers].blank? and params[:device][:server_id].blank?
       flash[:notice] = _('Please_select_server')
-      redirect_to :action => :device_edit, :id => @device.id and return false
+      device_update_errors += 1
     end
 
     #============multi server support===========
@@ -502,12 +505,12 @@ class DevicesController < ApplicationController
     #============================= end  ============================================================
     if params[:device][:recording_to_email].to_i == 1 and params[:device][:recording_email].to_s.length == 0
       flash[:notice] = _("Recordings_email_should_be_set_when_send_recordings_to_email_is_YES")
-      redirect_to :action => :device_edit, :id => @device.id and return false
+      device_update_errors += 1
     end
 
     if params[:device][:name] and params[:device][:name].to_s.scan(/[^\w\.\@\$\-]/).compact.size > 0
       flash[:notice] = _('Device_username_must_consist_only_of_digits_and_letters')
-      redirect_to :action => :device_edit, :id => @device.id and return false
+      device_update_errors += 1
     end
 
     #4816 If device uses ip authentication it cannot be dynamic and valid host must be specified
@@ -515,14 +518,14 @@ class DevicesController < ApplicationController
     #needs refactoring, leave it for better times.
     if params[:ip_authentication].to_i == 1 and params[:host].blank?
       flash[:notice] = _("Must_specify_host_if_ip_authentication_enabled")
-      redirect_to :action => :device_edit, :id => @device.id and return false
+      device_update_errors += 1
     end
 
     #ticket 5055. ip auth or dynamic host must checked
     if params[:dynamic_check].to_i != 1 and params[:ip_authentication].to_i != 1 and ['SIP', 'IAX2'].include?(@device.device_type)
       if params[:host].to_s.strip.blank?
         flash[:notice] = _("Must_set_either_ip_auth_either_dynamic_host")
-        redirect_to :action => :device_edit, :id => @device.id and return false
+        device_update_errors += 1
       else
         params[:ip_authentication] = '1'
       end
@@ -530,16 +533,16 @@ class DevicesController < ApplicationController
 
     if params[:device][:extension] and Device.where(["id != ? and extension = ?", @device.id, params[:device][:extension]]).first
       flash[:notice] = _('Extension_is_used')
-      redirect_to :action => :device_edit, :id => @device.id and return false
+      device_update_errors += 1
     else
       #pin
       if (Device.where(["id != ? AND pin = ?", @device.id, params[:device][:pin]]).first and params[:device][:pin].to_s != "")
         flash[:notice] = _('Pin_is_already_used')
-        redirect_to :action => :device_edit, :id => @device.id and return false
+        device_update_errors += 1
       end
       if params[:device][:pin].to_s.strip.scan(/[^0-9]/).compact.size > 0
         flash[:notice] = _('Pin_must_be_numeric')
-        redirect_to :action => :device_edit, :id => @device.id and return false
+        device_update_errors += 1
       end
       @device.device_ip_authentication_record = params[:ip_authentication].to_i
       params[:device] = params[:device].reject { |key, value| ['extension'].include?(key.to_s) } if current_user.usertype == 'reseller' and Confline.get_value('Allow_resellers_to_change_extensions_for_their_user_devices').to_i == 0
@@ -609,7 +612,7 @@ class DevicesController < ApplicationController
       if params[:mask1]
         if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
           flash[:notice] = _('Allowed_IP_is_not_valid')
-          redirect_to :action => :device_edit, :id => @device.id and return false
+          device_update_errors += 1
         else
           @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
         end
@@ -627,7 +630,7 @@ class DevicesController < ApplicationController
       #------- Network related -------
       if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/
         flash[:notice] = _('Invalid_IP_address')
-        redirect_to :action => :device_edit, :id => @device.id and return false
+        device_update_errors += 1
       end
 
       @device.host = params[:host]
@@ -725,12 +728,12 @@ class DevicesController < ApplicationController
       if params[:vm_email].to_s != ""
         if !Email.address_validation(params[:vm_email])
           flash[:notice] = _("Email_address_not_correct")
-          redirect_to :action => :device_edit, :id => @device.id and return false
+          device_update_errors += 1
         end
       end
 
       @device.mailbox = @device.enable_mwi.to_i == 0 ? "" : @device.extension.to_s + "@default"
-      if @device.save
+      if device_update_errors == 0 and @device.save
 
         #----------server_devices table changes---------
         @device.create_server_devices(params[:add_to_servers]) if ccl_active?
