@@ -534,7 +534,7 @@ class DevicesController < ApplicationController
     if params[:device][:extension] and Device.where(["id != ? and extension = ?", @device.id, params[:device][:extension]]).first
       flash[:notice] = _('Extension_is_used')
       device_update_errors += 1
-    else
+    end
       #pin
       if (Device.where(["id != ? AND pin = ?", @device.id, params[:device][:pin]]).first and params[:device][:pin].to_s != "")
         flash[:notice] = _('Pin_is_already_used')
@@ -824,7 +824,6 @@ class DevicesController < ApplicationController
           render :action => :device_edit
         end
       end
-    end
   end
 
   # in before filter : device (:find_device)
