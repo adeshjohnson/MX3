@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.95" />
+<title>paypal_pay_without_signature</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">paypal_pay_without_signature</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Succesfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='settings']/form/div[11]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=gateways_paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_login</td>
+	<td>aistea_1310389388_biz_api1.gmail.com</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=gateways_paypal_signature</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_password</td>
+	<td>1310389435</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=gateways_paypal_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payment_gateways/gateways/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_first_name</td>
+	<td>tttttt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_last_name</td>
+	<td>ttttttt</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_paypal_year</td>
+	<td>label=2020</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_paypal_month</td>
+	<td>label=06</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_number</td>
+	<td>4872813215761001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_verification_value</td>
+	<td>000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_paypal_amount</td>
+	<td>67</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>An API Certificate or API Signature is required to make requests to PayPal</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
