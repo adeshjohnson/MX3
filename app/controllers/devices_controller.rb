@@ -360,12 +360,12 @@ class DevicesController < ApplicationController
     end
 
     unless is_number? params[:cid_number]
-      flash[:notice] = _('callerid_not_a_number')
+      @device.errors.add(:cid_number_error, _('callerid_not_a_number'))
       device_update_errors += 1
     end
 
     if params[:add_to_servers].blank? and params[:device][:server_id].blank?
-      flash[:notice] = _('Please_select_server')
+      @device.errors.add(:add_to_servers_error, _('Please_select_server'))
       device_update_errors += 1
     end
 
