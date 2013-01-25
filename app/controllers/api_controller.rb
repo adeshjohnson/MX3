@@ -128,9 +128,9 @@ class ApiController < ApplicationController
             dst = params[:dst] if params[:dst]
             channel = "Local/#{src}@mor_cb_src/n"
             if dst.length > 0
-              st = originate_call(device.id, src, channel, "mor_cb_dst", dst, device.callerid_number)
+              st = originate_call(device.id, src, channel, "mor_cb_dst", dst, (device.callerid_number.blank? ? src : device.callerid_number))
             else
-              st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", device.callerid_number)
+              st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", (device.callerid_number.blank? ? src : device.callerid_number))
             end
             doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
             doc.Status(st.to_i == 0 ? "Ok" : _('Cannot_connect_to_asterisk_server'))
