@@ -34,7 +34,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
@@ -69,7 +69,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Settings saved</td>
 	<td></td>
 </tr>
@@ -81,7 +81,7 @@
 <tr>
 	<td>type</td>
 	<td>address_email</td>
-	<td>abielskute@gmail.com</td>
+	<td>ieva.vaiginyte@gmail.com</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -99,7 +99,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyValue</td>
+	<td>assertValue</td>
 	<td>id=i8</td>
 	<td>off</td>
 </tr>
@@ -114,7 +114,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -174,7 +174,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Generating invoices for period:</td>
 	<td></td>
 </tr>
@@ -184,9 +184,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_1</td>
+	<td>8129.8718</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -219,8 +224,8 @@
 	<td>label=Postpaid</td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>css=#delete_link_2 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td>assertElementPresent</td>
+	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -234,17 +239,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices sent: 1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>ERROR: Email sent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -254,7 +259,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -266,7 +271,7 @@
 <tr>
 	<td>type</td>
 	<td>address_email</td>
-	<td>aisteaisteb@gmail.com</td>
+	<td>ieva.vaiginyte@gmail.com</td>
 </tr>
 <tr>
 	<td>uncheck</td>
@@ -319,7 +324,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -329,9 +334,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_1</td>
+	<td>8129.8718</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -374,17 +384,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices sent: 1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>ERROR: Email sent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -394,7 +404,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -406,7 +416,7 @@
 <tr>
 	<td>type</td>
 	<td>address_email</td>
-	<td>aisteaisteb@gmail.com</td>
+	<td>ieva.vaiginyte@gmail.com</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -459,7 +469,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test User #1</td>
 	<td></td>
 </tr>
@@ -469,9 +479,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Test User #1</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_1</td>
+	<td>8129.8718</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -514,17 +529,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Invoices sent: 1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>ERROR: Email sent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
@@ -534,7 +549,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
@@ -584,7 +599,7 @@
 	<td>label=Test User #1</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -594,17 +609,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=notice</td>
 	<td>No invoice found to recalculate</td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>assertValue</td>
 	<td>id=invoice_type_postpaid</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
@@ -614,10 +629,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>No invoice found to recalculate</td>
 	<td></td>
 </tr>
+<!---->
 </tbody></table>
 </body>
 </html>
