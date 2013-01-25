@@ -2730,6 +2730,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Please select server</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>hostname_ip_ip</td>
 	<td></td>
@@ -2737,6 +2742,11 @@
 <tr>
 	<td>assertValue</td>
 	<td>provider_server_ip</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_ipaddr</td>
 	<td>22.33.44.55</td>
 </tr>
 <tr>
@@ -2846,6 +2856,16 @@
 </tr>
 <tr>
 	<td>assertValue</td>
+	<td>id=provider_server_ip</td>
+	<td>192.168.0.2se</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
 	<td>provider_server_ip</td>
 	<td>192.168.0.2</td>
 </tr>
@@ -2867,6 +2887,16 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_server_ip</td>
+	<td>192.168.0de.2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2896,6 +2926,16 @@
 </tr>
 <tr>
 	<td>assertValue</td>
+	<td>id=provider_server_ip</td>
+	<td>www.go.go.go.lt/zz</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
 	<td>provider_server_ip</td>
 	<td>192.168.0.2</td>
 </tr>
@@ -2917,6 +2957,16 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_server_ip</td>
+	<td>exact:www.go.lt/id?lll=8</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3036,6 +3086,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Provider was not saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider port is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_port</td>
+	<td>123qwe7987987</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3231,6 +3296,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was not saved</td>
 	<td></td>
 </tr>
 <tr>
