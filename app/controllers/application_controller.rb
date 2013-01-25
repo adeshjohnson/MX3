@@ -2888,8 +2888,13 @@ Variables: (Names marked with * are required)
     end
   end
 
+  def is_number?(val=nil)
+    #check if value is a number ( no decimal seperator allowed )
+    (!!(val.match /^[0-9]+$/) rescue false)
+  end
+
   def is_numeric?(val=nil)
-    # Check if value is a digit
+    # Check if value is a digit ( allows decimal seperator )
     (!!(Float(val)) rescue false)
   end
 

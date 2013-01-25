@@ -4538,6 +4538,8 @@ Localization.define('en') do |l|
   l.store 'One_or_more_location_rules_are_using_this_device', 'One or more Location rules are using this Device'
   l.store 'Database_Error', 'DB is outdated, please upgrade it'
   l.store 'Direction_codes_to_update', 'Direction codes to update'
+  l.store 'callerid_not_a_number', 'Device CallerID Number must be numerical'
+
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
