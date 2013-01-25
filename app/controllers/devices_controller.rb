@@ -359,7 +359,7 @@ class DevicesController < ApplicationController
       params[:device][:device_type] = @device.device_type
     end
 
-    unless is_number? params[:cid_number]
+    if !params[:cid_number].blank? and !is_number? params[:cid_number]
       @device.errors.add(:cid_number_error, _('callerid_not_a_number'))
       device_update_errors += 1
     end
