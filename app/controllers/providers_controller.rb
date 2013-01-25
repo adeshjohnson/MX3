@@ -384,19 +384,18 @@ class ProvidersController < ApplicationController
     @provider.attributes = params[:provider]
     @provider.network(params[:hostname_ip].to_s, params[:provider][:server_ip].to_s.strip, params[:device][:ipaddr].to_s.strip, params[:provider][:port].to_s.strip)
     unless @provider.valid?
-      flash_errors_for(_('Providers_was_not_saved'), @provider)
       provider_update_errors += 1
     end
 
     if (params[:hostname_ip] == 'hostname' and params[:provider][:server_ip].blank?) or (params[:hostname_ip] == 'ip' and (params[:provider][:server_ip].blank? or params[:device][:ipaddr].blank?))
       @hostname_ip = "ip"
-      flash[:notice] = _('Hostname/IP_is_blank')
+      @provider.errors.add(:hostname_ip_error, _('Hostname/IP_is_blank'))
       provider_update_errors += 1
     end
 
     params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
-      flash[:notice] = _('Please_select_server')
+      @provider.errors.add(:add_to_servers_error, _('Please_select_server'))
       provider_update_errors += 1
     end
     #========= codecs =======
@@ -412,7 +411,7 @@ class ProvidersController < ApplicationController
 
     if params[:mask1]
       if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
-        flash[:notice] = _('Allowed_IP_is_not_valid')
+        @provider.errors.add(:mask1_error, _('Allowed_IP_is_not_valid'))
         provider_update_errors += 1
       else
         @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
@@ -494,7 +493,6 @@ class ProvidersController < ApplicationController
     end
 
     if not @provider.device.save
-      flash_errors_for(_('Providers_settings_bad'), @provider.device)
       provider_update_errors += 1
     end
 

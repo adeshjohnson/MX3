@@ -509,12 +509,12 @@ class DevicesController < ApplicationController
 
     #============================= end  ============================================================
     if params[:device][:recording_to_email].to_i == 1 and params[:device][:recording_email].to_s.length == 0
-      flash[:notice] = _("Recordings_email_should_be_set_when_send_recordings_to_email_is_YES")
+      @device.errors.add(:recording_to_email_error, _('Recordings_email_should_be_set_when_send_recordings_to_email_is_YES'))
       device_update_errors += 1
     end
 
     if params[:device][:name] and params[:device][:name].to_s.scan(/[^\w\.\@\$\-]/).compact.size > 0
-      flash[:notice] = _('Device_username_must_consist_only_of_digits_and_letters')
+      @device.errors.add(:device_name_error, _('Device_username_must_consist_only_of_digits_and_letters'))
       device_update_errors += 1
     end
 
@@ -522,14 +522,14 @@ class DevicesController < ApplicationController
     #TODO: this validation should be coded into model, but since ip auth is such a pain and
     #needs refactoring, leave it for better times.
     if params[:ip_authentication].to_i == 1 and params[:host].blank?
-      flash[:notice] = _("Must_specify_host_if_ip_authentication_enabled")
+      @device.errors.add(:ip_authentication_error, _('Must_specify_host_if_ip_authentication_enabled'))
       device_update_errors += 1
     end
 
     #ticket 5055. ip auth or dynamic host must checked
     if params[:dynamic_check].to_i != 1 and params[:ip_authentication].to_i != 1 and ['SIP', 'IAX2'].include?(@device.device_type)
       if params[:host].to_s.strip.blank?
-        flash[:notice] = _("Must_set_either_ip_auth_either_dynamic_host")
+        @device.errors.add(:dynamic_check_error, _('Must_set_either_ip_auth_either_dynamic_host'))
         device_update_errors += 1
       else
         params[:ip_authentication] = '1'
@@ -537,16 +537,16 @@ class DevicesController < ApplicationController
     end
 
     if params[:device][:extension] and Device.where(["id != ? and extension = ?", @device.id, params[:device][:extension]]).first
-      flash[:notice] = _('Extension_is_used')
+      @device.errors.add(:extension_error, _('Extension_is_used'))
       device_update_errors += 1
     end
       #pin
       if (Device.where(["id != ? AND pin = ?", @device.id, params[:device][:pin]]).first and params[:device][:pin].to_s != "")
-        flash[:notice] = _('Pin_is_already_used')
+        @device.errors.add(:pin_is_used_error, _('Pin_is_already_used'))
         device_update_errors += 1
       end
       if params[:device][:pin].to_s.strip.scan(/[^0-9]/).compact.size > 0
-        flash[:notice] = _('Pin_must_be_numeric')
+        @device.errors.add(:not_numeric_pin_error, _('Pin_must_be_numeric'))
         device_update_errors += 1
       end
       @device.device_ip_authentication_record = params[:ip_authentication].to_i
@@ -616,7 +616,7 @@ class DevicesController < ApplicationController
       #============= PERMITS ===================
       if params[:mask1]
         if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
-          flash[:notice] = _('Allowed_IP_is_not_valid')
+          @device.errors.add(:allowed_ip_is_not_valid_error, _('Allowed_IP_is_not_valid'))
           device_update_errors += 1
         else
           @device.permit = Device.validate_perims({:ip1 => params[:ip1], :ip2 => params[:ip2], :ip3 => params[:ip3], :mask1 => params[:mask1], :mask2 => params[:mask2], :mask3 => params[:mask3]})
@@ -634,7 +634,7 @@ class DevicesController < ApplicationController
 
       #------- Network related -------
       if !@new_device and @device.device_type == 'H323' and params[:host].to_s.strip !~ /^\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b$/
-        flash[:notice] = _('Invalid_IP_address')
+        @device.errors.add(:invalid_ip_address_error, _('Invalid_IP_address'))
         device_update_errors += 1
       end
 
@@ -732,7 +732,7 @@ class DevicesController < ApplicationController
 
       if params[:vm_email].to_s != ""
         if !Email.address_validation(params[:vm_email])
-          flash[:notice] = _("Email_address_not_correct")
+          @device.errors.add(:incorrect_email_error, _('Email_address_not_correct'))
           device_update_errors += 1
         end
       end
