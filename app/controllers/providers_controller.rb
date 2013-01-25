@@ -520,7 +520,11 @@ class ProvidersController < ApplicationController
       flash[:status] = _('Provider_was_successfully_updated')
       redirect_to :action => 'list', :id => @provider, :s_hidden => @provider.hidden.to_i and return false
     else
-      flash_errors_for(_('Providers_was_not_saved'), @provider)
+      if @provider.device.errors.blank?
+        flash_errors_for(_('Providers_settings_bad'), @provider)
+      else
+        flash_errors_for(_('Providers_settings_bad'), @provider.device)
+      end
 
       @servers= Server.where(:server_type => 'asterisk').order(:server_id).all
       @prules = @provider.providerrules
