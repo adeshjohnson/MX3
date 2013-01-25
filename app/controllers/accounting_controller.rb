@@ -981,7 +981,6 @@ class AccountingController < ApplicationController
   end
 
   def generate_invoice_detailed_pdf
-    #invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
     invoice = Invoice.where(:id => params[:id]).includes([:tax, :user]).first
 
     unless invoice

@@ -191,6 +191,7 @@ class Invoice < ActiveRecord::Base
     #
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
+    pdf.font("#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf")
     pdf = PdfGen::Generate.invoice_header_pdf(self, pdf, company, dc)
     items = []
     idetails.each do |item|
@@ -258,6 +259,7 @@ class Invoice < ActiveRecord::Base
     #
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
+    pdf.font("#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf")
     pdf = PdfGen::Generate.invoice_header_pdf(self, pdf, options[:company], current_user.currency.name)
     items = []
 
@@ -719,6 +721,7 @@ class Invoice < ActiveRecord::Base
 
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
+    pdf.font("#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf")
     pdf = PdfGen::Generate.invoice_header_pdf(self, pdf, options[:company], current_user.currency.name)
 
 
