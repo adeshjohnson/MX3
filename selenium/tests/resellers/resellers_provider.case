@@ -684,6 +684,16 @@
 <!--check current values-->
 <tr>
 	<td>assertValue</td>
+	<td>id=ip_authentication</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=provider_server_ip</td>
+	<td>0.0.0.1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
 	<td>provider_name</td>
 	<td>SIP_provider</td>
 </tr>
@@ -708,12 +718,12 @@
 	<td>0</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotVisible</td>
 	<td>provider_login</td>
-	<td>SIP_provider</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotVisible</td>
 	<td>provider_password</td>
 	<td>please_change</td>
 </tr>
@@ -740,7 +750,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>provider_server_ip</td>
-	<td>0.0.0.0</td>
+	<td>0.0.0.1</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -763,7 +773,7 @@
 	<td>2000</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
+	<td>assertNotChecked</td>
 	<td>qualify_yes</td>
 	<td></td>
 </tr>
@@ -1155,14 +1165,14 @@
 	<td>100</td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotVisible</td>
 	<td>id=provider_login</td>
-	<td>SIP_provider</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
+	<td>assertNotVisible</td>
 	<td>id=provider_password</td>
-	<td>please_change</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -1170,7 +1180,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
+	<td>assertNotChecked</td>
 	<td>register</td>
 	<td></td>
 </tr>
@@ -1361,12 +1371,22 @@
 </tr>
 <!--...change and assert register line-->
 <tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=provider_login</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>provider_login</td>
 	<td>login</td>
 </tr>
 <tr>
-	<td>assertEditable</td>
+	<td>waitForEditable</td>
 	<td>register</td>
 	<td></td>
 </tr>

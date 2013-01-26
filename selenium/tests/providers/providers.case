@@ -2721,7 +2721,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2846,7 +2846,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2881,7 +2881,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2916,7 +2916,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2951,7 +2951,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2986,7 +2986,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -3085,12 +3085,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider port is not valid</td>
+	<td>Port must be numeric</td>
 	<td></td>
 </tr>
 <tr>
@@ -3300,7 +3300,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -3309,14 +3309,34 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertValue</td>
 	<td>hostname_ip_ip</td>
 	<td>on</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=provider_server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_ipaddr</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>provider_server_ip</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_ipaddr</td>
+	<td>127.0.0.2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3336,7 +3356,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>provider_server_ip</td>
-	<td>127.0.0.1</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
