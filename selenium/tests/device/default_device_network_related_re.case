@@ -754,139 +754,15 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider was not saved</td>
+	<td>Provider was not updated</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Provider port is not valid</td>
+	<td>Port must be numeric</td>
 	<td></td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img[alt=&quot;Esp&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//a[@href='/billing/devices/user_devices']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=qualify_time</td>
-	<td>yes</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>El Proveedor fue actualizado satisfactoriamente.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/providers/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=qualify_time</td>
-	<td>1000</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=device_description</td>
-	<td>Test Device</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=qualify_time</td>
-	<td>2000</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=qualify_time</td>
-	<td>yes</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Las configuraciones del dispositivo fueron actualizadas</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=qualify_no</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=qualify_yes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=qualify_time</td>
-	<td>2000</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=qualify_time</td>
-	<td>-499</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Las configuraciones del dispositivo fueron actualizadas</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=qualify_no</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=qualify_yes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=qualify_time</td>
-	<td>2000</td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>css=img[alt=&quot;Esp&quot;]</td> 	<td></td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>//a[@href='/billing/devices/user_devices']</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=qualify_time</td> 	<td>yes</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>El Proveedor fue actualizado satisfactoriamente.</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/providers/edit/2</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=qualify_time</td> 	<td>1000</td> </tr> <tr> 	<td>open</td> 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=device_description</td> 	<td>Test Device</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=qualify_time</td> 	<td>2000</td> </tr> <tr> 	<td>type</td> 	<td>id=qualify_time</td> 	<td>yes</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Las configuraciones del dispositivo fueron actualizadas</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/devices/device_edit/13</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=qualify_no</td> 	<td>on</td> </tr> <tr> 	<td>click</td> 	<td>id=qualify_yes</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=qualify_time</td> 	<td>2000</td> </tr> <tr> 	<td>type</td> 	<td>id=qualify_time</td> 	<td>-499</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Las configuraciones del dispositivo fueron actualizadas</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/devices/device_edit/13</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=qualify_no</td> 	<td>on</td> </tr> <tr> 	<td>click</td> 	<td>id=qualify_yes</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=qualify_time</td> 	<td>2000</td> </tr>-->
 </tbody></table>
 </body>
 

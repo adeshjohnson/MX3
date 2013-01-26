@@ -328,13 +328,34 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Device was not updated</td>
+	<td></td>
+</tr>
+<!--*reikia pranešimo kad callerid must be numerical-->
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_name</td>
+	<td>erftg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=callerid_2</td>
-	<td>&quot;101&quot; &lt;abcd&gt;</td>
+	<td>assertTextPresent</td>
+	<td>&quot;erftg&quot; &lt;101&gt;</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -349,7 +370,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=cid_number</td>
-	<td>abcd</td>
+	<td>101</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -389,7 +410,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;101&quot; &lt;37093042422&gt;</td>
+	<td>&quot;erftg&quot; &lt;37093042422&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -429,7 +450,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;101&quot;</td>
+	<td>&quot;erftg&quot;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -742,9 +763,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Device was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>55555</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;----55555&gt;</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;55555&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -763,13 +804,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Device was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>123123123123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_2</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%&gt;</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;123123123123&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1259,7 +1315,7 @@
 <tr>
 	<td>type</td>
 	<td>id=cid_number</td>
-	<td>abcd</td>
+	<td>1111</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1274,7 +1330,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_7</td>
-	<td>&quot;105&quot; &lt;abcd&gt;</td>
+	<td>&quot;105&quot; &lt;1111&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1289,7 +1345,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=cid_number</td>
-	<td>abcd</td>
+	<td>1111</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1664,7 +1720,7 @@
 <tr>
 	<td>type</td>
 	<td>id=cid_number</td>
-	<td>----55555</td>
+	<td>55555</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1674,7 +1730,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_7</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;----55555&gt;</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;55555&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1693,13 +1749,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Device was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cid_number</td>
+	<td>123123123123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=callerid_7</td>
-	<td>&quot;lkjhgfdsa&quot; &lt;ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%&gt;</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;123123123123&gt;</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1934,7 +2005,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=cid_number</td>
-	<td>ĘĖĮŠŲŪ()_3456789(*&amp;^%$#$%</td>
+	<td>123123123123</td>
 </tr>
 <tr>
 	<td>assertValue</td>
