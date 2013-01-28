@@ -361,6 +361,11 @@ class DevicesController < ApplicationController
 
     if !params[:cid_number].blank? and !is_number? params[:cid_number]
       @device.errors.add(:cid_number_error, _('callerid_not_a_number'))
+
+      if @device.callerid
+        @cid_name = params[:cid_name].to_s.strip
+        @cid_number = params[:cid_number].to_s.strip
+      end
       device_update_errors += 1
     end
 
@@ -784,14 +789,10 @@ class DevicesController < ApplicationController
         @user = @device.user
         @device_type = @device.device_type
         @all_dids = Did.forward_dids_for_select
-        @cid_name = ""
-        if @device.callerid
-          @cid_name = nice_cid(@device.callerid)
-          @cid_number = cid_number(@device.callerid)
-        end
+
         @device_dids_numbers = @device.dids_numbers
-        @device_cids = @device.cid_number
-        @device_caller_id_number = @device.device_caller_id_number
+        @device_cids = params[:cid_number].to_s
+        @device_caller_id_number = params[:device_caller_id_number].to_i
 
         @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
         @audio_codecs = audio_codecs
