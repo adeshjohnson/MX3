@@ -3936,7 +3936,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     else
       devices = Device.find_all_for_select(corrected_user_id)
     end
-    users = User.find_all_for_select(corrected_user_id)
+    users = User.select("id, username, first_name, last_name, usertype, #{SqlExport.nice_user_sql}").where("users.usertype = 'user' AND users.owner_id = #{corrected_user_id} AND hidden=0").order("nice_user")
     if Confline.get_value('Show_HGC_for_Resellers').to_i == 1
       hgcs = Hangupcausecode.find_all_for_select
       hgc = Hangupcausecode.find_by_id(options[:s_hgc]) if options[:s_hgc].to_i > 0
@@ -3968,7 +3968,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     device = Device.find_by_id(options[:s_device]) if options[:s_device] != "all" and !options[:s_device].blank?
     did = Did.find_by_id(options[:s_did]) if options[:s_did] != "all" and !options[:s_did].blank?
     hgc = Hangupcausecode.find_by_id(options[:s_hgc]) if options[:s_hgc].to_i > 0
-    users = User.find_all_for_select
+    users = User.select("id, username, first_name, last_name, usertype, #{SqlExport.nice_user_sql}").where("users.usertype = 'user'").order("nice_user")
     dids = Did.find_all_for_select
     hgcs = Hangupcausecode.find_all_for_select
     providers = Provider.find_all_for_select
