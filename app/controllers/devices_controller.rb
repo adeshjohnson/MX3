@@ -602,7 +602,7 @@ class DevicesController < ApplicationController
         end
       end
 
-      if @device.device_type != 'FAX'
+      if device_update_errors == 0 and @device.device_type != 'FAX'
         @device.update_cid(params[:cid_name], params[:cid_number], true)
         @device.cid_from_dids = params[:device_caller_id_number].to_i == 3 ? 1 : 0
         @device.control_callerid_by_cids = params[:device_caller_id_number].to_i == 4 ? params[:control_callerid_by_cids].to_i : 0
@@ -780,6 +780,7 @@ class DevicesController < ApplicationController
       else
         flash_errors_for(_('Device_not_updated'), @device)
 
+        @server_devices = params[:add_to_servers].blank? ? [] : params[:add_to_servers].keys.map(&:to_i)
         @user = @device.user
         @device_type = @device.device_type
         @all_dids = Did.forward_dids_for_select
