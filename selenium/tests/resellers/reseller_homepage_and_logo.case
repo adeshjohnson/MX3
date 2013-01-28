@@ -31,6 +31,67 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--redirect reseller LOGO-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings_logo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>logo</td>
+	<td>/home/mor/selenium/files/pics/reseller_logo.png</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/login/qg2audn8qa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Logo_3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=img[alt=&quot;Mor_logo&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings_logo</td>
