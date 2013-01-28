@@ -11,6 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">active_calls_with_prov</td></tr>
 </thead><tbody>
+<!--active calls dst flags-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -36,6 +37,52 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/active_calls/ac_and_dst</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Page refreshes every:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//img[@alt='Phl']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>MOB testini_s</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//td[@id='dst_0']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Philippines FIX Philippines proper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[@id='dst_1']/img</td>
+	<td></td>
+</tr>
+<!--active calls with provider-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
