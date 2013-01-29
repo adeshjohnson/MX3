@@ -218,13 +218,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>s_user</td>
-	<td>label=Test Reseller</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//select[@id='s_user']/option[2]</td>
-	<td></td>
+	<td>id=s_user</td>
+	<td>label=User Resellers</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -233,8 +228,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>calldate_11</td>
-	<td>2009-01-01 00:00:03</td>
+	<td>id=calldate_24</td>
+	<td>2010-02-18 00:00:01</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -333,23 +328,18 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>s_user</td>
-	<td>label=Test Reseller</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//option[@value='2']</td>
-	<td></td>
+	<td>id=s_user</td>
+	<td>label=User Resellers</td>
 </tr>
 <tr>
 	<td>waitForSelectOptions</td>
 	<td>s_device</td>
-	<td>All,IAX2/104</td>
+	<td>All,IAX2/105</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>s_device</td>
-	<td>label=IAX2/104</td>
+	<td>label=IAX2/105</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -364,12 +354,12 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>s_user</td>
-	<td>Test Reseller</td>
+	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>s_device</td>
-	<td>IAX2/104</td>
+	<td>IAX2/105</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -594,7 +584,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=s_user</td>
-	<td>All Test Reseller User Resellers</td>
+	<td>All User Resellers</td>
 </tr>
 <tr>
 	<td>open</td>

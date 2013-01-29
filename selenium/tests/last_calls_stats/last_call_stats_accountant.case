@@ -223,8 +223,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>s_user</td>
-	<td>label=Test Reseller</td>
+	<td>id=s_user</td>
+	<td>label=Test User #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -233,8 +233,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>calldate_11</td>
-	<td>2009-01-01 00:00:03</td>
+	<td>id=calldate_14</td>
+	<td>2009-01-02 00:00:02</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -393,23 +393,18 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>s_user</td>
-	<td>label=System Admin</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//option[@value='0']</td>
-	<td></td>
+	<td>id=s_user</td>
+	<td>label=User Resellers</td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>id=s_device</td>
-	<td>All IAX2/103</td>
+	<td>All IAX2/105</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>s_device</td>
-	<td>label=IAX2/103</td>
+	<td>label=IAX2/105</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -434,12 +429,12 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>s_user</td>
-	<td>System Admin</td>
+	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>s_device</td>
-	<td>IAX2/103</td>
+	<td>IAX2/105</td>
 </tr>
 <tr>
 	<td>assertValue</td>
