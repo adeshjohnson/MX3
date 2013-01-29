@@ -361,11 +361,6 @@ class DevicesController < ApplicationController
 
     if !params[:cid_number].blank? and !is_number? params[:cid_number]
       @device.errors.add(:cid_number_error, _('callerid_not_a_number'))
-
-      if @device.callerid
-        @cid_name = params[:cid_name].to_s.strip
-        @cid_number = params[:cid_number].to_s.strip
-      end
       device_update_errors += 1
     end
 
@@ -793,6 +788,8 @@ class DevicesController < ApplicationController
         @device_dids_numbers = @device.dids_numbers
         @device_cids = params[:cid_number].to_s
         @device_caller_id_number = params[:device_caller_id_number].to_i
+        @cid_name = params[:cid_name].to_s.strip
+        @cid_number = params[:cid_number].to_s.strip
 
         @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
         @audio_codecs = audio_codecs
@@ -823,7 +820,12 @@ class DevicesController < ApplicationController
         @fax_enabled = true if Confline.get_value("Fax_Device_Enabled").to_i == 1
         @pdffaxemails = @device.pdffaxemails
 
-        set_voicemail_variables(@device)
+        @device_voicemail_box_email = params[:vm_email].to_s.strip
+        @device_voicemail_box_password = params[:vm_psw].to_s.strip
+        @device_enable_mwi = params[:device][:enable_mwi].to_i
+        @device_voicemail_active = @device.voicemail_active
+        @device_voicemail_box = @device.voicemail_box
+        @fullname = params[:vm_fullname].to_s.strip
 
         if @device.device_type == "H323"
           render :action => :device_edit_h323
