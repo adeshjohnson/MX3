@@ -258,7 +258,7 @@ class Call < ActiveRecord::Base
     group = []
     if group_options[:date]
       select << "(calls.calldate) AS 'calldate'"
-      group << 'DATE(calls.calldate)'
+      group << 'FLOOR((UNIX_TIMESTAMP(calls.calldate)) / 86400)' # grouping by intervals of exact 24 hours
     end
     if group_options[:disposition]
       select << 'calls.disposition'
