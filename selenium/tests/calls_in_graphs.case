@@ -172,6 +172,51 @@
 	<td>23</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_20_calls</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_20_billsec</td>
+	<td>exact:00:27:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_20_avg_billsec</td>
+	<td>exact:00:02:19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_20_date</td>
+	<td>2012-11-21</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_28_calls</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_28_billsec</td>
+	<td>exact:00:11:27</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_28_avg_billsec</td>
+	<td>exact:00:02:17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_28_date</td>
+	<td>2012-11-29</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>link=For more information please visit this wiki page</td>
 	<td></td>
@@ -710,6 +755,86 @@
 </tr>
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
 <tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=22</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_date</td>
+	<td>2009-01-02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_billsec</td>
+	<td>exact:00:00:30</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_avg_billsec</td>
+	<td>exact:00:00:30</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_2_date</td>
+	<td>2009-01-03</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_2_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_2_billsec</td>
+	<td>exact:00:00:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_2_avg_billsec</td>
+	<td>exact:00:00:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_537_date</td>
+	<td>2010-06-22</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_537_billsec</td>
+	<td>exact:00:00:30</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_537_avg_billsec</td>
+	<td>exact:00:00:30</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/users/edit/5</td>
 	<td></td>
@@ -940,6 +1065,111 @@
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
 <tr>
 	<td>open</td>
+	<td>/billing/stats/all_users_detailed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_48_date</td>
+	<td>2010-02-18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_48_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_48_billsec</td>
+	<td>exact:00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_48_avg_billsec</td>
+	<td>exact:00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_75_date</td>
+	<td>2010-03-17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_75_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_75_billsec</td>
+	<td>exact:00:01:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_75_avg_billsec</td>
+	<td>exact:00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_172_date</td>
+	<td>2010-06-22</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_172_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_172_billsec</td>
+	<td>exact:00:00:30</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_172_avg_billsec</td>
+	<td>exact:00:00:30</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1045,6 +1275,61 @@
 	<td>0</td>
 </tr>
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_33_date</td>
+	<td>2010-02-18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_33_calls</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_33_billsec</td>
+	<td>exact:00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_33_avg_billsec</td>
+	<td>exact:00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_60_date</td>
+	<td>2010-03-17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_60_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_60_billsec</td>
+	<td>exact:00:01:40</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_60_avg_billsec</td>
+	<td>exact:00:00:50</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1172,6 +1457,66 @@
 	<td>0</td>
 </tr>
 <!--Patikrinti, ar grafikuose data atvaizduoajama gerai-->
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_calls</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_date</td>
+	<td>2012-11-21</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_calls</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_billsec</td>
+	<td>exact:00:27:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_1_avg_billsec</td>
+	<td>exact:00:02:27</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_9_date</td>
+	<td>2012-11-29</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_9_calls</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_9_billsec</td>
+	<td>exact:00:11:27</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=row_9_avg_billsec</td>
+	<td>exact:00:02:17</td>
+</tr>
 </tbody></table>
 </body>
 </html>
