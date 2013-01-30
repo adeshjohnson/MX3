@@ -2080,7 +2080,7 @@ Sets default tax values for users or cardgroups
   # called from anywhere to check if everything is still ok/not_ok
   def FunctionsController::integrity_recheck
 
-    @destinations_without_dg = Destination.find(:all, :conditions => "destinationgroup_id = 0", :order => "direction_code ASC")
+    @destinations_without_dg = Destination.where(:destinationgroup_id => 0).order("direction_code ASC").all
 
     if @destinations_without_dg.size > 0
       return 1
@@ -2095,7 +2095,7 @@ Sets default tax values for users or cardgroups
 
     @default_user_warning = true if Confline.get_value('Default_User_allow_loss_calls', user_id).to_i == 1 and Confline.get_value('Default_User_postpaid', user_id).to_i == 1
 
-    @users_postpaid_and_loss_calls = User.find(:all, :conditions => ["postpaid = 1 and allow_loss_calls = 1"])
+    @users_postpaid_and_loss_calls = User.where(:postpaid => 1, :allow_loss_calls => 1).all
 
     if @users_postpaid_and_loss_calls.size > 0 or @default_user_warning
       return 1
@@ -2109,17 +2109,16 @@ Sets default tax values for users or cardgroups
   def permissions
     @page_title = _('Permissions')
     @page_icon = 'cog.png'
-    @roles = Role.find(:all, :order => "name")
-    #@rr = RoleRight.find(:all, :include =>[:role, :right])
+    @roles = Role.order(:name).all
 
-    @rights = Right.find(:all, :include => [:role_rights], :order => "saved DESC ,controller ASC , action ASC")
+    @rights = Right.includes([:role_rights]).order("saved DESC ,controller ASC , action ASC").all
     #@permissions = RoleRight.get_auth_list
     @roles_count = @roles.size
   end
 
   def permissions_save
-    @roles = Role.find(:all, :order => "name")
-    @rights = Right.find(:all, :include => [:role_rights], :order => "saved DESC ,controller ASC , action ASC")
+    @roles = Role.order(:name).all
+    @rights = Right.includes([:role_rights]).order("saved DESC ,controller ASC , action ASC").all
 
 
     RoleRight.transaction do
@@ -2155,13 +2154,13 @@ Sets default tax values for users or cardgroups
 
   def role_create
     @role = Role.new(params[:role])
-    if Role.find(:first, :conditions => "name = '#{@role.name}'")
+    if Role.where(:name => @role.name).first
       flash[:notice] = _('Cannot_Create_Role_already_exists')
       redirect_to :action => 'permissions' and return false
     end
 
     if @role.save
-      rights=Right.find(:all)
+      rights = Right.all
       for right in rights do
         role_right = RoleRight.new()
         role_right.role_id = @role.id
@@ -2183,7 +2182,7 @@ Sets default tax values for users or cardgroups
 
   def role_destroy
     @role = Role.find(params[:id])
-    if User.find(:first, :conditions => "usertype = '#{@role.name}'")
+    if User.where(:usertype => @role.name).first
       flash[:notice] = _("Cannot_delete_role_users_exist")
       redirect_to :action => 'permissions' and return false
     end
@@ -2550,7 +2549,7 @@ Sets default tax values for users or cardgroups
             if username.length == 0
               err += _('Please_enter_username')+"<br />"
             end
-            if User.find(:first, :conditions => ["username = ?", username])
+            if User.where(:username => username).first
               err += _('Such_username_is_already_taken')+"<br />"
             end
             if clean_value_all(r_arr[session[:imp_user_password]].to_s).length < 5
@@ -2618,7 +2617,7 @@ Sets default tax values for users or cardgroups
 
               if session[:imp_user_tariff] >= 0
                 tariff_id = clean_value_all(r_arr[session[:imp_user_tariff]].to_s).to_i
-                if Tariff.find(:first, :conditions => "id = #{tariff_id}")
+                if Tariff.where(:id => tariff_id).first
                   user.tariff_id = tariff_id
                 else
                   warn += _("Tariff_Was_Not_Found_Default_Assigned")+"<br />"
@@ -2764,7 +2763,7 @@ Sets default tax values for users or cardgroups
             if device_temp_id.length == 0
               err += _("Temp_Device_ID_Cant_Be_Empty") + "<br />"
             else
-              device = Device.find(:first, :conditions => "temporary_id = #{device_temp_id.to_i}")
+              device = Device.where("temporary_id = #{device_temp_id.to_i}").first
               if device
                 err += _("Temp_Device_ID_Already_Taken") + "<br />"
               end
@@ -2773,26 +2772,30 @@ Sets default tax values for users or cardgroups
             if user_temp_id.length == 0
               err += _("Temp_User_ID_Cant_Be_Empty") + "<br />"
             else
-              user = User.find(:first, :conditions => "temporary_id = #{user_temp_id.to_i}")
+              user = User.where("temporary_id = #{user_temp_id.to_i}").first
               if !user
                 err += _("User_Was_Not_Found") + "<br />"
               end
             end
 
-            if device_type.upcase != "SIP" and device_type.upcase != "IAX2"
+            if device_type.upcase != "SIP" and device_type.upcase != "IAX2" and device_type.downcase != "dahdi" and device_type.upcase != "FAX" and device_type.upcase != "H323" and device_type.capitalize != "Virtual"
               err += _("Invalid_Device_type") + "<br />"
             else
-              if device_type.upcase != "SIP"
+              if device_type.upcase == "SIP"
                 port = 5060
-              else
+              elsif device_type.upcase == "IAX2"
                 port = 4569
+              elsif device_type.upcase == "H323"
+                port = 1720
+              else
+                port = 0
               end
             end
 
             if device_extension.length == 0
               err += _("Device_Extension_Cant_Be_Empty") + "<br />"
             else
-              if nil != Device.find(:first, :conditions => "extension = '#{device_extension}'")
+              if nil != Device.where(:extension => device_extension).first
                 err += _("Device_Extension_Must_Be_Unique") + "<br />"
               end
             end
@@ -2821,7 +2824,7 @@ Sets default tax values for users or cardgroups
               device = Device.new(params[:device])
 
               if location != ""
-                loc = Location.find(:first, :conditions => "name = '#{location}'")
+                loc = Location.where(:name => location).first
                 if not loc
                   loc = Location.new
                   loc.name = location
@@ -2831,13 +2834,13 @@ Sets default tax values for users or cardgroups
                 #if reseller , importin device with no location , find default location
                 #if no default location, create it and use
                 if reseller?
-                  loc = Location.find(:all, :conditions => ['name = ? and user_id = ?', 'Default location', current_user.id])
+                  loc = Location.where(:name => 'Default location', :user_id => current_user.id).all
                   if not loc
                     current_user.create_reseller_localization
-                    loc = Location.find(:first, :conditions => "name = 'Default location'")
+                    loc = Location.where(:name => 'Default location').first
                   end
                 else
-                  loc = Location.find(:first, :conditions => "name = 'Global'")
+                  loc = Location.where(:name => 'Global').first
                 end
               end
 
@@ -2850,7 +2853,7 @@ Sets default tax values for users or cardgroups
               device.username = clean_value_all(r_arr[session[:imp_device_username]].to_s)
               device.secret = clean_value_all(r_arr[session[:imp_device_password]].to_s)
               device.pin = pin if pin != ""
-              device.device_type = device_type.upcase
+              device.device_type = ['SIP', 'IAX2', 'H323', 'FAX'].include?(device_type.upcase) ? device_type.upcase : (['dahdi'].include?(device_type.downcase) ? device_type.downcase : device_type.capitalize)
               device.permit = "0.0.0.0/0.0.0.0"
               device.host = clean_value_all(r_arr[session[:imp_device_host]].to_s)
               device.port = port
@@ -2909,7 +2912,7 @@ Sets default tax values for users or cardgroups
     session[:imp_device_include] and session[:imp_device_include]==1 ? @include = 1 : @include = 0
 
     if @step == 2
-      @providers = Provider.find(:all, :conditions => ['hidden=?', 0])
+      @providers = Provider.where(:hidden => 0).all
 
       if params[:include].to_i == 1
         session[:imp_dids_include] = 1
@@ -3170,7 +3173,7 @@ Sets default tax values for users or cardgroups
 
   def callback_settings
     @page_title = _('Callback_settings')
-    @servers = Server.find(:all, :order => "server_id ASC")
+    @servers = Server.order("server_id ASC").all
   end
 
   def callback_settings_update
