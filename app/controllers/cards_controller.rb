@@ -462,6 +462,8 @@ class CardsController < ApplicationController
     @return_controller = params[:return_to_controller] if params[:return_to_controller]
     @return_action = params[:return_to_action] if params[:return_to_action]
 
+    @card.first_use += Time.zone.now.utc_offset().second - Time.now.utc_offset().second
+    @card.daily_charge_paid_till += Time.zone.now.utc_offset().second - Time.now.utc_offset().second
     @page_title = _('Edit_card')
     @page_icon = "edit.png"
     @cg = @card.cardgroup
@@ -475,12 +477,18 @@ class CardsController < ApplicationController
     return_action = params[:return_to_action] if params[:return_to_action]
     @card_old = @card.dup
     @cg = @card.cardgroup
-    result=check_user_for_cardgroup(@cg)
+    result = check_user_for_cardgroup(@cg)
     return false if result == false
     #safety hack
     params[:card] = params[:card].except("sold", "balance", :sold, :balance) if params[:card]
 
-    if @card.update_attributes(params[:card])
+    @card.attributes = params[:card]
+
+    # first_use and daily_charge_paid_till are saved in DB converted from GUI timezone into DB timezone
+    @card.first_use = current_user.system_time(@card.first_use)
+    @card.daily_charge_paid_till = current_user.system_time(@card.daily_charge_paid_till)
+
+    if @card.save
       if @card.pin != @card_old.pin
         Action.add_action_hash(session[:user_id], {:target_id => @card.id, :target_type => "card", :action => "card_pin_changed", :data => @card_old.pin, :data2 => @card.pin})
       end
