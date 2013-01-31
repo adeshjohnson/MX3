@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   require 'builder/xmlbase'
 
+
   if !Rails.env.development?
     rescue_from Exception do |exc|
       #log_exception_handler(exc) and return false
