@@ -394,8 +394,38 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Total file lines: 4 </td>
+	<td>Total file lines: 9</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[6]/td[3]</td>
+	<td>H323</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[7]/td[3]</td>
+	<td>dahdi</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[8]/td[3]</td>
+	<td>Virtual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[9]/td[3]</td>
+	<td>Fax</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[3]</td>
+	<td>IAX2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[3]</td>
+	<td>SIP</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -405,11 +435,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Columns assigned</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>There were errors</td>
 	<td></td>
 </tr>
 <tr>
@@ -429,8 +454,48 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Step: 4</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_type_8</td>
+	<td>IAX2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_type_9</td>
+	<td>H323</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_type_10</td>
+	<td>dahdi</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_type_11</td>
+	<td>Virtual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_type_12</td>
+	<td>FAX</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_type_13</td>
+	<td>SIP</td>
 </tr>
 <tr>
 	<td>open</td>
