@@ -85,7 +85,7 @@ module UniversalHelpers
     logger.debug("  >> load_file_through_database(#{filename})")
     file = ActiveRecord::Base.connection.execute("select LOAD_FILE('#{full_file_path}')") #.fetch_row()[0]
     if file.first[0]
-      #File.open(full_file_path, 'w') { |f| f.write(file) }
+      File.open(full_file_path, 'w') { |f| f.write(file.first[0]) }
       logger.debug("  >> load_file_through_database = file")
       return filename
     else

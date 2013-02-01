@@ -2964,7 +2964,7 @@ class ApiController < ApplicationController
           doc.error("Provider was not found")
         end
        else
-         doc.("Don\'t be so smart")
+         doc.error("Don\'t be so smart")
        end
       else
         doc.error("Bad login")

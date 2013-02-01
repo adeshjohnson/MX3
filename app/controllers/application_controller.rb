@@ -2514,11 +2514,11 @@ Variables: (Names marked with * are required)
     f_size = `stat -c%s #{path}/#{full_name}`
     if (f_size.to_i / 1024).to_d >= size.to_d
       `rm -rf #{path}/#{filename}.tar.gz`
-      `cd #{path}; tar -czf #{filename}.tar.gz #{full_name}`
-      `rm -rf #{path}/#{full_name}`
+      `cd #{path}; tar -czf #{filename}.tar.gz #{filename}.#{extension}`
+      `rm -rf #{path}/#{full_name}.#{extension}`
       return "#{path}/#{filename}.tar.gz"
     else
-      return "#{path}/#{full_name}"
+      return "#{path}/#{full_name}.#{extension}"
     end
   end
 
