@@ -31,7 +31,7 @@ class SmsProvider < ActiveRecord::Base
       end
     rescue Exception => e
       MorLog.log_exception(e, Time.now.to_i, 'sms', 'providers')
-      out = "<img title='Error' src='#{Web_Dir}/images/icons/cross.png' alt='Error' id='test_err_#{self.id}'/>"
+      out = "<img title='Error' src='#{Web_Dir}/assets/icons/cross.png' alt='Error' id='test_err_#{self.id}'/>"
     end
     return out
   end

@@ -311,7 +311,7 @@ class ServersController < ApplicationController
     rescue Exception
       flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
       flash[:notice] = _('Cannot_connect_to_asterisk_server')
-      flash[:notice] += "<a href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' />&nbsp;#{_('Click_here_for_more_info')}</a>" if flash_help_link
+      flash[:notice] += "<a href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' />&nbsp;#{_('Click_here_for_more_info')}</a>" if flash_help_link
       session[:server_test_ok] = 0
     else
       session[:server_test_ok] = 1

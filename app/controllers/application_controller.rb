@@ -1082,7 +1082,7 @@ class ApplicationController < ActionController::Base
         if session[:usertype] == "admin" and !options[:no_redirect]
           flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
           flash[:notice] = _('Cannot_connect_to_asterisk_server')
-          flash[:notice] += "<a href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' />&nbsp;#{_('Click_here_for_more_info')}</a>" if flash_help_link
+          flash[:notice] += "<a href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' />&nbsp;#{_('Click_here_for_more_info')}</a>" if flash_help_link
           if options[:api].to_i == 0
             redirect_to :controller => "callc", :action => "main" and return false
           else
@@ -2208,7 +2208,7 @@ Variables: (Names marked with * are required)
 
         if !flash_help_link.blank?
           flash[:notice] = _('Something_is_wrong_please_consult_help_link')
-          flash[:notice] += "<a id='exception_info_link' href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>".html_safe
+          flash[:notice] += "<a id='exception_info_link' href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>".html_safe
         else
           flash[:notice] = flash_notice.to_s.blank? ? "INTERNAL ERROR. - ID: #{id} - #{exception_class}" : flash_notice
         end
@@ -2523,7 +2523,7 @@ Variables: (Names marked with * are required)
   end
 
   def notice_with_info_help(text, help_link)
-    text.to_s + " " + "<a id='notice_info_link' href='#{help_link}' target='_blank'>#{_("Press_Here_For_More_Info")}<img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
+    text.to_s + " " + "<a id='notice_info_link' href='#{help_link}' target='_blank'>#{_("Press_Here_For_More_Info")}<img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
   end
 
   def csv_import_invalid_file_notice

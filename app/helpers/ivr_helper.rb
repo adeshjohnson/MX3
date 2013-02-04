@@ -136,7 +136,7 @@ module IvrHelper
     sumary_tool_tip = make_tooltip(block, actions, extensions)
     content = []
     content << "var icon = new Image();"
-    content << "icon.src = '#{Web_Dir}'+'/images/icons/view.png';"
+    content << "icon.src = '#{Web_Dir}'+'/assets/icons/view.png';"
     content << "document.getElementById('#{text_div}').innerHTML +=  \"<div id = 'block_name' style='position:absolute; font-weight: bold; top: #{y+16}px; left: #{x-block.name.size*2}px;' ><a href='#' onclick=\\\"new Ajax.Updater('edit_window', '#{Web_Dir}/ivr/refresh_edit_window?block_id=#{block.id}', {asynchronous:true, evalScripts:true}); return false;\\\"  onmouseover=\\\"Tip(\'#{sumary_tool_tip}\')\\\" onmouseout = \\\"UnTip()\\\">#{block.name}<\\\/a><\\\/div>\";"
     content << "icon.onload=#{context}.drawImage(icon, #{x} ,#{y});"
     content.join("")

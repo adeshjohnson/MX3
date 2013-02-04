@@ -399,13 +399,15 @@ class IvrController < ApplicationController
       end
     end
 
-    unless (@block = IvrBlock.find(:first, :include => [:ivr], :conditions => ["ivr_blocks.id = ?", params[:block_id].gsub('=', '')]))
+    @block = IvrBlock.includes(:ivr).where(:id => params[:block_id].gsub('=', '')).first
+
+    unless @block
       flash[:notice] = _("Block_Not_Found")
       redirect_to :controller => :callc, :action => :main and return false
     end
 
-    @ivr_voices = current_user.ivr_voices.find(:first)
-    @ivr_sound_files = current_user.ivr_sound_files.find(:first)
+    @ivr_voices = current_user.ivr_voices.first
+    @ivr_sound_files = current_user.ivr_sound_files.first
 
     @ivr = @block.ivr
     @blocks = @ivr.ivr_blocks

@@ -120,9 +120,9 @@ module ActiveProcessor
           html << file_field_tag(field_name)
           html << "&nbsp;"
           unless value.blank?
-            html << tag(:img, {:src => Web_Dir + "/images/icons/check.png", :title => _("Certificate_Exists")})
+            html << tag(:img, {:src => Web_Dir + "/assets/icons/check.png", :title => _("Certificate_Exists")})
           else
-            html << tag(:img, {:src => Web_Dir + "/images/icons/cross.png", :title => _("Certificate_not_exists")})
+            html << tag(:img, {:src => Web_Dir + "/assets/icons/cross.png", :title => _("Certificate_not_exists")})
           end
         else
           html << "unrecognized field"

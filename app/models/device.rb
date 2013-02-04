@@ -747,7 +747,7 @@ class Device < ActiveRecord::Base
 
     idi = self.id
     curr_id = User.current ? User.current.id : self.user.owner_id
-    message = (User.current and User.current.usertype == 'admin') ? _("When_IP_Authentication_checked_IP_must_be_unique") : _('This_IP_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
+    message = (User.current and User.current.usertype == 'admin') ? _("When_IP_Authentication_checked_IP_must_be_unique") : _('This_IP_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
     cond = if ipaddr.blank?
              ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, curr_id]
            else
@@ -785,7 +785,7 @@ class Device < ActiveRecord::Base
 
     #    check device with providers port, dont allow dublicates in providers and devices combinations
     if self.provider
-      message2 = (User.current and User.current.usertype == 'admin') ? _("Device_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
+      message2 = (User.current and User.current.usertype == 'admin') ? _("Device_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
 
       cond3 = if ipaddr.blank?
                 ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? AND providers.id IS NULL' + condd, idi, host, port]
@@ -799,7 +799,7 @@ class Device < ActiveRecord::Base
       end
 
     else
-      message2 = (User.current and User.current.usertype == 'admin') ? _("Provider_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/images/icons/help.png' title='#{_('Help')}' /></a>"
+      message2 = (User.current and User.current.usertype == 'admin') ? _("Provider_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
 
       cond3 = if ipaddr.blank?
                 ['devices.id != ? AND host = ? and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=? ' + condd, idi, host, port]
