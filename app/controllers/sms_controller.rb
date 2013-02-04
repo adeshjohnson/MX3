@@ -447,6 +447,8 @@ in before filter : tariff (:find_tariff_from_id)
 in before filter : tariff (:find_tariff_from_id)
 =end
   def tariff_update
+    a=check_user_id_with_session(@tariff.owner_id)
+    return false if !a
     @tariff.update_attributes(params[:tariff].each_value(&:strip!))
     @tariff.owner_id = session[:user_id]
     @tariff.save

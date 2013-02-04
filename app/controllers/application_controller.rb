@@ -2401,7 +2401,7 @@ Variables: (Names marked with * are required)
   end
 
   def check_user_id_with_session(user_id)
-    if user_id != session[:user_id] and session[:usertype] != "admin"
+    if user_id != session[:user_id]
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     else
