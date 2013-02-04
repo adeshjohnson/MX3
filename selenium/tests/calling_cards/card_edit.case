@@ -67,6 +67,36 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=card_first_use_1i</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_2i</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_3i</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_1i</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_2i</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_3i</td>
+	<td>label=1</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -334,6 +364,131 @@
 <tr>
 	<td>assertText</td>
 	<td>id=lang_23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=first_use_7</td>
+	<td>2013-02-01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=daily_charge_7</td>
+	<td>2013-02-01</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_first_use_2i</td>
+	<td>February</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_first_use_3i</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_daily_charge_paid_till_2i</td>
+	<td>February</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_daily_charge_paid_till_3i</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/show/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>First use: 2013-02-01 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Daily charge paid till: 2013-02-01 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT-11:00) International Date Line West</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=first_use_7</td>
+	<td>2013-01-31</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=daily_charge_7</td>
+	<td>2013-01-31</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_first_use_2i</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_first_use_3i</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_daily_charge_paid_till_2i</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=card_daily_charge_paid_till_3i</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/show/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>First use: 2013-01-31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Daily charge paid till: 2013-01-31</td>
 	<td></td>
 </tr>
 <tr>
@@ -725,6 +880,36 @@
 	<td>type</td>
 	<td>id=card_language</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_1i</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_2i</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_first_use_3i</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_1i</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_2i</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=card_daily_charge_paid_till_3i</td>
+	<td>label=1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
