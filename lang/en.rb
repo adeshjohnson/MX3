@@ -2732,7 +2732,7 @@ Localization.define('en') do |l|
   l.store 'Dynamic', 'Dynamic'
   l.store 'Invite', 'Invite'
 
-  l.store 'No_invoices_found_in_selected_period', 'No Invoices found in selected period'
+  l.store 'No_invoices_found_in_selected_period', 'No Invoices found in selected period, or Invoice type is not selected for Users'
   l.store 'Destination_exist_and_belong_to_Direction', 'Destinations exists and belongs to Direction'
   l.store 'Destinations_assigned', 'Destinations assigned'
   l.store 'DIDs_were_successfully_created', 'DIDs created'
