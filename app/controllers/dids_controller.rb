@@ -854,10 +854,8 @@ ORDER BY dids.did ASC"
       user_id = current_user.id
     end
 
-    @users = User.find(:all,
-                       :select => "users.id, users.username, users.first_name, users.last_name, #{SqlExport.nice_user_sql}",
-                       :conditions => ["hidden = 0 AND usertype != 'reseller' AND owner_id = ?", user_id],
-                       :order => "nice_user ASC")
+    @users = User.select("users.id, users.username, users.first_name, users.last_name, #{SqlExport.nice_user_sql}").where(:hidden => 0, :owner_id => user_id).order("nice_user ASC").all
+
     user = @users.first
     @devices = (user ? user.devices : [])
   end
