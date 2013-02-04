@@ -5,7 +5,7 @@
 # selenium-server must be running
 # start selenium server with command:
 # 		./mor_test_run.sh -s
-#
+# 
 #==============
 #============SETTINGS========================
 
