@@ -81,6 +81,9 @@ class Currency < ActiveRecord::Base
     end
   end
 
+  # Action is called from daily_actions and from GUI -> Settings
+  # If it is called from daily_actions there will be no session, so user.current is undefined.
+
   def Currency.update_currency_rates(id = -1)
     require 'net/http'
     default_currency = Currency.get_default
@@ -97,10 +100,10 @@ class Currency < ActiveRecord::Base
         currencies[i].last_update = Time.now;
         currencies[i].save
         if currencies[i].exchange_rate == 0  
-          Action.add_action_hash(User.current.id, {:target_id => currencies[i].id, :target_type => "currency", :action => "failed_to_update_currency", :data => currencies[i].exchange_rate}) 
+          Action.add_action_hash(User.current ? User.current.id : 0, {:target_id => currencies[i].id, :target_type => "currency", :action => "failed_to_update_currency", :data => currencies[i].exchange_rate})
         end 
       }
-      Action.add_action(User.current.id, "Currency updated", id)
+      Action.add_action(User.current ? User.current.id : 0, "Currency updated", id)
     end
   end
 
