@@ -910,7 +910,7 @@ class Call < ActiveRecord::Base
     end
 
     cond << "calls.calldate BETWEEN ? AND ?"
-    var += [options[:current_user].system_time("#{options[:a1]} 00:00:00"), options[:current_user].system_time("#{options[:a2]} 23:59:59")]
+    var += [options[:a1].to_s, options[:a2].to_s]
 
     sql = "SELECT calls_hc.hc_code, calls_hc.calls, hangupcausecodes.id, hangupcausecodes.code, hangupcausecodes.description FROM(
               SELECT calls.hangupcause AS 'hc_code', count(calls.id) AS 'calls' FROM calls #{des} WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} GROUP BY hc_code) AS calls_hc
@@ -930,7 +930,7 @@ class Call < ActiveRecord::Base
     a1 = !options[:a1].blank? ? options[:a1] : '2004'
     a2 = !options[:a2].blank? ? options[:a2] : Date.today.to_s
     a2 = a1 if a1.to_date > a2.to_date
-    "#{a1} 00:00:00".to_date.upto("#{a2} 23:59:59".to_date) do |date|
+    a1.to_date.upto(a2.to_date) do |date|
       date_period << "select '#{date.to_s}' as call_date2"
     end
 

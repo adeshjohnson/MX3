@@ -3194,6 +3194,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     change_date
 
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
     if params[:back]
       @back = params[:back]
       if params[:back].to_i == 2
@@ -3233,7 +3238,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @users = User.find_all_for_select(corrected_user_id)
     @countries = Direction.find(:all, :order => "name ASC")
 
-    @calls, @Calls_graph, @hangupcusecode_graph, @calls_size = Call.hangup_cause_codes_stats({:provider_id => @provider_id, :device_id => @device_id, :country_code => @code, :user_id => @user_id, :current_user => current_user, :a1 => session_from_date, :a2 => session_till_date})
+    @calls, @Calls_graph, @hangupcusecode_graph, @calls_size = Call.hangup_cause_codes_stats({:provider_id => @provider_id, :device_id => @device_id, :country_code => @code, :user_id => @user_id, :current_user => current_user, :a1 => session_from_datetime, :a2 => session_till_datetime})
 
   end
 
@@ -3614,8 +3619,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     change_date
 
-    a1 = session_from_date
-    a2 = session_till_date
+
+
+    a1 = session_from_datetime
+    a2 = session_till_datetime
 
     session[:action_log_stats_options] ? @options = session[:action_log_stats_options] : @options = {:order_by => "action", :order_desc => 0, :page => 1}
 
@@ -3710,6 +3717,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @servers = Server.find(:all)
     end
 
+    session[:hour_from] = "00"
+    session[:minute_from] = "00"
+    session[:hour_till] = "23"
+    session[:minute_till] = "59"
+
     @default = {:s_user => -1, :s_provider => -1, :s_did => -1, :s_device => -1, :s_direction => -1, :s_server => -1, :s_reseller => -1}
     session[:stats_load_stats_options] ? @options = session[:stats_load_stats_options] : @options = @default
 
@@ -3720,8 +3732,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @options[:s_provider] = params[:s_provider] if params[:s_provider]
     @options[:s_direction] = params[:s_direction] if params[:s_direction]
     @options[:s_server] = params[:s_server] if params[:s_server] and current_user.usertype != 'reseller'
-    @options[:a1] ="#{(session_from_date.to_s + " 00:00:00")}"
-    @options[:a2] ="#{(session_from_date.to_s + " 23:59:59")}"
+    @options[:a1] ="#{(session_from_datetime.to_s)}"
+    @options[:a2] ="#{(session_till_datetime.to_s)}"
     @options[:current_user] = current_user
     @calls_answered, @calls_all =Call.calls_for_laod_stats(@options)
 

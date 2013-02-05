@@ -218,8 +218,8 @@ class Action < ActiveRecord::Base
 
     if !s_int_ch or s_int_ch.to_i != 1
       cond << "actions.date BETWEEN ? AND ?"
-      cond_arr << a1.to_s + ' 00:00:00'
-      cond_arr << a2.to_s + ' 23:59:59'
+      cond_arr << a1.to_s
+      cond_arr << a2.to_s
       if options[:s_type].to_s != "all"
         cond << "actions.action = ? "
         cond_arr << options[:s_type].to_s
