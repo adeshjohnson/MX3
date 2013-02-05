@@ -178,7 +178,7 @@
           <td><b><%= _('Compound_tax') %></b></td>
           <td></td>
           <td>
-            <% value = Confline.get_value("Tax_compound") -%>
+            <% value = Confline.get_value("Tax_compound", session[:user_id]) -%>
             <% value == "" ? value = 1 : value = value.to_i -%>
             <%= check_box_tag("compound_tax", 1, (value == 1)) %>
           </td>

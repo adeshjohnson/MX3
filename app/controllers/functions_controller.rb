@@ -1165,7 +1165,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Tax_3_Value", params[:tax3value].to_d)
     Confline.set_value("Tax_4_Value", params[:tax4value].to_d)
     Confline.set_value("Total_tax_name", params[:total_tax])
-    Confline.set_value("Tax_compound", params[:compound_tax].to_i)
+    Confline.set_value("Tax_compound", params[:compound_tax].to_i, session[:user_id])
 
     Confline.set_value2("Tax_1", "1") # for consistency.
     Confline.set_value2("Tax_2", params[:tax2active].to_i)
@@ -1880,7 +1880,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value2("Tax_2", params[:tax2active].to_i, session[:user_id])
     Confline.set_value2("Tax_3", params[:tax3active].to_i, session[:user_id])
     Confline.set_value2("Tax_4", params[:tax4active].to_i, session[:user_id])
-    Confline.set_value("Tax_compound", params[:compound_tax].to_i)
+    Confline.set_value("Tax_compound", params[:compound_tax].to_i, session[:user_id])
     #/Tax
 
     # EMAILS
