@@ -842,6 +842,42 @@
 	<td>id=date_till_year</td>
 	<td>2013</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Chart_bar&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Providers' Statistics</td>
+	<td></td>
+</tr>
+<!--pakeičiamas id į tokį, kurio stats neegzistuoja-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/providers_stats/77?search=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was not found</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
