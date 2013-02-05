@@ -1570,7 +1570,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_title = _('Providers_stats')
     @page_icon = "chart_pie.png"
 
-    if params[:id].to_s == ""
+    p = Provider.where(:id => params[:id].to_s).first
+
+    if !p
       flash[:notice] = _("Provider_not_found")
       redirect_to :controller => "callc", :action => 'main' and return false
     end
