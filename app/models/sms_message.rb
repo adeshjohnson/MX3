@@ -219,7 +219,7 @@ class SmsMessage < ActiveRecord::Base
   def sms_send(user, user_tariff, number, lcr, sms_numbers, message, options = {})
     sql="SELECT * FROM (
           SELECT sms_providers.id as 'providers_id', provider_type,  A.prefix as 'prefix', sms_rates.price, currencies.exchange_rate AS 'e_rate' FROM sms_providers
-            JOIN (SELECT sms_lcrproviders.* FROM  sms_lcrproviders WHERE sms_lcrproviders.sms_lcr_id = '#{lcr.id}') AS p ON (p.sms_provider_id = sms_providers.id)
+            JOIN (SELECT sms_lcrproviders.* FROM  sms_lcrproviders WHERE sms_lcrproviders.sms_lcr_id = '#{lcr.id}' and sms_lcrproviders.active = 1) AS p ON (p.sms_provider_id = sms_providers.id)
             JOIN sms_tariffs ON (sms_providers.sms_tariff_id = sms_tariffs.id)
             LEFT JOIN sms_rates ON (sms_rates.sms_tariff_id = sms_tariffs.id)
             JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{number}', 1, LENGTH(destinations.prefix)) ORDER BY LENGTH(destinations.prefix) DESC) as A ON (A.prefix = sms_rates.prefix)
