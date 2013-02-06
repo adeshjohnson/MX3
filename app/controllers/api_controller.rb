@@ -1005,15 +1005,6 @@ class ApiController < ApplicationController
     if allow
       if @user
         #admin? reseller? user?
-        if values[:tariff_id] and @user.usertype != 'user' and @user.usertype != 'accountant'
-          if @user.usertype == 'admin'
-            @tariff = Tariff.find(values[:tariff_id].to_i)
-          else
-            @tariff = Tariff.find(:first, :conditions => ["id = ? and owner_id = ?", values[:tariff_id].to_i, @user.id.to_i])
-          end
-        else
-          @tariff = @user.tariff
-        end
 
         if !values[:user_id].blank?
           rate_user_id = values[:user_id]
@@ -1022,6 +1013,21 @@ class ApiController < ApplicationController
           rate_user_id = @user.id
           is_self = true
         end
+
+        if values[:tariff_id] and @user.usertype != 'user' and @user.usertype != 'accountant' and values[:user_id].blank?
+          if @user.usertype == 'admin'
+            @tariff = Tariff.where(:id => values[:tariff_id]).first
+          else
+            @tariff = Tariff.where(["id = ? and owner_id = ?", values[:tariff_id], @user.id]).first
+          end
+        else
+          if is_self
+            @tariff = @user.tariff
+          else
+            @tariff = User.where(:id => rate_user_id).first.tariff rescue nil
+          end
+        end
+
 
         @cust_tariff = Customrate.where(:user_id => rate_user_id)
         @cust_destinations = []
