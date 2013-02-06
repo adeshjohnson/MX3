@@ -45,7 +45,7 @@ class CcshopController < ApplicationController
       session[:items_per_page] = Confline.get_value("Items_Per_Page", 0).to_i
       session[:default_currency] = Currency.find(1).name
       session[:show_currency] = session[:default_currency]
-      flash[:notice] = _('login_successfully')
+      flash[:status] = _('login_successfully')
       redirect_to :controller => "ccshop", :action => "card_details" and return false
     else
       flash[:notice] = _('bad_cc_login')
@@ -305,7 +305,7 @@ class CcshopController < ApplicationController
 
     @page = 1
     @page = params[:page].to_i if params[:page]
-   
+
     @st = "A"
     @st = params[:st].upcase if params[:st]
 
@@ -317,8 +317,8 @@ class CcshopController < ApplicationController
     @all_rates = @rates
     @rates = []
     @rates_cur2 = []
-    @rates_free2=[]
-    @rates_d=[]
+    @rates_free2 = []
+    @rates_d = []
     iend = ((session[:items_per_page] * @page) - 1)
     iend = @all_rates.size - 1 if iend > (@all_rates.size - 1)
     for i in ((@page - 1) * session[:items_per_page])..iend
@@ -326,15 +326,18 @@ class CcshopController < ApplicationController
     end
     #----
 
-    sql = "SELECT rates.* FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code ORDER by directions.name ASC;"
+    sql = "SELECT rates.* FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code AND directions.name like '#{@st}%' ORDER by directions.name ASC;"
     rates = Rate.find_by_sql(sql)
 
     exrate = Currency.count_exchange_rate(@tariff.currency, session[:show_currency])
+    ratedetails = Ratedetail.where("rate_id in (SELECT rates.id FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code AND directions.name like '#{@st}%')").order("rate DESC").all
+
     for rate in rates
-      get_provider_rate_details(rate, exrate)
-      @rates_cur2[rate.id]=@rate_cur
-      @rates_free2[rate.id]=@rate_free
-      @rates_d[rate.id]= @rate_increment_s
+      rate_d = ratedetails.select{|ratedetail| ratedetail.rate_id.to_i == rate.id.to_i}
+      get_provider_rate_details(rate_d, exrate)
+      @rates_cur2[rate.id] = @rate_cur
+      @rates_free2[rate.id] = @rate_free
+      @rates_d[rate.id] = @rate_increment_s
     end
 
     @use_lata = false
@@ -348,13 +351,9 @@ class CcshopController < ApplicationController
     @cust_exchange_rate = count_exchange_rate(session[:default_currency], session[:show_currency])
   end
 
-  def get_provider_rate_details(rate, exrate)
-    
-    # caching ratedetails or creating cache  
-    @tmp_ratedetails_cache = (@tmp_ratedetails_cache || Ratedetail.find(:all, :conditions => "rate_id in (SELECT rates.id FROM rates, destinations, directions WHERE rates.tariff_id = #{@tariff.id} AND rates.destination_id = destinations.id AND destinations.direction_code = directions.code)", :order => "rate DESC").select{|ratedetail| ratedetail.rate_id.to_i == rate.id.to_i})
+  def get_provider_rate_details(rate_d, exrate)
 
-    # reading from cache 
-    @rate_details = @tmp_ratedetails_cache
+    @rate_details = rate_d
 
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
