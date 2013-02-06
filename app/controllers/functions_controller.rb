@@ -2585,6 +2585,7 @@ Sets default tax values for users or cardgroups
               address.save
 
               user = User.new
+              user.imported_user = true
               user.temporary_id = clean_value_all(r_arr[session[:imp_user_temp_id]]).to_i
               user.username =clean_value_all r_arr[session[:imp_user_username]].to_s
               user.password = Digest::SHA1.hexdigest(clean_value_all(r_arr[session[:imp_user_password]].to_s))

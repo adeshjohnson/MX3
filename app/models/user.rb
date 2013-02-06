@@ -79,6 +79,8 @@ class User < ActiveRecord::Base
   after_create :after_create_localization, :after_create_user, :create_balance_payment
   after_save :after_create_localization, :check_address
 
+  attr_accessor :imported_user
+
   def after_create_localization
     logger.fatal('after_create checkin usertype and location.size')
     logger.fatal(usertype.to_yaml)
@@ -216,7 +218,7 @@ class User < ActiveRecord::Base
       return false
     end
 
-    if password == Digest::SHA1.hexdigest(username)
+    if password == Digest::SHA1.hexdigest(username) and !self.imported_user
       errors.add(:password, _("Please_enter_password_not_equal_to_username"))
       return false
     end
