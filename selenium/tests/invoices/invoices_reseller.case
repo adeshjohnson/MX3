@@ -1267,7 +1267,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Apply to all Users</td>
 	<td></td>
 </tr>
@@ -1277,9 +1277,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=status</td>
-	<td>Settings saved</td>
+	<td>assertTextPresent</td>
+	<td>Taxes set</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1437,7 +1437,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Apply to all Users</td>
 	<td></td>
 </tr>
@@ -1587,7 +1587,7 @@
 	<td>off</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Apply to all Users</td>
 	<td></td>
 </tr>
@@ -1609,6 +1609,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#delete_link_8 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
