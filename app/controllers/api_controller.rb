@@ -1015,6 +1015,59 @@ class ApiController < ApplicationController
           @tariff = @user.tariff
         end
 
+        if !values[:user_id].blank?
+          rate_user_id = values[:user_id]
+          is_self = false
+        else
+          rate_user_id = @user.id
+          is_self = true
+        end
+
+        @cust_tariff = Customrate.where(:user_id => rate_user_id)
+        @cust_destinations = []
+
+        if ((is_self and values[:tariff_id].blank?) or !is_self) and @cust_tariff.count > 0
+          destinations = @cust_tariff.collect {|x| [:rates => x.acustratedetails, :dest_group => x.destinationgroup] }.flatten
+
+	      outstring << "<page>
+                  <pagename>#{_('Tariff')}</pagename>
+                  <tariff_name>Custom Rates</tariff_name>
+                  <purpose>user</purpose>
+                  <currency>#{@cust_tariff.first.user.currency.name}</currency>
+	          <rates>"
+            
+              destinations.each do |rates|
+                outstring << " <destination> "
+                outstring << "<destination_group_name>#{CGI::escapeHTML(rates[:dest_group][:name])}</destination_group_name>
+                              <destination_group_type>#{CGI::escapeHTML(rates[:dest_group][:desttype])}</destination_group_type>"
+                
+                @cust_destinations << {:name => rates[:dest_group][:name], :type => rates[:dest_group][:desttype]}
+
+                rates[:rates].each do |rate|
+                  outstring << "<rate>"
+                  if rate[:duration].to_s == "-1"
+                    outstring << "<duration>Infinity</duration>"
+                  else
+                    outstring << "<duration>#{rate[:duration].to_s}</duration>"
+                  end
+                  outstring << "<type>#{rate[:artype].to_s}</type>
+                    <round_by>#{rate[:round].to_s}</round_by>
+                    <tariff_rate>#{rate[:price].to_s}</tariff_rate>
+                    <start_time>#{rate[:start_time].to_s[%r[\w{2}:\w{2}:\w{2}]]}</start_time>
+                    <end_time>#{rate[:end_time].to_s[%r[\w{2}:\w{2}:\w{2}]]}</end_time>
+                    <daytype>#{rate[:daytype].to_s}</daytype>
+                    <from>#{rate[:from].to_s}</from>
+                    </rate>"
+                end
+
+                outstring << "</destination>"
+
+              end
+              
+              outstring << "</rates>
+                            </page>"
+
+        end
         if @tariff
           if @tariff.purpose.to_s == 'user'
 
@@ -1037,8 +1090,12 @@ class ApiController < ApplicationController
                             <rates>"
 
             rates.each { |name, type|
-
+            
+  
               type.each { |type_name, rate_data|
+
+                next if @cust_destinations.include?({:name => name, :type => type_name})
+
                 outstring << " <destination> "
                 outstring << "<destination_group_name>#{CGI::escapeHTML(name)}</destination_group_name>
                                <destination_group_type>#{CGI::escapeHTML(type_name)}</destination_group_type>"
@@ -1046,9 +1103,9 @@ class ApiController < ApplicationController
                 rate_data.each { |rate|
                   outstring << "<rate>"
                   if rate["duration"].to_i == -1
-                    outstring << "<duration>Infinity</duration>"
+                    outstring << " <duration>Infinity</duration> "
                   else
-                    outstring << "<duration>#{rate['duration']}</duration>"
+                    outstring << " <duration>#{rate['duration']}</duration> "
                   end
                   outstring << "<type>#{rate['artype'].to_s}</type>
                   <round_by>#{rate['round'].to_s}</round_by>
