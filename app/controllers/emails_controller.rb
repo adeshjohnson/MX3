@@ -160,6 +160,13 @@ class EmailsController < ApplicationController
     @page_title = _('Send_email') + ": " + @email.name
     @page_icon = "email_go.png"
 
+    @email_sending_enabled = Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
+
+    if !@email_sending_enabled or @email.template != 0
+      dont_be_so_smart
+      redirect_to :controller => "emails", :action => "list" and return false
+    end
+
     default = {
         :shu => 'true',
         :sbu => 'true'
