@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class CdrController < ApplicationController
+  
+  require 'iconv'
+
   layout "callc"
   before_filter :check_localization
   before_filter :authorize
@@ -50,7 +53,8 @@ class CdrController < ApplicationController
             redirect_to :action => :import_csv, :step => 0 and return false
           end
           @file.rewind
-          file = @file.read
+          ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+          file = ic.iconv(@file.read)
           session[:cdr_file_size] = file.size
           session[:temp_cdr_import_csv] = CsvImportDb.save_file("_crd_", file)
           flash[:status] = _('File_downloaded')
