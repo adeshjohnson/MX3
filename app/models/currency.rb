@@ -25,7 +25,10 @@ class Currency < ActiveRecord::Base
       curr1 = Currency.find(:first, :conditions => ["name = ?", curr1]) if curr1.class != Currency
       curr2 = Currency.find(:first, :conditions => ["name = ?", curr2]) if curr2.class != Currency
       if curr2 and curr1 and curr1.exchange_rate.to_d != 0.0
-        return curr2.exchange_rate.to_d / curr1.exchange_rate.to_d
+        # preventing ruby Infinity number
+        balance = curr2.exchange_rate.to_d / curr1.exchange_rate.to_d
+        balance.to_s == "Infinity" ? balance = 0.to_d : false
+        return balance
       else
         return 0.0
       end
