@@ -42,8 +42,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
 <tr>
@@ -52,8 +52,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
 	<td></td>
 </tr>
 <tr>
@@ -1124,6 +1124,237 @@
 	<td>assertText</td>
 	<td>css=from</td>
 	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Nustatomas useriui custom rate-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/custom_rates/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dg_new</td>
+	<td>label=Albania FIX</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/1?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>898.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate updated</td>
+	<td></td>
+</tr>
+<!--naudojant user_id turi paimti userio custom rates ir tarifus-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>898.0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Retail_user_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.4023</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.04</td>
+	<td></td>
+</tr>
+<!--tariff_id turi ignoruoti, kada yra user_id-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;tariff_id=10&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>898.0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.4023</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Retail_user_tariff</td>
+	<td></td>
+</tr>
+<!--tariff_id turi ignoruoti, kada yra user_id-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;tariff_id=14&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>898.0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.4023</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Retail_user_tariff</td>
+	<td></td>
+</tr>
+<!--nenaudojant user_id, tariff_id pateikiama tik prisijungusiam useriui priskirto tariff rate ir custom rates-->
+<!--jei custom rates nėra, tai imami userio tarifai-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Retail_admin_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>0.567</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/custom_rates/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/2?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>2.6897</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>2.6897</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Retail_admin_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=retail_user&amp;p=retail_user1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>898.0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Retail_user_tariff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.4023</td>
+	<td></td>
 </tr>
 -->
 </tbody></table>
