@@ -1269,7 +1269,7 @@ Localization.define('en') do |l|
   l.store 'PayPal_Test', 'Test'
   l.store 'Paypal_Default_Currency', 'Default currency'
   l.store 'Browser_Title', 'Browser title'
-  l.store 'Email_Sending_Enabled', 'Sending enabled'
+  l.store 'Email_Sending_Enabled', 'Sending globally enabled'
   l.store 'Email_Smtp_Server', 'SMTP server'
   l.store 'Email_Domain', 'Domain'
   l.store 'Email_Login', 'Login'

@@ -162,10 +162,10 @@
       <%= render :partial => "reseller_settings_invoices" %>
     </div>
     <%#end%>
+    <% if Confline.get_value("Email_Sending_Enabled").to_i == 1 %>
     <div class="dhtmlgoodies_aTab">
       <br/>
       <br/>
-      <% if Confline.get_value("Email_Sending_Enabled").to_i == 1 %>
           <table class="simple" width="100%">
             <tr>
               <td></td>
@@ -235,16 +235,8 @@
               }
               validate_password();
           </script>
-      <% else %>
-          <table class="simple" width="100%">
-            <tr>
-              <td width="30"></td>
-              <td><b><%= _('Email_sending_is_disabled_globally.') %></b></td>
-              <td></td>
-            </tr>
-          </table>
-      <% end %>
     </div>
+    <% end %>  
     <div class="dhtmlgoodies_aTab">
       <br/>
       <br/>
@@ -352,7 +344,8 @@
       setting_tabs << "Registration"
       setting_tabs << "Various"
       setting_tabs << "Invoices" #if  !current_user.reseller_allow_providers_tariff?
-      setting_tabs += ["Emails", "Tax"]
+      setting_tabs << "Email" if Confline.get_value("Email_Sending_Enabled").to_i == 1
+      setting_tabs << "Tax"
       setting_tabs << "Privacy" if  !current_user.reseller_allow_providers_tariff?
       setting_tabs << "API"  if Confline.get_value('Allow_API').to_i == 1 %>
             initTabs('dhtmlgoodies_tabView1', Array(<%= raw setting_tabs.map{|tab| "'"+ _(tab) + "'"}.join(", ") %>), 0, 600, 560);
