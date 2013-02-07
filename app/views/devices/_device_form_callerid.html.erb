@@ -48,8 +48,15 @@
                 <td><%= radio_button_tag('device_caller_id_number', 5, @device_caller_id_number.to_i == 5, :onchange => 'disable_radio_buttons(this.id)') %></td>
                 <td><%= _('Control_by_Destination') %></td>
               </tr>
+              <tr id='id_device_caller_id_number_6' >
+                <td><%= radio_button_tag('device_caller_id_number', 6, @device_caller_id_number.to_i == 6, :onchange => 'disable_radio_buttons(this.id);change_cid_value("unknown")') %></td>
+                <td><%= _('unknown') %></td>
+              </tr>
               <script type='text/javascript'>
                   function disable_radio_buttons(id) {
+                      if (id == 'device_caller_id_number_6') {
+                          $('cid_number').readOnly = true;
+                      }
                       if (id == 'device_caller_id_number_4') {
                           $('device_number_from_did').disabled = true;
                           $('control_callerid_by_cids').disabled = false;

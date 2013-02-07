@@ -4539,6 +4539,7 @@ Localization.define('en') do |l|
   l.store 'Database_Error', 'DB is outdated, please upgrade it'
   l.store 'Direction_codes_to_update', 'Direction codes to update'
   l.store 'callerid_not_a_number', 'Device CallerID Number must be numerical'
+  l.store 'unknown', 'Unknown'
 
   #  l.store '', ''
   #  l.store '', ''
