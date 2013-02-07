@@ -441,8 +441,8 @@ class FunctionsController < ApplicationController
       notice_msg = _('Tariff_not_found') if notice_msg.nil? and not (@u_tariff = @user.tariff)
       notice_msg = _('Lcr_was_not_found') if notice_msg.nil? and not (@lcr = @user.lcr)
       if @lcr
-        notice_msg = _('Lcrprovider_was_not_found') if notice_msg.nil? and not (@lcr_providers = @lcr.providers)
-        notice_msg = _('There_is_no_active_provider') if notice_msg.nil? and not (@lcr_active_providers = @lcr.active_providers)
+        notice_msg = _('Lcrprovider_was_not_found') if notice_msg.nil? and not (@lcr_providers = (!@lcr.providers.blank? ? @lcr.providers : LcrPartial.where(:main_lcr_id => @lcr.id).first.lcr.providers rescue nil))
+        notice_msg = _('There_is_no_active_provider') if notice_msg.nil? and not (@lcr_active_providers = (!@lcr.active_providers.blank? ? @lcr.active_providers : LcrPartial.where(:main_lcr_id => @lcr.id).first.lcr.active_providers rescue nil))
       end
     end
 
