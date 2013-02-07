@@ -557,7 +557,7 @@ class Invoice < ActiveRecord::Base
     logger.fatal tax.to_yaml
     tax_amount = 0
     up_string = 60
-    font = 6
+    font = 7.5
     colspain = type == 1 ? 3 : 2
     if self.tax
       taxes = tax.applied_tax_list(self.converted_price(ex), :precision => nc)
