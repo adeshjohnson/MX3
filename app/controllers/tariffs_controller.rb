@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class TariffsController < ApplicationController
+ 
+  require 'iconv'
+
   require 'csv'
   # include PdfGen
   include UniversalHelpers
@@ -895,7 +898,8 @@ class TariffsController < ApplicationController
             redirect_to :action => "import_csv2", :id => @tariff.id, :step => "0" and return false
           end
           @file.rewind
-          file = @file.read
+          ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+          file = ic.iconv(@file.read)
           session[:file_size] = file.size
           session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = @tariff.save_file(file)
           flash[:status] = _('File_downloaded')
