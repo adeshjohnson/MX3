@@ -211,7 +211,7 @@ class DestinationGroupsController < ApplicationController
 
   def destinations_to_dg_update
     @options = session[:destinations_destinations_to_dg_options]
-    ds = Destination.select_destination_assign_dg(session[:destinations_destinations_to_dg_options][:page], "name")
+    ds = Destination.select_destination_assign_dg(session[:destinations_destinations_to_dg_options][:page], @options[:order])
     dgs = []
     ds.each { |d| dgs << d.id.to_s }
     if dgs and dgs.size.to_i > 0
