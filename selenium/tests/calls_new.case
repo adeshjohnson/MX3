@@ -776,6 +776,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextNotPresent</td>
+	<td>Date from is greater than date till</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/stats/load_stats</td>
 	<td></td>
@@ -801,6 +806,11 @@
 	<td></td>
 </tr>
 <!--įsitikinti, kad grafikas tuščias-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Date from is greater than date till</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/stats/hangup_cause_codes_stats</td>
@@ -861,7 +871,27 @@
 	<td>css=img[alt=&quot;Call&quot;]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Date from is greater than date till</td>
+	<td></td>
+</tr>
 <!--įsitikinti, kad grafikas tuščias-->
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Date from is greater than date till</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
