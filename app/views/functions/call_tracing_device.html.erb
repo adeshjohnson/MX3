@@ -1,4 +1,6 @@
-<% @exp_prov = @cheap_prov = @exp_res = @cheap_res = @max_user_arate = @max_reseller_arate = @exp_user = @cheap_user = 0
+<% 
+
+   @exp_prov = @cheap_prov = @exp_res = @cheap_res = @max_user_arate = @max_reseller_arate = @exp_user = @cheap_user = 0
    @call_errors = false
 %>
 
@@ -309,6 +311,7 @@ rez
         <% @exp_prov += 1 if @loss and !@disabled %>
         <% @cheap_prov += 1 if @user.allow_loss_calls == 0 and (r['rate'].to_f / r['e_rate'].to_f) <= @max_user_arate and r['rate'] and r['prefix'] %>
         <% @disabled ? text_class="n_disabled" : text_class="n" -%>
+        <% @lossy = true if !@loss and !@disabled %>
         <tr class=<%= "row" + i.to_s %>
               <% if (not r['rate'] or not r['prefix']) and !@disabled %>
                   <%= tooltip(_('Provider'), _('CT_No_tariff_explanation')) %>
@@ -342,7 +345,7 @@ rez
 <% unless @hide_lcrs_and_providers %>
     </table>
     <%#check if prov rate is higher%>
-    <% if @exp_prov > 0 and @user.allow_loss_calls == 0 %>
+    <% if !@lossy and @user.allow_loss_calls == 0 and  %>
         <% @call_errors = true %>
         <br/>
         <% if @user.usertype == "reseller" %>
