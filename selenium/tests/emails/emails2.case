@@ -53,6 +53,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/emails/send_emails/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -119,6 +129,16 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>Test email will be sent to: test_reseller@email.test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/send_emails/33</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 <tr>
@@ -1138,6 +1158,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/emails/send_emails/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1449,6 +1479,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/emails/send_emails/33</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1649,13 +1689,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>login_psw</td>
-	<td>admin1</td>
+	<td>login_username</td>
+	<td>admin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>login_username</td>
-	<td>admin</td>
+	<td>login_psw</td>
+	<td>admin1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2119,6 +2159,61 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Email was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/send_emails/36</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/send_emails/35</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
 </tbody></table>
