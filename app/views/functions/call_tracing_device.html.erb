@@ -345,7 +345,7 @@ rez
 <% unless @hide_lcrs_and_providers %>
     </table>
     <%#check if prov rate is higher%>
-    <% if !@lossy and @user.allow_loss_calls == 0 and  %>
+    <% if !@lossy and @user.allow_loss_calls == 0 %>
         <% @call_errors = true %>
         <br/>
         <% if @user.usertype == "reseller" %>
