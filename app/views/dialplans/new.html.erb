@@ -245,6 +245,7 @@
                 <td align="left">
                   <select name="dialplan[data3]">
                     <% for device in @cbdevices %>
+                        <% next if device.user.hidden.to_i == 1 %>
                         <option value=<%= device.id %> <%= "selected" if @dp.data3.to_i == device.id %>> <%= device.description %> <%= nice_device(device) %> </option>
                     <% end %>
                   </select>
