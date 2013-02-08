@@ -871,9 +871,9 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
 
     prefixes = Hash[prefixes.map { |v| [v.to_s, 1] }]
 
+    packed_destinations = {}
+    update = {}
     new_destinations.each_with_index { |row, i|
-      prefix = row["col_#{options[:imp_prefix]}"].to_s.strip.gsub(/\s/, '')
-      pr = row["col_#{options[:imp_prefix]}"]
       country_code = row["col_#{options[:imp_cc]}"].to_s #country_code
       if country_code.blank? or options[:imp_cc] == -1
         prefix = row["col_#{options[:imp_prefix]}"].to_s.strip.gsub(/\s/, '')
@@ -890,20 +890,31 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
           if options[:imp_subcode].to_i < 0
             string = prefix.to_i.to_s[0..(prefix.to_i.to_s.length.to_i-2)]
             dan = true
-            dest = nil
-            while (!dest and string.length.to_i > 1)
-              dest = Destination.find(:first, :conditions => ["prefix like ?", string.to_s+'%'])
-              if dest
-                subcodes = dest.subcode.to_s
-                dan = false
-              else
-                string = string.to_s[0..(string.length.to_i-2)].to_s
-              end
+            str = "prefix like '#{string.to_s}'"
+            string = string.to_s[0..(string.length.to_i-2)].to_s
+            while (string.length.to_i > 1)
+              str << " OR prefix like '#{string.to_s}'"
+              string = string.to_s[0..(string.length.to_i-2)].to_s
+            end
+            dest = Destination.where(str).order("prefix DESC").first
+            if dest
+              subcodes = dest.subcode.to_s
+              dan = false
             end
             if string.length.to_i == 1 and dan == true
               subcodes = 'NGN'
             end
-            ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{short_prefix}', f_subcodes = '#{subcodes}' WHERE id = #{row['i_id']}")
+            packed_destinations[short_prefix].blank? ? packed_destinations[short_prefix] = [subcodes] : packed_destinations[short_prefix] << subcodes
+            if update[short_prefix].blank?
+              update[short_prefix] = {}
+              update[short_prefix][subcodes] = [row['i_id']]
+            else
+              if update[short_prefix][subcodes].blank?
+                update[short_prefix][subcodes] = [row['i_id']]
+              else
+                update[short_prefix][subcodes] << row['i_id']
+              end
+            end
           else
             ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{short_prefix}', f_subcodes = col_#{options[:imp_subcode].to_i} WHERE id = #{row['i_id']}")
           end
@@ -914,6 +925,12 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
       MorLog.my_debug(i.to_s + " status/update_rate counted", 1) if i % 1000 == 0
     }
 
+    update.keys.each { |s_prefix|
+      update[s_prefix].keys.each{ |subcode|
+        all_id = update[s_prefix][subcode].map { |i| i }.join ','
+        ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{s_prefix}', f_subcodes = '#{subcode}' WHERE id IN (#{all_id})")
+      }
+    }
     if bad and bad.size.to_i > 0
       # set error flag on not int prefixes | code : 13
       ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 10 WHERE id IN (#{bad.join(',')})")
