@@ -198,7 +198,7 @@
       <tr>
         <th align="left"><%= b_provider + _('Provider') %></th>
         <td id="provider" align="right"> 
-          <%= ((p_owner = User.where(:id => @provider.user_id).first and p_owner.usertype != "reseller" and !p_owner.blank?) ? (link_to @provider.name, :controller => "providers", :action => "list") : (@provider.name)) %>
+          <%= ((p_owner = User.where(:id => @provider.user_id).first and p_owner.usertype != "reseller" and !p_owner.blank?) ? (link_to @provider.name, :controller => :providers, :action => :edit, :id => @provider.id ) : (@provider.name)) %>
         </td>
       </tr>
 
