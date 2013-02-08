@@ -290,7 +290,7 @@ class DidsController < ApplicationController
     #devices
     @free_devices = []
     if (@did.user)
-      @free_devices = @did.user.devices
+      @free_devices = @did.user.devices.where(:istrunk => 0).first
     end
 
     #trunks

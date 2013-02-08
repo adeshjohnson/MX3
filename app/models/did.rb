@@ -33,6 +33,8 @@ class Did < ActiveRecord::Base
   scope :terminated, where('status = "terminated"')
 
 
+  attr_accessor :closing
+
   def validate_provider
     if !['admin', 'accountant'].include?(User.current.usertype)
       c_u = User.current
@@ -57,7 +59,7 @@ class Did < ActiveRecord::Base
         return false
       end
     end
-    if self.device and self.device.is_trunk? and User.current.is_reseller? and not User.current.allowed_to_assign_did_to_trunk? 
+    if self.device and self.device.is_trunk? and User.current.is_reseller? and not User.current.allowed_to_assign_did_to_trunk? and not self.closing
       self.errors.add(:device, _('DID_cannot_be_assigned_to_trunk')) 
       return false 
     end 
@@ -157,6 +159,7 @@ class Did < ActiveRecord::Base
 
     self.status = "closed"
     self.closed_till = (Time.now + Confline.get_value("Days_for_did_close").to_i.days).strftime("%Y-%m-%d %H:%M:%S")
+    self.closing = true
     self.save
 
   end
