@@ -10,7 +10,9 @@
     reseller_menu.add(3, 1, '<%= _('Logo') %>', '<%= Web_Dir %>/functions/reseller_settings_logo');
     reseller_menu.add(4, 1, '<%= _('Default_user') %>', '<%= Web_Dir %>/users/default_user');
     reseller_menu.add(5, 1, '<%= _('Default_device') %>', '<%= Web_Dir %>/devices/default_device');
-    reseller_menu.add(6, 1, '<%= _('Emails') %>', '<%= Web_Dir %>/emails/list');
+    <% if Confline.get_value("Email_Sending_Enabled").to_i == 1 %>
+      reseller_menu.add(6, 1, '<%= _('Emails') %>', '<%= Web_Dir %>/emails/list');
+    <% end %>
     reseller_menu.add(7, 1, '<%= _('Translations') %>', '<%= Web_Dir %>/functions/translations');
 
     reseller_menu.add(11, 0, '<%= _('Routing') %>', '');
