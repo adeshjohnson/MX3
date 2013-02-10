@@ -326,7 +326,11 @@
 	<td>Device was not updated</td>
 	<td></td>
 </tr>
-<!--*reikia pranešimo kad callerid must be numerical-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device CallerID Number must be numerical</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>id=cid_number</td>
@@ -1000,6 +1004,66 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>DID reserved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='id_device_caller_id_number_6']/td[2]</td>
+	<td>Unknown</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_8</td>
+	<td>&quot;CallerID&quot; &lt;unknown&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_name</td>
+	<td>CallerID</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>unknown</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -1873,6 +1937,71 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='id_device_caller_id_number_6']/td[2]</td>
+	<td>Unknown</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>unknown</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;CallerID&quot; &lt;unknown&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>unknown</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -2522,6 +2651,61 @@
 	<td>assertValue</td>
 	<td>id=cid_number</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='id_device_caller_id_number_6']/td[2]</td>
+	<td>Unknown</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_caller_id_number_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=cid_number</td>
+	<td>unknown</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=callerid_2</td>
+	<td>&quot;lkjhgfdsa&quot; &lt;unknown&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cid_number</td>
+	<td>unknown</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_caller_id_number_6</td>
+	<td>off</td>
 </tr>
 <tr>
 	<td>open</td>
