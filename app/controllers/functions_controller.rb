@@ -3505,7 +3505,7 @@ Sets default tax values for users or cardgroups
   end
 
   def call_tracing_device_find_user
-    return false if params[:user].blank?                  s
+    return false if params[:user].blank?
     if admin?
       User.includes([:tariff, :devices, :lcr]).where(:id => params[:user]).first
     else
