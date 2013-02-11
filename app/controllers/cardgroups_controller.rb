@@ -199,7 +199,7 @@ class CardgroupsController < ApplicationController
     @cardgroup.disable_voucher = params[:disable_voucher].to_i
     if session[:usertype].to_s == "reseller" and current_user.own_providers.to_i == 0
       user= User.where(:id => get_user_id()).first
-      @cardgroup.lcr = Lcr.where(:id => '#{user.lcr_id}').order("name ASC").first
+      @cardgroup.lcr = Lcr.where(:id => user.lcr_id).order("name ASC").first
     end
     if @cardgroup.save and tax_save
       session[:tmp_new_cardgroup] = nil
