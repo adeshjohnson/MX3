@@ -539,7 +539,7 @@ class RecordingsController < ApplicationController
       if key.scan(/recording_enabled_|recording_forced_enabled_|recording_hdd_quota_|recordings_email_/).size > 0
         num = key.gsub(/recording_enabled_|recording_forced_enabled_|recording_hdd_quota_|recordings_email_/, "")
         if !users[num]
-          users[num] = User.where(:id => num)
+          users[num] = User.where(:id => num).first
         end
       end
     }
