@@ -176,7 +176,11 @@
 	<td>xpath=(//td[@id='pospaid_and_loss_calls_size'])[2]</td>
 	<td>0</td>
 </tr>
-<!--<tr> 	<td>assertTextPresent</td> 	<td>Some of system configuration needs your attention. Please click here to see it.</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Some of system configuration needs your attention. Please click here to see it</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/9</td>
