@@ -549,7 +549,7 @@ class Invoice < ActiveRecord::Base
     return res, res2
   end
 
-  def tax_items(ex, nc, nice_number_hash, type, dc, show_avg_rate = 0)
+  def tax_items(ex, nc, nice_number_hash, type, dc, show_avg_rate = 0, font = 10)
     items = []
     tax = self.tax
 
@@ -557,7 +557,6 @@ class Invoice < ActiveRecord::Base
     logger.fatal tax.to_yaml
     tax_amount = 0
     up_string = 60
-    font = 10
     colspain = type == 1 ? 3 : 2
     if self.tax
       taxes = tax.applied_tax_list(self.converted_price(ex), :precision => nc)
@@ -714,7 +713,7 @@ class Invoice < ActiveRecord::Base
     end
 
     items << ['', {:text => _('SUBTOTAL') + ":", :colspan => 3, :align => :right}, nice_cell(self.nice_invoice_number(self.converted_price(ex))), dc.to_s + " (" + _('Without_VAT') + ")"]
-    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 3, dc, options[:show_avg_rate])
+    items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 3, dc, options[:show_avg_rate], 7)
     items += items_t
     items << ['', {:text => _('TOTAL')+ ":", :colspan => 3, :align => :right}, {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :align => :right}, dc]
 
