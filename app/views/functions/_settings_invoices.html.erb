@@ -63,22 +63,22 @@
         <tr>
           <td></td>
           <td id="inv_address_1"><b><%= _('Invoice_Address1') %>:</b></td>
-          <td id="invoice_adr_1"><%= text_field_tag('invoice_address1', Confline.get_value("Invoice_Address1"), "class" => "input", :size => "48", :maxlength => "30") %></td>
+          <td id="invoice_adr_1"><%= text_field_tag('invoice_address1', Confline.get_value("Invoice_Address1"), "class" => "input", :size => "48", :maxlength => "48") %></td>
         </tr>
         <tr>
           <td></td>
           <td id="inv_address_2"><b><%= _('Invoice_Address2') %>:</b></td>
-          <td id="invoice_adr_2"><%= text_field_tag('invoice_address2', Confline.get_value("Invoice_Address2"), "class" => "input", :size => "48", :maxlength => "30") %></td>
+          <td id="invoice_adr_2"><%= text_field_tag('invoice_address2', Confline.get_value("Invoice_Address2"), "class" => "input", :size => "48", :maxlength => "48") %></td>
         </tr>
         <tr>
           <td></td>
           <td id="inv_address_3"><b><%= _('Invoice_Address3') %>:</b></td>
-          <td id="invoice_adr_3"><%= text_field_tag('invoice_address3', Confline.get_value("Invoice_Address3"), "class" => "input", :size => "48", :maxlength => "30") %></td>
+          <td id="invoice_adr_3"><%= text_field_tag('invoice_address3', Confline.get_value("Invoice_Address3"), "class" => "input", :size => "48", :maxlength => "48") %></td>
         </tr>
         <tr>
           <td></td>
           <td id="inv_address_4"><b><%= _('Invoice_Address4') %>:</b></td>
-          <td id="invoice_adr_4"><%= text_field_tag('invoice_address4', Confline.get_value("Invoice_Address4"), "class" => "input", :size => "48", :maxlength => "30") %></td>
+          <td id="invoice_adr_4"><%= text_field_tag('invoice_address4', Confline.get_value("Invoice_Address4"), "class" => "input", :size => "48", :maxlength => "48") %></td>
         </tr>
         <tr>
           <td></td>
@@ -108,7 +108,7 @@
         <tr>
           <td></td>
           <td id="inv_balance_line"><b><%= _('Invoice_Balance_Line') %>:</b></td>
-          <td id="invoice_balance_line"><%= text_field_tag('invoice_balance_line', Confline.get_value("Invoice_Balance_Line"), "class" => "input", :size => "80", :maxlength => "70") %></td>
+          <td id="invoice_balance_line"><%= text_field_tag('invoice_balance_line', Confline.get_value("Invoice_Balance_Line"), "class" => "input", :size => "70", :maxlength => "70") %></td>
         </tr>
         <tr>
           <td></td>
@@ -118,7 +118,7 @@
         <tr>
           <td></td>
           <td id="inv_end_title"><b><%= _('Invoice_End_Title') %>:</b></td>
-          <td id="invoice_end_title"><%= text_field_tag('invoice_end_title', Confline.get_value("Invoice_End_Title"), "class" => "input", :size => "70", :maxlength => "60") %></td>
+          <td id="invoice_end_title"><%= text_field_tag('invoice_end_title', Confline.get_value("Invoice_End_Title"), "class" => "input", :size => "70", :maxlength => "70") %></td>
         </tr>
         <%= raw setting_boolean(_('Add_Average_rate_in_detailed_invoice'), 'invoice_add_average_rate', "Invoice_Add_Average_rate") %>
         <%= raw setting_boolean(_('Show_Time_in_Minutes'), 'invoice_show_time_in_minutes', "Invoice_Show_Time_in_Minutes") %>
