@@ -70,6 +70,7 @@ class SmsProvider < ActiveRecord::Base
         end
       else
         sms.clickatell_message_id = code[1].to_s
+        sms.status_code = "0"
       end
     end
     sms.save
