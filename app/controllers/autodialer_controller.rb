@@ -83,6 +83,7 @@ class AutodialerController < ApplicationController
   def campaign_create
     @campaign = Campaign.new(params[:campaign])
     @campaign.user_id = session[:user_id]
+    @campaign.owner_id = current_user.owner_id
     @campaign.status = "disabled"
 
     time_from = params[:time_from][:hour] + ":" + params[:time_from][:minute] + ":00"
