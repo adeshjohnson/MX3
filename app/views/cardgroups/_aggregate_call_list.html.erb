@@ -26,7 +26,7 @@
 
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <% if @options[:destination_grouping].to_i == 1 %>
-            <td align="left" id="t_dir_name_<%= i %>"><%= h(row.dir_name) %> <%= h(row.subcode) %> <%= h(row.dest_name) %> <%= "("+row.prefix + ")" if !row.prefix.to_s.blank? %></td>
+            <td align="left" id="t_dir_name_<%= i %>"><%= h(row.dir_name) %> <%= h(row.subcode) %> <%= h(row.dest_name) %> <%= row.prefix if !row.prefix.to_s.blank? %></td>
         <% else %>
             <td align="left" id="t_dir_name_<%= i %>"><%= h(row.dir_name) %> <%= h(row.subcode) %>
               <% "("+row.prefix + ")" if !row.prefix.to_s.blank? %></td>
