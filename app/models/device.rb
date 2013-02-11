@@ -71,7 +71,7 @@ class Device < ActiveRecord::Base
     if self.user and self.user.owner.usertype == "reseller"
       allowed_to_assign_did = self.user.owner.allowed_to_assign_did_to_trunk?
       has_assigned_did = (not self.dids.empty?)
-      if self.user.owner.is_reseller? and self.is_trunk? and has_assigned_did and not allowed_to_assign_did
+      if self.user.owner.usertype == "reseller" and self.is_trunk? and has_assigned_did and not allowed_to_assign_did
         self.errors.add(:trunk, _('Did_is_assigned_to_device'))
         return false
       end
