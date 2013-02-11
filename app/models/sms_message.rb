@@ -255,7 +255,7 @@ class SmsMessage < ActiveRecord::Base
     prov_rate = res["price"].to_d / res["e_rate"].to_d
     prov_type = res["provider_type"]
     self.provider_id = prov_id
-    provider = SmsProvider.find_by_id(prov_id)
+    provider = SmsProvider.where(:id => prov_id).first
     self.provider_rate = prov_rate
     self.provider_price = Email.nice_number(prov_rate * sms_numbers.to_i)
     #===========================================================================

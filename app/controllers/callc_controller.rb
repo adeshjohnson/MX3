@@ -167,7 +167,7 @@ class CallcController < ApplicationController
         flash[:status] = _('login_successfully')
         if defined?(CS_Active) && CS_Active == 1 && group = current_user.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) and current_user.usertype != 'admin'
           session[:cs_group] = group
-          session[:lang] = Translation.find_by_id(group.group.translation_id).short_name
+          session[:lang] = Translation.where(:id => group.group.translation_id).first.short_name
           redirect_to :controller => "callshop", :action => "show", :id => group.group_id and return false
         else
           redirect_to :action => "main" and return false

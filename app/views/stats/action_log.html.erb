@@ -83,13 +83,13 @@
         <td align="left" id="target_<%= r['id'] %>">
           <% case r['target_type'].to_s
                when "user" %>
-              <% if (user = User.find_by_id(r['target_id'].to_i)) == nil %>
+              <% if (user = User.where(:id => r['target_id'].to_i).first) == nil %>
                   <%= _('User_was_not_found') %>
               <% else %>
                   <%= link_nice_user(user) %>
               <% end %>
           <% when "device" %>
-              <% if (device = Device.find_by_id(r['target_id'].to_i)) == nil %>
+              <% if (device = Device.where(:id => r['target_id'].to_i).first) == nil %>
                   <%= _("Device_was_not_found") %>
               <% else %>
                   <%= link_nice_device(device) %>
@@ -113,7 +113,7 @@
 	  <td id="data_<%=r['id'] %>">
 	  
 		  <% if r['action'].match("did")%>
-	        <% did = Did.find_by_id(r['data'].to_i)%>
+	        <% did = Did.where(:id => r['data'].to_i).first %>
 	        <%=link_to did.did ,:controller=>"dids", :action=>"edit", :id=> h(r['data']), :back_controller =>"stats", :back_action=>"action_log" if did%></td>
 	      <% else %>
 	  

@@ -90,7 +90,7 @@
               <% if dp.data5.blank? %>
                   <%= _('Not_used') %>
               <% else %>
-                  <% device = Device.find_by_id(dp.data5.to_i) %>
+                  <% device = Device.where(:id => dp.data5.to_i).first %>
                   <%= h device.device_type + "/" + device.name %>
               <% end %>
             </td>

@@ -184,7 +184,7 @@ class Device < ActiveRecord::Base
       #if old location id - create and set
       value = Confline.get_value("Default_device_location_id", self.user.owner_id)
       if value.blank? or value.to_i == 1 or !value
-        owner = User.find_by_id(self.user.owner_id)
+        owner = User.where(:id => self.user.owner_id).first
         owner.after_create_localization
       else
         #if new - only update devices with location 1

@@ -67,7 +67,7 @@ class MonitoringsController < ApplicationController
       else
         flash_errors_for(_("Failed_to_create_monitoring"), @monitoring)
         if for_user?
-          @user = User.find_by_id(@monitoring.user)
+          @user = User.where(:id => @monitoring.user).first
           render :action => "for_user"
         else
           @users = User.find(:all, :conditions => ['users.hidden = 0 AND users.owner_id = ?', correct_owner_id])
@@ -79,7 +79,7 @@ class MonitoringsController < ApplicationController
   end
 
   def edit
-    @m_users = @monitoring.users if @monitoring.user_type.blank? #User.find_by_id(params[:user_id].to_i) if params[:user_id]
+    @m_users = @monitoring.users if @monitoring.user_type.blank?
 
   end
 
@@ -139,9 +139,9 @@ class MonitoringsController < ApplicationController
 
   def find_user
     if params[:id] == current_user.id
-      @user = User.find_by_id(params[:id])
+      @user = User.where(:id => params[:id]).first
     else
-      @user = User.find(:first, :conditions => {:id => params[:id], :owner_id => correct_owner_id})
+      @user = User.where(:id => params[:id], :owner_id => correct_owner_id).first
     end
 
     unless @user
@@ -152,9 +152,9 @@ class MonitoringsController < ApplicationController
 
   def find_monitoring
     if current_user.usertype == 'accountant'
-      @monitoring = User.find(0).owned_monitorings.find_by_id(params[:id])
+      @monitoring = User.find(0).owned_monitorings.where(:id => params[:id]).first
     else
-      @monitoring = current_user.owned_monitorings.find_by_id(params[:id])
+      @monitoring = current_user.owned_monitorings.where(:id => params[:id]).first
     end
 
 

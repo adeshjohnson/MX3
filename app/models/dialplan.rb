@@ -163,7 +163,7 @@ class Dialplan < ActiveRecord::Base
   end
 
   def sound_file_name
-    sf = IvrSoundFile.find_by_id(self.sound_file_id, :include => [:ivr_voice])
+    sf = IvrSoundFile.where(:id => self.sound_file_id).includes(:ivr_voice).first
     return (sf) ? "#{sf.ivr_voice.voice}/#{sf.path}" : ""
   end
 

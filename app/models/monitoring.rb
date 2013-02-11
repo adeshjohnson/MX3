@@ -162,7 +162,7 @@ class Monitoring < ActiveRecord::Base
   def associate
     # we were adding new monitoring system-wide
     if user_type.blank?
-      user = User.find_by_id(@user)
+      user = User.where(:id => @user).first
       user.monitorings << self unless user.monitorings.include?(self)
     end
   end
@@ -173,7 +173,7 @@ class Monitoring < ActiveRecord::Base
       self.destroy
       # means that we deassociate single user with monitoring
     else
-      self.users.delete(User.find_by_id(user))
+      self.users.delete(User.where(:id => user).first)
       # if there are no users left destory monitoring
       if self.users.empty?
         self.destroy

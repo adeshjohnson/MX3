@@ -141,7 +141,7 @@ class CardgroupsController < ApplicationController
     end
 
     user_id = get_user_id()
-    user= User.find_by_id(user_id)
+    user= User.where(:id => user_id).first
 
     if session[:tmp_new_tax].nil?
       if session[:usertype].to_s == "reseller"
@@ -157,9 +157,9 @@ class CardgroupsController < ApplicationController
     check_addon
 
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      @lcrs = current_user.lcrs.find(:all, :conditions => ["id = ?", user.lcr_id], :order => "name ASC")
+      @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC").all
     else
-      @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
+      @lcrs = current_user.lcrs.order("name ASC").all
     end
     @locations = current_user.locations
 
@@ -169,7 +169,7 @@ class CardgroupsController < ApplicationController
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs= Tariff.find(:all, :conditions => "owner_id = #{user_id} #{cond}")
+    @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").all
 
     if @tariffs.empty?
       flash[:notice] = _('No_tariffs_found')
@@ -198,8 +198,8 @@ class CardgroupsController < ApplicationController
     @cardgroup.allow_loss_calls = params[:allow_loss_calls].to_i
     @cardgroup.disable_voucher = params[:disable_voucher].to_i
     if session[:usertype].to_s == "reseller" and current_user.own_providers.to_i == 0
-      user= User.find_by_id(get_user_id())
-      @cardgroup.lcr = Lcr.find(:all, :conditions => "id = '#{user.lcr_id}'", :order => "name ASC")[0]
+      user= User.where(:id => get_user_id()).first
+      @cardgroup.lcr = Lcr.where(:id => '#{user.lcr_id}').order("name ASC").first
     end
     if @cardgroup.save and tax_save
       session[:tmp_new_cardgroup] = nil
@@ -220,7 +220,7 @@ class CardgroupsController < ApplicationController
   def edit
     @page_title = _('Card_group_edit')
     @page_icon = "edit.png"
-    @cardgroup = Cardgroup.find(:first, :include => [:tax], :conditions => ["cardgroups.id = ?", params[:id]])
+    @cardgroup = Cardgroup.includes(:tax).where(:id => params[:id]).first
     unless @cardgroup
       flash[:notice] = _('Cardgroup_was_not_found')
       redirect_to :action => 'list' and return false
@@ -230,12 +230,12 @@ class CardgroupsController < ApplicationController
     check_user_for_cardgroup(@cardgroup)
 
     user_id = get_user_id()
-    user= User.find_by_id(user_id)
+    user= User.where(:id => user_id).first
 
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      @lcrs = current_user.lcrs.find(:all, :conditions => ["id = ?", user.lcr_id], :order => "name ASC")
+      @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC").all
     else
-      @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
+      @lcrs = current_user.lcrs.order("name ASC").all
     end
 
     @locations = current_user.locations
@@ -245,7 +245,7 @@ class CardgroupsController < ApplicationController
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs= Tariff.find(:all, :conditions => "owner_id = #{user_id} #{cond}")
+    @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").all
 
     @price_with_vat =@cardgroup.price.to_d + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_d).to_d
 
@@ -268,7 +268,7 @@ class CardgroupsController < ApplicationController
   end
 
   def update
-    @cardgroup = Cardgroup.find(:first, :include => [:tax], :conditions => ["cardgroups.id = ?", params[:id]])
+    @cardgroup = Cardgroup.includes(:tax).where(:id => params[:id]).first
     unless @cardgroup
       flash[:notice] = _('Cardgroup_was_not_found')
       redirect_to :action => 'list' and return false
@@ -294,9 +294,9 @@ class CardgroupsController < ApplicationController
       flash_errors_for(_('Cardgroup_was_not_updated'), @cardgroup)
       user_id = get_user_id()
       if reseller? and !current_user.reseller_allow_providers_tariff?
-        @lcrs = current_user.lcrs.find(:all, :conditions => ["id = ?", user.lcr_id], :order => "name ASC")
+        @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC").all
       else
-        @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
+        @lcrs = current_user.lcrs.order("name ASC").all
       end
 
       @locations = current_user.locations
@@ -369,7 +369,7 @@ class CardgroupsController < ApplicationController
 
   def upload_card_image
     path = Actual_Dir + '/app/assets/images/cards/'
-    @cardgroup=Cardgroup.find_by_id(params[:id])
+    @cardgroup=Cardgroup.where(:id => params[:id]).first
     unless @cardgroup
       flash[:notice] = _('Cardgroup_now_found')
       redirect_to :action => 'show', :id => @cardgroup.id and return false
@@ -482,23 +482,23 @@ class CardgroupsController < ApplicationController
     @page_icon = "view.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Ghost_Minute_Percent_per_Destination_for_Calling_Card_Group"
 
-    @cg=Cardgroup.find_by_id(params[:id])
+    @cg = Cardgroup.where(:id => params[:id]).first
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
       redirect_to :action => 'show', :id => @cg.id and return false
     end
 
-    a=check_user_for_cardgroup(@cg)
+    a = check_user_for_cardgroup(@cg)
     return false if !a
 
-    @gmps = CcGhostminutepercent.find(:all, :conditions => "cardgroup_id = '#{@cg.id}'")
+    @gmps = CcGhostminutepercent.where(:cardgroup_id => @cg.id).all
 
   end
 
 
   def gmp_create
 
-    @cg = Cardgroup.find_by_id(params[:cg].to_i)
+    @cg = Cardgroup.where(:id => params[:cg].to_i).first
 
     unless @cg
       flash[:notice] = _('Cardgroup_now_found')
@@ -517,7 +517,7 @@ class CardgroupsController < ApplicationController
       redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
 
-    old_gmp = CcGhostminutepercent.find(:first, :conditions => "cardgroup_id = '#{@cg.id}' AND prefix = '#{prefix}' AND percent = '#{percent}'")
+    old_gmp = CcGhostminutepercent.where(:cardgroup_id => @cg.id, :prefix => prefix, :percent => percent).first
     if old_gmp
       flash[:notice] = _('Duplicate_record')
       redirect_to :action => 'gmp_list', :id => @cg.id and return false
@@ -537,7 +537,7 @@ class CardgroupsController < ApplicationController
 
   def gmp_destroy
 
-    gmp = CcGhostminutepercent.find_by_id(params[:id].to_i)
+    gmp = CcGhostminutepercent.where(:id => params[:id].to_i).first
     unless gmp
       flash[:notice] = _('Record_not_found')
       redirect_to :action => 'list' and return false
@@ -563,7 +563,7 @@ class CardgroupsController < ApplicationController
     @page_icon = "edit.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/Ghost_Minute_Percent_per_Destination_for_Calling_Card_Group"
 
-    @gmp = CcGhostminutepercent.find_by_id(params[:id].to_i)
+    @gmp = CcGhostminutepercent.where(:id => params[:id].to_i).first
     unless @gmp
       flash[:notice] = _('Record_not_found')
       redirect_to :action => 'list' and return false
@@ -580,7 +580,7 @@ class CardgroupsController < ApplicationController
 
   def gmp_update
 
-    @gmp = CcGhostminutepercent.find_by_id(params[:id].to_i)
+    @gmp = CcGhostminutepercent.where(:id => params[:id].to_i).first
     unless @gmp
       flash[:notice] = _('Record_not_found')
       redirect_to :action => 'list' and return false
@@ -604,7 +604,7 @@ class CardgroupsController < ApplicationController
       redirect_to :action => 'gmp_list', :id => @cg.id and return false
     end
 
-    old_gmp = CcGhostminutepercent.find(:first, :conditions => "cardgroup_id = '#{@cg.id}' AND prefix = '#{prefix}' AND percent = '#{percent}'")
+    old_gmp = CcGhostminutepercent.where(:cardgroup_id =>@cg.id, :prefix => prefix, :percent => percent).first
     if old_gmp
       flash[:notice] = _('Duplicate_record')
       redirect_to :action => 'gmp_list', :id => @cg.id and return false
@@ -674,7 +674,7 @@ class CardgroupsController < ApplicationController
     params[:prefix] ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") : (@options[:prefix] = "" if !@options[:prefix])
 
     @options[:order] = Call.calls_order_by(params, @options)
-    @cardgroups = Cardgroup.find(:all, :include => [:tax], :conditions => ["owner_id = ?", user_id])
+    @cardgroups = Cardgroup.includes(:tax).where(:owner_id => user_id).all
 
     @options[:csv] = params[:csv].to_i
     @options[:from]= session_from_datetime

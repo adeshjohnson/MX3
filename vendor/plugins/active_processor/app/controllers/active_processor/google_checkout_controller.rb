@@ -37,8 +37,8 @@ class ActiveProcessor::GoogleCheckoutController < ActiveProcessor::BaseControlle
       ActiveProcessor.log("  >> Got notification: #{notification}")
       case notification
         when Google4R::Checkout::NewOrderNotification then
-          payment = Payment.find_by_id_and_completed(notification.shopping_cart.items.first.id, false)
-          owner = User.find_by_id(payment.user_id).owner_id
+          payment = Payment.where(:id => notification.shopping_cart.items.first.id, :completed => false).first
+          owner = User.where(:id => payment.user_id).first.owner_id
           payment.update_attributes({
                                         :transaction_id => notification.google_order_number,
                                         :pending_reason => notification.financial_order_state
@@ -47,7 +47,7 @@ class ActiveProcessor::GoogleCheckoutController < ActiveProcessor::BaseControlle
         when Google4R::Checkout::OrderStateChangeNotification then
           payment = Payment.find_by_transaction_id_and_completed(notification.google_order_number, false)
           if payment
-            owner = User.find_by_id(payment.user_id).owner_id
+            owner = User.where(:id => payment.user_id).first.owner_id
             payment.update_attributes({
                                           :pending_reason => notification.new_financial_order_state
                                       })
@@ -74,7 +74,7 @@ class ActiveProcessor::GoogleCheckoutController < ActiveProcessor::BaseControlle
             gateway = ::GatewayEngine.find(:first, {:engine => "google_checkout", :gateway => "google_checkout", :for_user => payment.user_id}).query
             confirmation = gateway.get(:config, "payment_confirmation")
 
-            user = User.find_by_id(payment.user_id)
+            user = User.where(:id => payment.user_id).first
             if confirmation.blank? or confirmation == "none"
               payment.update_attributes({
                                             :completed => true,
@@ -109,7 +109,7 @@ class ActiveProcessor::GoogleCheckoutController < ActiveProcessor::BaseControlle
                                      })
 
               if gateway.get(:config, 'payment_notification').to_i == 1
-                owner = User.find_by_id(user.owner_id)
+                owner = User.where(:id => user.owner_id).first
                 email = Email.find(:first, :conditions => {:name => 'payment_notification_regular', :owner_id => owner.id})
 
                 variables = Email.email_variables(owner, nil, {:payment => payment, :payment_notification => OpenStruct.new({}), :payment_type => "#{gateway.name} (#{gateway.engine})"})

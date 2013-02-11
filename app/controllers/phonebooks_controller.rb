@@ -95,7 +95,7 @@ class PhonebooksController < ApplicationController
   private
 
   def find_phonebook
-    @phonebook = Phonebook.find_by_id(params[:id])
+    @phonebook = Phonebook.where(:id => params[:id]).first
 
     unless @phonebook
       flash[:notice]=_('Phonebook_was_not_found')
@@ -108,7 +108,7 @@ class PhonebooksController < ApplicationController
   end
 
   def find_user
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
     unless @user
       flash[:notice]=_('User_was_not_found')
       redirect_to :action => :list and return false
@@ -118,7 +118,7 @@ class PhonebooksController < ApplicationController
   def find_phonebooks
     user_id = session[:user_id]
     user_id = params[:id] if params[:id] and session[:usertype] == "admin"
-    @user = User.find_by_id(user_id)
+    @user = User.where(:id => user_id).first
 
     unless @user
       flash[:notice] = _('User_was_not_found')

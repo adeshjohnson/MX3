@@ -281,7 +281,7 @@ class FunctionsController < ApplicationController
 
     @pbxfunction = @dialplan.pbxfunction
 
-    @user = User.find_by_id(@dialplan.data5) if @dialplan.data5 != "all" and !@dialplan.data5.blank?
+    @user = User.where(:id => @dialplan.data5).first if @dialplan.data5 != "all" and !@dialplan.data5.blank?
     @users = current_user.find_all_for_select
 
   end
@@ -294,7 +294,7 @@ class FunctionsController < ApplicationController
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
-    user = User.find_by_id(params[:s_user].to_i)
+    user = User.where(:id => params[:s_user].to_i).first
 
     if reseller?
       if user.owner_id.to_i != current_user.id and user.id.to_i != current_user.id
@@ -310,7 +310,7 @@ class FunctionsController < ApplicationController
 
     if params[:dialplan]
       pbxfunction_id = params[:dialplan][:type_id]
-      pbxfunction = Pbxfunction.find(pbxfunction_id)
+      pbxfunction = Pbxfunction.where(:id => pbxfunction_id).first
       if current_user.usertype == 'reseller' and pbxfunction.allow_resellers == 0
         dont_be_so_smart
         redirect_to :controller => :callc, :action => :main and return false
@@ -395,11 +395,6 @@ class FunctionsController < ApplicationController
 
 
   def pbx_function_destroy
-    #    dialplan = Dialplan.find_by_id(params[:id])
-    #    unless dialplan
-    #      flash[:notice]=_('Dialplan_was_not_found')
-    #      redirect_to :action=>:pbx_functions and return false
-    #    end
     dids = Did.count(:all, :conditions => ["dialplan_id =  ?", params[:id].to_i])
     if dids.to_i == 0
       pbx_function_delete_extline(@dialplan)
@@ -424,7 +419,7 @@ class FunctionsController < ApplicationController
 
   def call_tracing_ajax
     if admin?
-      @user = User.find_by_id(params[:id])
+      @user = User.where(:id => params[:id]).first
       render :layout => false
     else
       render :text => "" and return false
@@ -561,7 +556,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @loc_tariff_id = res['tariff_id']
     @loc_device_id = res['device_id']
     #check if reseller is changed from/to res pro and he changed LCR in location rules, lcr partial
-    lcr_owner = Lcr.find_by_id(@loc_lcr_id)
+    lcr_owner = Lcr.where(:id => @loc_lcr_id).first
     if lcr_owner and !@user_owner.is_admin?
       if lcr_owner.user_id.to_i == @user_owner.owner_id.to_i and @user_owner.reseller_allow_providers_tariff?
         flash[:notice] = _('Check_if_you_are_using_your_lcr')
@@ -577,7 +572,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     if @loc_lcr_id.to_i > 0
       @old_lcr = @lcr
       if @user_owner.is_allow_manage_providers?
-        @lcr = @user_owner.lcrs.find_by_id(@loc_lcr_id)
+        @lcr = @user_owner.lcrs.where(:id => @loc_lcr_id).first
       else
         @lcr = @user_owner.load_lcrs(:first, :conditions => "id = #{@loc_lcr_id}")
       end
@@ -588,12 +583,12 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     # tariff change from localization
     if @loc_tariff_id.to_i > 0
       @old_u_tariff = @u_tariff
-      @u_tariff = Tariff.find_by_id(@loc_tariff_id)
+      @u_tariff = Tariff.where(:id => @loc_tariff_id).first
     end
     # device change from localization
     if @loc_device_id.to_i > 0
       @old_device = @device
-      @new_device = Device.find_by_id(@loc_device_id)
+      @new_device = Device.where(:id => @loc_device_id).first
     end
 
 
@@ -610,7 +605,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     if res
       @old_lcr_before_partials = @lcr
       if @user_owner.is_allow_manage_providers?
-        @lcr = @user_owner.lcrs.find_by_id(res['lcr_id'].to_i)
+        @lcr = @user_owner.lcrs.where(:id => res['lcr_id'].to_i).first
       else
         @lcr = Lcr.find(res['lcr_id'].to_i)
         #@lcr = current_user.load_lcrs(:first, :conditions=>"id = #{res['lcr_id'].to_i}")
@@ -727,7 +722,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         rr['rate'] = res['rate']
         rr['e_rate'] = res['e_rate']
       end
-      tariff = Tariff.find_by_id(tariff_id)
+      tariff = Tariff.where(:id => tariff_id).first
       unless tariff
         flash[:notice] = _('Tariff_not_found')
         redirect_to :action => 'call_tracing' and return false
@@ -735,7 +730,6 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       rr['e_rate'] = tariff.exchange_rate(@user_owner.currency.name).to_d
 
       if @user_owner.is_reseller? and @user_owner.is_allow_manage_providers? and prov.common_use == 1
-        #t=Tariff.find_by_id(current_user.tariff_id)
         data = CommonUseProvider.find(:first, :conditions => " reseller_id = #{@user_owner.id} AND provider_id = #{prov.id}", :include => [:tariff])
         t = data.tariff if data
         unless t
@@ -868,7 +862,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
 
   def login_as_execute
-    @user = User.find_by_id(params[:user])
+    @user = User.where(:id => params[:user]).first
     unless @user
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => :index and return false
@@ -886,7 +880,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
     if defined?(CS_Active) && CS_Active == 1 && group = @user.usergroups.includes(:group).where("usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'").first
       session[:cs_group] = group
-      session[:lang] = Translation.find_by_id(group.group.translation_id).short_name
+      session[:lang] = Translation.where(:id => group.group.translation_id).first.short_name
       redirect_to :controller => "callshop", :action => "show", :id => group.group_id and return false
     else
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -1335,7 +1329,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     # PRIVACY settings
     Confline.set_value("Hide_Destination_End", params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i)
     # /PRIVACY settings
-    user = User.find_by_id(session[:user_id])
+    user = User.where(:id => session[:user_id]).first
     unless user
       flash[:notice] = _("User_not_found")
       redirect_to :controller => :callc, :action => :main and return false
@@ -3448,7 +3442,7 @@ Sets default tax values for users or cardgroups
 =end
 
   def find_location_rule
-    @rule = Locationrule.find_by_id(params[:id])
+    @rule = Locationrule.where(:id => params[:id]).first
     unless @rule
       flash[:notice]=_('Location_rule_was_not_found')
       redirect_to :action => :localization and return false
@@ -3457,7 +3451,7 @@ Sets default tax values for users or cardgroups
   end
 
   def find_dialplan
-    @dialplan = Dialplan.find_by_id(params[:id])
+    @dialplan = Dialplan.where(:id => params[:id]).first
 
     unless @dialplan
       flash[:notice]=_('Dialplan_was_not_found')
@@ -3471,7 +3465,7 @@ Sets default tax values for users or cardgroups
   end
 
   def find_location
-    @location = Location.find_by_id(params[:id])
+    @location = Location.where(:id => params[:id]).first
     unless @location
       flash[:notice]=_('Location_was_not_found')
       redirect_to :action => :localization and return false
@@ -3497,28 +3491,28 @@ Sets default tax values for users or cardgroups
     return false unless params[:reseller_user].to_i > 0 or params[:user]
     if admin?
       if params[:reseller_user] and params[:reseller_user].to_i > 0
-        User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ? ", params[:reseller_user].to_i])
+        User.includes([:tariff, :devices, :lcr]).where(:id => params[:reseller_user].to_i).first
       else
-        User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ?", params[:user]])
+        User.includes([:tariff, :devices, :lcr]).where(:id => params[:user]).first
       end
     else
       if current_user.id == params[:user].to_i
-        User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ?", params[:user]])
+        User.includes([:tariff, :devices, :lcr]).where(:id => params[:user]).first
       else
-        User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ? and users.owner_id = ?", params[:user], current_user.id])
+        User.includes([:tariff, :devices, :lcr]).where(:id => params[:user], :owner_id => current_user.id).first
       end
     end
   end
 
   def call_tracing_device_find_user
-    return false if params[:user].blank?
+    return false if params[:user].blank?                  s
     if admin?
-      User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ?", params[:user]])
+      User.includes([:tariff, :devices, :lcr]).where(:id => params[:user]).first
     else
       if current_user.id == params[:user].to_i
-        User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ?", params[:user]])
+        User.includes([:tariff, :devices, :lcr]).where(:id => params[:user]).first
       else
-        User.find(:first, :include => [:tariff, :devices, :lcr], :conditions => ["users.id = ? and users.owner_id = ?", params[:user], current_user.id])
+        User.includes([:tariff, :devices, :lcr]).where(:id => params[:user], :owner_id => current_user.id).first
       end
     end
   end

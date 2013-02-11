@@ -302,7 +302,7 @@ rez
 <% users_own_provider = false %> 
 <% @res_prov.each_with_index { |r, i| %>
     <% unless @hide_lcrs_and_providers %>
-        <% prov = Provider.find_by_id(r['providers_id']) %>
+        <% prov = Provider.where(:id => r['providers_id']).first %>
         <% @disabled = false %>
         <% if prov.active?(@lcr.id) == 0 %>
             <% @disabled = true %>

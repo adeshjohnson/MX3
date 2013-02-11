@@ -374,7 +374,7 @@ class ApiController < ApplicationController
                   doc.user("#{nice_user(user)}")
                 end
               else
-                if Card.find_by_id(payment.user_id)
+                if Card.where(:id => payment.user_id).first
                   doc.user("#{payment.number}+" "+(#{payment.pin})")
                 else
                   doc.user(" #{_('Batch_card_sale')}")
@@ -1458,20 +1458,20 @@ class ApiController < ApplicationController
         @options = last_calls_stats_parse_params
         if @user_logged.usertype.to_s == "user"
           user = @user_logged
-          device = Device.find_by_id(@options[:s_device]) if @options[:s_device] != "all" and !@options[:s_device].blank?
+          device = Device.where(:id => @options[:s_device]).first if @options[:s_device] != "all" and !@options[:s_device].blank?
         end
 
         if @user_logged.usertype.to_s == "reseller"
-          user = User.find(:first, :conditions => ["id=? and owner_id =?", @options[:s_user], @user_logged.id]) if @options[:s_user] =~ /^[0-9]+$/
+          user = User.where(:id => @options[:s_user], :owner_id => @user_logged.id).first if @options[:s_user] =~ /^[0-9]+$/
           user = @user_logged if @options[:s_user].to_i == @user_logged.id.to_i
-          device = Device.find_by_id(@options[:s_device]) if @options[:s_device] != "all" and !@options[:s_device].blank?
+          device = Device.where(:id => @options[:s_device]).first if @options[:s_device] != "all" and !@options[:s_device].blank?
           if Confline.get_value('Show_HGC_for_Resellers').to_i == 1
-            hgc = Hangupcausecode.find_by_id(@options[:s_hgc]) if @options[:s_hgc].to_i > 0
+            hgc = Hangupcausecode.where(:id => @options[:s_hgc]).first if @options[:s_hgc].to_i > 0
           end
 
           if @user_logged.reseller_allow_providers_tariff?
             if @options[:s_provider].to_i > 0
-              provider = Provider.find(:first, :conditions => ["providers.id = ?", @options[:s_provider]])
+              provider = Provider.where(:id => @options[:s_provider]).first
               unless provider
                 provider = nil
               end
@@ -1483,11 +1483,11 @@ class ApiController < ApplicationController
         end
 
         if ["admin", "accountant"].include?(@user_logged.usertype.to_s)
-          user = User.find_by_id(@options[:s_user]) if @options[:s_user] =~ /^[0-9]+$/
-          device = Device.find_by_id(@options[:s_device]) if @options[:s_device] != "all" and !@options[:s_device].blank?
-          did = Did.find_by_id(@options[:s_did]) if @options[:s_did] != "all" and !@options[:s_did].blank?
-          hgc = Hangupcausecode.find_by_id(@options[:s_hgc]) if @options[:s_hgc].to_i > 0
-          provider = Provider.find_by_id(@options[:s_provider]) if @options[:s_provider].to_i > 0
+          user = User.where(:id => @options[:s_user]).first if @options[:s_user] =~ /^[0-9]+$/
+          device = Device.where(:id => @options[:s_device]).first if @options[:s_device] != "all" and !@options[:s_device].blank?
+          did = Did.where(:id => @options[:s_did]).first if @options[:s_did] != "all" and !@options[:s_did].blank?
+          hgc = Hangupcausecode.where(:id => @options[:s_hgc]).first if @options[:s_hgc].to_i > 0
+          provider = Provider.where(:id => @options[:s_provider]).first if @options[:s_provider].to_i > 0
         end
 
         if user or @options[:s_user] == "all"
@@ -1577,7 +1577,7 @@ class ApiController < ApplicationController
               doc.monitoring_found("success")
               doc.users {
                 values[:users].split(",").each { |id|
-                  user = User.find_by_id(id)
+                  user = User.where(:id => id).first
                   doc.user {
                     doc.id(id)
                     if user
@@ -1595,7 +1595,7 @@ class ApiController < ApplicationController
 
                       if monitoring.send_email?
                         if Confline.get('Email_Sending_Enabled').value.to_i == 1
-                          admin = User.find_by_id(monitoring.owner_id)
+                          admin = User.where(:id => monitoring.owner_id).first
                           if admin.address and !admin.address.email.empty?
                             status << " email sent"
                           else
@@ -1606,8 +1606,8 @@ class ApiController < ApplicationController
                         end
 
                         unless users.empty?
-                          email = Email.find(:first, :conditions => {:name => 'monitoring_activation', :owner_id => monitoring.owner_id})
-                          user = User.find_by_id(monitoring.owner_id)
+                          email = Email.where(:name => 'monitoring_activation', :owner_id => monitoring.owner_id).first
+                          user = User.where(:id => monitoring.owner_id).first
 
                           call_list = CGI.unescape(params[:calls_string].to_s.gsub('my_empty_line_123', '
                           '))
@@ -2476,7 +2476,7 @@ class ApiController < ApplicationController
 
         #try find tariff by id
         #if not found - create one with given name
-        try_find_tariff = Tariff.find_by_id(tariff[:id].to_i)
+        try_find_tariff = Tariff.where(:id => tariff[:id].to_i).first
         if !try_find_tariff
           logger.fatal "TARIFF NOT FOUND. CREATING ONE"
           tariff_new = Tariff.new()
@@ -2490,7 +2490,7 @@ class ApiController < ApplicationController
             tariff[:id] = tariff_new.id
             logger.fatal "TARIFF CREATED " + tariff[:id].to_s
           else
-            find_tariff_id = Tariff.find(:first, :conditions => ['name =? and purpose = "user"', tariff[:name].to_s])
+            find_tariff_id = Tariff.where(:name => tariff[:name].to_s, :purpose => "user").first
             if find_tariff_id and (find_tariff_id.owner_id.to_i == user.id or user.usertype.to_s == 'admin')
               logger.fatal "TARIFF with same name exists, ID:#{find_tariff_id.id}!!! CHANGE NAME OR ID"
               error += "TARIFF with same name exists, ID:#{find_tariff_id.id}!!! CHANGE NAME OR ID"
@@ -3096,7 +3096,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
-        ph = Phonebook.find_by_id(params[:phonebook_id])
+        ph = Phonebook.where(:id => params[:phonebook_id]).first
         if ph
           if ph.user_id != @user.id and @user.usertype != "admin"
             doc.error("Dont be so smart")
@@ -4131,7 +4131,7 @@ class ApiController < ApplicationController
                         doc.message{
                           doc.message_id(sms.id)
                           doc.sms_status_code_tip(sms.sms_status_code_tip)
-                          @curr = Currency.find_by_id(@user.currency_id)
+                          @curr = Currency.where(:id => @user.currency_id).first
                           if @user.usertype.to_s == 'reseller'
                             doc.price(nice_number sms.reseller_price)
                           else

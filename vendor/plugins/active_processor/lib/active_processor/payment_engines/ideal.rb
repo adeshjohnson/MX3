@@ -167,7 +167,7 @@ module ActiveProcessor
 
         if transaction.success?
           confirmation = self.get(:config, "payment_confirmation")
-          user = User.find_by_id(payment.user_id)
+          user = User.where(:id => payment.user_id).first
           if confirmation.blank? or confirmation == "none"
             return true, finish_transaction(user, payment)
           else
@@ -215,7 +215,7 @@ module ActiveProcessor
                                 :data4 => "authorization: #{payment.transaction_id}"})
 
         if self.get(:config, 'payment_notification').to_i == 1
-          owner = User.find_by_id(user.owner_id)
+          owner = User.where(:id => user.owner_id).first
           email = Email.find(:first, :conditions => {:name => 'payment_notification_regular', :owner_id => owner.id})
           variables = Email.email_variables(owner, nil, {:payment => payment, :payment_notification => OpenStruct.new({}), :payment_type => "#{self.name} (#{self.engine})"})
           EmailsController::send_email(email, Confline.get_value("Email_from", owner.id), [owner], variables)

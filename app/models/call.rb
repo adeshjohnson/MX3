@@ -1238,7 +1238,7 @@ class Call < ActiveRecord::Base
 
     # testing tariff
     if user_test_tariff_id > 0
-      tariff = Tariff.find_by_id(user_test_tariff_id)
+      tariff = Tariff.where(:id => user_test_tariff_id).first
       CsvImportDb.clean_value "Using testing tariff with id: #{user_test_tariff_id}"
     else
       tariff = user.tariff
@@ -1271,7 +1271,7 @@ class Call < ActiveRecord::Base
 
       if loc_tariff_id.to_i > 0 and user_test_tariff_id.to_i == 0
         # change tariff because of localization
-        tariff = @tariffs_cache["t_#{loc_tariff_id}".to_sym] ||= Tariff.find_by_id(loc_tariff_id)
+        tariff = @tariffs_cache["t_#{loc_tariff_id}".to_sym] ||= Tariff.where(:id => loc_tariff_id).first
       end
 
       #my_debug sql

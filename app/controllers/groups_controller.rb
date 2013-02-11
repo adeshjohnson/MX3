@@ -83,7 +83,7 @@ class GroupsController < ApplicationController
   end
 
   def change_member_type
-    user = User.find_by_id(params[:user])
+    user = User.where(:id => params[:user]).first
     unless user
       flash[:notice] = _('User_was_not_found')
       redirect_to :controller => 'callc', :action => "main" and return false
@@ -109,7 +109,7 @@ class GroupsController < ApplicationController
   end
 
   def change_position
-    member = User.find_by_id(params[:member_id])
+    member = User.where(:id => params[:member_id]).first
 
     if @group.move_member(member, params[:direction])
       flash[:status] = _('Booth_order_was_updated')
@@ -120,7 +120,7 @@ class GroupsController < ApplicationController
 
 
   def add_member
-    user = User.find_by_id(params[:new_member])
+    user = User.where(:id => params[:new_member]).first
     unless user
       flash[:notice] = _('User_was_not_found')
       redirect_to :controller => 'callc', :action => "main" and return false
@@ -144,7 +144,7 @@ class GroupsController < ApplicationController
 
 
   def remove_member
-    user = User.find_by_id(params[:user])
+    user = User.where(:id => params[:user]).first
     unless user
       flash[:notice] = _('User_was_not_found')
       redirect_to :controller => 'callc', :action => "main" and return false
@@ -162,7 +162,7 @@ class GroupsController < ApplicationController
   def manager_list
     @page_title = _('Groups')
     #@group_pages, @groups = paginate :groups, :per_page => 10
-    user = User.find_by_id(session[:user_id])
+    user = User.where(:id => session[:user_id]).first
     unless user
       flash[:notice] = _('User_was_not_found')
       redirect_to :controller => 'callc', :action => "main" and return false
@@ -171,7 +171,7 @@ class GroupsController < ApplicationController
   end
 
   def manager_members
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
 
     authorize_group_manager(@group.id)
 
@@ -191,7 +191,7 @@ class GroupsController < ApplicationController
 
     #changing the state user logged status
     if params[:member]
-      user = User.find(params[:member])
+      user = User.where(:id => params[:member]).first
       if user.logged == 1 and params[:laction] == "logout"
         user.logged = 0
         add_action(user.id, "logout", "")
@@ -217,7 +217,6 @@ class GroupsController < ApplicationController
     authorize_group_manager(@group.id)
 
     @page_title = _('Callshop')+": " + @group.name
-    #@users = User.find(:all)
     @calls = []
     @durations = []
 
@@ -227,14 +226,13 @@ class GroupsController < ApplicationController
     i = 0
     for member in @group.simple_users
       @calls[i] = member.total_calls("answered", @date_from, @date_till)
-      #      @durations[i] = member.total_duration("answered",date_from, date_till)
       @durations[i] = member.total_billsec("answered", @date_from, @date_till)
       i+=1
     end
 
     #changing the state user logged status
     if params[:member]
-      user = User.find_by_id(params[:member])
+      user = User.where(:id => params[:member]).first
       if user.logged == 1 and params[:laction] == "logout"
         user.logged = 0
         add_action(user.id, "logout", "")
@@ -305,7 +303,7 @@ class GroupsController < ApplicationController
     @page_title = _('Member_devices')
     @page_icon = "device.png"
 
-    @user = User.find_by_id(params[:id])
+    @user = User.where(:id => params[:id]).first
     unless @user
       flash[:notice] = _('User_was_not_found')
       redirect_to :controller => 'callc', :action => "main" and return false
@@ -325,8 +323,8 @@ class GroupsController < ApplicationController
   end
 
   def find_group
-    @group = Group.find_by_id(params[:group]) if params[:group] and !params[:group].kind_of?(Hash)
-    @group = Group.find_by_id(params[:id]) if @group.nil?
+    @group = Group.where(:id => params[:group]).first if params[:group] and !params[:group].kind_of?(Hash)
+    @group = Group.where(:id => params[:id]).first if @group.nil?
 
     unless @group
       flash[:notice] = _('Call_shop_was_not_found')

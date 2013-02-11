@@ -119,7 +119,7 @@ class DestinationGroupsController < ApplicationController
 
 
   def dg_destination_delete
-    @destgroup = Destinationgroup.find_by_id(params[:dg_id])
+    @destgroup = Destinationgroup.where(:id => params[:dg_id]).first
     unless @destgroup
       flash[:notice]=_('Destinationgroup_was_not_found')
       redirect_to :action => :index and return false
@@ -413,7 +413,7 @@ class DestinationGroupsController < ApplicationController
   def dg_destination_stats
     @page_title = _('Dg_destination_stats')
     @page_icon = "chart_bar.png"
-    @destinationgroup = Destinationgroup.find_by_id(params[:dg_id])
+    @destinationgroup = Destinationgroup.where(:id => params[:dg_id]).first
     unless @destinationgroup
       flash[:notice]=_('Destinationgroup_was_not_found')
       redirect_to :action => :index and return false

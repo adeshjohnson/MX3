@@ -136,7 +136,7 @@
                   <%= link_nice_user(user) %>
               <% end %>
           <% else %>
-              <% if Card.find_by_id(payment.user_id) %>
+              <% if Card.where(:id => payment.user_id).first %>
                   <%= link_to "#{payment.number} (#{payment.pin})", {:controller => "cards", :action => "show", :id => payment.card_id} %>
               <% else %>
                   <%= _('Batch_card_sale') %>

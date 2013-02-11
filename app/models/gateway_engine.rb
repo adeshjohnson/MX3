@@ -42,7 +42,7 @@ class GatewayEngine
   # Configure according to conflines
   def on_find
     # find owner
-    owner = User.find_by_id(@user).owner_id
+    owner = User.where(:id => @user).first.owner_id
 
     @gateways.each { |engine, gateways|
       gateways.each { |name, gateway|
@@ -100,7 +100,7 @@ class GatewayEngine
       p.amount = params['amount']
       p.currency = params['currency']
       p.pending_reason = "Unnotified payment"
-      p.owner_id = User.find_by_id(@user).owner_id
+      p.owner_id = User.where(:id => @user).first.owner_id
       p.completed = 0
       p.first_name = params['first_name']
       p.last_name = params['last_name']
@@ -122,7 +122,7 @@ class GatewayEngine
     gateway = query
 
     payment = Payment.find(:first, :conditions => {:id => @transaction})
-    user = User.find_by_id(payment.user_id)
+    user = User.where(:id => payment.user_id).first
 
     confirmation = gateway.get(:config, "payment_confirmation")
 
@@ -167,7 +167,7 @@ class GatewayEngine
       if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
         if gateway.get(:config, 'payment_notification').to_i == 1
           email = Email.find(:first, :conditions => {:name => 'payment_notification_regular', :owner_id => user.owner_id})
-          owner = User.find_by_id(user.owner_id)
+          owner = User.where(:id => user.owner_id).first
 
           variables = Email.email_variables(owner, nil, {:payment => payment, :payment_notification => OpenStruct.new({:business => payment.email}), :payment_type => "#{gateway.name} (#{gateway.engine})"})
           Email.send_email(email, [owner], Confline.get_value("Email_from", owner.id), 'send_email', {:assigns => variables, :owner => variables[:owner]})
@@ -179,8 +179,7 @@ class GatewayEngine
 
   def on_after_gateways_failed_payment
     gateway = query
-    payment = Payment.find(:first, :conditions => {:id => @transaction})
-    user = User.find_by_id(payment.user_id)
+    payment = Payment.where(:id => @transaction).first
 
     if !gateway.payment.response.blank?
       payment.update_attributes({
@@ -228,7 +227,7 @@ class GatewayEngine
       p.amount = gateway.payment.orig_amount
       p.currency = params['currency']
       p.pending_reason = "Unnotified payment"
-      p.owner_id = User.find_by_id(@user).owner_id
+      p.owner_id = User.where(:id => @user).first.owner_id
       p.completed = 0
       p.date_added = Time.now
     end
@@ -256,7 +255,7 @@ class GatewayEngine
       p.amount = round_to_cents(gw_payment.money.to_i/100.0)
       p.currency = gw_payment.currency
       p.pending_reason = "Unnotified payment"
-      p.owner_id = User.find_by_id(@user).owner_id
+      p.owner_id = User.where(:id => @user).first.owner_id
       p.completed = 0
       p.date_added = Time.now
     end

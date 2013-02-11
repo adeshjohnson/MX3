@@ -63,7 +63,7 @@ class EmailsController < ApplicationController
 =end
 
   def update
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
     unless @user
       flash[:notice] = _('User_was_not_found')
       render :controller => "callc", :action => 'main'
@@ -346,7 +346,7 @@ class EmailsController < ApplicationController
     end
   end
 
-  def EmailsController::send_invoices(email, to, from, files = [], number)
+  def EmailsController::send_invoices(email, to, from, files = [], number = 0)
      
      smtp_server = Confline.get_value("Email_Smtp_Server", email[:owner_id].to_i).to_s.strip
      smtp_user = Confline.get_value("Email_Login", email[:owner_id].to_i).to_s.strip
@@ -641,7 +641,7 @@ class EmailsController < ApplicationController
     if Confline.get_value("Send_Email_To_Admin_After_Registration") == "1"
       #
       email = Email.find(:first, :conditions => ["name = 'registration_confirmation_for_admin' AND owner_id= ?", owner_id])
-      users = [User.find_by_id(owner_id)]
+      users = [User.where(:id => owner_id).first]
       variables = Email.email_variables(user, device, {:user_ip => reg_ip, :password => password, :free_ext => free_ext})
       num = EmailsController.send_email(email, Confline.get_value("Email_from", owner_id), users, variables)
 
@@ -662,7 +662,7 @@ class EmailsController < ApplicationController
   private
 
   def find_email
-    @email = Email.find_by_id(params[:id])
+    @email = Email.where(:id => params[:id]).first
     unless @email
       flash[:notice] = _('Email_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -671,7 +671,7 @@ class EmailsController < ApplicationController
   end
 
   def find_session_user
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
     unless @user
       flash[:notice] = _('User_was_not_found')
       render :controller => "callc", :action => 'main'
@@ -680,7 +680,7 @@ class EmailsController < ApplicationController
 
   def check_user_for_email(email)
     if email.class.to_s =="Fixnum"
-      email = Email.find(:first, :conditions => ["id = ? ", email])
+      email = Email.where(:id =>  email).first
     end
     if email.owner_id != session[:user_id]
       dont_be_so_smart

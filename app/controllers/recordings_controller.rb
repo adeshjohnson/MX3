@@ -36,8 +36,8 @@ class RecordingsController < ApplicationController
 
   def get_recording
     rec_id = params[:rec]
-    rec = Recording.find_by_id(params[:rec]) rescue nil
-    rec_user = User.find(:first, :conditions => "id = #{rec.user_id}") rescue nil
+    rec = Recording.where(:id => params[:rec]).first rescue nil
+    rec_user = User.where(:id => rec.user_id).first rescue nil
     is_authorized = ( current_user.id == rec_user.owner_id or (rec.visible_to_user == 1 and current_user.id == rec.user_id) ? true : false ) rescue false
 
     if rec_id.blank? or rec_user.blank?
@@ -90,7 +90,7 @@ class RecordingsController < ApplicationController
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
-    @device = Device.find_by_id(params[:show_rec])
+    @device = Device.where(:id => params[:show_rec]).first
     unless @device
       flash[:notice] = _('Device_not_found')
       redirect_to :controller => :callc, :action => :main and return false
@@ -130,7 +130,7 @@ class RecordingsController < ApplicationController
 
   def play_rec
     @page_title = ""
-    @rec = Recording.find_by_id(params[:rec])
+    @rec = Recording.where(:id => params[:rec]).first
     unless @rec
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -150,7 +150,7 @@ class RecordingsController < ApplicationController
 
   def play_recording
     @page_title = ""
-    @rec = Recording.find_by_id(params[:id])
+    @rec = Recording.where(:id => params[:id]).first
     unless @rec
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -190,7 +190,7 @@ class RecordingsController < ApplicationController
     else
       id = session[:user_id]
     end
-    @user = User.find_by_id(id)
+    @user = User.where(:id => id).first
 
     change_date
     params[:page] ? @page = params[:page].to_i : @page = 1
@@ -243,7 +243,7 @@ class RecordingsController < ApplicationController
   def list_recordings
     @page_title = _('Recordings')
     @page_icon = "music.png"
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
 
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
@@ -307,7 +307,7 @@ class RecordingsController < ApplicationController
   def edit
     @page_title = _('Edit_Recording')
     @page_icon = "edit.png"
-    @recording = Recording.find_by_id(params[:id])
+    @recording = Recording.where(:id => params[:id]).first
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -324,7 +324,7 @@ class RecordingsController < ApplicationController
   def edit_recording
     @page_title = _('Edit_Recording')
     @page_icon = "edit.png"
-    @recording = Recording.find_by_id(params[:id])
+    @recording = Recording.where(:id => params[:id]).first
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -338,7 +338,7 @@ class RecordingsController < ApplicationController
 =end
 
   def update
-    @recording = Recording.find_by_id(params[:id])
+    @recording = Recording.where(:id => params[:id]).first
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -360,7 +360,7 @@ class RecordingsController < ApplicationController
 =end
 
   def update_recording
-    @recording = Recording.find_by_id(params[:id])
+    @recording = Recording.where(:id => params[:id]).first
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -384,7 +384,7 @@ class RecordingsController < ApplicationController
   def list_users
     @page_title = _('Users')
     @page_icon = 'vcard.png'
-    @roles = Role.find(:all, :conditions => ["name !='guest'"])
+    @roles = Role.where("name !='guest'").all
 
     params[:search_on] ? @search = params[:search_on].to_i : @search = 0
     params[:page] ? @page = params[:page].to_i : @page = 1
@@ -539,7 +539,7 @@ class RecordingsController < ApplicationController
       if key.scan(/recording_enabled_|recording_forced_enabled_|recording_hdd_quota_|recordings_email_/).size > 0
         num = key.gsub(/recording_enabled_|recording_forced_enabled_|recording_hdd_quota_|recordings_email_/, "")
         if !users[num]
-          users[num] = User.find_by_id(num)
+          users[num] = User.where(:id => num)
         end
       end
     }
@@ -563,7 +563,7 @@ class RecordingsController < ApplicationController
 =end
 
   def destroy_recording
-    @recording = Recording.find_by_id(params[:id])
+    @recording = Recording.where(:id => params[:id]).first
     unless @recording
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -584,7 +584,7 @@ class RecordingsController < ApplicationController
 =end
 
   def destroy
-    rec = Recording.find_by_id(params[:id])
+    rec = Recording.where(:id => params[:id]).first
     unless rec
       flash[:notice] = _('Recording_was_not_found')
       redirect_to :controller => "callc", :action => 'main' and return false
@@ -637,7 +637,7 @@ class RecordingsController < ApplicationController
       cond = 'id = -1'
       @type = params[:rec_action].to_i
       if params[:rec_action].to_i == 1
-        @device = Device.find(:first, :conditions => {:id => params[:s_device]})
+        @device = Device.where(:id => params[:s_device]).first
         unless @device
           flash[:notice] = _('Device_was_not_found')
           redirect_back_or_default("/callc/main")
@@ -655,7 +655,7 @@ class RecordingsController < ApplicationController
   end
 
   def bulk_delete
-    recordings = Recording.find(:all, :conditions => session[:recordings_delete_cond])
+    recordings = Recording.where(session[:recordings_delete_cond]).all
     for r in recordings
       unless r
         flash[:notice] = _('Recording_was_not_found')

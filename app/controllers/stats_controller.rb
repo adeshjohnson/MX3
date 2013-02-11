@@ -1059,7 +1059,7 @@ in before filter : user (:find_user_from_id_or_session)
     params[:page] ? @page = params[:page].to_i : @page = 1
 
     @device = Device.find(:first, :conditions => ['id=?', @sel_device_id]) if @sel_device_id.to_i > 0
-    @hgc =Hangupcausecode.find_by_id(@sel_hgc_id) if @sel_hgc_id > 0
+    @hgc =Hangupcausecode.where(:id => @sel_hgc_id).first if @sel_hgc_id > 0
     @hgcs = Hangupcausecode.find(:all)
     @search = 0
 
@@ -1074,7 +1074,7 @@ in before filter : user (:find_user_from_id_or_session)
 
     #changing the state of call processed field
     if params[:processed]
-      if processed_call = Call.find_by_id(params[:processed])
+      if processed_call = Call.where(:id => params[:processed]).first
         processed_call.processed == 0 ? processed_call.processed = 1 : processed_call.processed = 0
         processed_call.save
       end
@@ -1261,7 +1261,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @sel_hgc_id = 0
     @sel_hgc_id = params[:hgc].to_i if params[:hgc]
 
-    @hgc =Hangupcausecode.find_by_id(@sel_hgc_id) if @sel_hgc_id > 0
+    @hgc = Hangupcausecode.where(:id => @sel_hgc_id).first if @sel_hgc_id > 0
 
     if session[:usertype].to_s != 'admin' and params[:reseller]
       dont_be_so_smart
@@ -1305,16 +1305,15 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @device = Device.find(@sel_device_id) if @sel_device_id > 0
 
 
-    @hgcs = Hangupcausecode.find(:all)
+    @hgcs = Hangupcausecode.all
     @sel_hgc_id = 0
     @sel_hgc_id = params[:hgc].to_i if params[:hgc]
 
-    @hgc =Hangupcausecode.find_by_id(@sel_hgc_id) if @sel_hgc_id > 0
+    @hgc = Hangupcausecode.where(:id => @sel_hgc_id).first if @sel_hgc_id > 0
 
     date_from = params[:date_from]
     date_till = params[:date_till]
     call_type = params[:call_type]
-    #call_type = params[:calltype] if params[:calltype]
     user = @user
 
     calls = user.calls(call_type, date_from, date_till, @direction, "calldate", "DESC", @device, {:hgc => @hgc})
@@ -1771,7 +1770,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if @user_id.to_i != -1
       cond+= "calls.user_id = #{@user_id} AND "
-      @user = User.find_by_id(@user_id)
+      @user = User.where(:id => @user_id).first
     else
       @user = nil
     end
@@ -1805,7 +1804,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         descond +=" AND calls.prefix = destinations.prefix AND destinations.direction_code ='#{@country.code}' "
       end
     end
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order("name ASC").all
 
     if params[:hid] == nil and !session[:hangup_call]
       flash[:notice] = _('Hangupcausecode_not_found')
@@ -1813,11 +1812,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     end
 
     if params[:hid] != nil
-      #@hangup = get_hangup_cause_message(params[:hid])
-      @hangup = Hangupcausecode.find_by_id(params[:hid].to_i)
+      @hangup = Hangupcausecode.where(:id => params[:hid].to_i).first
     else
-      #@hangup = get_hangup_cause_message(session[:hangup_call])
-      @hangup = Hangupcausecode.find_by_id(session[:hangup_call].to_i)
+      @hangup = Hangupcausecode.where(:id => session[:hangup_call].to_i).first
     end
 
     unless @hangup
@@ -1866,7 +1863,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if @user_id.to_i != -1
       cond+= "calls.user_id = #{@user_id} AND "
-      @user = User.find_by_id(@user_id)
+      @user = User.where(:id => @user_id).first
     else
       @user = nil
     end
@@ -1881,7 +1878,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     if params[:direction]
       if params[:direction].to_i != -1
-        @country = Direction.find(params[:direction])
+        @country = Direction.where(:id => params[:direction]).first
         @coun = @country.id
         @direction = @coun
         des+= 'destinations, '
@@ -2501,7 +2498,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def providers_calls_to_csv
 
-    provider = Provider.find_by_id(params[:id])
+    provider = Provider.where(:id => params[:id]).first
     unless provider
       flash[:notice] = _('Provider_not_found')
       redirect_to :controller => "callc", :action => "main" and return false
@@ -3431,42 +3428,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @help_link = "http://wiki.kolmisoft.com/index.php/First_Activity"
 
     change_date
-    a1 = session_from_date
-    a2 = session_till_date
-
-=begin
-    #find all users
-    users = User.find(:all, :conditions => "hidden = 0")
-    for user in users
-      #check if has logged first activity
-      action = Action.find(:first, :conditions => "user_id = #{user.id} AND action = 'first_call'")
-
-      # no such action, looking for first call of the user
-      if not action
-
-        call = Call.find(:first, :conditions => "calls.user_id = #{user.id}", :order => "calldate ASC" )
-
-        if call
-          #call found, creating action
-
-          MorLog.my_debug("No action for first_call found, creating for user with id: #{user.id}")
-
-          action = Action.new
-          action.user_id = user.id
-          action.date = call.calldate
-          action.action = 'first_call'
-          action.data = call.id
-          action.save
-        end
-      else
-        # we have action so we can find call
-        call = Call.find_by_id(action.data.to_i)
-
-      end
-
-    end
-=end
-
 
     @size = Action.set_first_call_for_user(session_from_date, session_till_date)
 
@@ -3938,13 +3899,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def last_calls_stats_user(user, options)
     devices = user.devices(:conditions => "device_type != 'FAX'")
-    device = Device.find_by_id(options[:s_device]) if options[:s_device] != "all" and !options[:s_device].blank?
+    device = Device.where(:id => options[:s_device]).first if options[:s_device] != "all" and !options[:s_device].blank?
     return devices, device
   end
 
   def last_calls_stats_reseller(options)
-    user = User.find_by_id(options[:s_user]) if options[:s_user] != "all" and !options[:s_user].blank?
-    device = Device.find_by_id(options[:s_device]) if options[:s_device] != "all" and !options[:s_device].blank?
+    user = User.where(:id => options[:s_user]).first if options[:s_user] != "all" and !options[:s_user].blank?
+    device = Device.where(:id => options[:s_device]).first if options[:s_device] != "all" and !options[:s_device].blank?
     if user
       devices = user.devices(:conditions => "device_type != 'FAX'")
     else
@@ -3953,7 +3914,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     users = User.select("id, username, first_name, last_name, usertype, #{SqlExport.nice_user_sql}").where("users.usertype = 'user' AND users.owner_id = #{corrected_user_id} AND hidden=0").order("nice_user")
     if Confline.get_value('Show_HGC_for_Resellers').to_i == 1
       hgcs = Hangupcausecode.find_all_for_select
-      hgc = Hangupcausecode.find_by_id(options[:s_hgc]) if options[:s_hgc].to_i > 0
+      hgc = Hangupcausecode.where(:id => options[:s_hgc]).first if options[:s_hgc].to_i > 0
     end
 
     if current_user.reseller_allow_providers_tariff?
@@ -3971,26 +3932,26 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     else
       providers = nil; provider = nil
     end
-    did = Did.find_by_id(options[:s_did]) if options[:s_did] != "all" and !options[:s_did].blank?
+    did = Did.where(:id => options[:s_did]).first if options[:s_did] != "all" and !options[:s_did].blank?
     dids = Did.find_all_for_select
 
     return users, user, devices, device, hgcs, hgc, providers, provider, did, dids
   end
 
   def last_calls_stats_admin(options)
-    user = User.find_by_id(options[:s_user]) if options[:s_user] != "all" and !options[:s_user].blank?
-    device = Device.find_by_id(options[:s_device]) if options[:s_device] != "all" and !options[:s_device].blank?
-    did = Did.find_by_id(options[:s_did]) if options[:s_did] != "all" and !options[:s_did].blank?
-    hgc = Hangupcausecode.find_by_id(options[:s_hgc]) if options[:s_hgc].to_i > 0
+    user = User.where(:id => options[:s_user]).first if options[:s_user] != "all" and !options[:s_user].blank?
+    device = Device.where(:id => options[:s_device]).first if options[:s_device] != "all" and !options[:s_device].blank?
+    did = Did.where(:id => options[:s_did]).first if options[:s_did] != "all" and !options[:s_did].blank?
+    hgc = Hangupcausecode.where(:id => options[:s_hgc]).first if options[:s_hgc].to_i > 0
     users = User.select("id, username, first_name, last_name, usertype, #{SqlExport.nice_user_sql}").where("users.usertype = 'user'").order("nice_user")
     dids = Did.find_all_for_select
     hgcs = Hangupcausecode.find_all_for_select
     providers = Provider.find_all_for_select
-    provider = Provider.find_by_id(options[:s_provider]) if options[:s_provider].to_i > 0
-    resellers = User.find(:all, :conditions => 'usertype = "reseller"')
+    provider = Provider.where(:id => options[:s_provider]).first if options[:s_provider].to_i > 0
+    resellers = User.where(:usertype => "reseller").all
     resellers_with_dids = User.find(:all, :joins => 'JOIN dids ON (users.id = dids.reseller_id)', :conditions => 'usertype = "reseller"', :group => 'users.id')
     resellers = [] if !resellers
-    reseller = User.find_by_id(options[:s_reseller]) if options[:s_reseller] != "all" and !options[:s_reseller].blank?
+    reseller = User.where(:id => options[:s_reseller]).first if options[:s_reseller] != "all" and !options[:s_reseller].blank?
     if user
       devices = user.devices(:conditions => "device_type != 'FAX'")
     else

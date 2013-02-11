@@ -30,14 +30,14 @@ class ActiveProcessor::IntegrationsController < ActiveProcessor::BaseController
     notify = ActiveMerchant::Billing::Integrations.const_get(params[:gateway].downcase.camelize).notification(request.raw_post)
 
     if notify.respond_to?(:acknowledge) && notify.acknowledge
-      payment = Payment.find_by_id_and_completed(notify.item_id, 0)
+      payment = Payment.where(:id => notify.item_id, :completed => 0).first
 
       if payment
         gateway = ::GatewayEngine.find(:first, {:engine => payment.paymenttype.split("_").first, :gateway => payment.paymenttype.split("_")[1..-1].join("_"), :for_user => current_user.id}).query
 
         params['tax'] ||= 0
 
-        user = User.find_by_id(payment.user.id)
+        user = User.where(:id => payment.user.id).first
         payment.update_attributes({
                                       :pending_reason => "Pending for gateway approval"
                                   })
@@ -61,12 +61,12 @@ class ActiveProcessor::IntegrationsController < ActiveProcessor::BaseController
     notify = ActiveMerchant::Billing::Integrations.const_get(params[:gateway].downcase.camelize).notification(request.raw_post)
 
     if notify.respond_to?(:acknowledge) && notify.acknowledge
-      payment = Payment.find_by_id_and_completed(notify.item_id, 0)
+      payment = Payment.where(:id => notify.item_id, :completed => 0)
       params['tax'] ||= 0 # some gateway do not supply tax value, so set it to 0 if not present in params.
 
       unless payment.nil?
         if notify.acknowledge
-          user = User.find_by_id(payment.user.id) # this is needed due to faulty association between user and payment models
+          user = User.where(:id => payment.user.id).first # this is needed due to faulty association between user and payment models
           gateway = ::GatewayEngine.find(:first, {:engine => payment.paymenttype.split("_").first, :gateway => payment.paymenttype.split("_")[1..-1].join("_"), :for_user => payment.user_id}).query
           confirmation = gateway.get(:config, "payment_confirmation")
 
@@ -108,7 +108,7 @@ class ActiveProcessor::IntegrationsController < ActiveProcessor::BaseController
                                      })
 
               if gateway.get(:config, 'payment_notification').to_i == 1
-                owner = User.find_by_id(user.owner_id)
+                owner = User.where(:id => user.owner_id).first
                 email = Email.find(:first, :conditions => {:name => 'payment_notification_integrations', :owner_id => owner.id})
 
                 variables = Email.email_variables(owner, nil, {:payment => payment, :payment_notification => notify, :payment_type => "#{gateway.name} (#{gateway.engine})"})

@@ -211,7 +211,7 @@ in before filter : rule (:find_location_rule)
   end
 
   def location_change
-    device = Device.find_by_id(params[:id])
+    device = Device.where(:id => params[:id]).first
     unless  device
       flash[:notice]=_('Device_was_not_found')
       redirect_to :action => :localization and return false
@@ -261,7 +261,7 @@ in before filter : rule (:find_location_rule)
   def admins_location_rules
     if reseller?
       @page_title = _('Admins_location_rules')
-      @location = Location.find_by_id(params[:id])
+      @location = Location.where(:id => params[:id]).first
       @rules = @location.locationrules
 
       @grules_dst = Locationrule.find(:all, :conditions => ["location_id =? and lr_type =?", 1, "dst"], :order => "name ASC")
@@ -317,7 +317,7 @@ in before filter : rule (:find_location_rule)
   private
 
   def find_location_rule
-    @rule = Locationrule.find_by_id(params[:id])
+    @rule = Locationrule.where(:id => params[:id]).first
     unless @rule
       flash[:notice]=_('Location_rule_was_not_found')
       redirect_to :action => :localization and return false
@@ -326,7 +326,7 @@ in before filter : rule (:find_location_rule)
   end
 
   def find_location
-    @location = Location.find_by_id(params[:id])
+    @location = Location.where(:id => params[:id]).first
     unless @location
       flash[:notice]=_('Location_was_not_found')
       redirect_to :action => :localization and return false

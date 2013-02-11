@@ -14,7 +14,7 @@
             <td id="action_<%= action.id %>" align="center">  <%= action.action %>      </td>
             <td id="data_<%= action.id %>" align="right">
             <% if action.action == "IVR" and allow_manage_providers? %>
-                <% ivr = current_user.ivrs.find_by_id(action.data) %>
+                <% ivr = current_user.ivrs.where(:id => action.data).first %>
                 <%= link_to ivr.name, :controller => "ivr", :action => "edit", :id => ivr.id if ivr %>
             <% else %>
                 <%= action.data %>

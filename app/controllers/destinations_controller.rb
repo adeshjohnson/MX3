@@ -99,7 +99,7 @@ class DestinationsController < ApplicationController
   def stats
     @page_title = _('Destination_stats')
     @page_icon = "chart_bar.png"
-    @destination = Destination.find_by_id(params[:des_id])
+    @destination = Destination.where(:id => params[:des_id]).first
     unless @destination
       flash[:notice]=_('Destination_was_not_found')
       redirect_to :controller => :callc, :action => :main and return false

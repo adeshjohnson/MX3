@@ -158,7 +158,7 @@ module ActiveProcessor
                                              })
 
                       if get(:config, 'payment_notification').to_i == 1
-                        owner = User.find_by_id(user.owner_id)
+                        owner = User.where(:id => user.owner_id).first
                         email = Email.find(:first, :conditions => {:name => 'payment_notification_regular', :owner_id => owner.id})
 
                         variables = Email.email_variables(owner, nil, {:payment => @payment, :payment_notification => OpenStruct.new({}), :payment_type => "OSMP (OSMP)"})
@@ -244,58 +244,6 @@ module ActiveProcessor
       end
 
       private
-
-      #def finish_transaction(payment, params)
-      #user = payment.user
-      #ActiveProcessor.debug("finish_transaction(#{user.id}, #{payment.id}")
-      #        case payment.pending_reason
-      #        when "waiting_response"
-      #          confirmation = get(:config, "payment_confirmation")
-      #          if confirmation.blank? or confirmation == "none"
-      #            ActiveProcessor.debug("  > waiting_response")
-      #            payment.update_attributes({:completed => 1, :shipped_at => params[:date], :pending_reason => "Completed"})
-      #            Action.add_action_hash(payment.user_id,
-      #              { :action => "payment: #{self.settings['name']}",
-      #                :data => "User successfully payed using OSMP",
-      #                :data3 => "#{payment.amount} #{payment.currency} | tax: #{payment.gross - payment.amount} #{payment.currency} | fee: #{payment.fee} #{payment.currency} | sent: #{payment.gross} #{payment.currency}",
-      #                :data2 => "payment id: #{payment.id}",
-      #                :data4 => "authorization: #{payment.transaction_id}"
-      #              })
-      #            user.balance += payment.amount_to_system_currency
-      #            return user.save
-      #          else
-      #            payment.update_attributes({
-      #                :completed => false,
-      #                :pending_reason => "Waiting for confirmation"
-      #              })
-      #            ActiveProcessor.log("    >> Payment: #{payment.id}, Pending_reason: #{payment.pending_reason.downcase}")
-      #            ActiveProcessor.log("    >> USER (#{user.id}) waiting for confirmation.")
-      #            Action.add_action_hash(payment.user_id,
-      #              { :action => "payment: #{settings['name']}",
-      #                :data => "User successfully payed, waiting for payment approval #{settings['name']} (Google Checkout)",
-      #                :data3 => "#{payment.amount} #{payment.currency} | tax: #{payment.gross - payment.amount} #{payment.currency} | fee: #{payment.fee} #{payment.currency} | sent: #{payment.gross} #{payment.currency}",
-      #                :data2 => "payment id: #{payment.id}",
-      #                :data4 => "Transaction: #{payment.transaction_id}"
-      #              })
-      #
-      #            if get(:config, 'payment_notification').to_i == 1
-      #              owner = User.find_by_id(user.owner_id)
-      #              email = Email.find(:first, :conditions => { :name => 'payment_notification_regular', :owner_id => owner.id })
-      #
-      #              variables = Email.email_variables(owner, nil, { :payment => payment, :payment_notification => OpenStruct.new({}), :payment_type => "OSMP (OSMP)" })
-      #              EmailsController::send_email(email, Confline.get_value("Email_from", owner.id), [owner], variables)
-      #            end
-      #            return true
-      #          end
-
-      #        when "Waiting for confirmation"
-      #          ActiveProcessor.debug("  > Waiting for confirmation")
-      #          return true
-      #        when "Completed"
-      #          ActiveProcessor.debug("  > Completed")
-      #          return true
-      #end
-      # end
 
       def round_to_cents(amount)
         return sprintf("%.2f", amount)

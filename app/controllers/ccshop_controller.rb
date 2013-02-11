@@ -283,7 +283,7 @@ class CcshopController < ApplicationController
       else
         # showing card data from db
         for item in @order.cclineitems
-          card = Card.find_by_id(item.card_id)
+          card = Card.where(:id => item.card_id).first
           @sold_cards << card if card
         end
       end
@@ -310,7 +310,7 @@ class CcshopController < ApplicationController
     @st = params[:st].upcase if params[:st]
 
     @Show_Currency_Selector = true
-    @dgroups = ( @dgroups ||= Destinationgroup.find(:all, :conditions => ["name like ?", "#{@st}%"], :order => "name ASC, desttype ASC") )
+    @dgroups = ( @dgroups ||= Destinationgroup.where("name like ?", "#{@st}%").order("name ASC, desttype ASC").all )
 
     @rates = @tariff.rates_by_st(@st, 0, 10000)
     @total_pages = (@rates.size.to_f / session[:items_per_page].to_f).ceil
@@ -370,12 +370,12 @@ class CcshopController < ApplicationController
     @page_title = _('Speed_Dials')
     @page_icon = "book.png"
 
-    @card = Card.find(:first, :conditions => ["id = ?", session[:card_id]])
-    @sp = Phonebook.find(:all, :conditions => ["card_id = ?", session[:card_id]])
+    @card = Card.where(:id => session[:card_id]).first
+    @sp = Phonebook.where(:card_id => session[:card_id]).all
   end
 
   def speeddial_add_new
-    card = Card.find(:first, :conditions => ["id = ?", session[:card_id]])
+    card = Card.where(:id =>  session[:card_id]).first
     number = params[:number]
     name = params[:name]
     speeddial = params[:speeddial]
@@ -408,7 +408,7 @@ class CcshopController < ApplicationController
     @page_title = _('Edit_Speed_Dial')
     @page_icon = "edit.png"
 
-    @phonebook = Phonebook.find(:first, :conditions => ["id = ? AND card_id = ?", params[:id], session[:card_id]])
+    @phonebook = Phonebook.where(:id => params[:id], :card_id => session[:card_id]).first
     unless @phonebook
       dont_be_so_smart
       redirect_to :action => 'speeddials' and return false
@@ -417,7 +417,7 @@ class CcshopController < ApplicationController
 
 
   def speeddial_update
-    @phonebook = Phonebook.find(:first, :conditions => ["id = ? AND card_id = ?", params[:id], session[:card_id]])
+    @phonebook = Phonebook.where(:id => params[:id], :card_id => session[:card_id]).first
     unless @phonebook
       dont_be_so_smart
       redirect_to :action => 'speeddials' and return false
@@ -435,7 +435,7 @@ class CcshopController < ApplicationController
   end
 
   def speeddial_destroy
-    ph = Phonebook.find(:first, :conditions => ["id = ? AND card_id = ?", params[:id], session[:card_id]])
+    ph = Phonebook.where(:id => params[:id], :card_id => session[:card_id]).first
     unless ph
       dont_be_so_smart
       redirect_to :action => 'speeddials' and return false
@@ -551,7 +551,7 @@ class CcshopController < ApplicationController
   end
 
   def find_tariff
-    @tariff = Tariff.find(:first, :conditions => ['id=?', params[:id]])
+    @tariff = Tariff.where(:id => params[:id]).first
 
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')

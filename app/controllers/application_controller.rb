@@ -588,7 +588,7 @@ class ApplicationController < ActionController::Base
 
   #function for configuring extensions based on passed arguments
   def configure_extensions(device_id, options = {})
-    @device = Device.find_by_id(device_id)
+    @device = Device.where(:id => device_id).first
 
     return if !@device || device_id == 0
 
@@ -2412,7 +2412,7 @@ Variables: (Names marked with * are required)
   def check_owner_for_device(user, r = 1, cu = nil)
     a = true
     if user.class != User
-      user = User.find_by_id(user)
+      user = User.where(:id => user).first
     end
     if cu == nil
       if session and session[:usertype] == "accountant" and ['accountant', 'admin'].include?(user.usertype)
@@ -2874,7 +2874,7 @@ Variables: (Names marked with * are required)
       flash[:notice] = _('Provider_not_found')
       redirect_to :controller => "providers", :action => 'list' and return false
     end
-    @providerrule = @provider.providerrules.find_by_id(params[:providerrule_id])
+    @providerrule = @provider.providerrules.where(:id => params[:providerrule_id]).first
     unless @providerrule
       flash[:notice] = _('Provider_rule_was_not_found')
       redirect_to :controller => "providers", :action => 'list' and return false
@@ -2882,7 +2882,7 @@ Variables: (Names marked with * are required)
   end
 
   def find_destination
-    @destination = Destination.find_by_id(params[:id], :include => [:destinationgroup])
+    @destination = Destination.where(:id => params[:id]).includes([:destinationgroup]).first
     unless @destination
       flash[:notice] = _('Destination_was_not_found')
       redirect_to :controller => "directions", :action => 'list' and return false

@@ -511,7 +511,7 @@ class PaymentsController < ApplicationController
 
                 if Confline.get_value("PayPal_Email_Notification", @user.owner_id).to_i == 1
                   email = Email.find(:first, :conditions => {:name => 'payment_notification_integrations', :owner_id => @user.owner_id})
-                  user = User.find_by_id(@user.owner_id)
+                  user = User.where(:id => @user.owner_id).first
 
                   variables = Email.email_variables(user, nil, {:payment => @payment, :payment_notification => notify, :payment_type => "paypal"})
                   EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)
@@ -1430,7 +1430,7 @@ class PaymentsController < ApplicationController
   end
 
   def find_payment
-    @payment = Payment.find_by_id(params[:id])
+    @payment = Payment.where(:id => params[:id]).first
 
     unless @payment
       flash[:notice] = _('Payment_was_not_found')

@@ -96,7 +96,7 @@ class CallshopController < ApplicationController
 
   # balance update topup action (xhr)
   def update
-    @invoice = CsInvoice.find_by_id(params[:invoice_id])
+    @invoice = CsInvoice.where(:id => params[:invoice_id]).first
     @user = @invoice.user
 
     if params[:increase] && params[:increase] != "true"
@@ -126,7 +126,7 @@ class CallshopController < ApplicationController
 
   # booth summary form (xhr)
   def free_booth
-    @booth = User.find_by_id(params[:user_id])
+    @booth = User.where(:id => params[:user_id]).first
     @invoice = @booth.cs_invoices.first
     if @invoice
       begin
@@ -134,7 +134,7 @@ class CallshopController < ApplicationController
         server_id, channel = params.values_at(:server, :channel)
 
         unless server_id.blank? or channel.blank?
-          server = Server.find(:first, :conditions => "id = #{server_id.to_i}")
+          server = Server.where(:id => server_id.to_i).first
 
           if server
             server.ami_cmd("soft hangup #{channel}")
@@ -151,7 +151,7 @@ class CallshopController < ApplicationController
 
   # booth release action (xhr)
   def release_booth
-    @user = User.find_by_id(params[:user_id])
+    @user = User.where(:id => params[:user_id]).first
     @invoice = @user.cs_invoices.first
     if @invoice
       @user.update_attributes(:balance => 0, :blocked => 1)
@@ -164,7 +164,7 @@ class CallshopController < ApplicationController
       else
         @invoice.destroy
       end
-      @user.cs_invoices.find(:all, :conditions => ["state = 'unpaid'"]).each(&:destroy)
+      @user.cs_invoices.where(:state => 'unpaid').all.each(&:destroy)
       store_invoice_in_session(@user, nil)
       render :text => "OK"
     else
@@ -174,7 +174,7 @@ class CallshopController < ApplicationController
 
   # comment update form (xhr)
   def comment_update
-    @invoice = User.find_by_id(params[:user_id]).cs_invoices.first
+    @invoice = User.where(:id => params[:user_id]).first.cs_invoices.first
     render :layout=>false
   end
 
@@ -254,12 +254,12 @@ class CallshopController < ApplicationController
 
   # invoice print
   def invoice_print
-    @invoice = CsInvoice.find_by_id(params[:invoice_id])
+    @invoice = CsInvoice.where(:id => params[:invoice_id]).first
     render :layout=>false
   end
 
   def invoice_edit
-    @invoice = CsInvoice.find_by_id(params[:invoice_id])
+    @invoice = CsInvoice.where(:id => params[:invoice_id]).first
     render :layout=>false
   end
 

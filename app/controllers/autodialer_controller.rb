@@ -394,8 +394,8 @@ class AutodialerController < ApplicationController
 
     #if selected campaign
     if @campaign_id != -1
-      @campaing_stat = Campaign.find_by_id(@campaign_id)
-      data = Adnumber.find(:all, :conditions => ['campaign_id = ?', @campaign_id])
+      @campaing_stat = Campaign.where(:id => @campaign_id).first
+      data = Adnumber.where(:campaign_id => @campaign_id).all
       data.each do |numbers|
         @numbers << numbers.number
         @channels << numbers.channel

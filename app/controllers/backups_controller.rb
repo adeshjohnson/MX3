@@ -29,7 +29,7 @@ class BackupsController < ApplicationController
 
   def backup_destroy
 
-    backup = Backup.find_by_id(params[:id])
+    backup = Backup.where(:id => params[:id]).first
     unless backup
       flash[:notice] = _("Backup_was_not_found")
       redirect_to :action => :backup_manager and return false
@@ -42,7 +42,7 @@ class BackupsController < ApplicationController
 
   def backup_download
     path = Confline.get_value("Backup_Folder")
-    backup = Backup.find_by_id(params[:id])
+    backup = Backup.where(:id => params[:id]).first
     unless backup
       flash[:notice] = _('Backup_was_not_found')
       redirect_to :action => :backup_manager and return false
@@ -73,7 +73,7 @@ class BackupsController < ApplicationController
 
   def backup_restore
 
-    backup = Backup.find_by_id(params[:id])
+    backup = Backup.where(:id => params[:id]).first
     unless backup
       flash[:notice] = _('Backup_was_not_found')
       redirect_to :action => :backup_manager and return false

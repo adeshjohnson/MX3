@@ -829,10 +829,10 @@ class User < ActiveRecord::Base
   def User.exists_resellers_confline_settings(id)
     con = Confline.find(:first, :conditions => "name = 'Email_Login' AND owner_id = #{id}")
     unless con
-      reseller = User.find_by_id(id)
+      reseller = User.where(:id => id).first
       reseller.create_reseler_emails
     else
-      reseller = User.find_by_id(id)
+      reseller = User.where(:id => id).first
       reseller.check_reseller_emails
     end
   end
@@ -1377,7 +1377,7 @@ class User < ActiveRecord::Base
       if owner_id == 0
         new_tax = Confline.get_default_tax(0)
       else
-        new_tax = User.find_by_id(owner_id).get_tax.dup
+        new_tax = User.where(:id => owner_id).first.get_tax.dup
       end
     else
       new_tax = Tax.new(taxs)
@@ -2156,7 +2156,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     user.credit = 0 if user.prepaid?
     if user.owner_id != 0
-      reseller = User.find_by_id(user.owner_id)
+      reseller = User.where(:id => user.owner_id).first
       if reseller and reseller.own_providers.to_i == 1
         lcr_id = Confline.get_value("Default_User_lcr_id", reseller.id)
         if reseller.load_lcrs(:first, :conditions => ['id=?', lcr_id])

@@ -135,7 +135,7 @@ in before filter : lcr (:find_lcr_from_id)
     prov_id = params[:select_prov]
 
     if prov_id != "0"
-      @prov = SmsProvider.find_by_id(prov_id)
+      @prov = SmsProvider.where(:id => prov_id).first
       @lcr.add_sms_provider(@prov)
       flash[:status] = _('Provider_added')
     else
@@ -577,7 +577,7 @@ in before filter : tariff (:find_tariff_from_id)
   end
 
   def rate_destroy
-    sms_rate = SmsRate.find_by_id(params[:id])
+    sms_rate = SmsRate.where(:id => params[:id]).first
     sms_rate.destroy if sms_rate
     flash[:status] = _('Sms_rate_deleted')
     redirect_to :action => 'rates', :id => params[:tariff], :st => params[:st], :page => params[:page]

@@ -66,19 +66,19 @@ class DialplansController < ApplicationController
       if @dp.data5.blank?
         @user_id = ""
       else
-        device_used = Device.find_by_id(@dp.data5.to_i)
+        device_used = Device.where(:id => @dp.data5.to_i).first
         @user_id = device_used.user_id
       end
       @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
     end
     if @dp.dptype == 'callingcard' 
-      @balance_ivrs = current_user.ivrs.find(:all)
+      @balance_ivrs = current_user.ivrs.all
     end
 
     if @dp.dptype == 'quickforwarddids'
       @users = current_user.find_all_for_select
       if @dp.data3.to_s.length > 0 and @selected_device = Device.find(:first, :select => 'users.id user_id, devices.id device_id', :joins => "JOIN users ON users.id = devices.user_id", :conditions => "users.owner_id = #{current_user.id} AND devices.id = #{@dp.data3.to_i}")
-        @devices = Device.find(:all, :conditions => "user_id = #{@selected_device.user_id}")
+        @devices = Device.where(:user_id => @selected_device.user_id).all
         @selected_user_id = @selected_device.user_id
         @selected_device_id = @selected_device.device_id
       else
@@ -94,13 +94,13 @@ class DialplansController < ApplicationController
     @device_selected = params[:device_id].to_i
     @device = []
     if params[:id]
-      @device = Device.find(:all, :conditions => ['user_id =? AND name not like "mor_server_%"', params[:id]])
+      @device = Device.where("user_id = #{params[:id]} AND name NOT LIKE 'mor_server_%'").all
     end
     render :layout => false
   end
 
   def did_assign_to_dp
-    did = Did.find_by_id(params[:did_id])
+    did = Did.where(:id => params[:did_id]).first
     unless did
       flash[:notice]=_('Did_was_not_found')
       redirect_to :action => :dialplans and return false
@@ -141,7 +141,7 @@ class DialplansController < ApplicationController
     @dp.name = params[:dialplan][:name].to_s.strip
     if @dp.dptype == "callingcard"
 
-      @cardgroup = Cardgroup.find_by_id(params[:dialplan_number_pin_length])
+      @cardgroup = Cardgroup.where(:id => params[:dialplan_number_pin_length]).first
       unless @cardgroup
         flash[:notice]=_('Cardgroup_was_not_found')
         redirect_to :action => :dialplans and return false

@@ -250,7 +250,7 @@ class VouchersController < ApplicationController
       flash[:notice] = _('Voucher_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
-    @user = User.find_by_id(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
 
     if  @user.vouchers_disabled_till > Time.now
       flash[:notice] = _('Vouchers_disabled_till') + ": " + nice_date_time(@user.vouchers_disabled_till)
@@ -315,7 +315,7 @@ class VouchersController < ApplicationController
     @user.save
 
     if @user.owner_id != 0
-      ruser = User.find_by_id(@user.owner_id)
+      ruser = User.where(:id => @user.owner_id).first
       ruser.balance += @credit_in_default_currency * User.current.currency.exchange_rate.to_d
       ruser.save
       pr = Payment.new({:tax => (@voucher.credit_with_vat - @credit_in_default_currency), :gross => @credit_in_default_currency, :paymenttype => "voucher", :amount => @voucher.credit_with_vat, :currency => @voucher.currency, :date_added => Time.now, :shipped_at => Time.now, :completed => 1, :user_id => ruser.id, :first_name => ruser.first_name, :last_name => ruser.last_name})

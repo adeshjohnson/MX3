@@ -1264,7 +1264,7 @@ class AccountingController < ApplicationController
   end
 
   def generate_invoice_destinations_csv
-    invoice = Invoice.find_by_id(params[:id], :include => [:tax, :user])
+    invoice = Invoice.where(:id => params[:id]).includes([:tax, :user]).first
 
     unless invoice
       flash[:notice] = _('Invoice_was_not_found')

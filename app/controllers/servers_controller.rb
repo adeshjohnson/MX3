@@ -23,7 +23,7 @@ class ServersController < ApplicationController
     @page_title = _('Servers')
     @page_icon = 'server.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
-    @servers = Server.find(:all, :order => "server_id")
+    @servers = Server.order("server_id").all
   end
 
   def server_providers
@@ -44,7 +44,7 @@ class ServersController < ApplicationController
   end
 
   def add_provider_to_server
-    @provider = Provider.find_by_id(params[:provider_add])
+    @provider = Provider.where(:id => params[:provider_add]).first
     unless @provider
       flash[:notice] = _('Provider_not_found')
       redirect_to :action => 'list' and return false
@@ -86,7 +86,7 @@ class ServersController < ApplicationController
   end
 
   def server_add
-    @servers = Server.find(:all)
+    @servers = Server.all
     server = Server.new
     server.server_id = params[:server_id].to_s.strip
     server.hostname = params[:server_hostname].to_s.strip
@@ -139,7 +139,7 @@ class ServersController < ApplicationController
 
 
   def server_update
-    @servers = Server.find(:all)
+    @servers = Server.all
     server_old = @server.dup
 
     @server_providers = Serverprovider.find(:all, :conditions => ["server_id=?", @server.server_id])
@@ -218,12 +218,12 @@ class ServersController < ApplicationController
 
 
   def delete
-    provider = Provider.find_by_id(params[:id])
+    provider = Provider.where(:id => params[:id]).first
     unless provider
       flash[:notice] = _('Provider_not_found')
       redirect_to :action => 'list' and return false
     end
-    server = Server.find_by_id(params[:sid])
+    server = Server.where(:id => params[:sid]).first
     unless server
       flash[:notice] = _('Server_not_found')
       redirect_to :action => 'list' and return false

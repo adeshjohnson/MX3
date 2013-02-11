@@ -2273,7 +2273,7 @@ class DevicesController < ApplicationController
   end
 
   def find_fax_device
-    @device = Device.find_by_id_and_device_type(params[:id], "FAX")
+    @device = Device.where(:id => params[:id], :device_type => "FAX").first
 
     unless @device
       flash[:notice] = _('Device_was_not_found')
