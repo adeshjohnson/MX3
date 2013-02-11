@@ -1046,12 +1046,12 @@ class Call < ActiveRecord::Base
     s = []
 
     if options[:csv].to_i == 0
-      s << "IF(calls.prefix = '', 'No prefix found', calls.prefix ) AS prefix, directions.name as 'dir_name', destinations.direction_code AS 'code', destinations.subcode AS 'subcode', destinations.name AS 'dest_name'"
+      s << "IF(calls.prefix = '', '#{_('Calls_To_Dids')}', calls.prefix ) AS prefix, directions.name as 'dir_name', destinations.direction_code AS 'code', destinations.subcode AS 'subcode', destinations.name AS 'dest_name'"
     else
       if options[:destination_grouping].to_i == 1
-        s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' ', destinations.name, ' (',  calls.prefix, ') ' )", "direct_name", 'No prefix found')
+        s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' ', destinations.name, ' (',  calls.prefix, ') ' )", "direct_name", "#{_('Calls_To_Dids')}")
       else
-        s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' (',  calls.prefix, ') ')", "direct_name", 'No prefix found')
+        s << SqlExport.column_escape_null("CONCAT(directions.name, ' ', destinations.subcode, ' (',  calls.prefix, ') ')", "direct_name", "#{_('Calls_To_Dids')}")
       end
     end
     s << "cardgroups.name AS  'cardgroup_name'"
