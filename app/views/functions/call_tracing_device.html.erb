@@ -289,16 +289,18 @@
         <th align="right"><%= _('Price') %>/min (<%= current_user.currency.name %>)</th>
       </tr>
 <% end %>
-<% @res_prov.sort! { |a, b| (
-rez = 0
-if a['rate'] and a['prefix'] and b['rate'] and b['prefix']
-  rez = (a['rate'].to_f / a['e_rate'].to_f <=> b['rate'].to_f / b['e_rate'].to_f)
-else
-  rez = -1 if a['rate'] and a['prefix']
-  rez = 1 if b['rate'] and b['prefix']
-end
-rez
-) } %>
+<% if @lcr.order != "priority" %>
+    <% @res_prov.sort! { |a, b| (
+      rez = 0
+      if a['rate'] and a['prefix'] and b['rate'] and b['prefix']
+        rez = (a['rate'].to_f / a['e_rate'].to_f <=> b['rate'].to_f / b['e_rate'].to_f)
+      else
+        rez = -1 if a['rate'] and a['prefix']
+        rez = 1 if b['rate'] and b['prefix']
+      end
+      rez )}
+    %>
+<% end %>
 <% users_own_provider = false %> 
 <% @res_prov.each_with_index { |r, i| %>
     <% unless @hide_lcrs_and_providers %>
