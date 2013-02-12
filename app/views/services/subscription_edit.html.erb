@@ -43,3 +43,16 @@
 <% end %>
 <br>
 
+<% if @sub.service.servicetype.to_s == "flat_rate" %>
+    <script type="text/javascript">
+
+        $('activation_start_day').disabled = true;
+        $('activation_start_hour').disabled = true;
+        $('activation_start_minute').disabled = true;
+
+        $('activation_end_day').disabled = true;
+        $('activation_end_hour').disabled = true;
+        $('activation_end_minute').disabled = true;
+
+    </script>
+<% end %>

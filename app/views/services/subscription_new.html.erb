@@ -7,7 +7,7 @@
         <td>
           <select name="subscription[service_id]" id="subscription_service_id" onchange="change_date_selector(this.value);">
             <% for serv in @services %>
-                <option value=<%= serv.id %>> <%= serv.name %>, <%= _('Price') %>: <%= serv.price %> </option>
+                <option type="<%= serv.servicetype.to_s %>" value=<%= serv.id %>> <%= serv.name %>, <%= _('Price') %>: <%= serv.price %> </option>
             <% end %>
           </select>
         </td>
@@ -45,4 +45,44 @@
         }
     }
     change_date_selector(<%= @services[0].id if @services.size > 0 %>);
+</script>
+
+<script type="text/javascript">
+    function disable() {
+        $('activation_start_day').disabled = true;
+        $('activation_start_hour').disabled = true;
+        $('activation_start_minute').disabled = true;
+
+        $('activation_end_day').disabled = true;
+        $('activation_end_hour').disabled = true;
+        $('activation_end_minute').disabled = true;
+    }
+
+    function enable() {
+        $('activation_start_day').disabled = false;
+        $('activation_start_hour').disabled = false;
+        $('activation_start_minute').disabled = false;
+
+        $('activation_end_day').disabled = false;
+        $('activation_end_hour').disabled = false;
+        $('activation_end_minute').disabled = false;
+    }
+
+    Event.observe(window, 'load', function () {
+        var service = $('subscription_service_id')
+        var a = service.options[service.selectedIndex]
+        if ( a.getAttribute("type") == 'flat_rate'){
+            disable();
+        } else {
+            enable();
+        }
+        Event.observe(service, 'change', function () {
+            var a = service.options[service.selectedIndex]
+            if ( a.getAttribute("type") == 'flat_rate'){
+                disable();
+            } else {
+                enable();
+            }
+        });
+    })
 </script>
