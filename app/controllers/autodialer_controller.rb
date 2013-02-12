@@ -385,7 +385,7 @@ class AutodialerController < ApplicationController
     #representing owner of the user that created campaign. 
     #seems that campaigns.user_id is representing creator/owner of the campaign
     campaign_owner_id = ((@current_user.is_admin? or @current_user.is_accountant?) ? 0 : @current_user.id)
-    @campaigns = Campaign.where(:owner_id => campaign_owner_id).all
+    @campaigns = Campaign.where("owner_id = #{campaign_owner_id} OR user_id = #{campaign_owner_id}").all
     @Calltime_graph = ""
     @answered_percent = @no_answer_percent = @failed_percent = @busy_percent = 0
     @calls_busy = @calls_failed = @calls_no_answer = @calls_answered = 0
