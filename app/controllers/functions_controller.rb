@@ -614,7 +614,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
         flash[:notice] = _('LCR_in_lcr_partial_not_found')
         redirect_to :action => 'call_tracing' and return false
       end
-      @lcr_providers = @lcr.providers
+      @lcr_providers = @lcr.providers.order(@lcr.order)
       @lcr_partials_prefix = res['prefix']
     end
     #=end
