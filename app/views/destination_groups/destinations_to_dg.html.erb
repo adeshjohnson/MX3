@@ -13,7 +13,6 @@
     <th align="left"> <%= _('Subcode') %> </th>
     <th align="left"> <%= _('Destination_group') %> </th>
   </tr>
-
   <%= form_tag :action => 'destinations_to_dg_update' do %>
 
       <% @destinations_without_dg.each_with_index { |dest, index| %>
@@ -28,12 +27,12 @@
               <%= radio_button_tag('subcode'+idt, 'NGN', checked = (dest.desttype == "NGN" or dest.desttype.blank?)) %>
               NGN
             </td>
-            <td align="left">
-              <%= select_tag("dg"+idt, options_for_select(@dgs, dest.dgid.to_s)) %>
+            <td align="left" id="dgs_<%= idt %>" name="dgs_<%= idt %>" width="240px">
+              <%= select_tag("dg"+idt, options_for_select(@dgs.select {|label,value| value == dest.dgid.to_s}, dest.dgid.to_s), :onmousedown => "return show_select('#{idt}','#{dest.dgid.to_s}');", :style => "width:100%") %>
             </td>
           </tr>
       <% } %>
-
+     
       <tr>
         <th align="right" colspan=5><%= submit_tag _('Update_this_page'), :disable_with => _('Processing..') %></th>
       </tr>
@@ -41,4 +40,20 @@
   <% end %>
 
 </table>
+<script type="text/javascript">
+    function show_select(name,selected) {
+      var obj = this.document.getElementById("dg" + name);
+      obj.options.length = 0;
+      var dgs =<%=raw @dgs %>;
+      var cc = 0;     
+
+      for (i = 0; i < dgs.length; i++) {
+        cc = obj.options.length
+        obj.options[cc] = new Option(dgs[i][0], dgs[i][1]);
+        if (selected == dgs[i][1]) {
+          obj.options[cc].setAttribute("selected", "selected");
+        }
+      }
+    }
+</script>
 
