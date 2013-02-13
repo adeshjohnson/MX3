@@ -978,7 +978,7 @@ class CallcController < ApplicationController
     unless ip.blank?
       greped_ip = `/sbin/ifconfig | grep '#{ip} '` # Space is to detect that we match whole IP Example: '192.168.0.16' and '192.168.0.160'
       if greped_ip.to_s.length == 0
-        render :text => "hearbeat IP incorrect" and return false
+        render :text => "Heartbeat IP incorrect" and return false
       end
     end
     return true
