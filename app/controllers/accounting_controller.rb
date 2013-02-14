@@ -1193,6 +1193,8 @@ class AccountingController < ApplicationController
       }
     end
 
+    csv_string << _('Minimal_Charge_for_Calls') + " (#{dc})" + sep + nice_number(user.converted_minimal_charge(ex).to_d) if user.minimal_charge_enabled?
+
     show_zero_calls = user.invoice_zero_calls.to_i
     if show_zero_calls == 0
       zero_calls_sql = " AND #{up} > 0 "
@@ -1331,6 +1333,9 @@ class AccountingController < ApplicationController
       }
     end
     csv_string << ""
+
+    csv_string << _('Minimal_Charge_for_Calls') + " (#{dc})" + sep + nice_number(user.converted_minimal_charge(ex).to_d) if user.minimal_charge_enabled?
+
     csv_string << ""
 
 
