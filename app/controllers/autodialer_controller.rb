@@ -514,11 +514,8 @@ class AutodialerController < ApplicationController
   private
 
   def find_campaign
-    if current_user.is_admin?
-      @campaign = Campaign.find(:first, :conditions => {:id => params[:id]})
-    else
-      @campaign = current_user.campaigns.find(:first, :conditions => {:id => params[:id]})
-    end
+
+    @campaign = Campaign.where("id = #{params[:id]} AND (user_id = #{current_user.id} OR owner_id = #{current_user.id})").first
 
     unless @campaign
       flash[:notice] = _('Campaign_was_not_found')
