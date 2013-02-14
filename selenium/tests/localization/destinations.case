@@ -315,7 +315,7 @@
 <tr>
 	<td>type</td>
 	<td>id=items_per_page</td>
-	<td>50</td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -340,6 +340,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Not assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/1?page=2</td>
 	<td></td>
 </tr>
 <tr>
@@ -393,13 +398,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations_to_dg?page=2</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Algeria</td>
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations_to_dg?page=3</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>American Samoa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations_to_dg?page=4</td>
 	<td></td>
 </tr>
 <tr>
@@ -410,6 +430,36 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destinations updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destinations updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destinations updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -822,7 +872,7 @@
 <tr>
 	<td>type</td>
 	<td>items_per_page</td>
-	<td>50</td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -969,6 +1019,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/billing/destinations/list/2?page=2</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>93</td>
 	<td></td>
@@ -1023,6 +1078,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Albania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/2?page=2</td>
 	<td></td>
 </tr>
 <tr>
@@ -1098,6 +1158,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Algeria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/list/3?page=2</td>
 	<td></td>
 </tr>
 <tr>
