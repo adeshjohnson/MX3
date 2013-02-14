@@ -1,8 +1,8 @@
 <% if @success.to_i == 1 -%>
     <center>
       <div id="status">
-        <%= _('Connection_test_passed') %>: <%= @provider.name %>
-        <%= "<br>" + _('Server') + ": " + @server.to_s + " (" + @provider.server_ip + ")" if @server.to_s != "" %>
+        <%=raw _('Connection_test_passed') %>: <%= @provider.name %>
+        <%=raw "<br>" + _('Server') + ": " + @server.to_s + " (" + @provider.server_ip + ")" if @server.to_s != "" %>
       </div>
     </center>
 <% else -%>
@@ -11,11 +11,11 @@
         <%= _('Connection_test_failed') %>
         <br>
         <% if !@message.blank? -%>
-            <%= _("Message") %>: <%= @message %>
+            <%=raw _("Message") %>: <%= @message %>
             <br>
         <% end -%>
         <% if defined?(@provider) and @provider.class == Provider -%>
-            <%= _("Provider") %>: <%= @provider.name %>
+            <%=raw _("Provider") %>: <%= @provider.name %>
             <br>
             <%= _('IP') %>: <%= @provider.server_ip %>
             <br>
