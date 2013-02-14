@@ -210,7 +210,7 @@ class Invoice < ActiveRecord::Base
 
     if items.size <= 16
       n = 17 - items.size
-      n -= self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size
+      n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
     elsif items.size <= 19
@@ -219,7 +219,7 @@ class Invoice < ActiveRecord::Base
       n = items.size - 19
       n -= (n / 31) * 31
       n = 31 - n
-      x = 2 + self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size
+      x = 2 + (self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1)
       x += 1 if user.minimal_charge_enabled?
       n = 0 if n >= x
       n = -(n) if n < 0
@@ -367,7 +367,7 @@ class Invoice < ActiveRecord::Base
 
     if items.size <= 16
       n = 17 - items.size
-      n -= self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size
+      n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
     elsif items.size <= 19
@@ -376,7 +376,7 @@ class Invoice < ActiveRecord::Base
       n = items.size - 19
       n -= (n / 31) * 31
       n = 31 - n
-      x = 2 + self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size
+      x = 2 + (self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1)
       x += 1 if user.minimal_charge_enabled?
       n = 0 if n >= x
       n = -(n) if n < 0
