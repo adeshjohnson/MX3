@@ -311,10 +311,14 @@ class Did < ActiveRecord::Base
      counter = 0
 
      rules.each do |rule|
-       if rule.user_id.to_i == 0 or ((rule_ids.include? User.where(:id => rule.user_id).first.quickforwards_rule.id) rescue false)
+       if rule.user_id.to_i == 0
          counter += 1
        else
-         next 
+         if ((rule_ids.include? User.where(:id => rule.user_id).first.quickforwards_rule.id) rescue false)
+           counter += 1
+         else
+           next
+         end 
        end
      end
      return counter
