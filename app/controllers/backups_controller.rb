@@ -49,10 +49,8 @@ class BackupsController < ApplicationController
     end
     filename = "db_dump_" + backup.backuptime.to_s + ".sql.tar.gz"
     full_filename = path +"/"+ filename
-
     begin
-      file = File.open(full_filename, "rb")
-      send_data file.read, :filename => filename
+      send_file full_filename, :filename => filename, :x_sendfile => true, :stream => true
     rescue
       flash[:notice] = _('Backup_file_is_missing')
       redirect_to :action => :backup_manager and return false
