@@ -3724,6 +3724,7 @@ Localization.define('en') do |l|
   l.store 'Create_new_Quickforwards_Rule', 'Create new Quickforwards Rule'
   l.store 'Quickforwards_Rules', 'Quickforwards Rules'
   l.store 'How_to_use_quickforwards_rules', 'How to use quickforwards rules'
+  l.store 'Quickforwards_Rule_has_assigned_users', 'Quickforwards Rule has assigned users'
   l.store 'matches_dids_beginning_whit_1_2_3_and_4', 'matches DIDs beginning with 1 2 3 and 4'
   l.store 'Rule_separator', 'Rule separator'
   l.store 'Invoices_is_generating', 'Invoices are being generated'

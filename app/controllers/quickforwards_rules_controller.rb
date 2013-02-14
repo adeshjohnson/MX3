@@ -56,9 +56,14 @@ class QuickforwardsRulesController < ApplicationController
   end
 
   def destroy
-    @quickforwards_rule.destroy
-    flash[:status] = _('Quickforwards_Rule_was_successfully_deleted')
-    redirect_to :action => 'list'
+    if @quickforwards_rule.users.size == 0
+      @quickforwards_rule.destroy
+      flash[:status] = _('Quickforwards_Rule_was_successfully_deleted')
+      redirect_to :action => 'list'
+    else
+      flash[:notice] = _('Quickforwards_Rule_has_assigned_users')
+      redirect_to :action => 'list'
+    end
   end
 
 =begin

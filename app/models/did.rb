@@ -306,7 +306,23 @@ class Did < ActiveRecord::Base
   end
 
   def find_qf_rules
-    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
+     rules = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^')))")
+     rule_ids = rules.collect(&:id)
+     counter = 0
+
+     rules.each do |rule|
+       if rule.user_id.to_i == 0 or ((rule_ids.include? User.where(:id => rule.user_id).first.quickforwards_rule.id) rescue false)
+         counter += 1
+       else
+         next 
+       end
+     end
+     return counter
   end
+
+#  def find_qf_rules
+#    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
+#  end
+
 
 end

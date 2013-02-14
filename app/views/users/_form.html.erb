@@ -363,7 +363,7 @@
 <% if admin? or reseller? and current_user.quickforwards_rules.size.to_i > 0 %>
     <tr id="quickforwards_rule">
       <td><%= _('Quickforwards_Rule') %>:</td>
-      <td><%= select_tag('user[quickforwards_rule_id]', options_for_select(current_user.quickforwards_rules.collect { |t| [t.name, t.id] }, @user.try(:quickforwards_rule_id))) %></td>
+      <td><%= select_tag('user[quickforwards_rule_id]', options_for_select([["None","0"]] + current_user.quickforwards_rules.collect { |t| [t.name, t.id] }, @user.try(:quickforwards_rule_id))) %></td>
     </tr>
 <% end %>
 <% if (admin? or accountant?) and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>

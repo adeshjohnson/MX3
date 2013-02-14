@@ -307,8 +307,7 @@ class DidsController < ApplicationController
     @choice_closed = false
     @choice_terminated = false
 
-    qf_rule_collisions = @did.find_qf_rules.to_i > 0  ? true : false
-    @belongs_to_qf_rule = @did.find_qf_rules.to_i > 0 ? true : false
+    @qf_rule_collisions = @did.find_qf_rules.to_i > 0  ? true : false
 
     #DialPlan variables (DID's for dialplan)
     @choice_free_dp = false
@@ -321,7 +320,7 @@ class DidsController < ApplicationController
         @choice_terminated = false
         @choice_free_dp = false
       else
-        @choice_reserved = true    if !qf_rule_collisions
+        @choice_reserved = true unless @qf_rule_collisions
         @choice_terminated = true
         @choice_free_dp = true
       end
@@ -349,26 +348,25 @@ class DidsController < ApplicationController
     end
 
     if @choice_free_dp
-      current_user.is_accountant? ? @dialplan_source = Dialplan.where('user_id = 0') : @dialplan_source = current_user.dialplans
+      current_user.is_accountant? ? @dialplan_source = Dialplan.where(:user_id => 0) : @dialplan_source = current_user.dialplans
 
-      @ccdps = @dialplan_source.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")  if !qf_rule_collisions
-      @abpdps = @dialplan_source.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")   if !qf_rule_collisions
+      @qfddps = @dialplan_source.where("dptype = 'quickforwarddids' AND id != 1").order("name ASC")
 
+      unless @qf_rule_collisions 
+        @ccdps = @dialplan_source.where(:dptype => 'callingcard').order("name ASC")
+        @abpdps = @dialplan_source.where(:dptype => 'authbypin').order("name ASC")
 
-      @cbdps = @dialplan_source.find(:all, :conditions => "dptype = 'callback' AND data1 != #{@did.id}", :order => "name ASC") if callback_active?  and !qf_rule_collisions
+        @cbdps = @dialplan_source.where(["dptype = 'callback' AND data1 != ?", did.id]).order("name ASC") if callback_active?
 
-      @qfddps = @dialplan_source.find(:all, :conditions => "dptype = 'quickforwarddids' AND id != 1", :order => "name ASC")
-
-      @pbxfdps = @dialplan_source.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC") if !qf_rule_collisions
-      @ivrs = @dialplan_source.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")  if !qf_rule_collisions
-
-      @vm_extension = Confline.get_value("VM_Retrieve_Extension", 0)  if !qf_rule_collisions
-
-      @ringdps = @dialplan_source.find(:all, :conditions => "dptype = 'ringgroup'", :order => "name ASC") if !qf_rule_collisions
+        @pbxfdps = @dialplan_source.where(:dptype => 'pbxfunction').order("name ASC")
+        @ivrs = @dialplan_source.where(:dptype => 'ivr').order("name ASC")
+        @vm_extension = Confline.get_value("VM_Retrieve_Extension", 0)
+        @ringdps = @dialplan_source.where(:dptype => 'ringgroup').order("name ASC")
+      end
     end
 
     @tone_zones = ['at', 'au', 'be', 'br', 'ch', 'cl', 'cn', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', 'gr', 'hu', 'it', 'lt', 'mx', 'ml', 'no', 'nz', 'pl', 'pt', 'ru', 'se', 'sg', 'uk', 'us', 'us-old', 'tw', 've', 'za']
-    @cc_tariffs = Tariff.find(:all, :conditions => ["purpose != 'provider' and owner_id = #{correct_owner_id}"])
+    @cc_tariffs = Tariff.where(["purpose != 'provider' and owner_id = ?", correct_owner_id])
 
   end
 
