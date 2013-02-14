@@ -356,7 +356,7 @@ class DidsController < ApplicationController
         @ccdps = @dialplan_source.where(:dptype => 'callingcard').order("name ASC")
         @abpdps = @dialplan_source.where(:dptype => 'authbypin').order("name ASC")
 
-        @cbdps = @dialplan_source.where(["dptype = 'callback' AND data1 != ?", did.id]).order("name ASC") if callback_active?
+        @cbdps = @dialplan_source.where(["dptype = 'callback' AND data1 != ?", @did.id]).order("name ASC") if callback_active?
 
         @pbxfdps = @dialplan_source.where(:dptype => 'pbxfunction').order("name ASC")
         @ivrs = @dialplan_source.where(:dptype => 'ivr').order("name ASC")
