@@ -671,13 +671,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>user_username</td>
-	<td>asdfghjk</td>
+	<td>id=user_username</td>
+	<td>user1</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password_password</td>
-	<td>asdrtyu</td>
+	<td>id=password_password</td>
+	<td>user11</td>
 </tr>
 <!--assign quickforwards rules-->
 <tr>
@@ -725,12 +725,7 @@
 <!--check old and set new quickforwards rules-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
+	<td>/billing/users/edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -1069,12 +1064,7 @@
 <!--chenck usrer, it do not chage quickforwards rules-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
+	<td>/billing/users/edit/6</td>
 	<td></td>
 </tr>
 <tr>
@@ -3363,6 +3353,106 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Quickforwards Rule successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>0000371</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>000037130000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>000037130010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID interval successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/quickforwarddids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>000037130000</td>
 	<td></td>
 </tr>
 </tbody></table>
