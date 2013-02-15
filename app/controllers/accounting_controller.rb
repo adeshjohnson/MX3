@@ -7,6 +7,7 @@ class AccountingController < ApplicationController
   before_filter :check_localization
   before_filter :authorize
 
+
   before_filter :check_if_can_see_finances, :only => [:vouchers, :vouchers_list_to_csv, :voucher_new, :voucher_create, :voucher_delete,]
   before_filter { |c| c.instance_variable_set :@allow_read, true
   c.instance_variable_set :@allow_edit, true
