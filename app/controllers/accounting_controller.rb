@@ -1338,7 +1338,6 @@ class AccountingController < ApplicationController
 
     csv_string << ""
 
-
     show_zero_calls = user.invoice_zero_calls.to_i
     if show_zero_calls == 0
       zero_calls_sql = " AND #{up} > 0 "
