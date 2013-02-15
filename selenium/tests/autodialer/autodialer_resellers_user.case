@@ -628,6 +628,31 @@
 	<td>reseller's campaign</td>
 	<td></td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Actions&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Actions for campaign: user resellers campaign edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tr.row1 &gt; td</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>WAIT</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[3]</td>
+	<td>1</td>
+</tr>
 <!--reseller savo campaigns mato tik asmeniniame meniu-->
 <tr>
 	<td>open</td>
@@ -1344,6 +1369,31 @@
 	<td>css=input[type=&quot;image&quot;]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Actions&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Actions for campaign: user resellers campaign edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tr.row1 &gt; td</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>WAIT</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[3]</td>
+	<td>1</td>
+</tr>
 <!--reseller savo campaigns mato tik asmeniniame meniu-->
 <tr>
 	<td>open</td>
@@ -1446,6 +1496,96 @@
 	<td>assertText</td>
 	<td>name=campaign_id</td>
 	<td>None admins_user_campaign reseller's campaign admin's campaign</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>device for acc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=campaign_name</td>
+	<td>accountant campaign</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>accountant campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>user resellers campaign edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>admins_user_campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>reseller's campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>admin's campaign</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
