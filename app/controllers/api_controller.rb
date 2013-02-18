@@ -90,7 +90,7 @@ class ApiController < ApplicationController
 
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
 
-    if username.length > 0 and password.length > 0 and user = User.find(:first, :conditions => ["username = ? and password = ?", username, Digest::SHA1.hexdigest(password)])
+    if username.length > 0 and password.length > 0 and user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
 
       add_action(@current_user.id, "logout", "")
 
@@ -117,10 +117,10 @@ class ApiController < ApplicationController
       username = params[:u].to_s
       password = params[:p].to_s
 
-      user = User.find(:first, :conditions => ["username = ? and password = ?", username, Digest::SHA1.hexdigest(password)])
+      user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
 
       if username.length > 0 and password.length > 0 and user
-        device = Device.find(:first, :conditions => ["id =?", params[:device]])
+        device = Device.where(:id => params[:device]).first
         if params[:device] and device and device.user_id == user.id
           if params[:src] and params[:src].length > 0
             src = params[:src]
@@ -185,7 +185,7 @@ class ApiController < ApplicationController
     from_nice = nice_date(from_t, 0)
     till_nice = nice_date(till_t, 0)
 
-    user = User.find(:first, :conditions => ["username = ? and password = ?", username, Digest::SHA1.hexdigest(password)])
+    user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
 
     if user
       User.current = user
@@ -200,7 +200,7 @@ class ApiController < ApplicationController
         when "user"
           cond = " AND invoices.user_id = #{user.id}"
       end
-      invoices = Invoice.find(:all, :select => "invoices.*", :joins => "JOIN users on (users.id = invoices.user_id)", :conditions => ["period_start >= ? AND period_end <= ? AND users.generate_invoice != 0 #{cond}", from_nice, till_nice])
+      invoices = Invoice.select("invoices.*").joins("JOIN users on (users.id = invoices.user_id)").where(["period_start >= ? AND period_end <= ? AND users.generate_invoice != 0 #{cond}", from_nice, till_nice])
 
       if invoices or invoices.size == 0
         doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
@@ -317,7 +317,7 @@ class ApiController < ApplicationController
         if !@current_user.is_user?
 
           if @options[:s_user_id] =~ /[0-9]/
-            user = User.find(:first, :conditions => {:id => @options[:s_user_id], :owner_id => @owner_id})
+            user = User.where(:id => @options[:s_user_id], :owner_id => @owner_id).first
           end
           unless user
             doc.status { doc.error(_('Dont_be_so_smart')) }
@@ -358,10 +358,9 @@ class ApiController < ApplicationController
       cond << "amount <= '#{q(@options[:s_amount_max])}' " if !@options[:s_amount_max].blank?
 
 
-      @payments = Payment.find(:all,
-                               :select => "payments.*, payments.user_id as 'user_id', payments.first_name as 'payer_first_name', payments.last_name as 'payer_last_name', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",
-                               :joins => "left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)",
-                               :conditions => [cond.join(" AND ")] + cond_param)
+      @payments = Payment.select("payments.*, payments.user_id as 'user_id', payments.first_name as 'payer_first_name', payments.last_name as 'payer_last_name', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id").
+                          joins("left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)").
+                          where([cond.join(" AND ")] + cond_param)
 
       doc.page {
         doc.pagename("#{_('Payments_list')}")
@@ -369,7 +368,7 @@ class ApiController < ApplicationController
           @payments.each { |payment|
             doc.payment {
               if payment.card == 0
-                user = User.find(:first, :conditions => ["id = ?", payment.user_id]) if !payment.user_id.blank?
+                user = User.where(:id => payment.user_id).first if !payment.user_id.blank?
                 if user
                   doc.user("#{nice_user(user)}")
                 end
@@ -437,18 +436,17 @@ class ApiController < ApplicationController
 
 
       if @current_user.usertype == "admin"
-        @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
-        @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsm = Call.where("calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsd = Call.where("calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
       else
-        @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.user_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
-        @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.user_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsm = Call.where("calls.user_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
+        @callsd = Call.where("calls.user_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
         if @current_user.usertype == "reseller"
-          @callsm = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
-          @callsd = Call.find_by_sql("SELECT calls.* FROM calls WHERE calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
+          @callsm = Call.where("calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{month_t}-01 00:00:00' AND '#{month_t}-#{last_day} 23:59:59' AND disposition = 'ANSWERED'")
+          @callsd = Call.where("calls.reseller_id = '#{@current_user.id}' AND calls.calldate BETWEEN '#{day_t} 00:00:00' AND '#{day_t} 23:59:59' AND disposition = 'ANSWERED'")
         end
 
       end
-
 
       @total_durationm = 0
       @total_call_pricem = 0
@@ -590,10 +588,10 @@ class ApiController < ApplicationController
       username = params[:u].to_s
       password = params[:p].to_s
 
-      @user_logged = User.find(:first, :conditions => ["username = ? and password = ?", username, Digest::SHA1.hexdigest(password)])
+      @user_logged = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
       if @user_logged
         if @user_logged.usertype == 'admin'
-          @user = User.find(:first, :conditions => "id = #{values[:user_id].to_i}") if values [:user_id]
+          @user = User.where(:id => values[:user_id].to_i).first if values [:user_id]
         elsif @user_logged.usertype == 'reseller'
           if values [:user_id]
             if @user_logged.id.to_i == values[:user_id].to_i
@@ -601,16 +599,16 @@ class ApiController < ApplicationController
             else
               owner = @user_logged.id
             end
-            @user = User.find(:first, :conditions => "id = #{values[:user_id].to_i} AND owner_id = #{owner.to_i}")
+            @user = User.where(:id => values[:user_id].to_i, :owner_id => owner.to_i).first
           end
 
         else
-          @user = User.find(:first, :conditions => ["username = ? and password = ?", username, Digest::SHA1.hexdigest(password)])
+          @user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
         end
 
         if @user
           @address = @user.address
-          @country = Direction.find(:first, :conditions => ["id =?", @user.taxation_country])
+          @country = Direction.where(:id => @user.taxation_country).first
           doc.page {
             doc.pagename("#{_('Personal_details')}")
             doc.language("en")
@@ -677,8 +675,8 @@ class ApiController < ApplicationController
       @user.save
 
 
-      @devices = @user.devices #Device.find(:all, :conditions => "user_id = #{@current_user.id}", :order => "name")
-
+      @devices = @user.devices
+ 
       doc.page {
         doc.pagename("#{_('Devices')}")
         doc.language("#{Localization.lang}")
@@ -731,11 +729,11 @@ class ApiController < ApplicationController
       if @current_user.usertype != "admin"
         if @current_user.usertype == "user" and @current_user.manager_in_groups.size == 0
           #simple user
-          @device = Device.find(params[:device_id])
+          @device = Device.where(:id => params[:device_id]).first
 
         else
           #group manager
-          @device = Device.find(params[:id])
+          @device = Device.where(:id => params[:id]).first
           @user = @device.user
 
           can_check = false
@@ -750,15 +748,15 @@ class ApiController < ApplicationController
         end
       else
         #admin
-        @device = Device.find(params[:device_id])
+        @device = Device.where(:id => params[:device_id]).first
         @user = @device.user
       end
       #need security increase because rigth now everybody can see everybodies call flows
 
-      @before_call_cfs = Callflow.find(:all, :conditions => "cf_type = 'before_call' AND device_id = #{@device.id}", :order => "priority ASC")
-      @no_answer_cfs = Callflow.find(:all, :conditions => "cf_type = 'no_answer' AND device_id = #{@device.id}", :order => "priority ASC")
-      @busy_cfs = Callflow.find(:all, :conditions => "cf_type = 'busy' AND device_id = #{@device.id}", :order => "priority ASC")
-      @failed_cfs = Callflow.find(:all, :conditions => "cf_type = 'failed' AND device_id = #{@device.id}", :order => "priority ASC")
+      @before_call_cfs = Callflow.where(:cf_type => 'before_call', :device_id => @device.id).order("priority ASC")
+      @no_answer_cfs = Callflow.where(:cf_type => 'no_answer', :device_id => @device.id).order("priority ASC")
+      @busy_cfs = Callflow.where(:cf_type => 'busy', :device_id => @device.id).order("priority ASC")
+      @failed_cfs = Callflow.where(:cf_type => 'failed', :device_id => @device.id).order("priority ASC")
 
       if @before_call_cfs.empty?
         cf = create_empty_callflow(@device.id, "before_call")
@@ -841,14 +839,14 @@ class ApiController < ApplicationController
         when "empty"
           output += "-"
         when "forward"
-          dev = Device.find(cf.data) if cf.data2 == "local"
+          dev = Device.where(:id => cf.data).first if cf.data2 == "local"
           output += _('Forward') + " " + dev.device_type + "/" + dev.name if cf.data2 == "local"
           output += _('Forward') + " " + cf.data if cf.data2 == "external"
           output += _('Forward_not_functional_please_enter_dst') if cf.data2 == ""
         when "voicemail"
           output += _('VoiceMail')
         when "fax_detect"
-          dev = Device.find(cf.data) if cf.data2 == "fax"
+          dev = Device.where(:id => cf.data).first if cf.data2 == "fax"
           output += _('Fax_detect') + ": " + dev.device_type + "/" + dev.extension if cf.data2 == "fax"
           output += _('Fax_detect_not_functional_please_select_fax_device') if cf.data2 == ""
       end
@@ -869,9 +867,9 @@ class ApiController < ApplicationController
       @user.logged = 1
       @user.save
 
-      @device = Device.find(params[:device_id])
+      @device = Device.where(:id => params[:device_id]).first
       @user = @device.user
-      @cf = Callflow.find(params[:cf])
+      @cf = Callflow.where(:id => params[:cf]).first
       @devices = @user.devices
 
       doc.page {
@@ -940,8 +938,8 @@ class ApiController < ApplicationController
       @user.logged = 1
       @user.save
 
-      @tariff = User.find(@current_user.id).tariff
-      @dgroups = Destinationgroup.find(:all, :order => "name ASC, desttype ASC")
+      @tariff = User.where(:id => @current_user.id).first.tariff
+      @dgroups = Destinationgroup.all.order("name ASC, desttype ASC")
       @vat = 0.to_d
       @rates_cur2 = []
 
@@ -1221,7 +1219,7 @@ class ApiController < ApplicationController
 
 
   def get_provider_rate_details(rate, exrate)
-    @rate_details = Ratedetail.find(:all, :conditions => "rate_id = #{rate.id.to_s}", :order => "rate DESC")
+    @rate_details = Ratedetail.where(:rate_id => rate.id.to_s).order("rate DESC")
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
       @rate_cur, @rate_free = Currency.count_exchange_prices({:exrate => exrate, :prices => [@rate_details[0]['rate'].to_d, @rate_details[0]['connection_fee'].to_d]})
@@ -1241,7 +1239,7 @@ class ApiController < ApplicationController
       @user.logged = 1
       @user.save
 
-      @destgroup = Destinationgroup.find(params[:dest_gr_id])
+      @destgroup = Destinationgroup.where(:id => params[:dest_gr_id]).first
       @destinations = @destgroup.destinations
 
       doc.page {
@@ -1508,7 +1506,7 @@ class ApiController < ApplicationController
             doc.userid(@user_logged.id)
             doc.username(@user_logged.username)
             doc.total_calls("#{calls.size}")
-            doc.currency(Currency.find(1).name)
+            doc.currency(Currency.where(:id => 1).first.name)
             doc.calls_stat {
               doc.period {
                 doc.period_start(@options[:from])
@@ -1571,7 +1569,7 @@ class ApiController < ApplicationController
     if allow == true
       if defined?(MA_Active) and MA_Active == 1
         if (values.keys & [:monitoring_id, :users, :block, :email, :mtype]).size == 5
-          monitoring = Monitoring.find(:first, :conditions => {:id => values[:monitoring_id], :block => (values[:block] == "true") ? true : false, :email => (values[:email] == "true") ? true : false, :mtype => values[:mtype]})
+          monitoring = Monitoring.where(:id => values[:monitoring_id], :block => (values[:block] == "true") ? true : false, :email => (values[:email] == "true") ? true : false, :mtype => values[:mtype]).first
           if monitoring
             doc.status {
               doc.monitoring_found("success")
@@ -1675,7 +1673,7 @@ class ApiController < ApplicationController
 
       @calls = []
       for call_h in calls_hash
-        @calls << Call.find(call_h["id"])
+        @calls << Call.where(:id => call_h["id"]).first
       end
 
       @select_date = false
@@ -1718,13 +1716,13 @@ class ApiController < ApplicationController
 
   def simple_balance
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
-      @user = User.find(:first, :conditions => ["uniquehash = ?", params[:id]])
+      @user = User.where(:uniquehash => params[:id]).first
       if @user
         if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
           user_balance = @user.balance
         elsif params[:currency].to_s.downcase == 'user'
           user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, @user.currency.name)
-        elsif Currency.find(:first, :conditions => {:name => params[:currency]}) # in case valid currency was supplied return balance in that currency
+        elsif Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
           user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
         else # in case invalid currency value was supplied, return currency in system's currency
           user_balance = @user.balance
@@ -1740,13 +1738,13 @@ class ApiController < ApplicationController
 
   def balance
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
-      user = User.find(:first, :conditions => ["username = ?", params[:username]])
+      user = User.where(:username => params[:username]).first
       if user
         if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
           user_balance = user.balance
         elsif params[:currency].to_s.downcase == 'user'
           user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, user.currency.name)
-        elsif Currency.find(:first, :conditions => {:name => params[:currency]}) # in case valid currency was supplied return balance in that currency
+        elsif Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
           user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
         else # in case invalid currency value was supplied, return currency in system's currency
           user_balance = user.balance
@@ -1764,14 +1762,12 @@ class ApiController < ApplicationController
     if Confline.get_value("Devices_Check_Rate").to_i == 1
       prefix = split_number(params[:prefix])
       if prefix.size > 0
-        user = User.find(:first, :conditions => ["username = ?", params[:username]])
+        user = User.where(:username => params[:username]).first
         if user
-          destination = Destination.find(:first, :include => [:destinationgroup],
-                                         :conditions => ["prefix IN (?)", prefix],
-                                         :order => "LENGTH(prefix) DESC")
+          destination = Destination.include(:destinationgroup).where(:prefix => prefix).order("LENGTH(prefix) DESC").first
           if destination
             dg = destination.destinationgroup
-            rate = Rate.find(:first, :include => [:ratedetails, :aratedetails], :conditions => ["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id])
+            rate = Rate.include([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
             if rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
               text = "#{rate.aratedetails[0].price}\##{destination.name}\##{destination.prefix}" if rate.aratedetails.size > 0
               text = "#{rate.ratedetails[0].rate}\##{destination.name}\##{destination.prefix}" if rate.ratedetails.size > 0
@@ -1812,10 +1808,10 @@ class ApiController < ApplicationController
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
     doc.page {
       if Confline.get_value("API_Allow_registration_ower_API").to_i == 1
-        if !params[:id] or !User.find(:first, :conditions => ["uniquehash = ?", params[:id]])
+        if !params[:id] or !User.where(:uniquehash => params[:id]).first
           doc.status { doc.error(_('Dont_be_so_smart')) }
         else
-          owner = User.find(:first, :conditions => ['uniquehash=?', params[:id]])
+          owner = User.where(:uniquehash => params[:id]).first
           if owner
             notice = User.validate_from_registration(params)
             capt = true
@@ -1883,7 +1879,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
-        user_b = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], @user.id]) if values[:user_id]
+        user_b = User.where(:id => values[:user_id], :owner_id => @user.id).first if values[:user_id]
         if user_b
           old_balance = user_b.balance.to_d
           if values[:balance]
@@ -1920,87 +1916,6 @@ class ApiController < ApplicationController
     send_xml_data(out_string, params[:test].to_i)
   end
 
-  # http://trac.kolmisoft.com/trac/ticket/4236
-  # ALTER TABLE devices ADD allow_grandstreams INT default 0 COMMENT 'Allow grandstreams realtime data sending';
-  #
-  #  def grandstreams_realtime_data_for_callshop
-  #
-  #    doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
-  #    doc.instruct! :xml, :version => "1.0"
-  #    doc.Screen{
-  #      doc.IdleScreen{
-  #        doc.ShowStatusLine("true")
-  #        if call_shop_active?
-  #          user = User.find(:first, :include=>[:tariff, :currency],:conditions=>{:id => params[:id]})
-  #          if user
-  #            device = Device.find(:first, :conditions=>{:user_id => user.id})
-  #            if device and device.try(:allow_grandstreams).to_i == 1
-  #              call = Activecall.find(:first, :select=>"activecalls.prefix, activecalls.answer_time, activecalls.user_rate, activecalls.start_time",:conditions=>{:user_id => user.id})
-  #
-  #              if call
-  #                time = nice_time2(call.start_time)
-  #                duration = nice_time(call.duration)
-  #                dest = Destination.find(:first, :conditions => ["prefix = ?", call.prefix])
-  #                if dest
-  #                  n_dest =  dest.direction.name if dest.direction
-  #                end
-  #
-  #                if user.tariff.purpose == 'user'
-  #                  connection_fee = 0
-  #                else
-  #                  ratedetails = Rate.find(:first, :select=>"*", :joins=>" JOIN ratedetails ON (rate_id = rates.id)", :conditions=>["tariff_id = ? and destination_id = ?  AND ? BETWEEN ratedetails.start_time AND ratedetails.end_time", user.tariff_id, dest.id, time ])
-  #                  connection_fee = ratedetails.connection_fee
-  #                end
-  #
-  #                price =  nice_number((call.user_rate.to_d * (call.duration.to_d / 60.to_d).to_d) + connection_fee.to_d)
-  #
-  #                rate = call.user_rate
-  #
-  #                doc.DisplayString(:font=>"f8"){
-  #                  doc.DisplayStr(n_dest.to_s + ' ' + _('Rate') + ': ' + rate.to_s + ' ' + user.currency.name.to_s + '/min')
-  #                  doc.x(0)
-  #                  doc.y(0)
-  #                }
-  #                doc.DisplayString(:font=>"f8"){
-  #                  doc.DisplayStr(_('Time') + ': ' +duration.to_s + ' ' + _('Price') + ': '+ price.to_s + ' ' + user.currency.name.to_s)
-  #                  doc.x(65)
-  #                  doc.y(12)
-  #                }
-  #              else
-  #                doc.DisplayString(:font=>"f8"){
-  #                  doc.DisplayStr(_('Call_not_found'))
-  #                  doc.x(65)
-  #                  doc.y(12)
-  #                }
-  #              end
-  #            else
-  #              doc.DisplayString(:font=>"f8"){
-  #                doc.DisplayStr(_('Setting_is_off'))
-  #                doc.x(65)
-  #                doc.y(12)
-  #              }
-  #            end
-  #          else
-  #            doc.DisplayString(:font=>"f8"){
-  #              doc.DisplayStr(_('User_not_found'))
-  #              doc.x(65)
-  #              doc.y(12)
-  #            }
-  #          end
-  #        else
-  #          doc.DisplayString(:font=>"f8"){
-  #            doc.DisplayStr(_('No_callshop_addon_active'))
-  #            doc.x(65)
-  #            doc.y(12)
-  #          }
-  #        end
-  #
-  #      }
-  #    }
-  #    send_xml_data(out_string, params[:test].to_i, "gs_screen.xml")
-  #  end
-
-
   def user_update_api
     allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
@@ -2018,10 +1933,10 @@ class ApiController < ApplicationController
             owner_id = @user.id
           end
           if @user.usertype == 'reseller'
-            user_u = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], owner_id]) if values[:user_id]
+            user_u = User.where(:id => values[:user_id], :owner_id => owner_id).first if values[:user_id]
             user_u = @user if values[:user_id] == owner_id
           else
-            user_u = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], owner_id]) if values[:user_id]
+            user_u = User.where(:id => values[:user_id], :owner_id => owner_id).first if values[:user_id]
           end
           if user_u
 
@@ -2128,7 +2043,7 @@ class ApiController < ApplicationController
     if allow == true
       check_user(params[:u], params[:p])
       if @user
-        device = Device.find(:first, :conditions => {:id => params[:device]})
+        device = Device.where(:id => params[:device]).first
         if device
           if check_owner_for_device(device.user_id, 0, @user)
             if @user.usertype == 'accountant'
@@ -2252,12 +2167,12 @@ class ApiController < ApplicationController
                 if rate_destinationgroups_id
                   logger.fatal "DB DESTINATION ID: " + rate_destinationgroups_id.to_s
                   #find rate by tariff id and destination group
-                  rate_id = Rate.find(:first, :conditions => ["tariff_id = ? and destinationgroup_id = ?", tariff_id, rate_destinationgroups_id])
+                  rate_id = Rate.where(:tariff_id => tariff_id, :destinationgroup_id => rate_destinationgroups_id).first
 
                   if rate_id
 
                     #find existing rates
-                    db_rates = Aratedetail.find(:all, :conditions => ['rate_id= ?', rate_id.id])
+                    db_rates = Aratedetail.where(:rate_id => rate_id.id)
                     collision_rates_with_db = []
                     #start1 <= end2 and start2 <= end1
                     db_rates.each do |rate1|
@@ -2437,7 +2352,7 @@ class ApiController < ApplicationController
             }
           end
         else
-          tariff = Tariff.find(:first, :conditions => {:id => tariff_id, :owner_id => @user.id, :purpose => 'user_wholesale'})
+          tariff = Tariff.where(:id => tariff_id, :owner_id => @user.id, :purpose => 'user_wholesale').first
           if tariff
             tariff.name = params[:name].to_s if params[:name]
             tariff.currency = params[:currency].to_s if params[:currency]
@@ -2767,7 +2682,7 @@ class ApiController < ApplicationController
       if @user
         if check_owner_for_device(params[:user_id], 0, @user)
           coi = @user.usertype == 'accountant' ? 0 : @user.id
-          user_u = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], coi]) if values[:user_id]
+          user_u = User.where(:id => values[:user_id], :owner_id => coi).first if values[:user_id]
           if user_u
 
             params[:device] = {}
@@ -3053,7 +2968,7 @@ class ApiController < ApplicationController
           user_u = @user
         else
           if values[:user_id] and values[:user_id].to_i != @user.id
-            user_u = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], @user.get_correct_owner_id])
+            user_u = User.where(:id => values[:user_id], :owner_id => @user.get_correct_owner_id).first
             MorLog.my_debug @user.get_correct_owner_id
           else
             user_u = @user
@@ -3159,7 +3074,7 @@ class ApiController < ApplicationController
         elsif values[:user_id]
           condition << "credit_notes.user_id = #{values[:user_id].to_i}"
         end
-        notes = CreditNote.find(:all, :include => :user, :conditions => condition.join(' AND '))
+        notes = CreditNote.include(:user).where(condition.join(' AND '))
         if notes and notes.size.to_i > 0
           can_see_finances = (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_read('see_financial_data')))
           doc.credit_notes {
@@ -3219,7 +3134,7 @@ class ApiController < ApplicationController
         elsif @user.is_admin? or @user.is_accountant?
           condition = ['users.owner_id = 0 AND credit_notes.id = ?', params[:credit_note_id].to_i]
         end
-        note = CreditNote.find(:first, :include => :user, :conditions => condition)
+        note = CreditNote.include(:user).where(condition).first
         if note
           if params[:status] and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_edit('see_financial_data')))
             if params[:status] == 'paid'
@@ -3271,7 +3186,7 @@ class ApiController < ApplicationController
         elsif @user.is_admin? or @user.is_accountant?
           condition = ['users.owner_id = 0 AND credit_notes.id = ?', params[:credit_note_id].to_i]
         end
-        note = CreditNote.find(:first, :include => :user, :conditions => condition)
+        note = CreditNote.include(:user).where(condition).first
         if note
           note.destroy
           doc.status("Credit note was deleted")
@@ -3319,7 +3234,7 @@ class ApiController < ApplicationController
         elsif @user.is_admin? or @user.is_accountant?
           condition = ['users.owner_id = 0 AND users.id = ?', params[:user_id].to_i]
         end
-        user = User.find(:first, :include => :tax, :conditions => condition)
+        user = User.include(:tax).where(condition).first
         if user and user.id > 0
           note = CreditNote.new
           note.user = user
@@ -3393,7 +3308,7 @@ class ApiController < ApplicationController
 
       if !@current_user.is_user?
         coi = @current_user.usertype == 'accountant' ? 0 : @current_user.id
-        user = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", @values[:user_id], coi]) if @values[:user_id]
+        user = User.where(:id => @values[:user_id], :owner_id => coi).first if @values[:user_id]
       else
         user = @current_user
       end
@@ -3443,7 +3358,7 @@ class ApiController < ApplicationController
       if Confline.get_value("API_Allow_payments_ower_API").to_i == 1
         if !@current_user.is_user?
           coi = @current_user.usertype == 'accountant' ? 0 : @current_user.id
-          user = User.find(:first, :conditions => ["id = ? AND owner_id = ? ", values[:user_id], coi]) if values[:user_id]
+          user = User.where(:id => values[:user_id], :owner_id => coi).first if values[:user_id]
         end
 
         if user
@@ -3542,7 +3457,7 @@ class ApiController < ApplicationController
           valid_pin_supplied = (not pin.blank?)
           cardgroup_id = values[:cardgroup_id].to_i
           if cardgroup_id == 0 and valid_pin_supplied
-            card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => pin, :owner_id => @current_user.get_correct_owner_id})
+            card_by_pin = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
             if card_by_pin
               cardgroup_id = card_by_pin.cardgroup.id
             else
@@ -3553,7 +3468,7 @@ class ApiController < ApplicationController
           #If the Caller_id exists in a device:
           #1. If pin number IS supplied - add card's value to user of the device, and disable card.
           #2. If NO pin number is supplied - do not create new card in cardgroup_id, and add the payment of amount of funds to the user.
-          device = Device.find(:first, :include => [:user, :callerids], :conditions => ['callerids.cli = ? OR callerids.cli LIKE ?', callerid, '%' + callerid + '%'])
+          device = Device.include([:user, :callerids]).where(['callerids.cli = ? OR callerids.cli LIKE ?', callerid, '%' + callerid + '%']).first
           if device
             if device.belongs_to_provider?
               doc.error("Callerid belongs to provider")
@@ -3561,7 +3476,7 @@ class ApiController < ApplicationController
               doc.error("Device already has such callerid, but you do not have permission to change user's balance")
             else
               if valid_pin_supplied
-                card = Card.find(:first, :conditions => {:pin => pin, :owner_id => @current_user.get_correct_owner_id})
+                card = Card.where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                 if card
                   card.disable
                   if card.save
@@ -3581,7 +3496,7 @@ class ApiController < ApplicationController
                   doc.error("Could not find card")
                 end
               else
-                cardgroup = Cardgroup.find(:first, :conditions => {:id => cardgroup_id, :owner_id => @current_user.get_correct_owner_id})
+                cardgroup = Cardgroup.where(:id => cardgroup_id, :owner_id => @current_user.get_correct_owner_id).first
                 if cardgroup
                   cardgroup_excange_rate = Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default.name)
                   amount *= cardgroup_excange_rate
@@ -3604,14 +3519,14 @@ class ApiController < ApplicationController
               end
             end
           else
-            card = Card.find(:first, :conditions => {:callerid => callerid}) #TODO: issiaiskinti ar ieskoti pagal pina ar callerid????
+            card = Card.where(:callerid => callerid).first #TODO: issiaiskinti ar ieskoti pagal pina ar callerid????
                                                                              #If pin number IS supplied(ignore the amount of funds to add parameter):
                                                                              #1. If the Caller_id does not exist at all - associate Caller_id to the new card, and mark card as sold.
                                                                              #2. If the Caller_id exists in another card within the same cardgroup_id, add new calling card value to old card, and disable new card.
                                                                              #3. If the Caller_id exists in a card within a different cardgroup_id, transfer Caller_id and balance from old card to new card, mark new card as sold, and disable old card.
             if valid_pin_supplied
               if not card
-                card = Card.find(:first, :include => :cardgroup, :conditions => {:pin => pin, :owner_id => @current_user.get_correct_owner_id})
+                card = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                 if card
                   if card.sold?
                     doc.error("PIN number already sold")
@@ -3628,7 +3543,7 @@ class ApiController < ApplicationController
                   doc.error("PIN number not found")
                 end
               elsif card.cardgroup.id == cardgroup_id
-                card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => pin, :owner_id => @current_user.get_correct_owner_id})
+                card_by_pin = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                 if card_by_pin
                   original_balance_in_system_currency = card.balance
                   exchange_rate = Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default)
@@ -3647,7 +3562,7 @@ class ApiController < ApplicationController
                 if card.sold?
                   doc.error("PIN number already sold")
                 else
-                  card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => pin, :owner_id => @current_user.get_correct_owner_id})
+                  card_by_pin = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                   if card_by_pin and card_by_pin != card
                     card.callerid = card_by_pin.callerid
                     card_by_pin.callerid = nil
@@ -3678,7 +3593,7 @@ class ApiController < ApplicationController
               #3. If Caller_id exists in another cardg!x!:<Mouse>C!y!:<Mouse>C!z!:
 
               if not card
-                cardgroup = Cardgroup.find(:first, :conditions => {:id => cardgroup_id, :owner_id => @current_user.get_correct_owner_id})
+                cardgroup = Cardgroup.where(:id => cardgroup_id, :owner_id => @current_user.get_correct_owner_id).first
                 if cardgroup
                   amount *= Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default)
                   new_card = cardgroup.create_card({:balance => amount, :callerid => callerid})
@@ -3698,7 +3613,7 @@ class ApiController < ApplicationController
                   doc.error("Failed to make transaction")
                 end
               elsif card.cardgroup.id != cardgroup_id
-                cardgroup = Cardgroup.find(:first, :conditions => {:id => cardgroup_id, :owner_id => @current_user.get_correct_owner_id})
+                cardgroup = Cardgroup.where(:id => cardgroup_id, :owner_id => @current_user.get_correct_owner_id).first
                 if cardgroup
                   card.callerid = nil
                   card.disable
@@ -3752,7 +3667,7 @@ class ApiController < ApplicationController
 
       if values[:pin] and !values[:pin].blank?
         # II
-        device = Device.find(:first, :include => [:user, :callerids], :conditions => ['callerids.cli = ? OR callerids.cli LIKE ?', params[:callerid], '%' + params[:callerid] + '%'])
+        device = Device.find(:first, :include => [:user, :callerids], :conditions => ['callerids.cli = ? OR callerids.cli LIKE ?', params[:callerid], '%' + params[:callerid] + '%']).first
         if !device or (device and device.user and device.user.owner_id == @current_user.get_correct_owner_id)
           if device
             #4 * We find device by callerid and card by PIN, device.user.balance+=card.balance, card.disable
@@ -3961,7 +3876,7 @@ class ApiController < ApplicationController
                 #1 * We check if callerid_id is free. If it is free then we search cardgroup by cardgroup_id, then we create card_n in cardgroup, card_n.callerid = Caller_id, card_n.balance = amount, card_n.sold
                 logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                 logger.fatal values.to_yaml
-                cardgroup = Cardgroup.find(:first, :conditions => {:id => values[:cardgroup_id], :owner_id => @current_user.get_correct_owner_id})
+                cardgroup = Cardgroup.where(:id => values[:cardgroup_id], :owner_id => @current_user.get_correct_owner_id).first
                 if cardgroup
                   logger.fatal cardgroup.tell_balance_in_currency
                   amount = values[:amount].to_d * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_d
@@ -4010,7 +3925,7 @@ class ApiController < ApplicationController
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    cg = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ? and cardgroups.owner_id = ?", @values[:id], @current_user.get_correct_owner_id])
+    cg = Cardgroup.include([:tariff, :lcr, :location, :tax]).where(:id => @values[:id], :owner_id => @current_user.get_correct_owner_id).first
 
     if cg
       doc.cardgroup {
@@ -4046,10 +3961,10 @@ class ApiController < ApplicationController
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    cg = Cardgroup.find(:first, :include => [:tariff, :lcr, :location, :tax], :conditions => ["cardgroups.id = ? and cardgroups.owner_id = ?", @values[:id], @current_user.get_correct_owner_id])
+    cg = Cardgroup.include([:tariff, :lcr, :location, :tax]).where(:id => @values[:id], :owner_id => @current_user.get_correct_owner_id).first
     cards_size = @values[:quantity].to_i < 1 ? 1 : @values[:quantity].to_i
     if cg
-      cards = cg.cards.find(:all, :conditions => {:sold => 0}, :limit => cards_size, :order => "rand()")
+      cards = cg.cards.where(:sold => 0).limit(cards_size).order("rand()")
       if cards
         doc.cards {
           for card in cards
@@ -4215,11 +4130,11 @@ class ApiController < ApplicationController
         check_user(params[:u], params[:p])
         if @user
           if @user.usertype == 'accountant' or @user.usertype == 'admin' or @user.usertype == 'reseller'
-            email = Email.find(:first, :conditions => ['name = ? and owner_id = ?', params[:email_name], @user.get_corrected_owner_id])
+            email = Email.where(:name => params[:email_name], :owner_id => @user.get_corrected_owner_id).first
             if email
               if @user.address.email
                 if !params[:email_to_user_id].blank?
-                  user = User.find(:first, :conditions => ['id = ?', params[:email_to_user_id]])
+                  user = User.where(:id => params[:email_to_user_id]).first
                 else
                   user = @user
                 end
@@ -4337,9 +4252,9 @@ class ApiController < ApplicationController
 =end
   def check_user(login='', password='')
     if params[:action] == 'send_email'
-      @user = User.find(:first, :conditions => ["username = ?", login.to_s])
+      @user = User.where(:username => login.to_s).first
     else
-      @user = User.find(:first, :conditions => ["username = ? and password = ?", login.to_s, Digest::SHA1.hexdigest(password.to_s)])
+      @user = User.where(:username => login.to_s, :password => Digest::SHA1.hexdigest(password.to_s)).first
     end
     if @user
       User.current = @user
