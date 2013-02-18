@@ -281,7 +281,7 @@ class CallcController < ApplicationController
 
     @page_title = _('Start_page')
     session[:layout_t]="full"
-    @user = User.includes(:tax).where(:users.id => session[:user_id]).first
+    @user = User.includes(:tax).where(:id => session[:user_id]).first
 
     unless @user
       redirect_to :action => "logout" and return false
