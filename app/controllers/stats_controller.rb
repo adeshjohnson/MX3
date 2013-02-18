@@ -1012,7 +1012,8 @@ in before filter : user (:find_user_from_id_or_session)
         if filename
           filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
           if params[:test].to_i != 1
-            send_file(filename)
+            file = File.open(filename)
+            send_data file.read, :filename => filename
           else
             render :text => filename
           end
