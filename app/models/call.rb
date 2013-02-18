@@ -624,7 +624,7 @@ class Call < ActiveRecord::Base
         s << "IF(#{nice_reseller} IS NULL, ' ', #{nice_reseller}) as 'nice_reseller'"
         if options[:can_see_finances]
           s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_rate')
-          s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_price_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
+          s << SqlExport.replace_dec("(#{SqlExport.admin_reseller_price_no_dids_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
         end
       end
 
@@ -651,7 +651,7 @@ class Call < ActiveRecord::Base
           end
         end
         s << SqlExport.replace_dec("(#{SqlExport.reseller_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_rate')
-        s << SqlExport.replace_dec("(#{SqlExport.reseller_price_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
+        s << SqlExport.replace_dec("(#{SqlExport.reseller_price_no_dids_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'reseller_price')
         s << "IF(calls.card_id = 0 ,(#{SqlExport.nice_user_sql('users', false)}), CONCAT('Card#', IF(cards.number IS NULL, '', cards.number))) as 'user'"
         s << SqlExport.replace_dec("(#{SqlExport.user_rate_sql} * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_rate')
         s << SqlExport.replace_dec("(IF(#{SqlExport.user_price_sql} != 0 , (#{SqlExport.user_price_sql}), 0) * #{options[:exchange_rate]} ) ", options[:column_dem], 'user_price')
