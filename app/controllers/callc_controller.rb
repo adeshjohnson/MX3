@@ -32,10 +32,10 @@ class CallcController < ApplicationController
 
 
     if params[:id]
-      @owner = User.find(:first, :conditions => ["users.uniquehash = ?", params[:id]])
+      @owner = User.where(:uniquehash => params[:id]).first
     end
 
-    @owner = User.find(:first, :conditions => ["users.id = ?", 0]) unless @owner
+    @owner = User.where(:id => 0).first unless @owner
 
     if @owner and @owner.class == User
       @owner_id = @owner.id
@@ -127,7 +127,7 @@ class CallcController < ApplicationController
     @type = "user"
     @login_ok = false
 
-    @user = User.find(:first, :conditions => ["username = ? and password = ?", @username, Digest::SHA1.hexdigest(@psw)])
+    @user = User.where(:username => @username, :password => Digest::SHA1.hexdigest(@psw)).first
     if @user and @user.owner
       @login_ok = true
       renew_session(@user)
@@ -165,7 +165,7 @@ class CallcController < ApplicationController
         redirect_to :action => "main_for_pda" and return false
       else
         flash[:status] = _('login_successfully')
-        if defined?(CS_Active) && CS_Active == 1 && group = current_user.usergroups.find(:first, :include => :group, :conditions => ["usergroups.gusertype = 'manager' and groups.grouptype = 'callshop'"]) and current_user.usertype != 'admin'
+        if defined?(CS_Active) && CS_Active == 1 && group = current_user.usergroups.includes(:group).where("usergroups.gusertype = 'manager' AND groups.grouptype = 'callshop'").first and current_user.usertype != 'admin'
           session[:cs_group] = group
           session[:lang] = Translation.where(:id => group.group.translation_id).first.short_name
           redirect_to :controller => "callshop", :action => "show", :id => group.group_id and return false
@@ -178,7 +178,7 @@ class CallcController < ApplicationController
 
       add_action2(0, "bad_login", @username.to_s + "/" + @psw.to_s, request.env["REMOTE_ADDR"].to_s)
 
-      us = User.find(:first, :conditions => ["users.id = ?", session[:login_id]])
+      us = User.where(:id => session[:login_id]).first
       u_hash = us ? us.uniquehash : ''
       flash[:notice] = _('bad_login')
       show_login = Action.disable_login_check(request.env["REMOTE_ADDR"].to_s).to_i == 0 ? 1 : 0
@@ -189,7 +189,7 @@ class CallcController < ApplicationController
   def main_for_pda
     # my_debug session[:layout_t]
     @page_title = _('Start_page')
-    @user=User.find(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
     if @user.first_name and @user.last_name
       @username = @user.first_name.capitalize + " " + @user.last_name.capitalize
     else
@@ -200,7 +200,7 @@ class CallcController < ApplicationController
   def logout
     add_action(session[:user_id], "logout", "")
 
-    user=User.find(:first, :conditions => ["id = ?", session[:user_id]])
+    user = User.where(:id => session[:user_id]).first
     if user
       user.logged = 0
       user.save
@@ -230,13 +230,13 @@ class CallcController < ApplicationController
     @r = ''
     @st = true
     if params[:email] and !params[:email].blank?
-      addresses = Address.find(:all, :conditions => ['email = ?', params[:email]])
+      addresses = Address.where(:email => params[:email]).all
       if addresses and addresses.size.to_i > 0
         if addresses.size.to_i == 1
-          user = User.find(:first, :include => [:address], :conditions => ['address_id = ?', addresses[0].id])
+          user = User.includes(:address).where(:address_id => addresses[0].id).first
           if user and user.id != 0
             psw = random_password(12)
-            email =Email.find(:first, :conditions => ["name = 'password_reminder' AND owner_id = ?", user.owner_id])
+            email = Email.where(:name => 'password_reminder', :owner_id => user.owner_id).first
             variables = Email.email_variables(user, nil, {:owner => user.owner_id, :login_password => psw})
             session[:flash_not_redirect] = 1
             session[:forgot_pasword] = 1
@@ -281,7 +281,7 @@ class CallcController < ApplicationController
 
     @page_title = _('Start_page')
     session[:layout_t]="full"
-    @user=User.find(:first, :include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
+    @user = User.includes(:tax).where(:users.id => session[:user_id]).first
 
     unless @user
       redirect_to :action => "logout" and return false
@@ -295,7 +295,7 @@ class CallcController < ApplicationController
     end
 
     if session[:usertype] == 'reseller'
-      reseller = User.find(session[:user_id])
+      reseller = User.where(:id => session[:user_id]).first
       reseller.check_default_user_conflines
     end
 
@@ -312,7 +312,7 @@ class CallcController < ApplicationController
     @ob_link_name = session[:ouroboros_name]
     @ob_link_url = session[:ouroboros_url]
     @ob_enabled = 0 if @user.owner_id > 0 # do not show for reseller users
-    @addresses = Phonebook.find(:all, :conditions => ["user_id=?", session[:user_id]])
+    @addresses = Phonebook.where(:user_id => session[:user_id]).all
     if  request.env["HTTP_X_MOBILE_GATEWAY"]
       @notice = params[:sms_notice].to_s
       respond_to do |format|
@@ -329,7 +329,7 @@ class CallcController < ApplicationController
 
     @ex = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
 
-    @user=User.find(:first, :include => [:tax], :conditions => ["users.id = ?", session[:user_id]])
+    @user = User.includes(:tax).where(:id => session[:user_id]).first
 
     unless @user
       redirect_to :action => "logout" and return false
@@ -353,7 +353,7 @@ class CallcController < ApplicationController
   end
 
   def user_settings
-    @user=User.find(session[:user_id])
+    @user = User.where(:id => session[:user_id]).first
   end
 
 
@@ -363,10 +363,10 @@ class CallcController < ApplicationController
     #     today = "2006-07-26" #debug
 
     #counting month_normative for 1 user which was counted most time ago
-    user = User.find(:first, :order => "month_plan_updated ASC")
+    user = User.order("month_plan_updated ASC").first
     user.months_normative(Time.now.strftime("%Y-%m"))
 
-    @users = User.find(:all, :conditions => "usertype = 'user' AND show_in_realtime_stats = '1' ")
+    @users = User.where(:usertype => 'user', :show_in_realtime_stats => '1').all
 
     @h = Hash.new
 
@@ -410,7 +410,7 @@ class CallcController < ApplicationController
     for a in @a
 
       if @ranks_type == "duration"
-        user = User.find(a[0])
+        user = User.where(:id => a[0]).first
 
         @b[a[0]] = user.total_calls("answered", today, today) + user.total_calls("answered_inc", today, today)
         #User.find(a[0]).calls("answered",today,today).size
@@ -488,9 +488,9 @@ class CallcController < ApplicationController
   def global_settings
     @page_title = _('global_settings')
     cond = "exten = ? AND context = ? AND priority IN (2, 3) AND appdata like ?"
-    ext = Extline.find(:first, :conditions => [cond, '_X.', "mor", 'TIMEOUT(response)%'])
+    ext = Extline.where(cond, '_X.', "mor", 'TIMEOUT(response)%').first
     @timeout_response = (ext ? ext.appdata.gsub("TIMEOUT(response)=", "").to_i : 20)
-    ext = Extline.find(:first, :conditions => [cond, '_X.', "mor", 'TIMEOUT(digit)%'])
+    ext = Extline.where(cond, '_X.', "mor", 'TIMEOUT(digit)%').first
     @timeout_digit = (ext ? ext.appdata.gsub("TIMEOUT(digit)=", "").to_i : 10)
   end
 
@@ -504,9 +504,9 @@ class CallcController < ApplicationController
     @type = params[:type]
 
     if @type == "devices"
-      @devices = Device.find(:all, :conditions => "user_id > 0")
+      @devices = Device.where("user_id > 0").all
       for dev in @devices
-        a=configure_extensions(dev.id, {:current_user => current_user})
+        a = configure_extensions(dev.id, {:current_user => current_user})
         return false if !a
       end
     end
@@ -547,7 +547,7 @@ class CallcController < ApplicationController
   end
 
   def set_tz_to_users
-    users = User.find(:all)
+    users = User.all
     for u in users
       Time.zone = u.time_zone
       u.time_zone = ActiveSupport::TimeZone[Time.zone.now.utc_offset().hour.to_d + params[:add_time].to_d].name
@@ -564,7 +564,7 @@ class CallcController < ApplicationController
   def signup_start
     @page_title = _('Sign_up')
     @page_icon = "signup.png"
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order("name ASC").all
 
     @agreement = Confline.get("Registration_Agreement", @owner.id)
 
@@ -605,7 +605,7 @@ class CallcController < ApplicationController
     session[:reg_email] = params[:email]
     reg_ip= request.remote_ip
 
-    if !params[:id] or !User.find(:first, :conditions => ["uniquehash = ?", params[:id]])
+    if !params[:id] or !User.where(:uniquehash => params[:id]).first
       reset_session
       dont_be_so_smart
       redirect_to :action => "login" and return false
@@ -666,13 +666,13 @@ class CallcController < ApplicationController
         if defined?(PG_Active) && PG_Active == 1
           if Confline.get_value("ideal_ideal_enabled").to_i == 1
             MorLog.my_debug("Starting iDeal check")
-            payments = Payment.find(:all, :conditions => {:paymenttype => "ideal_ideal", :completed => 0, :pending_reason => "waiting_response"})
+            payments = Payment.where(:paymenttype => "ideal_ideal", :completed => 0, :pending_reason => "waiting_response").all
             MorLog.my_debug("Found #{payments.size} waiting payments")
             # There m ay be possibe to do some caching if performance becomes an issue.
             if payments.size > 0
               payments.each { |payment|
                 user = payment.user
-                gateway = ::GatewayEngine.find(:first, {:engine => "ideal", :gateway => "ideal", :for_user => user.id}).enabled_by(user.owner.id).query ## this is cacheable
+                gateway = ::GatewayEngine.where(:engine => "ideal", :gateway => "ideal", :for_user => user.id).first.enabled_by(user.owner.id).query ## this is cacheable
                 success, message = gateway.check_response(payment)
                 MorLog.my_debug("#{success ? "Done" : "Fail"} : #{message}")
               }
@@ -996,11 +996,11 @@ class CallcController < ApplicationController
       render :text => "Date is in future" and return false
     end
 
-    users = User.find(:all)
+    users = User.all
 
     # check all users for actions, if action not present - create new one and save users balance
     for user in users
-      old_action = Action.find(:first, :conditions => "data = '#{date}' AND user_id = '#{user.id}'")
+      old_action = Action.where(:data => date, :user_id => user.id).first
       if not old_action
         MorLog.my_debug("Creating new action user_balance_at_month_end for user with id: #{user.id}, balance: #{user.balance}")
         Action.add_action2(user.id, "user_balance_at_month_end", date, user.balance.to_s)
@@ -1066,7 +1066,7 @@ class CallcController < ApplicationController
     if send
       email_time = Time.now
       email = Email.new(:body => email_body.join("\n"), :subject => "subscriptions report", :format => "plain", :id => "subscriptions report")
-      EmailsController::send_email(email, Confline.get_value("Email_from", 0), [User.find(0)], {:owner => 0})
+      EmailsController::send_email(email, Confline.get_value("Email_from", 0), [User.where(:id => 0).first], {:owner => 0})
       logger.debug("Email took: #{Time.now - email_time}")
     end
     if session[:usertype] == "admin"
@@ -1115,7 +1115,7 @@ class CallcController < ApplicationController
   def block_users
     date = Time.now.strftime("%Y-%m-%d")
     #my_debug date
-    users = User.find(:all, :conditions => "block_at = '#{date}'")
+    users = User.where(:block_at => date).all
     #my_debug users.size if users
     for user in users
       user.blocked = 1
@@ -1127,11 +1127,11 @@ class CallcController < ApplicationController
   def block_users_conditional
     day = Time.now.day
     #my_debug day
-    users = User.find(:all, :conditions => "block_at_conditional = '#{day}' AND balance < 0 AND postpaid = 1 AND block_conditional_use = '1'")
+    users = User.where("block_at_conditional = '#{day}' AND balance < 0 AND postpaid = 1 AND block_conditional_use = '1'").all
     #my_debug users.size if users
     for user in users
 
-      invoices = Invoice.count(:all, :conditions => "user_id = #{user.id} AND paid = 0")
+      invoices = Invoice.where("user_id = #{user.id} AND paid = 0").count
       #my_debug "not paid invoices: #{invoices}"
 
       if invoices > 0
@@ -1147,18 +1147,18 @@ class CallcController < ApplicationController
 
     enable_debug = 1
 
-    users = User.find(:all, :include => [:address], :conditions => "warning_email_active = '1' AND ( (warning_email_sent = '0' AND warning_email_hour = '-1') or ( warning_email_hour = '#{Time.now().hour.to_i}')) AND balance < warning_email_balance")
+    users = User.includes(:address).where("warning_email_active = '1' AND ( (warning_email_sent = '0' AND warning_email_hour = '-1') or ( warning_email_hour = '#{Time.now().hour.to_i}')) AND balance < warning_email_balance").all
     if users.size.to_i > 0
       for user in users
         if enable_debug == 1
           MorLog.my_debug("Need to send warning_balance email to: #{user.id} #{user.username} #{user.email}")
         end
-        email= Email.find(:first, :conditions => ["name = 'warning_balance_email' AND owner_id = ?", user.owner_id])
+        email= Email.where(:name => 'warning_balance_email', owner_id => user.owner_id).first
         unless email
           owner = user.owner
           if owner.usertype == "reseller"
             owner.check_reseller_emails
-            email= Email.find(:first, :conditions => ["name = 'warning_balance_email' AND owner_id = ?", user.owner_id])
+            email= Email.where(:name => 'warning_balance_email', owner_id => user.owner_id).first
           end
         end
         variables = email_variables(user)
@@ -1188,7 +1188,7 @@ class CallcController < ApplicationController
 
 
   def find_registration_owner
-    unless params[:id] and (@owner = User.find(:first, :conditions => ["uniquehash = ?", params[:id]]))
+    unless params[:id] and (@owner = User.where(:uniquehash => params[:id]).first)
       dont_be_so_smart
       redirect_to :action => "login" and return false
     end

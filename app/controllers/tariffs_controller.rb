@@ -61,14 +61,14 @@ class TariffsController < ApplicationController
       incl = ''
     end
 
-    @prov_tariffs = Tariff.find(:all, :conditions => "purpose = 'provider' AND owner_id = '#{user.id}' #{cond}", :include => incl, :order => "name ASC", :group => 'tariffs.id')
-    @user_tariffs = Tariff.find(:all, :conditions => "purpose = 'user' AND owner_id = '#{user.id}' #{con}", :include => incl, :order => "name ASC", :group => 'tariffs.id')
-    @user_wholesale_tariffs = Tariff.find(:all, :conditions => "purpose = 'user_wholesale' AND owner_id = '#{user.id}' #{cond}", :include => incl, :order => "name ASC", :group => 'tariffs.id')
+    @prov_tariffs = Tariff.where("purpose = 'provider' AND owner_id = '#{user.id}' #{cond}").includes(incl).order("name ASC").group('tariffs.id').all
+    @user_tariffs = Tariff.where("purpose = 'user' AND owner_id = '#{user.id}' #{con}").includes(incl).order("name ASC").group('tariffs.id').all
+    @user_wholesale_tariffs = Tariff.where("purpose = 'user_wholesale' AND owner_id = '#{user.id}' #{cond}").includes(incl).order("name ASC").group('tariffs.id').all
     @user_wholesale_enabled = (Confline.get_value("User_Wholesale_Enabled") == "1")
 
     @Show_Currency_Selector =1
     @tr = []
-    tariffs_rates = Tariff.find(:all, :select => 'tariffs.id, COUNT(rates.id) as rsize', :conditions => "(purpose = 'provider' or purpose = 'user_wholesale' ) AND owner_id = '#{user.id}'", :joins => 'LEFT JOIN rates ON (rates.tariff_id = tariffs.id)', :order => "name ASC", :group => 'tariffs.id')
+    tariffs_rates = Tariff.select('tariffs.id, COUNT(rates.id) as rsize').where("(purpose = 'provider' or purpose = 'user_wholesale' ) AND owner_id = '#{user.id}'").joins('LEFT JOIN rates ON (rates.tariff_id = tariffs.id)').order("name ASC").group('tariffs.id').all
     tariffs_rates.each { |t| @tr[t.id] = t.rsize.to_i }
     #deleting not necessary session vars - just in case after crashed csv rate import
     session[:file] = nil
@@ -164,7 +164,7 @@ class TariffsController < ApplicationController
     end
 
     #check for locationrules
-    lrules= Locationrule.find(:all, :conditions => "tariff_id='#{@tariff.id}'")
+    lrules = Locationrule.where(:tariff_id => @tariff.id).all
     if lrules.size.to_i > 0
       flash[:notice] = lrules.size.to_s + " " + _('locationrules_are_using_this_tariff_cant_delete')
       redirect_to :action => 'list' and return false
@@ -189,8 +189,8 @@ class TariffsController < ApplicationController
     check_user_for_tariff(@tariff.id)
     @page_title = _('Tariff_list')
     @page_icon = "view.png"
-    @user = User.find(:all, :conditions => ["tariff_id = ?", @tariff.id])
-    @cardgroup = Cardgroup.find(:all, :conditions => ["tariff_id = ?", @tariff.id])
+    @user = User.where(:tariff_id => @tariff.id).all
+    @cardgroup = Cardgroup.where(:tariff_id => @tariff.id).all
   end
 
 
@@ -204,33 +204,32 @@ class TariffsController < ApplicationController
     @page_title = _('Rates_for_tariff') #+": " + @tariff.name
     @can_edit = true
 
-    if current_user.usertype == 'reseller' and @tariff.owner_id != current_user.id and CommonUseProvider.find(:first, :conditions => ["reseller_id = ? AND tariff_id = ?", current_user.id, @tariff.id])
+    if current_user.usertype == 'reseller' and @tariff.owner_id != current_user.id and CommonUseProvider.where(:reseller_id => current_user.id, :tariff_id => @tariff.id).first
       @can_edit = false
     end
 
-    @directions_first_letters = Rate.find(:all, :select => 'directions.name', :conditions => ["rates.tariff_id=?", @tariff.id], :joins => "JOIN destinations ON destinations.id = rates.destination_id JOIN directions ON (directions.code = destinations.direction_code)", :order => "directions.name ASC", :group => "SUBSTRING(directions.name,1,1)") 
-    
-    @directions_first_letters.map! { |rate| rate.name[0..0] } 
+    @directions_first_letters = Rate.select('directions.name').where("rates.tariff_id = #{@tariff.id}").joins("JOIN destinations ON destinations.id = rates.destination_id JOIN directions ON (directions.code = destinations.direction_code)").order("directions.name ASC").group("SUBSTRING(directions.name,1,1)").all
+
+    @directions_first_letters.map! { |rate| rate.name[0..0] }
     @st = (params[:st] ? params[:st].upcase : @directions_first_letters[0]) 
 
     @st = @st.to_s
 
     @st = 'A' if @st.blank?
 
-    @directions = Direction.find(
-        :all,
-        :select => "directions.*, COUNT(destinations.id) AS 'dest_count', COUNT(rates.id) AS 'rate_count'",
-        :conditions => ["directions.name LIKE ?", @st.to_s + "%"],
-        :joins => "LEFT JOIN destinations ON (destinations.direction_code = directions.code) LEFT JOIN rates ON (rates.destination_id = destinations.id AND tariff_id = #{@tariff.id.to_i})",
-        :order => "name ASC",
-        :group => "directions.id")
-
+    @directions = Direction.
+        select("directions.*, COUNT(destinations.id) AS 'dest_count', COUNT(rates.id) AS 'rate_count'").
+        where(["directions.name LIKE ?", @st.to_s + "%"]).
+        joins("LEFT JOIN destinations ON (destinations.direction_code = directions.code) LEFT JOIN rates ON (rates.destination_id = destinations.id AND tariff_id = #{@tariff.id.to_i})").
+        order("name ASC").
+        group("directions.id").
+        all
     @page = params[:page] ? params[:page].to_i : 1
     record_offset = (@page - 1) * session[:items_per_page].to_i
 
     if params[:s_prefix]
       @s_prefix = params[:s_prefix].gsub(/[^0-9%]/, '')
-      @des_id = Destination.find(:all, :select => 'id', :conditions => ["prefix LIKE ?", @s_prefix.to_s]).map {|destination| destination.id}
+      @des_id = Destination.select(:id).where(["prefix LIKE ?", @s_prefix.to_s]).all.map {|destination| destination.id}
     end
     if @s_prefix
       unless @des_id.empty?
@@ -270,10 +269,10 @@ class TariffsController < ApplicationController
     #@prefix = request.raw_post || request.query_string
     #@prefix = @prefix.gsub(/=/, "")
     @tariff = params[:tariff_id]
-    @destination = Destination.find(:first,
-                                    :select => "directions.name as 'dir_name', directions.code as 'dir_code', destinations.prefix AS 'des_prefix', destinations.name as 'des_name', destinations.subcode AS 'des_subcode', rates.id AS 'rate_id'",
-                                    :joins => "LEFT JOIN directions ON (destinations.direction_code = directions.code) LEFT JOIN (SELECT * FROM rates WHERE tariff_id = #{@tariff.to_i}) AS rates ON (rates.destination_id = destinations.id)",
-                                    :conditions => ["prefix = ?", @prefix])
+    @destination = Destination.select("directions.name as 'dir_name', directions.code as 'dir_code', destinations.prefix AS 'des_prefix', destinations.name as 'des_name', destinations.subcode AS 'des_subcode', rates.id AS 'rate_id'").
+                               joins("LEFT JOIN directions ON (destinations.direction_code = directions.code) LEFT JOIN (SELECT * FROM rates WHERE tariff_id = #{@tariff.to_i}) AS rates ON (rates.destination_id = destinations.id)").
+                               where(["prefix = ?", @prefix]).
+                               first
     render :layout => false
   end
 
