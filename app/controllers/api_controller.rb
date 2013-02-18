@@ -1764,10 +1764,10 @@ class ApiController < ApplicationController
       if prefix.size > 0
         user = User.where(:username => params[:username]).first
         if user
-          destination = Destination.include(:destinationgroup).where(:prefix => prefix).order("LENGTH(prefix) DESC").first
+          destination = Destination.includes(:destinationgroup).where(:prefix => prefix).order("LENGTH(prefix) DESC").first
           if destination
             dg = destination.destinationgroup
-            rate = Rate.include([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
+            rate = Rate.includes([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
             if rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
               text = "#{rate.aratedetails[0].price}\##{destination.name}\##{destination.prefix}" if rate.aratedetails.size > 0
               text = "#{rate.ratedetails[0].rate}\##{destination.name}\##{destination.prefix}" if rate.ratedetails.size > 0
@@ -3074,7 +3074,7 @@ class ApiController < ApplicationController
         elsif values[:user_id]
           condition << "credit_notes.user_id = #{values[:user_id].to_i}"
         end
-        notes = CreditNote.include(:user).where(condition.join(' AND '))
+        notes = CreditNote.includes(:user).where(condition.join(' AND '))
         if notes and notes.size.to_i > 0
           can_see_finances = (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_read('see_financial_data')))
           doc.credit_notes {
@@ -3134,7 +3134,7 @@ class ApiController < ApplicationController
         elsif @user.is_admin? or @user.is_accountant?
           condition = ['users.owner_id = 0 AND credit_notes.id = ?', params[:credit_note_id].to_i]
         end
-        note = CreditNote.include(:user).where(condition).first
+        note = CreditNote.includes(:user).where(condition).first
         if note
           if params[:status] and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_edit('see_financial_data')))
             if params[:status] == 'paid'
@@ -3186,7 +3186,7 @@ class ApiController < ApplicationController
         elsif @user.is_admin? or @user.is_accountant?
           condition = ['users.owner_id = 0 AND credit_notes.id = ?', params[:credit_note_id].to_i]
         end
-        note = CreditNote.include(:user).where(condition).first
+        note = CreditNote.includes(:user).where(condition).first
         if note
           note.destroy
           doc.status("Credit note was deleted")
@@ -3234,7 +3234,7 @@ class ApiController < ApplicationController
         elsif @user.is_admin? or @user.is_accountant?
           condition = ['users.owner_id = 0 AND users.id = ?', params[:user_id].to_i]
         end
-        user = User.include(:tax).where(condition).first
+        user = User.includes(:tax).where(condition).first
         if user and user.id > 0
           note = CreditNote.new
           note.user = user
@@ -3457,7 +3457,7 @@ class ApiController < ApplicationController
           valid_pin_supplied = (not pin.blank?)
           cardgroup_id = values[:cardgroup_id].to_i
           if cardgroup_id == 0 and valid_pin_supplied
-            card_by_pin = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
+            card_by_pin = Card.includes(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
             if card_by_pin
               cardgroup_id = card_by_pin.cardgroup.id
             else
@@ -3468,7 +3468,7 @@ class ApiController < ApplicationController
           #If the Caller_id exists in a device:
           #1. If pin number IS supplied - add card's value to user of the device, and disable card.
           #2. If NO pin number is supplied - do not create new card in cardgroup_id, and add the payment of amount of funds to the user.
-          device = Device.include([:user, :callerids]).where(['callerids.cli = ? OR callerids.cli LIKE ?', callerid, '%' + callerid + '%']).first
+          device = Device.includes([:user, :callerids]).where(['callerids.cli = ? OR callerids.cli LIKE ?', callerid, '%' + callerid + '%']).first
           if device
             if device.belongs_to_provider?
               doc.error("Callerid belongs to provider")
@@ -3526,7 +3526,7 @@ class ApiController < ApplicationController
                                                                              #3. If the Caller_id exists in a card within a different cardgroup_id, transfer Caller_id and balance from old card to new card, mark new card as sold, and disable old card.
             if valid_pin_supplied
               if not card
-                card = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
+                card = Card.includes(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                 if card
                   if card.sold?
                     doc.error("PIN number already sold")
@@ -3543,7 +3543,7 @@ class ApiController < ApplicationController
                   doc.error("PIN number not found")
                 end
               elsif card.cardgroup.id == cardgroup_id
-                card_by_pin = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
+                card_by_pin = Card.includes(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                 if card_by_pin
                   original_balance_in_system_currency = card.balance
                   exchange_rate = Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default)
@@ -3562,7 +3562,7 @@ class ApiController < ApplicationController
                 if card.sold?
                   doc.error("PIN number already sold")
                 else
-                  card_by_pin = Card.include(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
+                  card_by_pin = Card.includes(:cardgroup).where(:pin => pin, :owner_id => @current_user.get_correct_owner_id).first
                   if card_by_pin and card_by_pin != card
                     card.callerid = card_by_pin.callerid
                     card_by_pin.callerid = nil
@@ -3925,7 +3925,7 @@ class ApiController < ApplicationController
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    cg = Cardgroup.include([:tariff, :lcr, :location, :tax]).where(:id => @values[:id], :owner_id => @current_user.get_correct_owner_id).first
+    cg = Cardgroup.includes([:tariff, :lcr, :location, :tax]).where(:id => @values[:id], :owner_id => @current_user.get_correct_owner_id).first
 
     if cg
       doc.cardgroup {
@@ -3961,7 +3961,7 @@ class ApiController < ApplicationController
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    cg = Cardgroup.include([:tariff, :lcr, :location, :tax]).where(:id => @values[:id], :owner_id => @current_user.get_correct_owner_id).first
+    cg = Cardgroup.includes([:tariff, :lcr, :location, :tax]).where(:id => @values[:id], :owner_id => @current_user.get_correct_owner_id).first
     cards_size = @values[:quantity].to_i < 1 ? 1 : @values[:quantity].to_i
     if cg
       cards = cg.cards.where(:sold => 0).limit(cards_size).order("rand()")
