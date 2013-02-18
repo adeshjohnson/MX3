@@ -745,6 +745,12 @@
 	<td>DIDs quantity: 3</td>
 	<td></td>
 </tr>
+<!--pirmas sakinys paprastas tekstas, antras sakinys paryškintas, trečias - pabrauktas-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>You can choose to which Trunk route calls from this DID. Trunk owner can be other company. Make sure you understand what you are doing here!&lt;/ </td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
@@ -768,6 +774,27 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>DIDs quantity: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID reserved</td>
+	<td></td>
+</tr>
+<!--pirmas sakinys paprastas tekstas, antras sakinys paryškintas, trečias - pabrauktas-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>You can choose to which Trunk route calls from this DID. Trunk owner can be other company. Make sure you understand what you are doing here!</td>
 	<td></td>
 </tr>
 <!--# when interval not entered.-->

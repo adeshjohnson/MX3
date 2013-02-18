@@ -816,11 +816,6 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>email_batch_size</td>
-	<td>50</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>email_from</td>
 	<td></td>
 </tr>
@@ -2291,11 +2286,7 @@
 	<td>1</td>
 </tr>
 -->
-<tr>
-	<td>open</td>
-	<td>/billing/emails/list_users/31</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/emails/list_users/31</td> 	<td></td> </tr>-->
 <!--
 <tr>
 	<td>assertText</td>
@@ -2558,6 +2549,86 @@
 	<td></td>
 </tr>
 -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/send_emails/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=to_be_sent_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=to_be_sent_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=to_be_sent_6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=items_per_page</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list_users/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1 2 3</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
