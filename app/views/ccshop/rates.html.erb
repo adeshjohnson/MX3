@@ -23,8 +23,8 @@
       <% @dgroups.each_with_index { |dg, i| %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
 
-            <td><%= draw_flag_by_code dg.flag %> <%= h dg.name %></td>
-            <td><%= h dg.desttype %></td>
+            <td id="code_<%= dg.id %>"><%= draw_flag_by_code dg.flag %> <%= h dg.name %></td>
+            <td id="desttype_<%= dg.id %>"><%= h dg.desttype %></td>
 
 
             <%
@@ -42,6 +42,7 @@
                arates = crate.acustratedetails if crate
                exchange_rate = @exchange_rate
                exchange_rate = @cust_exchange_rate if crate
+               
 
                if arates.size == 0
                  price = 0
@@ -64,9 +65,9 @@
             <td align="center"><%= link_to b_view + _('View'), {:controller => :destination_groups, :action => :dg_list_user_destinations, :id => dg.id}, :onclick => "window.open(this.href,'new_window','height=400,width=600');return false;" %></td>
             <% if show_rr %>
                 <% if @show_values_without_vat == 1 %>
-                    <td align="center"><%= nice_number_currency(price, exchange_rate) if arates.size > 0 %></td>
+                    <td id="rate_<%= dg.id %>" align="center"><%= nice_number_currency(price, exchange_rate) if arates.size > 0 %></td>
                 <% end %>
-                <td align="center"><%= nice_number_currency(@cardgroup.get_tax.count_tax_amount(price), exchange_rate) if arates.size > 0 %></td>
+                <td id="rate_tax_<%= dg.id %>" align="center"><%= nice_number_currency(@cardgroup.get_tax.count_tax_amount(price) + exchange_rate) if arates.size > 0 %></td>
             <% else %>
                 <td colspan="3" align="center"><%= link_to b_rates + _('Check_advanced_rates'), :action => 'user_advrates', :id => dg.id %> </td>
             <% end %>
@@ -119,48 +120,37 @@
                 <th align="left"><%= _('Name') %></th>
             <% end %>
 
-            <% if @show_values_without_vat == 1 %>
-                <th colspan=2 align="center"><%= _('Rate') %> (<%= session[:show_currency] %>)</th>
-            <% else %>
-                <th align="center"><%= _('Rate_with_VAT') %> (<%= session[:show_currency] %>)</th>
-            <% end %>
+            <th align="center"><%= _('Rate') %> (<%= session[:show_currency] %>)</th>
+            <th align="center"><%= _('Rate_with_VAT') %> (<%= session[:show_currency] %>)</th>
 
-            <% if @show_values_without_vat == 1 %>
-                <th colspan=2 align="center"><%= _('Connection_Fee') %> (<%= session[:show_currency] %>)</th>
-            <% else %>
+                <th align="center"><%= _('Connection_Fee') %> (<%= session[:show_currency] %>)</th>
                 <th align="center"><%= _('Connection_Fee_with_VAT') %> (<%= session[:show_currency] %>)</th>
-            <% end %>
 
             <th align="center"><%= _('Increment') %> </th>
           </tr>
 
           <% @rates.each_with_index { |rate, i| %>
               <tr class="row<%= (i % 2 + 1).to_s %>">
-                <td><%= draw_flag rate.destination.direction.code %><%= h(rate.destination.direction.name) %></td>
+                <td id="<%= rate.id %>"><%= draw_flag rate.destination.direction.code %><%= h(rate.destination.direction.name) %></td>
                 <% if @use_lata %>
-                    <td><%= h(rate.destination.prefix) %></td>
-                    <td><%= h(rate.destination.city) %></td>
-                    <td><%= h(rate.destination.state) %></td>
-                    <td><%= h(rate.destination.lata) %></td>
-                    <td><%= h(rate.destination.tier) %></td>
-                    <td><%= h(rate.destination.ocn) %></td>
-                    <td><%= h(rate.destination.name) %></td>
+                    <td id="prefix_<%= rate.id -%>"><%= h(rate.destination.prefix) %></td>
+                    <td id="city_<%= rate.id -%>"><%= h(rate.destination.city) %></td>
+                    <td id="state_<%= rate.id -%>"><%= h(rate.destination.state) %></td>
+                    <td id="lata_<%= rate.id -%>"><%= h(rate.destination.lata) %></td>
+                    <td id="tier_<%= rate.id -%>"><%= h(rate.destination.tier) %></td>
+                    <td id="ocn_<%= rate.id %>"><%= h(rate.destination.ocn) %></td>
+                    <td id="name_<%= rate.id %>"><%= h(rate.destination.name) %></td>
                 <% else %>
-                    <td><%= h(rate.destination.prefix) %></td>
-                    <td><%= h(rate.destination.subcode) %></td>
-                    <td><%= h(rate.destination.name) if rate.destination.name %></td>
+                    <td id="prefix_<%= rate.id %>"><%= h(rate.destination.prefix) %></td>
+                    <td id="subcode_<%= rate.id %>"><%= h(rate.destination.subcode) %></td>
+                    <td id="name_<%= rate.id %>"><%= h(rate.destination.name) if rate.destination.name %></td>
                 <% end %>
 
-                <% if @show_values_without_vat == 1 %>
-                    <td align="center"><%= nice_number @rates_cur2[rate.id] %></td>
-                <% end %>
-                <td align="center"><%= nice_number(@rates_cur2[rate.id] + @cardgroup.get_tax.count_tax_amount(@rates_cur2[rate.id])) %></td>
-                <% if @show_values_without_vat == 1 %>
-                    <td align="center"><%= nice_number @rates_free2[rate.id] %></td>
-                <% end %>
-
-                <td align="center"><%= nice_number(@rates_free2[rate.id] + @cardgroup.get_tax.count_tax_amount(@rates_free2[rate.id])) %></td>
-                <td align="center"><%= @rates_d[rate.id] %></td>
+                <td id="rate_<%= rate.id %>" align="center"><%= nice_number @rates_cur2[rate.id] %></td>
+                <td id="rate_tax_<%= rate.id %>" align="center"><%= nice_number(@rates_cur2[rate.id] + @cardgroup.get_tax.count_tax_amount(@rates_cur2[rate.id])) %></td>
+                <td id="fee_<%= rate.id %>" align="center"><%= nice_number @rates_free2[rate.id] %></td>
+                <td id="fee_tax_<%= rate.id %>" align="center"><%= nice_number(@rates_free2[rate.id] + @cardgroup.get_tax.count_tax_amount(@rates_free2[rate.id])) %></td>
+                <td id="inc_<%= rate.id %>" align="center"><%= @rates_d[rate.id] %></td>
           <% } %>
         </table>
 
