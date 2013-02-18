@@ -1153,12 +1153,12 @@ class CallcController < ApplicationController
         if enable_debug == 1
           MorLog.my_debug("Need to send warning_balance email to: #{user.id} #{user.username} #{user.email}")
         end
-        email= Email.where(:name => 'warning_balance_email', owner_id => user.owner_id).first
+        email= Email.where(:name => 'warning_balance_email', :owner_id => user.owner_id).first
         unless email
           owner = user.owner
           if owner.usertype == "reseller"
             owner.check_reseller_emails
-            email= Email.where(:name => 'warning_balance_email', owner_id => user.owner_id).first
+            email= Email.where(:name => 'warning_balance_email', :owner_id => user.owner_id).first
           end
         end
         variables = email_variables(user)
