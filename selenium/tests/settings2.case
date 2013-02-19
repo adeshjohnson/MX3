@@ -312,6 +312,123 @@
 	<td>off</td>
 </tr>
 <!--<tr> 	<td>click</td> 	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>System time zone daylight savings</td> 	<td></td> </tr> <tr> 	<td>check</td> 	<td>id=system_time_zone_daylight_savings</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=system_time_zone_daylight_savings</td> 	<td>on</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=system_time_zone_daylight_savings</td> 	<td>on</td> </tr> <tr> 	<td>uncheck</td> 	<td>id=system_time_zone_daylight_savings</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=system_time_zone_daylight_savings</td> 	<td>off</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=system_time_zone_daylight_savings</td> 	<td>off</td> </tr>-->
+<!--global settings timeout-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/global_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>timeout_response</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>timeout_digit</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>timeout_response</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>timeout_digit</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>timeout_response</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>timeout_digit</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>timeout_response</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>timeout_digit</td>
+	<td>10</td>
+</tr>
+<!--custom login page-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Login Page Text:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=login_page_text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Front Page Text:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=frontpage_text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_page_text</td>
+	<td>&lt;marquee behavior=alternate width=&quot;190&quot; scrollamount=&quot;7&quot; scrolldelay=&quot;96&quot; height=&quot;20&quot; bgcolor=&quot;#E0FFFF&quot;&gt;&lt;font size=&quot;5&quot;&gt;Welcome to MOR&lt;/font&gt;&lt;/marquee&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Welcome to MOR</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
