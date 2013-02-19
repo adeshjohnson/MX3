@@ -66,7 +66,7 @@ class CcpanelController < ApplicationController
 
 
   def card_details
-    @page_title = _('Calling_Card_Panel')
+    @page_title = _('Card')
     @cg = @card.cardgroup
   end
 
