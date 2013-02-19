@@ -67,7 +67,7 @@
                 <% if @show_values_without_vat == 1 %>
                     <td id="rate_<%= dg.id %>" align="center"><%= nice_number_currency(price, exchange_rate) if arates.size > 0 %></td>
                 <% end %>
-                <td id="rate_tax_<%= dg.id %>" align="center"><%= nice_number_currency(@cardgroup.get_tax.count_tax_amount(price) + exchange_rate) if arates.size > 0 %></td>
+                <td id="rate_tax_<%= dg.id %>" align="center"><%= nice_number_currency(@cardgroup.get_tax.count_tax_amount(price) + price, exchange_rate) if arates.size > 0 %></td>
             <% else %>
                 <td colspan="3" align="center"><%= link_to b_rates + _('Check_advanced_rates'), :action => 'user_advrates', :id => dg.id %> </td>
             <% end %>
