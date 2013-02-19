@@ -1,0 +1,15 @@
+<div align="center">
+
+  <table class='page_title2' width="100%">
+    <tr>
+      <td align="center">
+        <% for st in 'A'..'Z' %>
+            <%=raw "<b>" if st == @st %>
+            <%=raw link_to st, :action => params[:action], :id => @letter_select_header_id, :st => st %>
+            <%=raw "</b>" if st == @st %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+</div>

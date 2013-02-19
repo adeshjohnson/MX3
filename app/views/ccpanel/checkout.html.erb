@@ -1,0 +1,36 @@
+<%= render_component(:action => "display_cart", :params => {:context => :checkout}) %>
+
+<% if "paypal" %>
+    <br/>
+    <div class="separator"></div>
+    <br/>
+    <%
+       if @paypal_test == 1
+         amount = 0.01
+       else
+         amount = @total_amount.to_f
+       end
+    %>
+
+    <%= image_tag("logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal") %>
+    <br/>
+    <%= paypal_form_tag %>
+    <%= paypal_setup @order.id, amount, Confline.get_value("PayPal_Email"), :item_name => "Calling Card", :return_url => @paypal_return_url, :cancel_url => @paypal_cancel_url, :notify_url => @paypal_ipn_url, :currency => @paypal_currency %>
+    <%= b_money + _('Please_press_here_to_pay') %> <%= nice_number amount %>  <%= @paypal_currency %>
+    <%= submit_tag "PayPal", :disable_with => _('Processing..') %>
+    <%= end_form_tag %>
+<% end %>
+
+<% if not "hanza" %>
+    <br/>
+    <div class="separator"></div>
+    <br/>
+    <img src="http://www.hansa.lt/img/logo_hanza.gif"/>
+    <%= hanza_form_tag %>
+    <%= hanza_setup @order.id, @cart.total_show_price, :item_name => Hanza_Item_Name, :account => Hanza_Account, :name => Hanza_Company_Name, :snd_id => Hanza_Snd_ID, :return_url => @hanza_return_url, :cancel_url => @hanza_cancel_url, :notify_url => @hanza_ipn_url %>
+    <%= _('Please_press_here_to_pay') %> <%= my_number_to_currency(@cart.total_show_price, @cart.show_currency) %> <%= _ 'using' %>  <%= submit_tag "Hanza", :disable_with => _('Processing..') %>
+    <%= end_form_tag %>
+<% end %>
+
+<br/>
+<br/>

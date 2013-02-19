@@ -1,0 +1,16 @@
+<div class="catalogentry">
+  <%= image_tag "cards/#{@cg.image}", :style => 'border-style:none', :title => @cg.name, :size => "150x100" %>
+
+  <h3><%= h @cg.name %></h3>
+  <%= @cg.description %>
+  <br/><br/>
+
+  <div><%= _('Balance') %>: <span class="catalogprice"><%= nice_number(@cg.get_tax.apply_tax(@card.balance)) %> </span>
+  </div>
+  <br/><br/>
+  <%= _('First_use') %>: <%= nice_date_time @card.first_use %>
+  <br/>
+  <br/>
+</div>
+<div class="separator">&nbsp;</div>
+

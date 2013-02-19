@@ -1,0 +1,27 @@
+<br>
+
+<%= form_tag(:action => 'speeddial_update', :id => @phonebook) do %>
+    <table width="100%" class="maintable">
+      <tr>
+        <th align="left"><%= _('Name') %></th>
+        <th align="left"><%= _('Number') %></th>
+        <th align="left"><%= _('Speed_Dial') %></th>
+        <th align="center"><%= _('Created_at') %></th>
+        <th align="center"><%= _('Updated_at') %></th>
+      </tr>
+
+
+      <tr class="row1">
+
+        <td align="left"><%= text_field 'phonebook', 'name', "class" => "input", :size => "30", :maxlength => "50" %></td>
+        <td align="left"><%= text_field 'phonebook', 'number', "class" => "input", :size => "20", :maxlength => "50" %></td>
+        <td align="left"><%= text_field 'phonebook', 'speeddial', "class" => "input", :size => "10", :maxlength => "10" %></td>
+        <td align="center"><%= nice_date_time @phonebook.added %></td>
+        <td align="center"><%= nice_date_time @phonebook.updated_at %></td>
+      </tr>
+    </table>
+
+    <br><br>
+    <%= submit_tag 'Update', :disable_with => _('Processing..') %>
+<% end %>
+
