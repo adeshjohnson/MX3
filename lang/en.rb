@@ -504,6 +504,7 @@ Localization.define('en') do |l|
   l.store 'Please_press_here_to_pay', 'Please press here to pay'
   l.store 'Shopping_cart', 'Shopping cart'
   l.store 'Card', 'Card'
+  l.store 'Calling_Card_Panel', 'Calling Card Panel'
   l.store 'Each', 'Each'
   l.store 'Thank_you_for_your_order', 'Thank you for your order!'
   l.store 'Your_card', 'Your card'

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 #require 'pdf/wrapper'
 
-class CcshopController < ApplicationController
+class CcpanelController < ApplicationController
 
   #before_filter :cdr2calls, :check_localization
   before_filter :check_localization
@@ -16,10 +16,10 @@ class CcshopController < ApplicationController
   end
 
   def list
-    @page_title = _('Cards')
+    @page_title = _('Calling_Card_Panel')
     join_sql = "LEFT JOIN (SELECT cardgroup_id, count(*) AS 'not_sold_count' FROM cards where sold = 0 GROUP BY cardgroup_id) AS not_sold ON cardgroups.id = not_sold.cardgroup_id"
-    session[:ccshop_display_paypal] = Confline.get_value("Paypal_Enabled", 0)
-    if session[:ccshop_display_paypal].to_i == 1
+    session[:ccpanel_display_paypal] = Confline.get_value("Paypal_Enabled", 0)
+    if session[:ccpanel_display_paypal].to_i == 1
       @cardgroups = Cardgroup.find(:all, :include => [:tax], :joins => join_sql, :conditions => "owner_id = 0 AND not_sold_count > 0", :order => "name ASC")
     end
     session[:default_currency] = Currency.find(1).name
@@ -28,7 +28,7 @@ class CcshopController < ApplicationController
 
   def try_to_login
     if session[:cclogin] == true
-      redirect_to :controller => "ccshop", :action => "index" and return false
+      redirect_to :controller => "ccpanel", :action => "index" and return false
     end
 
     if CC_Single_Login == 1
@@ -46,10 +46,10 @@ class CcshopController < ApplicationController
       session[:default_currency] = Currency.find(1).name
       session[:show_currency] = session[:default_currency]
       flash[:status] = _('login_successfully')
-      redirect_to :controller => "ccshop", :action => "card_details" and return false
+      redirect_to :controller => "ccpanel", :action => "card_details" and return false
     else
       flash[:notice] = _('bad_cc_login')
-      redirect_to :controller => "ccshop", :action => "index" and return false
+      redirect_to :controller => "ccpanel", :action => "index" and return false
     end
   end
 
@@ -59,14 +59,14 @@ class CcshopController < ApplicationController
     session[:card_id] = nil
     session[:card_number] = nil
     flash[:status] = _('logged_off')
-    redirect_to :controller => "ccshop", :action => "index" and return false
+    redirect_to :controller => "ccpanel", :action => "index" and return false
   end
 
   ############# MENU ####################
 
 
   def card_details
-    @page_title = _('Card')
+    @page_title = _('Calling_Card_Panel')
     @cg = @card.cardgroup
   end
 
@@ -140,9 +140,9 @@ class CcshopController < ApplicationController
     @page_title = _('Checkout')
     @page_icon = "cart_edit.png"
 
-    @paypal_return_url = Web_URL + Web_Dir + "/ccshop/paypal_complete"
-    @paypal_cancel_url = Web_URL + Web_Dir + "/ccshop/display_cart"
-    @paypal_ipn_url = Web_URL + Web_Dir + "/ccshop/paypal_ipn"
+    @paypal_return_url = Web_URL + Web_Dir + "/ccpanel/paypal_complete"
+    @paypal_cancel_url = Web_URL + Web_Dir + "/ccpanel/display_cart"
+    @paypal_ipn_url = Web_URL + Web_Dir + "/ccpanel/paypal_ipn"
     @paypal_currency = Confline.get_value("Paypal_Default_Currency")
 
     #	@hanza_ipn_url = "https://lt.hanza.net/cgi-bin/lip/pangalink.jsp"
@@ -539,7 +539,7 @@ class CcshopController < ApplicationController
 
     unless @card && @card.cardgroup
       flash[:notice] = _('Cardgroup_was_not_found')
-      redirect_to :controller => "ccshop", :action => "index" and return false
+      redirect_to :controller => "ccpanel", :action => "index" and return false
     end
   end
 

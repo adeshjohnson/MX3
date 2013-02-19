@@ -5,7 +5,7 @@
   <script type="text/javascript">var mor_web_dir = '<%=Web_Dir%>';</script>
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag "ccshop" %>
+  <%= stylesheet_link_tag "ccpanel" %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,7 +41,7 @@
                   <tr>
                     <td align="right" class="nb">
                       <b> <%= _('Card_number') %>: </b><%= session[:card_number] %>
-                      <% link_to _('logoff'), :controller => "ccshop", :action => "logout" %>
+                      <% link_to _('logoff'), :controller => "ccpanel", :action => "logout" %>
                     </td>
                   </tr>
               <% end %>
@@ -83,14 +83,11 @@
                 <script type="text/javascript">
                     d5 = new dTree('d5');
                     d5.add(0, -1, '<%= _('MENU') %>');
-                    d5.add(1, 0, '<%= _('Details') %>', '<%= Web_Dir %>/ccshop/card_details');
-                    d5.add(2, 0, '<%= _('Calls') %>', '<%= Web_Dir %>/ccshop/call_list');
-                    <%if session[:ccshop_display_paypal].to_i == 1%>
-                    d5.add(3, 0, '<%= _('Shop') %>', '<%= Web_Dir %>/ccshop/index');
-                    <%end%>
-                    d5.add(4, 0, '<%= _('Rates') %>', '<%= Web_Dir %>/ccshop/rates');
-                    d5.add(5, 0, '<%= _('Speed_Dials') %>', '<%= Web_Dir %>/ccshop/speeddials');
-                    d5.add(6, 0, '<%= _('Logoff') %>', '<%= Web_Dir %>/ccshop/logout');
+                    d5.add(1, 0, '<%= _('Details') %>', '<%= Web_Dir %>/ccpanel/card_details');
+                    d5.add(2, 0, '<%= _('Calls') %>', '<%= Web_Dir %>/ccpanel/call_list');
+                    d5.add(4, 0, '<%= _('Rates') %>', '<%= Web_Dir %>/ccpanel/rates');
+                    d5.add(5, 0, '<%= _('Speed_Dials') %>', '<%= Web_Dir %>/ccpanel/speeddials');
+                    d5.add(6, 0, '<%= _('Logoff') %>', '<%= Web_Dir %>/ccpanel/logout');
                     document.write(d5);
                 </script>
 
@@ -105,7 +102,7 @@
             <% else %>
                 <div class="nb">
                   <b><%= _('Login') %>:</b>
-                  <%= form_tag(:controlle => "ccshop", :action => 'try_to_login') do %>
+                  <%= form_tag(:controlle => "ccpanel", :action => 'try_to_login') do %>
                       <% if CC_Single_Login == 1 %>
                           <%= text_field_tag 'login', "", "class" => "input", :size => "15", :maxlength => "20" %>
                       <% else %>
