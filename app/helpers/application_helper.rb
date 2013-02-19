@@ -774,8 +774,8 @@ module ApplicationHelper
     d = ""
     if device
       d = nice_device_type(device, opts) + "/"
-      d += device.name if !device.username.blank? and device.device_type != "FAX"
-      d += device.extension if device.device_type == "FAX" or device.name.length == 0 or device.username.blank?
+      d += device.name.to_s if !device.username.blank? and device.device_type != "FAX"
+      d += device.extension.to_s if device.device_type == "FAX"  or !device.name or device.name.length == 0 or device.username.blank?
     end
 
     d.html_safe
