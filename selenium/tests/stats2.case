@@ -833,6 +833,82 @@
 	<td>2011-05-31</td>
 	<td></td>
 </tr>
+<!--loss making calls duration-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/loss_making_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[4]</td>
+	<td>Duration</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>billsec_26</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>billsec_27</td>
+	<td>00:00:50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>total_duration</td>
+	<td>00:01:40</td>
+</tr>
 </tbody></table>
 </body>
 </html>
