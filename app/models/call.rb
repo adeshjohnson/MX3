@@ -581,7 +581,7 @@ class Call < ActiveRecord::Base
 
                  SUM(#{user_price}) * #{options[:exchange_rate].to_d} as total_user_price,
                  SUM(#{reseller_price}) * #{options[:exchange_rate].to_d} as total_reseller_price,
-                 SUM(#{SqlExport.admin_reseller_price_sql}) * #{options[:exchange_rate].to_d} as total_reseller_price_with_dids,
+                 SUM(#{SqlExport.admin_reseller_price_no_dids_sql}) * #{options[:exchange_rate].to_d} as total_reseller_price_with_dids,
                  SUM(did_price) * #{options[:exchange_rate].to_d} as total_did_price,
                  SUM(did_prov_price) * #{options[:exchange_rate].to_d} as total_did_prov_price,
                  SUM(did_inc_price) * #{options[:exchange_rate].to_d} as total_did_inc_price,
