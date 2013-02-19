@@ -4,18 +4,19 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>periodic_actions</title>
+<title>update_currencies_daily_actions</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">periodic_actions</td></tr>
+<tr><td rowspan="1" colspan="3">update_currencies_daily_actions</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
+<!--login-->
 <tr>
 	<td>type</td>
 	<td>login_username</td>
@@ -36,6 +37,63 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<!--updating currencies via daily actions-->
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=GBP_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=XOF_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/daily_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>2013</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=GBP_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=XOF_exchange_rate</td>
+	<td>1.0</td>
+</tr>
+<!--testing periodic actions-->
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/delete_conflines</td>
