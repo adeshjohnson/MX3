@@ -1768,7 +1768,11 @@ class ApiController < ApplicationController
           if destination
             dg = destination.destinationgroup
             rate = Rate.includes([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
-            if rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
+            customrate = Customrate.includes(:acustratedetails).where("customrates.destinationgroup_id = #{dg.id} AND customrates.user_id = #{user.id}").first
+            if customrate and customrate.acustratedetails.size > 0
+              text = "#{customrate.acustratedetails[0].price}\##{destination.name}\##{destination.prefix}"
+              render :text => text.to_s
+            elsif rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
               text = "#{rate.aratedetails[0].price}\##{destination.name}\##{destination.prefix}" if rate.aratedetails.size > 0
               text = "#{rate.ratedetails[0].rate}\##{destination.name}\##{destination.prefix}" if rate.ratedetails.size > 0
               render :text => text.to_s
