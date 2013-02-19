@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_7']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=devices_check_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/custom_rates/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dg_new</td>
+	<td>label=Albania MOB</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=dg_new</td>
+	<td>label=Lithuania MOB</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/1?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>0.987</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/2?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>0.987</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/3?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>0.987</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate1</td>
+	<td>1.2356</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate17</td>
+	<td>1.2356</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate250</td>
+	<td>1.2356</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=9320</td>
+	<td></td>
+</tr>
+<!--useris turi custom rate sitam prefixui, todel rodo kaina is custom rates-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.987#Afghanistan Kabul#9320</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=542214</td>
+	<td></td>
+</tr>
+<!--useris neturi custom rate sitam prefixui, todel rodo kaina is tarifu puslapio. -->
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.2356#Argentina La Plata#542214</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=101&amp;prefix=542214</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_tariff_id</td>
+	<td>label=Wholesale - Test Tariff for Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/252</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>0.347</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/ratedetail_edit/261</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ratedetail_rate</td>
+	<td>0.347</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=93</td>
+	<td></td>
+</tr>
+<!--useris turi custom rate sitam prefixui, todel rodo kaina is custom rates-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.987#Afghanistan proper#93</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=54</td>
+	<td></td>
+</tr>
+<!--useris neturi custom rate sitam prefixui, todel rodo kaina is tarifu puslapio. -->
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.347#Argentina proper#54</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
