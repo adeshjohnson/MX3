@@ -265,7 +265,7 @@ class CallsController < ApplicationController
     channel = params[:channel]
 
     if server_id.to_i > 0 and channel.to_s.length > 0
-      server = Server.find(:first, :conditions => "id = #{server_id.to_i}")
+      server = Server.find(:first, :conditions => "server_id = #{server_id.to_i}")
 
       if server
         if ast_18?
