@@ -418,7 +418,7 @@ class LcrsController < ApplicationController
     if filename
       filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
       if params[:test].to_i != 1
-        send_file(filename)
+        send_data File.open(filename).read, :filename => filename
       else
         render :text => filename
       end

@@ -4246,7 +4246,7 @@ class ApiController < ApplicationController
         `cd #{path}; zip #{name}.zip #{name}`
         `rm -rf #{path}/#{name}`
         fsrc = "#{path}/#{name}.zip"
-        send_file(fsrc, :type => "application/zip")
+        send_data(File.open(fsrc).read, :filename => fsrc, :type => "application/zip")
       end
     end
   end

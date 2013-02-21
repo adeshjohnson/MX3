@@ -1229,7 +1229,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       if filename
         filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
         if params[:test].to_i != 1
-          send_file(filename)
+          send_data(File.open(filename).read, :filename => filename)
         else
           render :text => filename
         end
@@ -1281,7 +1281,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     if filename
       filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
       if params[:test].to_i != 1
-        send_file(filename)
+        send_data(File.open(filename).read, :filename => filename)
       else
         render :text => filename
       end
@@ -2519,7 +2519,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     filename = provider.provider_calls_csv({:tz => current_user.time_offset, :direction => @direction, :call_type => @call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i})
     filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
     if params[:test].to_i != 1
-      send_file(filename)
+      send_data(File.open(filename).read, :filename => filename)
     else
       render :text => filename
     end
