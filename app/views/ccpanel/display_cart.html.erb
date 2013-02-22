@@ -19,7 +19,7 @@
       <% cg = item.cardgroup -%>
       <tr>
         <td></td>
-        <td valign="top"><%= image_tag "cards/#{cg.image}", :style => 'border-style:none', :title => cg.name, :size => "150x100" %></td>
+        <td valign="top"><%= image_tag "/images/cards/#{cg.image}", :style => 'border-style:none', :title => cg.name, :size => "150x100" %></td>
         <td align="left" style="padding-left:1em;" nowrap>&nbsp;<b><%= h(cg.name) %></b></td>
         <td align="center" valign="middle"></td>
         <% item_price = item.price + cg.get_tax.count_tax_amount(item.price) -%>

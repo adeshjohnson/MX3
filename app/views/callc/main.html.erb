@@ -31,31 +31,31 @@
           <% if  @vouch_enabled == 1 %>
               <br/>
               <br/>
-              <%= link_to image_tag("logo/vouchers_logo.png", :style => 'border-style:none', :title => "Vouchers"), :controller => "vouchers", :action => "voucher_use" %>
+              <%= link_to image_tag("/images/logo/vouchers_logo.png", :style => 'border-style:none', :title => "Vouchers"), :controller => "vouchers", :action => "voucher_use" %>
           <% end %>
 
           <% if @pp_enabled == 1 %>
               <br/>
               <br/>
-              <%= link_to image_tag("logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal", :width => '190'), :controller => "payments", :action => "paypal" %>
+              <%= link_to image_tag("/images/logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal", :width => '190'), :controller => "payments", :action => "paypal" %>
           <% end %>
 
           <% if @wm_enabled == 1 %>
               <br/>
               <br/>
-              <%= link_to image_tag("logo/webmoney_logo.gif", :style => 'border-style:none', :title => "WebMoney", :width => '190'), :controller => "payments", :action => "webmoney" %>
+              <%= link_to image_tag("/images/logo/webmoney_logo.gif", :style => 'border-style:none', :title => "WebMoney", :width => '190'), :controller => "payments", :action => "webmoney" %>
           <% end %>
 
           <% if @lp_enabled == 1 %>
               <br/>
               <br/>
-              <%= link_to image_tag("logo/linkpoint_logo.jpg", :style => 'border-style:none', :title => "LinkPoint", :width => '190'), :controller => "payments", :action => "linkpoint" %>
+              <%= link_to image_tag("/images/logo/linkpoint_logo.jpg", :style => 'border-style:none', :title => "LinkPoint", :width => '190'), :controller => "payments", :action => "linkpoint" %>
           <% end %>
 
           <% if  @cp_enabled == 1 %>
               <br/>
               <br/>
-              <%= link_to image_tag("logo/cyberplat_logo.gif", :style => 'border-style:none', :title => "Cyberplat") + image_tag("logo/cyberplat_logo.jpg", :style => 'border-style:none', :title => "Cyberplat"), :controller => "payments", :action => "cyberplat" %>
+              <%= link_to image_tag("/images/logo/cyberplat_logo.gif", :style => 'border-style:none', :title => "Cyberplat") + image_tag("/images/logo/cyberplat_logo.jpg", :style => 'border-style:none', :title => "Cyberplat"), :controller => "payments", :action => "cyberplat" %>
           <% end %>
 
           <% if  @ob_enabled == 1 %>
@@ -64,7 +64,7 @@
               <table>
                 <tr>
                   <td>
-                    <%= link_to image_tag("logo/ouroboros_logo.jpg", :style => 'border-style:none', :title => "Ouroboros", :width => '190'), :controller => "payments", :action => "ouroboros" %>
+                    <%= link_to image_tag("/images/logo/ouroboros_logo.jpg", :style => 'border-style:none', :title => "Ouroboros", :width => '190'), :controller => "payments", :action => "ouroboros" %>
                   </td>
                 </tr>
                 <% if @ob_link_name.to_s != "" and @ob_link_url.to_s != "" %>

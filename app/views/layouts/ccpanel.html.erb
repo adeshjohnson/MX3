@@ -21,9 +21,9 @@
         <tr>
           <td valign="top">
             <% if session[:logo_picture] %>
-                <%= image_tag session[:logo_picture] %>
+                <%= image_tag "/images/" + session[:logo_picture].to_s %>
             <% else %>
-                <%= image_tag Confline.get_value("Logo_picture") %>
+                <%= image_tag "/images/" + Confline.get_value("Logo_picture").to_s %>
             <% end %>
           </td>
           <td>

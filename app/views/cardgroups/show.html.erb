@@ -8,7 +8,7 @@
 <b><%= _('Card_group') %> </b> : <%= @cardgroup.name %>
 
 <% tax = @cardgroup.get_tax %>
-<%= image_tag "cards/#{@cardgroup.image}", :style => 'border-style:none', :title => @cardgroup.name, :size => "150x100" %>
+<%= image_tag "/images/cards/#{@cardgroup.image}", :style => 'border-style:none', :title => @cardgroup.name, :size => "150x100" %>
 
 <br/><br/>
 <div style="min-width: 775px;">

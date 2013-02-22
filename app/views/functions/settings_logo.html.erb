@@ -15,5 +15,5 @@
 <br/>
 <% if @logo %>
     <b><%= @logo %></b><br/><br/>
-    <%= image_tag @logo, :alt => 'Logo' %>
+    <%= image_tag ("/images/" + @logo), :alt => 'Logo' %>
 <% end %>

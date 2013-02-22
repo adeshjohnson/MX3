@@ -1,7 +1,7 @@
 <% if @enabled == 1 and @user_enabled == 1 %>
 
     <div align="right">
-      <a href="http://www.cyberplat.ru" target="_blank"><%= image_tag("logo/cyberplat_logo.gif", :style => 'border-style:none', :title => "Cyberplat") %></a>
+      <a href="http://www.cyberplat.ru" target="_blank"><%= image_tag("/images/logo/cyberplat_logo.gif", :style => 'border-style:none', :title => "Cyberplat") %></a>
     </div>
 
     <%= form_tag :action => 'cyberplat_pay', :id => params[:id] do %>

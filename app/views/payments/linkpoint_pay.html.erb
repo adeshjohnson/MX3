@@ -1,5 +1,5 @@
 <% if @enabled.to_i == 1 %>
-    <div align="right"><%= image_tag("logo/cards.png", :style => 'border-style:none', :title => "Credit cards") %></div>
+    <div align="right"><%= image_tag("/images/logo/cards.png", :style => 'border-style:none', :title => "Credit cards") %></div>
     <%= form_tag(Linkpoint::Notification.get_ipn_url(Confline.get_value("Linkpoint_Test").to_i), :id => "lpform") do %>
         <%= raw linkpoint_setup(nil, @amount_with_vat, Confline.get_value("Linkpoint_StoreID"),
                             :item_name => session[:company] + " balance update",

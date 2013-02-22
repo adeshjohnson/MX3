@@ -28,7 +28,7 @@
 
           <tr class="row<%= (i % 2 + 1).to_s %>">
             <td align="center">
-              &nbsp;    <%= image_tag "cards/#{card.cardgroup.image}", :style => 'border-style:none', :title => card.cardgroup.name, :size => "70" %>
+              &nbsp;    <%= image_tag "/images/cards/#{card.cardgroup.image}", :style => 'border-style:none', :title => card.cardgroup.name, :size => "70" %>
             </td>
             <td align="center">
               <%= card.number %>

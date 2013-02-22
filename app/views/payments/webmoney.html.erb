@@ -1,6 +1,6 @@
 <% if @enabled == 1 %>
 
-    <div align="right"><%= image_tag("logo/webmoney_logo.gif", :style => 'border-style:none', :title => "WebMoney") %></div>
+    <div align="right"><%= image_tag("/images/logo/webmoney_logo.gif", :style => 'border-style:none', :title => "WebMoney") %></div>
 
     <%= form_tag :action => 'webmoney_pay', :id => params[:id] do %>
         <%= _('Please_enter_amount_to_update_your_balance') %>*: <%= text_field_tag 'amount', Confline.get_value("WebMoney_Default_Amount", @user.owner_id), "class" => "input", :size => "8", :maxlength => "8" %> <%= @currency %>

@@ -28,7 +28,7 @@
                 <% end %>
             <% else %>
                 <% if Confline.get_value("Show_logo_on_register_page", 0).to_i == 1 %>
-                    <%= link_to(image_tag(Confline.get_value("Logo_Picture", 0)), {:controller => "/callc", :action => "main"}, {:id => "company_logo", :title => Confline.get_value("Company", 0)}) %>
+                    <%= link_to(image_tag("/images/" + Confline.get_value("Logo_Picture", 0).to_s), {:controller => "/callc", :action => "main"}, {:id => "company_logo", :title => Confline.get_value("Company", 0)}) %>
                 <% end %>
             <% end %>
           </td>

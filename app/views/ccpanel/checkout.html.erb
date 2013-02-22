@@ -12,7 +12,7 @@
        end
     %>
 
-    <%= image_tag("logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal") %>
+    <%= image_tag("/images/logo/paypal_logo.gif", :style => 'border-style:none', :title => "PayPal") %>
     <br/>
     <%= paypal_form_tag %>
     <%= paypal_setup @order.id, amount, Confline.get_value("PayPal_Email"), :item_name => "Calling Card", :return_url => @paypal_return_url, :cancel_url => @paypal_cancel_url, :notify_url => @paypal_ipn_url, :currency => @paypal_currency %>

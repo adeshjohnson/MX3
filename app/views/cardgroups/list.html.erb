@@ -48,7 +48,7 @@
     <%= form_tag :action => 'cards_to_csv', :id => cg.id do %>
         <table class="maintable" width="100%">
           <tr class="row2">
-            <td id="picture_<%= cg.id %>" align="center" width="10%" rowspan=4><%= image_tag "cards/#{cg.image}", :style => 'border-style:none', :title => cg.name, :size => "150x100" %> </td>
+            <td id="picture_<%= cg.id %>" align="center" width="10%" rowspan=4><%= image_tag "/images/cards/#{cg.image}", :style => 'border-style:none', :title => cg.name, :size => "150x100" %> </td>
             <th id="name_column_<%= cg.id %>" align="left" colspan=2><%= _('Name') %></th>
             <th id="description_column_<%= cg.id %>" align="left" colspan=<%= length %>><%= _('Description') %></th>
             <th id="num_length_column_<%= cg.id %>" align="center" colspan=3><%= _('Number_length')+ "/" +_('Pin_length') %></th>

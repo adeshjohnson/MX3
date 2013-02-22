@@ -1,6 +1,6 @@
 <% if @enabled == 1 %>
 
-    <div align="right"><%= image_tag("logo/webmoney_logo.gif", :style => 'border-style:none', :title => "WebMoney") %></div>
+    <div align="right"><%= image_tag("/images/logo/webmoney_logo.gif", :style => 'border-style:none', :title => "WebMoney") %></div>
     <% gw = Confline.get_value("WebMoney_Gateway", @user.owner_id).to_i %>
 
     <%= form_tag(WebMoney::Notification.ipn_url(gw)) do %>
