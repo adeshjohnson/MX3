@@ -760,9 +760,11 @@ class ApplicationController < ActionController::Base
 
         #handling calleridpres
         if @device.calleridpres.to_s.length > 0
-          Extline.mcreate(default_context, i, "SetCallerPres", @device.calleridpres.to_s, @device.extension, device_id)
-          #enable this line for Asterisk 1.6 or 1.8++ and comment previous one
-          #Extline.mcreate(default_context, i, "Set", "CALLERPRES()=#{@device.calleridpres.to_s}", @device.extension, device_id)
+          if ast_18?
+            Extline.mcreate(default_context, i, "Set", "CALLERPRES()=#{@device.calleridpres.to_s}", @device.extension, device_id)
+          else
+            Extline.mcreate(default_context, i, "SetCallerPres", @device.calleridpres.to_s, @device.extension, device_id)
+          end
           i+=1
         end
 
