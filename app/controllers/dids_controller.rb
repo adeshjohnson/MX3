@@ -419,7 +419,7 @@ class DidsController < ApplicationController
   end
 
 
-  def update_did(did, status, comment)
+  def update_did(did, status, comment) 
     if status == "provider"
       did.language = params[:did][:language].to_s.strip
       did.provider_id = params[:did][:provider_id].to_s.strip if params[:did][:provider_id]
@@ -512,7 +512,9 @@ class DidsController < ApplicationController
       add_action(session[:user_id], 'did_terminated', did.id)
       flash[:status] = _('DID_terminated')
     end
-
+    if did.errors.size > 0
+      flash[:notice] = did.errors.first[1].to_s
+    end
   end
 
 

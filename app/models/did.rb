@@ -15,7 +15,7 @@ class Did < ActiveRecord::Base
   validates_format_of :did, :with => /^\d+$/, :message => _('DID_must_consist_only_of_digits'), :on => :create
 
   before_create :validate_provider
-  before_save :validate_device, :validate_user, :check_collisions_with_qf_rules
+  before_save :validate_device, :validate_user, :check_collisions_with_qf_rules, :conditions
   before_destroy :find_if_used_in_calls
 
   # ----- scopes -----------------------------
@@ -34,6 +34,13 @@ class Did < ActiveRecord::Base
 
 
   attr_accessor :closing
+
+  def conditions
+    if (self.user.usertype == "reseller") and self.dialplan_id.to_i > 0
+      errors.add(:did, _("Dont_be_so_smart"))
+      return false
+    end
+  end
 
   def validate_provider
     if !['admin', 'accountant'].include?(User.current.usertype)
