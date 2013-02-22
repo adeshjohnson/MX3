@@ -99,7 +99,7 @@
             <td align="center" id="billed_time_term_<%= i %>"><%= nice_time(row.terminating_billsec) %></td>
         <% end -%>
         <td align="center" id="duration_<%= i %>"><%= nice_time(row.duration) %></td>
-        <td align="right" id="answered_calls_<%= i %>"><%= row.answered_calls %></td>
+        <td align="right" id="answered_calls_<%= i %>"><%= row.answered_calls.to_i %></td>
         <td align="right" id="total_calls_<%= i %>"><%= row.total_calls %></td>
         <td align="right" id="asr_<%= i %>"><%= nice_number(row.asr) %> %</td>
         <td align="center" id="acd_<%= i %>"><%= nice_time(row.acd) %></td>
