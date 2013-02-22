@@ -1030,13 +1030,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use Failover Provider Test Provider - IAX2/22.33.44.55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_5 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider removed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
+	<td>Do not use Failover Provider Test Provider - IAX2/22.33.44.55 Provider_for_admin - SIP/0.0.0.0</td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>xpath=(//select[@name='select_prov'])[2]</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
 	<td>label=Provider_for_admin - SIP/0.0.0.0</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td>css=td.main_window &gt; div.nb &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1077,16 +1107,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Failover Provider: Do not use </td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>(2)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1582,7 +1602,7 @@
 <tr>
 	<td>assertText</td>
 	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
-	<td>Do not use Failover Provider common_use_provider - SIP/0.0.0.0 Provider common use - IAX2/0.0.0.0 Provider_for_admin - SIP/0.0.0.0 Test Provider - IAX2/22.33.44.55</td>
+	<td>Do not use Failover Provider common_use_provider - SIP/0.0.0.0 Provider common use - IAX2/0.0.0.0 Provider_for_admin - SIP/0.0.0.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -1851,13 +1871,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=option[value=&quot;3&quot;]</td>
-	<td>common_use_provider</td>
+	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;] &gt; option[value=&quot;4&quot;]</td>
+	<td>Provider common use</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>css=#f_providers_list &gt; select[name=&quot;select_prov&quot;]</td>
-	<td>label=common_use_provider</td>
+	<td>label=Provider common use</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
