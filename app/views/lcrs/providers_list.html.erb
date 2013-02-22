@@ -126,7 +126,7 @@
             <div id="f_providers_list" style="display:<%= !@lcr.no_failover? ? '' : 'none' %>;">
               <%=_('Failover_provider') %>:  <select name="select_prov" <%= "disabled" if (@other_providers + @providers).size == 0 %> >
               <option value="0"><%= _('Do_not_use_Failover_Provider') %></option>
-              <% for prov in @other_providers + @providers %>
+              <% for prov in @other_providers %>
                   <% device = prov.device %>
                   <option value="<%= prov.id %>" <%= 'selected' if prov.id == @lcr.failover_provider_id %>  >
                     <%= prov.name %>
