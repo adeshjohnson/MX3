@@ -24,3 +24,4 @@
 //= require scriptaculous/unittest
 //= require dtree
 //= require tab-view
+//= require_self
