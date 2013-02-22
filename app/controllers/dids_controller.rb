@@ -559,6 +559,10 @@ class DidsController < ApplicationController
         end
       end
       for di in @dids
+        if di.status.downcase == "reserved"
+          bad_num += 1
+          next
+        end
         if dp
           di.dialplan_id = dp.id
         end
@@ -1317,6 +1321,7 @@ ORDER BY dids.did ASC"
     @from = params[:from].to_i
     @till = params[:till].to_i
     active = params[:active].to_i
+    
     @opts = {:from => @from, :till => @till, :active => active.to_i}
 
     var = [@from, @till]
@@ -1354,6 +1359,7 @@ ORDER BY dids.did ASC"
     if active.to_i == 1
       cond << 'dids.status = ?'; var << 'active'
     end
+   
     @dids = Did.where([cond.join(" AND "), *var]).all
   end
 
