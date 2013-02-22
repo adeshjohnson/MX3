@@ -285,7 +285,8 @@ class DidsController < ApplicationController
     @back_controller = params[:back_controller] if params[:back_controller]
     @back_action = params[:back_action] if params[:back_action]
     #users
-    @free_users = User.find(:all, :select => "id, username, first_name, last_name, #{SqlExport.nice_user_sql}", :conditions => (reseller? ? ["hidden = 0 AND owner_id = ?", current_user.id] : "hidden = 0"), :order => "nice_user ASC")
+    @did.dialplan_id > 0 ? dp_cond = " AND usertype != 'reseller'" : dp_cond = ""
+    @free_users = User.select("id, username, first_name, last_name, #{SqlExport.nice_user_sql}").where((reseller? ? ["hidden = 0 AND owner_id = ?", current_user.id] : "hidden = 0" + dp_cond)).order("nice_user ASC")
 
     #devices
     @free_devices = []
@@ -490,6 +491,11 @@ class DidsController < ApplicationController
       add_action(session[:user_id], 'did_closed', did.id)
       flash[:status] = _('DID_closed')
     end
+    if did.dialplan_id > 0
+      if did.errors.size > 0
+        flash_errors_for(_('Did_was_not_updated'), did)
+      end
+    end
 
     #check if not assigned to reseller and user not reseller or user is reseller and did assigned to reseller
     if status == "reserved" and ((did.reseller_id == 0 and !reseller?) or (reseller? and did.reseller_id != 0))
@@ -511,9 +517,6 @@ class DidsController < ApplicationController
       extlines_did_not_active(did.id)
       add_action(session[:user_id], 'did_terminated', did.id)
       flash[:status] = _('DID_terminated')
-    end
-    if did.errors.size > 0
-      flash[:notice] = did.errors.first[1].to_s
     end
   end
 
