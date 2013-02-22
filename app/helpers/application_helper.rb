@@ -1289,7 +1289,7 @@ module ApplicationHelper
 
   def gateway_logo(gateway, html_options = {})
     value = gateway.get(:config, "logo_image")
-    url = (value.to_s.blank? ? "logo/#{gateway.name}_logo.gif" : "logo/#{value}")
+    url = (value.to_s.blank? ? "/images/logo/#{gateway.name}_logo.gif" : "/images/logo/#{value}")
     image_tag(url, html_options)
   end
 
