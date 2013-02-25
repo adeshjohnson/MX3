@@ -4543,6 +4543,8 @@ Localization.define('en') do |l|
   l.store 'callerid_not_a_number', 'Device CallerID Number must be numerical'
   l.store 'unknown', 'Unknown'
   l.store 'Minimal_Charge_for_Calls', 'Minimal Charge for Calls'
+  l.store 'Manage_Recordings', 'Manage Recordings'
+
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
