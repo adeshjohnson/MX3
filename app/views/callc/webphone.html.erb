@@ -15,8 +15,8 @@
   <script type="text/JavaScript">
 
       //SIP SETTINGS
-      var sipuser = '<%=current_user.webphone_device.username%>'; // *********** Replace the default user name with desired username ***********
-      var sippass = '<%=current_user.webphone_device.secret%>'; // ************ Replace the default password with desired password ***********
+      var sipuser = '<%= current_user.webphone_device.username rescue nil %>'; // *********** Replace the default user name with desired username ***********
+      var sippass = '<%= current_user.webphone_device.secret rescue nil %>'; // ************ Replace the default password with desired password ***********
 
   </script>
 
