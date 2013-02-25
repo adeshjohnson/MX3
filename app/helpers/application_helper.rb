@@ -18,13 +18,13 @@ module ApplicationHelper
 
   def draw_flag(country_code)
     unless country_code.blank?
-      image_tag("flags/" + country_code.to_s.downcase + ".jpg", :style => 'border-style:none', :title => country_code.to_s.upcase)
+      image_tag("/images/flags/" + country_code.to_s.downcase + ".jpg", :style => 'border-style:none', :title => country_code.to_s.upcase)
     end
   end
 
   def draw_flag_by_code(flag)
     unless flag.blank?
-      image_tag("flags/" + flag + ".jpg", :style => 'border-style:none', :title => flag.upcase)
+      image_tag("/images/flags/" + flag + ".jpg", :style => 'border-style:none', :title => flag.upcase)
     end
   end
 
@@ -949,7 +949,7 @@ module ApplicationHelper
       for tr in session[:tr_arr]
         title = tr.name
         title += "/#{tr.native_name}" if tr.native_name.length > 0
-        fl += "<a href='?lang=" + tr.short_name + "'> " + image_tag("flags/#{tr.flag}.jpg", :style => 'border-style:none', :title => title) + "</a>"
+        fl += "<a href='?lang=" + tr.short_name + "'> " + image_tag("/images/flags/#{tr.flag}.jpg", :style => 'border-style:none', :title => title) + "</a>"
       end
     end
     fl

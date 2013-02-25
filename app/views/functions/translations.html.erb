@@ -17,7 +17,7 @@
                        translation = item.translation %>
                     <li id="item_<%= item.id %>" style="height: 18px; <%= style %>">
                       <%
-                         flag = image_tag("flags/#{translation.flag}.jpg", :style => 'border-style:none', :title => translation.name)
+                         flag = image_tag("/images/flags/#{translation.flag}.jpg", :style => 'border-style:none', :title => translation.name)
                          native_name = ""
                          native_name += " / " + translation.native_name if translation.native_name.length > 0 %>
                       <%= flag + " " + translation.name + native_name %>
@@ -37,7 +37,7 @@
                   <%
                      translation = tr.translation
                      tr.active.to_i == 0 ? style = "color: #BBBBBB;" : style = ""
-                     flag = image_tag("flags/#{translation.flag}.jpg", :style => 'border-style:none', :title => translation.name)
+                     flag = image_tag("/images/flags/#{translation.flag}.jpg", :style => 'border-style:none', :title => translation.name)
                      native_name = ""
                      native_name += " / " + translation.native_name if translation.native_name.length > 0 %>
                   <%#= link_to_remote(flag + " " + translation.name + native_name, {:update => 'items', :loading => "Element.show('spinner');", :complete=> "Element.hide('spinner');", :url => {:action => "translations_change_status", :id => tr.id}}, {:style => "#{style}", :id=> "translation_#{translation.id}_#{tr.active}"}) %>
