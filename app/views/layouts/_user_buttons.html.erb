@@ -25,7 +25,7 @@
         <td id="device_groups_<%= user.id %>" align="center"><%= link_to(b_groups, {:controller => 'users', :action => 'device_groups', :id => user.id}, :id => "device_groups_link_"+user.id.to_s) %> </td>
     <% end %>
 
-    <% unless accountant? and session[:acc_device_manage].to_i == 0 %>
+    <% unless (accountant? and session[:acc_device_manage].to_i == 0) %>
         <td id="show_devices_<%= user.id %>" align="center"><%= link_to(b_device, {:controller => 'devices', :action => 'show_devices', :id => user.id}, :id => "show_devices_link_"+user.id.to_s) unless (user.usertype == "admin" or user.usertype == "accountant") and session[:usertype] != "admin" %></td>
     <% end %>
 

@@ -71,8 +71,12 @@
         <td id="cli_<%= device.id %>" align="center">
           <%= link_to(b_cli, {:action => "device_clis", :id => device.id}, {:id => "cli_link_" + device.id.to_s}) if device.device_type != "Skype" %>
         </td>
-        <% if session[:usertype] == "admin" and rec_active? %>
-            <td id="recordings_<%= device.id %>" align="center"><%= link_to b_music, {:controller => 'recordings', :action => 'show', :show_rec => device.id}, {:title => _('Recordings', :id => "recordings_link_" + device.id.to_s)} %></td>
+        <% if (session[:usertype] == "admin") or (show_recordings?) %>
+            <td id="recordings_<%= device.id %>" align="center">
+              <% if rec_active? and device.record_forced == 1 %>
+                <%= link_to b_music, {:controller => 'recordings', :action => 'show', :show_rec => device.id}, {:title => _('Recordings', :id => "recordings_link_" + device.id.to_s)} %>
+              <% end %>
+            </td>
         <% end %>
         <% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
             <td id="all_details_<%= device.id %>" align="center">

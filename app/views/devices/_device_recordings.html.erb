@@ -21,7 +21,7 @@
         <tr>
           <td height="10" colspan="2"></td>
         </tr>
-        <% if !["admin", "reseller"].include?(session[:usertype]) %>
+        <% if !["admin","accountant","reseller"].include?(session[:usertype]) %>
             <% if (rec_active?) %>
                 <tr>
                   <td><%= _('Record_calls_for_this_device') %>:</td>

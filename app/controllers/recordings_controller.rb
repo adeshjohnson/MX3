@@ -3,20 +3,19 @@ class RecordingsController < ApplicationController
 
   layout "callc"
 
-
-  @@view = [:index, :list, :play_rec]
-  @@edit = [:edit, :update, :setup, :update_recordings, :calls2recordings_disabled, :destroy, :destroy_recording]
+  before_filter :check_localization
+  before_filter :authorize
+  before_filter :check_post_method, :only => [:destroy_recording, :destroy, :update, :update_recordings, :list_users_update]
 
   before_filter { |c|
-    allow_read, allow_edit = c.check_read_write_permission(@@view, @@edit, {:role => "accountant", :right => :acc_recordings_manage, :ignore => true})
+    view = [:index, :list, :play_rec, :show]
+    edit = [:edit, :update, :setup, :update_recordings, :calls2recordings_disabled, :destroy, :destroy_recording]
+    allow_read, allow_edit = c.check_read_write_permission(view, edit, {:role => "accountant", :right => :acc_recordings_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
     true
   }
 
-  before_filter :check_localization
-  before_filter :authorize
-  before_filter :check_post_method, :only => [:destroy_recording, :destroy, :update, :update_recordings, :list_users_update]
 
   def index
     redirect_to :action => :list_recordings and return false
@@ -185,7 +184,7 @@ class RecordingsController < ApplicationController
     @server_path = get_server_path(1)
     @remote_server_path = get_server_path(0)
 
-    if session[:usertype] == "admin" or session[:usertype] == "reseller"
+    if session[:usertype] == "admin" or "reseller" or "accountant"
       id = params[:id]
     else
       id = session[:user_id]
