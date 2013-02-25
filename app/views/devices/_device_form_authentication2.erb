@@ -98,13 +98,10 @@
             <% if ccl_active? and @device.device_type.to_s == "SIP" %>
                 function zero_port() {
                     if ($('zero_port_1').checked) {
-                        $('port').disabled = true;
                         $('ip_auth2').hidden = true;
-                        $('port').value = 0;
                     } else {
-                        $('port').disabled = false;
                         $('ip_auth2').hidden = false;
-                        $('port').value = <%= @device.proxy_port == 0 ? Device::DefaultPort["SIP"] : @device.port %>;
+                        $('port').value = <%= @device.port %>;
                     }
                 }
             <% end %>

@@ -278,8 +278,8 @@
           <tr id="ip_auth_zero_port">
             <td id="zero_port"> <%= _('Accept_calls_from_any_port') %>: </td>
             <td id="zero_port_2">
-              <%= radio_button_tag('zero_port', '0', @device.proxy_port > 0) %> <%= _('No') %>
-     	      <%= radio_button_tag('zero_port', '1', @device.proxy_port == 0) %> <%= _('Yes') %>
+              <%= radio_button_tag('zero_port', '0', @device.proxy_port.to_i > 0) %> <%= _('No') %>
+     	      <%= radio_button_tag('zero_port', '1', @device.proxy_port.to_i == 0) %> <%= _('Yes') %>
             </td>
           </tr>
         <% end %>
@@ -615,11 +615,10 @@
             if ($('zero_port_1').checked) {
                 $('server_port_row').disabled = true;
                 $('server_port_row').hidden = true;
-                $('provider_port').value = 0;
             } else {
                 $('server_port_row').disabled = false;
                 $('server_port_row').hidden = false;
-                $('provider_port').value = <%= @device.proxy_port == 0 ? @device.port : @device.proxy_port %>;
+                $('provider_port').value = <%= @device.port %>;
             }
         }
 

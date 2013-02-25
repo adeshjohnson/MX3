@@ -444,8 +444,12 @@ class ProvidersController < ApplicationController
     @device.insecure = "port" if params[:insecure_port] == "1" and params[:insecure_invite] != "1"
     @device.insecure = "port,invite" if params[:insecure_port] == "1" and params[:insecure_invite] == "1"
     @device.insecure = "invite" if params[:insecure_port] != "1" and params[:insecure_invite] == "1"
-    if ccl_active? and !params[:provider][:port] and @device.device_type.to_s == "SIP"
-      @device.proxy_port = 0
+    if ccl_active?
+      if @device.device_type.to_s == 'SIP' and params[:zero_port].to_i == 1
+        @device.proxy_port = 0
+      else
+        @device.proxy_port = @device.port
+      end
     else
       @device.proxy_port = @device.port
     end

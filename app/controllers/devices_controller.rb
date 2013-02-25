@@ -454,7 +454,7 @@ class DevicesController < ApplicationController
       unless @device.is_dahdi?
         params[:host]=params[:host].to_s.strip
         if @device.host != "dynamic"
-          params[:port]=params[:port].to_s.strip
+          params[:port] = params[:port].to_s.strip
 
         end
         if ccl_active? and @device.device_type == "SIP" and (@device.host == "dynamic" or @device.host.blank?)
@@ -658,7 +658,7 @@ class DevicesController < ApplicationController
       @device.port = Device::DefaultPort["SIP"] if @device.device_type == 'SIP' and not Device.valid_port? params[:port], @device.device_type
       @device.port = Device::DefaultPort["H323"] if @device.device_type == 'H323' and not Device.valid_port? params[:port], @device.device_type
       if ccl_active?
-        if params[:port].blank? and @device.device_type == 'SIP' and params[:zero_port].to_i == 1
+        if @device.device_type == 'SIP' and params[:zero_port].to_i == 1
           @device.proxy_port = 0
         else
           @device.proxy_port = @device.port
