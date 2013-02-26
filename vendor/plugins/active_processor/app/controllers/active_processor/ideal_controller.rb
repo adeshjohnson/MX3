@@ -48,9 +48,16 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   end
 
   def notify
+    MorLog.my_debug "||||||session||||||"
+    MorLog.my_debug session.to_yaml
+
     payment = Payment.find(:first, :conditions => {:transaction_id => params[:trxid], :pending_reason => "waiting_response"})
+    MorLog.my_debug "||||||payment||||||"
+    MorLog.my_debug payment.to_yaml
     if payment and !payment.transaction_id.blank?
-      gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => current_user.id}).enabled_by(current_user.owner_id).query
+      gateway = ::GatewayEngine.find(:first, {:engine => params[:engine], :gateway => params[:gateway], :for_user => payment.user_id}).enabled_by(payment.user.owner_id).query
+      MorLog.my_debug "||||||gateway||||||"
+      MorLog.my_debug gateway.to_yaml
       success, message = gateway.check_response(payment)
       if success
         flash[:status] = message
