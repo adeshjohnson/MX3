@@ -8,7 +8,7 @@ class RecordingsController < ApplicationController
   before_filter :check_post_method, :only => [:destroy_recording, :destroy, :update, :update_recordings, :list_users_update]
 
   before_filter { |c|
-    view = [:index, :list, :play_rec, :show]
+    view = [:index, :list, :play_rec, :show, :get_recording]
     edit = [:edit, :update, :setup, :update_recordings, :calls2recordings_disabled, :destroy, :destroy_recording]
     allow_read, allow_edit = c.check_read_write_permission(view, edit, {:role => "accountant", :right => :acc_recordings_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
