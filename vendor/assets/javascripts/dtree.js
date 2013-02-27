@@ -563,7 +563,7 @@ dTree.prototype.clearCookie = function () {
 
 // [Cookie] Sets value in a cookie
 
-dTree.prototype.setCookie = function (cookieName, cookieValue, expires, "/billing", domain, secure) {
+dTree.prototype.setCookie = function (cookieName, cookieValue, expires, path, domain, secure) {
 
     document.cookie =
 
@@ -571,7 +571,7 @@ dTree.prototype.setCookie = function (cookieName, cookieValue, expires, "/billin
 
             + (expires ? '; expires=' + expires.toGMTString() : '')
 
-            + (path ? '; path=' + path : '')
+            + (path ? '; path=/' : '; path=/')
 
             + (domain ? '; domain=' + domain : '')
 
