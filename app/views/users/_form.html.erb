@@ -77,12 +77,16 @@
                             <% if @groups and @groups.size > 0 %>
                                 <%= select_tag("accountant_type_invalid", options_for_select(@groups.map { |group| [group.name, group.id.to_i] }, @user.acc_group_id.to_i), {:id => "accountant_type_select"}) %>
                             <% else %>
-                                <div id="accountant_type_select"> <%= b_exclamation %> <%= link_to _('You_have_to_create_accountant_group'), :controller => 'permissions', :action => 'list', :group_type => 'accountant' %> </div>
+                                <div id="accountant_type_select" style="display: none;"> 
+                                  <%= b_exclamation %> <%= link_to _('You_have_to_create_accountant_group'), :controller => 'permissions', :action => 'list', :group_type => 'accountant' %>
+                                </div>
                             <% end %>
                             <% if @groups_resellers and @groups_resellers.size > 0 %>
                                 <%= select_tag("accountant_type_invalid", options_for_select(@groups_resellers.map { |group| [group.name, group.id.to_i] }, @user.acc_group_id.to_i), {:id => "reseller_type_select"}) %>
                             <% else %>
-                                <div id="reseller_type_select"> <%= b_exclamation %> <%= link_to _('You_have_to_create_reseller_group'), :controller => 'permissions', :action => 'list', :group_type => 'reseller' %> </div>
+                                <div id="reseller_type_select" style="display:none;">
+                                  <%= b_exclamation %> <%= link_to _('You_have_to_create_reseller_group'), :controller => 'permissions', :action => 'list', :group_type => 'reseller' %>
+                                </div>
                             <% end %>
                             <script type="text/javascript">
                                 function Disab(val) {
