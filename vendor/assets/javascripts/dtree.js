@@ -563,7 +563,7 @@ dTree.prototype.clearCookie = function () {
 
 // [Cookie] Sets value in a cookie
 
-dTree.prototype.setCookie = function (cookieName, cookieValue, expires, path, domain, secure) {
+dTree.prototype.setCookie = function (cookieName, cookieValue, expires, "/billing", domain, secure) {
 
     document.cookie =
 
