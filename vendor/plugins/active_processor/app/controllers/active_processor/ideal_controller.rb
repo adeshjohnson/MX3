@@ -50,6 +50,8 @@ class ActiveProcessor::IdealController < ActiveProcessor::BaseController
   def notify
     MorLog.my_debug "||||||session||||||"
     MorLog.my_debug session.to_yaml
+    MorLog.my_debug "||||||params||||||"
+    MorLog.my_debug params.to_yaml if params
 
     payment = Payment.find(:first, :conditions => {:transaction_id => params[:trxid], :pending_reason => "waiting_response"})
     MorLog.my_debug "||||||payment||||||"
