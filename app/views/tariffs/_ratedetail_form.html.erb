@@ -20,6 +20,7 @@
     <td><b><label for="ratedetail_end_time"><%= _('End_Time') %>:</label></b></td>
     <td>
       <% if @etedit %>
+          <% @ratedetail.end_time = nice_time2(@ratedetail.end_time) %>
           <%= text_field 'ratedetail', 'end_time', "class" => "input" %>
       <% else %>
           <%= nice_time2 @ratedetail.end_time %>
