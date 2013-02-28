@@ -1989,7 +1989,7 @@ Localization.define('en') do |l|
   l.store 'Select', 'Select'
   l.store 'To', 'To'
   l.store 'Rate_import_status', 'Rate import Status'
-  l.store 'Make_wholesale_tariff', 'Make wholesale Tariff'
+  l.store 'Make_wholesale_tariff', 'Make Wholesale Tariff'
   l.store 'provider', 'provider'
   l.store 'user_wholesale', 'wholesale user'
   l.store 'minute', 'minute'
