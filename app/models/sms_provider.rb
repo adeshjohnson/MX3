@@ -79,11 +79,11 @@ class SmsProvider < ActiveRecord::Base
   end
 
   def send_sms_api(sms, user, options={})
-    if options[:unicode].to_i != 0
-      mtext = CGI.escape(options[:message].to_s.strip.unpack("U*").collect { |s| ("0"*3+ s.to_i.to_s(16))[-4..-1] }.join(""))
-    else
+    # if options[:unicode].to_i != 0
+    #   mtext = CGI.escape(options[:message].to_s.strip.unpack("U*").collect { |s| ("0"*3+ s.to_i.to_s(16))[-4..-1] }.join(""))
+    # else
       mtext= CGI.escape(options[:message].to_s.strip)
-    end
+    # end
 
     pr_device = user.primary_device
     cli = !options[:src].blank? ? options[:src].to_s : (pr_device ? CGI.escape(pr_device.callerid.to_s) : '')
