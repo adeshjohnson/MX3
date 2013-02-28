@@ -279,36 +279,6 @@
 	<td>12.0000</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=EUR</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//th[11]</td>
-	<td>Price (EUR)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//th[12]</td>
-	<td>Price with TAX (EUR)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_price_1</td>
-	<td>10.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_full_price_1</td>
-	<td>10.0000</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=CHF</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/services/subscription_edit/1?back=subscriptions&amp;page=1&amp;s_date_from=-1&amp;s_date_till=-1&amp;s_device=-1&amp;s_memo=&amp;s_service=-1&amp;s_user=-1</td>
 	<td></td>
@@ -426,6 +396,122 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>12.0000</td>
+	<td></td>
+</tr>
+<!--PDF, CSV failai turi likti generuojami pagal userio, kuriam jie yra generuojami, valiutą-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=BOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUBTOTAL (BOB)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUBTOTAL (BOB)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>BOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>price (BOB)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>price_with_tax (BOB)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>BOB.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>BOB.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>91.0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -836,6 +922,122 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>7.9998</td>
+	<td></td>
+</tr>
+<!--PDF, CSV failai turi likti generuojami pagal userio, kuriam jie yra generuojami, valiutą-->
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CHF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_price_2</td>
+	<td>1.0549</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_full_price_2</td>
+	<td>1.0549</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUBTOTAL (CHF)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.0549</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUBTOTAL (CHF)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.0549</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CHF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.0549</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>price (CHF)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>price_with_tax (CHF)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.0549</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CHF.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.0549</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/2?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CHF.csv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>1.0549</td>
 	<td></td>
 </tr>
 
