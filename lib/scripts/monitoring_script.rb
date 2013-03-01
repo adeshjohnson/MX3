@@ -91,7 +91,7 @@ else
 
 
       def get_users(user_type = nil)
-        find_all_users_sql = self.owner_id == 0 ? '' : " AND users.owner_id = #{self.owner_id} "
+        find_all_users_sql = " AND users.owner_id = #{self.owner_id} "
 
 
           operator = (self.monitoring_type == 'above' ? '>' : '<')
