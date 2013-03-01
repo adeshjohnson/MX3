@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
   rescue_from AbstractController::ActionNotFound, :with => :action_missing
   rescue_from ActionController::RoutingError, :with => :action_missing
   rescue_from ActionController::UnknownController, :with => :action_missing
+  rescue_from ActionView::MissingTemplate, :with => :template_missing
   #rescue_from ActionController::UnknownAction, :with => :action_missing
 
   protect_from_forgery
@@ -87,6 +88,10 @@ class ApplicationController < ActionController::Base
     Rails.logger.error(m)
     redirect_to :controller => :callc, :action => :main
     # or render/redirect_to somewhere else
+  end
+
+  def template_missing
+    redirect_to :controller => :callc, :action => :main
   end
 
   def log_session_size
