@@ -621,7 +621,8 @@ class User < ActiveRecord::Base
     #    res = ActiveRecord::Base.connection.select_all(sql)
     #
     #    res
-    Call.last_calls_csv({:user => self, :from => date.to_s + ' 00:00:00', :till => date.to_s + ' 23:59:59', :call_type => 'answered', :current_user => self, :pdf => 1, :order => 'calldate'})
+    calls, test_data = Call.last_calls_csv({:user => self, :from => date.to_s + ' 00:00:00', :till => date.to_s + ' 23:59:59', :call_type => 'answered', :current_user => self, :pdf => 1, :order => 'calldate'})
+    return calls
   end
 
   def months_normative(month)

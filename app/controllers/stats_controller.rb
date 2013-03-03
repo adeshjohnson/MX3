@@ -992,7 +992,7 @@ in before filter : user (:find_user_from_id_or_session)
       when 'pdf'
         options[:column_dem] = '.'
         options[:current_user] = current_user
-        calls = Call.last_calls_csv(options.merge({:pdf => 1}))
+        calls, test_data = Call.last_calls_csv(options.merge({:pdf => 1}))
         total_calls = Call.last_calls_total_stats(options)
         pdf = PdfGen::Generate.generate_last_calls_pdf(calls, total_calls, current_user, {:direction => '', :date_from => session_from_datetime, :date_till => session_till_datetime, :show_currency => session[:show_currency], :rs_active => rs_active?, :can_see_finances => can_see_finances?})
         logger.debug("  >> Calls #{calls.size}")
@@ -1007,7 +1007,7 @@ in before filter : user (:find_user_from_id_or_session)
         options[:test] = 1 if params[:test]
         options[:collumn_separator], options[:column_dem] = current_user.csv_params
         options[:current_user] = current_user
-        filename, content = Call.last_calls_csv(options)
+        filename, test_data = Call.last_calls_csv(options)
         filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
         if filename
           filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
@@ -1015,7 +1015,7 @@ in before filter : user (:find_user_from_id_or_session)
             file = File.open(filename)
             send_data file.read, :filename => filename
           else
-            render :text => filename + (content.to_s rescue "")
+            render :text => filename + test_data.to_s
           end
         else
           flash[:notice] = _("Cannot_Download_CSV_File_From_DB_Server")
@@ -1224,14 +1224,14 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       options = session[:stats_country_stats_options]
       @user_id = (options and options[:user_id]) ? options[:user_id] : default_user_id
       settings_owner_id = (["reseller", "admin"].include?(session[:usertype]) ? session[:user_id] : session[:owner_id])
-      filename, content = Call.country_stats_csv({:collumn_separator => Confline.get_csv_separator(settings_owner_id), :s_user => @user_id, :current_user => current_user, :from => session_from_datetime, :till => session_till_datetime, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :hide_finances => !can_see_finances?})
+      filename, test_data = Call.country_stats_csv({:collumn_separator => Confline.get_csv_separator(settings_owner_id), :s_user => @user_id, :current_user => current_user, :from => session_from_datetime, :till => session_till_datetime, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :hide_finances => !can_see_finances?})
       filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
       if filename
         filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
         if params[:test].to_i != 1
           send_data(File.open(filename).read, :filename => filename)
         else
-          render :text => filename + content.to_s
+          render :text => filename + test_data.to_s
         end
       else
         flash[:notice] = _("Cannot_Download_CSV_File_From_DB_Server")

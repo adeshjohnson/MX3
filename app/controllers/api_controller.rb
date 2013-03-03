@@ -1496,7 +1496,7 @@ class ApiController < ApplicationController
           options = last_calls_stats_set_variables(@options, {:user => user, :device => device, :hgc => hgc, :did => did, :current_user => @user_logged, :provider => provider, :can_see_finances => ((not @user_logged.is_accountant?) || @user_logged.can_see_finances?)})
           options[:current_user] = @user_logged
 
-          calls = Call.last_calls_csv(options.merge({:pdf => 1}))
+          calls, test_content = Call.last_calls_csv(options.merge({:pdf => 1}))
 
 
           doc.page {
