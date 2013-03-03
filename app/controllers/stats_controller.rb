@@ -1007,15 +1007,15 @@ in before filter : user (:find_user_from_id_or_session)
         options[:test] = 1 if params[:test]
         options[:collumn_separator], options[:column_dem] = current_user.csv_params
         options[:current_user] = current_user
-        filename = Call.last_calls_csv(options)
+        filename, content = Call.last_calls_csv(options)
         filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
         if filename
+          filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
           if params[:test].to_i != 1
-            filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
             file = File.open(filename)
             send_data file.read, :filename => filename
           else
-            render :text => filename
+            render :text => filename + (content.to_s rescue "")
           end
         else
           flash[:notice] = _("Cannot_Download_CSV_File_From_DB_Server")
@@ -1224,14 +1224,14 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       options = session[:stats_country_stats_options]
       @user_id = (options and options[:user_id]) ? options[:user_id] : default_user_id
       settings_owner_id = (["reseller", "admin"].include?(session[:usertype]) ? session[:user_id] : session[:owner_id])
-      filename = Call.country_stats_csv({:collumn_separator => Confline.get_csv_separator(settings_owner_id), :s_user => @user_id, :current_user => current_user, :from => session_from_datetime, :till => session_till_datetime, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :hide_finances => !can_see_finances?})
+      filename, content = Call.country_stats_csv({:collumn_separator => Confline.get_csv_separator(settings_owner_id), :s_user => @user_id, :current_user => current_user, :from => session_from_datetime, :till => session_till_datetime, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :hide_finances => !can_see_finances?})
       filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
       if filename
+        filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
         if params[:test].to_i != 1
-          filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
           send_data(File.open(filename).read, :filename => filename)
         else
-          render :text => filename
+          render :text => filename + content.to_s
         end
       else
         flash[:notice] = _("Cannot_Download_CSV_File_From_DB_Server")
@@ -1279,8 +1279,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     filename = @user.user_calls_to_csv({:tz => current_user.time_offset, :device => @device, :direction => @direction, :call_type => call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :hgc => @hgc, :usertype => user_type, :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i, :reseller => res.to_i, :hide_finances => !can_see_finances?})
     filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
     if filename
+      filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
       if params[:test].to_i != 1
-        filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
         send_data(File.open(filename).read, :filename => filename)
       else
         render :text => filename
@@ -2517,8 +2517,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @orig_call_type = @call_type
 
     filename = provider.provider_calls_csv({:tz => current_user.time_offset, :direction => @direction, :call_type => @call_type, :date_from => date_from, :date_till => date_till, :default_currency => session[:default_currency], :show_currency => session[:show_currency], :show_full_src => session[:show_full_src], :nice_number_digits => session[:nice_number_digits], :test => params[:test].to_i})
+    filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
     if params[:test].to_i != 1
-      filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
       send_data(File.open(filename).read, :filename => filename)
     else
       render :text => filename

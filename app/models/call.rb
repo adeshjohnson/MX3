@@ -679,7 +679,7 @@ class Call < ActiveRecord::Base
 
     filename = "Last_calls-#{options[:current_user].id.to_s.gsub(" ", "_")}-#{options[:from].gsub(" ", "_").gsub(":", "_")}-#{options[:till].gsub(" ", "_").gsub(":", "_")}-#{Time.now().to_i}"
     sql = "SELECT * "
-    if options[:test] != 1 and options[:pdf].to_i == 0
+    if options[:pdf].to_i == 0 and options[:test] != 1
       sql += " INTO OUTFILE '/tmp/#{filename}.csv'
             FIELDS TERMINATED BY '#{options[:collumn_separator]}'
             ESCAPED BY '#{"\\\\"}'
@@ -697,12 +697,13 @@ class Call < ActiveRecord::Base
     sql += "LEFT JOIN directions ON (directions.code = destinations.direction_code)"
     sql += "WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} ORDER BY #{options[:order]} ) as C"
 
+    test_content = ""
     if options[:test].to_i == 1
       mysql_res = ActiveRecord::Base.connection.select_all(sql)
-      MorLog.my_debug(sql)
-      MorLog.my_debug("------------------------------------------------------------------------")
-      MorLog.my_debug(mysql_res.inspect.to_s)
-      filename += mysql_res.inspect.to_s
+#      MorLog.my_debug(sql)
+#      MorLog.my_debug("------------------------------------------------------------------------")
+#      MorLog.my_debug(mysql_res.inspect.to_s)
+      test_content = mysql_res.inspect.to_s
     else
       if options[:pdf].to_i == 1
         filename = Call.find_by_sql(sql)
@@ -711,7 +712,7 @@ class Call < ActiveRecord::Base
       end
 
     end
-    return filename
+    return filename, test_content
   end
 
   def Call.calls_for_laod_stats(options={})
@@ -1011,16 +1012,17 @@ class Call < ActiveRecord::Base
     end
     sql += " FROM (SELECT #{s.join(', ')} FROM calls #{jn.join(' ')}  WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} GROUP BY destinationgroups.id ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC ) as C"
 
+    test_content = ""
     if options[:test].to_i == 1
       mysql_res = ActiveRecord::Base.connection.select_all(sql)
       MorLog.my_debug(sql)
       MorLog.my_debug("------------------------------------------------------------------------")
       MorLog.my_debug(mysql_res.to_yaml)
-      filename += mysql_res.inspect
+      test_content = mysql_res.inspect
     else
       mysql_res = ActiveRecord::Base.connection.execute(sql)
     end
-    return filename
+    return filename, test_content
   end
 
   def Call.cardgroup_aggregate(options={})
