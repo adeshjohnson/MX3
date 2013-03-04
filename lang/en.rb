@@ -4544,6 +4544,7 @@ Localization.define('en') do |l|
   l.store 'unknown', 'Unknown'
   l.store 'Minimal_Charge_for_Calls', 'Minimal Charge for Calls'
   l.store 'Manage_Recordings', 'Manage Recordings'
+  l.store 'Email_Must_Be_Unique', 'Email must be unique'
 
   #  l.store '', ''
   #  l.store '', ''

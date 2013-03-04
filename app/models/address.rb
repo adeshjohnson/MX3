@@ -3,6 +3,8 @@ class Address < ActiveRecord::Base
   belongs_to :direction
   has_one :cc_client
 
+  validates :email, :uniqueness => {:message => _('Email_Must_Be_Unique')}, :allow_nil => true
+
   before_save :address_before_save
 
   def address_before_save

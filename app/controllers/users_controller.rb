@@ -549,7 +549,9 @@ class UsersController < ApplicationController
     @return_controller = "users"
     @return_action = "list"
 
-    if @user.save
+    @user.address.email = nil if @user.address.email == ""
+
+    if @user.address.valid? and @user.save
       if @user.usertype == "reseller"
         @user.check_default_user_conflines
 
@@ -600,7 +602,11 @@ class UsersController < ApplicationController
       @groups_resellers = AccGroup.where(:group_type => 'reseller')
       @devices = @user.devices(:conditions => "device_type != 'FAX'")
 
-      flash_errors_for(_('User_was_not_updated'), @user)
+      if !@user.address.valid?
+        flash_errors_for(_('User_was_not_updated'), @user.address)
+      else
+        flash_errors_for(_('User_was_not_updated'), @user)
+      end
       render :action => 'edit'
     end
   end
