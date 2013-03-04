@@ -54,7 +54,7 @@
             : <%= text_field_tag 's_id', @search_id, "class" => "input", :size => "10", :maxlength => "30" %>
           </td>
         </tr>
-        <% if current_user.is_admin? or current_user.is_accountant?  %>
+        <% if User.current.is_admin? or User.current.is_accountant?  %>
         <tr>
           <td>
             <% (rai_selected_id = @options[:responsible_accountant_id] and rai_selected_id != '-1' ? rai_selected_id : rai_selected_id = '-1')  %>
@@ -108,7 +108,7 @@
       <% end %>
       <th align="left"><%= nice_list_order('account_type', _('Account_type'), @options) %></th>
       <% if can_see_finances? %>
-          <th align="right"><%= nice_list_order('balance', _('Balance'), @options) %>(<%= current_user.currency.name %>
+          <th align="right"><%= nice_list_order('balance', _('Balance'), @options) %>(<%= User.current.currency.name %>
             )
           </th>
       <% end %>
@@ -116,7 +116,7 @@
       <% if admin? %>
           <th align="center"></th>
       <% end %>
-      <% if monitoring_enabled_for(current_user) %>
+      <% if monitoring_enabled_for(User.current) %>
           <th colspan=13></th>
       <% else %>
           <th colspan=13></th>
@@ -128,7 +128,7 @@
           <td id="name_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.id %> </td>
           <td id="user_link_<%= user.id %>" align="left" class="<%= text_class %>" <%= nice_user_tooltip(user) %> > <%= @allow_edit ? link_nice_user(user) : nice_user(user) %> </td>
           <td id="username_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.username %> </td>
-          <% if ['admin', 'accountant'].include?(current_user.usertype) %>
+          <% if ['admin', 'accountant'].include?(User.current.usertype) %>
               <td id="usetype_<%= user.id %>" align="left" class="<%= text_class %>" <%= tooltip(_('Accountant_group'), user.acc_group_name) if  user.usertype == 'accountant' and session[:usertype] == 'admin' %>> <%= h user.usertype %> <%= "(Wholesale)" if user.purpose == 'user_wholesale' and ['accountant', 'reseller'].include?(user.usertype) %>  </td>
           <% end %>
           <td id="postpaid_<%= user.id %>" align="left" class="<%= text_class %>"><%= _('Prepaid') if user.postpaid != 1 %>  <%= _('Postpaid') if user.postpaid == 1 %></td>
