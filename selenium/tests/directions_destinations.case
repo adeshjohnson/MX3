@@ -669,6 +669,112 @@
 	<td>notice</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>items_per_page</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--STRANGE PREFIX-->
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>'345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>qwer</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>@#$%^&amp;'345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>qwer234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>#$%tre435tr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>qwer34ertg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>#$%tre435tr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>'345</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>@#$%^&amp;'345</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
