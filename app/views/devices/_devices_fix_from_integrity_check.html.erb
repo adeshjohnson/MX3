@@ -6,6 +6,7 @@
       <tr>
         <th><%= _('Device') %></th>
         <th><%= _('User') %></th>
+        <th><%= _('User_Owner') %></th>
         <th></th>
       </tr>
       <% @devices.each_with_index { |d, i| %>
@@ -22,6 +23,7 @@
               <% end %>
             </td>
             <td id="device_user_<%= d.id %>"><%= h nice_user(d.user) if d.user %></td>
+            <td id="device_user_owner_<%= d.id %>"><%= h nice_user(d.user.owner) if d.user.owner %></td>
             <td align="center" id="edit_<%= d.id %>"><%= link_to b_edit, d.provider ? {:controller => :providers, :action => :edit, :id => d.id} : {:action => :device_edit, :id => d.id}, :id => "edit_device_#{d.id}" if d.user_id.to_i == -1 or ( d.user and d.user.owner_id == current_user.id)%></td>
           </tr>
       <% } %>
