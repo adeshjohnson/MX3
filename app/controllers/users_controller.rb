@@ -549,7 +549,7 @@ class UsersController < ApplicationController
     @return_controller = "users"
     @return_action = "list"
 
-    @user.address.email = nil if @user.address.email == ""
+    @user.address.email = nil if @user.address.email == "" or nil
 
     if @user.address.valid? and @user.save
       if @user.usertype == "reseller"
