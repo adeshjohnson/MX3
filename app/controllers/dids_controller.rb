@@ -53,7 +53,7 @@ class DidsController < ApplicationController
       session[:did_search_options] = {:s_language => 'all'}
       params[:s_language] = 'all' if !params[:s_language]
     end
-    [:search_did, :search_provider, :search_language, :search_status, :search_user, :search_device].each do |param|
+    [:search_did, :search_provider, :search_dialplan, :search_language, :search_status, :search_user, :search_device].each do |param|
       set_search_param(param)
     end
 
@@ -65,6 +65,7 @@ class DidsController < ApplicationController
     var = []
     cond << "did like ?" and var << @search_did.to_str.strip if @search_did.to_s.strip.length > 0
     cond << "dids.provider_id = ?" and var << @search_provider if @search_provider.to_s.length > 0
+    cond << "dids.dialplan_id = ?" and var << @search_dialplan if @search_dialplan.to_s.length > 0
     cond << "dids.language = ? " and var << @search_language.to_s if @search_language.to_s != 'all'
     if @search_status.length > 0
       if  ['free', 'active'].include?(@search_status) and admin?
@@ -86,6 +87,8 @@ class DidsController < ApplicationController
       unless current_user.usertype == 'reseller'
         @providers = current_user.load_providers(:all, {})
       end
+
+      @dialplans = Dialplan.where(:user_id => current_user.id) 
 
       sql = "SELECT DISTINCT language FROM dids ORDER by language"
       @languages = ActiveRecord::Base.connection.select_all(sql)

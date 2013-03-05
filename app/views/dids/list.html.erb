@@ -38,6 +38,15 @@
                 </select>
             <% end %>
 
+            &nbsp;&nbsp;<%= _('Dialplan') %>:
+            <select id="s_dialplan" name="s_dialplan">
+              <option value="" selected> <%= _('All') %></option>
+              <% for dialplan in @dialplans %>
+                  <option value='<%= dialplan.id %>' <%= "selected" if @search_dialplan.to_i == dialplan.id %>> <%= h(dialplan.name) %> </option>
+              <% end %>
+            </select>
+
+
             &nbsp;&nbsp;<%= _('Language') %>:
             <select id="s_language" name="s_language">
               <option value="all" selected> <%= _('All') %></option>
