@@ -736,6 +736,106 @@
 	<td>link=For more details about Integrity Check please click here</td>
 	<td></td>
 </tr>
+<!--devices weak password, no internal server-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<!--There is no ID-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>devices_with_weak_password_size</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>devices_with_weak_password_size</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>654</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>654</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<!--There is no ID-->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>devices_with_weak_password_size</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>devices_with_weak_password_size</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/device/devices_internal_server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_weak_passwords</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[3]</td>
+	<td>User owner</td>
+</tr>
+<!--must be empty when admin is reseller-->
+<tr>
+	<td>assertText</td>
+	<td>id=device_user_owner_2</td>
+	<td></td>
+</tr>
+<!--must be link to resellers edit-->
+<tr>
+	<td>assertText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User settings: Test Reseller</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
