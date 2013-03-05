@@ -420,6 +420,7 @@ class UsersController < ApplicationController
     end
 
     @address = Address.new(params[:address])
+    @address.email = nil if @address.email.to_s.blank?
     if @address.save
       @user.address_id = @address.id
     else
@@ -549,7 +550,7 @@ class UsersController < ApplicationController
     @return_controller = "users"
     @return_action = "list"
 
-    @user.address.email = nil if @user.address.email == "" or nil
+    @user.address.email = nil if @user.address.email.to_s.blank?
 
     if @user.address.valid? and @user.save
       if @user.usertype == "reseller"
