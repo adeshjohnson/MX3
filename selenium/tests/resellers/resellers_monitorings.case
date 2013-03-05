@@ -42,11 +42,6 @@
 	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
 <!--assert and set permissions-->
 <tr>
 	<td>open</td>
@@ -140,13 +135,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>15000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=sreseller_menu_addons1</td>
+	<td>assertElementPresent</td>
+	<td>//a[@href='/billing/monitorings']</td>
 	<td>Monitorings</td>
 </tr>
 <tr>
@@ -167,6 +157,16 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Monitoring call price sum over past period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Global monitorings that apply for this user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal monitorings that apply for this user</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,6 +200,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>amount_above</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>will be higher than 33 USD</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>id=bellow_monitoringamount</td>
 	<td></td>
@@ -215,28 +225,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=above_monitoringamount</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>amount_above</td>
-	<td>33</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>will be higher than 33 USD</td>
-	<td></td>
-</tr>
-<tr>
 	<td>mouseOver</td>
 	<td>id=m_condition</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Email will not be sent and users will not be blocked if user's call price sum per 30 minutes will be higher than 33 USD. This monitoring will be applied to all users.</td>
+	<td>Email will not be sent and users will not be blocked if user's call price sum per 30 minutes will be less than 33 USD. This monitoring will be applied to all users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>What actions to take?</td>
 	<td></td>
 </tr>
 <tr>
@@ -418,6 +418,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Monitoring created successfully. Applied to 1 users.</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/monitorings/for_user/6</td>
 	<td></td>
@@ -428,8 +433,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -444,12 +454,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>delete_link_2</td>
+	<td>delete_link_3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure that you want to remove this monitoring? It will be removed for user_reseller,user_reseller2 users.</td>
+	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -611,6 +621,11 @@
 	<td>label=12</td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>on</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>will_be_blocked</td>
 	<td></td>
@@ -681,11 +696,21 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User successfully created</td>
+	<td></td>
+</tr>
 <!--* for prepaid-->
 <tr>
 	<td>open</td>
 	<td>/billing/monitorings</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -714,22 +739,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-3 td.period</td>
+	<td>css=td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-3 td.amount</td>
+	<td>css=td.amount</td>
 	<td>66.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-3 td.block img[title=&quot;check&quot;]</td>
+	<td>css=td.block &gt; img[alt=&quot;Check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-3 td.email img[title=&quot;cross&quot;]</td>
+	<td>css=td.email &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -764,8 +789,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>off</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>99</td>
 </tr>
 <tr>
@@ -790,22 +825,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-4 td.period</td>
+	<td>css=#monit-5 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-4 td.amount</td>
+	<td>css=#monit-5 td.amount</td>
 	<td>99.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
+	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -815,22 +850,22 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-4 td.period</td>
+	<td>css=#monit-5 td.period</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-4 td.amount</td>
+	<td>css=#monit-5 td.amount</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-4 td.block img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <!--* assert that we can create monitoring for single user-->
@@ -875,28 +910,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>on</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-5 td.period</td>
+	<td>css=#monit-6 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-5 td.amount</td>
+	<td>css=#monit-6 td.amount</td>
 	<td>111.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
+	<td>css=#monit-6 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
+	<td>css=#monit-6 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -906,22 +946,22 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.period</td>
+	<td>css=#monit-6 td.period</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.amount</td>
+	<td>css=#monit-6 td.amount</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-6 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-6 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -931,22 +971,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-5 td.period</td>
+	<td>css=#monit-6 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-5 td.amount</td>
+	<td>css=#monit-6 td.amount</td>
 	<td>111.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
+	<td>css=#monit-6 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
+	<td>css=#monit-6 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <!--* assert that we cannot create montioring which is taking no action-->
@@ -973,12 +1013,17 @@
 <!--* assert monitoring edit for single user-->
 <tr>
 	<td>open</td>
-	<td>/billing/monitorings/edit/5</td>
+	<td>/billing/monitorings/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>222</td>
 </tr>
 <tr>
@@ -993,22 +1038,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-5 td.period</td>
+	<td>css=#monit-6 td.period</td>
 	<td>1 Hour(s)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-5 td.amount</td>
+	<td>css=#monit-6 td.amount</td>
 	<td>222.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
+	<td>css=#monit-6 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-5 td.email img[title=&quot;check&quot;]</td>
+	<td>css=#monit-6 td.email img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <!--* after editing it should be applied to the same user-->
@@ -1019,28 +1064,33 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.period</td>
+	<td>css=#monit-6 td.period</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.amount</td>
+	<td>css=#monit-6 td.amount</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.block img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-6 td.block img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-6 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <!--* it should stay associated with same amount of users-->
 <tr>
 	<td>open</td>
-	<td>/billing/monitorings/edit/4</td>
+	<td>/billing/monitorings/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=above_monitoringamount</td>
 	<td></td>
 </tr>
 <tr>
@@ -1065,22 +1115,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-4 td.period</td>
+	<td>css=#monit-5 td.period</td>
 	<td>30 minutes</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#monit-4 td.amount</td>
+	<td>css=#monit-5 td.amount</td>
 	<td>123.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-4 td.block img[title=&quot;check&quot;]</td>
+	<td>css=#monit-5 td.block img[title=&quot;check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-4 td.email img[title=&quot;cross&quot;]</td>
+	<td>css=#monit-5 td.email img[title=&quot;cross&quot;]</td>
 	<td></td>
 </tr>
 <!--* assert activation/deactivation-->
@@ -1112,6 +1162,16 @@
 <tr>
 	<td>assertElementNotPresent</td>
 	<td>css=#monit-2 td.active img[title=&quot;check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings/for_user/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=a &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <!--admin-->
@@ -1500,6 +1560,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>on</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>amount_above</td>
 	<td>33</td>
@@ -1748,8 +1813,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>123</td>
 </tr>
 <tr>
@@ -1770,12 +1840,17 @@
 <!--duplicate edit-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#edit_link_7 &gt; img</td>
+	<td>css=#edit_link_8 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -1794,8 +1869,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>id=amount_above</td>
+	<td>id=amount_bellow</td>
 	<td>33</td>
 </tr>
 <tr>
@@ -1835,7 +1915,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td></td>
 </tr>
 <tr>
@@ -1844,8 +1924,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=bellow_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>222</td>
 </tr>
 <tr>
@@ -1865,7 +1950,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#edit_link_8 &gt; img[alt=&quot;Edit&quot;]</td>
+	<td>css=#edit_link_9 &gt; img[alt=&quot;Edit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1935,7 +2020,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>amount_above</td>
+	<td>amount_bellow</td>
 	<td>70</td>
 </tr>
 <tr>
@@ -2205,17 +2290,17 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-3 &gt; td.period</td>
+	<td>css=#monit-4 &gt; td.period</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#monit-7 &gt; td.period</td>
+	<td>css=#monit-8 &gt; td.period</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-10 &gt; td.period</td>
+	<td>css=#monit-11 &gt; td.period</td>
 	<td></td>
 </tr>
 <tr>
@@ -2245,7 +2330,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=monit-6</td>
+	<td>id=monit-7</td>
 	<td></td>
 </tr>
 <tr>
@@ -2255,12 +2340,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=monit-6</td>
+	<td>id=monit-7</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-10 &gt; td.period</td>
+	<td>css=#monit-11 &gt; td.period</td>
 	<td></td>
 </tr>
 <tr>
@@ -2270,7 +2355,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=monit-6</td>
+	<td>id=monit-7</td>
 	<td></td>
 </tr>
 <tr>
@@ -2280,7 +2365,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=monit-6</td>
+	<td>id=monit-7</td>
 	<td></td>
 </tr>
 <tr>
@@ -2295,12 +2380,32 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-7 &gt; td.period</td>
+	<td>css=#monit-8 &gt; td.period</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>css=#monit-10 &gt; td.period</td>
+	<td>css=#monit-11 &gt; td.period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_7 &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Monitoring deleted successfully</td>
 	<td></td>
 </tr>
 </tbody></table>
