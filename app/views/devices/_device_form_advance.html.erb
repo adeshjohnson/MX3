@@ -212,8 +212,11 @@
   <tr> 
     <td> <%= _('T.38_support') %>: </td> 
     <td> 
-      <%= radio_button_tag('device[t38pt_udptl]', "no",  (not @device.t38_support?)) %> <%= _('No') %>
-      <%= radio_button_tag('device[t38pt_udptl]', "yes", @device.t38_support?) %> <%= _('Yes') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "no", (@device.t38pt_udptl == 'no')) %> <%= _('No') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "yes", (@device.t38pt_udptl == 'yes')) %> <%= _('Yes') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "fec", (@device.t38pt_udptl == 'fec')) %> <%= _('Fec') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "redundancy", (@device.t38pt_udptl == 'redundancy')) %> <%= _('Redundancy') %>
+      <%= radio_button_tag('device[t38pt_udptl]', "none", (@device.t38pt_udptl == 'none')) %> <%= _('None') %>
     </td>
   </tr>
 <% end %>
