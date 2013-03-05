@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 #Italian translation by Giovanni Bosa (giovbs-at-gmail-dot-com), Wangate, CODEMA di De Martinis R.M
 
 Localization.define('it') do |l|
