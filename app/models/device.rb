@@ -27,7 +27,7 @@ class Device < ActiveRecord::Base
   belongs_to :devicegroup
   has_many :callerids
   belongs_to :location
-  has_one :voicemail_box
+  # belongs_to :voicemail_box
   has_many :callflows
   has_many :pdffaxemails
   has_one :provider
@@ -286,11 +286,10 @@ class Device < ActiveRecord::Base
     sql = "UPDATE devices SET accountcode = id WHERE id = #{id};"
     ActiveRecord::Base.connection.update(sql)
     user = self.user
-    if user and self.voicemail_box
+    if user
       email = Confline.get_value("Default_device_voicemail_box_email", user.owner_id)
       email = user.address.email if user.address and user.address.email.to_s.size > 0
-      #why is this even used here?
-      #create_vm(extension, Confline.get_value("Default_device_voicemail_box_password", user.owner_id), user.first_name + " " + user.last_name, email)
+      create_vm(extension, Confline.get_value("Default_device_voicemail_box_password", user.owner_id), user.first_name + " " + user.last_name, email)
     end
   end
 
@@ -1239,7 +1238,7 @@ class Device < ActiveRecord::Base
   one tries to insert duplicate record, no exception would be risen and INSERT stetement would be ignored
 =end
   def create_vm(mailbox, pass, fullname, email)
-    vm = (self.voicemail_box ? self.voicemail_box : VoicemailBox.new)
+    vm = VoicemailBox.new
     vm.device_id = self.id
     vm.mailbox = mailbox
     vm.password = pass
@@ -1250,7 +1249,7 @@ class Device < ActiveRecord::Base
     else
       vm.email = Confline.get_value("Company_Email")
     end
-    vm.save
+    #vm.save
 
     sql = "INSERT IGNORE INTO voicemail_boxes (device_id, mailbox, password, fullname, context, email, pager, dialout, callback) VALUES ('#{self.id}', '#{mailbox}', '#{pass}', '#{fullname}', 'default', '#{vm.email}', '', '', '');"
     res = ActiveRecord::Base.connection.insert(sql)

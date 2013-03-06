@@ -4,11 +4,9 @@ class VoicemailBox < ActiveRecord::Base
   #cant find why or how this relationship would be posible
   #has_one :user
 
-  belongs_to :device
-
   set_primary_key "uniqueid"
 
-  validates_uniqueness_of :device_id, :message => _('Duplicate_voicemail')
+  validates_uniqueness_of :device_id
 
   class << self # Class methods
     alias :all_columns :columns
