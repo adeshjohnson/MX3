@@ -838,11 +838,7 @@ in before filter : devicegroup (:find_devicegroup)
       a = Address.create(params[:address].each_value(&:strip!)) if params[:address]
       @user.address_id = a.id
     else
-      if Confline.get_value("Disallow_Email_Editing", current_user.owner.id) == "1" and current_user.id != @user.owner.id
-        @user.address.update_attributes(params[:address].except('email').each_value(&:strip!)) if params[:address]
-      else
-        @user.address.update_attributes(params[:address].each_value(&:strip!)) if params[:address]
-      end
+      @user.address.update_attributes(params[:address].each_value(&:strip!)) if params[:address]
     end
 
     if @user.save
