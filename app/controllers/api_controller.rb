@@ -2009,18 +2009,24 @@ class ApiController < ApplicationController
 
               user_u.update_from_edit(par, @user, tax, monitoring_enabled_for(@user), rec_active?, 1)
 
-              if user_u.save
+              user_u.address.email = nil if user_u.address.email.to_s.blank?
+              if user_u.address.valid? and user_u.save
                 if user_u.usertype == "reseller"
                   user_u.check_default_user_conflines
                 end
-                user_u.address.email = nil if user_u.address.email.to_s.blank?
                 user_u.address.save
                 doc.status("User was updated")
               else
                 doc.error("User was not updated")
-                user_u.errors.each { |key, value|
-                  doc.message(_(value))
-                } if user_u.respond_to?(:errors)
+                if !user_u.address.valid?
+                  user_u.address.errors.each { |key, value|
+                    doc.message(_(value))
+                  } if user_u.address.respond_to?(:errors)
+                else
+                  user_u.errors.each { |key, value|
+                    doc.message(_(value))
+                  } if user_u.respond_to?(:errors)
+                end
               end
             else
               doc.error(notice)

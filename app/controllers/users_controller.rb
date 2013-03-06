@@ -840,14 +840,14 @@ in before filter : devicegroup (:find_devicegroup)
     else
       @user.address.update_attributes(params[:address].each_value(&:strip!)) if params[:address]
     end
+    @user.address.email = nil if @user.address.email.to_s.blank?
 
-    if @user.save
+    if @user.address.valid? and @user.save
 
       #renew_session(@user)
 
       session[:first_name] = @user.first_name
       session[:last_name] = @user.last_name
-      @user.address.email = nil if @user.address.email.to_s.blank?
       @user.address.save
       session[:show_currency] = @user.currency.name
       flash[:status] = _('Personal_details_changed')
@@ -862,7 +862,11 @@ in before filter : devicegroup (:find_devicegroup)
       @total_recordings_size = Recording.select("SUM(size) AS 'total_size'").where(:user_id => @user.id).first["total_size"].to_d
       @i = @user.get_invoices_status
       @address = @user.address
-      flash_errors_for(_('User_was_not_updated'), @user)
+      if !@user.address.valid?
+        flash_errors_for(_('User_was_not_updated'), @user.address)
+      else
+        flash_errors_for(_('User_was_not_updated'), @user)
+      end
       render :action => 'personal_details'
     end
   end

@@ -2562,7 +2562,9 @@ Sets default tax values for users or cardgroups
             if clean_value_all(r_arr[session[:imp_user_email]].to_s).to_s.strip.length == 0
               err +=_('Please_enter_email') +"<br />"
             end
-
+            if Address.where(:email => (clean_value_all r_arr[session[:imp_user_email]]).to_s.strip).first
+              err +=_('Email_Must_Be_Unique')
+            end
             unless Email.address_validation(clean_value_all(r_arr[session[:imp_user_email]].to_s).to_s.strip)
               err +=_('Please_enter_valid_email') +"<br />"
             end
