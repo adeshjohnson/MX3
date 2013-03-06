@@ -43,6 +43,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=bellow_monitoringamount</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=above_monitoringamount</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Drops bellow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Increases more</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>id=bellow_monitoringamount</td>
 	<td></td>
@@ -55,6 +75,41 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>will be less than 33 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=above_monitoringamount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_above</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>will be higher than 33</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=new_monitoring</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//form[@id='new_monitoring']/table/tbody/tr/td[2]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>If user's call price sum over specified period will be higher/less than this amount monitoring will take action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOut</td>
+	<td>//form[@id='new_monitoring']/table/tbody/tr/td[2]/b</td>
 	<td></td>
 </tr>
 <tr>
