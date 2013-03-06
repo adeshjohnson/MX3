@@ -2178,7 +2178,7 @@ class DevicesController < ApplicationController
 
 =begin
   ticket #5014 this logic is more suited to be in controller than in view. 
-  About exception - it might occur if device(but not provider's) has no voicemail_box. 
+  About exception - it might occur if device(but not provider's) has no box.voicemail_box. 
   this would only mean that someone has corruped data. 
 =end
   def set_voicemail_variables(device)
