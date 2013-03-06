@@ -2180,6 +2180,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     address.mob_phone = params[:mob_phone] if params[:mob_phone].to_s != ""
     address.fax = params[:fax] if params[:fax].to_s != ""
     address.email = params[:email] if params[:email].to_s != ""
+    address.email = nil if address.email.to_s.blank?
     address.save
     #If registering through API, taxation country by default is same 
     #as country. ticket #5071

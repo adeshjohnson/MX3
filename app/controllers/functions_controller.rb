@@ -2579,6 +2579,7 @@ Sets default tax values for users or cardgroups
               address.mob_phone =clean_value_all r_arr[session[:imp_user_mob_phone]] if session[:imp_user_mob_phone] >=0
               address.fax =clean_value_all r_arr[session[:imp_user_fax]].to_s if session[:imp_user_fax] >=0
               address.email =(clean_value_all r_arr[session[:imp_user_email]]).to_s.strip
+              address.email = nil if address.email.to_s.blank?
 
               address.save
 

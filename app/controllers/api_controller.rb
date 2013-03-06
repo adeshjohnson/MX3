@@ -2013,6 +2013,7 @@ class ApiController < ApplicationController
                 if user_u.usertype == "reseller"
                   user_u.check_default_user_conflines
                 end
+                user_u.address.email = nil if user_u.address.email.to_s.blank?
                 user_u.address.save
                 doc.status("User was updated")
               else

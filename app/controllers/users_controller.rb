@@ -506,6 +506,7 @@ class UsersController < ApplicationController
     #for backwards compatibility - user had no address before, so let's give it to him
     unless @user.address
       address = Address.new
+      address.email = nil if address.email.to_s.blank?
       address.save
       @user.address_id = address.id
       @user.save
@@ -591,6 +592,7 @@ class UsersController < ApplicationController
       #for backwards compatibility - user had no address before, so let's give it to him
       unless @user.address
         address = Address.new
+        address.email = nil if address.email.to_s.blank?
         address.save
         @user.address_id = address.id
         @user.save
@@ -721,6 +723,7 @@ in before filter : devicegroup (:find_devicegroup)
 
     @address = @devicegroup.address
     @address.update_attributes(params[:address])
+    @address.email = nil if @address.email.to_s.blank?
     if @address.save
 
       flash[:status] = _('Dev_groups_details_changed')
@@ -753,7 +756,7 @@ in before filter : user (:find_user)
 =end
   def device_group_create
     @address = Address.new(params[:address])
-
+    @address.email = nil if @address.email.to_s.blank?
     @devicegroup = Devicegroup.new(:user_id => @user.id, :name => params[:devicegroup][:name], :added => Time.now().to_s(:db))
     if @address.save
 
@@ -803,6 +806,7 @@ in before filter : devicegroup (:find_devicegroup)
 
     unless @user.address
       address = Address.new
+      address.email = nil if saddress.email.to_s.blank?
       address.save
       @user.address_id = address.id
       @user.save
@@ -847,6 +851,7 @@ in before filter : devicegroup (:find_devicegroup)
 
       session[:first_name] = @user.first_name
       session[:last_name] = @user.last_name
+      @user.address.email = nil if @user.address.email.to_s.blank?
       @user.address.save
       session[:show_currency] = @user.currency.name
       flash[:status] = _('Personal_details_changed')

@@ -29,7 +29,7 @@ class ValidationController < ApplicationController
         if user.address.email and user.address.email.to_s.length > 0 and !Email.address_validation(user.address.email)
           Action.new(:user_id => user.id, :date => Time.now.to_s(:db), :action => "user_validated", :data => "email_deleted", :data2 => user.address.email).save
           MorLog.my_debug("FIXING USER: #{user.id} Wrong address.email: #{user.address.email}")
-          user.address.email = ""
+          user.address.email = nil if user.address.email.to_s.blank?
           user.address.save
         end
 
