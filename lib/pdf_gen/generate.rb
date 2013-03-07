@@ -14,9 +14,16 @@ module PdfGen
       top_options = {
           :rowspan => 2
       }
-      top_options2 = {
-          :colspan => 3
-      }
+      if options[:can_see_finances]
+        top_options2 = {
+            :colspan => 3
+        }
+      else
+        top_options2 = {
+            :colspan => 1
+        }
+      end
+
 
       headers = [{:text => _('date')}.merge(top_options),
                  {:text => _('called_from')}.merge(top_options),
@@ -32,29 +39,37 @@ module PdfGen
           #--------------------- rate price name
 
           headers2 << {:text => _('Name')}
-          headers2 << {:text => _('Rate')}
-          headers2 << {:text => _('Price')}
+          if options[:can_see_finances]
+            headers2 << {:text => _('Rate')}
+            headers2 << {:text => _('Price')}
+          end
           #headers << headers2
           if options[:rs_active]
             headers << {:text => _('Reseller')}.merge(top_options2)
             #--------------------- rate price name
             headers2 << {:text => _('Name')}
-            headers2 << {:text => _('Rate')}
-            headers2 << {:text => _('Price')}
+            if options[:can_see_finances]
+              headers2 << {:text => _('Rate')}
+              headers2 << {:text => _('Price')}
+            end
           end
           headers << {:text => _('User')}.merge(top_options2)
           #--------------------- rate price name
           headers2 << {:text => _('Name')}
-          headers2 << {:text => _('Rate')}
-          headers2 << {:text => _('Price')}
+          if options[:can_see_finances]
+            headers2 << {:text => _('Rate')}
+            headers2 << {:text => _('Price')}
+          end
 
           headers << {:text => _('Did'), :colspan => 4}
           #--------------------- rate price name
 
           headers2 << {:text => _('Number')}
-          headers2 << {:text => _('Provider')}
-          headers2 << {:text => _('Incoming')}
-          headers2 << {:text => _('Owner')}
+          if options[:can_see_finances]
+            headers2 << {:text => _('Provider')}
+            headers2 << {:text => _('Incoming')}
+            headers2 << {:text => _('Owner')}
+          end
           #  headers << headers2
         end
         if usertype == 'reseller'
@@ -678,7 +693,7 @@ module PdfGen
     options = options.merge({
                                 :pdf_last_calls => 1,
                                 :rs_active => main_options[:rs_active],
-                                :can_see_finaces => main_options[:can_see_finances],
+                                :can_see_finances => main_options[:can_see_finances],
                                 :reseller_allow_providers_tariff => current_user.reseller_allow_providers_tariff?})
 
     ###### Generate PDF ########
