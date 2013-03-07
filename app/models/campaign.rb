@@ -95,15 +95,15 @@ class Campaign < ActiveRecord::Base
 =begin 
   Campaign will not be able to start if user is blocked 
 =end 
-  def user_blocked? 
-     user.blocked? 
+  def user_blocked?
+    device.user.blocked?
   end 
 	 
 =begin 
   Campaign will not be able to start if user is prepaid and does not have balance 
 =end 
   def user_has_no_balance? 
-     user.prepaid? and user.balance <= 0 
+     device.user.prepaid? and device.user.balance <= 0
   end 
 	 
 =begin
@@ -112,7 +112,7 @@ class Campaign < ActiveRecord::Base
   credit -1 means user has unlimited credit
 =end
   def user_has_no_credit?
-    user.postpaid? and user.balance + user.credit <= 0 and user.credit != -1
+    device.user.postpaid? and device.user.balance + device.user.credit <= 0 and device.user.credit != -1
   end
 
 =begin
