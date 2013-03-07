@@ -1245,17 +1245,19 @@ class Device < ActiveRecord::Base
     vm.callback = ""
     vm.dialout = ""
     vm.pager = ""
-    vm.fullname = fullname.gsub("'", "")
+    fullname = fullname.gsub("'", "")
     vm.context = "default"
     if email
       vm.email = email
     else
       vm.email = Confline.get_value("Company_Email")
     end
-    vm.save
+    #vm.save
 
-    #sql = "INSERT IGNORE INTO voicemail_boxes (device_id, mailbox, password, fullname, context, email, pager, dialout, callback) VALUES ('#{self.id}', '#{mailbox}', '#{pass}', '#{fullname}', 'default', '#{vm.email}', '', '', '');"
-    #res = ActiveRecord::Base.connection.insert(sql)
+    if self.voicemail_box.blank?
+      sql = "INSERT IGNORE INTO voicemail_boxes (device_id, mailbox, password, fullname, context, email, pager, dialout, callback) VALUES ('#{self.id}', '#{mailbox}', '#{pass}', '#{fullname}', 'default', '#{vm.email}', '', '', '');"
+      res = ActiveRecord::Base.connection.insert(sql)
+    end
 
     vm = VoicemailBox.find(:first, :conditions => "device_id = '#{self.id}' AND fullname = '#{fullname}' AND email = '#{vm.email}'")
 
