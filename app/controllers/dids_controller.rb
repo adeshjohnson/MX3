@@ -932,8 +932,8 @@ ORDER BY dids.did ASC"
         end
 
       end
-      flash[:notice] = [bad_num.to_s, _('DIDs_were_not_updated')].join(" ")
-      flash[:status] = [num.to_s, _('DIDs_were_updated')].join(" ")
+      flash[:notice] = [bad_num.to_s, _('DIDs_were_not_updated')].join(" ") if bad_num.to_i > 0
+      flash[:status] = [num.to_s, _('DIDs_were_updated')].join(" ") if num.to_i > 0
       redirect_to({:action => 'list'}) and return false
     else
       flash[:notice] = _('User_Was_Not_Found')
