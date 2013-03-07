@@ -3160,7 +3160,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_title = _('Google_Maps')
     @page_icon = "world.png"
 
-    @devices = Device.includes(:user).where("users.owner_id = #{current_user.id} AND name NOT LIKE 'mor_server%' AND ipaddr > 0 AND ipaddr != '0.0.0.0' AND user_id > -1
+    @devices = Device.joins(:user).where("users.owner_id = #{current_user.id} AND name NOT LIKE 'mor_server%' AND ipaddr > 0 AND ipaddr != '0.0.0.0' AND user_id > -1
     AND '192.168.' != SUBSTRING(ipaddr, 1, LENGTH('192.168.'))
     AND '10.' != SUBSTRING(ipaddr, 1, LENGTH('10.'))
     AND ((CAST(SUBSTRING(ipaddr, 1,6) AS DECIMAL(6,3)) > 172.31)

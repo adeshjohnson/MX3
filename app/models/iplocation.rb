@@ -42,6 +42,8 @@ class Iplocation < ActiveRecord::Base
         if res and res.length > 0
           lat = res.match(/<tr><th>Latitude:<\/th><td>(.*)<\/td><\/tr>/)
           lon = res.match(/<tr><th>Longitude:<\/th><td>(.*)<\/td><\/tr>/)
+          lat = res.match(/<tr><th>Latitude:<\/th><td>\n(.*)&nbsp;&nbsp;/) if lat.to_s.blank?
+          lon = res.match(/<tr><th>Longitude:<\/th><td>\n(.*)&nbsp;&nbsp;/) if lon.to_s.blank?
           cit = res.match(/<tr><th>City:<\/th><td>(.*)<\/td><\/tr>/)
           cou = res.match(/<tr><th>Country:<\/th><td>(.*)<\/td><\/tr>/)
           loc.longitude = lon[1].to_d if lon
@@ -73,10 +75,10 @@ class Iplocation < ActiveRecord::Base
         res = res1.body
 
         if res and res.length > 0
-          cou = res.match(/<th>My IP address country:<\/th>.*\n.*<td>.*\n(.*)<\/td>.*\n.*<\/tr>/)
-          cit = res.match(/<th>My IP address city:<\/th>.*\n.*<td>.*\n(.*)<\/td>.*\n.*<\/tr>/)
-          lat = res.match(/<th>My IP address latitude:<\/th>.*\n.*<td>.*\n(.*)<\/td>.*\n.*<\/tr>/)
-          lon = res.match(/<th>My IP address longitude:<\/th>.*\n.*<td>.*\n(.*)<\/td>.*\n.*<\/tr>/)
+          cou = res.match(/<th>IP address country:<\/th>\r\n<td>\r\n(.*)<\/td>\r\n<\/tr>/)
+          cit = res.match(/<th>IP address city:<\/th>\r\n<td>\r\n(.*)<\/td>\r\n<\/tr>/)
+          lat = res.match(/<th>IP address latitude:<\/th>\r\n<td>\r\n(.*)<\/td>\r\n<\/tr>/)
+          lon = res.match(/<th>IP address longitude:<\/th>\r\n<td>\r\n(.*)<\/td>\r\n<\/tr>/)
           loc.country = cou[1].gsub(/<img.*>/, "").strip.titlecase if cou
           loc.city = cit[1].strip.titlecase if cit
           loc.longitude = lon[1].strip.to_d if lon
