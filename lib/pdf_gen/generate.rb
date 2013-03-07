@@ -30,7 +30,11 @@ module PdfGen
                  {:text => _('called_to')}.merge(top_options),
                  {:text => _('duration')}.merge(top_options),
                  {:text => _('hangup_cause')}.merge(top_options) ]
-      headers2 = [{:text =>'', :colspan => 6}]
+      if usertype == 'reseller'
+        headers2 = [{:text =>'', :colspan => 5}]
+      else
+        headers2 = [{:text =>'', :colspan => 6}]
+      end
 
       if options[:pdf_last_calls].to_i == 1
         if ['admin', 'accountant'].include?(usertype)
@@ -80,17 +84,18 @@ module PdfGen
             headers2 << {:text => _('Rate')}
             headers2 << {:text => _('Price')}
           end
-          headers << {:text => _('Selfcost')}.merge(top_options2) if options[:rs_active]
+          headers << {:text => _('Selfcost'), :colspan => 2}
           headers2 << {:text => _('Rate')}
           headers2 << {:text => _('Price')}
-          headers2 << {:text => _('User')}
+
+          headers << {:text => _('User'), :colspan => 3}
           #--------------------- rate price name
           headers2 << {:text => _('Name')}
           headers2 << {:text => _('Rate')}
           headers2 << {:text => _('Price')}
-          headers2 << {:text => _('Did')}
+          headers << {:text => _('Did')}
           #--------------------- rate price name
-          headers << {:text => _('Number')}.merge(top_options)
+          headers2 << {:text => _('Number')}
         end
         if usertype == 'user'
           headers << {:text => _('Prefix_used')}.merge(top_options)
