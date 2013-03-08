@@ -373,6 +373,17 @@
 	<td>css=device_id</td>
 	<td>8</td>
 </tr>
+<!--user with the same email-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=cccccccc&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This email address is already in use.</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>

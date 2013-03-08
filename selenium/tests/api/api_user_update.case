@@ -3891,6 +3891,48 @@
 	<td>id=warning_active</td>
 	<td>off</td>
 </tr>
+<!--updeitinama emailas i toki, koks jau yra sistemoje-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=2&amp;a8=test_reseller@email.test&amp;hash=ab22e29a8ed57eae21cea69d354ef2992a135143&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was not updated Email must be unique</td>
+	<td></td>
+</tr>
+<!--this is reseller updating-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;p=aaaaa&amp;user_id=5&amp;a8=test_reseller@email.test&amp;hash=b9cffa3c5cbca7c5e1a5586bc520c1c923c10034&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was not updated Email must be unique</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;a8=test_reseller@email.test&amp;hash=ab22e29a8ed57eae21cea69d354ef2992a135143&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was not updated Email must be unique</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=101&amp;p=1011&amp;user_id=3&amp;a8=test_reseller@email.test&amp;hash=9c5b41ab01464404239827d5e4ff6f0f9c24be59&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
