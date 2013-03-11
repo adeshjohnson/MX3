@@ -181,12 +181,11 @@ class Call < ActiveRecord::Base
     start_date.upto(end_date) do |day|
       day_stats = day_by_day_stats[i]
 
-      if ((day < day_stats['calldate'].to_date) rescue false)
-        next
+      if ((day.strftime("%Y%m%d").to_i > day_stats['calldate'].strftime("%Y%m%d").to_i) rescue false)
+       next
       end
       
-
-      if day_stats and day_stats['calldate']
+      if day_stats and day_stats['calldate'] 
 	      if day.to_date != (i == 0 ? "" : day_by_day_stats[i-1]['calldate'].to_date)
 		date[index] = day
 		calls[index] = day_stats['total_calls'].to_i
@@ -270,8 +269,11 @@ class Call < ActiveRecord::Base
     group = []
     if group_options[:date]
       select << "(calls.calldate) AS 'calldate'"
-      #group << 'FLOOR((UNIX_TIMESTAMP(calls.calldate)) / 86400)' # grouping by intervals of exact 24 hours
-      group << '(day(calldate) + FLOOR(HOUR(calldate) / 24))'
+      if Time.zone.now().utc_offset.to_i == 0
+        group << 'FLOOR((UNIX_TIMESTAMP(calls.calldate)) / 86400)' # grouping by intervals of exact 24 hours
+      else
+        group << '(day(calldate) + FLOOR(HOUR(calldate) / 24))'
+      end
     end
     if group_options[:disposition]
       select << 'calls.disposition'
