@@ -272,7 +272,7 @@ class StatsController < ApplicationController
     @t_avg_billsec = @a_avg_billsec.last.to_i
 
     @a_calls.delete_at(@a_calls.length - 1)
-    @a_billsec.delete_at(@a_billsec.length - 1)
+    @a_billsec.delete_at(@a_billsec.length  - 1)
     @a_avg_billsec.delete_at(@a_billsec.length)
 
     index = @a_date.length - 1
@@ -317,7 +317,7 @@ class StatsController < ApplicationController
     i=0
     @Calltime_graph =""
     for i in 0..@a_billsec.size-1
-      @Calltime_graph += @a_date[i].to_s + ";" + (@a_billsec[i] / 60).to_s + "\\n"
+      @Calltime_graph += @a_date[i].to_s + ";" + (@a_billsec[i].to_i / 60).to_s + "\\n"
       ine=ine +1
     end
 
