@@ -38,6 +38,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>ieva.vaiginyte@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/settings</td>
 	<td></td>
 </tr>
@@ -65,6 +85,46 @@
 	<td>type</td>
 	<td>api_secret_key</td>
 	<td>secret</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_smtp_server</td>
+	<td>smtp.gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_port</td>
+	<td>587</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_password</td>
+	<td>kolmisoft9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_login</td>
+	<td>kolmitest998@gmail.com</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>email_login</td>
+	<td>kolmitest998@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_from</td>
+	<td>kolmitest998@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email_batch_size</td>
+	<td>50</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -104,6 +164,11 @@
 <tr>
 	<td>click</td>
 	<td>monitoring_user_type_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=will_be_sent</td>
 	<td></td>
 </tr>
 <tr>
@@ -231,6 +296,328 @@
 	<td>user_blocked_2</td>
 	<td>on</td>
 </tr>
+<!--testing resellers monitorings-->
+<tr>
+	<td>click</td>
+	<td>id=user_blocked_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/list?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>res_perm</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/1?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitorings_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_login</td>
+	<td>kolmitest998@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_password</td>
+	<td>kolmisoft9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>resellers_user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>resellers_user1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_period_in_past_type_days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>monitoring_period_in_past_days</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount_above</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>will_be_blocked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>monitoring_user_type_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=will_be_sent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Monitoring created successfully. Applied to all users.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user_blocked_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user_blocked_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>ignore_global_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>ieva.vaiginyte@yahoo.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/monitoring_test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/test/run_ma_script?params=&quot;-ksecret -umor -pmor -nmor&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user_blocked_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user_blocked_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>ignore_global_monitorings</td>
+	<td>on</td>
+</tr>
+<!--irasius tinkama reselerio ir admin email, patikrinti, ar admin/reseller gauna info apie savo užblokuotus userius. (adminas neturi gauti reselerio useriu info, reseleris - admino)-->
 </tbody></table>
 </body>
 </html>
