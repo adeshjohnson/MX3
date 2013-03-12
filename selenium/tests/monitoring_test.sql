@@ -1,1 +1,1 @@
-update calls set calldate = now();
+update calls set calldate = now();  
