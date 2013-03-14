@@ -852,13 +852,13 @@ module PdfGen
     dts.each { |d|
       numbers = (d.to_s.length.to_i / 93)
       if numbers.to_f > 1.to_f
-        pdf.text(d.to_s, {:left => 10, :top => ystart+(i.to_i % 30 * xdelta), :font_size => 8, :alignment => :left})
+        pdf.text(d.to_s.to_utf, {:left => 10, :top => ystart+(i.to_i % 30 * xdelta), :font_size => 8, :alignment => :left})
         (numbers.ceil.to_i-1).to_i.times {
           pdf.text('', {:left => 10, :top => ystart+(i.to_i % 30 * xdelta), :font_size => 8, :alignment => :left})
           i+=1
         }
       else
-        pdf.text(d.to_s, {:left => 10, :top => ystart+(i.to_i % 30 * xdelta), :font_size => 8, :alignment => :left})
+        pdf.text(d.to_s.to_utf, {:left => 10, :top => ystart+(i.to_i % 30 * xdelta), :font_size => 8, :alignment => :left})
       end
       i+=1
     }

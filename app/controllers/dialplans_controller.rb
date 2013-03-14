@@ -94,7 +94,7 @@ class DialplansController < ApplicationController
     @device_selected = params[:device_id].to_i
     @device = []
     if params[:id]
-      @device = Device.where("user_id = #{params[:id]} AND name NOT LIKE 'mor_server_%'").all
+      @device = Device.where("user_id = '#{params[:id].to_s}' AND name NOT LIKE 'mor_server_%'").all
     end
     render :layout => false
   end

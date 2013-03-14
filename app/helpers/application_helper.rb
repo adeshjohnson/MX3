@@ -837,6 +837,10 @@ module ApplicationHelper
     end
   end
 
+  def to_utf
+    self.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
+  end
+
   def nice_user(user)
     # dont panic. h() << sanitizes names from &, <, > characters
     if user
