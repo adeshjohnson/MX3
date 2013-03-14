@@ -11,8 +11,7 @@
 <br>
 
 <div align="center">
-  <table width="100%" class="maintable"
-  %>
+  <table width="100%" class="maintable">
   <tr>
 
     <th align="left">        <%= _('Username') %>    </th>
@@ -85,8 +84,7 @@
 
             </td>
         <% end %>
-        <td align="center" class="<%= text_class %>"> <%= link_to _('Calls_in_period'), :controller => "stats", :action => "call_list", :id => member.id, :calltype => "answered", :show_dst => "1", :date_from => @date_from, :date_till => @date_till %>   </td>
-
+        <td align="center" class="<%= text_class %>"> <%= link_to _('Calls_in_period'), :controller => "stats", :action => "last_calls_stats", :s_user => member, :s_call_type => "answered", :date_from => @date_from, :date_till => @date_till %>   </td>
         <td align="center" class="<%= text_class %>"> <%= link_to b_chart_bar + _('Logins'), :controller => "stats", :action => "user_logins", :id => member.id %>   </td>
 
       </tr>

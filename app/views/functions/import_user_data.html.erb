@@ -56,7 +56,7 @@
               <% end %>
             </td>
 
-            <td id="call_list_<%= @user.id %>" align="center"><%= link_to b_call, :controller => "stats", :action => "call_list", :id => @user, :calltype => "answered" %> </td>
+            <td id="call_list_<%= @user.id %>" align="center"><%= link_to b_call, :controller => "stats", :action => "last_calls_stats", :s_user => @user, :s_call_type => "answered" %> </td>
 
             <% if session[:usertype] == "admin" %>
                 <td id="login_as_<%= @user.id %>" align="center"><%= link_to b_login_as, {:controller => "functions", :action => 'login_as_execute', :user => @user}, :confirm => _('are_you_sure'), :method => :post if @user.id != 0 %></td>
