@@ -2103,7 +2103,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @avg_profit_call = @total_profit.to_d / @total_answered_calls.to_d
       days = (session_till_date.to_date - session_from_date.to_date).to_d
       days = 1.0 if days == 0;
-      @avg_profit_day = @total_profit.to_d / days
+      @avg_profit_day = @total_profit.to_d / (session_till_date.to_date - session_from_datetime.to_date + 1).to_i
       @total_users != 0 ? @avg_profit_user = @total_profit.to_d / @total_users.to_d : @avg_profit_user = 0
     else
       #profit
