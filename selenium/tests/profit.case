@@ -44,38 +44,43 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>billing/stats/profit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -84,28 +89,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Profit for: All , Period: 2009-01-01 - 2009-01-01</td>
+	<td>Profit for: All , Period: 2012-11-21 - 2012-11-21</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_calls</td>
-	<td>4</td>
+	<td>17</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>4.0000</td>
+	<td>0.8880</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_calls_profit</td>
-	<td>9.0000</td>
+	<td>9.2717</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_call_price</td>
-	<td>13.0000</td>
+	<td>10.1597</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -119,28 +124,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Profit for: 101 - Test User #1 , Period: 2009-01-01 - 2009-01-01</td>
+	<td>Profit for: 101 - Test User #1 , Period: 2012-11-21 - 2012-11-21 </td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>1.0000</td>
+	<td>0.7720</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_calls</td>
-	<td>1</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_call_price</td>
-	<td>3.0000</td>
+	<td>5.9987</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_calls_profit</td>
-	<td>2.0000</td>
+	<td>5.2267</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -154,28 +159,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Profit for: reseller - Test Reseller , Period: 2009-01-01 - 2009-01-01</td>
+	<td>Profit for: reseller - Test Reseller , Period: 2012-11-21 - 2012-11-21 </td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_calls</td>
-	<td>2</td>
+	<td>8</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>2.0000</td>
+	<td>0.1160</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_call_price</td>
-	<td>8.0000</td>
+	<td>4.1610</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_calls_profit</td>
-	<td>6.0000</td>
+	<td>4.0450</td>
 </tr>
 <!--Test /stats/profit for reseller-->
 <tr>
@@ -216,32 +221,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -250,28 +255,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Profit for: All , Period: 2009-01-01 - 2009-01-01</td>
+	<td>Profit for: All , Period: 2012-11-21 - 2012-11-21</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_calls</td>
-	<td>1</td>
+	<td>8</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>4.0000</td>
+	<td>0.5027</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_call_price</td>
-	<td>5.0000</td>
+	<td>4.5477</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_calls_profit</td>
-	<td>1.0000</td>
+	<td>4.0450</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -285,28 +290,28 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Profit for: user_reseller - User Resellers , Period: 2009-01-01 - 2009-01-01</td>
+	<td>Profit for: user_reseller - User Resellers , Period: 2012-11-21 - 2012-11-21</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_calls</td>
-	<td>1</td>
+	<td>8</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>4.0000</td>
+	<td>0.5027</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_call_price</td>
-	<td>5.0000</td>
+	<td>4.5477</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_calls_profit</td>
-	<td>1.0000</td>
+	<td>4.0450</td>
 </tr>
 <!--2009 05 25 profit for test user subscription-->
 <tr>
@@ -347,32 +352,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=April</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=April</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=10</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -381,7 +386,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Profit for: All , Period: 2009-04-01 - 2009-04-10</td>
+	<td>Profit for: All , Period: 2012-11-21 - 2012-11-30</td>
 	<td></td>
 </tr>
 <tr>
@@ -398,33 +403,33 @@
 <tr>
 	<td>assertText</td>
 	<td>number_total_call_price</td>
-	<td>0.0000</td>
+	<td>14.3827</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>0.0000</td>
+	<td>2.4160</td>
 </tr>
 <!--calls profit-->
 <tr>
 	<td>assertText</td>
 	<td>number_calls_profit</td>
-	<td>0.0000</td>
+	<td>11.9667</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_avg_profit_per_min</td>
-	<td>0.0000</td>
+	<td>0.3014</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=April</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -434,17 +439,17 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=April</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=30</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -454,22 +459,22 @@
 <tr>
 	<td>assertText</td>
 	<td>number_total_profit</td>
-	<td>10.0000</td>
+	<td>38.1592</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_avg_profit_per_min</td>
-	<td>0.0000</td>
+	<td>id=number_avg_profit_per_min</td>
+	<td>0.3014</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=April</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -479,72 +484,17 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=May</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=15</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>14.8387</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_total_call_price</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_calls_profit</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_avg_profit_per_min</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=April</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=2</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=April</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=6</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -553,93 +503,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_total_profit</td>
-	<td>1.6667</td>
+	<td>id=number_calls_profit</td>
+	<td>5.2267</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_total_call_price</td>
-	<td>0.0000</td>
+	<td>id=number_total_call_price</td>
+	<td>5.9987</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_total_self_price</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_calls_profit</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_avg_profit_per_min</td>
-	<td>0.0000</td>
+	<td>id=number_avg_profit_per_min</td>
+	<td>0.2653</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=April</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=2</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=April</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=30</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>0.0000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_total_call_price</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_total_self_price</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_calls_profit</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>number_avg_profit_per_min</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -654,7 +534,7 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2010</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -674,42 +554,52 @@
 <tr>
 	<td>assertText</td>
 	<td>number_total_calls</td>
-	<td>2</td>
+	<td>24</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>number_answer_calls</td>
-	<td>1</td>
+	<td>16</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_total_call_price</td>
-	<td>3.0000</td>
+	<td>id=number_total_call_price</td>
+	<td>14.3827</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_total_self_price</td>
-	<td>1.0000</td>
+	<td>id=number_total_self_price</td>
+	<td>2.4160</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_calls_profit</td>
-	<td>2.0000</td>
+	<td>id=number_calls_profit</td>
+	<td>11.9667</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>number_avg_profit_per_min</td>
-	<td>4.0000</td>
+	<td>id=number_avg_profit_per_min</td>
+	<td>0.3014</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=number_total_profit</td>
-	<td>138.1613</td>
+	<td>192.9980</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
 	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2007</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -789,7 +679,7 @@
 <tr>
 	<td>assertText</td>
 	<td>number_total_profit</td>
-	<td>28.3333</td>
+	<td>27.6667</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -816,6 +706,262 @@
 	<td>assertText</td>
 	<td>total_profit</td>
 	<td>3.0000</td>
+</tr>
+<!--tikrinama, ar gerai skaiciuoja dienos vidurki-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_calls_profit</td>
+	<td>25.5783</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=avg_profit_per_day</td>
+	<td>0.8526</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+13:00) Nuku'alofa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_calls_profit</td>
+	<td>17.7717</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=avg_profit_per_day</td>
+	<td>0.5924</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_calls_profit</td>
+	<td>13.6117</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=avg_profit_per_day</td>
+	<td>0.4537</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+13:00) Nuku'alofa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=number_calls_profit</td>
+	<td>8.8283</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=avg_profit_per_day</td>
+	<td>0.2943</td>
 </tr>
 </tbody></table>
 </body>
