@@ -933,12 +933,12 @@ class CallcController < ApplicationController
             old_id = Server.select("MAX(server_id) AS last_old_id").first.last_old_id rescue 0
             new_id = old_id.to_i + 1
 
-            if (created_server = Server.create(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" ) rescue false)
+            if (created_server = Server.create(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" ) rescue false) and 
               Device.where(:name => "mor_server_" + new_id.to_s).update_all(:nat => "yes", :allow => "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722")
 
               @sd.each do |d|
                  cur_dev = Device.where(:id => d.device_id.to_s).first
-                 if cur_dev.host.to_s == "dynamic" and cur_dev.device_type.to_s == "SIP"
+                 if cur_dev and cur_dev.host.to_s == "dynamic" and cur_dev.device_type.to_s == "SIP"
                    d.server_id = created_server.id
                    d.save
                    cur_dev.insecure = 'port,invite'
