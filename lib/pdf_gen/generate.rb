@@ -498,7 +498,7 @@ module PdfGen
     pdf.stroke do
       pdf.horizontal_line 0, 550, :fill_color => 'DDDDDD'
     end
-    pdf.move_down 20
+    pdf.move_down 15
     pdf.fill_color('000000')
 
 
@@ -535,9 +535,9 @@ module PdfGen
     pdf.text(_('Agreement_number') + " : " + user.agreement_number.to_s, {:left => 40, :size => 12})
     pdf.text(_('Agreement_date') + " : " + nice_date(user.agreement_date, options).to_s, {:left => 40, :size => 12})
 
-    pdf.move_down 20
+    pdf.move_down 10
     pdf.text(_('Time_period') + ": " + nice_date(invoice.period_start, options).to_s + " - " + nice_date(invoice.period_end, options).to_s, {:left => 40, :size => 12})
-    pdf.move_down 20
+    pdf.move_down 10
     #balance line
     if Confline.get_value("#{prepaid.to_s}Invoice_Show_Balance_Line", user.owner_id).to_i == 1
       balance = invoice.owned_balance_from_previous_month
