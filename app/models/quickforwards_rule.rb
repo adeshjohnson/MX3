@@ -4,6 +4,7 @@ class QuickforwardsRule < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :name, :message => _('Name_cannot_be_blank')
+  validates_format_of :rule_regexp, :with => /^[0-9\[\]\%\|\,]*$/, :message => _('Invalid_regexp')
   #validates_presence_of :rule_regexp, :message=> _('Regexp_cannot_be_blank')
 
   before_create :q_before_create
