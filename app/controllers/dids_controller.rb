@@ -402,7 +402,19 @@ class DidsController < ApplicationController
         update_did(did, status, 0)
         add_action(session[:user_id], 'did_edited', did.id)
       end
-      if params[:status].to_s == 'free'
+      if status == 'reserved'
+        user = User.where(:id => params[:user_id].to_i).first
+        if user.usertype.to_s == 'reseller'
+          num = Did.where("status = 'free' AND reseller_id = #{params[:user_id].to_i} AND did BETWEEN #{params[:from].to_i} AND #{params[:till].to_i}").count
+          bad_num = Did.where("(status != 'free' OR reseller_id != #{params[:user_id].to_i}) AND did BETWEEN #{params[:from].to_i} AND #{params[:till].to_i}").count
+        else
+          num = Did.where("status = 'reserved' AND user_id = #{params[:user_id].to_i} AND did BETWEEN #{params[:from].to_i} AND #{params[:till].to_i}").count
+          bad_num = Did.where("(status != 'reserved' OR user_id != #{params[:user_id].to_i}) AND did BETWEEN #{params[:from].to_i} AND #{params[:till].to_i}").count
+        end
+        flash[:notice] = [bad_num.to_s, _('DIDs_were_not_updated')].join(" ") if bad_num.to_i > 0
+        flash[:status] = [num.to_s, _('DIDs_were_updated')].join(" ") if num.to_i > 0
+      elsif status == 'free'
+        flash[:status] = [@dids.size, _('DIDs_were_updated')].join(" ") if @dids.size.to_i > 0
         params[:user_id] = ""
       end
       @opts[:user] = params[:user_id] if params[:user_id]
