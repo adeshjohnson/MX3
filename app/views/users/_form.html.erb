@@ -341,7 +341,7 @@
 <% if reseller_pro_active? and ((params[:action].to_s == 'edit' and reseller_active?) or params[:action] == "create" or params[:action] == "new") and (current_user.is_admin? or current_user.is_accountant?) %>
     <tr id="reseller_providers">
       <td><%= _('Allow_to_have_own_providers') %>:</td>
-      <td><%= check_box_tag 'own_providers', "1", (@user.own_providers == 1) %></td>
+      <td><%= check_box_tag 'own_providers', "1", (@user.own_providers == 1) %><span id="permanent_action" hidden = ""> <%= raw b_exclamation + " " + _('This_action_cannot_be_undone') %></span></td>
     </tr>
     <tr id="reseller_create_providers">
       <td><%= _('Disallow_to_create_own_providers') %>:</td>
@@ -451,10 +451,14 @@
         Event.observe(have_own_prov, 'click', function () {
             if (have_own_prov.checked) {
                 create_own_prov.hidden = false;
+                if (create_own_prov_checkbox.disabled == true) {
+                    $('permanent_action').hidden = false;
+                }
                 create_own_prov_checkbox.disabled = false;
             } else {
                 create_own_prov.hidden = true;
                 create_own_prov_checkbox.disabled = true;
+                $('permanent_action').hidden = true;
 
             }
         });
