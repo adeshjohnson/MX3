@@ -796,8 +796,10 @@ module PdfGen
       if ['admin', 'accountant'].include?(usertype)
 
         item << nice_number(total_calls.total_provider_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
-        item << {:text => '', :colspan => 2}
-        item << nice_number(total_calls.total_reseller_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+        if main_options[:rs_active]
+          item << {:text => '', :colspan => 2}
+          item << nice_number(total_calls.total_reseller_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
+        end
         item << {:text => '', :colspan => 2}
         item << nice_number(total_calls.total_user_price, {:nice_number_digits => digits, :change_decimal => cgnd, :global_decimal => gnd})
         item << {:text => ''}
