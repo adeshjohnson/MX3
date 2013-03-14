@@ -2203,78 +2203,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
   end
 
   def providers_calls
-
-    #type checking looks a bit nasty but cant figure out how session[:stats_providers_calls]                                     
-    #becomes integer although it should allways be hash                                                                          
-    providers_calls = session[:stats_providers_calls]                                                                            
-    session[:stats_providers_calls] = nil if (not providers_calls.kind_of?(Hash)) or (providers_calls[:direction] == 0)          
-
-    session[:stats_providers_calls].nil? ? @options = {} : @options = session[:stats_providers_calls]
-    @Show_Currency_Selector=1
-
-    @user = current_user
-
-    if !@provider
-      flash[:notice] = _('Cannot_find_provider_with_id')+" : " + params[:id].to_s
-      redirect_to :controller => "providers", :action => "list" and return false
-    end
-
-    @page_title = _('Providers_calls')
-    @page_title = @page_title + ": " + @provider.name
-    @page_icon = "call.png"
-    change_date
-
-    my_debug @options.to_yaml
-
-    @options[:direction] = params[:direction] || @options[:direction] || "outgoing"
-    @options[:call_type] = params[:call_type] if params[:call_type]  
-    @options[:call_type] = "all" if !@options[:call_type] 
-    conditions = []
-    if @options[:direction] == "incoming"
-      conditions << "(calls.did_provider_id = '#{@provider.id}' OR calls.src_device_id = '#{@provider.device_id}')"
-    else
-      conditions << "calls.provider_id = '#{@provider.id}'"
-    end
-
-    conditions << "disposition = '#{@options[:call_type]}' " if @options[:call_type] != "all"
-    conditions << "calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
-    #    @total_calls = Call.count(:conditions => conditions.join(" AND "))
-    #    @calls = Call.find(:all, :conditions => conditions.join(" AND "), :order => "calldate DESC")
-
-    select = []
-    select << "COUNT(*) AS 'total_calls'"
-    select << "SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration'"
-    select << "SUM(IF(calls.reseller_id > 0, calls.reseller_price, calls.user_price)) as 'user_price'"
-    select << "SUM(IF(calls.provider_price IS NOT NULL, calls.provider_price, 0)) as 'provider_price'"
-
-    total_data = Call.find(:first,
-                           :select => select.join(", "),
-                           :conditions => conditions.join(" AND ")
-    )
-    @total_calls = total_data["total_calls"].to_i
-
-    items_per_page, total_pages = item_pages(@total_calls)
-    page_no = valid_page_number(params[:page], total_pages)
-    offset, limit = query_limit(total_pages, items_per_page, page_no)
-
-    @options[:total_pages] = total_pages
-    @options[:page] = page_no
-
-    @calls = Call.find(:all,
-                       :conditions => conditions.join(" AND "),
-                       :limit => limit,
-                       :offset => offset,
-                       :order => " calldate DESC"
-    )
-    @exchange_rate = Currency.count_exchange_rate(session[:default_currency], session[:show_currency])
-
-    @total_duration = total_data["duration"].to_i
-    @total_user_price = total_data["user_price"].to_d * @exchange_rate
-    @total_provider_price = total_data["provider_price"].to_d * @exchange_rate
-    @total_profit = @total_user_price - @total_provider_price
-
-
-    session[:stats_providers_calls] = @options
+    dont_be_so_smart
+    redirect_to :controller => :callc, :action => :main and return false
   end
 
 

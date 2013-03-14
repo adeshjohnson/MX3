@@ -91,11 +91,11 @@
           <td align="right" id="call_<%= prov.id %>"> <%= prov.pcalls %>      </td>
           <td align="center" id="billsec_<%= prov.id %>"> <%= nice_time prov.billsec %>      </td>
 
-          <td align="right" id="answered_<%= prov.id %>"> <%= link_to prov.answered.to_i, :action => 'providers_calls', :id => prov.id, :call_type => "ANSWERED" %>      </td>
-          <td align="right" id="no_answered_<%= prov.id %>"> <%= link_to prov.no_answer.to_i, :action => 'providers_calls', :id => prov.id, :call_type => "NO ANSWER" %>      </td>
-          <td align="right" id="busy_<%= prov.id %>"> <%= link_to prov.busy.to_i, :action => 'providers_calls', :id => prov.id, :call_type => "BUSY" %>      </td>
-          <td align="right" id="failed_<%= prov.id %>"> <%= link_to prov.failed.to_i, :action => 'providers_calls', :id => prov.id, :call_type => "FAILED" %>      </td>
-          <td align="right" id="failed_locally_<%= prov.id %>"> <%= link_to prov.failed_locally.to_i, :action => 'providers_calls', :id => prov.id, :call_type => "FAILED" %>      </td>
+          <td align="right" id="answered_<%= prov.id %>"> <%= link_to prov.answered.to_i, :action => 'last_calls_stats', :s_provider => prov, :s_call_type => 'answered' %>      </td>
+          <td align="right" id="no_answered_<%= prov.id %>"> <%= link_to prov.no_answer.to_i, :action => 'last_calls_stats', :s_provider => prov, :s_call_type => 'no answer' %>      </td>
+          <td align="right" id="busy_<%= prov.id %>"> <%= link_to prov.busy.to_i, :action => 'last_calls_stats', :s_provider => prov, :s_call_type => 'busy' %>      </td>
+          <td align="right" id="failed_<%= prov.id %>"> <%= link_to prov.failed.to_i, :action => 'last_calls_stats', :s_provider => prov, :s_call_type => 'failed' %>      </td>
+          <td align="right" id="failed_locally_<%= prov.id %>"> <%= link_to prov.failed_locally.to_i, :action => 'last_calls_stats', :s_provider => prov, :s_call_type => 'failed' %>      </td>
 
           <td align="right" id="asr_<%= prov.id %>"> <%= nice_number asr %>  %</td>
           <td align="center" id="acd_<%= prov.id %>"> <%= nice_time acd %>      </td>
