@@ -48,7 +48,7 @@ class Device < ActiveRecord::Base
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{ |o| not o.port.blank? }
 
   # before_create :check_callshop_user
-  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi
+  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi, :ast18
   before_update :validate_fax_device_codecs
   after_create :create_codecs, :device_after_create
   after_save :device_after_save#, :prune_device #do not prune devices after save! it abuses AMI and crashes live calls (#11709)! prune_device is done in device_update->configure_extensions->prune_device
@@ -1228,6 +1228,13 @@ class Device < ActiveRecord::Base
         ss << s[0].to_i
       }
       ActiveRecord::Base.connection.execute("DELETE FROM server_devices WHERE device_id = '#{id}' AND server_id NOT IN (#{ss.join(',')})")
+    end
+  end
+
+  def ast18
+  # tweaks for Asterisk 1.8
+    if AST_18 == 1
+      self.auth = "md5" if self.device_type.upcase == "IAX2"
     end
   end
 
