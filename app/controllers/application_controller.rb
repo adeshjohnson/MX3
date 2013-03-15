@@ -767,6 +767,7 @@ class ApplicationController < ActionController::Base
         if @device.calleridpres.to_s.length > 0
           if ast_18?
             Extline.mcreate(default_context, i, "Set", "CALLERID(name-pres)=#{@device.calleridpres.to_s}", @device.extension, device_id)
+            Extline.mcreate(default_context, i, "Set", "CALLERID(num-pres)=#{@device.calleridpres.to_s}", @device.extension, device_id)
           else
             Extline.mcreate(default_context, i, "SetCallerPres", @device.calleridpres.to_s, @device.extension, device_id)
           end
