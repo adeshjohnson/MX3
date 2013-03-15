@@ -446,7 +446,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/20</td>
+	<td>/billing/dids/edit/19</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,6 +575,66 @@
 	<td>type</td>
 	<td>quickforwards_rule_name</td>
 	<td>Vardas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=quickforwards_rule_rule_regexp</td>
+	<td>asdfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quickforwards Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>* Invalid Regexp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=quickforwards_rule_rule_regexp</td>
+	<td>&quot;&amp;*ĮŠŲ^!)(|</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quickforwards Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>* Invalid Regexp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=quickforwards_rule_rule_regexp</td>
+	<td>###</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quickforwards Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>* Invalid Regexp</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1167,7 +1227,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37161112347</td>
+	<td>37161112348</td>
 	<td></td>
 </tr>
 <tr>
@@ -1616,7 +1676,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=dialplan_19</td>
+	<td>id=dialplan_11</td>
 	<td></td>
 </tr>
 <tr>
@@ -2678,7 +2738,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/26</td>
+	<td>/billing/dids/edit/25</td>
 	<td></td>
 </tr>
 <tr>
@@ -2728,7 +2788,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/fake_form?path_to_action=/billing/dids/assign_to_dp/26</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/dids/assign_to_dp/25</td>
 	<td></td>
 </tr>
 <tr>
