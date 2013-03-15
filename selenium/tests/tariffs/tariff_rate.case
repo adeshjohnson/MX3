@@ -1508,6 +1508,22 @@
 	<td>{&quot;filename&quot;:&quot;Rates-USD.csv&quot;,&quot;file&quot;:&quot;Direction,Destination,Prefix,Subcode,Country code,Rate(USD),Connection Fee(USD),Increment,Minimal Time,Start Time,End Time,Week Day\nAfghanistan,Afghanistan </td>
 	<td></td>
 </tr>
+<!--isitikinimui, kad nera po laiko pridedama laiko juosta (0200)-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>23:59:59,\&quot;\&quot;\nAlbania</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0100</td>
+	<td></td>
+</tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
