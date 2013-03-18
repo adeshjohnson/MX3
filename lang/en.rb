@@ -4547,6 +4547,7 @@ Localization.define('en') do |l|
   l.store 'User_Owner', 'User owner'
   l.store 'This_action_cannot_be_undone', 'This action cannot be undone'
   l.store 'smtp_server_error', 'SMTP Server error occurred'
+  l.store 'one_DID_made_available', 'DID made available'
 
   #  l.store '', ''
   #  l.store '', ''

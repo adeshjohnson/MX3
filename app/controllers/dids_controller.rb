@@ -414,7 +414,7 @@ class DidsController < ApplicationController
         flash[:notice] = [bad_num.to_s, _('DIDs_were_not_updated')].join(" ") if bad_num.to_i > 0
         flash[:status] = [num.to_s, _('DIDs_were_updated')].join(" ") if num.to_i > 0
       elsif status == 'free'
-        flash[:status] = [@dids.size, _('DIDs_were_updated')].join(" ") if @dids.size.to_i > 0
+        flash[:status] = [@dids.size, _('DID_made_available')].join(" ") if @dids.size.to_i > 0
         params[:user_id] = ""
       end
       @opts[:user] = params[:user_id] if params[:user_id]
@@ -473,7 +473,7 @@ class DidsController < ApplicationController
 
       extlines_did_not_active(did.id)
       add_action(session[:user_id], 'did_made_available', did.id)
-      flash[:status] = _('DID_made_available')
+      flash[:status] = _('one_DID_made_available')
       #  redirect_to :action => 'edit', :id => did.id and return false
     end
 
