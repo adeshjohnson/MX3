@@ -43,14 +43,16 @@ module Cyberplat
 
       system("#{Actual_Dir}/lib/cyberplat/checker.exe -s -f #{Actual_Dir}/lib/cyberplat/checker.ini #{checker_tmp}/message2.txt < #{checker_tmp}/message.txt")
       msg = ""
-      File.open("#{checker_tmp}/message2.txt", "r") do |infile|
-        while (line = infile.gets)
-          msg +=line
+      if File.exists?("#{checker_tmp}/message2.txt")
+        File.open("#{checker_tmp}/message2.txt", "r") do |infile|
+          while (line = infile.gets)
+            msg +=line
+          end
         end
       end
       Confline.my_debug(msg)
-      system("rm #{checker_tmp}/message.txt")
-      system("rm #{checker_tmp}/message2.txt")
+      system("rm -f #{checker_tmp}/message.txt")
+      system("rm -f #{checker_tmp}/message2.txt")
       returning button = [] do
         button << tag(:input, :type => 'hidden', :name => 'version', :value => '2.0')
         button << tag(:input, :type => 'hidden', :name => 'сryptotool', :value => "Ipriv")
