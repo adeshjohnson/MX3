@@ -1034,6 +1034,8 @@ class PaymentsController < ApplicationController
               MorLog.my_debug('Payment notification : Mode missmach')
               MorLog.my_debug('   SYSTEM:' + confline('WebMoney_Test'))
               MorLog.my_debug('   WM    :' + params[:LMI_MODE].to_s)
+              MorLog.my_debug(params.to_yaml) if params
+              MorLog.my_debug('-------------------------------------')
             end
           else
             MorLog.my_debug('Payment notification : payment amount missmach')
@@ -1062,6 +1064,9 @@ class PaymentsController < ApplicationController
       @user = User.find(session[:user_id])
       @amount = @payment.gross
     else
+      MorLog.my_debug('Params in webmoney_success action')
+      MorLog.my_debug(params.to_yaml) if params
+      MorLog.my_debug('-------------------------------------')
       MorLog.my_debug "payment_id not received"
       redirect_to :controller => "callc", :action => 'main' and return false
 
