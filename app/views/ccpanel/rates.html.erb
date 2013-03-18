@@ -33,7 +33,7 @@
                roundby = 1
 
                arates = []
-               rate = dg.rates[0]
+               rate = Rate.where("destinationgroup_id = #{dg.id} and tariff_id = #{@tariff.id}").first
 
                arates = rate.aratedetails if rate
 
