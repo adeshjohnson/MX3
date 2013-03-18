@@ -1979,7 +1979,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       arr[1][:joins] += "LEFT JOIN users ON (devices.user_id = users.id)"
       arr[1][:select] = "devices.*"
       if arr[1] and arr[1].include?(:conditions)
-        arr[1][:conditions] += " AND (users.owner_id = #{id} AND users.hidden = 0)"
+        arr[1][:conditions] << " AND (users.owner_id = #{id} AND users.hidden = 0)"
       else
         arr[1][:conditions] = "users.owner_id = #{id} AND users.hidden = 0"
       end

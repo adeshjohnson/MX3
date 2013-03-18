@@ -900,7 +900,7 @@ ORDER BY dids.did ASC"
         var << @user.id
         @opts[:user] = @user.id
         if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all')
-          @device = current_user.load_users_devices(:first, :conditions => ["devices.id =  ?", params[:device]] )
+          @device = current_user.load_users_devices(:first, :conditions => ["devices.id = #{params[:device]}"])
           if @device
             cond << "dids.device_id = ?"
             var << @device.id
@@ -920,7 +920,7 @@ ORDER BY dids.did ASC"
     if @s_user and @s_user.owner_id == correct_owner_id
 
       if params[:s_device] and not (params[:s_device].strip.blank? or params[:s_device].strip.downcase == 'all')
-        @s_device = current_user.load_users_devices(:first, :conditions => ["devices.id = ? ", params[:s_device]])
+        @s_device = current_user.load_users_devices(:first, :conditions => ["devices.id = #{params[:s_device]}"])
         unless @s_device
           flash[:notice] = _("Device_not_found")
           redirect_to({:action => 'dids_interval_add_to_user'}.merge(@opts)) and return false
