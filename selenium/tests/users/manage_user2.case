@@ -1097,12 +1097,6 @@
 	<td>on</td>
 </tr>
 <!--testing unique emails address-->
-<!--pirmiausia iterpiamas sql su vienodais emails, kad butu sugaudyti crashai-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/emails_for_manage_user</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/new</td>
@@ -1222,47 +1216,6 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=address_email</td>
-	<td></td>
-</tr>
-<!--Jei sistemoje jau yra userių su vienodias emails, reikia padaryti, kad editinant userį, neleistų išsaugoti pasikartojančio email (kitas usersis - user reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=address_email</td>
-	<td>test_email@email.com</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User was not updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Email must be unique</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=address_email</td>
-	<td>test_email2@email.com</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test Accountant</td>
 	<td></td>
 </tr>
 <tr>
