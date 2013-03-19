@@ -199,9 +199,14 @@ class EmailsController < ApplicationController
           @users_list << user
         end
       end
+      if @users_list.blank?
+        flash[:notice] = _('no_users_selected')
+        redirect_to :action => 'list'
+      else
+        send_all(@users_list, @email)
+      end
 
       #sent email to users
-      send_all(@users_list, @email)
     end
 
     if @users_list.size > 0
@@ -293,7 +298,7 @@ class EmailsController < ApplicationController
     e =[]
     status = Email.send_email(email, users, session[:usertype].to_s == "admin" ? Confline.get_value("Company_Email", 0) : Confline.get_value("Email_from", session[:user_id].to_i), 'send_all', {:owner => session[:user_id], })
     status.uniq.each { |i| e << _(i.capitalize) }
-    flash[:notice] = e.join('<br>')
+    flash[:status] = e.join('<br>')
   end
 
   #send_all
