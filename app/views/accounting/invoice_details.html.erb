@@ -105,6 +105,7 @@
             <% end %>
           </td>
         </tr>
+        <% if (@invoice_invoicedetails.first.name != "Manual Payment") and (@invoice_invoicedetails.count == 1) and (@user.postpaid.to_i == 0) %>
         <tr class="row2">
           <th align="left"><%= _('Invoice_detailed') %>:</th>
           <td align="center">
@@ -145,6 +146,7 @@
               </td>
             </tr>
         <% end %>
+      <% end %>
       </table>
       <% if ["admin", "accountant"].include?(session[:usertype]) or session[:user_id] == @invoice.user.owner_id %>
           <br><br>
