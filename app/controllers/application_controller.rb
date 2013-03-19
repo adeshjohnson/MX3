@@ -1803,7 +1803,9 @@ class ApplicationController < ActionController::Base
       accs = acc.to_s
       variable = "MOR_ACC=#{accs}"
 
-      variable += "|" + var2 if var2 and var2.length > 0
+      sep = (AST_18 == 1 ? "," : "|")
+
+      variable += sep + var2 if var2 and var2.length > 0
 
 =begin
 CLI> manager show command originate

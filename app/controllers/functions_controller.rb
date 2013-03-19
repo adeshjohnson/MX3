@@ -147,17 +147,32 @@ class FunctionsController < ApplicationController
         redirect_to :controller => :callc, :action => :main and return false
       end
 
-      callerid_number = Confline.get_value('WEB_Callback_CID', 0)
+      # LegA/LegB settings from callback settings
+      legA = Confline.get_value("Callback_legA_CID")
+      legB = Confline.get_value("Callback_legB_CID")
+      custom_legA = Confline.get_value2('Callback_legA_CID', 0)
+      custom_legB = Confline.get_value2('Callback_legB_CID', 0)
 
       if device #Device.count(@acc, :conditions => "secret = '#{secret}'") > 0
 
-        @cb_ok = 1
+        legA_cid = (legA == 'device' ? device.callerid_number : (legA == 'custom' ? custom_legA : @src))
+        legB_cid = (legB == 'device' ? device.callerid_number : (legB == 'custom' ? custom_legB : @src))
 
+        legA_cid = @src if legA_cid.blank?
+        legB_cid = @src if legB_cid.blank?
+
+        separator = (AST_18 == 1 ? "," : "|")
+
+        server = Confline.get_value("Web_Callback_Server").to_i
+        server = 1 if server == 0
+
+        @cb_ok = 1
+        
         channel = "Local/#{@src}@mor_cb_src/n"
         if @dst.length > 0
-          st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, callerid_number)
+          st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, legB_cid, "MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
         else
-          st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", callerid_number)
+          st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", legB_cid,"MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
         end
 
         @error = _('Cannot_connect_to_asterisk_server') if st.to_i != 0
@@ -3189,9 +3204,10 @@ Sets default tax values for users or cardgroups
     Confline.set_value("CB_WaitTime", params[:cb_waittime])
 
     Confline.set_value("Web_Callback_Server", params[:web_callback_server])
-    Confline.set_value("Web_Callback_Send_Source_As_CID", params[:web_callback_send_source])
-    cid = params[:web_callback_send_source].to_i == 1 ? '' :  params[:web_callback_cid]
-    Confline.set_value("WEB_Callback_CID", cid)
+    Confline.set_value("Callback_legB_CID", params[:CID]['legB'], 0)
+    Confline.set_value("Callback_legA_CID", params[:CID]['legA'], 0)
+    Confline.set_value2("Callback_legB_CID", params[:legB_send_custom])
+    Confline.set_value2("Callback_legA_CID", params[:legA_send_custom])
 
     if (params[:email_callback_pop3_server] or params[:email_callback_login])
       if params[:email_callback_pop3_server] != params[:email_pop3_server]

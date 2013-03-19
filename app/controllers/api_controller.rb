@@ -127,10 +127,27 @@ class ApiController < ApplicationController
             dst = ""
             dst = params[:dst] if params[:dst]
             channel = "Local/#{src}@mor_cb_src/n"
+
+            legA = Confline.get_value("Callback_legA_CID", 0)
+            legB = Confline.get_value("Callback_legB_CID", 0)
+            custom_legA = Confline.get_value2('Callback_legA_CID', 0)
+            custom_legB = Confline.get_value2('Callback_legB_CID', 0)
+
+            legA_cid = (legA == 'device' ? device.callerid_number : (legA == 'custom' ? custom_legA : src))
+            legB_cid = (legB == 'device' ? device.callerid_number : (legB == 'custom' ? custom_legB : src))
+
+            legA_cid = src if legA_cid.blank?
+            legB_cid = src if legB_cid.blank?
+
+            separator = (AST_18 == 1 ? "," : "|")
+
+            server = Confline.get_value("Web_Callback_Server").to_i
+            server = 1 if server == 0
+
             if dst.length > 0
-              st = originate_call(device.id, src, channel, "mor_cb_dst", dst, (device.callerid_number.blank? ? src : device.callerid_number))
+              st = originate_call(device.id, src, channel, "mor_cb_dst", dst, legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
             else
-              st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", (device.callerid_number.blank? ? src : device.callerid_number))
+              st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
             end
             doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
             doc.Status(st.to_i == 0 ? "Ok" : _('Cannot_connect_to_asterisk_server'))
