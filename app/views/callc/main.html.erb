@@ -6,7 +6,7 @@
       <br/>
       <br/>
 
-      <%= raw session[:frontpage_text].to_s.html_safe %>
+      <%= raw session[:frontpage_text].to_s.html_safe.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?") %>
 
       <% if sms_active? && Confline.get_value("Send_SMS_from_Front_page").to_i == 1 && current_user.can_send_sms? %>
           <br/>
