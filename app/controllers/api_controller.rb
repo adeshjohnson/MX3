@@ -2433,7 +2433,7 @@ class ApiController < ApplicationController
             tariff[:id] = tariff_new.id
             logger.fatal "TARIFF CREATED " + tariff[:id].to_s
           else
-            find_tariff_id = Tariff.where(:name => tariff[:name].to_s, :purpose => "user").first
+            find_tariff_id = Tariff.where(:name => tariff[:name].to_s).first
             if find_tariff_id and (find_tariff_id.owner_id.to_i == user.id or user.usertype.to_s == 'admin')
               logger.fatal "TARIFF with same name exists, ID:#{find_tariff_id.id}!!! CHANGE NAME OR ID"
               error += "TARIFF with same name exists, ID:#{find_tariff_id.id}!!! CHANGE NAME OR ID"

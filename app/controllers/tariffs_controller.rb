@@ -1431,7 +1431,7 @@ class TariffsController < ApplicationController
 
     @ards = @rate.aratedetails
 
-    if not @ards[0]
+    if @ards.first.blank?
 
       ard = Aratedetail.new
       ard.from = 1
@@ -1446,7 +1446,7 @@ class TariffsController < ApplicationController
     end
 
 
-    if @ards[0].daytype.to_s == ""
+    if @ards.first.daytype.to_s == ""
       @WDFD = true
 
       sql = "SELECT TIME(start_time) start_time, TIME(end_time) end_time FROM aratedetails WHERE daytype = '' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
