@@ -39,7 +39,7 @@
 <tr>
 	<td>type</td>
 	<td>logout_link</td>
-	<td>http://trac.kolmisoft.com/trac/timeline</td>
+	<td>http://wiki.kolmisoft.com/index.php/Call_Tracing</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -52,19 +52,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Logout link:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>logout_link</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>logout_link</td>
-	<td>http://trac.kolmisoft.com/trac/timeline</td>
+	<td>http://wiki.kolmisoft.com/index.php/Call_Tracing</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -72,9 +72,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>link=TracGuide</td>
-	<td>TracGuide</td>
+	<td>waitForText</td>
+	<td>link=User Details</td>
+	<td>User Details</td>
 </tr>
 <!--101-->
 <tr>
@@ -98,7 +98,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>link=Logout</td>
 	<td></td>
 </tr>
@@ -108,9 +108,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>link=TracGuide</td>
-	<td>TracGuide</td>
+	<td>waitForText</td>
+	<td>link=User Details</td>
+	<td>User Details</td>
 </tr>
 <!--accountant-->
 <tr>
@@ -134,7 +134,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>link=Logout</td>
 	<td></td>
 </tr>
@@ -144,9 +144,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>link=TracGuide</td>
-	<td>TracGuide</td>
+	<td>waitForText</td>
+	<td>link=User Details</td>
+	<td>User Details</td>
 </tr>
 <!--reseller-->
 <tr>
@@ -182,7 +182,7 @@
 <tr>
 	<td>type</td>
 	<td>logout_link</td>
-	<td>http://wiki.kolmisoft.com</td>
+	<td>http://www.google.lt</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -190,7 +190,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>link=Logout</td>
 	<td></td>
 </tr>
@@ -201,9 +201,9 @@
 </tr>
 <!--tikriausiai turetu buti google.lt-->
 <tr>
-	<td>assertText</td>
-	<td>link=TracGuide</td>
-	<td>TracGuide</td>
+	<td>waitForText</td>
+	<td>link=User Details</td>
+	<td>User Details</td>
 </tr>
 <!--user_reseller-->
 <tr>
@@ -227,7 +227,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>link=Logout</td>
 	<td></td>
 </tr>
@@ -237,8 +237,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>MOR Manual</td>
+	<td>waitForTextPresent</td>
+	<td>Gmail</td>
 	<td></td>
 </tr>
 <!--change-->
@@ -288,23 +288,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Please enter your Username and Password to login:</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>TracGuide</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/images/callc/login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Login</td>
 	<td></td>
 </tr>
 </tbody></table>
