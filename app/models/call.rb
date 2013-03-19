@@ -567,7 +567,7 @@ class Call < ActiveRecord::Base
     #if reseller pro - change common use provider price, rate to reseller tariff rate, price
     if options[:current_user].usertype == 'reseller'
       prov_price = "(SUM(#{SqlExport.reseller_provider_price_sql}) * #{options[:exchange_rate].to_d}) as total_provider_price"
-      profit = "(SUM(#{SqlExport.reseller_profit_sql}) * #{options[:exchange_rate].to_d}) AS total_profit"
+      profit = "(SUM(IF(calls.user_id = #{options[:current_user].id}, 0, #{SqlExport.reseller_profit_sql})) * #{options[:exchange_rate].to_d}) AS total_profit"
       user_price = SqlExport.user_price_no_dids_sql
       reseller_price = SqlExport.reseller_price_no_dids_sql
     else

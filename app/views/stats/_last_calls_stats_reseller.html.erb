@@ -224,9 +224,15 @@
                   <%= nice_number(call.user_price_exrate.to_f) %>
                 </td>
                 <td id="did_<%= call.id %>" class="<%= text_class %>" align="left"><%= did.did if did %></td>
-                <td id="profit_<%= call.id %>" class="<%= text_class %>" align="left">
-                  <%= nice_number(call.profit) %>
-                </td>
+                <% if call.user and call.user.usertype.to_s == 'reseller' %>
+                  <td id="profit_<%= call.id %>" class="<%= text_class %>" align="center">
+                    <a style="" href="http://wiki.kolmisoft.com/index.php/Deprecated_functionality" target="_blank"><%= image_tag('icons/exclamation.png', :title => _('Deprecated_functionality')) %></a>
+                  </td>
+                <% else %>
+                  <td id="profit_<%= call.id %>" class="<%= text_class %>" align="left">
+                    <%= nice_number(call.profit) %>
+                  </td>
+                <% end %>
             <% end %>
           </tr>
       <% } %>
