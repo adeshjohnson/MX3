@@ -104,7 +104,7 @@ class CallsController < ApplicationController
       originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, #{SqlExport.user_price_sql}), if(calls.reseller_price IS NULL, 0, calls.reseller_price)))", {:reference => 'originating_billed'})
       originating_billsec = "SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originating_billsec'"
 
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', #{SqlExport.admin_provider_price_sql}, 0))", {:reference => 'terminating_billed'})
+      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', #{SqlExport.admin_provider_price_sql}, 0)) - calls.did_prov_price", {:reference => 'terminating_billed'})
       terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'terminating_billsec'"
     end
 

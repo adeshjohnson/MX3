@@ -1809,7 +1809,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @calls = Call.find(:all, :include => [:user, :provider, :device], :conditions => "provider_price > user_price AND calldate BETWEEN \'" + session_from_date + " 00:00:00\' AND \'" + session_till_date + " 23:59:59\' AND disposition = \'ANSWERED\'"+ condition, :order => "calldate DESC")
 
     @total_calls = Call.find(:all,
-                             :select => 'COUNT(*), SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) AS total_duration, SUM(provider_price-user_price) AS total_loss',
+                             :select => 'COUNT(*), SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) AS total_duration, SUM(provider_price - did_prov_price - user_price) AS total_loss',
                              :conditions => 'provider_price > user_price AND calldate BETWEEN \'' + session_from_date + ' 00:00:00\' AND \'' + session_till_date + ' 23:59:59\' AND disposition = \'ANSWERED\''+ condition)
   end
 
@@ -1871,6 +1871,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     cond_did_owner_cost << "calls.calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}'"
     select = ["SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) AS 'billsec'"]
     select += [SqlExport.replace_price("SUM(#{up})", {:reference => 'user_price'}), SqlExport.replace_price("SUM(#{pp})", {:reference => 'provider_price'})]
+    select += ["SUM(calls.did_prov_price) AS 'did_prov_price'"]
     if session[:usertype] == "reseller"
       conditions << "calls.reseller_id = #{session[:user_id].to_i}"
       cond_did_owner_cost << "calls.reseller_id = #{session[:user_id].to_i}"
@@ -1878,7 +1879,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     total = Call.find(:all, :select => select.join(", "), :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}", :conditions => (conditions +["disposition = 'ANSWERED'"]).join(" AND "))[0]
     @total_duration = (total["billsec"]).to_i
     @total_call_price = (total["user_price"]).to_d
-    @total_call_selfprice = (total["provider_price"]).to_d
+    @total_call_selfprice = (total["provider_price"].to_d - total["did_prov_price"].to_d)         # did_provider_price minusuojamas dėl to, kad If the rate is less than zero, this price is paid TO the Provider for the DID usage.
     select_total = ["COUNT(*) AS 'total_calls'"]
     select_total << "SUM(IF(calls.disposition = 'ANSWERED', 1, 0)) AS 'answered_calls'"
     select_total << "SUM(IF(calls.disposition = 'BUSY', 1, 0)) AS 'busy_calls'"
@@ -3177,13 +3178,13 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     session[:hour_till] = "23"
     session[:minute_till] = "59"
 
-    sql = "SELECT EXTRACT(YEAR FROM #{calldate}) as year, EXTRACT(MONTH FROM #{calldate}) as month, EXTRACT(day FROM #{calldate}) as day, Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp}) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
+    sql = "SELECT EXTRACT(YEAR FROM #{calldate}) as year, EXTRACT(MONTH FROM #{calldate}) as month, EXTRACT(day FROM #{calldate}) as day, Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp} - calls.did_prov_price) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
     #{des3} calls #{des2} #{SqlExport.left_join_reseler_providers_to_calls_sql}
     WHERE #{cond} calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}' #{des}
     GROUP BY year, month, day"
     @res = ActiveRecord::Base.connection.select_all(sql)
 
-    sql_total = "SELECT  Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp}) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
+    sql_total = "SELECT  Count(calls.id) as 'calls' , SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'duration', SUM(#{up}) as 'user_price', SUM(#{rp}) as 'resseler_price', SUM(#{pp} - calls.did_prov_price) as 'provider_price', SUM(IF(disposition!='ANSWERED',1,0)) as 'fail'  FROM
     #{des3} calls #{des2} #{SqlExport.left_join_reseler_providers_to_calls_sql}
     WHERE #{cond} calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}' #{des}"
     @res_total = ActiveRecord::Base.connection.select_all(sql_total)

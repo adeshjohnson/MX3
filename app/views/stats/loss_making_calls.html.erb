@@ -92,9 +92,9 @@
                 </td>
 
                 <td id="difference_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.provider_rate - call.user_rate) %></td>
-                <td id="user_price_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.user_price) %></td>
-                <td id="provider_price_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.provider_price) %></td>
-                <td id="loss_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.provider_price - call.user_price) %></td>
+                <td id="user_price_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.user_price + call.did_inc_price) %></td>
+                <td id="provider_price_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.provider_price - call.did_prov_price) %></td>
+                <td id="loss_<%= call.id %>" class="<%= text_class %>" align="right"><%= nice_number(call.provider_price - call.did_prov_price - call.user_price) %></td>
             <% end %>
             <% user = call.user
                device = call.device %>

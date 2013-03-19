@@ -314,7 +314,7 @@ class Call < ActiveRecord::Base
       cond << "users.owner_id = #{user.id}"
     else
       provider_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'provider_billsec'"
-      provider_price = SqlExport.replace_price("SUM(#{SqlExport.admin_provider_price_sql})", {:reference => 'provider_price'})
+      provider_price = SqlExport.replace_price("SUM(#{SqlExport.admin_provider_price_sql} - calls.did_prov_price)", {:reference => 'provider_price'})
     end
 
     #limit terminators to allowed ones.
@@ -549,7 +549,7 @@ class Call < ActiveRecord::Base
         select << "(#{SqlExport.admin_user_rate_sql} * #{options[:exchange_rate]} ) AS user_rate_exrate"
         select << "(#{SqlExport.admin_provider_rate_sql} * #{options[:exchange_rate]}) AS provider_rate_exrate "
         select << "(#{SqlExport.admin_provider_price_sql} * #{options[:exchange_rate]} ) AS provider_price_exrate"
-        select << "(#{SqlExport.admin_profit_sql} + #{options[:s_user] == 'all' ? 'calls.did_price' : '(IF(calls.user_id = ' + options[:s_user].to_s + ', 0, calls.did_price - calls.did_inc_price))'}) * #{options[:exchange_rate]} AS profit"
+        select << "(#{SqlExport.admin_profit_sql} + #{options[:s_user] == 'all' ? 'calls.did_price + calls.did_prov_price' : '(IF(calls.user_id = ' + options[:s_user].to_s + ', calls.did_prov_price, calls.did_price - calls.did_inc_price))'}) * #{options[:exchange_rate]} AS profit"
       end
     end
     select << "IF(resellers.id > 0, #{SqlExport.nice_user_sql("resellers", nil)}, '') AS 'nice_reseller'"
@@ -572,7 +572,7 @@ class Call < ActiveRecord::Base
       reseller_price = SqlExport.reseller_price_no_dids_sql
     else
       prov_price = "(SUM(#{SqlExport.admin_provider_price_sql}) * #{options[:exchange_rate].to_d}) as total_provider_price"
-      profit = "(SUM(#{SqlExport.admin_profit_sql} + #{options[:s_user] == 'all' ? 'calls.did_price' : '(IF(calls.user_id = ' + options[:s_user].to_s + ', 0, calls.did_price - calls.did_inc_price))'}) * #{options[:exchange_rate].to_d}) AS total_profit"
+      profit = "(SUM(#{SqlExport.admin_profit_sql} + #{options[:s_user] == 'all' ? 'calls.did_price + calls.did_prov_price' : '(IF(calls.user_id = ' + options[:s_user].to_s + ', calls.did_prov_price , calls.did_price - calls.did_inc_price))'}) * #{options[:exchange_rate].to_d}) AS total_profit"
       user_price = SqlExport.user_price_no_dids_sql
       reseller_price = SqlExport.admin_reseller_price_no_dids_sql
     end
@@ -668,9 +668,9 @@ class Call < ActiveRecord::Base
     if options[:current_user].usertype == "admin" or options[:current_user].usertype == "accountant"
       if options[:can_see_finances]
         if options[:s_user] != 'all'
-          s << SqlExport.replace_dec("(IF(calls.user_id = #{options[:user].id},#{SqlExport.admin_profit_sql},calls.did_price) * #{options[:exchange_rate]})", options[:column_dem], 'profit')
+          s << SqlExport.replace_dec("(IF(calls.user_id = #{options[:user].id},#{SqlExport.admin_profit_sql} + calls.did_prov_price,calls.did_price) * #{options[:exchange_rate]})", options[:column_dem], 'profit')
         else
-          s << SqlExport.replace_dec("((#{SqlExport.admin_profit_sql} + calls.did_price) * #{options[:exchange_rate]})", options[:column_dem], 'profit')
+          s << SqlExport.replace_dec("((#{SqlExport.admin_profit_sql} + calls.did_price + calls.did_prov_price) * #{options[:exchange_rate]})", options[:column_dem], 'profit')
         end
       end
     elsif options[:current_user].usertype == 'reseller'
