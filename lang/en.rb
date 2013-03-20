@@ -1439,7 +1439,7 @@ Localization.define('en') do |l|
   l.store 'Greeting_upload', 'Greeting upload'
   l.store 'Zero_size_file', 'Zero size file'
   l.store 'Logo_uploaded', 'Logo uploaded'
-  l.store 'SIP_302_Reinvite_Support', 'SIP 302 Reinvite Support'
+  l.store 'SIP_302_Reinvite_Support', 'SIP 302 Redirect Support'
 
   l.store 'File_is_not_wav_or_mp3', 'File is not WAV or MP3'
   l.store 'File_is_too_big', 'File is too big'
