@@ -14,7 +14,7 @@ class Did < ActiveRecord::Base
   validates_presence_of :did, :message => _("Enter_DID")
   validates_format_of :did, :with => /^\d+$/, :message => _('DID_must_consist_only_of_digits'), :on => :create
 
-  before_create :validate_provider
+  before_create :validate_provider, :reseller_did_creation
   before_save :validate_device, :validate_user, :check_collisions_with_qf_rules, :conditions
   before_destroy :find_if_used_in_calls
 
@@ -293,6 +293,17 @@ class Did < ActiveRecord::Base
 =end
   def cc_tariff_id=(value)
     write_attribute(:cc_tariff_id, value.to_i)
+  end
+  
+  def reseller_did_creation
+    if User.current.usertype.downcase == "reseller"
+      did = self.did
+      rules = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id = 0")
+      if rules.count > 0
+        errors.add(:prefix,_('Collisions_with_Quickforwards_Rules_rs'))
+        return false
+      end    
+    end
   end
 
   def check_collisions_with_qf_rules
