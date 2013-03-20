@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@href='/billing/functions/callback_settings']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/servers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/dialplan/callback_dialplan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>If you leave empty CID in Callback settings, Source will be sent as CallerID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_maxretries</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_retrytime</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_retrytime</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_waittime</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=web_callback_server</td>
+	<td>1 - 127.0.0.1 20 - 127.0.0.2 30 - 127.0.0.3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=web_callback_server</td>
+	<td>label=30 - 127.0.0.3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legA_device</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legA_src</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legA_custom</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=legA_send_custom</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legB_device</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legB_src</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legB_custom</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legB_custom</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=legB_send_custom</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cb_maxretries</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cb_retrytime</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cb_waittime</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CID_legA_custom</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=legA_send_custom</td>
+	<td>55555555555</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CID_legB_src</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_maxretries</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_retrytime</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_waittime</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legA_custom</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=legA_send_custom</td>
+	<td>55555555555</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legB_src</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CID_legA_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CID_legB_custom</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=legB_send_custom</td>
+	<td>azsxdcfk,mnbsdrhndftht</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legA_device</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=CID_legB_custom</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=legA_send_custom</td>
+	<td>55555555555</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=legA_send_custom</td>
+	<td>55555555555</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=legB_send_custom</td>
+	<td>azsxdcfk,mnbsdrhndftht</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=web_callback_server</td>
+	<td>30 - 127.0.0.3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_name_100</td>
+	<td>Callback_dialplan</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_did_100</td>
+	<td>37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_dname_100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_data2_100</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_description_100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Assign DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>icon_chech_dp_callback_afcac_100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_data5_100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@id='diaplan_edit_100']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=cb_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_active</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cb_active</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/dids/dids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=callback_dp_name</td>
+	<td>DialPlanas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=c_dp_name_101</td>
+	<td>DialPlanas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/hide/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>name=dialplan[data3]</td>
+	<td>IAX2/1002 Test Device #1 IAX2/101 Test FAX device FAX/102 Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=dialplan[data3]</td>
+	<td>Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>IAX2/1002 Test Device #1 IAX2/101 Test FAX device FAX/102 Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>SIP</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/hide/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>name=dialplan[data3]</td>
+	<td>SIP SIP/1001 Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=dialplan[data3]</td>
+	<td>Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/23</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=assign_to_dp_pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID assigned to Dial Plan: AuthByPIN re</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>SIP SIP/1001 Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/hide/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=dialplan[data3]</td>
+	<td>SIP SIP/1001 Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>name=dialplan[data3]</td>
+	<td>Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>SIP SIP/1001 Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>Test Device for Resellers User IAX2/105 Test Device for Resellers User IAX2/108</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/hide/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=dialplan[data3]</td>
+	<td>IAX2/1002 Test Device #1 IAX2/101 Test FAX device FAX/102 Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>name=dialplan[data3]</td>
+	<td>Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>IAX2/1002 Test Device #1 IAX2/101 Test FAX device FAX/102 Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>css=select[name=&quot;dialplan[data3]&quot;]</td>
+	<td>Test Device for Admin IAX2/103 Test Device for Reseller IAX2/104 Test Device for Accountant SIP/109</td>
+</tr>
+<!--new dialplan-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>callback_dp_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//select[@name='dialplan[data1]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//select[@name='dialplan[data6]']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//select[@name='dialplan[data6]']</td>
+	<td>Leave as it is 1 unallocated number / 404 Not Found 2 no route to network / 404 Not Found 3 no route to destination / 404 Not Found 17 user busy / 486 Busy here 18 no user responding / 408 Request Timeout 19 no answer from the user / 480 Temporarily unavailable 20 subscriber absent / 480 Temporarily unavailable 21 call rejected / 403 Forbidden 22 number changed (w/ diagnostic) / 301 Moved Permanently 23 redirection to new destination / 410 Gone 26 non-selected user clearing / 404 Not Found 27 destination out of order / 502 Bad Gateway 28 address incomplete / 484 Address incomplete 29 facility rejected / 501 Not implemented 31 normal unspecified / 480 Temporarily unavailable</td>
+</tr>
+<!--There is no ID-->
+<tr>
+	<td>mouseOver</td>
+	<td>hangup_cause_codes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>How to terminate Callback initiation Call (ISDN/SIP)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>ask_for_card</td>
+	<td>Ask for Card ?</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>wait_time</td>
+	<td>Wait (s)</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>wait_time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>WzBoDyI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>How many seconds to wait after initiation call to callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=callback_dialplan[data4]_</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>callback_dp_name</td>
+	<td>ccccccccccccccccccc</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>cb_add</td>
+	<td></td>
+</tr>
+<!--edit dialplan-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>dp_not_assign_101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Add new DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Call ends with such Hangup Cause Code :</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=dialplan[data6]</td>
+	<td>Leave as it is 1 unallocated number / 404 Not Found 2 no route to network / 404 Not Found 3 no route to destination / 404 Not Found 17 user busy / 486 Busy here 18 no user responding / 408 Request Timeout 19 no answer from the user / 480 Temporarily unavailable 20 subscriber absent / 480 Temporarily unavailable 21 call rejected / 403 Forbidden 22 number changed (w/ diagnostic) / 301 Moved Permanently 23 redirection to new destination / 410 Gone 26 non-selected user clearing / 404 Not Found 27 destination out of order / 502 Bad Gateway 28 address incomplete / 484 Address incomplete 29 facility rejected / 501 Not implemented 31 normal unspecified / 480 Temporarily unavailable</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dialplan[data6]</td>
+	<td>label=21 call rejected / 403 Forbidden</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--assert is it saved?-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>dialplan[data6]</td>
+	<td>21 call rejected / 403 Forbidden</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ssettings_menu27</td>
+	<td></td>
+</tr>
+<!--assert table field-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_hgc_101</td>
+	<td>21 call rejected / 403 Forbidden</td>
+</tr>
+<!--edit again-->
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>dialplan[data6]</td>
+	<td>21 call rejected / 403 Forbidden</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dialplan[data6]</td>
+	<td>label=29 facility rejected / 501 Not implemented</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dialplan[data3]</td>
+	<td>label=Test Device for Admin IAX2/103</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>dialplan[data1]</td>
+	<td>37060011246</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_did_101</td>
+	<td>37060011246</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>c_dp_hgc_101</td>
+	<td>29 facility rejected / 501 Not implemented</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=c_dp_name_101</td>
+	<td>DialPlanas</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=c_dp_description_101</td>
+	<td>Test Device for Admin IAX2/103</td>
+</tr>
+<!--delete-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/destroy/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/destroy/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/destroy/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/destroy/101</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Don't be so smart...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//select[@name='dialplan[data6]']</td>
+	<td>Leave as it is 1 unallocated number / 404 Not Found 2 no route to network / 404 Not Found 3 no route to destination / 404 Not Found 17 user busy / 486 Busy here 18 no user responding / 408 Request Timeout 19 no answer from the user / 480 Temporarily unavailable 20 subscriber absent / 480 Temporarily unavailable 21 call rejected / 403 Forbidden 22 number changed (w/ diagnostic) / 301 Moved Permanently 23 redirection to new destination / 410 Gone 26 non-selected user clearing / 404 Not Found 27 destination out of order / 502 Bad Gateway 28 address incomplete / 484 Address incomplete 29 facility rejected / 501 Not implemented 31 normal unspecified / 480 Temporarily unavailable</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@name='dialplan[data6]']</td>
+	<td>label=23 redirection to new destination / 410 Gone</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>callback_dialplan[data4]_</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=callback_dp_name</td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=c_dp_hgc_103</td>
+	<td>23 redirection to new destination / 410 Gone</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/edit/103</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=dialplan[data6]</td>
+	<td>23 redirection to new destination / 410 Gone</td>
+</tr>
+</tbody></table>
+</body>
+</html>
