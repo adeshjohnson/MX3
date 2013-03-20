@@ -1458,7 +1458,9 @@ class ApplicationController < ActionController::Base
               (SELECT extension c FROM devices  WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
               UNION ALL
               (SELECT extension + 1 AS c FROM devices WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
-            ) AS v GROUP BY free HAVING  x < 2 AND free BETWEEN #{ran_min} AND #{ran_max} ORDER BY CONVERT(free, UNSIGNED);"
+              UNION ALL
+              (SELECT username + 1 AS c FROM devices WHERE (username REGEXP '^[0-9]+$' = 1 AND username BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
+            ) AS v GROUP BY free HAVING  x < 3 AND free BETWEEN #{ran_min} AND #{ran_max} ORDER BY CONVERT(free, UNSIGNED) DESC limit 1;"
     devices = ActiveRecord::Base.connection.select_all(sql)
 
     if devices and devices[0]
