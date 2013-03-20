@@ -299,7 +299,7 @@ class Did < ActiveRecord::Base
     if User.current.usertype.downcase == "reseller"
       did = self.did
       rules = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id = 0")
-      if rules.count > 0
+      if rules.size > 0
         errors.add(:prefix,_('Collisions_with_Quickforwards_Rules_rs'))
         return false
       end    
