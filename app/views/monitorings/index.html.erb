@@ -7,7 +7,11 @@
     <th align="center"><%= _('Monitoring_type') %></th>
     <th align="center"><%= _('Amount') %> (<%= Currency.get_default.name %>)</th>
     <th align="center"><%= _('Block_user') %></th>
-    <th align="center"><%= _('Send_email_to_admin') %></th>
+    <% if !reseller? %>
+        <th align="center"><%= _('Send_email_to_admin') %></th>
+    <% else %>
+        <th align="center"><%= _('Send_email_to_reseller') %></th>
+    <% end %>
     <th align="center"><%= _('Users') %></th>
     <% if !reseller? %>
         <th align="center"><%= _('Log') %></th>

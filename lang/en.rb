@@ -4552,6 +4552,7 @@ Localization.define('en') do |l|
   l.store 'Send_Device_CID', 'Send Device CID'
   l.store 'cid_fallback_info', 'If you leave empty CID in Callback settings, Source will be sent as CallerID'
   l.store 'Deprecated_functionality', 'Deprecated functionality'
+  l.store 'Send_email_to_reseller', 'Send Email to Reseller'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

@@ -1,3 +1,9 @@
+<style type="text/css">
+    .field_with_errors {
+        display: inline;
+    }
+</style>
+
 <script type="text/javascript">
     Event.observe(window, 'load', function () {
         var minutes = $('monitoring_period_in_past_type_minutes');
@@ -67,13 +73,13 @@
 <td>
   <table> 
     <tr> 
-    <td> 
-      <b <%= tooltip(_('Block_user'), _('Block_user_explanation'))%>><%= b_info %> <%= _('Block_user') %>:</b> 
-    </td> 
-    <td> 
-      <%= form.radio_button :block, false, :id => "will_not_be_blocked" %> <%= _('No') %> 
-      <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Yes') %> 
-    </td> 
+    <td>
+      <b <%= tooltip(_('Block_user'), _('Block_user_explanation'))%>><%= b_info %> <%= _('Block_user') %>:</b>
+    </td>
+    <td>
+      <%= form.radio_button :block, false, :id => "will_not_be_blocked" %> <%= _('No') %>
+      <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Yes') %>
+    </td>
     </tr> 
     <tr> 
       <td> 
