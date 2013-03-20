@@ -1555,7 +1555,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value("PayPal_Default_Amount", default_amount)
     Confline.set_value("PayPal_Min_Amount", params[:paypal_min_amount])
     Confline.set_value("PayPal_Max_Amount", params[:paypal_max_amount])
-    Confline.set_value("PayPal_Email_Notification", params[:paypal_email_notification])
+    Confline.set_value("PayPal_Email_Notification", params[:paypal_email_notification_checkbox])
     Confline.set_value("PayPal_Test", params[:paypal_test])
     Confline.set_value("PayPal_Payment_Confirmation", params[:paypal_payment_confirmation])
     Confline.set_value('PayPal_Custom_redirect', params[:paypal_custom_redirect])

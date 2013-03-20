@@ -116,7 +116,7 @@
         </tr>
         <tr>
           <td></td>
-          <%= raw setting_boolean(_('PayPal_Email_Notification'), 'paypal_email_notification', 'PayPal_Email_Notification') %>
+          <%= raw setting_boolean(_('PayPal_Email_Notification'), 'paypal_email_notification_checkbox', 'PayPal_Email_Notification') %>
           <%= hidden_field_tag("paypal_email_notification", "0") %>
         </tr>
         <tr <%= raw tooltip(_('PayPal_Custom_redirect'), _('PayPal_Custom_redirect_Explanation')) %>>
@@ -461,7 +461,10 @@
       </table>
     </div>
     </div>
-
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     </td>
     </tr>
     <tr>
