@@ -519,32 +519,32 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='table']/table/tbody/tr[3]/td[9]</td>
-	<td>5;0000</td>
+	<td>-9;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='table']/table/tbody/tr[7]/td[9]</td>
-	<td>10;0000</td>
+	<td>2;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='table']/table/tbody/tr[3]/td[10]</td>
-	<td>26;0000</td>
+	<td>40;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='table']/table/tbody/tr[7]/td[10]</td>
-	<td>6;0000</td>
+	<td>14;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=m_1</td>
-	<td>83;8710 %</td>
+	<td>129;0323 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=m_5</td>
-	<td>37;5000 %</td>
+	<td>87;5000 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -554,27 +554,27 @@
 <tr>
 	<td>assertText</td>
 	<td>id=mr_5</td>
-	<td>60;0000 %</td>
+	<td>700;0000 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_markup</td>
-	<td>310;7143 %</td>
+	<td>-738;8889 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_margi</td>
-	<td>75;6522 %</td>
+	<td>115;6522 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>87;0000</td>
+	<td>133;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_provider_price</td>
-	<td>28;0000</td>
+	<td>-18;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -671,7 +671,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>92;0000</td>
+	<td>138;0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -691,22 +691,22 @@
 <tr>
 	<td>assertText</td>
 	<td>id=user_price_26</td>
-	<td>2;0000</td>
+	<td>6;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=provider_price_27</td>
-	<td>5;0000</td>
+	<td>1;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=loss_27</td>
-	<td>3;0000</td>
+	<td>-1;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_loss</td>
-	<td>6;0000</td>
+	<td>-2;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -715,63 +715,83 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/stats/profit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=number_total_call_price</td>
-	<td>99;0000</td>
+	<td>28;1103</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=number_total_self_price</td>
-	<td>26;0000</td>
+	<td>-10;0047</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=number_calls_profit</td>
-	<td>73;0000</td>
+	<td>38;1150</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=number_avg_profit_per_min</td>
-	<td>6;4412</td>
+	<td>0;5679</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=avg_profit_per_call</td>
-	<td>4;0556</td>
+	<td>1;3143</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=avg_profit_per_day</td>
-	<td>0;0333</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=avg_profit_per_day</td>
-	<td>0;0333</td>
+	<td>0;9075</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=avg_profit_per_user</td>
-	<td>14;6000</td>
+	<td>19;0575</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=subscription_profit</td>
-	<td>453;2258</td>
+	<td>13;8710</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=number_total_profit</td>
-	<td>531;2258</td>
+	<td>73;7260</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=percent_answer_calls</td>
-	<td>90;0000 %</td>
+	<td>67;4419 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -781,12 +801,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=percent_busy_calls</td>
-	<td>10;0000 %</td>
+	<td>13;9535 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=percent_erro_calls</td>
-	<td>0;0000 %</td>
+	<td>18;6047 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -796,12 +816,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_selfcost_percent</td>
-	<td>26;2626 %</td>
+	<td>-35;5907 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=percent_calls_profit</td>
-	<td>73;7374 %</td>
+	<td>135;5907 %</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -810,38 +830,33 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>selfcost_250</td>
-	<td>21;0000</td>
+	<td>id=selfcost_250</td>
+	<td>2;5320</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>price_448</td>
-	<td>16;0000</td>
+	<td>id=price_250</td>
+	<td>10;9720</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=new_price_250</td>
-	<td>62;0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=calls_profit</td>
-	<td>73;0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=price</td>
-	<td>99;0000</td>
+	<td>8;4400</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=selfcost</td>
-	<td>26;0000</td>
+	<td>2;5320</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>calls_profit</td>
-	<td>73;0000</td>
+	<td>id=price</td>
+	<td>10;9720</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calls_profit</td>
+	<td>8;4400</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -852,33 +867,23 @@
 <!--<tr> 	<td>assertText</td> 	<td>dids_total_inc_price</td> 	<td>12;0000</td> </tr>-->
 <tr>
 	<td>assertText</td>
-	<td>did_price_1</td>
-	<td>5;0000</td>
+	<td>id=did_inc_price_1</td>
+	<td>3;9133</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>dids_total_price</td>
-	<td>5;0000</td>
+	<td>id=did_price_1</td>
+	<td>5;8700</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>did_prov_price_1</td>
-	<td>12;0000</td>
+	<td>id=did_prov_price_1</td>
+	<td>1;9567</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>dids_total_price_provider</td>
-	<td>12;0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>did_profit_1</td>
-	<td>29;0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>dids_total_profit</td>
-	<td>17;0000</td>
+	<td>id=did_profit_1</td>
+	<td>11;7400</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -903,7 +908,7 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='table']/table[2]/tbody/tr[2]/td[4]</td>
-	<td>100;0000 %</td>
+	<td>67;4419 %</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -913,42 +918,42 @@
 <tr>
 	<td>assertText</td>
 	<td>id=asr_1</td>
-	<td>90;0000 %</td>
+	<td>90;9091 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=tasr</td>
-	<td>90;0000 %</td>
+	<td>67;4419 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=price_1</td>
-	<td>28;0000</td>
+	<td>0;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=tp</td>
-	<td>28;0000</td>
+	<td>2;5320</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=price2_1</td>
-	<td>69;0000</td>
+	<td>0;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=tup</td>
-	<td>69;0000</td>
+	<td>10;9720</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=price3_1</td>
-	<td>41;0000</td>
+	<td>0;0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=tprofit</td>
-	<td>41;0000</td>
+	<td>8;4400</td>
 </tr>
 <tr>
 	<td>open</td>
