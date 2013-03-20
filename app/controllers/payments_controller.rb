@@ -816,6 +816,7 @@ class PaymentsController < ApplicationController
           invoice.issue_date = Time.now
           invoice.paid = 1
           invoice.number = ""
+          invoice.paid_date = Time.now
           invoice.invoice_type = "prepaid"
           invoice.price = invoice.nice_invoice_number(invoice_amount.to_d, {:nc=>nc, :apply_rounding=>true})
           invoice.price_with_vat = invoice.nice_invoice_number(invoice_amount_real.to_d, {:nc=>nc, :apply_rounding=>true})
