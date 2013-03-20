@@ -91,7 +91,7 @@ class PaymentsController < ApplicationController
     iend = ((session[:items_per_page].to_i * @page) - 1)
     iend = @all_payments.size - 1 if iend > (@all_payments.size - 1)
     for i in ((@page - 1) * session[:items_per_page].to_i)..iend
-      @payments << @all_payments[i]
+      @payments << @all_payments[i] if !@all_payments[i].blank?
     end
 
     @total_amaunt= 0.to_d
