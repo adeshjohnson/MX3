@@ -71,7 +71,7 @@
         <td><br/></td>
         <td><br/></td>
       </tr>
-      <tr <%= tooltip('Important', 'In case of absent device cid, callback will display src') %>>
+      <tr>
         <td></td>
         <td><b><%= _('Send_Device_CID') %>:</b></td>
         <td><%= radio_button 'CID', 'legB', 'device', :checked => (Confline.get_value("Callback_legB_CID") == "device") %></td>
