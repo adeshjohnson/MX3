@@ -2649,12 +2649,12 @@
 <tr>
 	<td>type</td>
 	<td>id=did_start</td>
-	<td>38060012345</td>
+	<td>39060012345</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=did_end</td>
-	<td>38060012350</td>
+	<td>39060012350</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2820,7 +2820,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%</td>
+	<td>390%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2834,7 +2834,78 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/4</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--sitie zingsniai tam, nes del pakeistu settingu reseleris nebegali kurti didu, kurie ieina i admino taisykle, bet liktu testavimo logika ir zingsniai-->
+<tr>
+	<td>open</td>
+	<td>/billing/quickforwards_rules/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=quickforwards_rule_rule_regexp</td>
+	<td>390%|37060012346</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quickforwards Rule successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/25</td>
 	<td></td>
 </tr>
 <tr>
@@ -2884,7 +2955,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/fake_form?path_to_action=/billing/dids/assign_to_dp/4</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/dids/assign_to_dp/25</td>
 	<td></td>
 </tr>
 <tr>
@@ -2981,7 +3052,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%|37060012345</td>
+	<td>390%|37060012345</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3006,7 +3077,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%|37060012346</td>
+	<td>390%|37060012346</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3020,7 +3091,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/4</td>
+	<td>/billing/dids/edit/25</td>
 	<td></td>
 </tr>
 <tr>
@@ -3082,7 +3153,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%</td>
+	<td>390%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3102,7 +3173,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%|37060012346</td>
+	<td>390%|37060012346</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3212,7 +3283,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%</td>
+	<td>390%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3226,7 +3297,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/4</td>
+	<td>/billing/dids/edit/26</td>
 	<td></td>
 </tr>
 <tr>
@@ -3276,7 +3347,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/fake_form?path_to_action=/billing/dids/assign_to_dp/4</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/dids/assign_to_dp/26</td>
 	<td></td>
 </tr>
 <tr>
@@ -3378,7 +3449,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%|37261112345</td>
+	<td>390%|37261112345</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3418,7 +3489,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%|37261112345</td>
+	<td>390%|37261112345</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3464,7 +3535,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%</td>
+	<td>390%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3484,7 +3555,7 @@
 <tr>
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>380%|37261112345</td>
+	<td>390%|37261112345</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
