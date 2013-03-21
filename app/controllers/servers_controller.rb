@@ -307,7 +307,7 @@ class ServersController < ApplicationController
     session[:flash_not_redirect] = 1
     session[:server_test_ok] = 0
     begin
-      @server.reload(0)
+      @server.ami_cmd("core show version")
     rescue Exception
       flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
       flash[:notice] = _('Cannot_connect_to_asterisk_server')
