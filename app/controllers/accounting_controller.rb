@@ -994,6 +994,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
+
+    # Hide from prepaid manual payments
+    if type == "prepaid" and invoice.invoicedetails.first and invoice.invoicedetails.first.name == "Manual Payment"
+        flash[:notice] = _("Dont_be_so_smart")
+        redirect_to :controller => :callc, :action => :main and return false
+    end
+
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
     show_avg_rate = 1 
@@ -1044,6 +1051,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
+
+    # Hide from prepaid manual payments
+    if type == "prepaid" and invoice.invoicedetails.first and invoice.invoicedetails.first.name == "Manual Payment"
+        flash[:notice] = _("Dont_be_so_smart")
+        redirect_to :controller => :callc, :action => :main and return false
+    end
+
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
@@ -1103,6 +1117,7 @@ class AccountingController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
 
+
     user = invoice.user
     sep, dec = user.csv_params
     nice_number_hash  = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]}
@@ -1142,6 +1157,13 @@ class AccountingController < ApplicationController
     idetails = invoice.invoicedetails
     user = invoice.user
 
+    # Hide from prepaid manual payments
+    if invoice.invoice_type.downcase == "prepaid" and idetails.first and idetails.first.name == "Manual Payment"
+        flash[:notice] = _("Dont_be_so_smart")
+        redirect_to :controller => :callc, :action => :main and return false
+    end
+
+
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
 
@@ -1149,6 +1171,7 @@ class AccountingController < ApplicationController
 
     owner = invoice.user.owner_id
     prepaid = (invoice.invoice_type.to_s == 'prepaid' and owner == 0) ? "Prepaid_" : ""
+
     up, rp, pp = user.get_price_calculation_sqls
     billsec_cond = Confline.get_value("#{prepaid}Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
     user_price = SqlExport.replace_price(up, {:ex => ex})
@@ -1276,6 +1299,11 @@ class AccountingController < ApplicationController
     idetails = invoice.invoicedetails
     user = invoice.user
 
+    # Hide from prepaid manual payments
+    if invoice.invoice_type.downcase == "prepaid" and idetails.first and idetails.first.name == "Manual Payment"
+        flash[:notice] = _("Dont_be_so_smart")
+        redirect_to :controller => :callc, :action => :main and return false
+    end
 
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
@@ -1405,6 +1433,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       flash[:notice] = _('Invoice_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
+
+    # Hide from prepaid manual payments
+    if invoice.invoice_type.downcase == "prepaid" and invoice.invoicedetails.first and invoice.invoicedetails.first.name == "Manual Payment"
+        flash[:notice] = _("Dont_be_so_smart")
+        redirect_to :controller => :callc, :action => :main and return false
+    end
+
 
     if invoice.user_id != current_user.id and invoice.user.owner_id != current_user.get_corrected_owner_id
       dont_be_so_smart
