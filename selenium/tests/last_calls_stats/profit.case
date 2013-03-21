@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/did_billing</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,7 +124,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
-	<td>label=9</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -139,7 +139,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=9</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -170,7 +170,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>1.3133</td>
+	<td>6.5533</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -190,7 +190,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=number_calls_profit</td>
-	<td>1.3133</td>
+	<td>6.5533</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -270,17 +270,17 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=2</td>
+	<td>label=20</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -329,58 +329,33 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_232</td>
-	<td>2.0000</td>
+	<td>id=profit_30</td>
+	<td>0.1083</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_231</td>
-	<td>-2.0000</td>
+	<td>id=profit_36</td>
+	<td>1.1167</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_211</td>
-	<td>-1.0000</td>
+	<td>id=profit_43</td>
+	<td>1.0333</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_224</td>
-	<td>1.0000</td>
+	<td>id=profit_56</td>
+	<td>0.3417</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_233</td>
-	<td>-1.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_213</td>
-	<td>-1.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_220</td>
-	<td>1.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_226</td>
-	<td>2.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_221</td>
-	<td>-3.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_222</td>
-	<td>-3.0000</td>
+	<td>id=profit_67</td>
+	<td>0.3417</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>-2.5417</td>
+	<td>13.6117</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -515,22 +490,22 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>13.7317</td>
+	<td>62.8550</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=2</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -545,22 +520,22 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=2</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_hour</td>
-	<td>label=00</td>
+	<td>label=12</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -574,29 +549,29 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_price_15</td>
-	<td>1.0000</td>
+	<td>id=provider_price_33</td>
+	<td>0.2120</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_price_15</td>
-	<td>5.0000</td>
+	<td>id=user_price_33</td>
+	<td>0.9187</td>
 </tr>
 <!--<tr> 	<td>assertText</td> 	<td>id=did_inc_price_15</td> 	<td>3.0000</td> </tr>-->
 <tr>
 	<td>assertText</td>
-	<td>id=did_price_15</td>
-	<td>2.0000</td>
+	<td>id=did_price_33</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=profit_15</td>
-	<td>9.0000</td>
+	<td>id=profit_33</td>
+	<td>0.7067</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>35.0000</td>
+	<td>21.8950</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -651,12 +626,12 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -710,43 +685,33 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_233</td>
-	<td>-1.0000</td>
+	<td>id=profit_30</td>
+	<td>0.1083</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_213</td>
-	<td>-1.0000</td>
+	<td>id=profit_36</td>
+	<td>1.1167</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_225</td>
-	<td>-2.0000</td>
+	<td>id=profit_43</td>
+	<td>1.0333</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_226</td>
-	<td>2.0000</td>
+	<td>id=profit_56</td>
+	<td>0.3417</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>profit_222</td>
-	<td>-3.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_232</td>
-	<td>2.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>profit_224</td>
-	<td>1.0000</td>
+	<td>id=profit_67</td>
+	<td>0.3417</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_profit</td>
-	<td>-2.5417 </td>
+	<td>13.6117</td>
 </tr>
 </tbody></table>
 </body>
