@@ -80,10 +80,14 @@
       <%= form.radio_button :block, false, :id => "will_not_be_blocked" %> <%= _('No') %>
       <%= form.radio_button :block, true, :id => "will_be_blocked" %> <%= _('Yes') %>
     </td>
-    </tr> 
-    <tr> 
-      <td> 
-        <b <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation'))%>><%= b_info %> <%= _('Send_email_to_admin') %>:</b> 
+    </tr>
+    <tr>
+      <td>
+        <% if !reseller? %>
+          <b <%= tooltip(_('Send_email_to_admin'), _('Send_email_explanation'))%>><%= b_info %> <%= _('Send_email_to_admin') %>:</b>
+        <% else %>
+          <b <%= tooltip(_('Send_email_to_reseller'), _('Send_email_explanation'))%>><%= b_info %> <%= _('Send_email_to_reseller') %>:</b>
+        <% end %>
       </td> 
       <td> 
         <%= form.radio_button :email, false, :id => "will_not_be_sent" %> <%= _('No') %> 
