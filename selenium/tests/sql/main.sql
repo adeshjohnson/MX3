@@ -1623,13 +1623,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `usertype`, `logged`, `first_
 (19, 'wholesale_wres_user', 'ff1afdd6e3738df117b9596db87865eb88c01676', 'user', 0, 'Test', 'Wholesale wres User', 3, 0, 2, 0, 1, 1, 0, 22, 0, NULL, 0, 0, 1, 36, -1, '', '0000000017', '2012-01-20', '', 123, '', 0, 19, '', 13, 0, 0, '2000-01-01 00:00:00', NULL,NULL, 0, 0,NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 16, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 'Vilnius', 0, NULL),
 (20, 'wholesale_wrspro_user', '39ef97169b804d3d28c49ecd9a2090f4505b4e74', 'user', 0, 'Test', 'Wholesale wrspro User', 3, 0, 56, 0, 3, 0, 0, 24, 0, NULL, 0, 0, 1, 40, -1, '', '0000000018', '2012-01-20', '', 123, '', 0, 20, '', 11, 0, 0, '2000-01-01 00:00:00', NULL, NULL, 0, 0,NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2008-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 17, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 'Vilnius', 0, NULL),
 (21, 'retail_wrspro_user', '483d094847b839542b2e94f8957019a64b531b4b', 'user', 0, 'Test', 'Retail wrspro User', 3, 0, 8, 0, 3, 1, 0, 23, 0, NULL, 0, 0, 1, 38, -1, '', '0000000019', '2012-01-20', '', 123, '', 0, 22, '', 11, 0, 0, '2000-01-01 00:00:00', NULL,NULL, 0, 0, NULL, NULL, 0, 0, 0, 1, 0, 0, 0, 0, '2012-01-01', 15, 0, 0, 0, '', 104, 0, 0, 0, 19, 1, 0, -1, -1, 0, 0, 0, 0, 1, 0, 0, 'Vilnius', 0, NULL);
-UPDATE `users` SET address_id=1 WHERE id=0;
-UPDATE `users` SET address_id=5 WHERE id=2;
-UPDATE `users` SET address_id=7 WHERE id=7;
-UPDATE `users` SET address_id=7 WHERE id=8;
-UPDATE `users` SET address_id=8 WHERE id=9;
-UPDATE `users` SET address_id=8 WHERE id=10;
-UPDATE `users` SET address_id=5 WHERE id=11;
 UPDATE `users` SET lcr_id=4 WHERE id in (0,2,8,9);
 UPDATE `users` SET lcr_id=5 WHERE id in (3,10,11,12,13);
 UPDATE `users` SET lcr_id=6 WHERE id in (4,6,7);
@@ -1722,11 +1715,24 @@ INSERT INTO `voicemail_boxes` (`uniqueid`, `context`, `mailbox`, `password`, `fu
 update users set tariff_id=14 where id=0;
 
 INSERT INTO `addresses` (`id`, `direction_id`, `state`, `county`, `city`, `postcode`, `address`, `phone`, `mob_phone`, `fax`, `email`) VALUES
-(5, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
+(5, 1, '', '', '', '', '', '', '', '', 'test10@kolmisoft.com'),
 (6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
-(8, 1, '', '', '', '', '', '', '', '', 'test@kolmisoft.com'),
+(7, 1, '', '', '', '', '', '', '', '', 'test8@kolmisoft.com'),
+(8, 1, '', '', '', '', '', '', '', '', 'test9@kolmisoft.com'),
 (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 1, '', '', '', '', '', '', '', '', 'test2@kolmisoft.com'),
+(12, 1, '', '', '', '', '', '', '', '', 'test3@kolmisoft.com'),
+(13, 1, '', '', '', '', '', '', '', '', 'test4@kolmisoft.com'),
+(14, 1, '', '', '', '', '', '', '', '', 'test5@kolmisoft.com'),
+(15, 1, '', '', '', '', '', '', '', '', 'test6@kolmisoft.com'),
+(16, 1, '', '', '', '', '', '', '', '', 'test7@kolmisoft.com');
+UPDATE `users` SET address_id=1 WHERE id=0;
+UPDATE `users` SET address_id=11 WHERE id=2;
+UPDATE `users` SET address_id=12 WHERE id=7;
+UPDATE `users` SET address_id=13 WHERE id=8;
+UPDATE `users` SET address_id=14 WHERE id=9;
+UPDATE `users` SET address_id=15 WHERE id=10;
+UPDATE `users` SET address_id=16 WHERE id=11;
 
 Update users set time_zone = 'Vilnius';
