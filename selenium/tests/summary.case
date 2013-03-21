@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,7 +129,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -154,7 +154,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -184,7 +184,7 @@
 <tr>
 	<td>select</td>
 	<td>name=terminator</td>
-	<td>label=Terminator 2</td>
+	<td>label=Terminator 1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -193,23 +193,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>prov_calls_1</td>
-	<td>13</td>
+	<td>prov_calls_2</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>prov_price_1</td>
-	<td>140.0000 USD</td>
+	<td>prov_price_2</td>
+	<td>2.4160 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>user_calls_2</td>
-	<td>13</td>
+	<td>14</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>user_price_2</td>
-	<td>23.0000 USD</td>
+	<td>10.4693 USD</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -233,28 +233,53 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>prov_calls_1</td>
-	<td>18</td>
+	<td>id=term_calls</td>
+	<td>0</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>prov_price_1</td>
-	<td>224.0000 USD</td>
+	<td>id=term_amount</td>
+	<td>0.0000 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>user_calls_4</td>
-	<td>18</td>
+	<td>id=orig_calls</td>
+	<td>0</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>user_price_4</td>
+	<td>assertText</td>
+	<td>id=orig_amount</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=originator</td>
+	<td>label=User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>user_price_4</td>
-	<td>76.0000 USD</td>
+	<td>id=prov_calls_2</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_price_2</td>
+	<td>0.1160 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_calls_5</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_price_5</td>
+	<td>0.5027 USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -274,6 +299,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>User's settings successfully changed: Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_good_calls_provider</td>
 	<td></td>
 </tr>
 <tr>
@@ -323,6 +353,51 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>tariff for provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>test provider res</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/terminators/providers/3</td>
 	<td></td>
 </tr>
@@ -344,7 +419,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -369,7 +444,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -397,104 +472,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertNotText</td>
 	<td>css=tr.row1 &gt; td</td>
 	<td>Terminator 1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=tr.row2 &gt; td</td>
+	<td>css=tr.row1 &gt; td</td>
 	<td>Terminator 3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>prov_calls_11</td>
-	<td>3</td>
+	<td>prov_calls_3</td>
+	<td>7</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>prov_calls_12</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>prov_price_11</td>
-	<td>0.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>prov_price_12</td>
-	<td>80.0000 USD</td>
+	<td>prov_price_3</td>
+	<td>0.1160 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>user_calls_5</td>
-	<td>9</td>
+	<td>7</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>user_price_5</td>
-	<td>66.0000 USD</td>
+	<td>7.7310 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>name=terminator</td>
 	<td>Any Terminator 3</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=terminator</td>
-	<td>label=Terminator 3</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Terminator 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>prov_calls_12</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=term_calls</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>user_calls_5</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=orig_calls</td>
-	<td>6</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>prov_price_12</td>
-	<td>80.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=term_amount</td>
-	<td>80.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>user_price_5</td>
-	<td>60.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=orig_amount</td>
-	<td>60.0000 USD</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -513,55 +523,18 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Terminator 1</td>
+	<td>Terminator 3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=tr.row1 &gt; td</td>
-	<td>Terminator 1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=tr.row2 &gt; td</td>
 	<td>Terminator 3</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>user_name_5</td>
 	<td>User Resellers</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=terminator</td>
-	<td>label=Terminator 3</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Terminator 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=originator</td>
-	<td>label=User RSPRO</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<!--user_reseller-->
-<!--There is no ID-->
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>user_name_5</td>
-	<td></td>
 </tr>
 </tbody></table>
 </body>
