@@ -32,6 +32,11 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
 <!--Create terminator-->
 <tr>
 	<td>open</td>
@@ -68,6 +73,16 @@
 	<td>Provider assigned</td>
 	<td></td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
 <!--Aggregate report-->
 <!--...by prefix-->
 <tr>
@@ -78,32 +93,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=2</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=2</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -113,17 +128,17 @@
 <tr>
 	<td>assertText</td>
 	<td>total_billed_orig</td>
-	<td>4.0000 USD</td>
+	<td>10.1596 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_billed_term</td>
-	<td>4.0000 USD</td>
+	<td>0.8880 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_duration</td>
-	<td>00:02:20</td>
+	<td>00:07:24</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -133,17 +148,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_calls_0</td>
-	<td>4</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_acd</td>
-	<td>00:00:35</td>
+	<td>00:01:51</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_ast</td>
-	<td>100.0000 %</td>
+	<td>44.4444 %</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -189,12 +204,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Records: 0</td>
+	<td>Records: 1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Pages: 0</td>
+	<td>Pages: 1</td>
 	<td></td>
 </tr>
 <!--Summaty report-->
@@ -206,32 +221,32 @@
 <tr>
 	<td>assertText</td>
 	<td>term_calls</td>
-	<td>4</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>term_exact_min</td>
-	<td>00:02:20</td>
+	<td>00:07:24</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>term_amount</td>
-	<td>4.0000 USD</td>
+	<td>0.8880 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>orig_calls</td>
-	<td>4</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>orig_exact_min</td>
-	<td>00:02:20</td>
+	<td>00:07:24</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>orig_amount</td>
-	<td>13.0000 USD</td>
+	<td>10.1596 USD</td>
 </tr>
 <!--Check profit values-->
 <tr>
@@ -242,16 +257,16 @@
 <tr>
 	<td>assertText</td>
 	<td>number_total_self_price</td>
-	<td>4.0000</td>
+	<td>-3.3653</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>00:00:35</td>
+	<td>00:27:59</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>00:02:20</td>
+	<td>00:02:19</td>
 	<td></td>
 </tr>
 <!--show_user_stats-->
@@ -391,42 +406,6 @@
 	<td>row_3_asr</td>
 	<td>100.0000 %</td>
 </tr>
-<!--export call list to csv-->
-<tr>
-	<td>open</td>
-	<td>/billing/stats/call_list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>direction</td>
-	<td>label=Outgoing</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/stats/call_list_to_csv/0?call_type=all&amp;date_from=2009-01-01+00%3A00%3A00&amp;date_till=2009-01-02+23%3A59%3A59&amp;direction=outgoing&amp;test=1</td>
@@ -440,46 +419,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>50</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/call_list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>hgc</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>hgc</td>
-	<td>label=2 - No route to specified transit network (nat</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>No calls...</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>hgc</td>
-	<td>label=16 - Normal call clearing. This cause indicate</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>101</td>
 	<td></td>
 </tr>
 <tr>
@@ -500,27 +439,6 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>&quot;profit&quot;=&gt;1.0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/call_list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=System Admin</td>
-	<td></td>
-</tr>
-<!--description-->
-<tr>
-	<td>click</td>
-	<td>link=Search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>device</td>
 	<td></td>
 </tr>
 <tr>
@@ -636,93 +554,22 @@
 <tr>
 	<td>assertText</td>
 	<td>total_provider_price</td>
-	<td>3.0000</td>
+	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>total_profit</td>
-	<td>6.0000</td>
+	<td>9.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_margi</td>
-	<td>66.6667 %</td>
+	<td>100.0000 %</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_markup</td>
-	<td>200.0000 %</td>
-</tr>
-<!--tikrinama, ar caller name yra atvaizduojamas, kai skambučio tipas "answered"-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/calls_clid</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/call_list/0?calltype=answered</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>direction</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>callinfo_link_39</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>src_39</td>
-	<td>101 (S &amp; K Petrie)</td>
+	<td>0.0000 %</td>
 </tr>
 </tbody></table>
 </body>
