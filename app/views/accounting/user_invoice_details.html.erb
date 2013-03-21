@@ -81,7 +81,7 @@
             <% end %>
           </td>
         </tr>
-      <% if (@invoice_invoicedetails.first.name != "Manual Payment") and (@invoice_invoicedetails.count == 1) and (current_user.postpaid.to_i == 0) %>
+        <% unless (@invoice.invoice_type.downcase == 'prepaid') and (@invoice_invoicedetails.count == 1) and (@invoice_invoicedetails.first.name == "Manual Payment") %>
         <tr class="row2">
           <th align="left"><%= _('Invoice_detailed') %>:</th>
           <td align="center">
