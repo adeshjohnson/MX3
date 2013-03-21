@@ -215,6 +215,13 @@ class FunctionsController < ApplicationController
     @src = params[:src].gsub(/[^\d]/, "") if params[:src]
     @dst = params[:dst].gsub(/[^\d]/, "") if params[:dst]
 
+    # LegA/LegB settings from callback settings
+      legA = Confline.get_value("Callback_legA_CID")
+      legB = Confline.get_value("Callback_legB_CID")
+      custom_legA = Confline.get_value2('Callback_legA_CID', 0)
+      custom_legB = Confline.get_value2('Callback_legB_CID', 0)
+
+
     device = current_user.devices.find(:first, :conditions => {:id => @acc})
 
     unless device
