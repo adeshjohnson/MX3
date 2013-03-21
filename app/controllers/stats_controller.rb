@@ -1809,7 +1809,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @calls = Call.find(:all, :include => [:user, :provider, :device], :conditions => "provider_price > user_price AND calldate BETWEEN \'" + session_from_date + " 00:00:00\' AND \'" + session_till_date + " 23:59:59\' AND disposition = \'ANSWERED\'"+ condition, :order => "calldate DESC")
 
     @total_calls = Call.find(:all,
-                             :select => 'COUNT(*), SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) AS total_duration, SUM(provider_price - did_prov_price - user_price) AS total_loss',
+                             :select => 'COUNT(*), SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) AS total_duration, SUM(provider_price - did_prov_price - (user_price + did_inc_price)) AS total_loss',
                              :conditions => 'provider_price > user_price AND calldate BETWEEN \'' + session_from_date + ' 00:00:00\' AND \'' + session_till_date + ' 23:59:59\' AND disposition = \'ANSWERED\''+ condition)
   end
 
