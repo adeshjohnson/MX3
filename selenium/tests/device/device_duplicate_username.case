@@ -183,12 +183,12 @@
 <tr>
 	<td>assertText</td>
 	<td>extension_9</td>
-	<td>1001</td>
+	<td>5001</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>name_9</td>
-	<td>1001</td>
+	<td>5001</td>
 </tr>
 <!--VERIFY DEVICE-->
 <tr>
@@ -213,9 +213,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>assertNotText</td>
 	<td>username_value</td>
-	<td>1001</td>
+	<td>5000</td>
 </tr>
 <!--CREATE TEST DEVICE 2-->
 <tr>
@@ -242,7 +242,7 @@
 <tr>
 	<td>assertText</td>
 	<td>username_value</td>
-	<td>1003</td>
+	<td>5002</td>
 </tr>
 <!--VERIFY DEVICE-->
 <tr>
@@ -253,7 +253,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=device_extension</td>
-	<td>1003</td>
+	<td>5002</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -320,7 +320,7 @@
 <tr>
 	<td>assertNotText</td>
 	<td>username_value</td>
-	<td>1003</td>
+	<td>5002</td>
 </tr>
 <!--VERIFY DEVICE-->
 <tr>
@@ -379,7 +379,7 @@
 <tr>
 	<td>assertNotText</td>
 	<td>username_value</td>
-	<td>1003</td>
+	<td>5003</td>
 </tr>
 <!--VERIFY DEVICE-->
 <tr>
@@ -389,12 +389,22 @@
 </tr>
 <tr>
 	<td>type</td>
+	<td>id=device_name</td>
+	<td>5003</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>device_extension</td>
-	<td>50003</td>
+	<td>5003</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
 	<td></td>
 </tr>
 <!--CREATE TEST DEVICE 4-->
@@ -422,7 +432,7 @@
 <tr>
 	<td>assertNotText</td>
 	<td>username_value</td>
-	<td>1003</td>
+	<td>5003</td>
 </tr>
 <!--VERIFY DEVICE-->
 <tr>
@@ -511,22 +521,22 @@
 <tr>
 	<td>assertText</td>
 	<td>id=name_10</td>
-	<td>1003</td>
+	<td>5002</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=name_11</td>
-	<td>1003</td>
+	<td>5003</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=name_12</td>
-	<td>1004</td>
+	<td>5003</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=name_13</td>
-	<td>1004</td>
+	<td>5004</td>
 </tr>
 <!--VERIFY DEVICE-->
 <tr>
