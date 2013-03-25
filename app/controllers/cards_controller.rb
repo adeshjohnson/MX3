@@ -399,7 +399,7 @@ class CardsController < ApplicationController
         @card = Card.select("cards.*, cardgroups.name AS 'ccg_name'").where(["number = ?", n]).joins("LEFT JOIN cardgroups ON (cards.cardgroup_id = cardgroups.id)").first
         if @card.blank? and !card_pins[i].to_s.blank?
           cards_created += 1
-          sql << "('#{params[:user_id]}','#{@cg.price}','#{@cg.id}','#{false}','#{n}','#{card_pins[i]}','#{owner_id}','#{params[:card_language]}'"
+          sql << "('#{params[:user_id]}','#{@cg.read_attribute(:price)}','#{@cg.id}','#{false}','#{n}','#{card_pins[i]}','#{owner_id}','#{params[:card_language]}'"
           if n == end_num
             sql << ")"
           else
