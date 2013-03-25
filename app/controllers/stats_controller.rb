@@ -962,12 +962,12 @@ in before filter : user (:find_user_from_id_or_session)
     end
 
     if session[:usertype] == "reseller"
-      @users, @user, @devices, @device, @hgcs, @hgc, @providers, @provider, @did, @dids = last_calls_stats_reseller(@options)
+      @users, @user, @devices, @device, @hgcs, @hgc, @providers, @provider, @did = last_calls_stats_reseller(@options)
     end
 
 
     if ["admin", "accountant"].include?(session[:usertype])
-      @users, @user, @devices, @device, @hgcs, @hgc, @dids, @did, @providers, @provider, @reseller, @resellers, @resellers_with_dids = last_calls_stats_admin(@options)
+      @users, @user, @devices, @device, @hgcs, @hgc, @did, @providers, @provider, @reseller, @resellers, @resellers_with_dids = last_calls_stats_admin(@options)
     end
     session[:last_calls_stats] = @options
     options = last_calls_stats_set_variables(@options, {:user => @user, :device => @device, :hgc => @hgc, :did => @did, :current_user => current_user, :provider => @provider, :can_see_finances => can_see_finances?, :reseller => @reseller})
@@ -3701,9 +3701,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       providers = nil; provider = nil
     end
     did = Did.where(:id => options[:s_did]).first if options[:s_did] != "all" and !options[:s_did].blank?
-    dids = Did.find_all_for_select
 
-    return users, user, devices, device, hgcs, hgc, providers, provider, did, dids
+    return users, user, devices, device, hgcs, hgc, providers, provider, did
   end
 
   def last_calls_stats_admin(options)
@@ -3712,7 +3711,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     did = Did.where(:id => options[:s_did]).first if options[:s_did] != "all" and !options[:s_did].blank?
     hgc = Hangupcausecode.where(:id => options[:s_hgc]).first if options[:s_hgc].to_i > 0
     users = User.select("id, username, first_name, last_name, usertype, #{SqlExport.nice_user_sql}").where("users.usertype = 'user'").order("nice_user")
-    dids = Did.find_all_for_select
     hgcs = Hangupcausecode.find_all_for_select
     providers = Provider.find_all_for_select
     provider = Provider.where(:id => options[:s_provider]).first if options[:s_provider].to_i > 0
@@ -3725,7 +3723,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     else
       devices = Device.find_all_for_select
     end
-    return users, user, devices, device, hgcs, hgc, dids, did, providers, provider, reseller, resellers, resellers_with_dids
+    return users, user, devices, device, hgcs, hgc, did, providers, provider, reseller, resellers, resellers_with_dids
   end
 
   def last_calls_stats_set_variables(options, values)
