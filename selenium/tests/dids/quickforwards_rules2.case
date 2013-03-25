@@ -823,12 +823,12 @@
 <tr>
 	<td>type</td>
 	<td>id=did_start</td>
-	<td>37115987465</td>
+	<td>37011</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=did_end</td>
-	<td>37115987565</td>
+	<td>37122</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -842,12 +842,92 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>101 DIDs were not created:</td>
+	<td>13 DIDs were not created:</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Collisions with ADMIN Quickforward Rule</td>
+	<td>* Collisions with ADMIN Quickforward Rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>99 DIDs were successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>37130</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>37139</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>10 DIDs were not created:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>* Collisions with ADMIN Quickforward Rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>were successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>2458</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>2490</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0 DIDs were not created:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td><br />33 DIDs were successfully created</td>
 	<td></td>
 </tr>
 <tr>
