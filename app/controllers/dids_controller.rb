@@ -298,9 +298,9 @@ class DidsController < ApplicationController
     end
 
     #trunks
-    sql = "SELECT devices.* FROM devices
+    sql = "SELECT devices.*, #{SqlExport.nice_user_sql} FROM devices
               left join users on (devices.user_id = users.id)
-              where devices.istrunk = 1 and users.owner_id = '#{session[:user_id]}'"
+              where devices.istrunk = 1 and users.owner_id = '#{session[:user_id]}' ORDER BY nice_user"
 
     @available_trunks = Device.find_by_sql(sql)
 
