@@ -4554,6 +4554,9 @@ Localization.define('en') do |l|
   l.store 'Deprecated_functionality', 'Deprecated functionality'
   l.store 'Send_email_to_reseller', 'Send Email to Reseller'
   l.store 'no_users_selected', 'No users selected'
+  l.store 'Dids_were_successfully_created', 'DIDs were successfully created'
+  l.store 'DIDs_were_not_created', 'DIDs were not created'
+
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

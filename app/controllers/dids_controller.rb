@@ -197,7 +197,8 @@ class DidsController < ApplicationController
       end
     else #creating did interval
 
-
+      status = Hash.new(0)
+      status[:messages] =[]
       int_start = params[:did_start].to_s.strip
       int_end = params[:did_end].to_s.strip
       if int_end <= int_start
@@ -219,11 +220,25 @@ class DidsController < ApplicationController
           if did.save
             create_did_rates(did, did_rate_cache)
             add_action(session[:user_id], 'did_created', did.id, action_cache)
+            status[:good_dids] += 1
+          else
+            status[:messages] << did.errors.first[1]
+            status[:bad_dids] += 1
           end
+        end
+        status_out = status[:bad_dids].to_s + " " + _("DIDs_were_not_created") + ":<br/>"
+        status[:messages].uniq.each do |error|
+          status_out << "&nbsp; * #{error}<br/>"
         end
         did_rate_cache.flush
         action_cache.flush
-        flash[:status] = _('Did_interval_was_successfully_created')
+        if status[:bad_dids].size == 0
+          flash[:status] = _('Did_interval_was_successfully_created')
+        else
+          flash[:notice] = status_out
+          flash[:status] = "1 " + _("Did_was_successfully_created") if status[:good_dids].to_i == 1
+          flash[:status] = "#{status[:good_dids]} " + _("Dids_were_successfully_created") if status[:good_dids].to_i > 1
+        end
         redirect_to :action => 'list'
       end
     end
