@@ -1074,7 +1074,7 @@ class User < ActiveRecord::Base
     zero_calls_sql = invoice_zero_calls_sql
     up = SqlExport.user_price_sql
   
-    val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+    val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did WHERE dids.did IS NULL AND disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
     
     #val2 = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.dst_user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
 
@@ -1093,6 +1093,24 @@ class User < ActiveRecord::Base
 
     return total_calls.to_i, calls_price.to_d
   end
+
+  def own_outgoing_calls_stats_to_dids_in_period(period_start, period_end, calldate_index = 0)
+
+    total_calls = 0
+    calls_price = 0
+    zero_calls_sql = invoice_zero_calls_sql
+    up = SqlExport.user_price_sql
+  
+    val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did WHERE dids.did IS NOT NULL AND disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
+
+    if val
+      total_calls += val[0]['calls'].to_i
+      calls_price += val[0]['price'].to_d
+    end
+
+    return total_calls.to_i, calls_price.to_d
+  end
+
 
 
   # finds total outgoing calls made by this reseller users and price for these calls in period

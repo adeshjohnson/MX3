@@ -328,7 +328,7 @@ class AccountingController < ApplicationController
       MorLog.my_debug("******************** For user : #{user.id} ******************************", 1)
       # --- Subscriptions ---
       MorLog.my_debug("start incomming calls", 1)
-      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
+      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price, outgoing_calls_to_dids, outgoing_calls_price_to_dids = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
       MorLog.my_debug("end incomming calls", 1)
       # find subscriptions for user in period
       MorLog.my_debug("start subscriptions", 1)
@@ -366,6 +366,12 @@ class AccountingController < ApplicationController
         if (outgoing_calls_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price >= 0 and outgoing_calls > 0 )
           invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
           price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
+        end
+
+        # --- add own outgoing calls ---
+        if (outgoing_calls_price_to_dids > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_price_to_dids >= 0 and outgoing_calls_to_dids > 0 )
+          invoice.invoicedetails.create(:name => _('Calls_To_Dids'), :price => invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_to_dids, :invdet_type => 0)
+          price += invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
         # --- add resellers users outgoing calls ---
@@ -577,7 +583,7 @@ class AccountingController < ApplicationController
     @users.each { |user|
       MorLog.my_debug("******************** For user : #{user.id} ******************************", 1)
       MorLog.my_debug("incoming calls start", 1)
-      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
+      incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price, outgoing_calls_to_dids, outgoing_calls_price_to_dids = call_details_for_user(user, period_start_with_time, period_end_with_time, use_index)
       MorLog.my_debug("incoming calls end", 1)
       MorLog.my_debug("subscriptions start", 1)
       subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
@@ -604,6 +610,11 @@ class AccountingController < ApplicationController
         if (outgoing_calls_price > 0)
           invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
           price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
+        end
+
+        if (outgoing_calls_price_to_dids > 0)
+          invoice.invoicedetails.create(:name => _('Calls_To_Dids'), :price => invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_to_dids, :invdet_type => 0)
+          price += invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
 
         # --- add resellers users outgoing calls ---
@@ -1327,7 +1338,7 @@ class AccountingController < ApplicationController
 
     sub = 0
     idetails.each { |id|
-      if id.name != 'Calls' and id.name != 'Calls_To_Dids'
+      if id.name != 'Calls' and id.name != _('Calls_To_Dids')
         sub = 1
       end
     }
@@ -1340,7 +1351,7 @@ class AccountingController < ApplicationController
       end
 
       idetails.each { |id|
-        if id.name != 'Calls' and id.name != 'Calls_To_Dids'
+        if id.name != 'Calls' #and id.name != _('Calls_To_Dids')
 
           @iprice = id.price
           if id.invdet_type > 0
@@ -1355,6 +1366,10 @@ class AccountingController < ApplicationController
           elsif id.name == _("Did_owner_cost")
             qt = id.quantity
             tp = id.converted_price(ex) if id.converted_price(ex)
+            csv_string << "#{nice_inv_name(id.name)}#{sep}#{qt}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
+          elsif id.name == _('Calls_To_Dids')
+            qt = id.quantity
+            tp = id.converted_price(ex)
             csv_string << "#{nice_inv_name(id.name)}#{sep}#{qt}#{sep}#{nice_number(tp).to_s.gsub(".", dec).to_s}"
           end
         end
@@ -1736,6 +1751,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     outgoing_calls, outgoing_calls_price = user.own_outgoing_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
     MorLog.my_debug("  Outgoing calls: #{outgoing_calls}, for price: #{outgoing_calls_price}", 1)
 
+    # find own outgoing (made by this user) calls stats (count and sum price) of calls to dids
+    outgoing_calls_to_dids, outgoing_calls_price_to_dids = user.own_outgoing_calls_stats_to_dids_in_period(period_start_with_time, period_end_with_time, use_index)
+    MorLog.my_debug("  Outgoing calls to dids: #{outgoing_calls_to_dids}, for price: #{outgoing_calls_price_to_dids}", 1)
+
     # find users outgoing (made by this resellers users) calls stats (count and sum price)
     if user.usertype == "reseller"
       outgoing_calls_by_users, outgoing_calls_by_users_price, incoming_calls_by_users, incoming_calls_by_users_price = user.users_outgoing_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
@@ -1756,7 +1775,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     incoming_made_calls, incoming_made_calls_price = user.incoming_made_calls_stats_in_period(period_start_with_time, period_end_with_time, use_index)
     MorLog.my_debug("  Incoming MADE calls: #{incoming_made_calls}, for price: #{incoming_made_calls_price}", 1)
 
-    return incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price
+    return incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price, outgoing_calls_to_dids, outgoing_calls_price_to_dids
   end
 
   def calls_to_invoice()
@@ -1779,7 +1798,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     ind_ex.to_yaml
     ind_ex.each { |ie| use_index = 1; use_index if ie[:key_name].to_s == 'calldate' } if ind_ex
 
-    incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price = call_details_for_user(user, period_start_with_time.strftime("%Y-%m-%d %H:%M:%S"), period_end_with_time.strftime("%Y-%m-%d %H:%M:%S"), use_index)
+    incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price, outgoing_calls_to_dids, outgoing_calls_price_to_dids = call_details_for_user(user, period_start_with_time.strftime("%Y-%m-%d %H:%M:%S"), period_end_with_time.strftime("%Y-%m-%d %H:%M:%S"), use_index)
 
     # find subscriptions for user in period
     subscriptions = user.subscriptions_in_period(period_start_with_time, period_end_with_time, 'invoices')
@@ -1814,6 +1833,11 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       if (outgoing_calls_price > 0)
         invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
         price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
+      end
+
+      if (outgoing_calls_price > 0)
+        invoice.invoicedetails.create(:name => _('Calls_To_Dids'), :price => invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_to_dids, :invdet_type => 0)
+        price += invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
       # --- add resellers users outgoing calls ---
