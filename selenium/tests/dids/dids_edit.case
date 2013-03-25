@@ -636,6 +636,76 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>reseller user device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>reseller rspro device</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/dids/edit/24</td>
 	<td></td>
 </tr>
@@ -667,7 +737,7 @@
 <tr>
 	<td>assertText</td>
 	<td>xpath=(//select[@name='device_id'])[2]</td>
-	<td>User Resellers - SIP/1003 - Trunk device</td>
+	<td>User Resellers - SIP/1003 - Trunk device User Resellers - IAX2/1004 - reseller user device User RSPRO - IAX2/1005 - reseller rspro device</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -751,12 +821,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_43</td>
+	<td>id=type_47</td>
 	<td>did_assigned</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=target_42</td>
+	<td>id=target_46</td>
 	<td>IAX2/105</td>
 </tr>
 <tr>
@@ -1098,6 +1168,93 @@
 	<td>assertText</td>
 	<td>id=did_cc_tariff_id</td>
 	<td>Default Test Tariff for Users Test Tariff + 0.1</td>
+</tr>
+<!--trunks rusiavimas pagal abc did edite-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>103sdfdsgdfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>103sdfdsgdfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=trunk_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_secret</td>
+	<td>103sdfdsgdfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device's settings updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/18</td>
+	<td></td>
+</tr>
+<!--rusiuojama pagal abc (pagal userio varda)-->
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@name='device_id'])[2]</td>
+	<td>System Admin - IAX2/103 - Test Device for Admin Test Reseller - IAX2/104 - Test Device for Reseller Test User #1 - IAX2/101 - Test Device #1</td>
 </tr>
 </tbody></table>
 </body>
