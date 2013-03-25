@@ -4193,8 +4193,39 @@ class ApiController < ApplicationController
     send_xml_data(out_string, params[:test].to_i)
   end
 
+  def device_list
+    allow, values = MorApi.check_params_with_all_keys(params, request)
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
+    if allow
+      check_user(params[:u], params[:p])
+      if @user
+        user_id = params[:user_id].to_s.strip
+        user = User.where(id:user_id).first
+        if user
+          doc.devices {
+            user.devices.map do |device|
+              doc.device {
+                doc.device_id device.id
+                doc.device_type device.device_type
+              }
+            end
+          }
+        else
+          doc.error("User not found")
+        end
+      else
+        doc.error("Bad login")
+      end
+    else
+      doc.error("Incorrect hash")
+    end
+    }
+    send_xml_data(out_string, params[:test].to_i)
+  end
 
-
+  ## end of
   private
 
 

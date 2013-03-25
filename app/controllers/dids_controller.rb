@@ -226,9 +226,12 @@ class DidsController < ApplicationController
             status[:bad_dids] += 1
           end
         end
-        status_out = status[:bad_dids].to_s + " " + _("DIDs_were_not_created") + ":<br/>"
-        status[:messages].uniq.each do |error|
-          status_out << "&nbsp; * #{error}<br/>"
+        
+        if status[:bad_dids] > 0
+          status_out = status[:bad_dids].to_s + " " + _("DIDs_were_not_created") + ":<br/>"
+          status[:messages].uniq.each do |error|
+            status_out << "&nbsp; * #{error}<br/>"
+          end
         end
         did_rate_cache.flush
         action_cache.flush
