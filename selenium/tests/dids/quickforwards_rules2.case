@@ -820,8 +820,41 @@
 	<td>/billing/dids/new</td>
 	<td></td>
 </tr>
-<!--kitam ticketui-->
-<!--<tr> 	<td>type</td> 	<td>id=did_start</td> 	<td>37115987465</td> </tr> <tr> 	<td>type</td> 	<td>id=did_end</td> 	<td>37115987565</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>xpath=(//input[@name='commit'])[2]</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>DID was not created!</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Collisions with ADMIN Quickforward Rule</td> 	<td></td> </tr>-->
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>37115987465</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>37115987565</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>101 DIDs were not created:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Collisions with ADMIN Quickforward Rule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>id=did_did</td>
