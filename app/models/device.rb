@@ -882,9 +882,9 @@ class Device < ActiveRecord::Base
     jn = ''
     jn += ' JOIN dids ON (dids.device_id = devices.id) ' if options[:include_did].to_i == 1
     if current_user_id
-      return Device.find(:all, :select => "devices.id, devices.description, devices.extension, devices.device_type, devices.istrunk, devices.name, devices.ani, devices.username", :joins => "LEFT JOIN users ON (users.id = devices.user_id) #{jn}", :conditions => ["device_type != 'FAX' AND (users.owner_id = ? OR users.id = ?) AND name not like 'mor_server_%'", current_user_id, current_user_id])
+      return Device.select("devices.id, devices.description, devices.extension, devices.device_type, devices.istrunk, devices.name, devices.ani, devices.username").joins("LEFT JOIN users ON (users.id = devices.user_id) #{jn}").where(["device_type != 'FAX' AND (users.owner_id = ? OR users.id = ?) AND name not like 'mor_server_%' AND user_id > -1", current_user_id, current_user_id]).all
     else
-      return Device.find(:all, :select => "id, description, extension, device_type, istrunk, name, ani, username", :conditions => "device_type != 'FAX' AND name not like 'mor_server_%'", :joins=>jn)
+      return Device.select("id, description, extension, device_type, istrunk, name, ani, username").where("device_type != 'FAX' AND name not like 'mor_server_%' AND user_id > -1").joins(jn).all
     end
   end
 
