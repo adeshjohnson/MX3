@@ -870,7 +870,7 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
     MorLog.my_debug("Use temp table : #{name}")
 
     prefixes = Hash[prefixes.map { |v| [v.to_s, 1] }]
-
+    config   = Rails.configuration.database_configuration
     packed_destinations = {}
     update = {}
     new_destinations.each_with_index { |row, i|
@@ -916,7 +916,13 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
               end
             end
           else
-            ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{short_prefix}', f_subcodes = col_#{options[:imp_subcode].to_i} WHERE id = #{row['i_id']}")
+            b = ActiveRecord::Base.connection.select_all("SELECT COUNT(*) AS a FROM information_schema.tables  WHERE table_schema = '#{config[Rails.env]["database"]}' AND table_name = '#{name}' LIMIT 1")
+            if b.first["a"] > 0
+              ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{short_prefix}', f_subcodes = col_#{options[:imp_subcode].to_i} WHERE id = #{row['i_id']}")
+            else
+              flash[:notice] = _('Tariff_import_failed_please_try_again')
+              redirect_to :controller => "tariffs", :action => "list" and return false
+            end
           end
         else
           bad << row['i_id']
@@ -927,13 +933,25 @@ WHERE ratedetails.id IS NULL AND f_error = 0")
 
     update.keys.each { |s_prefix|
       update[s_prefix].keys.each{ |subcode|
-        all_id = update[s_prefix][subcode].map { |i| i }.join ','
-        ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{s_prefix}', f_subcodes = '#{subcode}' WHERE id IN (#{all_id})")
+        b = ActiveRecord::Base.connection.select_all("SELECT COUNT(*) AS a FROM information_schema.tables  WHERE table_schema = '#{config[Rails.env]["database"]}' AND table_name = '#{name}' LIMIT 1")
+        if b.first["a"] > 0
+          all_id = update[s_prefix][subcode].map { |i| i }.join ','
+          ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_country_code = 1, short_prefix = '#{s_prefix}', f_subcodes = '#{subcode}' WHERE id IN (#{all_id})")
+        else
+          flash[:notice] = _('Tariff_import_failed_please_try_again')
+          redirect_to :controller => "tariffs", :action => "list" and return false
+        end
       }
     }
     if bad and bad.size.to_i > 0
-      # set error flag on not int prefixes | code : 13
-      ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 10 WHERE id IN (#{bad.join(',')})")
+      b = ActiveRecord::Base.connection.select_all("SELECT COUNT(*) AS a FROM information_schema.tables  WHERE table_schema = '#{config[Rails.env]["database"]}' AND table_name = '#{name}' LIMIT 1")
+      if b.first["a"] > 0
+        # set error flag on not int prefixes | code : 13
+        ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1, nice_error = 10 WHERE id IN (#{bad.join(',')})")
+      else
+        flash[:notice] = _('Tariff_import_failed_please_try_again')
+        redirect_to :controller => "tariffs", :action => "list" and return false
+      end
     end
   end
 
