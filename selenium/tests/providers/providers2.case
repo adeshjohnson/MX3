@@ -1353,6 +1353,43 @@
 	<td>Such username already used in Device or Provider</td>
 	<td></td>
 </tr>
+<!--device id-->
+<tr>
+	<td>assertText</td>
+	<td>//tr[12]/td[2]</td>
+	<td>17</td>
+</tr>
+<!--tikrinu, ar sukure provider device, nes jis more neatvaizduojamas-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prov_9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>test_provider</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
@@ -1412,6 +1449,122 @@
 	<td>assertText</td>
 	<td>id=login_1</td>
 	<td>test</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--tikrinama, ar sukurus provaideri susikuria jo devaisas, kuris neatvaizduojamas last calls search-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>provaideris</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[11]/td[2]</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=s_provider</td>
+	<td>All provaideris short_pass_prov</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_value</td>
+	<td>prov_10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=username_value</td>
+	<td>provaideris</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=s_provider</td>
+	<td>All aaaaaaaaaaaaaaaaaaaaaaaaaaaa30 aaaaaaaaaaaaaaaaaaaaaaaaaaab30 bbbbbbbbbbbbbbbbbbbbbbbbbbbb30 provaideris short_password_prov short_pass_prov SIP_provider Test Provider testes test_provider</td>
 </tr>
 </tbody></table>
 </body>
