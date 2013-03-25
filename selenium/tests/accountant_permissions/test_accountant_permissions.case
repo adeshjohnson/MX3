@@ -82,7 +82,6 @@
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
-<!--//===========-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -120,8 +119,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>user_reseller</td>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,7 +213,6 @@
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
-<!--//=============-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -285,7 +283,6 @@
 	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
-<!--//================-->
 <!--Create group.-->
 <tr>
 	<td>open</td>
@@ -312,281 +309,15 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
+<!--WRITE-->
 <tr>
 	<td>open</td>
-	<td>/billing/permissions/list?group_type=accountant</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Test_accountant</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>description</td>
-	<td>Accountant</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Group created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Accountant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>name</td>
-	<td>Test_accountant</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Data</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Callingcard</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>DID</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Subscription</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Tariff</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Read</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Write</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>name_device_manage</td>
-	<td>Manage Devices</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>name_see_financial_data</td>
-	<td>See Financial Data</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>name_user_manage</td>
-	<td>Manage Users</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Accountant can only view</td>
-	<td></td>
-</tr>
-<!--WRITE-->
-<!--Assign first set of permissions (write)-->
-<tr>
-	<td>click</td>
-	<td>callingcard_pin_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>callingcard_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>see_financial_data_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_2_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_3_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_edit_opt_4_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_pin_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_password_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>voicemail_password_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_create_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>device_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>manage_dids_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>invoices_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>payments_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>services_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>manage_subscriptions_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>tariff_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_1_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_2_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_3_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_4_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_6_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_5_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_opt_7_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_create_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>vouchers_manage_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Group updated</td>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_all_permissions_write</td>
 	<td></td>
 </tr>
 <!--Assign group to accountant-->
@@ -692,6 +423,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>New DID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bulk management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/dids/new</td>
 	<td></td>
@@ -714,11 +460,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
@@ -748,19 +489,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>password_password</td>
+	<td>assertTextPresent</td>
+	<td>You have no permission</td>
 	<td></td>
 </tr>
 <!---> User-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Add new</td>
 	<td></td>
 </tr>
 <tr>
@@ -964,31 +700,6 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/users/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>1011</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test User #1</td>
-	<td></td>
-</tr>
 <!--Cardgroup-->
 <tr>
 	<td>open</td>
@@ -1139,11 +850,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Add new device</td>
 	<td></td>
 </tr>
 <tr>
@@ -1363,7 +1069,6 @@
 	<td>//img[@alt='Coins']</td>
 	<td></td>
 </tr>
-<!--//============-->
 <tr>
 	<td>open</td>
 	<td>/billing/dids/did_rates/4999</td>
@@ -1385,7 +1090,6 @@
 	<td></td>
 </tr>
 <!--READ====-->
-<!--Login as admin and set permissions to read.-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1413,7 +1117,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
 	<td></td>
 </tr>
 <tr>
@@ -1557,6 +1261,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=cli_ivr_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recordings_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitorings_manage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=webphone_acc_1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -1601,6 +1325,11 @@
 	<td>assertElementNotPresent</td>
 	<td>notice</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title</td>
+	<td>Rates for tariff</td>
 </tr>
 <!--User-->
 <tr>
@@ -1739,26 +1468,6 @@
 	<td>set_call_limit_name</td>
 	<td>Call Limit:</td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>accountant</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>accountant1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
 <!--Cardgroup-->
 <tr>
 	<td>open</td>
@@ -1840,26 +1549,6 @@
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/edit/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/destroy/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Don't be so smart...</td>
-	<td></td>
-</tr>
 <!--Device-->
 <tr>
 	<td>open</td>
@@ -1873,8 +1562,8 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>link=Add new device</td>
 	<td>Add new device</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -2073,6 +1762,191 @@
 	<td>//img[@alt='Coins']</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Split to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/day_setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>date_year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>date_month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>date_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@type='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Export to CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Generate Invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Add manual payment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Payments to CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Add vouchers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Bulk management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/show/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>//img[@alt='Edit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Add cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test_cardgroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/import_csv?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/act?cg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
 <!--DISABLED===-->
 <!--Login as admin and set permissions to disabled.-->
 <tr>
@@ -2102,7 +1976,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/permissions/edit/1?group_type=accountant</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
 	<td></td>
 </tr>
 <tr>
@@ -2243,6 +2117,26 @@
 <tr>
 	<td>click</td>
 	<td>vouchers_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cli_ivr_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recordings_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=monitorings_manage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=webphone_acc_0</td>
 	<td></td>
 </tr>
 <tr>
@@ -2431,18 +2325,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementNotPresent</td>
 	<td>link=Add new device</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>link=Add new device</td>
-	<td>Add new device</td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <tr>
@@ -2452,112 +2351,12 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Extension:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>device_extension</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
 	<td>extension_value</td>
-	<td>101</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Username:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>username_value</td>
-	<td>101</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>device_name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Password:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>secret_value</td>
-	<td>101</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>device_secret</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Name:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>cid_name_value</td>
-	<td>101</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>cid_name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Number:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>cid_number_value</td>
-	<td>101</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>cid_number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>PIN:</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
 	<td>device_pin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>device_pin_value</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Password:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>vm_psw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <!--Subscribtions-->
@@ -2567,33 +2366,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementNotPresent</td>
 	<td>//img[@alt='Add']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>link=New service</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextNotPresent</td>
 	<td>Test_periodic_service</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Periodic fee</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//img[@alt='Delete']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2602,23 +2386,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextNotPresent</td>
 	<td>User: Test User</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>Test_periodic_service</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementNotPresent</td>
 	<td>link=New subscription</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//img[@alt='Delete']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2630,11 +2409,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>notice</td>
 	<td></td>
 </tr>
 <tr>
@@ -2654,58 +2428,6 @@
 	<td></td>
 </tr>
 <!--google maps link test-->
-<!--admin-->
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>admin1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
-<!--accountant-->
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>accountant</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>accountant1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>Google Maps</td>
