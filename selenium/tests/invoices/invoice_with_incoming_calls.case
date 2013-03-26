@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/various_calls</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -74,7 +74,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -98,12 +98,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2011-11-01 - 2011-11-30</td>
+	<td>2012-11-01 - 2013-11-30</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Invoices generated: 4</td>
+	<td>Invoices generated: 3</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,47 +113,42 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;123123&quot;</td>
+	<td>&quot;370600&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011221&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:31:04&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011223&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:47:02&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011242&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:56:06&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011238&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-22 18:47:02&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011239&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-22 20:56:06&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011240&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-29 10:07:24&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011230&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011234&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-30 15:56:06&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -167,148 +162,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011224&quot;</td>
+	<td>assertTextNotPresent</td>
+	<td>Client number:</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011225&quot;</td>
+	<td>assertTextNotPresent</td>
+	<td>Incoming calls</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011226&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011242&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011238&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011239&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011240&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011230&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011234&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011233&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011223&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;123123&quot;</td>
+	<td>assertTextNotPresent</td>
+	<td>DID Owner Cost</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_pdf/4?test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/3?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Client number:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Incoming calls</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011230&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011221&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011223&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011221&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011221&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011223&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011224&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011226&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;123123&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011233&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011230&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011233&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011225&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011226&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011225&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011224&quot;</td>
+	<td>&quot;DID Owner Cost&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -379,7 +264,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -394,7 +279,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -423,7 +308,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2011-11-01 - 2011-11-30</td>
+	<td>2012-11-01 - 2013-11-30</td>
 	<td></td>
 </tr>
 <tr>
@@ -433,52 +318,47 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_pdf/5?test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/4?test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;123123&quot;</td>
+	<td>&quot;370600&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011221&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:31:04&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011223&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:47:02&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011242&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:56:06&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011238&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-22 18:47:02&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011239&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-22 20:56:06&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011240&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-29 10:07:24&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011230&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011234&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-30 15:56:06&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -539,7 +419,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -554,7 +434,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2012</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -583,27 +463,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_pdf/6?test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/5?test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;123123&quot;</td>
+	<td>&quot;40060&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011224&quot;</td>
+	<td>&quot;37060064753&quot;, &quot;2012-11-21 11:33:04&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;37060011226&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>&quot;37060011221&quot;</td>
+	<td>&quot;Calls to DIDs: &quot;, 12</td>
 	<td></td>
 </tr>
 <tr>
@@ -614,7 +489,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -629,7 +504,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -653,27 +528,17 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=src_237</td>
+	<td>id=src_34</td>
 	<td></td>
 </tr>
 <!--<tr> 	<td>assertText</td> 	<td>id=src_259</td> 	<td>123123 (123123)</td> </tr>-->
 <tr>
 	<td>assertText</td>
-	<td>id=src_237</td>
-	<td>37060011233 (37060011233)</td>
+	<td>id=src_34</td>
+	<td>40060 (40060)</td>
 </tr>
 <!--<tr> 	<td>assertText</td> 	<td>id=src_234</td> 	<td>37060011226 (37060011226)</td> </tr>-->
 <!--<tr> 	<td>assertText</td> 	<td>id=src_221</td> 	<td>37060011221 (37060011221)</td> </tr>-->
-<tr>
-	<td>assertText</td>
-	<td>id=src_277</td>
-	<td>37060011233 (37060011233)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=src_273</td>
-	<td>37060011233 (37060011233)</td>
-</tr>
 </tbody></table>
 </body>
 </html>
