@@ -689,9 +689,11 @@ class Invoice < ActiveRecord::Base
       items << [_('Client_number') + ": ", src, '', '', '', '']
 
       calls_to_dids = Hash.new(0)
-      calls_to_dids[:count] = calls.select {|call| !call['to_did'].blank? ? (calls_to_dids[:time] += call['billsec'];true) : false }.size
+      calls_to_dids[:count] = calls.select {|call| !call['to_did'].blank? ? (calls_to_dids[:time] += call['billsec'];calls_to_dids[:price] += call['user_price'];true) : false }.size
       if calls_to_dids[:count] > 0
-        items << [_('Calls_To_Dids') + ": ", calls_to_dids[:count], nice_time(calls_to_dids[:time], options[:min_type]), '', '', '']
+        items << [' ', '', '', '', '', '']
+        items << [' ', _('Quantity'), _('Duration'),_('Price'),"",""]
+        items << [_('Calls_To_Dids') + ": ", calls_to_dids[:count], nice_time(calls_to_dids[:time], options[:min_type]), nice_invoice_number(calls_to_dids[:price], nice_number_hash)," #{dc}" + " (" + _('Without_VAT') + ")", '']
       end
       items << [' ', '', '', '', '', '']
 
@@ -725,10 +727,10 @@ class Invoice < ActiveRecord::Base
             '',
             '',
             '',
-            (item['direction'] || _('Calls_To_Dids')),
+            item['direction'],
             nice_invoice_number(item["price"], nice_number_hash),
             dc.to_s + " (" + _('Without_VAT') + ")"
-        ]
+        ] if item['to_did'].blank?
         total_price += item["price"].to_d
       end
 
