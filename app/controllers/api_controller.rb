@@ -4207,7 +4207,7 @@ class ApiController < ApplicationController
         allow = false if @user.usertype == "accountant" and !@user.accountant_allow_read('device_manage')
         if allow
           if user and user.owner_id != owner_id
-            doc.error("Dont be so smart") 
+            doc.error("Don't be so smart") 
           elsif user and !user_id.blank?
             doc.devices {
               user.devices.map do |device|
