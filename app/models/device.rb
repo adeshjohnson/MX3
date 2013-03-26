@@ -1233,7 +1233,7 @@ class Device < ActiveRecord::Base
 
   def ast18
   # tweaks for Asterisk 1.8
-    if AST_18 == 1
+    if defined?(AST_18) and AST_18.to_i == 1
       self.auth = "md5" if self.device_type.upcase == "IAX2"
     end
   end
