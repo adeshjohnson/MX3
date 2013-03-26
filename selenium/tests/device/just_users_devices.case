@@ -78,6 +78,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Deprecated functionality</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Help&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=4</td>
 	<td></td>
@@ -95,6 +110,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Deprecated functionality</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Help&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality']</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,6 +328,146 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>User Resellers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>dev98</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Deprecated functionality</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Help&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_create_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: Test Accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_description</td>
+	<td>dev97</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Deprecated functionality</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Help&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality']</td>
 	<td></td>
 </tr>
 </tbody></table>
