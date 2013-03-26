@@ -1181,7 +1181,7 @@ class Call < ActiveRecord::Base
     imported_cdrs = 0
     for r in res
       billsec = r["col_#{options[:imp_billsec]}"].to_i
-      call = Call.new(:billsec => billsec, :dst => CsvImportDb.clean_value(r["col_#{options[:imp_dst]}"].to_s).gsub(/[^0-9]/, ""), :calldate => r["col_#{options[:imp_calldate]}"], :card_id => 0, :uniqueid => "", :channel => "", :dcontext => "", :dstchannel => "")
+      call = Call.new(:billsec => billsec, :dst => CsvImportDb.clean_value(r["col_#{options[:imp_dst]}"].to_s).gsub(/[^0-9]/, ""), :calldate => r["col_#{options[:imp_calldate]}"], :card_id => 0, :uniqueid => "", :channel => "", :dcontext => "", :dstchannel => "", :lastapp => "", :lastdata => "", :userfield => "")
       duration = CsvImportDb.clean_value(r["col_#{options[:imp_duration]}"]).to_i
       duration = billsec if duration == 0 or options[:imp_duration] == -1
       disposition = ""
