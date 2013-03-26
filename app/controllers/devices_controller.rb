@@ -149,6 +149,9 @@ class DevicesController < ApplicationController
           server_device.save
         end
       end
+      if ["admin", "accountant", "reseller"].include?(device.user.usertype)
+        flash[:notice] = _('Deprecated_functionality') + " <a href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png'/></a>".html_safe
+      end
       flash[:status] = device.check_callshop_user(_('device_created'))
       # no need to create extensions, prune peers, etc when device is created, because user goes to edit window and all these actions are done in device_update
       #a=configure_extensions(device.id, {:current_user => current_user})
