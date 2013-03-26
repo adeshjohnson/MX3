@@ -4556,7 +4556,7 @@ Localization.define('en') do |l|
   l.store 'no_users_selected', 'No users selected'
   l.store 'Dids_were_successfully_created', 'DIDs were successfully created'
   l.store 'DIDs_were_not_created', 'DIDs were not created'
-
+  l.store 'Max_retries_must_be_integer', 'Max Retries must be Integer'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

@@ -81,6 +81,10 @@ class AutodialerController < ApplicationController
   end
 
   def campaign_create
+    if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
+      flash[:notice] = _('Max_retries_must_be_integer')
+      redirect_to :action => 'campaign_new' and return false
+    end
     @campaign = Campaign.new(params[:campaign])
     @campaign.user_id = session[:user_id]
     @campaign.owner_id = current_user.owner_id
@@ -96,6 +100,9 @@ class AutodialerController < ApplicationController
     #    @campaign.wait_time = 30 if params[:campaign][:wait_time].to_i < 30
 
     if @campaign.save
+      if @campaign.user and ["admin", "accountant", "reseller"].include?(@campaign.user.usertype)
+        flash[:notice] = _('Deprecated_functionality') + " <a href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png'/></a>".html_safe
+      end
       flash[:status] = _('Campaign_was_successfully_created')
       redirect_to :action => 'user_campaigns'
     else
@@ -130,6 +137,10 @@ class AutodialerController < ApplicationController
 
 
   def campaign_update
+    if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
+      flash[:notice] = _('Max_retries_must_be_integer')
+      redirect_to :action => 'campaign_new' and return false
+    end
     @campaign.update_attributes(params[:campaign])
     time_from = params[:time_from][:hour] + ":" + params[:time_from][:minute] + ":00"
     time_till = params[:time_till][:hour] + ":" + params[:time_till][:minute] + ":59"
