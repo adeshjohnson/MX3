@@ -4202,18 +4202,26 @@ class ApiController < ApplicationController
       check_user(params[:u], params[:p])
       if @user
         user_id = params[:user_id].to_s.strip
-        user = User.where(id:user_id).first
-        if user
-          doc.devices {
-            user.devices.map do |device|
-              doc.device {
-                doc.device_id device.id
-                doc.device_type device.device_type
-              }
-            end
-          }
+        owner_id = (@user.usertype == "accountant" ? 0 : @user.id)
+        user = User.where(:id => user_id).first
+        allow = false if @user.usertype == "accountant" and !@user.accountant_allow_read('device_manage')
+        if allow
+          if user and user.owner_id != owner_id
+            doc.error("Dont be so smart") 
+          elsif user and !user_id.blank?
+            doc.devices {
+              user.devices.map do |device|
+                doc.device {
+                  doc.device_id device.id
+                  doc.device_type device.device_type
+                }
+              end
+            }
+          else
+            user_id.blank? ? doc.error("user_id is empty") : doc.error("User not found")
+          end
         else
-          doc.error("User not found")
+          doc.error("You are not authorized to view this page")
         end
       else
         doc.error("Bad login")
