@@ -137,21 +137,21 @@ class AutodialerController < ApplicationController
 
 
   def campaign_update
-    if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
-      flash[:notice] = _('Max_retries_must_be_integer')
-      redirect_to :action => 'campaign_edit', :id => @campaign.id
-    end
+
     @campaign.update_attributes(params[:campaign])
     time_from = params[:time_from][:hour] + ":" + params[:time_from][:minute] + ":00"
     time_till = params[:time_till][:hour] + ":" + params[:time_till][:minute] + ":59"
-
+    if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
+      @campaign.errors.add(:max_retries, _('Max_retries_must_be_integer'))
+      errors = 1
+    end
     @campaign.start_time = time_from
     @campaign.stop_time = time_till
 
     #    @campaign.retry_time = 60 if params[:campaign][:retry_time].to_i < 60
     #    @campaign.wait_time = 30 if params[:campaign][:wait_time].to_i < 30
 
-    if @campaign.save
+    if errors.to_i == 0 and @campaign.save
       flash[:status] = _('Campaigns_details_was_successfully_changed')
       redirect_to :action => 'user_campaigns'
     else
