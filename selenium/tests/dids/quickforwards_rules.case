@@ -3261,8 +3261,13 @@
 <!--checking that qf rule can be created when did belongs to simple plan-->
 <tr>
 	<td>open</td>
-	<td>/billing/quickforwards_rules/edit/5</td>
+	<td>/billing/quickforwards_rules/new</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=quickforwards_rule_name</td>
+	<td>res qf</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -3276,7 +3281,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Quickforwards Rule successfully updated</td>
+	<td>Quickforwards Rule successfully created</td>
 	<td></td>
 </tr>
 <tr>
@@ -3287,36 +3292,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Allow this DID to be assigned to other users/dialplans</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=tr.row1 &gt; td &gt; input[name=&quot;commit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/quickforwards_rules/edit/5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>390%|37261112345</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Quickforwards Rule successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/9</td>
 	<td></td>
 </tr>
 <tr>
@@ -3349,26 +3324,6 @@
 	<td>type</td>
 	<td>id=quickforwards_rule_rule_regexp</td>
 	<td>390%</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Quickforwards Rule successfully updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/quickforwards_rules/edit/5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=quickforwards_rule_rule_regexp</td>
-	<td>390%|37261112345</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
