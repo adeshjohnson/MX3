@@ -548,7 +548,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>[1,2,3,4]% - matches DIDs beginning with 1 2 3 and 4</td>
+	<td>[1234]% - matches DIDs beginning with 1 2 3 and 4 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>370600%|370614% - will match numbers 370600xxxxxx and 370614xxxxxx </td>
 	<td></td>
 </tr>
 <tr>
@@ -1478,6 +1483,26 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Quickforwards Rule was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Collisions with DIDs that are not assigned to Quickforwards Dial Plans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=quickforwards_rule_rule_regexp</td>
+	<td>380%|37060012347</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Quickforwards Rule successfully created</td>
 	<td></td>
 </tr>
@@ -1645,7 +1670,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>12 DID(s) were not updated</td>
+	<td>11 DID(s) were not updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -2593,7 +2618,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>11 DID(s) were not updated</td>
+	<td>10 DID(s) were not updated</td>
 	<td></td>
 </tr>
 <tr>
