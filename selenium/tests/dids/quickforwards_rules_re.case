@@ -131,7 +131,7 @@
 <!--reserve DID to reseller-->
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/5</td>
+	<td>/billing/dids/edit/15</td>
 	<td></td>
 </tr>
 <tr>
@@ -146,37 +146,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/6</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_id</td>
-	<td>label=Test Reseller</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Reserve']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/11</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_id</td>
-	<td>label=Test Reseller</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Reserve']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dids/edit/12</td>
+	<td>/billing/dids/edit/16</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,7 +277,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/dids/edit/16</td>
+	<td>/billing/dids/edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -347,26 +317,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>will match</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>[1,2,3,4]% - matches DIDs beginning with 1 2 3 and 4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>% - matches any symbol any number of times </td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Rule separator</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>quickforwards_rule_name</td>
 	<td>Vardas</td>
@@ -374,11 +324,16 @@
 <tr>
 	<td>type</td>
 	<td>quickforwards_rule_rule_regexp</td>
-	<td>370[1,2,3,6]%|355%</td>
+	<td>370[2,3,6]%|355%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quickforwards Rule successfully created</td>
 	<td></td>
 </tr>
 <!--create quickforwards rules-->
@@ -400,11 +355,16 @@
 <tr>
 	<td>type</td>
 	<td>quickforwards_rule_rule_regexp</td>
-	<td>372[1,2,3,6]%|3455%</td>
+	<td>372[2,3,6]%|3455%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Quickforwards Rule successfully created</td>
 	<td></td>
 </tr>
 <!--assign quickforwards rules-->
@@ -938,7 +898,7 @@
 <tr>
 	<td>type</td>
 	<td>quickforwards_rule_rule_regexp</td>
-	<td>370[1,2,3]%|3455%</td>
+	<td>370[6,2,3]%|3455%</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -996,24 +956,18 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--check quickforwarddids-->
 <tr>
 	<td>open</td>
 	<td>/billing/dids/quickforwarddids</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>37010012349</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37010012350</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
 	<td>37063042438</td>
 	<td></td>
 </tr>
@@ -1023,8 +977,159 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>37060012350</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>37060012349</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>37060012345</td>
+	<td></td>
+</tr>
+<!--check quickforwarddids - neturi nieko rodyti, nes reselerio taisykles neveikia-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='quickforward_dp_name']</td>
+	<td>res qf dp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cb_add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/edit/15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/quickforwarddids</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextNotPresent</td>
-	<td>37261112350</td>
+	<td>37010012349</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>37261112349</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>37060012350</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>37060012349</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>37060012345</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
 	<td></td>
 </tr>
 <!--admin login-->
