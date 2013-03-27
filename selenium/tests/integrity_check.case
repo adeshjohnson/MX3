@@ -836,6 +836,56 @@
 	<td>User settings: Test Reseller</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>weak prov</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Fix')])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=SIP/weak prov</td>
+	<td>SIP/weak prov</td>
+</tr>
 </tbody></table>
 </body>
 </html>
