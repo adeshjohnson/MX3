@@ -139,7 +139,7 @@ class AutodialerController < ApplicationController
   def campaign_update
     if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
       flash[:notice] = _('Max_retries_must_be_integer')
-      redirect_to :action => 'campaign_new' and return false
+      redirect_to :action => 'campaign_edit', :id => @campaign.id
     end
     @campaign.update_attributes(params[:campaign])
     time_from = params[:time_from][:hour] + ":" + params[:time_from][:minute] + ":00"
