@@ -2077,7 +2077,7 @@ Sets default tax values for users or cardgroups
     end
     @users_postpaid_and_loss_calls = User.find(:all, :conditions => ["postpaid = 1 and allow_loss_calls = 1"])
     if ccl_active?
-      @insecure_devices = Device.where("host='dynamic' AND insecure LIKE '%invite%' AND insecure != 'invite' AND device_type != 'SIP' AND host != 'dynamic'").all
+      @insecure_devices = Device.where("host='dynamic' AND insecure LIKE '%invite%' AND insecure != 'invite' AND device_type != 'SIP'").all
     else
       @insecure_devices = Device.where("host='dynamic' AND insecure LIKE '%invite%' AND insecure != 'invite'").all
     end
