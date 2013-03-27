@@ -298,19 +298,21 @@
 <% if @qf_rule_collisions %>
   <table class="maintable" width="50%">
     <tr>
-      <th align="left">    <%= _('DID_matches_quickforward_rule') %>    </th>
+      <th align="left">  <%= _('DID_matches_quickforward_rule') %>    </th>
     </tr>
     <tr class="row1">
       <td>
-           <br /><%= b_exclamation %><%= _('Collisions_with_Quickforwards_Rules') %>. <br /><br />
-           <br /><%= link_to b_forward + _('Quickforwards_Rules'), :controller => :quickforwards_rules, :action => :list %>. <br /><br /> 
+           <br /><%= b_exclamation %><%= (reseller? and !@rs_rules) ? _('Collisions_with_Quickforwards_Rules_rs') : _('Collisions_with_Quickforwards_Rules') %>. <br /><br />
+         <% if !reseller? or @rs_rules %>
+           <br /><%= link_to(b_forward + _('Quickforwards_Rules'), :controller => :quickforwards_rules, :action => :list) %>. <br /><br /> 
+         <% end %>
       </td>
     </tr>
   </table>
   <br />
 <% end %>
 
-<% if @choice_free_dp %>
+<% if (!reseller? and @choice_free_dp) or (@choice_free_dp and reseller? and @rs_rules) %>
 
     <table class="maintable" width="50%">
       <tr>

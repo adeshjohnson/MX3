@@ -329,7 +329,19 @@ class DidsController < ApplicationController
     @choice_closed = false
     @choice_terminated = false
 
-    @qf_rule_collisions = @did.find_qf_rules.to_i > 0  ? true : false
+    # QF Rule default values
+    @qf_rule_collisions = false
+    @rs_rules = false
+
+    @is_reseller = current_user.is_reseller?
+
+    if @is_reseller
+      res_scope_rules = QuickforwardsRule.where("#{@did.did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id in (0,#{current_user.id})")
+      @rs_rules = true if res_scope_rules.collect(&:id).include? current_user.quickforwards_rule_id
+      @qf_rule_collisions = true if res_scope_rules.size.to_i > 0
+    else
+      @qf_rule_collisions = true if @did.find_qf_rules.to_i > 0
+    end
 
     #DialPlan variables (DID's for dialplan)
     @choice_free_dp = false
