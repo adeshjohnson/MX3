@@ -1185,13 +1185,12 @@ class Call < ActiveRecord::Base
 
       # A: Hack for the mess that gets created with speedup.sql
       call.lastapp    =	""	if call.attributes.has_key? 'lastapp'
-      call.lastapp    =	""	if call.attributes.has_key? 'lastapp'
+      call.lastdata   =	""	if call.attributes.has_key? 'lastdata'
       call.uniqueid   =	""	if call.attributes.has_key? 'uniqueid'
       call.channel    =	""	if call.attributes.has_key? 'channel'
       call.dcontext   =	""	if call.attributes.has_key? 'dcontext'
       call.dstchannel =	""	if call.attributes.has_key? 'dstchannel'
       call.userfield  =	""	if call.attributes.has_key? 'userfield'
-      call.amaflags   =	""	if call.attributes.has_key? 'amaflags'
 
       duration = CsvImportDb.clean_value(r["col_#{options[:imp_duration]}"]).to_i
       duration = billsec if duration == 0 or options[:imp_duration] == -1
