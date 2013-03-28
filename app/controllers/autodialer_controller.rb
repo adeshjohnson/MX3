@@ -81,15 +81,14 @@ class AutodialerController < ApplicationController
   end
 
   def campaign_create
-    if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
-      flash[:notice] = _('Max_retries_must_be_integer')
-      redirect_to :action => 'campaign_new' and return false
-    end
     @campaign = Campaign.new(params[:campaign])
     @campaign.user_id = session[:user_id]
     @campaign.owner_id = current_user.owner_id
     @campaign.status = "disabled"
-
+    if !!!(params[:campaign][:max_retries].to_s =~ /^[+]?[0-9]+$/)
+      @campaign.errors.add(:max_retries, _('Max_retries_must_be_integer'))
+      errors = 1
+    end
     time_from = params[:time_from][:hour] + ":" + params[:time_from][:minute] + ":00"
     time_till = params[:time_till][:hour] + ":" + params[:time_till][:minute] + ":59"
 
@@ -99,7 +98,7 @@ class AutodialerController < ApplicationController
     #    @campaign.retry_time = 60 if params[:campaign][:retry_time].to_i < 60
     #    @campaign.wait_time = 30 if params[:campaign][:wait_time].to_i < 30
 
-    if @campaign.save
+    if errors.to_i == 0 and @campaign.save
       if @campaign.user and ["admin", "accountant", "reseller"].include?(@campaign.user.usertype)
         flash[:notice] = _('Deprecated_functionality') + " <a href='http://wiki.kolmisoft.com/index.php/Deprecated_functionality' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png'/></a>".html_safe
       end
