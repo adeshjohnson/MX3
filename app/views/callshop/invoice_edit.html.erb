@@ -68,7 +68,7 @@
               </tr>
               </thead>
               <tbody>
-              <% for call in @invoice.calls(nice_date_time(@invoice.paid_at || @invoice.updated_at)) %>
+              <% for call in @invoice_calls %>
                   <tr>
                     <td><%= nice_date(call.calldate) %></td>
                     <td><%= call.dst %></td>

@@ -260,6 +260,7 @@ class CallshopController < ApplicationController
 
   def invoice_edit
     @invoice = CsInvoice.where(:id => params[:invoice_id]).first
+    @invoice_calls = @invoice.calls((@invoice.paid_at || @invoice.updated_at).strftime("%Y-%m-%d %H:%M:%S"))
     render :layout=>false
   end
 
