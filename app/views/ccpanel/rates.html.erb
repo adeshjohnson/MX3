@@ -37,12 +37,7 @@
 
                arates = rate.aratedetails if rate
 
-               #check for custom ratese
-               crate = dg.customrates[0]
-               arates = crate.acustratedetails if crate
                exchange_rate = @exchange_rate
-               exchange_rate = @cust_exchange_rate if crate
-               
 
                if arates.size == 0
                  price = 0
