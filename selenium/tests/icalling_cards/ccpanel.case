@@ -1004,6 +1004,250 @@
 	<td>Shop</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>tariff to test rates</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<!--provider ir user rates jau nustatyti-->
+<!--nustatomi custom rates-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate1</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate2</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate473</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/custom_rates/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/1?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>12.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/2?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>12.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_acustrates/3?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>12.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=edit_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Custom rate updated</td>
+	<td></td>
+</tr>
+<!--cc naudoja visai kita tarifa, kuris nesusijes su provaiderio, userio tarifais ir custom rates.-->
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>cc group</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=price_with_vat</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=cardgroup[tariff_id]</td>
+	<td>label=tariff to test rates</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card Group successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/new?cg=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start_number</td>
+	<td>1111111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end_number</td>
+	<td>1111111112</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Cards created: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ccpanel/rates</td>
+	<td></td>
+</tr>
+<!--neturi buti custom rates, provider tarif kainu ir userio tarifo kainu - tik cc tarifo kainos. -->
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>12.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0.3100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>0.4500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_1</td>
+	<td>0.1320</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_2</td>
+	<td>0.6580</td>
+</tr>
 </tbody></table>
 </body>
 </html>
