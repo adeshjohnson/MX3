@@ -312,7 +312,7 @@
   <br />
 <% end %>
 
-<% if (!reseller? and @choice_free_dp) or (@choice_free_dp and reseller? and @rs_rules) %>
+<% if (!reseller? and @choice_free_dp) or (@choice_free_dp and reseller? and @rs_rules) or (@choice_free_dp and reseller? and !@qf_rule_collisions and !@rs_rules )  %>
 
     <table class="maintable" width="50%">
       <tr>
