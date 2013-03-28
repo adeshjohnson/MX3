@@ -1460,13 +1460,18 @@ class ApplicationController < ActionController::Base
               (SELECT extension + 1 AS c FROM devices WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
               UNION ALL
               (SELECT username + 1 AS c FROM devices WHERE (username REGEXP '^[0-9]+$' = 1 AND username BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
-            ) AS v GROUP BY free HAVING  x < 3 AND free BETWEEN #{ran_min} AND #{ran_max} ORDER BY CONVERT(free, UNSIGNED) DESC limit 1;"
+            ) AS v GROUP BY free HAVING free BETWEEN #{ran_min} AND #{ran_max} ORDER BY CONVERT(free, UNSIGNED);"
     devices = ActiveRecord::Base.connection.select_all(sql)
 
-    if devices and devices[0]
-      fe = devices[0]["free"].to_s
-    else
-      fe = ran_min + 1
+    used_extensions = []
+    all_extensions = (ran_min..ran_max).to_a
+    devices.each{|d| used_extensions << d["free"].to_i}
+
+    i = 0
+    fe = ""
+    until !fe.blank?
+      fe = all_extensions[i].to_s if !used_extensions.include?(all_extensions[i].to_i)
+      i += 1
     end
     fe
   end
