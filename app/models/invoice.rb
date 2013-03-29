@@ -616,19 +616,18 @@ class Invoice < ActiveRecord::Base
           if show_avg_rate == 1
             aa << nice_cell(' ', font) if type == 2
           end
-          aa << {:text => self.nice_invoice_number(self["tax_#{index+1}_value".to_sym] * ex, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all, :font_size => font}
+          aa << {:text => self.nice_invoice_number(tax_hash[:tax].to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all, :font_size => font}
           aa << {:text => dc} if type == 3
           items << aa
         end
-        tax_amount += self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_d 
+        tax_amount += self.nice_invoice_number(tax_hash[:tax].to_d, nice_number_hash.merge({:no_repl => 1})).to_d 
 
       }
-      price_with_tax = self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_d
+      price_with_tax = self.nice_invoice_number(self.converted_price(ex) + tax_amount, nice_number_hash.merge({:no_repl => 1})).to_d
     else
       price_with_tax = self.nice_invoice_number(self.converted_price_with_vat(ex), nice_number_hash.merge({:no_repl => 1})).to_d
       tax_amount = price_with_tax - self.converted_price(ex)
     end
-
     return items, up_string, tax_amount, price_with_tax
   end
 
