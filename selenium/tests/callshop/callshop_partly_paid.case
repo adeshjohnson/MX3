@@ -67,6 +67,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>css=#3 &gt; td.status</td>
 	<td>Partly paid</td>
@@ -77,7 +82,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForValue</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
 	<td>id=partial_payment_received</td>
 	<td>on</td>
 </tr>
@@ -121,6 +131,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>assertValue</td>
 	<td>id=pending_payment</td>
 	<td>0.57</td>
@@ -139,6 +154,11 @@
 	<td>click</td>
 	<td>//tr[@id='3']/td[7]/div/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
