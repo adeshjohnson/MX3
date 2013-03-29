@@ -4504,7 +4504,7 @@ Localization.define('en') do |l|
   l.store 'Collisions_with_Quickforwards_Rules', 'Collisions with Quickforward Rule, DID can be assigned only to Quickforwards Dial Plan'
   l.store 'Collisions_with_Dids', 'Collisions with DIDs that are not assigned to Quickforwards Dial Plans'
   l.store 'Collisions_with_Quickforwards_Rules_rs', 'Collisions with ADMIN Quickforward Rule'
-  l.store 'Collisions_with_admin_Quickforwards_Rules', 'Collisions with ADMIN Quickforward Rule, DID can be assigned only to Quickforwards Dial Plan'
+  l.store 'Collisions_with_admin_Quickforwards_Rules', 'Collisions with ADMIN Quickforward Rule, DID can be assigned only to Quickforwards Dial Plan'
   l.store 'DIDs_were_not_updated', 'DID(s) were not updated'
   l.store 'Did_was_not_updated', 'DID was not updated'
   l.store 'Disable_hash_checking', 'Disable hash checking'
