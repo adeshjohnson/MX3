@@ -689,6 +689,26 @@
 	<td>User not found</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_list?u=admin&amp;p=admin1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>user_id is empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_list?u=admin&amp;p=admin1&amp;user_id=&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>user_id is empty</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
