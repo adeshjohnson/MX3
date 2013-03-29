@@ -302,8 +302,8 @@
     </tr>
     <tr class="row1">
       <td>
-           <br /><%= b_exclamation %><%= (reseller? and !@rs_show_dp) ? _('Collisions_with_Quickforwards_Rules_rs') : ((reseller? and @rs_show_dp and !@rs_rules) ? _('Collisions_with_admin_Quickforwards_Rules') : _('Collisions_with_Quickforwards_Rules')) %>. <br /><br />
-         <% if !reseller? or (reseller? and @rs_show_dp) %>
+         <br /><%= b_exclamation %><%= (reseller? and !@rs_show_dp) ? _('Collisions_with_Quickforwards_Rules_rs') : ((reseller? and @rs_show_dp and !@rs_rules) ? _('Collisions_with_admin_Quickforwards_Rules') : _('Collisions_with_Quickforwards_Rules')) %>. <br /><br />
+         <% if !reseller? or (reseller? and @rs_show_dp) %>
            <br /><%= link_to(b_forward + _('Quickforwards_Rules'), :controller => :quickforwards_rules, :action => :list) %>. <br /><br /> 
          <% end %>
       </td>

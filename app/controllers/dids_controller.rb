@@ -338,8 +338,8 @@ class DidsController < ApplicationController
 
     if @is_reseller
       res_scope_rules = QuickforwardsRule.where("#{@did.did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id in (0,#{current_user.id})")
-      @rs_rules = true if res_scope_rules.collect(&:user_id).include?(current_user.id)
-      @rs_show_dp = true if res_scope_rules.collect(&:id).include?(current_user.quickforwards_rule_id)
+      @rs_rules = true if res_scope_rules.collect(&:user_id).include?(current_user.id)
+      @rs_show_dp = true if res_scope_rules.collect(&:id).include?(current_user.quickforwards_rule_id)
       @qf_rule_collisions = true if res_scope_rules.size.to_i > 0
     else
       @qf_rule_collisions = true if @did.find_qf_rules.to_i > 0
