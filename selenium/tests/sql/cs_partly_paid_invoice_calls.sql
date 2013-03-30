@@ -8,8 +8,4 @@ INSERT INTO `cs_invoices` (`id`, `callshop_id`, `user_id`, `state`, `invoice_typ
 (2, 1, 2, 'full', 'postpaid', 0.650000000000000, '', '2013-03-26 13:26:00', '2013-03-26 13:26:00', '2013-03-26 13:21:55', 7, 0.000000000000000),
 (3, 1, 2, 'partial', 'postpaid', 0.050000000000000, '', '2013-03-26 13:28:20', '2013-03-26 13:33:22', '2013-03-26 13:26:29', 9, 0.050000000000000),
 (4, 1, 2, 'full', 'postpaid', 0.600000000000000, '', '2013-03-26 13:30:34', '2013-03-26 13:30:34', '2013-03-26 13:28:51', 11, 0.000000000000000);
-INSERT INTO `groups` (`id`, `name`, `grouptype`, `owner_id`, `description`, `translation_id`) VALUES
-(1, 'Test', 'callshop', 0, '', 1);
-INSERT INTO `usergroups` (`id`, `user_id`, `group_id`, `gusertype`, `position`) VALUES
-(5, 6, 1, 'manager', 0),
-(7, 2, 1, 'user', 1);
+
