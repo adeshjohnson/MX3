@@ -1571,6 +1571,517 @@
 	<td>id=s_provider</td>
 	<td>All aaaaaaaaaaaaaaaaaaaaaaaaaaaa30 aaaaaaaaaaaaaaaaaaaaaaaaaaab30 bbbbbbbbbbbbbbbbbbbbbbbbbbbb30 provaideris short_password_prov short_pass_prov SIP_provider Test Provider testes test_provider</td>
 </tr>
+<!--trunking mode-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=iax2_trunking_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=iax2_trunking_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=iax2_trunking_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=add_to_servers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was not updated<br /> * Please select server</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>iax2 provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>sip provider</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>dahdi provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_dahdi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>h323 provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>skype&nbsp;&nbsp;provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_Skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>iax2 provider reseller</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_IAX2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=iax2_trunking_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=iax2_trunking_no</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_no</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=iax2_trunking_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was not updated<br /> * Provider should have login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=iax2_trunking_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>sip provider res</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>dahdi provider res</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_dahdi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>h323 provider res</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_H323</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>skype&nbsp;&nbsp;provider res</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=provider_tech_Skype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>IAX2 Trunking Mode</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
