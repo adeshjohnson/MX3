@@ -2241,6 +2241,87 @@
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>youremail@email.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/send_emails/36</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=to_be_sent_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Email sent</td>
+	<td></td>
+</tr>
+<!--patikrinti, kad email ateina iš no-reply@kolmisoft.com, o ne kolmitest@gmail.com-->
 </tbody></table>
 </body>
 </html>
