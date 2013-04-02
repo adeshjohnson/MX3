@@ -1,7 +1,7 @@
 <script type="text/javascript">
     addons_menu = new dTree('addons_menu');
     addons_menu.config.inOrder = true;
-    <% if erp_active? or skp_active? or ad_active? or cc_active? or call_shop_active? or (rec_active?) or reseller_active? or (sms_active?)or (defined?(MA_Active) and MA_Active == 1) or (defined?(PG_Active) and PG_Active == 1) or provider_billing_active? or web_phone_active? %>
+    <% if erp_active? or skp_active? or ad_active? or cc_active? or call_shop_active? or (rec_active?) or reseller_active? or (sms_active?)or (defined?(MA_Active) and MA_Active == 1) or (defined?(PG_Active) and PG_Active == 1) or provider_billing_active? or web_phone_active? or callback_active? %>
 
     <% si = 0
     i = si %>

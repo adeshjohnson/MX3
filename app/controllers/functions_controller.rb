@@ -3207,8 +3207,8 @@ Sets default tax values for users or cardgroups
     Confline.set_value("CB_WaitTime", params[:cb_waittime])
 
     Confline.set_value("Web_Callback_Server", params[:web_callback_server])
-    Confline.set_value("Callback_legB_CID", params[:CID]['legB'], 0)
-    Confline.set_value("Callback_legA_CID", params[:CID]['legA'], 0)
+    Confline.set_value("Callback_legB_CID", params[:CID]['legB'], 0) if params[:CID] and params[:CID].key? 'legB'
+    Confline.set_value("Callback_legA_CID", params[:CID]['legA'], 0) if params[:CID] and params[:CID].key? 'legA'
     Confline.set_value2("Callback_legB_CID", params[:legB_send_custom])
     Confline.set_value2("Callback_legA_CID", params[:legA_send_custom])
 
