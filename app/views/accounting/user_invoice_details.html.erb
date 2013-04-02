@@ -57,85 +57,95 @@
       </table>
 
     </td>
-    <td valign="top" align="right">
+    <% if (@user.generate_invoice.to_i == 1) and ((@i[0] == 2) or (@i[2] == 8) or (@i[4] == 32) or (@i[1] == 4) or (@i[3] == 16) or (@i[6] == 128)) %>
+      <td valign="top" align="right">
 
       <table width="95%" class="maintable">
 
         <tr>
           <th align="left"> <%= _('Generate') %>:</th>
-          <th align="center"> <%= _('PDF') %> </th>
-          <th align="center"> <%= _('CSV') %> </th>
-        </tr>
-
-        <tr class="row1">
-          <th align="left"><%= _('Invoice') %>:</th>
-          <td align="center">
-            <%= form_tag :action => 'generate_invoice_pdf', :id => @invoice.id do %>
-                <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice') %>
-            <% end %>
-          </td>
-
-          <td align="center">
-            <%= form_tag :action => 'generate_invoice_csv', :id => @invoice.id do %>
-                <%= image_submit_tag 'icons/excel.png', :title => _('Invoice') %>
-            <% end %>
-          </td>
-        </tr>
-        <% unless (@invoice.invoice_type.downcase == 'prepaid') and (@invoice_invoicedetails.count == 1) and (@invoice_invoicedetails.first.name == "Manual Payment") %>
-        <tr class="row2">
-          <th align="left"><%= _('Invoice_detailed') %>:</th>
-          <td align="center">
-            <%= form_tag :action => 'generate_invoice_detailed_pdf', :id => @invoice.id do %>
-                <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_detailed') %>
-            <% end %>
-          </td>
-
-          <td align="center">
-            <%= form_tag :action => 'generate_invoice_detailed_csv', :id => @invoice.id do %>
-                <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_detailed') %>
-            <% end %>
-          </td>
-        </tr>
-
-        <tr class="row1">
-          <th align="left"><%= _('Invoice_by_CallerID') %>:</th>
-          <td align="center">
-            <%= form_tag :action => 'generate_invoice_by_cid_pdf', :id => @invoice.id do %>
-                <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_by_CallerID') %>
-            <% end %>
-          </td>
-          <td align="center">
-            <%= form_tag :action => 'generate_invoice_by_cid_csv', :id => @invoice.id do %>
-                <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_by_CallerID') %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-        <!--
-        <% if @user.usertype != "reseller" %>
-                            <tr class="row1">
-                              <th align="left"><%= _('Invoice_CDR') %>:</th>
-
-                                        <td align="center">
-          <%= form_tag :action => 'generate_invoice_cdr_pdf', :id => @invoice.id do %>
-            <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_CDR') %>
+          <% if (@i[0] == 2) or (@i[2] == 8) or (@i[4] == 32) %>
+            <th align="center"> <%= _('PDF') %> </th>
           <% end %>
-                                        </td>
-
-
-
-                                        <td align="center">
-          <%= form_tag :action => 'generate_invoice_cdr_csv', :id => @invoice.id do %>
-            <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_CDR') %>
+          <% if (@i[1] == 4) or (@i[3] == 16) or (@i[6] == 128) %>
+            <th align="center"> <%= _('CSV') %> </th>
           <% end %>
-                                        </td>
-
-                           </tr>
+        </tr>
+        <% if (@i[0] == 2) or (@i[1] == 4) %>
+          <tr class="row1">
+            <th align="left"><%= _('Invoice') %>:</th>
+            <% if @i[0] == 2 %>
+              <td align="center">
+                <%= form_tag :action => 'generate_invoice_pdf', :id => @invoice.id do %>
+                  <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice') %>
+                <% end %>
+              </td>
+            <% elsif (@i[2] == 8) or (@i[4] == 32) %>
+                <td></td>
+            <% end %>
+            <% if @i[1] == 4 %>
+              <td align="center">
+                <%= form_tag :action => 'generate_invoice_csv', :id => @invoice.id do %>
+                  <%= image_submit_tag 'icons/excel.png', :title => _('Invoice') %>
+                <% end %>
+              </td>
+            <% elsif (@i[3] == 16) or (@i[6] == 128) %>
+                <td></td>
+            <% end %>
+          </tr>
         <% end %>
-        -->
+        <% unless (@invoice.invoice_type.downcase == 'prepaid') and (@invoice_invoicedetails.count == 1) and (@invoice_invoicedetails.first.name == "Manual Payment") %>
+            <% if (@i[2] == 8) or (@i[3] == 16) %>
+              <tr class="row2">
+                <th align="left"><%= _('Invoice_detailed') %>:</th>
+                <% if (@i[2] == 8) %>
+                  <td align="center">
+                    <%= form_tag :action => 'generate_invoice_detailed_pdf', :id => @invoice.id do %>
+                      <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_detailed') %>
+                    <% end %>
+                  </td>
+                <% elsif (@i[0] == 2) or (@i[4] == 32) %>
+                    <td></td>
+                <% end %>
+                <% if (@i[3] == 16) %>
+                  <td align="center">
+                    <%= form_tag :action => 'generate_invoice_detailed_csv', :id => @invoice.id do %>
+                      <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_detailed') %>
+                    <% end %>
+                  </td>
+                <% elsif (@i[1] == 4) or (@i[6] == 128) %>
+                  <td></td>
+                <% end %>
+              </tr>
+            <% end %>
+            <% if (@i[4] == 32) or (@i[6] == 128) %>
+              <tr class="row1">
+                <th align="left"><%= _('Invoice_by_CallerID') %>:</th>
+                <% if (@i[4] == 32) %>
+                  <td align="center">
+                    <%= form_tag :action => 'generate_invoice_by_cid_pdf', :id => @invoice.id do %>
+                      <%= image_submit_tag 'icons/pdf.png', :title => _('Invoice_by_CallerID') %>
+                    <% end %>
+                  </td>
+                <% elsif (@i[0] == 2) or (@i[2] == 8) %>
+                    <td></td>
+                <% end %>
+                <% if (@i[6] == 128) %>
+                  <td align="center">
+                    <%= form_tag :action => 'generate_invoice_by_cid_csv', :id => @invoice.id do %>
+                      <%= image_submit_tag 'icons/excel.png', :title => _('Invoice_by_CallerID') %>
+                    <% end %>
+                  </td>
+                <% elsif (@i[1] == 4) or (@i[3] == 16) %>
+                    <td></td>
+                <% end %>
+              </tr>
+            <% end %>
+        <% end %>
 
       </table>
-
+      </td>
+    <% end %>
   </tr>
 
   <tr>

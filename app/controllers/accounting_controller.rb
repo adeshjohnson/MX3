@@ -935,6 +935,7 @@ class AccountingController < ApplicationController
 
 
     @user = @invoice.user
+    @i = @user.get_invoices_status
     @page_title = _('Invoice') + ": " + @invoice.number
     @page_icon = "view.png"
   end
