@@ -481,6 +481,11 @@ module PdfGen
     pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address3", user.owner_id), {:left => 40, :size => 12})
     pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address4", user.owner_id), {:left => 40, :size => 12})
 
+    pdf.move_down 10 if Confline.get_value("#{prepaid.to_s}Invoice_Address1", user.owner_id).blank?
+    pdf.move_down 10 if Confline.get_value("#{prepaid.to_s}Invoice_Address2", user.owner_id).blank?
+    pdf.move_down 10 if Confline.get_value("#{prepaid.to_s}Invoice_Address3", user.owner_id).blank?
+    pdf.move_down 10 if Confline.get_value("#{prepaid.to_s}Invoice_Address4", user.owner_id).blank?
+
     # ----------- Invoice details ----------
 
     pdf.fill_color('DCDCDC')
