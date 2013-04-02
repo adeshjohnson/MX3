@@ -1,4 +1,4 @@
-<%= link_nice_tariff(@tariff) %>
+<%= raw link_nice_tariff(@tariff) %>
 <%= header = page_select_header(@page, @total_pages, @page_select_options) %>
 <br>
 <%= form_tag(:action => 'rate_new_by_direction_add', :id => @tariff.id, :st => @st, :dir_id => @direction.id) do %>
