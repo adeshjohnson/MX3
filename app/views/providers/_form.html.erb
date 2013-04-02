@@ -319,6 +319,16 @@
           </td>
         </tr>
 
+      <% if @provider.tech == "IAX2" %>
+        <tr>
+          <td colspan=2>
+            IAX2 Trunking Mode:
+            <%= radio_button_tag('iax2_trunking', 'no', checked = (@provider.device.trunk == 'no')) %> <%= _('No') %>
+            <%= radio_button_tag('iax2_trunking', 'yes', checked = (@provider.device.trunk == 'yes')) %> <%= _('Yes') %>
+          </td>
+        </tr>
+      <% end %>
+
     <% end %>
 
 <% end %>

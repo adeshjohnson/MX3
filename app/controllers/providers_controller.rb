@@ -412,6 +412,8 @@ class ProvidersController < ApplicationController
     @device.set_old_name
     @device.device_ip_authentication_record = params[:ip_authentication].to_i
 
+    @device.trunk = params[:iax2_trunking] if params[:iax2_trunking]
+
     @device.update_cid(params[:cid_name], params[:cid_number])
     @device.attributes = params[:device]
 
