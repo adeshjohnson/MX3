@@ -143,11 +143,6 @@
 	<td>label=ivr_actions</td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>10000</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=id</td>
 	<td>1</td>
@@ -158,12 +153,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>10000</td>
-</tr>
-<tr>
-	<td>waitForText</td>
+	<td>assertText</td>
 	<td>id=data1_value</td>
 	<td>3</td>
 </tr>
