@@ -41,6 +41,7 @@
                   <select name="originator">
                     <option value="any" <%= "selected" if @options[:originator] == "any" %> ><%= _("Any") %></option>
                     <% @options[:originators].each { |originator| %>
+                        <% next if originator.id.to_i == 0 %>
                         <option value="<%= originator.id %>" <%= "selected" if originator.id.to_s == @options[:originator] %> ><%= nice_user(originator) %> </option>
                     <% } %>
                   </select>

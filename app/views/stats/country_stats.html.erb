@@ -13,6 +13,7 @@
       <select name="user_id">
         <option value="-1" <%= " selected " if @user_id.to_i == -1 %>> <%= _('All') %> </option>
         <% for user in @users %>
+            <% next if user.id == 0 %>
             <option value=<%= user.id %> <%= " selected " if user.id.to_i == @user_id.to_i %>> <%= user.username + " - " + user.first_name + " " + user.last_name %> </option>
         <% end %>
       </select>
