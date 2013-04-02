@@ -296,7 +296,7 @@ class EmailsController < ApplicationController
 
   def send_all(users, email)
     e =[]
-    status = Email.send_email(email, users, session[:usertype].to_s == "admin" ? Confline.get_value("Company_Email", 0) : Confline.get_value("Email_from", session[:user_id].to_i), 'send_all', {:owner => session[:user_id], })
+    status = Email.send_email(email, users, Confline.get_value("Email_from", session[:user_id].to_i), 'send_all', {:owner => session[:user_id], })
     status.uniq.each { |i| e << _(i.capitalize) }
     flash[:status] = e.join('<br>')
   end
