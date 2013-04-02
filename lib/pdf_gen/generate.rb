@@ -494,7 +494,7 @@ module PdfGen
     options = {}
     options[:date_format] = Confline.get_value('Date_format')
     pdf.draw_text(_('Date') + ": " + nice_date(invoice.issue_date, options), {:at => [330, 685], :size => 12})
-    pdf.draw_text(_('Invoice_number') + ": " + invoice.number.to_s, {:at => [330, 675], :size => 12})
+    pdf.draw_text(_('Invoice_number') + ": " + invoice.number.to_s, {:at => [330, 672], :size => 12})
 
 
     # ----------- Separation line ---------
