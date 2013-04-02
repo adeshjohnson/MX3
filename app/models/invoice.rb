@@ -237,7 +237,7 @@ class Invoice < ActiveRecord::Base
     pdf.table(items,
               :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
               :font_size => 10,
-              :headers => [_('Service'), _('Quantity'), _('Price') + " (#{dc})", _('Total') + " (#{dc})"],
+              :headers => [_('Service'), _('Units'), _('Price') + " (#{dc})", _('Total') + " (#{dc})"],
               :align_headers => {0 => :left, 1 => :right, 2 => :right, 3 => :right},
               :column_widths => {0 => 300}) do
       column(0).style(:align => :left, :height => 15, :width => 450)
@@ -408,7 +408,7 @@ class Invoice < ActiveRecord::Base
       pdf.table(items,
                 :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
                 :font_size => 10,
-                :headers => [_('Direction'), ' ', _('Calls'), _('Time'), _('Total') + " (#{dc})"],
+                :headers => [_('Service'), ' ', _('Units'), _('Time'), _('Total') + " (#{dc})"],
                 :align_headers => {0 => :left, 1 => :center, 2 => :right, 3 => :center, 4 => :right},
                 :column_widths => {0 => 300}) do
         column(0).style(:align => :left, :height => 15)
@@ -421,7 +421,7 @@ class Invoice < ActiveRecord::Base
       pdf.table(items,
                 :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
                 :font_size => 10,
-                :headers => [_('Direction'), ' ', _('Calls'), _('Time'), _('Avg_rate'), _('Total') + " (#{dc})"],
+                :headers => [_('Service'), ' ', _('Units'), _('Time'), _('Avg_rate'), _('Total') + " (#{dc})"],
                 :align_headers => {0 => :left, 1 => :center, 2 => :right, 3 => :center, 4 => :right, 5 => :right},
                 :column_widths => {0 => 300}) do
         column(0).style(:align => :left, :height => 15)
