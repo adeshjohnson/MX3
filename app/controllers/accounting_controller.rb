@@ -968,6 +968,11 @@ class AccountingController < ApplicationController
     end
 
     user = invoice.user
+    @i = user.get_invoices_status
+    if (@i[0] != 2) and (user.usertype == "user")
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
@@ -1005,6 +1010,11 @@ class AccountingController < ApplicationController
     end
 
     user = invoice.user
+    @i = user.get_invoices_status
+    if (@i[2] != 8) and (user.usertype == "user")
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
 
     # Hide from prepaid manual payments
@@ -1062,6 +1072,11 @@ class AccountingController < ApplicationController
     end
 
     user = invoice.user
+    @i = user.get_invoices_status
+    if (@i[4] != 32) and (user.usertype == "user")
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
 
     # Hide from prepaid manual payments
@@ -1131,6 +1146,11 @@ class AccountingController < ApplicationController
 
 
     user = invoice.user
+    @i = user.get_invoices_status
+    if (@i[1] != 4) and (user.usertype == "user")
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
     sep, dec = user.csv_params
     nice_number_hash  = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]}
 
@@ -1168,6 +1188,11 @@ class AccountingController < ApplicationController
 
     idetails = invoice.invoicedetails
     user = invoice.user
+    @i = user.get_invoices_status
+    if (@i[3] != 16) and (user.usertype == "user")
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
 
     # Hide from prepaid manual payments
     if invoice.invoice_type.downcase == "prepaid" and idetails.first and idetails.first.name == "Manual Payment"
@@ -1464,7 +1489,11 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     dc = current_user.currency.name
     user = invoice.user
-
+    @i = user.get_invoices_status
+    if (@i[6] != 128) and (user.usertype == "user")
+      dont_be_so_smart
+      redirect_to :controller => :callc, :action => :main and return false
+    end
 
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
