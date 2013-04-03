@@ -1,45 +1,82 @@
 <%= form_tag :action => 'action_log' do %>
-    <div id="search_details" <%= "style='display:none;'" if @search == 0 %>>
-      <br/>
-      <table cellspacing="0" cellpadding="0" style="width: 100%">
-        <tr>
-          <td style="width: 70%">
-            <%= hidden_field_tag 'search_on', 1 %>
+  <br/>
+  <%= hidden_field_tag 'search_on', 1 %>
+  <table class="bordered">
+    <tr>
+      <td>
+        <table id="search_details" <%= "style='display:none;'" if @search == 0 %> class="simple">
+          <tr>
+            <td><%= _('From') %>:</td>
+            <td nowrap="true" colspan=4><%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %></td>
+            <td><%= link_to b_cross + _('Clear_search'), :action => 'action_log', :clean => 1 if @search == 1 %></td>
+          </tr>
+          <tr>
+            <td><%= _('Till') %>:</td>
+            <td nowrap="true" colspan=4><%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %></td>
+            <td><%= link_to b_check + _('Mark_all_as_reviewed'), :action => 'action_log_mark_reviewed' if @not_reviewed_actions %></td>
+          </tr>
+          <tr>
+            <td><%= _('User') %>:</td>
+            <td nowrap="true"><%= select_tag("user_id", options_for_select([["All", -1]]+@users.map { |user| [nice_user(user), user.id.to_i] }, @options[:s_user].to_i)) %></td>
+            <td><%= _("DID") %>:</td>
+            <td nowrap="true">
+          <span width=100px>
+            <input title="DID live search" type="text" size="20" id="s_did_pattern" name="did" autocomplete="off" value="<%=raw @options[:s_did].to_s %>" />
+            <table id="did_list" style='width: 145px;margin-left:2px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+          </span>
+            </td>
+          </tr>
+          <tr>
+            <td><%= _('Action_type') %>:</td>
+            <td nowrap="true"><%= select_tag("action_type", options_for_select([["All", "all"]]+@res.map { |r| [r['action'].to_s, r['action'].to_s] }, @options[:s_type].to_s)) %></td>
+            <td><%= _('Reviewed') %>:</td>
+            <td nowrap="true"><%= select_tag("processed", options_for_select([[_('All'), -1], [_('Reviewed').downcase, 1], [_('Not_reviewed').downcase, 0]], @options[:s_processed].to_i)) %></td>
+          </tr>
+          <tr>
+            <td><%= submit_tag _('Search'), :disable_with => _('Processing..') %></td>
+            <td><%= observe_field("s_user", :update => "s_device_span", :with => "user_id", :url => {:controller => "devices", :action => "get_devices_for_search"}, :loading => "Element.show('spinner');", :complete => "Element.hide('spinner');") %></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <script type='text/javascript'>
+        Event.observe(window, 'load',  function() {
+            Event.observe($('s_did_pattern'), 'click', function(){
+                if ($('s_did_pattern').value == "") {
+                    $('did_list').innerHTML = "";
+                <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+                }
+                Event.observe($('s_did_pattern'), 'keyup', function(){
+                    $('did_list').innerHTML = "";
+                    <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('s_did_pattern').value") %>
+                });
+                Event.observe($('did_list'), 'mouseover', function(){
+                    var el = document.getElementById('did_list').getElementsByTagName('td');
+                    for(var i=0;i<el.length;i++){
+                        el[i].onclick=function(){
+                            if (this.id != -2) {
+                                document.getElementById('s_did_pattern').value = this.innerHTML
+                            <%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+                            }
+                        }
+                        el[i].onmouseover=function(){
+                            this.style.backgroundColor="#BBBBBB";
+                        }
+                        el[i].onmouseout=function(){
+                            this.style.backgroundColor="rgb(255, 255, 255)";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+  </table>
 
-            <%= _('From') %>:
-            <%= select_datetime(Time.mktime(session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from]), :end_year => Date.today.year+1, :prefix => "date_from", :use_month_numbers => false) %>
-            &nbsp;&nbsp;<%= _('to') %>:
-            <%= select_datetime(Time.mktime(session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till]), :end_year => Date.today.year+1, :prefix => "date_till", :use_month_numbers => false) %>
-
-            <br/><br/>
-            <%= _('User') %>:
-            <%= select_tag("user_id", options_for_select([["All", -1]]+@users.map { |user| [nice_user(user), user.id.to_i] }, @options[:s_user].to_i)) %>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('DID') %>:
-            <%= select_tag("did", options_for_select([["All", ""]]+@dids.map { |did| [did.did, did.id.to_s] }, @options[:s_did].to_s)) %>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Action_type') %>:
-            <%= select_tag("action_type", options_for_select([["All", "all"]]+@res.map { |r| [r['action'].to_s, r['action'].to_s] }, @options[:s_type].to_s)) %>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Reviewed') %>:
-            <%= select_tag("processed", options_for_select([[_('All'), -1], [_('Reviewed').downcase, 1], [_('Not_reviewed').downcase, 0]], @options[:s_processed].to_i)) %>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag _('Search'), :disable_with => _('Processing..') %>
-
-            <% unless @options[:s_target_id].blank? && @options[:s_target_type].blank? %>
-                <br/>
-                <br/>
-                <strong><%= _('Showing') %></strong> <%= @options[:s_target_type] %> (<%= @options[:s_target_id] %>)
-            <% end %>
-          </td>
-          <td style="width: 10%">
-            <%= link_to b_cross + _('Clear_search'), :action => 'action_log', :clean => 1 if @search == 1 %>
-            <br/>
-            <%= link_to b_check + _('Mark_all_as_reviewed'), :action => 'action_log_mark_reviewed' if @not_reviewed_actions %>
-          </td>
-        </tr>
-      </table>
-    </div>
+  <% unless @options[:s_target_id].blank? && @options[:s_target_type].blank? %>
+    <br/>
+    <br/>
+    <strong><%= _('Showing') %></strong> <%= @options[:s_target_type] %> (<%= @options[:s_target_id] %>)
+  <% end %>
 <% end %>
 <br/>
 <br/>

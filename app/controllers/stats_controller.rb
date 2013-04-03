@@ -3371,8 +3371,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     order_by = Action.actions_order_by(@options)
 
     @users = User.find_all_for_select(corrected_user_id)
-    @dids = Did.find(:all)
-    @res = Action.find(:all, :select => "DISTINCT(actions.action)", :order => "actions.action")
+    @res = Action.select("DISTINCT(actions.action)").order("actions.action").all
 
     cond, cond_arr, join = Action.condition_for_action_log_list(current_user, a1, a2, params[:s_int_ch], @options)
     # page params
