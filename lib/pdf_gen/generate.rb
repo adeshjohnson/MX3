@@ -239,6 +239,8 @@ module PdfGen
     def Generate.generate_personal_rates(pdf, dgroups, tariff, tax, usr, options)
       digits = Confline.get_value("Nice_Number_Digits").to_i
       gnd = Confline.get_value("Global_Number_Decimal").to_s
+      cgnd = gnd.to_s == '.' ? false : true
+
       exrate = Currency.count_exchange_rate(tariff.currency, options[:currency])
 
       items = []
