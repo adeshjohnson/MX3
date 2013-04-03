@@ -4212,14 +4212,18 @@ class ApiController < ApplicationController
           if user and user.owner_id != owner_id
             doc.error("Don't be so smart") 
           elsif user and !user_id.blank?
-            doc.devices {
-              user.devices.map do |device|
-                doc.device {
-                  doc.device_id device.id
-                  doc.device_type device.device_type
-                }
-              end
-            }
+            if user.devices.blank?
+              doc.error("Device not found")
+            else
+              doc.devices {
+                user.devices.map do |device|
+                  doc.device {
+                    doc.device_id device.id
+                    doc.device_type device.device_type
+                  }
+                end
+              }
+            end
           else
             user_id.blank? ? doc.error("user_id is empty") : doc.error("User not found")
           end
