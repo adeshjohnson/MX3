@@ -107,10 +107,13 @@ class Invoice < ActiveRecord::Base
 
   # converted attributes for user in given currency exrate
   def converted_price_with_vat(exr)
-    b = read_attribute(:price)
-    (b.to_d + self.user.get_tax.count_tax_amount(b.to_d).to_d) * exr.to_d
-    # Do NOT multiply exchange rate with vat percentage...
-    #b.to_d * exr.to_d
+    if self.user
+      b = read_attribute(:price)
+      (b.to_d + self.user.get_tax.count_tax_amount(b.to_d).to_d) * exr.to_d
+    else
+      b = read_attribute(:price_with_vat)
+      b.to_d * exr.to_d
+    end
   end
 
 =begin
