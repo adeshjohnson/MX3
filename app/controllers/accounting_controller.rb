@@ -969,7 +969,7 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[0] != 2) and (user.usertype == "user")
+    if (@i[0] != 2) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
@@ -1011,7 +1011,7 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[2] != 8) and (user.usertype == "user")
+    if (@i[2] != 8) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
@@ -1073,7 +1073,7 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[4] != 32) and (user.usertype == "user")
+    if (@i[4] != 32) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
@@ -1147,7 +1147,7 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[1] != 4) and (user.usertype == "user")
+    if (@i[1] != 4) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
@@ -1189,7 +1189,7 @@ class AccountingController < ApplicationController
     idetails = invoice.invoicedetails
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[3] != 16) and (user.usertype == "user")
+    if (@i[3] != 16) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
@@ -1490,7 +1490,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     dc = current_user.currency.name
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[6] != 128) and (user.usertype == "user")
+    if (@i[6] != 128) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
