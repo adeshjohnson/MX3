@@ -2154,8 +2154,8 @@ class ApiController < ApplicationController
         tariffs = []
 
         begin
-          tariffs = XmlSimple.xml_in(xml)
-          value = transition_hash(tariffs)
+          tariffs = Hash.from_xml xml #XmlSimple.xml_in(xml)
+          value = tariffs['tariff'].symbolize_keys! #transition_hash(tariffs)
 
           #---- TO CHECK PARAMS HERE!-------------------
           logger.fatal "CHECK HERE"
@@ -2175,7 +2175,8 @@ class ApiController < ApplicationController
 
               logger.fatal "DESTINATIONS FOUND: " +value[:destinations].size.to_s
 
-              value[:destinations].each do |destination|
+              value[:destinations].each do |key, val|
+                destination = val.symbolize_keys!
                 logger.fatal "----------DATA -------------------------------------"
                 logger.fatal "Direction name: '" + destination[:direction].to_s + "'"
                 logger.fatal "Destination name: '" + destination[:destination_group_name].to_s + "'"
@@ -2184,9 +2185,10 @@ class ApiController < ApplicationController
 
                 #check for collision in xml rates
                 ##### bad_rates_time TO DO ISVESTI KUR BLOGI LAIKAI, RATES ISTRINAMI
+                destination[:rates].map!(&:symbolize_keys!)
                 collision_rates, bad_rates_time_array = check_params_rates(destination[:rates], destination) if destination[:rates].size > 1
 
-                logger.fatal "Rates for this destination after collision check in xlm: "+destination[:rates].size.to_s
+                logger.fatal "Rates for this destination after collision check in xml: "+destination[:rates].size.to_s
                 logger.fatal "----------WORK  WITH DB ----------------------------"
 
                 #find destinationgroups_id by name and type
@@ -2475,6 +2477,7 @@ class ApiController < ApplicationController
       # tikrinimas del koliziju
       if rate1[:rate_start_time].length == 8 and rate1[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate1[:rate_end_time].length == 8 and rate1[:rate_end_time].to_s !~ /[^0-9.\:]/
         rates.each do |rate2|
+          rate2.symbolize_keys!
           if  rate2[:rate_start_time].length == 8 and rate2[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate2[:rate_end_time].length == 8 and rate2[:rate_end_time].to_s !~ /[^0-9.\:]/
             if (rate1[:rate_start_time] != rate2[:rate_start_time] or rate1[:rate_end_time] != rate2[:rate_end_time]) and (rate1[:rate_start_time] <= rate2[:rate_end_time] and rate2[:rate_start_time] <= rate1[:rate_end_time]) and rate2[:day_type].to_s == rate1[:daytype].to_s
               logger.fatal 'COLLISION!!!!!!!!!!!!!!!!!'
