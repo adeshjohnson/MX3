@@ -20,7 +20,7 @@
         <% end %>
       </td>
       <td class="comment">
-        <%= h(invoice.comment) %><%= link_to "&nbsp;", "", {:class => "comm-edit", :title => _('Update_comment')} %>
+        <%= h(invoice.comment) %><%= link_to "&nbsp;".html_safe, "", {:class => "comm-edit", :title => _('Update_comment')} %>
       </td>
       <td class="session last">
         <div class="btn">

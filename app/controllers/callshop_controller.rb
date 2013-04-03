@@ -382,7 +382,7 @@ class CallshopController < ApplicationController
       if !booth[:duration].to_s.blank?
         booth[:duration] = nice_time(Time.now.getlocal()- Time.parse(booth[:duration].to_s))
       else
-        booth[:duration] = nice_time(Time.now.getlocal())
+        booth[:duration] = "-"
       end
       booth[:user_type] = (booth[:user_type].to_i == 1 ? "postpaid" : "prepaid")
 
