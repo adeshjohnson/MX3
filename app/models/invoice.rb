@@ -214,7 +214,7 @@ class Invoice < ActiveRecord::Base
     # x - number of required rows
 
     if items.size <= 16
-      n = 17 - items.size
+      n = 16 - items.size
       n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
@@ -230,7 +230,7 @@ class Invoice < ActiveRecord::Base
       n = -(n) if n < 0
     end
 
-    n.times { items << [' ', '', '', ''] } if n > 0
+    (n-4).times { items << [' ', '', '', ''] } if n > 4
 
     items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
     items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, {:text => self.nice_invoice_number(self.converted_price(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
