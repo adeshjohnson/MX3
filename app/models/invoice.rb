@@ -374,7 +374,7 @@ class Invoice < ActiveRecord::Base
     # x - number of required rows
 
     if items.size <= 16
-      n = 17 - items.size
+      n = 16 - items.size
       n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
@@ -391,11 +391,11 @@ class Invoice < ActiveRecord::Base
     end
 
     if options[:show_avg_rate] == 1
-      n.times { items << [' ', '', '', '', '', ''] } if n > 0
+      (n-4).times { items << [' ', '', '', '', '', ''] } if n > 0-4
       items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     else
-      n.times { items << [' ', '', '', '', ''] } if n > 0
+      (n-4).times { items << [' ', '', '', '', ''] } if n > 0-4
       items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     end

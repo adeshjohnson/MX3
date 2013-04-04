@@ -44,6 +44,7 @@ class Card < ActiveRecord::Base
     end
   end
 
+  # Needs refactoring!
   def Card.delete_from_sql(options={})
     cards_deleted = 0
     query = "DELETE cards
@@ -58,7 +59,7 @@ class Card < ActiveRecord::Base
                            cards.cardgroup_id = #{options[:cardgroup_id]} AND
                            cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
                      GROUP BY cards.id
-                     LIMIT 10000) tmp USING(id)"
+                     LIMIT 100) tmp USING(id)"
     begin
       rows_affected = ActiveRecord::Base.connection.delete(query)
 
