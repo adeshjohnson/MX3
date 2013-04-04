@@ -483,9 +483,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>type</td>
 	<td>did</td>
-	<td>label=37067531080</td>
+	<td>37067531080</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -574,13 +574,143 @@
 </tr>
 <!--* assert did search param preserve-->
 <tr>
-	<td>select</td>
+	<td>type</td>
 	<td>did</td>
-	<td>label=37093042422</td>
+	<td></td>
 </tr>
 <tr>
-	<td>storeSelectedValue</td>
-	<td>did</td>
+	<td>focus</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=-2</td>
+	<td>Enter value here</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did_pattern</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>150000</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=s_did_pattern</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>150000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_list</td>
+	<td>370630424383706753108037093042422</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did_pattern</td>
+	<td>555</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>150000</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=s_did_pattern</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=-2</td>
+	<td>No value found</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did_pattern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=s_did_pattern</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did_pattern</td>
+	<td>370</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>id=did_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=s_did_pattern</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_did_pattern</td>
+	<td>37093042422</td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>id=s_did_pattern</td>
 	<td>did</td>
 </tr>
 <tr>
@@ -594,7 +724,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertSelectedValue</td>
+	<td>assertValue</td>
 	<td>did</td>
 	<td>${did}</td>
 </tr>
