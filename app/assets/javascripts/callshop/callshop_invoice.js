@@ -155,7 +155,7 @@ function update_invoices(data, invoice_print_url, invoice_edit_url) {
     var hrow = "";
     var row;
     var x;
-    var invoices = data["invoices"];
+    var invoices = JSON.parse(data)["invoices"];
     for (var i = 0; i < invoices.length; i++) {
         row = invoices[i];
         hrow = "";
