@@ -2475,10 +2475,10 @@ class ApiController < ApplicationController
     #start1 <= end2 and start2 <= end1
     rates.each do |rate1|
       # tikrinimas del koliziju
-      if rate1[:rate_start_time].length == 8 and rate1[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate1[:rate_end_time].length == 8 and rate1[:rate_end_time].to_s !~ /[^0-9.\:]/
+      if rate1[:rate_start_time] and rate1[:rate_start_time].length == 8 and rate1[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate1[:rate_end_time].length == 8 and rate1[:rate_end_time].to_s !~ /[^0-9.\:]/
         rates.each do |rate2|
           rate2.symbolize_keys!
-          if  rate2[:rate_start_time].length == 8 and rate2[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate2[:rate_end_time].length == 8 and rate2[:rate_end_time].to_s !~ /[^0-9.\:]/
+          if rate2[:rate_start_time] and rate2[:rate_start_time].length == 8 and rate2[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate2[:rate_end_time].length == 8 and rate2[:rate_end_time].to_s !~ /[^0-9.\:]/
             if (rate1[:rate_start_time] != rate2[:rate_start_time] or rate1[:rate_end_time] != rate2[:rate_end_time]) and (rate1[:rate_start_time] <= rate2[:rate_end_time] and rate2[:rate_start_time] <= rate1[:rate_end_time]) and rate2[:day_type].to_s == rate1[:daytype].to_s
               logger.fatal 'COLLISION!!!!!!!!!!!!!!!!!'
               logger.fatal "#{destination[:destination_group_name]} #{destination[:destination_group_type]} COLLISION IN " +[rate1[:rate_start_time], rate2[:rate_start_time]].min.to_s + " AND " + [rate1[:rate_end_time], rate2[:rate_end_time]].max.to_s + " TIME RANGE "
