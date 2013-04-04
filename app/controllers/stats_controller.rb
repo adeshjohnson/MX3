@@ -3372,8 +3372,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     @users = User.find_all_for_select(corrected_user_id)
     @res = Action.select("DISTINCT(actions.action)").order("actions.action").all
+    @did = Did.where("did = '#{@options[:s_did]}'").first if !@options[:s_did].blank?
+    @options[:s_did] = @did.id  if !@did.blank?
 
     cond, cond_arr, join = Action.condition_for_action_log_list(current_user, a1, a2, params[:s_int_ch], @options)
+    @options[:s_did] = @did.did  if !@did.blank?
     # page params
     @ac_size = Action.count(:all, :conditions => [cond.join(" AND ")] + cond_arr, :joins => join, :select => "actions.id")
     @not_reviewed_actions = Action.find(:all, :conditions => [(['processed = 0'] + cond).join(" AND ")] + cond_arr, :joins => join, :limit => 1).size.to_i == 1
