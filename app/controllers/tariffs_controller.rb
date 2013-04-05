@@ -1918,7 +1918,7 @@ class TariffsController < ApplicationController
     @help_link = "http://wiki.kolmisoft.com/index.php/Advanced_Rates"
     #    @user = current_user
     #    @tariff = @user.tariff
-    if !@tariff or Confline.get_value("Show_Advanced_Rates_For_Users", current_user.owner_id).to_i == 0 or session[:show_rates_for_users].to_i != 1
+    if Confline.get_value("Show_Advanced_Rates_For_Users", current_user.owner_id).to_i != 1 or session[:show_rates_for_users].to_i != 1
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
@@ -1930,12 +1930,12 @@ class TariffsController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
     @rate = @dgroup.rate(@tariff.id)
-    unless @rate
+    @custom_rate = Customrate.where(["user_id = ? AND destinationgroup_id = ?", session[:user_id], @dgroup.id]).first
+    if !@rate and !@custom_rate
       dont_be_so_smart
       redirect_to :controller => :callc, :action => :main and return false
     end
 
-    @custom_rate = Customrate.where(["user_id = ? AND destinationgroup_id = ?", session[:user_id], @dgroup.id]).first
     if @custom_rate
       @ards = @custom_rate.acustratedetails
       r_details = 'acustratedetails'
