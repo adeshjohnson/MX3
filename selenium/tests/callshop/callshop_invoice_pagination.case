@@ -317,6 +317,126 @@
 	<td>prepaid</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.comment</td>
+	<td>postpaid komentaras</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.amount</td>
+	<td>15.00 USD</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>10.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=td.amount</td>
+	<td>10.00 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.comment</td>
+	<td>komentaras</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>15.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>postpaid komentaras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=User type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=td.amount</td>
+	<td>15.00 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.comment</td>
+	<td>postpaid komentaras</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>10.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=td.amount</td>
+	<td>10.00 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.comment</td>
+	<td>komentaras</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>15.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>postpaid komentaras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.comment</td>
+	<td>postpaid komentaras</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.amount</td>
+	<td>15.00 USD</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>10.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>prepaid</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
