@@ -1935,20 +1935,31 @@ class TariffsController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
 
-    @ards = @rate.aratedetails
+    @custom_rate = Customrate.where(["user_id = ? AND destinationgroup_id = ?", session[:user_id], @dgroup.id]).first
+    if @custom_rate
+      @ards = @custom_rate.acustratedetails
+      r_details = 'acustratedetails'
+      r_ident	= 'customrate_id'
+      r_id	= @custom_rate.id or 0
+    else
+      @ards = @rate.aratedetails
+      r_details = 'aratedetails'
+      r_ident	= 'rate_id'
+      r_id	= @rate.id or 0
+    end
 
-    if @ards[0].daytype.to_s == ""
+    if @ards.first.daytype.to_s == ""
       @WDFD = true
-
-      sql = "SELECT * FROM aratedetails WHERE daytype = '' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
+      
+      sql = "SELECT * FROM #{r_details} WHERE daytype = '' AND #{r_ident} = '#{r_id}' GROUP BY start_time ORDER BY start_time ASC"
       @day_arr = ActiveRecord::Base.connection.select_all(sql)
     else
       @WDFD = false
 
-      sql = "SELECT * FROM aratedetails WHERE daytype = 'WD' AND rate_id = #{@rate.id}  GROUP BY start_time ORDER BY start_time ASC"
+      sql = "SELECT * FROM #{r_details} WHERE daytype = 'WD' AND #{r_ident} = '#{r_id}' GROUP BY start_time ORDER BY start_time ASC"
       @wd_arr = ActiveRecord::Base.connection.select_all(sql)
 
-      sql = "SELECT * FROM aratedetails WHERE daytype = 'FD' AND rate_id = #{@rate.id} GROUP BY start_time ORDER BY start_time ASC"
+      sql = "SELECT * FROM #{r_details} WHERE daytype = 'FD' AND #{r_ident} = '#{r_id}' GROUP BY start_time ORDER BY start_time ASC"
       @fd_arr = ActiveRecord::Base.connection.select_all(sql)
     end
     @exchange_rate = count_exchange_rate(@tariff.currency, session[:show_currency])
