@@ -343,19 +343,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>link=Amount</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>15.00 USD</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>postpaid komentaras</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -368,13 +363,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextNotPresent</td>
+	<td>15.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>postpaid komentaras</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=User type</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>15000</td>
 </tr>
 <tr>
