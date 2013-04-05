@@ -69,7 +69,7 @@
 <!--GOOD TARIFF-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3Etest_export_advanced%3C%2Fname%3E%3Cid%3E13%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;test_export_advanced&lt;/name&gt;&lt;id&gt;6&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;301&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,6 +114,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Check advanced rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Forward&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=rate1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/user_arates_full/6?dg=1</td>
 	<td></td>
 </tr>
@@ -123,12 +143,160 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=start_time_value_1_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=end_time_value_1_0</td>
+	<td>exact:07:59:59</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>For Work Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>For Free Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Combine to Work Days and Free Days</td>
+	<td>Combine to Work Days and Free Days</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates/503?dt=WD&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_238</td>
+	<td>300</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_238</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=round_238</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_239</td>
+	<td>Infinity ?</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=price_238</td>
+	<td>0.02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_239</td>
+	<td>301</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=artype_239</td>
+	<td>event</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=round_239</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price_239</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_237</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_237</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_237</td>
+	<td>event</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=round_237</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=price_237</td>
+	<td>0.05</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates_full/6?dg=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Combine to Work Days and Free Days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Rate details combined</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=start_time_value_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=end_time_value_0</td>
+	<td>exact:07:59:59</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>For Work Days and Free Days:</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/tariffs/user_arates/503?dt=&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
-<!--patikrinti, ar gerai isikele tarifai-->
-<!--<tr> 	<td>assertValue</td> 	<td>id=duration</td> 	<td>∞</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=check_box</td> 	<td>on</td> </tr> <tr> 	<td>assertSelectedLabel</td> 	<td>id=artype_237</td> 	<td>minute</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=round</td> 	<td>1</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=price</td> 	<td>0.0</td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates_full/6?dg=1</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>select</td> 	<td>id=date_hour</td> 	<td>label=07</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>css=input[type=&quot;image&quot;]</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=end_time_value_0</td> 	<td>exact:07:59:59</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>link=Split to Work Days and Free Days</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Rate details split</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>//table[4]/tbody/tr[2]/td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//table[4]/tbody/tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertValue</td>
+	<td>name=price_237</td>
+	<td>0.05</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=price_238</td>
+	<td>0.02</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>0.01</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
 <!--SAME ID-->
 <tr>
 	<td>open</td>
@@ -165,7 +333,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%20%2B%200.2%3C%2Fname%3E%3Cid%3E15%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%20%2B%200.2%3C%2Fname%3E%3Cid%3E7%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%3EWD%3C%2Fday_type%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%3EWD%3C%2Fday_type%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%3EWD%3C%2Fday_type%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
 	<td></td>
 </tr>
 <!--Turėtų išsaugoti tokį pavadinimą, koks jis yra siunčiams, šiuo atveju turėtų gauti pranešimą  TARIFF with same name exists, ID:4!!! CHANGE NAME OR ID-->
@@ -181,7 +349,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%3C%2Fname%3E%3Cid%3E16%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff&lt;/name&gt;&lt;id&gt;16&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;301&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -204,7 +372,7 @@
 <!--NO DESTINATION-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3Etest_export_advanced2%3C%2Fname%3E%3Cid%3E18%3C%2Fid%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;test_export_advanced2&lt;/name&gt;&lt;id&gt;18&lt;/id&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,18 +438,115 @@
 <!--Tariff test_export_advanced2, Destination: Afghanistan FIX -->
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_arates/504?dt=&amp;st=00%3A00%3A00</td>
+	<td>/billing/tariffs/user_arates/504?dt=WD&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
-<!--patikrinti, ar gerai isikele tarifai-->
+<tr>
+	<td>assertText</td>
+	<td>id=from_240</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_240</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_240</td>
+	<td>event</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=round_240</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=price_240</td>
+	<td>0.05</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_241</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_241</td>
+	<td>300</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_241</td>
+	<td>minute</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=round_241</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=price_241</td>
+	<td>0.02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_242</td>
+	<td>301</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_242</td>
+	<td>exact:Infinity ?</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=artype_242</td>
+	<td>event</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=round</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>0.01</td>
+</tr>
 <!--<tr> 	<td>assertText</td> 	<td>id=duration_243</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_244</td> 	<td>300</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=duration</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=type_243</td> 	<td>event</td> </tr> <tr> 	<td>assertText</td> 	<td>id=type_243</td> 	<td>event</td> </tr> <tr> 	<td>assertText</td> 	<td>id=type_244</td> 	<td>minute</td> </tr> <tr> 	<td>assertText</td> 	<td>id=type_244</td> 	<td>minute</td> </tr> <tr> 	<td>assertSelectedLabel</td> 	<td>id=artype_245</td> 	<td>event</td> </tr> <tr> 	<td>assertText</td> 	<td>id=round_243</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>name=round_244</td> 	<td>1</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=round</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>name=price_243</td> 	<td>0.05</td> </tr> <tr> 	<td>assertValue</td> 	<td>name=price_244</td> 	<td>0.02</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=price</td> 	<td>0.01</td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/user_arates_full/7?dg=1</td>
 	<td></td>
 </tr>
-<!--!!!Nerodo dropdown laiko-->
-<!--patikrinti, ar gerai isikele tarifai-->
+<tr>
+	<td>assertText</td>
+	<td>id=start_time_value_1_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=end_time_value_1_0</td>
+	<td>exact:07:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Combine to Work Days and Free Days</td>
+	<td>Combine to Work Days and Free Days</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>For Work Days:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>For Free Days:</td>
+	<td></td>
+</tr>
 <!--<tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr>-->
 <tr>
 	<td>open</td>
@@ -291,7 +556,7 @@
 <!--BAD DESTINATION-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%202%3C%2Fname%3E%3Cid%3E19%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfstan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 2&lt;/name&gt;&lt;id&gt;19&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afstan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;IX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;301&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,7 +583,7 @@
 <!--Su raidziu kratiniu-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%203%3C%2Fname%3E%3Cid%3E20%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3Eeawrer%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3Ergtedwsa%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 3&lt;/name&gt;&lt;id&gt;10&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;eawrer&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;3&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;rgtedwsa&lt;/rate_price&gt;&lt;rate_round_by&gt;301&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -338,7 +603,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[3]/rate_price</td>
+	<td>//destination[2]/rate_price</td>
 	<td>rgtedwsa</td>
 </tr>
 <!--neaisku kokiam destiantion klaida-->
@@ -373,9 +638,10 @@
 	<td>Bad XML data</td>
 	<td></td>
 </tr>
+<!--perdaryta eilute, kad isikeltu, bet cia turi tikrinti kurima neivedant kai kuriu duomenu-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%205%3C%2Fname%3E%3Cid%3E21%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%2F%3E%3Crate_start_time%2F%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%2F%3E%3Crate_round_by%2F%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%2F%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%205%3C%2Fname%3E%3Cid%3E11%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E300%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%3EWD%3C%2Fday_type%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%3EWD%3C%2Fday_type%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -461,7 +727,7 @@
 <!--ROUND_BY > FROM + DURATION-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%206%3C%2Fname%3E%3Cid%3E22%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E300%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E3%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E301%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E0%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 6&lt;/name&gt;&lt;id&gt;22&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;300&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;3&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;301&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -517,7 +783,7 @@
 <!--FROM-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%207%3C%2Fname%3E%3Cid%3E23%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E30%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E5%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 7&lt;/name&gt;&lt;id&gt;23&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;5&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -533,7 +799,7 @@
 <!--NO DESTINATION GROUP-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%208%3C%2Fname%3E%3Cid%3E24%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%2F%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E30%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E5%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 8&lt;/name&gt;&lt;id&gt;24&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name/&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;5&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -552,14 +818,14 @@
 	<td>FIX</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertTextNotPresent</td>
 	<td>css=destination_group_name</td>
 	<td>[{}]</td>
 </tr>
-<!--WITH INFINITY-->
+<!--WITH INFINITY - infinity removed - pridėti, kai veiks-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%209%3C%2Fname%3E%3Cid%3E25%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E-1%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E-1%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 9&lt;/name&gt;&lt;id&gt;25&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;200&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;10&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,7 +841,7 @@
 <!--SPLIT TIME-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%2010%3C%2Fname%3E%3Cid%3E26%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E06%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E07%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E11%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E30%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E15%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E20%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E5%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E21%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E23%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 10&lt;/name&gt;&lt;id&gt;26&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;06:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;07:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;11:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;15:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;20:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;5&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;21:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type&gt;WD&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -607,7 +873,7 @@
 <!--COLLISION-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%2013%3C%2Fname%3E%3Cid%3E29%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E08%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E22%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E30%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E09%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E20%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E5%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E23%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E23%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 13&lt;/name&gt;&lt;id&gt;29&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;08:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;22:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;09:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;20:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;5&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;23:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -615,11 +881,14 @@
 	<td>Test Tariff 13</td>
 	<td></td>
 </tr>
-<!--patikrinti, kad vyksta kolizija-->
-<!--<tr> 	<td>assertText</td> 	<td>css=collision_in_time_range</td> 	<td>Afghanistan FIX COLLISION IN 08:00:00 AND 22:59:59 TIME RANGE</td> </tr>-->
+<tr>
+	<td>assertText</td>
+	<td>css=collision_in_time_range</td>
+	<td>Afghanistan FIX COLLISION IN 08:00:00 AND 22:59:59 TIME RANGE</td>
+</tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%2014%3C%2Fname%3E%3Cid%3E30%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E10%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E17%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E30%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E19%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E21%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E5%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E22%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E23%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 14&lt;/name&gt;&lt;id&gt;30&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;10:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;17:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;19:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;21:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;5&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;22:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -627,10 +896,9 @@
 	<td>Test Tariff 14</td>
 	<td></td>
 </tr>
-<!--tariff 14 su tarpu tik? jei taip, tada ok-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=%3Ctariff%3E%3Cname%3ETest%20Tariff%2015%3C%2Fname%3E%3Cid%3E31%3C%2Fid%3E%3Cdestinations%3E%3Cdestination%3E%3Cdirection%2F%3E%3Cdestination_group_name%3EAfghanistan%3C%2Fdestination_group_name%3E%3Cdestination_group_type%3EFIX%3C%2Fdestination_group_type%3E%3Crates%3E%3Crate_price%3E0.05%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E00%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E07%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E45%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E08%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E22%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E30%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.01%3C%2Frate_price%3E%3Crate_round_by%3E3%3C%2Frate_round_by%3E%3Crate_type%3Eevent%3C%2Frate_type%3E%3Crate_start_time%3E05%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E14%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E5%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3Crates%3E%3Crate_price%3E0.02%3C%2Frate_price%3E%3Crate_round_by%3E1%3C%2Frate_round_by%3E%3Crate_type%3Eminute%3C%2Frate_type%3E%3Crate_start_time%3E23%3A00%3A00%3C%2Frate_start_time%3E%3Crate_end_time%3E23%3A59%3A59%3C%2Frate_end_time%3E%3Crate_duration%3E300%3C%2Frate_duration%3E%3Cday_type%2F%3E%3C%2Frates%3E%3C%2Fdestination%3E%3C%2Fdestinations%3E%3C%2Ftariff%3E&amp;test=1</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;Test Tariff 15&lt;/name&gt;&lt;id&gt;31&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;45&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;08:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;22:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;3&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;05:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;14:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;5&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;23:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -638,8 +906,11 @@
 	<td>Test Tariff 15</td>
 	<td></td>
 </tr>
-<!--patikrinti, kad vyksta kolizija-->
-<!--<tr> 	<td>assertText</td> 	<td>css=collision_in_time_range</td> 	<td>Afghanistan FIX COLLISION IN 00:00:00 AND 14:59:59 TIME RANGE</td> </tr>-->
+<tr>
+	<td>assertText</td>
+	<td>css=collision_in_time_range</td>
+	<td>Afghanistan FIX COLLISION IN 00:00:00 AND 14:59:59 TIME RANGE</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -662,7 +933,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_arates/508?dt=&amp;st=00%3A00%3A00</td>
+	<td>/billing/tariffs/user_arates/508?dt=WD&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
 <tr>
@@ -670,161 +941,51 @@
 	<td>Test Tariff 7</td>
 	<td></td>
 </tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertText</td> 	<td>id=from_248</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_249</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_250</td> 	<td>31</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_251</td> 	<td>31</td> </tr> <tr> 	<td>assertText</td> 	<td>id=add_from</td> 	<td>331</td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_248</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_249</td> 	<td>30</td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_249</td> 	<td>30</td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_250</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_250</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=duration</td> 	<td>300</td> </tr>-->
 <tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates/509?dt=&amp;st=00%3A00%3A00</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=from_244</td>
+	<td>1</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Test Tariff 9</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=from_245</td>
+	<td>1</td>
 </tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertText</td> 	<td>id=from_252</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_253</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_253</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_252</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=type_252</td> 	<td>event</td> </tr> <tr> 	<td>assertSelectedLabel</td> 	<td>id=artype_253</td> 	<td>minute</td> </tr> <tr> 	<td>assertText</td> 	<td>id=round_252</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=round</td> 	<td>1</td> </tr> <tr> 	<td>assertValue</td> 	<td>name=price_252</td> 	<td>0.05</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=price</td> 	<td>0.02</td> </tr>-->
 <tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates_full/16?dg=1</td>
+	<td>assertText</td>
+	<td>id=from_246</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_247</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=add_from</td>
+	<td>331</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_244</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>00:00:00</td>
-</tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>06:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>07:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[3]/td[2]</td> 	<td>11:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td</td> 	<td>15:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td[2]</td> 	<td>20:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[5]/td</td> 	<td>21:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr>-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates/510?dt=&amp;st=00%3A00%3A00</td>
-	<td></td>
-</tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertElementPresent</td> 	<td>id=round_254</td> 	<td></td> </tr> <tr> 	<td>assertElementNotPresent</td> 	<td>id=round_255</td> 	<td></td> </tr>-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates_full/17?dg=1</td>
-	<td></td>
+	<td>id=duration_245</td>
+	<td>30</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>00:00:00</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//tr[2]/td[2]</td>
-	<td>07:59:59</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=tr.row2 &gt; td</td>
-	<td>08:00:00</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>id=date_hour</td>
+	<td>id=duration_246</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//table[4]/tbody/tr[2]/td</td>
-	<td>00:00:00</td>
+	<td>assertValue</td>
+	<td>id=duration</td>
+	<td>300</td>
 </tr>
-<tr>
-	<td>assertText</td>
-	<td>//table[4]/tbody/tr[2]/td[2]</td>
-	<td>15:59:59</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//table[4]/tbody/tr[3]/td</td>
-	<td>16:00:00</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//table[4]/tbody/tr[3]/td[2]/select</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>For Work Days:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>For Free Days:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Combine to Work Days and Free Days</td>
-	<td></td>
-</tr>
-<!--COLLISION-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates_full/18?dg=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>00:00:00</td>
-</tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>css=tr.row2 &gt; td</td> 	<td>08:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[3]/td[2]</td> 	<td>22:59:59</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[4]/td</td> 	<td>09:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[4]/td[2]</td> 	<td>20:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>23:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr>-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates_full/19?dg=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>00:00:00</td>
-</tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>10:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[3]/td[2]</td> 	<td>17:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td</td> 	<td>19:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td[2]</td> 	<td>21:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[5]/td</td> 	<td>22:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr>-->
-<tr>
-	<td>open</td>
-	<td>/billing/tariffs/user_arates_full/20?dg=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>00:00:00</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>//tr[2]/td[2]</td>
-	<td>07:59:59</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>css=tr.row2 &gt; td</td>
-	<td>05:00:00</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>//tr[3]/td[2]</td>
-	<td>14:59:59</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>08:00:00</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>//tr[2]/td[2]</td>
-	<td>22:59:59</td>
-</tr>
-<!--patikrinti rates-->
-<!--<tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>23:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr>-->
-</tbody></table>
+<!--<tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates/509?dt=WD&amp;st=00%3A00%3A00</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Test Tariff 9</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_249</td> 	<td>0</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_247</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_248</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=from_250</td> 	<td>1</td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_249</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=duration_247</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=type_247</td> 	<td>event</td> </tr> <tr> 	<td>assertSelectedLabel</td> 	<td>id=artype_250</td> 	<td>minute</td> </tr> <tr> 	<td>assertText</td> 	<td>id=round_248</td> 	<td></td> </tr> <tr> 	<td>assertValue</td> 	<td>id=round</td> 	<td>1</td> </tr> <tr> 	<td>assertValue</td> 	<td>name=price_247</td> 	<td>0.05</td> </tr> <tr> 	<td>assertValue</td> 	<td>id=price</td> 	<td>0.02</td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates_full/16?dg=1</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>06:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>07:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[3]/td[2]</td> 	<td>11:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td</td> 	<td>15:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td[2]</td> 	<td>20:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[5]/td</td> 	<td>21:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates/510?dt=WD&amp;st=00%3A00%3A00</td> 	<td></td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=round_251</td> 	<td></td> </tr> <tr> 	<td>assertElementNotPresent</td> 	<td>id=round_252</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates_full/17?dg=1</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>08:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>//table[4]/tbody/tr[2]/td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//table[4]/tbody/tr[2]/td[2]</td> 	<td>15:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//table[4]/tbody/tr[3]/td</td> 	<td>16:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>//table[4]/tbody/tr[3]/td[2]/select</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>For Work Days:</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>For Free Days:</td> 	<td></td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>link=Combine to Work Days and Free Days</td> 	<td></td> </tr> <!--COLLISION--> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates_full/18?dg=1</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>css=tr.row2 &gt; td</td> 	<td>08:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[3]/td[2]</td> 	<td>22:59:59</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[4]/td</td> 	<td>09:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[4]/td[2]</td> 	<td>20:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>23:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates_full/19?dg=1</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row2 &gt; td</td> 	<td>10:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[3]/td[2]</td> 	<td>17:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td</td> 	<td>19:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[4]/td[2]</td> 	<td>21:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>//tr[5]/td</td> 	<td>22:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/user_arates_full/20?dg=1</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>css=tr.row1 &gt; td</td> 	<td>00:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[2]/td[2]</td> 	<td>07:59:59</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>css=tr.row2 &gt; td</td> 	<td>05:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[3]/td[2]</td> 	<td>14:59:59</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>css=tr.row1 &gt; td</td> 	<td>08:00:00</td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>//tr[2]/td[2]</td> 	<td>22:59:59</td> </tr> <tr> 	<td>assertText</td> 	<td>css=tr.row1 &gt; td</td> 	<td>23:00:00</td> </tr> <tr> 	<td>assertElementPresent</td> 	<td>id=date_hour</td> 	<td></td> </tr>-->
 </body>
 </html>
