@@ -53,7 +53,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
 	<td></td>
 </tr>
 <tr>
@@ -105,6 +105,41 @@
 	<td>type</td>
 	<td>id=email_batch_size</td>
 	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_password</td>
+	<td>test123-(&amp;#^(*@?</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=email_password</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Email password can contain only letters and digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_3 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=email_password</td>
+	<td>exact:test123-(&amp;#^(*@?</td>
 </tr>
 <tr>
 	<td>type</td>
