@@ -22,8 +22,8 @@ class CronActionsController < ApplicationController
     @cron_setting = CronSetting.new({:user_id => current_user.id, :valid_from => Time.now, :valid_till => Time.now})
     @users = User.find_all_for_select(current_user.id)
     @tariffs = current_user.load_tariffs
-    @providers = Provider.all
-    @provider_tariffs = Tariff.where('purpose = "provider"').all
+    @providers = Provider.where(:user_id => current_user.id)
+    @provider_tariffs = Tariff.where(purpose:"provider", owner_id: current_user.id)
     @lcrs = Lcr.where("user_id = ? ", current_user.id).all
   end
 
