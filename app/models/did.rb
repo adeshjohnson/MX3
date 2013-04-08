@@ -346,7 +346,7 @@ class Did < ActiveRecord::Base
 #    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
 #  end
 
-  def insert_dids_from_csv_file(name)
+  def insert_dids_from_csv_file(name,owner_id)
     CsvImportDb.log_swap('analize')
     MorLog.my_debug("CSV analize_file #{name}", 1)
 
@@ -366,21 +366,50 @@ class Did < ActiveRecord::Base
     # set error flag on not int numbers | code : 3
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\r', '') REGEXP '^[0-9]+$' = 0")
 
+    # set error flag on collisions with QF | code : 4
+    all_dids = ActiveRecord::Base.connection.select_all("SELECT * FROM #{name} WHERE f_error = 0").each.collect{|v| v[:did]}
+    dids_with_collisions = []
+    if owner_id.to_i == 0
+      all_dids.each{|did|
+        a = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^')))")
+        dids_with_collisions << did if a.size > 0
+      }
+    else
+      all_dids.each{|did|
+        a = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id in (0,#{owner_id})")
+        dids_with_collisions << did if a.size > 0
+      }
+    end
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 4 WHERE did IN (#{dids_with_collisions.join(',')})")
+
+
     #------------ Import -------------------------------------
     CsvImportDb.log_swap('create_dids_start')
     count = 0
 
     s1 = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0").to_i
     n = s1/1000 +1
-    n.times{| i|
-      nr_sql = "INSERT INTO dids (did)
-                    SELECT did FROM #{name}
-                    WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
-      begin
-        ActiveRecord::Base.connection.execute(nr_sql)
-        count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 LIMIT #{i * 1000}, 1000").to_i
-      end
-    }
+    if owner_id.to_i == 0
+      n.times{| i|
+        nr_sql = "INSERT INTO dids (did)
+                      SELECT did FROM #{name}
+                      WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
+        begin
+          ActiveRecord::Base.connection.execute(nr_sql)
+          count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 LIMIT #{i * 1000}, 1000").to_i
+        end
+      }
+    else
+      n.times{| i|
+        nr_sql = "INSERT INTO dids (did,reseller_id)
+                      SELECT did,#{owner_id.to_s} FROM #{name}
+                      WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
+        begin
+          ActiveRecord::Base.connection.execute(nr_sql)
+          count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 LIMIT #{i * 1000}, 1000").to_i
+        end
+      }
+    end
 
     CsvImportDb.log_swap('create_dids_end')
     return dids_in_csv_file, count

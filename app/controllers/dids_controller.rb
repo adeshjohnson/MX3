@@ -253,7 +253,7 @@ class DidsController < ApplicationController
       begin
         CsvImportDb.load_csv_into_db(tname, ',', '.', '', "/tmp/", colums)
 
-        @total_numbers, @imported_numbers = Did.insert_dids_from_csv_file(tname)
+        @total_numbers, @imported_numbers = Did.insert_dids_from_csv_file(tname,current_user.id)
 
 
         if @total_numbers.to_i == @imported_numbers.to_i
