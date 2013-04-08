@@ -32,9 +32,7 @@
   <tr>
     <td></td>
     <td><b><%= _('Email_Password') %>:</b></td>
-    <td><%= text_field_tag('email_password', Confline.get_value("Email_Password"), "class" => "input", :size => "35", :maxlength => "50", :onChange => "validate_password();") %>
-      <span id="email_message">&nbsp;&nbsp;<%= b_exclamation %><%= _("Notice_email_password_fax_emails_problem") %></span>
-    </td>
+    <td><%= text_field_tag('email_password', Confline.get_value("Email_Password"), "class" => "input", :size => "35", :maxlength => "50", :onChange => "validate_password();") %></td>
   </tr>
   <tr>
     <td></td>
@@ -70,16 +68,3 @@
     </td>
   </tr>
 </table>
-<% content_for :scripts do %>
-    <script type="text/javascript">
-        function validate_password() {
-            var reg_exp = /^[a-zA-Z0-9]*$/;
-            if ($("email_password").value.search(reg_exp) == -1) {
-                $("email_message").show();
-            } else {
-                $("email_message").hide();
-            }
-        }
-        validate_password();
-    </script>
-<% end %>
