@@ -1,0 +1,12 @@
+<br/><b><%= _('DID_file') %>:</b>
+<%= params[:fname].to_s %>
+<br />
+<b><%= _('File_size') %>:</b> <%= session[:file_size].to_i %>
+<br>
+<b><%= _('Total_numbers_imported') %>:</b> <%= @imported_dids %>
+<%if @total_dids.to_i != @imported_dids.to_i%>
+    <br />
+    <%= link_to _('Click_here_to_see_bad_numbers') + " (#{@total_dids.to_i - @imported_dids.to_i})", {:action => "bad_dids_from_csv", :filename => params[:fname]}, :onclick => "window.open(this.href,'new_window','scrollbars=1,status=0,menubar=0,resizable=1,height=200,width=400');return false;" %>
+<%end%>
+<br /><br />
+<%= link_to b_back + _('Back_to_Dids'), :action => :list %>

@@ -53,3 +53,31 @@
     </td>
   </tr>
 </table>
+
+<br/>
+<br/>
+
+<table class="maintable" width="100%">
+  <tr class="row1">
+    <td>
+      <%= form_tag({:action => 'confirm_did'}, {:multipart => "true", :id => "files"}) do %>
+          <br/>
+          <%= _('DID_add_from_file') %>:
+          <br/>
+          <br/>
+          <b><%= _('Upload') %>:</b>
+          <%= file_field_tag "file" %>
+          <br/>
+          <br/>
+          <% if see_providers_in_dids? %>
+              <b><%= _('Provider') %>:</b>
+              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }), {:id => "did_provider_id_1"}) %>
+              <br/>
+              <br/>
+          <% end %>
+          <%= hidden_field_tag('amount', "from_file", {:id => "amount_file"}) %>
+          <%= submit_tag _('Create'), :disable_with => _('Processing..') %>
+      <% end %>
+    </td>
+  </tr>
+</table>

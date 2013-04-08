@@ -346,5 +346,44 @@ class Did < ActiveRecord::Base
 #    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
 #  end
 
+  def insert_dids_from_csv_file(name)
+    CsvImportDb.log_swap('analize')
+    MorLog.my_debug("CSV analize_file #{name}", 1)
+
+    dids_in_csv_file = (ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i).to_s
+
+
+    #------------ Analyze ------------------------------------
+    # set error flag on duplicates | code : 1
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1 WHERE did IN (SELECT number FROM (select did as number, count(*) as u from #{name} group by did having u > 1) as imf )")
+
+    # unset error for first number of duplicates
+    ActiveRecord::Base.connection.execute("UPDATE #{name}, (SELECT id FROM #{name} WHERE f_error = 1 GROUP BY did) AS A SET f_error = 0 WHERE f_error = 1 AND #{name}.id = A.id")
+
+    # set error flag where number is found in DB | code : 2
+    ActiveRecord::Base.connection.execute("UPDATE #{name} LEFT JOIN dids ON (replace(#{name}.did, '\\r', '') = dids.did) SET f_error = 2 WHERE dids.id IS NOT NULL AND f_error = 0")
+
+    # set error flag on not int numbers | code : 3
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\r', '') REGEXP '^[0-9]+$' = 0")
+
+    #------------ Import -------------------------------------
+    CsvImportDb.log_swap('create_dids_start')
+    count = 0
+
+    s1 = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0").to_i
+    n = s1/1000 +1
+    n.times{| i|
+      nr_sql = "INSERT INTO dids (did)
+                    SELECT did FROM #{name}
+                    WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
+      begin
+        ActiveRecord::Base.connection.execute(nr_sql)
+        count += ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 LIMIT #{i * 1000}, 1000").to_i
+      end
+    }
+
+    CsvImportDb.log_swap('create_dids_end')
+    return dids_in_csv_file, count
+  end
 
 end

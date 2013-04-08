@@ -195,7 +195,7 @@ class DidsController < ApplicationController
         flash_errors_for(_('Did_was_not_created'), @did)
         redirect_to :action => 'new'
       end
-    else #creating did interval
+    elsif params[:amount] == "interval" #creating did interval
 
       status = Hash.new(0)
       status[:messages] =[]
@@ -244,6 +244,33 @@ class DidsController < ApplicationController
         end
         redirect_to :action => 'list'
       end
+    else
+      @file = File.open('/tmp/' + params[:filename].to_s, "wb")
+      tname = params[:filename].to_s
+      session[:tname] = params[:filename].to_s
+      colums ={}
+      colums[:colums] = [{:name=>"did", :type=>"VARCHAR(50)", :default=>''},{:name=>"f_error", :type=>"INT(4)", :default=>0},{:name=>"id", :type=>'INT(11)', :inscrement=>' NOT NULL auto_increment '}]
+      begin
+        CsvImportDb.load_csv_into_db(tname, ',', '.', '', "/tmp/", colums)
+
+        @total_numbers, @imported_numbers = Did.insert_dids_from_csv_file(tname)
+
+
+        if @total_numbers.to_i == @imported_numbers.to_i
+          flash[:status] = _('DIDs_were_successfully_imported')
+          redirect_to :action => "list"
+        else
+          flash[:status] = _('M_out_of_n_dids_imported', @imported_numbers, @total_numbers)
+          redirect_to :action => "dids_imported", :fname => params[:filename].to_s, :file_size => @file.size.to_s and return false
+        end
+
+      rescue Exception => e
+        MorLog.log_exception(e, Time.now.to_i, params[:controller], params[:action])
+        CsvImportDb.clean_after_import(tname, "/tmp/")
+        flash[:notice] = _('MySQL_permission_problem_contact_Kolmisoft_to_solve_it')
+        redirect_to :action => "new" and return false
+      end
+
     end
   end
 
@@ -268,7 +295,7 @@ class DidsController < ApplicationController
       if @did.length < 10 or @did[0..0].to_i == 0
         @notice = _('DID_not_e164_compatible')
       end
-    else
+    elsif @amount == "amount_interval"
       @start=params[:did_start]
       @end=params[:did_end]
       if @start.length != @end.length
@@ -277,6 +304,33 @@ class DidsController < ApplicationController
       end
       if (@start[0..0].to_i == 0 or @start.length < 10) or (@end[0..0].to_i == 0 or @end.length < 10)
         @notice = _('DID_not_e164_compatible')
+      end
+    else
+      if params[:file]
+        @file = params[:file]
+        if @file.size > 0
+          if !@file.respond_to?(:original_filename) or !@file.respond_to?(:read) or !@file.respond_to?(:rewind)
+            flash[:notice] = _('Please_select_file')
+            redirect_to :action => "new" and return false
+          end
+          if get_file_ext(@file.original_filename, "csv") == false
+            @file.original_filename
+            flash[:notice] = _('Please_select_CSV_file')
+            redirect_to :action => "new" and return false
+          end
+          @file.rewind
+          file = @file.read
+          session[:file_size] = file.size
+          session[:filename] = @file.original_filename.to_s
+          @tname = CsvImportDb.save_file(session[:file_size].to_i, file, "/tmp/")
+          @all_dids = file.split("\n").select { |line| line.to_s.strip.gsub(/\s+/, '') unless line.to_s.strip.blank? }
+        else
+          flash[:notice] = _('Please_select_file')
+          redirect_to :action => "new" and return false
+        end
+      else
+        flash[:notice] = _('Please_upload_file')
+        redirect_to :action => "new" and return false
       end
     end
   end
@@ -1324,6 +1378,22 @@ ORDER BY dids.did ASC"
 
     session[:dids_summary_list_options] = @options
 
+  end
+
+  def bad_dids_from_csv
+    @page_title = _('Bad_rows_from_CSV_file')
+    if ActiveRecord::Base.connection.tables.include?(session[:tname].to_s)
+      @rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:tname].to_s} WHERE f_error > 0")
+    end
+
+    render(:layout => "layouts/mor_min")
+  end
+
+  def dids_imported
+    sql = "SELECT * FROM #{session[:tname].to_s}"
+    @file = ActiveRecord::Base.connection.select_all(sql).each(&:symbolize_keys!)
+    @total_dids = @file.size
+    @imported_dids = @file.select{|did| did[:f_error] == 0}.size
   end
 
   private

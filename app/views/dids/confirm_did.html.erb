@@ -32,7 +32,7 @@
     </table>
 
 
-<% else %>
+<% elsif @amount == "amount_interval" %>
 
 
     <table width="100%">
@@ -63,6 +63,48 @@
       </tr>
     </table>
 
+<% else %>
+
+    <table width="100%">
+      <tr>
+        <td>
+          <%= form_tag(:action => 'create', :provider => @provider.id, :filename => @tname) do %>
+
+              <br/><b><%= _('DID_file') %>:</b>
+              <%= @file.original_filename.to_s %>
+              <br/>
+              <b><%= _('File_size') %>:</b>
+              <%= @file.size.to_s %>
+              <br/><br/>
+              <b><%= _('First_file_lines') %>:</b>
+              <br/><br/>
+              <% @all_dids[0..4].each{|did| %>
+                 <%= did.to_s %>
+                 <br/>
+              <% } %>
+              <%= "....." if @all_dids.size > 5 %>
+              <br/><br/>
+              <b><%= _('Number_of_DIDs_in_file') %>:</b>
+              <%= @all_dids.size.to_s %>
+
+              <% if see_providers_in_dids? %>
+                  <br/><br/>
+                  <b><%= _('Provider') %>:</b>
+                  <%= @provider.name %>
+              <% end %>
+              <br/><br/>
+
+              <%= hidden_field_tag 'amount', "file" %>
+
+              <% if @notice %>
+                  <%= submit_tag(_('ok'), :method => :post, :disable_with => _('Processing..')) %>
+              <% else %>
+                  <%= submit_tag _('ok'), :disable_with => _('Processing..') %>
+              <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
 <% end %>
 
 
