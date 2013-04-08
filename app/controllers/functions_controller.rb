@@ -3184,7 +3184,7 @@ Sets default tax values for users or cardgroups
       arr = file.split("\n")
       @fl = []
       5.times { |num| @fl[num] = arr[num].to_s.split(sep) }
-      if  @fl[1].size.to_i < params[:min_collum_size].to_i
+      if  @fl[0].size.to_i < params[:min_collum_size].to_i
         @notice = _('Not_enough_columns_check_csv_separators')
       end
       render :layout => false
