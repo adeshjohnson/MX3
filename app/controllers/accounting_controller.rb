@@ -1818,9 +1818,12 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     nc = nice_invoice_number_digits(invoice.invoice_type)
 
+    ex = Currency.count_exchange_rate(current_user.currency.name, current_user.owner.currency.name)
+
     period_start_with_time, period_end_with_time = invoice.period_start.to_time, invoice.period_end.to_time.change(:hour => 23, :min => 59, :sec => 59, :usec => 999999.999)
     period_start = invoice.period_start.to_time
     period_end = invoice.period_end.to_time.change(:hour => 23, :min => 59, :sec => 59, :usec => 999999.999)
+
 
     ind_ex = ActiveRecord::Base.connection.select_all("SHOW INDEX FROM calls")
 
@@ -1926,6 +1929,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
             invd_price = service.price
             count_subscription = 1
           end
+
         end
 
         if service.servicetype == "periodic_fee"
@@ -1971,12 +1975,12 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         #my_debug("    Invoice Subscriptions price: #{invd_price.to_s}")
 
         if count_subscription == 1
-          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
+          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d * ex, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
           price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
       }
       invoice.invoice_precision=nc
-      invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
+      invoice.price = invoice.nice_invoice_number(price.to_d * ex.to_d, {:nc=>nc, :apply_rounding=>true})
       invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type))
       MorLog.my_debug(" Recalculated Invoice number: #{invoice.number}", 1)
       invoice.save
