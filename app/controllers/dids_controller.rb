@@ -245,6 +245,7 @@ class DidsController < ApplicationController
         redirect_to :action => 'list'
       end
     else
+      pr = (current_user.usertype == 'reseller' and current_user.own_providers.to_i == 0) ? Confline.get_value("DID_default_provider_to_resellers").to_i.to_s : params[:provider]
       @file = File.open('/tmp/' + params[:filename].to_s, "wb")
       tname = params[:filename].to_s
       session[:tname] = params[:filename].to_s
@@ -253,7 +254,7 @@ class DidsController < ApplicationController
       begin
         CsvImportDb.load_csv_into_db(tname, ',', '.', '', "/tmp/", colums)
 
-        @total_numbers, @imported_numbers = Did.insert_dids_from_csv_file(tname,current_user.id)
+        @total_numbers, @imported_numbers = Did.insert_dids_from_csv_file(tname,current_user.id,pr.to_i)
 
 
         if @total_numbers.to_i == @imported_numbers.to_i

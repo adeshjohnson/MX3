@@ -346,7 +346,7 @@ class Did < ActiveRecord::Base
 #    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
 #  end
 
-  def Did.insert_dids_from_csv_file(name,owner_id)
+  def Did.insert_dids_from_csv_file(name,owner_id,prov_id)
     CsvImportDb.log_swap('analize')
     MorLog.my_debug("CSV analize_file #{name}", 1)
 
@@ -380,7 +380,7 @@ class Did < ActiveRecord::Base
         dids_with_collisions << did if a.size > 0
       }
     end
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 4 WHERE did IN (#{dids_with_collisions.join(',')})")
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 4 WHERE did IN (#{dids_with_collisions.join(',')})") if dids_with_collisions.size > 0
 
 
     #------------ Import -------------------------------------
@@ -391,8 +391,8 @@ class Did < ActiveRecord::Base
     n = s1/1000 +1
     if owner_id.to_i == 0
       n.times{| i|
-        nr_sql = "INSERT INTO dids (did)
-                      SELECT did FROM #{name}
+        nr_sql = "INSERT INTO dids (did,provider_id)
+                      SELECT did,#{prov_id.to_s} FROM #{name}
                       WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
         begin
           ActiveRecord::Base.connection.execute(nr_sql)
@@ -401,8 +401,8 @@ class Did < ActiveRecord::Base
       }
     else
       n.times{| i|
-        nr_sql = "INSERT INTO dids (did,reseller_id)
-                      SELECT did,#{owner_id.to_s} FROM #{name}
+        nr_sql = "INSERT INTO dids (did,reseller_id,provider_id)
+                      SELECT did,#{owner_id.to_s},#{prov_id.to_s} FROM #{name}
                       WHERE f_error = 0 LIMIT #{i * 1000}, 1000"
         begin
           ActiveRecord::Base.connection.execute(nr_sql)
