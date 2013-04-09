@@ -840,6 +840,56 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>resellers tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_3</td>
+	<td>tariff</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>resellers provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1065,6 +1115,22 @@
 	<td>assertText</td>
 	<td>id=cron_setting_lcr_id</td>
 	<td>Primary LCR1 LCR2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cron_setting_action</td>
+	<td>label=Change provider tariff</td>
+</tr>
+<!--neturi buti reselerio tarifu ir provaideriu-->
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_provider_target_id</td>
+	<td>All Test Provider</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td>Test Tariff Test Tariff bad currency</td>
 </tr>
 </tbody></table>
 </body>
