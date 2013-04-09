@@ -17,7 +17,7 @@
           &nbsp;&nbsp;<%= _('Server') %>: <select name="s_server">
   <option value="-1" <%= "selected" if @options[:s_server].to_i == -1 %>><%= _('All') %></option>
   <% for serv in @servers %>
-      <option value="<%= serv.id %>" <%= "selected" if @options[:s_server].to_i == serv.id %>><%= serv.hostname %></option>
+      <option value="<%= serv.server_id %>" <%= "selected" if @options[:s_server].to_i == serv.server_id %>><%= serv.hostname %></option>
   <% end %>
 </select>
       <% end %>
