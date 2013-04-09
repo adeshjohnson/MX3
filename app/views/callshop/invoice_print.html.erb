@@ -143,8 +143,8 @@
 </p>
 
 <p>
-  <strong><%= _('Period') %>: <%= nice_date_time(@invoice.created_at) %>
-    - <%= nice_date_time(@invoice.paid_at || @invoice.updated_at) %></strong>
+  <strong><%= _('Period') %>: <%= nice_date_time(@invoice.created_at, ofset=0) %>
+    - <%= nice_date_time((@invoice.paid_at || @invoice.updated_at), ofset=0) %></strong>
 </p>
 
 <table id="calls" cellspacing="0" cellpadding="0">
@@ -158,9 +158,9 @@
   </tr>
   </thead>
   <tbody>
-  <% for call in @invoice.calls(nice_date_time(@invoice.paid_at || @invoice.updated_at)) %>
+  <% for call in @invoice.calls(nice_date_time((@invoice.paid_at || @invoice.updated_at), ofset=0)) %>
       <tr>
-        <td><%= nice_date_time(call.calldate) %></td>
+        <td><%= nice_date_time(call.calldate, ofset=0) %></td>
         <td><%= call.dst %></td>
         <td><%= curr_price(call.user_rate) %></td>
         <td><%= seconds_to_time(call.user_billsec) %></td>
