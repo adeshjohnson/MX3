@@ -346,7 +346,7 @@ class Did < ActiveRecord::Base
 #    QuickforwardsRule.where("#{did} REGEXP(replace(rule_regexp, '%', ''))").all.count
 #  end
 
-  def insert_dids_from_csv_file(name,owner_id)
+  def Did.insert_dids_from_csv_file(name,owner_id)
     CsvImportDb.log_swap('analize')
     MorLog.my_debug("CSV analize_file #{name}", 1)
 
@@ -367,7 +367,7 @@ class Did < ActiveRecord::Base
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\r', '') REGEXP '^[0-9]+$' = 0")
 
     # set error flag on collisions with QF | code : 4
-    all_dids = ActiveRecord::Base.connection.select_all("SELECT * FROM #{name} WHERE f_error = 0").each.collect{|v| v[:did]}
+    all_dids = ActiveRecord::Base.connection.select_all("SELECT * FROM #{name} WHERE f_error = 0").each(&:symbolize_keys!).collect{|v| v[:did]}
     dids_with_collisions = []
     if owner_id.to_i == 0
       all_dids.each{|did|
