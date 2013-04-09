@@ -354,6 +354,9 @@ class Did < ActiveRecord::Base
 
 
     #------------ Analyze ------------------------------------
+    # strip all DIDs
+    ActiveRecord::Base.connection.execute("UPDATE #{name} set did = REPLACE( #{name}.did, ' ', '' )")
+
     # set error flag on duplicates | code : 1
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 1 WHERE did IN (SELECT number FROM (select did as number, count(*) as u from #{name} group by did having u > 1) as imf )")
 

@@ -252,7 +252,7 @@ class DidsController < ApplicationController
       colums ={}
       colums[:colums] = [{:name=>"did", :type=>"VARCHAR(50)", :default=>''},{:name=>"f_error", :type=>"INT(4)", :default=>0},{:name=>"id", :type=>'INT(11)', :inscrement=>' NOT NULL auto_increment '}]
       begin
-        CsvImportDb.load_csv_into_db(tname, ',', '.', '', "/tmp/", colums)
+        CsvImportDb.load_csv_into_db(tname, '', '.', '', "/tmp/", colums)
 
         @total_numbers, @imported_numbers = Did.insert_dids_from_csv_file(tname,current_user.id,pr.to_i)
 
