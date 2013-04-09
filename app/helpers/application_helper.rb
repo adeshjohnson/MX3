@@ -218,6 +218,22 @@ module ApplicationHelper
     image_tag('icons/server.png') + " "
   end
 
+  def b_arrow_down_blue
+    image_tag('icons/arrow_down_blue.png') + " "
+  end
+
+  def b_arrow_up_blue
+    image_tag('icons/arrow_up_blue.png') + " "
+  end
+
+  def b_arrow_down_green
+    image_tag('icons/arrow_down_green.png') + " "
+  end
+
+  def b_arrow_up_green
+    image_tag('icons/arrow_up_green.png') + " "
+  end
+
   def b_spy
     image_tag('icons/sound.png') + " "
   end
@@ -1593,6 +1609,34 @@ conf_name - name of confline that will be represented by checkbox.
       when 'owner'
         _('DID_owner_rate_explained')
     end
+  end
+
+  def priority_table(items, lcr)
+    out = ""
+
+    out << "<table>"
+    items.each{|item|
+      out << "<tr id='item_" + item.id.to_s + "'>"
+        out << "<td>"
+          out << (lcr.provider_active(item.id) ? (image_tag 'icons/check.png', :title => _('Disable')) : (image_tag 'icons/cross.png', :title => _('Enable'))) + item.name.to_s
+          unless current_user.usertype == 'reseller' and item.common_use == 1
+            out << ":" + item.tech.to_s + ":" + (item.tariff ? item.tariff.name.to_s : "")
+          end
+        out << "</td>"
+        out << "<td align='center' style='width: 45px;'>"
+          if items.size > 1
+            if !items.first.eql?(item)
+              out << "<a onClick=\"new Ajax.Updater('sortable_table', '" + Web_Dir + "/lcrs/change_position?id=" + lcr.id.to_s + "&item_id=" + item.lcr_prov_id.to_s + "&direction=up', {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}})\">" + b_arrow_up_blue + "</a>"
+            end
+            if !items.last.eql?(item)
+              out << "<a onClick=\"new Ajax.Updater('sortable_table', '" + Web_Dir + "/lcrs/change_position?id=" + lcr.id.to_s + "&item_id=" + item.lcr_prov_id.to_s + "&direction=down', {asynchronous:true, evalScripts:true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}})\">" + b_arrow_down_blue + "</a>"
+            end
+          end
+        out << "</td>"
+      out << "</tr>"
+    }
+    out << "</table>"
+    out
   end
 
 end

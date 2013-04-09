@@ -4,18 +4,12 @@
 <%= _("Drag_To_Change_Order") %>
 <br/>
 <br/>
-<ul id="sortable_list" style="list-style-type: none;margin-left: 0px;padding-left: 0px;">
-  <% for item in @items do %>
-      <li id="item_<%= item.id %>">
-        <%= image_tag 'icons/check.png', :title => _('Disable') if @lcr.provider_active(item.id) %>
-        <%= image_tag 'icons/cross.png', :title => _('Enable') if not @lcr.provider_active(item.id) %>
-        <%= item.name %>
-        <% unless current_user.usertype == 'reseller' and item.common_use == 1 %>
-            :<%= item.tech %>:<%= item.tariff.name %>
-        <% end %>
-      </li>
-  <% end %>
-</ul>
-<%= sortable_element('sortable_list', :update => 'items', :url => {:action => :providers_sort_save, :id => @lcr.id}) %>
-
+<table style="border:1px solid #cccccc;">
+  <tr>
+    <td id='sortable_table'>
+      <%= raw priority_table(@items,@lcr) %>
+    </td>
+  </tr>
+</table>
+<br/>
 <%= link_to b_back + _('Back'), :action => 'providers_list', :id => @lcr.id %>

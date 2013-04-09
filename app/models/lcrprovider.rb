@@ -10,4 +10,15 @@ class Lcrprovider < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(query)
   end
 
+  def move_lcr_prov(direction)
+    if direction == "down"
+      following_lcr_prov = Lcrprovider.where(:lcr_id => self.lcr_id, :priority => self.priority + 1).first
+      self.update_attribute(:priority, self.priority + 1)
+      following_lcr_prov.update_attribute(:priority, following_lcr_prov.priority - 1)
+    else
+      previous_lcr_prov = Lcrprovider.where(:lcr_id => self.lcr_id, :priority => self.priority - 1).first
+      self.update_attribute(:priority, self.priority - 1)
+      previous_lcr_prov.update_attribute(:priority, previous_lcr_prov.priority + 1) if previous_lcr_prov
+    end
+  end
 end

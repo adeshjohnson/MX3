@@ -9,7 +9,7 @@ class LcrsController < ApplicationController
   before_filter :check_localization
   before_filter :authorize
   before_filter :providers_enabled_for_reseller?
-  before_filter :find_lcr_from_id, :only => [:lcr_clone, :make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider]
+  before_filter :find_lcr_from_id, :only => [:lcr_clone, :make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider, :change_position]
   before_filter :find_lcr_partial_from_id, :only => [:lcrpartial_destroy, :lcrpartial_edit, :update_lcrpartial]
   before_filter :check_owner, :only => [:make_tariff, :details, :provider_change_status, :remove_provider, :try_to_add_provider, :providers_sort_save, :providers_sort, :providers_percent, :provider_change_status, :edit, :update, :destroy, :details_by_destinations, :providers_list, :try_to_add_failover_provider]
 
@@ -524,6 +524,13 @@ class LcrsController < ApplicationController
       flash_errors_for(_('Lcr_not_copied'), ln)
     end
     redirect_to :action => 'list' and return false
+  end
+
+  def change_position
+    @lcr_prov = Lcrprovider.where(:id => params[:item_id]).first
+    @lcr_prov.move_lcr_prov(params[:direction])
+    @items = @lcr.providers("asc")
+    render :layout => false
   end
 
   private

@@ -47,7 +47,7 @@ class Lcr < ActiveRecord::Base
       end
     end
 
-    sql = "SELECT providers.* , lcrproviders.percent, lcrproviders.priority FROM providers JOIN lcrproviders ON (providers.id = lcrproviders.provider_id) WHERE lcrproviders.lcr_id = #{self.id} ORDER BY #{order1}"
+    sql = "SELECT providers.* , lcrproviders.percent, lcrproviders.priority, lcrproviders.id AS lcr_prov_id FROM providers JOIN lcrproviders ON (providers.id = lcrproviders.provider_id) WHERE lcrproviders.lcr_id = #{self.id} ORDER BY #{order1}"
     return Provider.find_by_sql(sql)
   end
 
