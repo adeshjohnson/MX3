@@ -338,7 +338,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>link=Amount</td>
 	<td></td>
 </tr>
@@ -358,6 +358,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>10.00 USD</td>
 	<td></td>
@@ -366,6 +371,11 @@
 	<td>assertTextPresent</td>
 	<td>komentaras</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
@@ -378,7 +388,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>link=User type</td>
 	<td></td>
 </tr>
@@ -398,6 +408,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>15.00 USD</td>
 	<td></td>
@@ -406,6 +421,11 @@
 	<td>assertTextPresent</td>
 	<td>postpaid komentaras</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
@@ -423,7 +443,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>link=Comment</td>
 	<td></td>
 </tr>
@@ -443,6 +463,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>10.00 USD</td>
 	<td></td>
@@ -451,6 +476,11 @@
 	<td>assertTextPresent</td>
 	<td>komentaras</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
@@ -468,6 +498,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>waitForTextPresent</td>
 	<td>15.00 USD</td>
 	<td></td>
@@ -478,6 +513,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>15000</td>
+</tr>
+<tr>
 	<td>assertTextNotPresent</td>
 	<td>10.00 USD</td>
 	<td></td>
@@ -485,6 +525,71 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>prepaid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.print</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>Invoice</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td>selenium.getAllWindowNames()[selenium.getAllWindowNames().length-1] </td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Invoice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>5.00 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='calls']/tbody/tr/td[5]</td>
+	<td>5.00 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tbody/tr[2]/td[5]</td>
+	<td>5.00 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tbody/tr[3]/td[5]</td>
+	<td>5.00 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot/tr/td[3]</td>
+	<td>15.00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot/tr/td[2]</td>
+	<td>exact:00:00:03</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=Invoice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 </tbody></table>
