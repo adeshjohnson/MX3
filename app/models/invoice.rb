@@ -318,6 +318,7 @@ class Invoice < ActiveRecord::Base
     # prints content of invoice detailed pdf table
     calls.each do |item|
       ii = []
+      dg_dest_names = ""
       dg_dest_names = item['dg_name']
       if !item['dest_name'].blank?
         dg_dest_names += " - " + item['dest_name']
