@@ -2112,6 +2112,67 @@
 	<td>Don't be so smart...</td>
 	<td></td>
 </tr>
+<!--tariff import one line-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/ieva/Desktop/mor/branches/12/selenium/files/csv/0700.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sep_row_1_0</td>
+	<td>Czech Republic</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sep_row_2_0</td>
+	<td>Czech Republic - Fixed Peak</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=sep_row_3_0</td>
+	<td>420</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Column Separator , and Decimal Separator .</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>File uploaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 2&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Column assignment</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
