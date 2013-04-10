@@ -375,7 +375,7 @@
         </table>
     <% end %>
 
-    <% if @exp_prov > 0 and @user.allow_loss_calls == 0 %>
+    <% if @exp_prov > 0 and @exp_prov.to_i == @active_prov.to_i and @user.allow_loss_calls == 0 %>
         <% @call_errors = true %>
         <br/>
 
