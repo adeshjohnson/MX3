@@ -41,7 +41,7 @@
     <% for invoice in @invoices %>
         <tr id="<%= invoice.id %>" class="booth">
           <td class="issue_date"><%= invoice.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <td class="amount"><%= format_money(invoice.balance, @currency) %></td>
+          <td class="amount"><%= nice_number(invoice.balance) %> <%= @currency %></td>
           <td class="status"><%= invoice_state(invoice) %></td>
           <td class="comment"><%= h(invoice.comment) %></td>
           <td class="user_type"><%= invoice.invoice_type %></td>

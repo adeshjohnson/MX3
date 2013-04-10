@@ -26,16 +26,16 @@
                   </tr>
                   <tr>
                     <td><%= _('Total_call_price') %></td>
-                    <td><%= format_money(@invoice.price_with_tax, @currency) %></td>
+                    <td><%= nice_number(@invoice.price_with_tax) %> <%= @currency %></td>
                   </tr>
                   <% if @invoice.invoice_type == "prepaid" %>
                       <tr>
                         <td><%= _('Money_paid') %></td>
-                        <td><%= format_money(@invoice.balance_with_tax, @currency) %></td>
+                        <td><%= nice_number(@invoice.balance_with_tax) %> <%= @currency %></td>
                       </tr>
                       <tr>
                         <td><%= _('Money_to_return') %></td>
-                        <td><%= format_money(@invoice.balance_with_tax - @invoice.price_with_tax, @currency) %></td>
+                        <td><%= nice_number(@invoice.balance_with_tax - @invoice.price_with_tax) %> <%= @currency %></td>
                       </tr>
                   <% end %>
                 </table>
@@ -72,9 +72,9 @@
                   <tr>
                     <td><%= nice_date(call.calldate) %></td>
                     <td><%= call.dst %></td>
-                    <td><%= curr_price(call.user_rate) %> <%= @currency %></td>
+                    <td><%= nice_number(call.user_rate.to_d * current_user.currency.exchange_rate.to_d) %> <%= @currency %></td>
                     <td><%= seconds_to_time(call.user_billsec) %></td>
-                    <td><%= format_money(curr_price(call.user_price)) %></td>
+                    <td><%= nice_number(curr_price(call.user_price)) %></td>
                   </tr>
               <% end %>
               <% if @invoice.tax %>
@@ -96,7 +96,7 @@
                   <strong><%= _('Total') %>:</strong>
                 </td>
                 <td><%= seconds_to_time(@invoice.call_duration) %></td>
-                <td><%= format_money(@invoice.price_with_tax) %></td>
+                <td><%= nice_number(@invoice.price_with_tax) %></td>
               </tr>
               </tbody>
             </table>

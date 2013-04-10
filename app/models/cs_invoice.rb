@@ -4,7 +4,6 @@ class CsInvoice < ActiveRecord::Base
   belongs_to :user
   belongs_to :tax
 
-  before_save :cs_before_save
   before_create :cs_before_create
 
   def calls(end_date = Time.now.strftime("%Y-%m-%d %H:%M:%S"))
@@ -12,7 +11,7 @@ class CsInvoice < ActiveRecord::Base
   end
 
   def call_price
-    @call_price ||= round_to_cents(calls.sum { |call| round_to_cents(curr_price(call.user_price)) })
+    @call_price ||= calls.sum { |call| curr_price(call.user_price) }
   end
 
   def call_duration
@@ -25,10 +24,6 @@ class CsInvoice < ActiveRecord::Base
 
   def prepaid?
     invoice_type == "prepaid"
-  end
-
-  def cs_before_save
-    self.balance = round_to_cents(self.balance)
   end
 
   def cs_before_create

@@ -19,8 +19,8 @@
 
                     <p>
                       <%= _('Money_user_paid') %>
-                      <input type="text" id="pending_payment" name="pending_payment" value="<%= sprintf("%.2f", @invoice.price_with_tax.to_f) %>" size="5"/> <%= @currency %>
-                      <input type="hidden" id="total_value" name="total" value="<%= sprintf("%.2f", @invoice.price_with_tax.to_f) %>"/>
+                      <input type="hidden" id="pending_payment" name="pending_payment" value="<%= @invoice.price_with_tax.to_f %>"/>
+                      <input type="text" id="total_value" name="total" value="<%= sprintf("%.2f", @invoice.price_with_tax.to_f) %>" size="5"/> <%= @currency %>
                     </p>
                 <% end %>
                 <strong><%= _('Summary') %></strong>
@@ -31,25 +31,25 @@
                   </tr>
                   <tr>
                     <td><%= _('Total_call_price') %></td>
-                    <td id="call_price"><%= sprintf("%.2f", @invoice.price_with_tax.to_f) %> <%= @currency %></td>
+                    <td id="call_price"><%= nice_number(@invoice.price_with_tax.to_f) %> <%= @currency %></td>
                   </tr>
                   <% if @invoice.invoice_type == "prepaid" %>
                       <tr>
                         <td><%= _('Money_paid') %></td>
-                        <td id="money_balance"><%= sprintf("%.2f", @invoice.balance_with_tax.to_f) %> <%= @currency %></td>
+                        <td id="money_balance"><%= nice_number(@invoice.balance_with_tax.to_f) %> <%= @currency %></td>
                       </tr>
                       <tr>
                         <% if @invoice.balance - @invoice.call_price < 0 %>
                             <td><%= _('Money_to_acquire') %></td>
-                            <td id="money_return"><%= sprintf("%.2f", (-1 * ((@invoice.balance_with_tax.to_f - @invoice.price_with_tax.to_f) * 100).ceil.to_f / 100)) %> <%= @currency %></td>
+                            <td id="money_return"><%= nice_number(-1 * (@invoice.balance_with_tax.to_f - @invoice.price_with_tax.to_f)) %> <%= @currency %></td>
                         <% else %>
                             <td><%= _('Money_to_return') %></td>
-                            <td id="money_return"><%= sprintf("%.2f", (((@invoice.balance_with_tax.to_f - @invoice.price_with_tax.to_f) * 100).ceil.to_f / 100)) %> <%= @currency %></td>
+                            <td id="money_return"><%= nice_number(@invoice.balance_with_tax.to_f - @invoice.price_with_tax.to_f) %> <%= @currency %></td>
                         <% end %>
                       </tr>
                   <% else %>
                       <td><%= _('Money_to_return') %></td>
-                      <td id="money_return"><%= format_money(sprintf("%.2f", @invoice.balance_with_tax).to_f - sprintf("%.2f", @invoice.price_with_tax).to_f, @currency) %></td>
+                      <td id="money_return"><%= nice_number(@invoice.balance_with_tax.to_f - @invoice.price_with_tax.to_f) %> <%= @currency %></td>
                   <% end %>
                 </table>
                 <br/>
@@ -81,9 +81,9 @@
                       <tr>
                         <td><%= call.calldate.strftime("%Y-%m-%d %H:%M:%S") %></td>
                         <td><%= call.dst %></td>
-                        <td><%= sprintf("%.2f", curr_price(call.user_rate.to_f)) %> <%= @currency %></td>
+                        <td><%= nice_number(curr_price(call.user_rate.to_f)) %> <%= @currency %></td>
                         <td><%= seconds_to_time(call.user_billsec) %></td>
-                        <td><%= sprintf("%.2f", curr_price(call.user_price.to_f)) %></td>
+                        <td><%= nice_number(curr_price(call.user_price.to_f)) %></td>
                       </tr>
                   <% end %>
                   <% if @invoice.tax %>
@@ -105,7 +105,7 @@
                       <strong><%= _('Total') %>:</strong>
                     </td>
                     <td><%= seconds_to_time(@invoice.call_duration) %></td>
-                    <td><%= sprintf("%.2f", @invoice.price_with_tax.to_f) %></td>
+                    <td><%= nice_number(@invoice.price_with_tax.to_f) %></td>
                   </tr>
                   </tbody>
                 </table>
@@ -114,7 +114,7 @@
               <table cellpadding="0" cellspacing="0" class="summary">
                 <tr>
                   <td><%= _('Money_to_return') %>
-                    <strong><%= sprintf("%.2f", @invoice.balance.to_f) %> <%= @currency %></strong>
+                    <strong><%= nice_number(@invoice.balance.to_f) %> <%= @currency %></strong>
                   </td>
                 </tr>
               </table>

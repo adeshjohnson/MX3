@@ -162,9 +162,9 @@
       <tr>
         <td><%= nice_date_time(call.calldate, ofset=0) %></td>
         <td><%= call.dst %></td>
-        <td><%= curr_price(call.user_rate) %></td>
+        <td><%= nice_number(call.user_rate.to_d * current_user.currency.exchange_rate.to_d) %></td>
         <td><%= seconds_to_time(call.user_billsec) %></td>
-        <td><%= format_money(curr_price(call.user_price)) %> <%= @currency %></td>
+        <td><%= nice_number(curr_price(call.user_price)) %> <%= @currency %></td>
       </tr>
   <% end %>
   </tbody>
@@ -174,7 +174,7 @@
     <td>
       <%= seconds_to_time(@invoice.call_duration) %>
     </td>
-    <td><%= format_money(@invoice.price_with_tax) %></td>
+    <td><%= nice_number(@invoice.price_with_tax) %></td>
   </tr>
   </tfoot>
   <% if @invoice.tax %>
