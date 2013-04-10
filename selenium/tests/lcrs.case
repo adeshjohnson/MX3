@@ -1154,6 +1154,37 @@
 	<td>css=#sortable_table &gt; table.2.0</td>
 	<td>exact:Test2:SIP:Test Tariff</td>
 </tr>
+<!--crasho testavimas, kada istrinami visi tarifai-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/delete_tariffs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_sort/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#item_1 &gt; td</td>
+	<td>Test Provider:IAX2:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#item_3 &gt; td</td>
+	<td>exact:Test3:SIP:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#item_2 &gt; td</td>
+	<td>exact:Test2:SIP:</td>
+</tr>
 </tbody></table>
 </body>
 </html>
