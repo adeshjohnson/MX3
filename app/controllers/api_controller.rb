@@ -1628,7 +1628,11 @@ class ApiController < ApplicationController
                           '))
 
                           variables = Email.email_variables(user, nil, {:monitoring => monitoring, :monitoring_type => monitoring.monitoring_types, :monitoring_users_list => users, :call_list => call_list})
-                          EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)
+                          if Confline.get_value("Email_from", user.id).to_s =~ /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/
+                            EmailsController::send_email(email, Confline.get_value("Email_from", user.id), [user], variables)
+                          else
+                            status << " email not sent, invalid format of From email in owner settings"
+                          end
                         end
 
                       end
