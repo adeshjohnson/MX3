@@ -1097,19 +1097,25 @@
 	<td>Primary LCR1 LCR2</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=cron_setting_action</td>
+	<td>label=Change provider tariff</td>
+</tr>
+<!--neturi buti reselerio tarifu ir provaideriu-->
+<tr>
 	<td>assertText</td>
-	<td>id=cron_setting_lcr_id</td>
-	<td>Primary LCR1 LCR2</td>
+	<td>id=cron_setting_provider_to_target_id</td>
+	<td>Test Tariff Test Tariff bad currency</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cron_setting_provider_target_id</td>
+	<td>All Test Provider</td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/cron_actions/edit/4</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=cron_setting_lcr_id</td>
-	<td>Primary LCR1 LCR2</td>
 </tr>
 <tr>
 	<td>assertText</td>
