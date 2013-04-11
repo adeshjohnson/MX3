@@ -378,8 +378,10 @@ class Did < ActiveRecord::Base
         dids_with_collisions << did if a.size > 0
       }
     else
+      assigned_qf = User.select("quickforwards_rule_id").where(:id => owner_id.to_i).first.quickforwards_rule_id
+      cond = "and id != #{assigned_qf.to_s}" if assigned_qf.to_i > 0
       all_dids.each{|did|
-        a = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id in (0,#{owner_id})")
+        a = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^'))) and user_id = 0 #{cond}")
         dids_with_collisions << did if a.size > 0
       }
     end
