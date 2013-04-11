@@ -12,11 +12,11 @@
       <td class="balance">
         <% if user.prepaid? %>
             <span class="balance-value <%= ((user.balance - invoice.call_price) < 0.0) ? "red" : "green" %>"><%= _(user.user_type).upcase %>
-              (<%= sprintf("%.2f", user.balance.to_f) %>)</span>
+              (<%= nice_number(user.balance.to_f) %>)</span>
             <a href="" class="topup topup-prepaid" title="<%= _('Adjust_user_balance') %>">&nbsp;</a>
         <% else %>
             <span class="balance-value <%= (invoice.call_price > 0.0) ? "red" : "green" %>"><%= _(user.user_type).upcase %>
-              (<%= sprintf("%.2f", user.balance.to_f) %>)</span>
+              (<%= nice_number(user.balance.to_f) %>)</span>
         <% end %>
       </td>
       <td class="comment">

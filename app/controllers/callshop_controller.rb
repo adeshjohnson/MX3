@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 class CallshopController < ApplicationController
 
-  layout "callshop", :except => [:new, :free_booth, :topup_booth, :invoice_print, :invoice_edit, :comment_update]
+  layout "callshop", :except => [:new, :free_booth, :topup_booth, :invoice_print, :invoice_edit, :comment_update, :number_digits]
 
   before_filter :check_localization
   before_filter :check_addon
-  skip_before_filter :redirect_callshop_manager
+  skip_before_filter :redirect_callshop_manager, :number_digits
 
   #skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   #skip_before_filter :set_current_user
@@ -22,7 +22,7 @@ class CallshopController < ApplicationController
     true
   }
 
-  before_filter :find_shop_and_authorize, :except => [:show_json, :get_number_data]
+  before_filter :find_shop_and_authorize, :except => [:show_json, :get_number_data, :number_digits]
   # manager view
   def show
     @users = @cshop.users
@@ -293,6 +293,10 @@ class CallshopController < ApplicationController
     render :json => result.to_json
   end
 
+  def number_digits
+    render :text => (!session or !session[:nice_number_digits]) ? Confline.get_value("Nice_Number_Digits") : session[:nice_number_digits]
+  end
+
   private
 
   def find_shop_and_authorize
@@ -384,6 +388,8 @@ class CallshopController < ApplicationController
       else
         booth[:duration] = "-"
       end
+
+      booth[:balance] = nice_number(booth[:balance])
       booth[:user_type] = (booth[:user_type].to_i == 1 ? "postpaid" : "prepaid")
 
       if booth[:number]

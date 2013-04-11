@@ -3,6 +3,15 @@ function update_totals(){
     $("#active_calls_count").html($("tr.booth.occupied").size());
 }
 
+function httpGet(theUrl){
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
 function log(message) {
     if (window.console) {
         console.debug(message);
@@ -415,7 +424,8 @@ function remove_slide_menus(element){
                                                 // if we determine that a booth got occupied or reserved by prepaid client, we need to inject balance adjustment link and colorize booth user type
                                                 if (current.state.match(/occupied|reserved/)) {
                                                     var balance_col = row.find('.balance');
-                                                    balance_col.html(sprintf("%.2f", parseFloat(balance_col.html())));
+                                                    var num = httpGet("/billing/callshop/number_digits")
+                                                    balance_col.html(sprintf("%."+ num +"f", parseFloat(balance_col.html())));
                                                     if (current.user_type.match(/postpaid/)) {
                                                         balance_col.prepend(i18n.user_types.postpaid.toUpperCase() + " (").append(")").wrapInner(function() {
                                                             var val = parseFloat(current.balance);
