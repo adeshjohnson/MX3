@@ -576,11 +576,16 @@ class Call < ActiveRecord::Base
       user_price = SqlExport.user_price_no_dids_sql
       reseller_price = SqlExport.admin_reseller_price_no_dids_sql
     end
+    if options[:current_user].usertype == "user"
+      billsec_sql = "CEIL(user_billsec)"
+    else
+      billsec_sql = "IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)"
+    end
     Call.find(
         :first,
         :select => "
                  COUNT(*) as total_calls,
-                 SUM(IF((billsec IS NULL OR billsec = 0), IF(real_billsec IS NULL, 0, real_billsec), billsec)) as total_duration,
+                 SUM(#{billsec_sql}) as total_duration,
                  SUM(IF(calls.user_id = #{options[:current_user].id}, #{SqlExport.user_price_sql}, #{options[:current_user].usertype == "user" ? SqlExport.user_did_price_sql : SqlExport.user_price_sql})) * #{options[:exchange_rate].to_d} as total_user_price_with_dids,
 
                  SUM(#{user_price}) * #{options[:exchange_rate].to_d} as total_user_price,

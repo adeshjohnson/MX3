@@ -28,6 +28,7 @@
   <%= raw setting_boolean(_('Show_forgot_password'), 'show_forgot_password', "Show_forgot_password") %>
   <%= raw setting_boolean(_('Hide_recordings_for_all_users'), 'hide_recordings_for_all_users', "Hide_recordings_for_all_users") %>
   <%= raw setting_boolean(_('Show_recordings_with_zero_billsec'), 'show_recordings_with_zero_billsec', 'Show_recordings_with_zero_billsec') %>
+  <%= raw setting_boolean(_('Instead_billsec_show_user_billsec'), 'invoice_user_billsec_show', "Invoice_user_billsec_show", 0, {:id => 'inv_user_billsec', :tip => tooltip(_('billsec_and_user_billsec'), _('billsec_and_user_billsec_explanation'))}) %>
   <tr>
     <td></td>
     <td><b><%= _('Default_Number_Decimal') %>:</b></td>

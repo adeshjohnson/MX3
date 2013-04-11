@@ -39,7 +39,6 @@
         <%= raw setting_boolean(_("Show_balance_line"), 'invoice_show_balance_line', "Invoice_Show_Balance_Line", 0, {:id => 'inv_show_balance'}) %>
         <%= raw setting_boolean(_("Round_finals_to_2_decimals"), 'invoice_number_digits', "Round_finals_to_2_decimals", 0, {:id => 'inv_num_digits'}) %>
         <%= raw setting_boolean(_('Short_file_name'), 'invoice_short_file_name', "Invoice_Short_File_Name", 0, {:id => 'inv_short_file_name'}) %>
-        <%= raw setting_boolean(_('Instead_billsec_show_user_billsec'), 'invoice_user_billsec_show', "Invoice_user_billsec_show", 0, {:id => 'inv_user_billsec', :tip => tooltip(_('billsec_and_user_billsec'), _('billsec_and_user_billsec_explanation'))}) %>
         <tr>
           <td></td>
           <td id="inv_page_limit" <%= tooltip(_('Invoice_Page_Limit'), _('Invoice_Page_Limit_explanation')) %> >
@@ -185,7 +184,6 @@
         <%= raw setting_boolean(_("Show_balance_line"), 'prepaid_invoice_show_balance_line', "Prepaid_Invoice_Show_Balance_Line", :id => 'prep_inv_show_balance_line') %>
         <%= raw setting_boolean(_("Round_finals_to_2_decimals"), 'prepaid_invoice_number_digits', "Prepaid_Round_finals_to_2_decimals", :id => 'prep_inv_num_digits') %>
         <%= raw setting_boolean(_('Short_file_name'), 'prepaid_invoice_short_file_name', "Prepaid_Invoice_Short_File_Name", :id => 'prep_inv_short_file_name') %>
-        <%= raw setting_boolean(_('Instead_billsec_show_user_billsec'), 'prepaid_invoice_user_billsec_show', "Prepaid_Invoice_user_billsec_show", 0, {:id => 'prep_inv_user_billsec', :tip => tooltip(_('billsec_and_user_billsec'), _('billsec_and_user_billsec_explanation'))}) %>
         <tr>
           <td <%= tooltip(_('Invoice_Page_Limit'), _('Invoice_Page_Limit_explanation')) %> ></td>
           <td id="prepaid_inv_page_limit"><b><%= _('Invoice_Page_Limit') %>:</b></td>

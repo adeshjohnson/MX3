@@ -1210,7 +1210,7 @@ class AccountingController < ApplicationController
     prepaid = (invoice.invoice_type.to_s == 'prepaid' and owner == 0) ? "Prepaid_" : ""
 
     up, rp, pp = user.get_price_calculation_sqls
-    billsec_cond = Confline.get_value("#{prepaid}Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
+    billsec_cond = Confline.get_value("Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
     user_price = SqlExport.replace_price(up, {:ex => ex})
     reseller_price = SqlExport.replace_price(rp, {:ex => ex})
     did_sql_price = SqlExport.replace_price('calls.did_price', {:ex => ex, :reference => 'did_price'})
@@ -1349,7 +1349,7 @@ class AccountingController < ApplicationController
     owner = invoice.user.owner_id
     prepaid = (invoice.invoice_type.to_s == 'prepaid' and owner == 0) ? "Prepaid_" : ""
 
-    billsec_cond = Confline.get_value("#{prepaid}Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
+    billsec_cond = Confline.get_value("Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec'
     up, rp, pp = user.get_price_calculation_sqls
     user_price = SqlExport.replace_price(up, {:ex => ex})
 

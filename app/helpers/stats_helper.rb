@@ -57,10 +57,10 @@ module StatsHelper
     rez.join("").html_safe
   end
 
-  def call_duration(call, text_class, call_type)
+  def call_duration(call, text_class, call_type, own = false)
     rez = ["<td id='duration_#{call.id}' class='#{text_class}' align='center'>"]
     unless ["missed", "missed_inc", "missed_inc_all"].include?(call_type)
-      rez << nice_time(call.nice_billsec)
+      rez << nice_time((own ? call.user_billsec : call.nice_billsec ))
     else
       rez << nice_time(call.duration)
     end

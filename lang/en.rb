@@ -3606,7 +3606,7 @@ Localization.define('en') do |l|
   l.store 'Resellers_Allow_Use_dahdi_Device', 'Allow to use dahdi devices'
   l.store 'Resellers_Allow_Use_Virtual_Device', 'Allow to use Virtual devices'
   l.store 'Allow_short_passwords_in_devices', 'Allow short passwords in devices'
-  l.store 'Instead_billsec_show_user_billsec', 'Instead billsec show user_billsec'
+  l.store 'Instead_billsec_show_user_billsec', 'Show user_billsec for Users instead of billsec'
   l.store 'billsec_and_user_billsec', 'billsec and user_billsec explanation'
   l.store 'billsec_and_user_billsec_explanation', 'billsec - actual call time. user_billsec - user is billed for this calculated time.'
   l.store 'Failed_Locally', 'Failed Locally'

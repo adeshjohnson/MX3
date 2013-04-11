@@ -551,7 +551,7 @@ class Invoice < ActiveRecord::Base
         :limit => Confline.get_value("#{prepaid}Invoice_page_limit", owner).to_i,
         :min_type => (Confline.get_value("#{prepaid}Invoice_Show_Time_in_Minutes", owner).to_i == 1) ? 1 : 0,
         :show_avg_rate => (Confline.get_value("#{prepaid}Invoice_Add_Average_rate", owner).to_i == 1) ? 1 : 0,
-        :billsec_cond => Confline.get_value("#{prepaid}Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec',
+        :billsec_cond => Confline.get_value("Invoice_user_billsec_show", owner).to_i == 1 ? 'user_billsec' : 'billsec',
         :company => Confline.get_value("Company", user.owner_id)
     }
   end

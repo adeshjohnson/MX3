@@ -1043,6 +1043,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Registration_Enable_VAT_checking", params[:enable_vat_checking].to_i)
     Confline.set_value("Registration_allow_vat_blank", params[:allow_vat_blank].to_i)
 
+    Confline.set_value("Invoice_user_billsec_show", params[:invoice_user_billsec_show].to_i)
+
     #Invoices
     #postpaid
     update_confline("Invoice_Number_Start", params[:invoice_number_start])
@@ -1074,7 +1076,6 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Round_finals_to_2_decimals", params[:invoice_number_digits].to_i)
     Confline.set_value("Invoice_Short_File_Name", params[:invoice_short_file_name].to_i)
     session[:nice_invoice_number_digits] = params[:invoice_number_digits].to_i
-    Confline.set_value("Invoice_user_billsec_show", params[:invoice_user_billsec_show].to_i)
     Confline.set_value("Invoice_show_additional_details_on_separate_page", params[:show_additional_details_on_separate_page_check].to_i)
     Confline.set_value2("Invoice_show_additional_details_on_separate_page", params[:show_additional_details_on_separate_page_details].to_s)
     set_valid_page_limit("Invoice_page_limit", params[:invoice_page_limit].to_i, 0) #"magic number" 0 means administrator id
@@ -1107,7 +1108,6 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Prepaid_Round_finals_to_2_decimals", params[:prepaid_invoice_number_digits].to_i)
     Confline.set_value("Prepaid_Invoice_Short_File_Name", params[:prepaid_invoice_short_file_name].to_i)
     session[:nice_prepaid_invoice_number_digits] = params[:prepaid_invoice_number_digits].to_i
-    Confline.set_value("Prepaid_Invoice_user_billsec_show", params[:prepaid_invoice_user_billsec_show].to_i)
     Confline.set_value("Prepaid_Invoice_show_additional_details_on_separate_page", params[:prepaid_show_additional_details_on_separate_page_check].to_i)
     Confline.set_value2("Prepaid_Invoice_show_additional_details_on_separate_page", params[:prepaid_show_additional_details_on_separate_page_details].to_s)
     set_valid_page_limit("Prepaid_Invoice_page_limit", params[:prepaid_invoice_page_limit].to_i, 0) #"magic number" 0 means administrator id
