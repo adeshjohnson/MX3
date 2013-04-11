@@ -372,12 +372,7 @@ class Did < ActiveRecord::Base
     # set error flag on collisions with QF | code : 4
     all_dids = ActiveRecord::Base.connection.select_all("SELECT * FROM #{name} WHERE f_error = 0").each(&:symbolize_keys!).collect{|v| v[:did]}
     dids_with_collisions = []
-    if owner_id.to_i == 0
-      all_dids.each{|did|
-        a = QuickforwardsRule.where("#{did} REGEXP(concat('^',replace(replace(rule_regexp, '%', ''),'|','|^')))")
-        dids_with_collisions << did if a.size > 0
-      }
-    else
+    if owner_id.to_i != 0
       assigned_qf = User.select("quickforwards_rule_id").where(:id => owner_id.to_i).first.quickforwards_rule_id
       cond = "and id != #{assigned_qf.to_s}" if assigned_qf.to_i > 0
       all_dids.each{|did|
