@@ -2,8 +2,8 @@
     <div align="right">
       <%= image_tag("/images/logo/ouroboros_logo.jpg", :style => 'border-style:none', :title => "Ouroboros") %>
     </div>
-    <% ouroboros_form_tag do %>
-        <%= ouroboros_setup({
+    <%= ouroboros_form_tag do %>
+        <%= raw ouroboros_setup({
                                     :mch_code => @merchant_code.to_s,
                                     :amount => @payment.amount.to_s,
                                     :order_id => @payment.id.to_s,
