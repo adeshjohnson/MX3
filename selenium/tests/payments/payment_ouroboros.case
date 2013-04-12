@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.152" />
+<title>payment_ouroboros</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">payment_ouroboros</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>ouroboros_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_merchant_code</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_secret_key</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_default_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_min_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_max_amount</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ouroboros_default_currency</td>
+	<td>label=HRK</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ouroboros_language</td>
+	<td>label=English</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_link_name</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ouroboros_link_url</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/ouroboros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>user_10</td>
+	<td>System Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>paymenttype_10</td>
+	<td>Ouroboros</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amount_10</td>
+	<td>13.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>fee_10</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_10</td>
+	<td>13.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_10</td>
+	<td>HRK</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>completed_10</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<!--as 101 -->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--create payment-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/ouroboros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--as reseller | passs-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/ouroboros</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/personal_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>paymenttype_12</td>
+	<td>Ouroboros</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amount_12</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>fee_12</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_12</td>
+	<td>15.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_12</td>
+	<td>HRK</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>completed_12</td>
+	<td>No (Unnotified payment)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Hello, System Admin <br /> <br /> <br /> <br /> <br /> <br /> We accept: <br /> <br /> 123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=img[alt=&quot;Ouroboros_logo&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Ouroboros_logo&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:Please enter amount to update your balance*: HRK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:*Minimum amount: 1.0000 HRK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:Please press here to pay* 5.0000 HRK <br /><br /> <br /> <br /> *Your TAX: %. Total amount to pay : 5.0000 HRK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:*Your TAX: %. Total amount to pay : 5.0000 HRK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Error occurred in the payment process</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=return</td>
+	<td>Return to merchant</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
