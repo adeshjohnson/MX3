@@ -52,6 +52,9 @@ module ActiveMerchant
     end
 
     def request(method, body, headers = {})
+      debug method
+      debug body
+      debug headers
       retry_exceptions do
         begin
           info "#{method.to_s.upcase} #{endpoint}", tag
@@ -151,6 +154,7 @@ module ActiveMerchant
         when 200...300
           response.body
         else
+          debug(response)
           raise ResponseError.new(response)
       end
     end
