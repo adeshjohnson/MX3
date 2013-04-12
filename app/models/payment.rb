@@ -47,7 +47,7 @@ class Payment < ActiveRecord::Base
 
   def payment_amount_with_vat(nice_number_digits)
     if self.tax && !["webmoney", "cyberplat", "linkpoint", "voucher", "ouroboros", "subscription", "invoice", "paypal", 'manual'].include?(self.paymenttype)
-      return self.amount + self.tax
+      return self.amount.to_f + self.tax.to_f
     else
       if self.paymenttype == "invoice" and self.invoice
         return self.invoice.price_with_tax
