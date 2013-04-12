@@ -95,8 +95,7 @@
                 <%= show_call_dst(call, text_class) %>
             <% end %>
             <td id="prefix_<%= call.id %>" align="right"><%= call.prefix.to_s %></td>
-            <%= call_duration(call, text_class, @call_type, true) %>
-
+            <%= call_duration(call, text_class, @call_type, show_user_billsec?) %>
             <% if @call_type != "answered" %>
                 <td id="disposition_<%= call.id %>"><%= call.disposition %></td>
             <% end %>
