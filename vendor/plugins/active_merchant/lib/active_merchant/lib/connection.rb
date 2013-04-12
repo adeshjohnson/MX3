@@ -93,6 +93,10 @@ module ActiveMerchant
     private
     def http
       http = Net::HTTP.new(endpoint.host, endpoint.port)
+      
+      debug endpoint.host.to_s
+      debug endpoint.port.to_s
+      
       configure_debugging(http)
       configure_timeouts(http)
       configure_ssl(http)
