@@ -154,10 +154,12 @@ class DidsController < ApplicationController
     @did = Did.new
     @page_title = _('New_did')
     @page_icon = 'add.png'
+    @options = session[:new_dids_creation] || Hash.new(nil)
+
     if current_user.usertype == 'reseller'
       @providers = current_user.providers.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
     else
-      @providers = Provider.find(:all, :conditions => ['hidden=?', 0], :order => "name ASC")
+      @providers = Provider.find(:all, :conditions => 'hidden = 0 AND user_id = 0', :order => "name ASC")
     end
   end
 
@@ -185,7 +187,7 @@ class DidsController < ApplicationController
   def create
     if params[:amount] == "one" # Create just one did
       pr = (current_user.usertype == 'reseller' and current_user.own_providers.to_i == 0) ? Confline.get_value("DID_default_provider_to_resellers").to_i.to_s : params[:provider]
-      @did = Did.new(:did => params[:did].to_s.strip, :provider_id => pr, :reseller_id => current_user.id)
+      @did = Did.new(:did => params[:did].to_s.strip, :provider_id => pr, :reseller_id => corrected_user_id)
       if @did.save
         create_did_rates(@did)
         add_action(session[:user_id], 'did_created', @did.id)
@@ -215,7 +217,7 @@ class DidsController < ApplicationController
               :user_id => 0,
               :device_id => 0,
               :subscription_id => 0,
-              :reseller_id => current_user.id,
+              :reseller_id => corrected_user_id,
               :provider_id => pr.strip)
           if did.save
             create_did_rates(did, did_rate_cache)
@@ -278,6 +280,7 @@ class DidsController < ApplicationController
   def confirm_did
     @page_title = _('New_did')
     @page_icon = 'add.png'
+    session[:new_dids_creation] = params
     @provider = nil
     if current_user.usertype == 'reseller'
       p = params[:did] ? params[:did][:provider_id] : nil
