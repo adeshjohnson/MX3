@@ -280,7 +280,8 @@ class DidsController < ApplicationController
   def confirm_did
     @page_title = _('New_did')
     @page_icon = 'add.png'
-    session[:new_dids_creation] = params
+    good_params = params.except("file")
+    session[:new_dids_creation] = good_params
     @provider = nil
     if current_user.usertype == 'reseller'
       p = params[:did] ? params[:did][:provider_id] : nil
