@@ -590,6 +590,7 @@
               </td>
             </tr>
         <% end %>
+    <% end %>
         <% if defined? PROVB_Active and PROVB_Active.to_i == 1 %>
             <tr>
               <td> <%= _('Time_limit_per_day') %> </td>
@@ -599,6 +600,7 @@
               </td>
             </tr>
         <% end %>
+    <% if session[:usertype] != "reseller" %>
         <tr>
           <td height="20"></td>
         </tr>
