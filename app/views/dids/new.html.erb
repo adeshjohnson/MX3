@@ -13,7 +13,7 @@
           <br/>
           <% if see_providers_in_dids? %>
               <b><%= _('Provider') %>:</b>
-              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }, (@options[:amount].to_s == "one" ? @options[:did][:provider_id].to_i : 0 )), {:id => "did_provider_id_1"}) %>
+              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }, (@options[:amount].to_s == "one" and !@options[:did].blank? ? @options[:did][:provider_id].to_i : 0 )), {:id => "did_provider_id_1"}) %>
               <br/>
               <br/>
           <% end %>
@@ -43,7 +43,7 @@
           <br/>
           <% if see_providers_in_dids? %>
               <b><%= _('Provider') %>:</b>
-              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }, (@options[:amount].to_s == "amount_interval" ? @options[:did][:provider_id].to_i : 0 )), {:id => "did_provider_id_2"}) %>
+              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }, (@options[:amount].to_s == "amount_interval" and !@options[:did].blank? ? @options[:did][:provider_id].to_i : 0 )), {:id => "did_provider_id_2"}) %>
               <br/>
               <br/>
           <% end %>
@@ -71,7 +71,7 @@
           <br/>
           <% if see_providers_in_dids? %>
               <b><%= _('Provider') %>:</b>
-              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }, (@options[:amount].to_s == "from_file" ? @options[:did][:provider_id].to_i : 0 )), {:id => "did_provider_id_1"}) %>
+              <%= select_tag("did[provider_id]", options_for_select(@providers.map { |p| [p.name, p.id] }, (@options[:amount].to_s == "from_file" and !@options[:did].blank? ? @options[:did][:provider_id].to_i : 0 )), {:id => "did_provider_id_1"}) %>
               <br/>
               <br/>
           <% end %>
