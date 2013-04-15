@@ -2092,6 +2092,171 @@
 	<td>IAX2 Trunking Mode</td>
 	<td></td>
 </tr>
+<!--time limit per day setting-->
+<!--sip-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time limit per day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[26]/td[2]</td>
+	<td>min</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>dfgdfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/17</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>15</td>
+</tr>
+<!--iax2-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time limit per day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[15]/td[2]</td>
+	<td>min</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>dfgdfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_time_limit_per_day</td>
+	<td>15</td>
+</tr>
+<!--h323-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Time limit per day</td>
+	<td></td>
+</tr>
+<!--dahdi-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/18</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Time limit per day</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
