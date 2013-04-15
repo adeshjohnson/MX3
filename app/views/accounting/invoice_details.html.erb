@@ -105,7 +105,7 @@
             <% end %>
           </td>
         </tr>
-        <% unless (@invoice.invoice_type.downcase == 'prepaid') and (@invoice_invoicedetails.count == 1) and (@invoice_invoicedetails.first.name == "Manual Payment") %>
+        <% unless ((@invoice.invoice_type.downcase == 'prepaid') and (@invoice_invoicedetails.count == 1) and (@invoice_invoicedetails.first.name.include?("Manual Payment"))) %>
         <tr class="row2">
           <th align="left"><%= _('Invoice_detailed') %>:</th>
           <td align="center">

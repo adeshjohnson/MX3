@@ -109,8 +109,8 @@ class Invoice < ActiveRecord::Base
   def converted_price_with_vat(exr)
     begin
       b = read_attribute(:price)
-      (b.to_d + self.user.get_tax.count_tax_amount(b.to_d).to_d) * exr.to_d
-    rescue
+      (b.to_d + self.get_tax.count_tax_amount(b.to_d).to_d) * exr.to_d
+    rescue # fail safe 
       b = read_attribute(:price_with_vat)
       b.to_d * exr.to_d
     end
