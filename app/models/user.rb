@@ -2642,21 +2642,19 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def warning_email_hour
     b = read_attribute(:warning_email_hour)
-    if b.to_i != -1
-      c = b.to_d + (time_offset.to_d/3600).to_d
-      b = c.to_i > 24 ? c - 24 : c
-      b = c.to_i < 0 ? c + 24 : b
-    else
-      b
-    end
-    b
+    Time.zone	  = User.find(0).time_zone
+    system_time	  = Time.zone.now.change(hour: b.to_i, min: 0, sec: 0)
+    Time.zone	  = self.time_zone
+    c = Time.zone.parse(system_time.to_s).hour
+    c
   end
 
   def warning_email_hour= value
     if value.to_i != -1
-      b = value.to_d - (time_offset.to_d/3600).to_d
-      c = b.to_i > 24 ? b - 24 : b
-      c = b.to_i < 0 ? b + 24 : c
+      Time.zone	   = self.time_zone
+      session_time = Time.zone.now.change(hour: value.to_i, min: 0, sec: 0)
+      Time.zone	   = User.find(0).time_zone
+      c = Time.zone.parse(session_time.to_s).hour
     else
       c = value
     end
