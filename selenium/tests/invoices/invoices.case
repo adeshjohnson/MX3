@@ -48,7 +48,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/calls_fix_delta</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
 	<td></td>
 </tr>
 <tr>
@@ -220,22 +220,6 @@
 	<td>//div[@id='confirm_without_message']/input</td>
 	<td></td>
 </tr>
-<!--date fix-->
-<tr>
-	<td>open</td>
-	<td>/billing/stats/show_user_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
 <!--reseller-->
 <tr>
 	<td>open</td>
@@ -301,32 +285,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -341,7 +325,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -403,32 +387,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -443,7 +427,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -467,7 +451,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Generating invoices for period: 2009-01-01 - 2009-01-01</td>
+	<td>Generating invoices for period: 2012-11-21 - 2012-11-21</td>
 	<td></td>
 </tr>
 <tr>
@@ -500,32 +484,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=10</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -545,7 +529,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_month</td>
-	<td>label=March</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -564,7 +548,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Generating invoices for period: 2009-01-01 - 2009-01-10</td>
+	<td>Generating invoices for period: 2012-11-21 - 2012-11-30</td>
 	<td></td>
 </tr>
 <tr>
@@ -581,32 +565,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=October</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=10</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=February</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -626,7 +610,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_month</td>
-	<td>label=March</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -645,7 +629,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Generating invoices for period: 2009-01-01 - 2009-02-10</td>
+	<td>Generating invoices for period: 2012-10-21 - 2012-11-30 </td>
 	<td></td>
 </tr>
 <tr>
@@ -662,32 +646,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=October</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=10</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=February</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_till_day</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -697,7 +681,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -727,58 +711,58 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_start_2</td>
-	<td>2009-01-01</td>
+	<td>id=inv_period_start_2</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_end_2</td>
-	<td>2009-01-01</td>
+	<td>id=inv_period_end_2</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_start_3</td>
-	<td>2009-01-01</td>
+	<td>id=inv_period_start_3</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_end_3</td>
-	<td>2009-01-10</td>
+	<td>id=inv_period_end_3</td>
+	<td>2012-11-30</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_start_4</td>
-	<td>2009-01-01</td>
+	<td>id=inv_period_start_4</td>
+	<td>2012-10-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_end_4</td>
-	<td>2009-02-10</td>
+	<td>id=inv_period_end_4</td>
+	<td>2012-11-30</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_5</td>
-	<td>INV09010104</td>
+	<td>id=inv_number_2</td>
+	<td>INV12112101</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_6</td>
-	<td>INV09010105</td>
+	<td>id=inv_number_3</td>
+	<td>INV12112102</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_2</td>
-	<td>INV09010101</td>
+	<td>id=inv_number_4</td>
+	<td>INV12102101</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_3</td>
-	<td>INV09010102</td>
+	<td>id=inv_number_5</td>
+	<td>INV12102102</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_4</td>
-	<td>INV09010103</td>
+	<td>id=inv_number_6</td>
+	<td>INV12102103</td>
 </tr>
 <!--Manual payment should be marked as paid.-->
 <tr>
@@ -937,7 +921,7 @@
 <tr>
 	<td>assertText</td>
 	<td>number</td>
-	<td>INV09010101</td>
+	<td>INV12112101</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -946,43 +930,43 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>period_start</td>
-	<td>2009-01-01</td>
+	<td>id=period_start</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>period_end</td>
-	<td>2009-01-01</td>
+	<td>id=period_end</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>price</td>
-	<td>5.0000</td>
+	<td>id=price</td>
+	<td>10.7219</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>full_price</td>
-	<td>9.4380</td>
+	<td>20.2387</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id_name_2</td>
+	<td>id_name_5</td>
 	<td>Calls</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id_quantity_2</td>
-	<td>1</td>
+	<td>id_quantity_5</td>
+	<td>3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id_price_2</td>
-	<td>5.0000</td>
+	<td>id_price_5</td>
+	<td>3.3453</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id_total_price_2</td>
-	<td>5.0000</td>
+	<td>id_total_price_5</td>
+	<td>3.3453</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -1079,7 +1063,7 @@
 <tr>
 	<td>assertText</td>
 	<td>amount_12</td>
-	<td>5.0000</td>
+	<td>10.7219</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1089,7 +1073,7 @@
 <tr>
 	<td>assertText</td>
 	<td>amout_with_tax_12</td>
-	<td>9.4380</td>
+	<td>20.2387</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1099,7 +1083,7 @@
 <tr>
 	<td>assertText</td>
 	<td>total_amount</td>
-	<td>29.0000 (USD)</td>
+	<td>34.7219 (USD)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1109,7 +1093,7 @@
 <tr>
 	<td>assertText</td>
 	<td>total_with_tax</td>
-	<td>54.7404 (USD)</td>
+	<td>65.5411 (USD)</td>
 </tr>
 <!--## CHECK IF NUMBERS ARE ROUNDED CORRECTLY-->
 <tr>
@@ -1159,33 +1143,58 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_type_5</td>
+	<td>inv_type_6</td>
 	<td>Postpaid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_price_5</td>
-	<td>7.0000</td>
+	<td>inv_price_6</td>
+	<td>19.5977</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_full_price_5</td>
-	<td>13.2132</td>
+	<td>inv_full_price_6</td>
+	<td>36.9925</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoice_details/5?currency=USD</td>
+	<td>/billing/accounting/invoice_details/6?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>price</td>
-	<td>7.0000</td>
+	<td>19.5977</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>full_price</td>
-	<td>13.2132</td>
+	<td>36.9925</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1194,13 +1203,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>price_5</td>
-	<td>7.0000</td>
+	<td>price_6</td>
+	<td>19.5977</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>price_with_vat_5</td>
-	<td>13.2132</td>
+	<td>price_with_vat_6</td>
+	<td>36.9926</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1216,7 +1225,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
@@ -1227,12 +1236,12 @@
 <tr>
 	<td>assertText</td>
 	<td>css=quantity</td>
-	<td>1</td>
+	<td>3</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=price</td>
-	<td>5.0000</td>
+	<td>3.3453</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -1247,48 +1256,48 @@
 <!--reseller-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=reseller&amp;p=reseller1&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td>/billing/api/invoices?u=reseller&amp;p=reseller1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>2.0000</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//product[2]/price</td>
+	<td>5.8700</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>5.0000</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//invoice[2]/product[2]/price</td>
+	<td>3.6583</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>11.0000</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//product[4]/price</td>
+	<td>3.9800</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Calls</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=name</td>
+	<td>Calls from Users</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>1</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=quantity</td>
+	<td>13</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>5.0000</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=price</td>
+	<td>13.7277</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>2011-10-10</td>
-	<td>2011-10-10</td>
+	<td>assertText</td>
+	<td>//invoice[2]/product/issue_date</td>
+	<td>2012-10-10</td>
 </tr>
 <!--user-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=101&amp;p=1011&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td>/billing/api/invoices?u=101&amp;p=1011&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
@@ -1299,22 +1308,22 @@
 <tr>
 	<td>assertText</td>
 	<td>//invoice[2]/product/quantity</td>
-	<td>1</td>
+	<td>8</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//invoice[2]/product/price</td>
-	<td>5.0000</td>
+	<td>10.4693</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2012-03-03</td>
+	<td>2012-12-03</td>
 	<td></td>
 </tr>
 <!--accountant-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=accountant&amp;p=accountant1&amp;from=1230760800&amp;till=1234303200&amp;file=false</td>
+	<td>/billing/api/invoices?u=accountant&amp;p=accountant1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
@@ -1325,17 +1334,17 @@
 <tr>
 	<td>assertText</td>
 	<td>css=quantity</td>
-	<td>1</td>
+	<td>3</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=price</td>
-	<td>5.0000</td>
+	<td>3.3453</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td> 2011-12-12</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=issue_date</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1402,32 +1411,32 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_day</td>
-	<td>label=1</td>
+	<td>label=21</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1461,22 +1470,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoice_details/9</td>
+	<td>/billing/accounting/invoice_details/10</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id_price_13</td>
-	<td>8.00</td>
+	<td>id_price_21</td>
+	<td>3.98</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id_total_price_13</td>
-	<td>8.00</td>
+	<td>id_total_price_21</td>
+	<td>3.98</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_pdf/9?test=1</td>
+	<td>/billing/accounting/generate_invoice_pdf/10?test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1486,7 +1495,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_pdf/9?test=1</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/10?test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1501,17 +1510,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>'1'</td>
+	<td>'9'</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>'37063042438'</td>
+	<td>'37093042422'</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_pdf/9?test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/10?test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1633,7 +1642,7 @@
 <tr>
 	<td>select</td>
 	<td>activation_end_year</td>
-	<td>label=2014</td>
+	<td>label=2016</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1694,12 +1703,12 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1709,12 +1718,12 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=January</td>
+	<td>label=November</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1734,12 +1743,12 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_issue_month</td>
-	<td>label=October</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1848,12 +1857,12 @@
 <tr>
 	<td>select</td>
 	<td>activation_start_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>activation_start_month</td>
-	<td>label=September</td>
+	<td>label=August</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1873,12 +1882,12 @@
 <tr>
 	<td>select</td>
 	<td>activation_end_year</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>activation_end_month</td>
-	<td>label=October</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1923,12 +1932,12 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=September</td>
+	<td>label=August</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1938,12 +1947,12 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=October</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1953,17 +1962,17 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_issue_month</td>
-	<td>label=October</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_issue_day</td>
-	<td>label=10</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1982,7 +1991,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2009-09-28 - 2009-10-28</td>
+	<td>2012-08-28 - 2012-12-28</td>
 	<td></td>
 </tr>
 <tr>
@@ -1996,34 +2005,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Issue date</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
 	<td>inv_period_start_12</td>
-	<td>2009-09-28</td>
+	<td>2012-08-28</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_period_end_12</td>
-	<td>2009-10-28</td>
+	<td>2012-12-28</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_12</td>
-	<td>2011-10-10</td>
+	<td>2012-12-31</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_price_12</td>
-	<td>12.04</td>
+	<td>62.76</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_12</td>
-	<td>22.73</td>
+	<td>118.47</td>
 </tr>
 <!--//=======-->
 <tr>
@@ -2174,7 +2178,7 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2189,12 +2193,12 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_till_month</td>
-	<td>label=October</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2214,12 +2218,12 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_issue_month</td>
-	<td>label=October</td>
+	<td>label=December</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2299,7 +2303,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>United States</td>
+	<td>Lithuania</td>
 	<td></td>
 </tr>
 <tr>
@@ -2309,7 +2313,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>9.4380</td>
+	<td>8.5276</td>
 	<td></td>
 </tr>
 <tr>
@@ -2319,7 +2323,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>United States</td>
+	<td>Lithuania</td>
 	<td></td>
 </tr>
 <!--Test if error on not existing invoice-->
@@ -2402,38 +2406,43 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_11</td>
-	<td>INV09010106</td>
+	<td>id=inv_number_11</td>
+	<td>INV12110101</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_number_13</td>
-	<td>INV09092802</td>
+	<td>id=inv_number_13</td>
+	<td>INV12092801</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_start_13</td>
-	<td>2009-09-28</td>
+	<td>id=inv_period_start_11</td>
+	<td>2012-11-01</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_start_11</td>
-	<td>2009-01-01</td>
+	<td>id=inv_period_start_13</td>
+	<td>2012-09-28</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_end_13</td>
-	<td>2009-10-28</td>
+	<td>id=inv_period_end_11</td>
+	<td>2012-11-30</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_period_end_11</td>
-	<td>2009-01-31</td>
+	<td>id=inv_period_end_13</td>
+	<td>2012-12-28</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_11</td>
+	<td>2012-12-10</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_13</td>
-	<td>2011-10-10</td>
+	<td>2013-12-10</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -2572,7 +2581,7 @@
 <tr>
 	<td>type</td>
 	<td>s_number</td>
-	<td>INV09010106</td>
+	<td>INV12110101</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2582,11 +2591,11 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_number_11</td>
-	<td>INV09010106</td>
+	<td>INV12110101</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>INV09092802</td>
+	<td>INV12092801</td>
 	<td></td>
 </tr>
 <!--......Period_start-->
@@ -2598,7 +2607,7 @@
 <tr>
 	<td>select</td>
 	<td>s_period_start</td>
-	<td>label=2009-09-28</td>
+	<td>label=2012-08-28</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2608,7 +2617,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_period_start_12</td>
-	<td>2009-09-28</td>
+	<td>2012-08-28</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -2624,7 +2633,7 @@
 <tr>
 	<td>select</td>
 	<td>s_period_end</td>
-	<td>label=2009-10-28</td>
+	<td>label=2012-12-28</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2634,7 +2643,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_period_end_12</td>
-	<td>2009-10-28</td>
+	<td>2012-12-28</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -2772,7 +2781,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_number_13</td>
-	<td>INV09092802</td>
+	<td>INV12092801</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2792,7 +2801,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_number_9</td>
-	<td>INV08010101</td>
+	<td>INV12112103</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2832,7 +2841,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_period_start_9</td>
-	<td>2008-01-01</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2852,7 +2861,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_period_end_9</td>
-	<td>2008-01-01</td>
+	<td>2012-11-21</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2862,7 +2871,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_2</td>
-	<td>2011-12-12</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2872,7 +2881,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_2</td>
-	<td>2011-12-12</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2964,7 +2973,7 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_price_6</td>
-	<td>18.0000</td>
+	<td>19.5977</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2973,8 +2982,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_price_9</td>
-	<td>8.00</td>
+	<td>inv_price_10</td>
+	<td>8.14</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -2990,27 +2999,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>9,System Admin,8.00,7.10,15.10</td>
+	<td>9,System Admin,0.00,0.00,0.00</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>12,Test User #1,12.04,10.69,22.73</td>
+	<td>12,Test User #1,62.76,55.71,118.47</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>5,System Admin,7.0000,6.2132,13.2132</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>6,Test Reseller,18.0000,15.9768,33.9768</td>
+	<td>6,Test Reseller,19.5977,17.3948,36.9925</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>1,User Resellers,5.00,4.44,9.44</td>
+	<td>1,User Resellers,</td>
 	<td></td>
 </tr>
 <tr>
@@ -3020,23 +3024,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_full_price_9</td>
-	<td>15.10</td>
+	<td>inv_full_price_10</td>
+	<td>15.37</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_price_9</td>
-	<td>8.00</td>
+	<td>inv_price_10</td>
+	<td>8.14</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_full_price_5</td>
-	<td>13.2132</td>
+	<td>inv_full_price_11</td>
+	<td>18.88</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_price_5</td>
-	<td>7.0000</td>
+	<td>inv_price_11</td>
+	<td>10.00</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3045,13 +3049,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_full_price_6</td>
-	<td>33.9768</td>
+	<td>id=inv_full_price_13</td>
+	<td>56.68</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_price_6</td>
-	<td>18.0000</td>
+	<td>id=inv_price_13</td>
+	<td>30.03</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -3066,7 +3070,7 @@
 <tr>
 	<td>select</td>
 	<td>name=s_issue_date</td>
-	<td>label=2011-12-12</td>
+	<td>label=2012-12-12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3075,28 +3079,18 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_issue_2</td>
-	<td>2011-12-12</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_issue_9</td>
-	<td>2011-12-12</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=inv_issue_5</td>
-	<td>2011-12-12</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_issue_10</td>
-	<td>2011-12-12</td>
+	<td>id=inv_issue_2</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_6</td>
-	<td>2011-12-12</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -3142,12 +3136,12 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_1</td>
-	<td>9.4380</td>
+	<td>16.0967</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_price_1</td>
-	<td>5.0000</td>
+	<td>8.5276</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -3161,7 +3155,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>1,User Resellers,5.0000,4.4380,9.4380</td>
+	<td>1,User Resellers,8.5276,7.5691,16.0967</td>
 	<td></td>
 </tr>
 <tr>
@@ -3177,7 +3171,7 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3192,7 +3186,7 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3207,7 +3201,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3242,7 +3236,7 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2009</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3257,7 +3251,7 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3272,7 +3266,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_issue_year</td>
-	<td>label=2011</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -3312,7 +3306,7 @@
 <tr>
 	<td>select</td>
 	<td>name=s_issue_date</td>
-	<td>label=2011-12-03</td>
+	<td>label=2013-12-03</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3387,22 +3381,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>9,System Admin,8.00,7.10,15.10</td>
+	<td>9,System Admin,0.00,0.00,0.00</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>12,Test User #1,12.04,10.69,22.73</td>
+	<td>12,Test User #1,62.76,55.71,118.47</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>5,System Admin,7.0000,6.2132,13.2132</td>
+	<td>5,System Admin,0.0000,0.0000,0.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>6,Test Reseller,18.0000,15.9768,33.9768</td>
+	<td>6,Test Reseller,19.5977,17.3948,36.9925</td>
 	<td></td>
 </tr>
 <tr>
@@ -3417,23 +3411,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_full_price_9</td>
-	<td>15.10</td>
+	<td>inv_full_price_10</td>
+	<td>15.37</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_price_9</td>
-	<td>8.00</td>
+	<td>inv_price_10</td>
+	<td>8.14</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_full_price_5</td>
-	<td>13.2132</td>
+	<td>inv_full_price_11</td>
+	<td>18.88</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>inv_price_5</td>
-	<td>7.0000</td>
+	<td>inv_price_11</td>
+	<td>10.00</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3442,13 +3436,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_full_price_6</td>
-	<td>33.9768</td>
+	<td>id=inv_full_price_12</td>
+	<td>118.47</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_price_6</td>
-	<td>18.0000</td>
+	<td>id=inv_price_12</td>
+	<td>62.76</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -3473,7 +3467,7 @@
 <tr>
 	<td>select</td>
 	<td>name=s_issue_date</td>
-	<td>label=2011-12-12</td>
+	<td>label=2012-12-12</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -3483,27 +3477,17 @@
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_2</td>
-	<td>2011-12-12</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_issue_9</td>
-	<td>2011-12-12</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_issue_5</td>
-	<td>2011-12-12</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=inv_issue_10</td>
-	<td>2011-12-12</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_issue_6</td>
-	<td>2011-12-12</td>
+	<td>2012-12-12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_issue_5</td>
+	<td>2012-12-12</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
