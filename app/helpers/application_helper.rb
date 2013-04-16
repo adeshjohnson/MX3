@@ -854,7 +854,7 @@ module ApplicationHelper
   end
 
   def to_utf
-    self.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
+    self.force_encoding("UTF-8").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
   end
 
   def nice_user(user)
