@@ -811,6 +811,7 @@ class PaymentsController < ApplicationController
           number_type = Confline.get_value("Prepaid_Invoice_Number_Type").to_i
           invoice = Invoice.new
           invoice.user_id = user.id
+          invoice.tax = user.tax.dup
           invoice.period_start =  Time.now
           invoice.period_end =  Time.now
           invoice.issue_date = Time.now
@@ -836,7 +837,7 @@ class PaymentsController < ApplicationController
             invdetail.name = _('Manual_payment')
           end
 
-          invdetail.price = invoice_amount_real
+          invdetail.price = invoice.price
           invdetail.quantity = 1
           invdetail.invdet_type = 0
           invdetail.save
