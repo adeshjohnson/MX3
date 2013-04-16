@@ -46,7 +46,11 @@ class Call < ActiveRecord::Base
   end
 
   def Call.nice_billsec_sql
-    "IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec) as 'nice_billsec'"
+    if User.current.is_user? and !User.current.owner.is_reseller? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1 
+      "CEIL(user_billsec) as 'nice_billsec'" 
+    else
+      "IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec) as 'nice_billsec'"
+    end
   end
 
   def Call.nice_answered_cond_sql(search_not = true)
