@@ -1817,6 +1817,293 @@
 	<td>did_language</td>
 	<td></td>
 </tr>
+<!--provider dropdowne turi liktas tas provideris, kuris buvo pries ismetant errora-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>second provider</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_provider_id_1</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:DID was not created!<br /> * Enter DID<br /> * DID must consists only of digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did_provider_id_1</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>136</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>135</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_provider_id_2</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad interval start and/or end</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did_provider_id_2</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#files &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_provider_id_1</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:DID was not created!<br /> * Enter DID<br /> * DID must consists only of digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did_provider_id_1</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>136</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>135</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_provider_id_2</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad interval start and/or end</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did_provider_id_2</td>
+	<td>Test Provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>label=Test Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#files &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>Test Provider</td>
+</tr>
+<!--kai accountantas kuria didus ir did interval, jo didai turi buti free, ne reserved-->
+<tr>
+	<td>type</td>
+	<td>id=did_did</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>DID successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_15</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status_15</td>
+	<td>Free</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>66666666666</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>66666666667</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_17</td>
+	<td>66666666667</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status_17</td>
+	<td>Free</td>
+</tr>
 </tbody></table>
 </body>
 </html>

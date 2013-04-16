@@ -1096,6 +1096,91 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_provider_id_1</td>
+	<td>label=Test Provider Reseller 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:DID was not created!<br /> * Enter DID<br /> * DID must consists only of digits</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did_provider_id_1</td>
+	<td>Test Provider Reseller 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_start</td>
+	<td>136</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=did_end</td>
+	<td>135</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=did_provider_id_2</td>
+	<td>label=Test Provider Reseller 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad interval start and/or end</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=did_provider_id_2</td>
+	<td>Test Provider Reseller 2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>label=Test Provider Reseller 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#files &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please upload file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>Test Provider Reseller 2</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1275,6 +1360,116 @@
 	<td>assertTextPresent</td>
 	<td>User Resellers</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_provider_id_1</td>
+	<td>Test Provider Test Provider Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_provider_id_2</td>
+	<td>Test Provider Test Provider Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>Test Provider Test Provider Admin</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=manage_dids_opt_1_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dids/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_provider_id_1</td>
+	<td>Test Provider Test Provider Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=did_provider_id_2</td>
+	<td>Test Provider Test Provider Admin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//select[@id='did_provider_id_1'])[2]</td>
+	<td>Test Provider Test Provider Admin</td>
 </tr>
 </tbody></table>
 </body>
