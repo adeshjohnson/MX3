@@ -163,7 +163,7 @@ module PdfGen
       pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
       pdf.font("#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf")
 
-      pdf.text(_('CDR_Records') + ": #{provider.name}", {:left => 40, :size => 16})
+      pdf.text(_('CDR_Records') + ": #{provider.name}", {:left => 40, :size => 10})
       pdf.text(_('Call_type') + ": " + options[:call_type], {:left => 40, :size => 10})
       pdf.text(_('Period') + ": " + options[:date_from] + "  -  " + options[:date_till], {:left => 40, :size => 8})
       pdf.text(_('Currency') + ": #{options[:currency]}", {:left => 40, :size => 8})
@@ -477,11 +477,11 @@ module PdfGen
 
     # ---------- Company details ----------
 
-    pdf.text(company, {:left => 40, :size => 23})
-    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address1", user.owner_id), {:left => 40, :size => 12})
-    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address2", user.owner_id), {:left => 40, :size => 12})
-    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address3", user.owner_id), {:left => 40, :size => 12})
-    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address4", user.owner_id), {:left => 40, :size => 12})
+    pdf.text(company, {:left => 40, :size => 16})
+    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address1", user.owner_id), {:left => 40, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address2", user.owner_id), {:left => 40, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address3", user.owner_id), {:left => 40, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Address4", user.owner_id), {:left => 40, :size => 10})
 
     pdf.move_down 10 if Confline.get_value("#{prepaid.to_s}Invoice_Address1", user.owner_id).blank?
     pdf.move_down 10 if Confline.get_value("#{prepaid.to_s}Invoice_Address2", user.owner_id).blank?
@@ -490,13 +490,13 @@ module PdfGen
 
     # ----------- Invoice details ----------
 
-    pdf.fill_color('DCDCDC')
-    pdf.draw_text(_('INVOICE'), {:at => [330, 700], :size => 26})
+    pdf.fill_color('FF0000')
+    pdf.draw_text(_('INVOICE'), {:at => [330, 700], :size => 24})
     pdf.fill_color('000000')
     options = {}
     options[:date_format] = Confline.get_value('Date_format')
-    pdf.draw_text(_('Date') + ": " + nice_date(invoice.issue_date, options), {:at => [330, 685], :size => 12})
-    pdf.draw_text(_('Invoice_number') + ": " + invoice.number.to_s, {:at => [330, 672], :size => 12})
+    pdf.draw_text(_('Date') + ": " + nice_date(invoice.issue_date, options), {:at => [330, 685], :size => 10})
+    pdf.draw_text(_('Invoice_number') + ": " + invoice.number.to_s, {:at => [330, 672], :size => 10})
 
 
     # ----------- Separation line ---------
@@ -517,30 +517,30 @@ module PdfGen
     end
 
     if inv_address_format == 1
-      pdf.text(user.first_name.to_s + " " + user.last_name.to_s, {:left => 40, :size => 23})
+      pdf.text(user.first_name.to_s + " " + user.last_name.to_s, {:left => 40, :size => 14})
       if address
         adr_direction = address.direction
-        pdf.text(address.address.to_s, {:left => 40, :size => 12})
-        pdf.text(address.city.to_s + ", " + address.postcode.to_s + ", " + address.state.to_s, {:left => 40, :size => 12})
+        pdf.text(address.address.to_s, {:left => 40, :size => 10})
+        pdf.text(address.city.to_s + ", " + address.postcode.to_s + ", " + address.state.to_s, {:left => 40, :size => 10})
         if adr_direction
-          pdf.text(adr_direction.name.to_s, {:left => 40, :size => 12})
+          pdf.text(adr_direction.name.to_s, {:left => 40, :size => 10})
         end
       end
     end
 
     if inv_address_format == 2
-      pdf.text(user.first_name.to_s + " " + user.last_name.to_s, {:left => 40, :size => 23})
+      pdf.text(user.first_name.to_s + " " + user.last_name.to_s, {:left => 40, :size => 12})
       if address
-        pdf.text(address.address.to_s, {:left => 40, :size => 12})
-        pdf.text(address.city.to_s + ", " + address.state.to_s, {:left => 40, :size => 12})
-        pdf.text(address.postcode.to_s, {:left => 40, :size => 12})
+        pdf.text(address.address.to_s, {:left => 40, :size => 10})
+        pdf.text(address.city.to_s + ", " + address.state.to_s, {:left => 40, :size => 10})
+        pdf.text(address.postcode.to_s, {:left => 40, :size => 10})
       end
     end
 
-    pdf.text(_('Company_Personal_ID') + " : " + user.clientid.to_s, {:left => 40, :size => 12})
-    pdf.text(_('VAT_Reg_number') + " : " + user.vat_number.to_s, {:left => 40, :size => 12})
-    pdf.text(_('Agreement_number') + " : " + user.agreement_number.to_s, {:left => 40, :size => 12})
-    pdf.text(_('Agreement_date') + " : " + nice_date(user.agreement_date, options).to_s, {:left => 40, :size => 12})
+    pdf.text(_('Company_Personal_ID') + " : " + user.clientid.to_s, {:left => 40, :size => 10})
+    pdf.text(_('VAT_Reg_number') + " : " + user.vat_number.to_s, {:left => 40, :size => 10})
+    pdf.text(_('Agreement_number') + " : " + user.agreement_number.to_s, {:left => 40, :size => 10})
+    pdf.text(_('Agreement_date') + " : " + nice_date(user.agreement_date, options).to_s, {:left => 40, :size => 10})
 
     pdf.move_down 10
     pdf.text(_('Time_period') + ": " + nice_date(invoice.period_start, options).to_s + " - " + nice_date(invoice.period_end, options).to_s, {:left => 40, :size => 12})
@@ -563,11 +563,11 @@ module PdfGen
     owner = invoice.user.owner_id
     prepaid = (invoice.invoice_type.to_s == 'prepaid' and owner == 0) ? "Prepaid_" : ""
     pdf.move_down(10)
-    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line1", owner), {:left => 50, :size => 12}) #,605]
-    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line2", owner), {:left => 50, :size => 12})
-    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line3", owner), {:left => 50, :size => 12})
-    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line4", owner), {:left => 50, :size => 12})
-    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line5", owner), {:left => 50, :size => 12})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line1", owner), {:left => 50, :size => 10}) #,605]
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line2", owner), {:left => 50, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line3", owner), {:left => 50, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line4", owner), {:left => 50, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line5", owner), {:left => 50, :size => 10})
                                                                                                             #    if opts[:show_end_title] == true
                                                                                                             #      inv_end_title = Confline.get_value("#{prepaid}Invoice_End_Title", owner)
                                                                                                             #      pdf.text(inv_end_title.to_s, {:left => 0, :size =>14, :alignment=>:center})
@@ -584,7 +584,7 @@ module PdfGen
     pdf.font("#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf")
     pdf.text(options[:pdf_name], {:left => 40, :size => 23})
     pdf.text(_('Name') + ": #{options[:name]}", {:left => 40, :size => 12}) if !options[:hide_tariff]
-    pdf.text(_('Currency') + ": " + options[:currency], {:left => 40, :size => 12})
+    pdf.text(_('Currency') + ": " + options[:currency], {:left => 40, :size => 10})
     pdf
   end
 
