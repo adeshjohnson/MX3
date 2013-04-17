@@ -65,7 +65,7 @@ module ActiveProcessor
           @gateway = @engine.query
           format.html {
             if (@gateway.errors.size + @gateway.credit_card.errors.size) > 0
-              flash.now[:notice] = _('ERRORs')
+              flash.now[:notice] = _('ERRORs') + ":"
             else
               flash.now[:notice] = _('Payment_Error')
             end
