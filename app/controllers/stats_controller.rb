@@ -3636,7 +3636,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :s_did_pattern => "",
         :s_destination => "",
         :order_by => "time",
-        :order_desc => 0,
+        :order_desc => 1,
         :s_country => '',
         :s_reseller => "all",
         :s_source => nil,
