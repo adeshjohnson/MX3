@@ -79,12 +79,6 @@ module ActiveProcessor
       } if object.respond_to?(:errors)
     end
 
-    def notice_flash_errors(object)
-      object.errors.each { |key, value|
-        flash.now[:notice] += "<br> * #{_(key)} - #{_(value.first)}"
-      } if object.respond_to?(:errors)
-    end
-
     # POST /notify
     def notify
 
