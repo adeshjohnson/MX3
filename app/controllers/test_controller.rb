@@ -20,6 +20,11 @@ class TestController < ApplicationController
     @time = Time.now()
   end
 
+  def check_db_update
+    value = Confline.get_value('DB_Update_From_Script', 0)
+    render :text => (value.to_i == 1 ? value : '')
+  end
+
   def raise_exception
     params[:this_is_fake_exception] = nil
     params[:do_not_log_test_exception] = 1
