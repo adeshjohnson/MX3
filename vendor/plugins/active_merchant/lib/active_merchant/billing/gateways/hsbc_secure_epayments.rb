@@ -127,7 +127,7 @@ module ActiveMerchant #:nodoc:
       private
 
       def build_request(&block)
-        xml = Builder::XmlMarkup.new :indent => 2
+        xml = Builder::XmlMarkup.new
         xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
         xml.EngineDocList do
           xml.DocVersion(:DataType => "String") { |x| x.text! "1.0" }
