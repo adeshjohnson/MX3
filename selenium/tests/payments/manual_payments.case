@@ -661,11 +661,6 @@
 	<td>50.0</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>tax2_value</td>
-	<td>6.0</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>tax2_enabled</td>
 	<td></td>
@@ -868,22 +863,22 @@
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_1</td>
-	<td>33.5156</td>
+	<td>12.5000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_2</td>
-	<td>67.0312</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_3</td>
-	<td>134.0625</td>
+	<td>50.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>inv_full_price_4</td>
-	<td>-33.5156</td>
+	<td>-12.5000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -905,6 +900,37 @@
 	<td>/billing/accounting/invoice_details/1</td>
 	<td></td>
 </tr>
+<!--Sugeneravus invoice prepaid user'io manual payment'ui, darytam su kita (ne default) valiuta, turi būti atvaizduojami tik Invoice pdf ir csv ikonėlės-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//input[@type='image'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=tr.row2 &gt; td &gt; form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[7]</td>
+	<td></td>
+</tr>
 <tr>
 	<td>assertText</td>
 	<td>invoice_type</td>
@@ -918,7 +944,7 @@
 <tr>
 	<td>assertText</td>
 	<td>full_price</td>
-	<td>33.5156</td>
+	<td>12.5000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -948,7 +974,7 @@
 <tr>
 	<td>assertText</td>
 	<td>full_price</td>
-	<td>67.0312</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -978,7 +1004,7 @@
 <tr>
 	<td>assertText</td>
 	<td>full_price</td>
-	<td>134.0625</td>
+	<td>50.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1008,7 +1034,7 @@
 <tr>
 	<td>assertText</td>
 	<td>full_price</td>
-	<td>-33.5156</td>
+	<td>-12.5000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1040,11 +1066,10 @@
 	<td>id=full_price</td>
 	<td>33.5156</td>
 </tr>
-<!--Negerai-->
 <tr>
 	<td>assertText</td>
 	<td>id=id_total_price_5</td>
-	<td>33.5156</td>
+	<td>12.5000</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1056,7 +1081,6 @@
 	<td>/billing/accounting/generate_invoice_pdf/5?&amp;test=1</td>
 	<td></td>
 </tr>
-<!--rodo prepaid price_with_vat: "1340.625", nes rodo USD, bet valiuta neparasyta-->
 <tr>
 	<td>assertTextPresent</td>
 	<td> price_with_vat: 134.0625</td>
@@ -1080,6 +1104,86 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Payment deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/5?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>33.5157</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tax: 50.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t1: 25.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t2: 10.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t3: 30.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/5?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000,33.5156</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>33.5157</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Tax: 50.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>t1: 25.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000,12.5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1223,7 +1327,2066 @@
 	<td>id=data3_21</td>
 	<td>EUR</td>
 </tr>
-<!---->
+<!--ADMINO MANUAL PAYMENTU TESTAVIMAS-->
+<!--user prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--admins default currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user[currency_id]</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--manual payment-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 50.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>0.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_c_t_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 50.0000 EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_c_t_2</td>
+	<td>25.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>25.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>37.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>37.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 50.0000 ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>37.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>50.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_one_time_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>price_5</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_periodic_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>45.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>price_5</td>
+	<td>45.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>price_7</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>87.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>user_balance_value</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>-50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: -50.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_c_t_2</td>
+	<td>-12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>-12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>75.0000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>75.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user[warning_email_balance]</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>user[warning_email_balance]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user[warning_email_balance]</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>25.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>t1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_value</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_name</td>
+	<td>t2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_value</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_name</td>
+	<td>t3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=KZT</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 134.0625 KZT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>75.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_c_t_2</td>
+	<td>33.5156 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_2</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_16</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_17</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_18</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_19</td>
+	<td>-50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_20</td>
+	<td>134.0625</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_with_tax</td>
+	<td>108.5156 (ALL)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_16</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_17</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_18</td>
+	<td>ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_20</td>
+	<td>KZT</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_19</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_6</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_7</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_8</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_9</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_10</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_6</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_7</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_8</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_9</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_10</td>
+	<td>33.5156</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total</td>
+	<td>87.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_wat</td>
+	<td>108.5156</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/6</td>
+	<td></td>
+</tr>
+<!--Sugeneravus invoice prepaid user'io manual payment'ui, darytam su kita (ne default) valiuta, turi būti atvaizduojami tik Invoice pdf ir csv ikonėlės-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//input[@type='image'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=tr.row2 &gt; td &gt; form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_6</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_6</td>
+	<td>Manual Payment(50.0 USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_7</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_7</td>
+	<td>Manual Payment(50.0 EUR)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_8</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_8</td>
+	<td>Manual Payment</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_9</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_9</td>
+	<td>Manual Payment(-50.0 USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=full_price</td>
+	<td>33.5156</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_10</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_10</td>
+	<td>Manual Payment(50.0 KZT)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/5?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> price_with_vat: 134.0625</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_16 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Payment deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/10?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>33.5157</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tax: 50.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t1: 25.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t2: 10.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t3: 30.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/10?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000,33.5156</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/6?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>33.5157</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Tax: 50.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>t1: 25.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/6?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000,12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=see_financial_data_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoices_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=payments_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=services_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_6_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_create_opt_5_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--ACCOUNTANTO  MANUAL PAYMENTU TESTAVIMAS-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--user prepaid-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=compound_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax4_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax3_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>-82.8380</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=p_currency</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_2</td>
+	<td>-0.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--acc default currency-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user[currency_id]</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--manual payment-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 50.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>-0.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_c_t_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 50.0000 EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>2.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_c_t_2</td>
+	<td>25.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>25.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>37.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>37.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 50.0000 ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>37.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>50.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_one_time_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>price_5</td>
+	<td>30.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_periodic_fee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>45.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>price_5</td>
+	<td>45.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_name</td>
+	<td>servname3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>service_servicetype_flat_rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_price</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>service_quantity</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>price_7</td>
+	<td>10.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>87.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>user_balance_value</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>-50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: -50.0000 USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_c_t_2</td>
+	<td>-12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>a_w_v_2</td>
+	<td>-12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>new_balance_2</td>
+	<td>75.0000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>75.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>user[warning_email_balance]</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>user[warning_email_balance]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>user[warning_email_balance]</td>
+	<td>20.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_value</td>
+	<td>25.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax2_name</td>
+	<td>t1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax3_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_value</td>
+	<td>10.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax3_name</td>
+	<td>t2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_value</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tax4_name</td>
+	<td>t3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>tax4_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=compound_tax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>p_currency</td>
+	<td>label=KZT</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User: Test User #1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount with TAX: 134.0625 KZT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>balance_2</td>
+	<td>75.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>exchange_rate_2</td>
+	<td>4.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_c_t_2</td>
+	<td>33.5156 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=a_w_v_2</td>
+	<td>12.5000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=new_balance_2</td>
+	<td>87.5000 ALL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_22</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_23</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_24</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_25</td>
+	<td>-50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>amout_with_tax_26</td>
+	<td>134.0625</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_with_tax</td>
+	<td>121.6933 (ALL)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_22</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_23</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_24</td>
+	<td>ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_26</td>
+	<td>KZT</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>currency_25</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_6</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_7</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_8</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_9</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_price_10</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_6</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_7</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_8</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_9</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>inv_full_price_10</td>
+	<td>33.5156</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total</td>
+	<td>92.1620</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_wat</td>
+	<td>134.1933</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/12</td>
+	<td></td>
+</tr>
+<!--Sugeneravus invoice prepaid user'io manual payment'ui, darytam su kita (ne default) valiuta, turi būti atvaizduojami tik Invoice pdf ir csv ikonėlės-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//input[@type='image'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=tr.row2 &gt; td &gt; form &gt; input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>xpath=(//input[@type='image'])[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_12</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_12</td>
+	<td>Manual Payment(50.0 USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_13</td>
+	<td>25.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_13</td>
+	<td>Manual Payment(50.0 EUR)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/14</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_14</td>
+	<td>50.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_14</td>
+	<td>Manual Payment</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>full_price</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_total_price_15</td>
+	<td>-12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_15</td>
+	<td>Manual Payment(-50.0 USD)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/16</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>invoice_type</td>
+	<td>Prepaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=full_price</td>
+	<td>33.5156</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_16</td>
+	<td>12.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id_name_16</td>
+	<td>Manual Payment(50.0 KZT)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/5?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> price_with_vat: 134.0625</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/16?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>33.5157</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tax: 50.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t1: 25.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t2: 10.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>t3: 30.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/16?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000,33.5156</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_pdf/12?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>33.5157</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Tax: 50.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>t1: 25.0 %</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_csv/12?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12.5000,12.5000</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
