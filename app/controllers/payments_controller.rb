@@ -837,7 +837,7 @@ class PaymentsController < ApplicationController
             invdetail.name = _('Manual_payment')
           end
 
-          invdetail.price = invoice.price
+          invdetail.price = invoice_amount.to_d
           invdetail.quantity = 1
           invdetail.invdet_type = 0
           invdetail.save
