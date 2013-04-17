@@ -299,7 +299,7 @@
 <tr>
 	<td>type</td>
 	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
-	<td>rrrrrrrrrrrrrrrrrrrrr</td>
+	<td>https://apixml.globaliris.com/</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -409,7 +409,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=gateways_hsbc_secure_epayments_xml_url</td>
-	<td>rrrrrrrrrrrrrrrrrrrrr</td>
+	<td>https://apixml.globaliris.com/</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -454,6 +454,81 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>HSBC Secure ePayments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card owner's name*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card owner's surname*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Credit card type*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card number*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card expiration year*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card expiration month*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CVV2 number*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Billing Name*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Billing Address1*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>City*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Country*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Zip Code or Post Code*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Amount*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Phone*</td>
 	<td></td>
 </tr>
 <tr>
@@ -543,12 +618,32 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Payment was unsuccessful, details from gateway:</td>
+	<td>Error(s):</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>or other card data is invalid, please double check</td>
+	<td> * Card number - is not a valid credit card number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Billing Address1 - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * City - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Zip Code or Post Code - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Phone - cannot be empty</td>
 	<td></td>
 </tr>
 <tr>
@@ -758,17 +853,37 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Payment was unsuccessful, details from gateway:</td>
+	<td>Error(s):</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>or other card data is invalid, please double check</td>
+	<td> * Card owner's name - cannot be empty</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>must be positive and higher or equal to the minimum amount (if any)</td>
+	<td> * Card owner's surname - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Card expiration time - expired</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Card number - is not a valid credit card number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * CVV2 number - is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Amount - cannot be empty</td>
 	<td></td>
 </tr>
 <tr>
@@ -783,9 +898,245 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>must be numeric and positive</td>
+	<td> * amount - must be numeric and positive</td>
 	<td></td>
 </tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_zip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_country</td>
+	<td>65465464</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_city</td>
+	<td>646465</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_verification_value</td>
+	<td>tyut</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Phone - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Country - Country not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address1</td>
+	<td>wertyu</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_name</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_city</td>
+	<td>646465</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_state</td>
+	<td>e4rt5yui</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_country</td>
+	<td>65465464</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td>56ytgf</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_verification_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_city</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_state</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_country</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Card owner's name - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Card owner's surname - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Card expiration time - expired</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Card number - is not a valid credit card number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * CVV2 number - is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Billing Name - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Billing Address1 - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * City - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Country - Country not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Zip Code or Post Code - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Phone - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_number</td>
+	<td>4485014884781383</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_country</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_first_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_last_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_verification_value</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_address1</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_city</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_phone</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gateways_hsbc_secure_epayments_billing_address_zip</td>
+	<td>10222</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gateways_hsbc_secure_epayments_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Payment was unsuccessful, wrong gateway settings</td>
+	<td></td>
+</tr>
+<!--ivedus i terminala n tail ir daug kartu paspausti enter. Paspausti commit dar karta ir turi susigeneruoti xml failas terminale su lietuvos country code 440-->
 </tbody></table>
 </body>
 </html>
