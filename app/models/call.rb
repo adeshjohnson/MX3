@@ -265,7 +265,7 @@ class Call < ActiveRecord::Base
       if Time.zone.now().utc_offset.to_i == 0
         group << 'FLOOR((UNIX_TIMESTAMP(calls.calldate)) / 86400)' # grouping by intervals of exact 24 hours
       else
-        group << '(day(calldate) + FLOOR(HOUR(calldate) / 24)) ORDER BY year(calldate),month(calldate),day(calldate) ASC'
+        group << 'year(calldate), month(calldate), (day(calldate) + FLOOR(HOUR(calldate) / 24)) ORDER BY calldate ASC'
       end
     end
     if group_options[:disposition]
