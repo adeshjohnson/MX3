@@ -1,0 +1,7 @@
+<%= form_for :location do |l| %>
+<%= l.label :name, _('Location_name') %>: &nbsp;<%= l.text_field :name, class: 'input' %><br /><br />
+<%= l.submit _('Save_changes') %>
+<% end %>
+
+<br /><br />
+<%= link_to b_back + _('back') , action: 'localization' %>

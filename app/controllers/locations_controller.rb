@@ -23,6 +23,32 @@ class LocationsController < ApplicationController
     @locations = current_user.locations
   end
 
+  def edit_localization
+    @location = Location.where(id: params[:id].to_i).first
+
+    if !@location or params[:id].blank? or user? or accountant?
+      dont_be_so_smart
+      redirect_to action: 'main', controller: 'callc'
+    elsif @location.user_id != current_user.id
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+      redirect_to action: 'main', controller: 'callc'
+    else
+
+      @page_title = _('Location_edit') + ": " + @location.name
+      @page_icon  = 'edit.png'
+      
+      if params['commit']
+	@location.name = params[:location][:name].to_s.strip
+        if @location.save
+          flash[:status] = _('Localization_updated')
+          redirect_to action: 'localization'
+        else
+          flash_errors_for(_("Location_not_updated"),@location)
+        end
+      end
+    end
+  end
+
   def location_rules
     @page_title = _('Location_rules')
     @page_icon = 'page_white_gear.png'
