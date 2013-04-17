@@ -22,6 +22,6 @@
 //= require scriptaculous/scriptaculous
 //= require scriptaculous/slider
 //= require scriptaculous/unittest
-//= require dtree
 //= require tab-view
+//= require dtree
 //= require_self
