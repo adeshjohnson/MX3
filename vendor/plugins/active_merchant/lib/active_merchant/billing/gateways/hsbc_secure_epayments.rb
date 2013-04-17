@@ -235,7 +235,7 @@ module ActiveMerchant #:nodoc:
           xml.Street2(:DataType => "String") { |x| x.text! address_opts[:address2] } if address_opts[:address2]
           xml.City(:DataType => "String") { |x| x.text! address_opts[:city] } if address_opts[:city]
           xml.StateProv(:DataType => "String") { |x| x.text! address_opts[:state] } if address_opts[:state]
-          xml.Country(:DataType => "String") { |x| x.text! COUNTRY_CODE_MAPPINGS[address_opts[:country]].to_s } if address_opts[:country]
+          xml.Country(:DataType => "String") { |x| x.text! Direction.where(:name => address_opts[:country].to_s.strip.downcase.capitalize).first.iso31661code } if address_opts[:country]
           xml.PostalCode(:DataType => "String") { |x| x.text! address_opts[:zip] } if address_opts[:zip]
         end
       end

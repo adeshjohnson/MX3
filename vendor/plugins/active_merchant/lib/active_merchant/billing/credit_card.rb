@@ -121,23 +121,23 @@ module ActiveMerchant #:nodoc:
       end
 
       def validate_card_number #:nodoc:
-        errors.add :number, "is not a valid credit card number" unless CreditCard.valid_number?(number)
-        unless errors.on(:number) || errors.on(:type)
-          errors.add :type, "is not the correct card type" unless CreditCard.matching_type?(number, type)
+        errors.add :gateway_number, "is not a valid credit card number" unless CreditCard.valid_number?(number)
+        unless errors.on(:gateway_number) || errors.on(:gateway_type)
+          errors.add :gateway_type, "is not the correct card type" unless CreditCard.matching_type?(number, type)
         end
       end
 
       def validate_card_type #:nodoc:
-        errors.add :type, "is required" if type.blank?
-        errors.add :type, "is invalid" unless CreditCard.card_companies.keys.include?(type)
+        errors.add :gateway_type, "is required" if type.blank?
+        errors.add :gateway_type, "is invalid" unless CreditCard.card_companies.keys.include?(type)
       end
 
       def validate_essential_attributes #:nodoc:
-        errors.add :first_name, "cannot be empty" if @first_name.blank?
-        errors.add :last_name, "cannot be empty" if @last_name.blank?
-        errors.add :month, "is not a valid month" unless valid_month?(@month)
-        errors.add :year, "expired" if expired?
-        errors.add :year, "is not a valid year" unless valid_expiry_year?(@year)
+        errors.add :gateway_first_name, "cannot be empty" if @first_name.blank?
+        errors.add :gateway_last_name, "cannot be empty" if @last_name.blank?
+        errors.add :gateway_month, "is not a valid month" unless valid_month?(@month)
+        errors.add :gateway_year, "expired" if expired?
+        errors.add :gateway_year, "is not a valid year" unless valid_expiry_year?(@year)
       end
 
       def validate_switch_or_solo_attributes #:nodoc:
@@ -152,7 +152,7 @@ module ActiveMerchant #:nodoc:
 
       def validate_verification_value #:nodoc:
         if CreditCard.requires_verification_value?
-          errors.add :verification_value, "is required" unless verification_value?
+          errors.add :gateway_verification_value, "is required" unless verification_value?
         end
       end
     end

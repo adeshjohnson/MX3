@@ -3259,7 +3259,7 @@ Localization.define('en') do |l|
   l.store 'gateway_billing_address_city', 'City'
   l.store 'gateway_billing_address_state', 'State'
   l.store 'gateway_billing_address_country', 'Country'
-  l.store 'gateway_billing_address_zip', 'Zip'
+  l.store 'gateway_billing_address_zip', 'Zip Code or Post Code'
   l.store 'gateway_billing_address_phone', 'Phone'
 
   l.store 'Card_payments', 'Card payments'
@@ -4568,6 +4568,8 @@ Localization.define('en') do |l|
   l.store 'Localization_not_updated', 'Localization was not updated'
   l.store 'Location_name' ,'Location name'
   l.store 'Location_edit', 'Location edit'
+  l.store 'country_not_found', 'Country not found'
+  l.store 'cannot_be_empty', 'cannot be empty'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

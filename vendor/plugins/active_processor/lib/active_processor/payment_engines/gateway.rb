@@ -91,6 +91,9 @@ module ActiveProcessor
         for param, value in params[@engine][@name]
           set(:form, {param => value}) # field validations
         end
+
+        error_counter = 0
+
         # CC and misc validations
         @credit_card = ActiveMerchant::Billing::CreditCard.new(
             params[@engine][@name].except('amount', 'with_tax', 'without_tax', 'separator', 'currency', 'default_currency').delete_if { |key, value|
@@ -99,22 +102,60 @@ module ActiveProcessor
         )
 
         unless @credit_card.valid?
-          @errors.store("number", "gateway_error_cc")
+          error_counter += 1
         end
 
         if get(:config, 'min_amount').to_i > 0
           if exchange(params[@engine][@name]['amount'], params[@engine][@name]['currency'], params[@engine][@name]['default_currency']).to_i < get(:config, 'min_amount').to_i * 100.0
-            @errors.store("amount", "gateway_error_min_amount")
+            @errors.store("gateway_amount", "gateway_error_min_amount")
+            error_counter += 1
           end
         end
 
         if get(:config, 'max_amount').to_i > 0
           if exchange(params[@engine][@name]['amount'], params[@engine][@name]['currency'], params[@engine][@name]['default_currency']).to_i > get(:config, 'max_amount').to_i * 100.0
-            @errors.store("amount", "gateway_error_max_amount")
+            @errors.store("gateway_amount", "gateway_error_max_amount")
+            error_counter += 1
           end
         end
 
-        return (@errors.size > 0) ? false : true
+        # Billing address validation
+        if params[@engine][@name]['billing_address']['name'].to_s.strip.blank?
+          @errors.store("gateway_billing_address_name", "cannot_be_empty")
+          error_counter += 1
+        end
+
+        if params[@engine][@name]['billing_address']['address1'].to_s.strip.blank?
+          @errors.store("gateway_billing_address_address1", "cannot_be_empty")
+          error_counter += 1
+        end
+
+        if params[@engine][@name]['billing_address']['city'].to_s.strip.blank?
+          @errors.store("gateway_billing_address_city", "cannot_be_empty")
+          error_counter += 1
+        end
+
+        if params[@engine][@name]['billing_address']['country'].to_s.strip.blank? or Direction.where(:name => params[@engine][@name]['billing_address']['country'].to_s.strip.downcase.capitalize).first.blank?
+          @errors.store("gateway_billing_address_country", "country_not_found")
+          error_counter += 1
+        end
+
+        if params[@engine][@name]['billing_address']['zip'].to_s.strip.blank?
+          @errors.store("gateway_billing_address_zip", "cannot_be_empty")
+          error_counter += 1
+        end
+
+        if params[@engine][@name]['billing_address']['phone'].to_s.strip.blank?
+          @errors.store("gateway_billing_address_phone", "cannot_be_empty")
+          error_counter += 1
+        end
+
+        if params[@engine][@name]['amount'].to_s.strip.blank?
+          @errors.store("gateway_amount", "cannot_be_empty")
+          error_counter += 1
+        end
+
+        return (error_counter > 0) ? false : true
       end
 
       private
