@@ -136,7 +136,7 @@ module ActiveMerchant #:nodoc:
         errors.add :gateway_first_name, "cannot be empty" if @first_name.blank?
         errors.add :gateway_last_name, "cannot be empty" if @last_name.blank?
         errors.add :gateway_month, "is not a valid month" unless valid_month?(@month)
-        errors.add :gateway_year, "expired" if expired?
+        errors.add :gateway_time, "expired" if expired?
         errors.add :gateway_year, "is not a valid year" unless valid_expiry_year?(@year)
       end
 

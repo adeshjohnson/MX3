@@ -64,7 +64,11 @@ module ActiveProcessor
         else
           @gateway = @engine.query
           format.html {
-            flash.now[:notice] = _('Payment_Error')
+            if (@gateway.errors.size + @gateway.credit_card.errors.size) > 0
+              flash.now[:notice] = _('ERRORs')
+            else
+              flash.now[:notice] = _('Payment_Error')
+            end
             notice_flash_errors(@gateway.credit_card) if @gateway.credit_card.errors.size > 0
             notice_flash_errors(@gateway) if @gateway.errors.size > 0
             render :action => "index"
