@@ -755,7 +755,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Payment was unsuccessful, details from gateway: The merchant login ID or password is invalid or the account is inactive</td>
+	<td>Payment was unsuccessful, wrong gateway settings</td>
 	<td></td>
 </tr>
 <tr>
@@ -815,7 +815,27 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Payment was unsuccessful, details from gateway: Security header is not valid</td>
+	<td>Error(s):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Billing Address1 - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * City - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Zip Code or Post Code - cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Phone - cannot be empty</td>
 	<td></td>
 </tr>
 <tr>
@@ -951,7 +971,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>transaction_28</td>
+	<td>transaction_27</td>
 	<td>0</td>
 </tr>
 <tr>
@@ -1336,27 +1356,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=paymenttype_29</td>
+	<td>id=paymenttype_28</td>
 	<td>Manual</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amount_29</td>
+	<td>id=amount_28</td>
 	<td>100.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=fee_29</td>
+	<td>id=fee_28</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amout_with_tax_29</td>
+	<td>id=amout_with_tax_28</td>
 	<td>100.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=completed_29</td>
+	<td>id=completed_28</td>
 	<td>Yes</td>
 </tr>
 <tr>
@@ -1481,11 +1501,6 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=paymenttype_34</td>
-	<td>Manual</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=paymenttype_33</td>
 	<td>Manual</td>
 </tr>
@@ -1496,17 +1511,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amount_34</td>
-	<td>25.0000</td>
+	<td>id=paymenttype_31</td>
+	<td>Manual</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=amount_33</td>
-	<td>100.0000</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=amount_32</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_31</td>
 	<td>13.5000</td>
 </tr>
 <tr>
@@ -1591,27 +1611,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=paymenttype_29</td>
+	<td>id=paymenttype_28</td>
 	<td>Manual</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amount_29</td>
+	<td>id=amount_28</td>
 	<td>100.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=fee_29</td>
+	<td>id=fee_28</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amout_with_tax_29</td>
+	<td>id=amout_with_tax_28</td>
 	<td>100.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=completed_29</td>
+	<td>id=completed_28</td>
 	<td>Yes</td>
 </tr>
 <tr>
@@ -1646,11 +1666,6 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=paymenttype_34</td>
-	<td>Manual</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=paymenttype_33</td>
 	<td>Manual</td>
 </tr>
@@ -1661,17 +1676,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=amount_34</td>
-	<td>25.0000</td>
+	<td>id=paymenttype_31</td>
+	<td>Manual</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=amount_33</td>
-	<td>100.0000</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=amount_32</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_31</td>
 	<td>13.5000</td>
 </tr>
 </tbody></table>
