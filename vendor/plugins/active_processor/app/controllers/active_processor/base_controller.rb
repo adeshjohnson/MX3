@@ -68,10 +68,12 @@ module ActiveProcessor
               flash.now[:notice] = _('ERRORs') + ":"
             else
               flash.now[:notice] = _('Payment_Error')
-              if @gateway.payment.response.params["return_message"]
-                flash.now[:notice] += "<br/> * ".html_safe + @gateway.payment.response.params["return_message"].to_s
-              else
-                flash.now[:notice] += "<br/> * ".html_safe + @gateway.payment.response.params["error_message"].to_s
+              if @gateway.name == "hsbc_secure_epayments"
+                if @gateway.payment.response.params["return_message"]
+                  flash.now[:notice] += "<br/> * ".html_safe + @gateway.payment.response.params["return_message"].to_s
+                else
+                  flash.now[:notice] += "<br/> * ".html_safe + @gateway.payment.response.params["error_message"].to_s
+                end
               end
             end
             notice_flash_errors(@gateway.credit_card) if @gateway.credit_card.errors.size > 0
