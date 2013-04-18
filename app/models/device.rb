@@ -315,6 +315,19 @@ class Device < ActiveRecord::Base
       self.extension = self.username = self.name = 'virtual_' + self.id.to_i.to_s 
       self.save
     end
+
+    if self.device_type == "H323"
+      self.username = ""
+      self.secret = ""
+      if !self.name.include?('ipauth')
+        name = self.generate_rand_name('ipauth', 8)
+        while Device.where(['name= ? and id != ?', name, self.id]).first
+          name = self.generate_rand_name('ipauth', 8)
+        end
+        self.name = name
+      end
+      self.save
+    end
   end
 
 
@@ -837,7 +850,11 @@ class Device < ActiveRecord::Base
   end
 
   def username_must_be_unique_check
-    self.username_must_be_unique or self.provider_device_username_unique?
+    if self.device_type != "H323"
+      self.username_must_be_unique or self.provider_device_username_unique?
+    else
+      false
+    end
   end
 
   def Device.validate_perims(options={})
