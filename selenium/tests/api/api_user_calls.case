@@ -62,6 +62,11 @@
 	<td>123456</td>
 </tr>
 <tr>
+	<td>check</td>
+	<td>id=inv_user_billsec</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -280,6 +285,17 @@
 	<td>css=body</td>
 	<td>hash14</td>
 </tr>
+<!--#hash 9 api for reseller (to show some calls)-->
+<tr>
+	<td>open</td>
+	<td>billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash92</td>
+</tr>
 <!--sql-->
 <tr>
 	<td>open</td>
@@ -385,6 +401,11 @@
 	<td>assertText</td>
 	<td>css=total_calls</td>
 	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>30.0</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -643,6 +664,52 @@
 	<td>css=show_status</td>
 	<td>all</td>
 </tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_start</td>
+	<td>2002-04-30 20:39:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=period_end</td>
+	<td>2011-12-01 01:59:59</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>40.0</td>
+</tr>
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
@@ -683,6 +750,11 @@
 	<td>assertText</td>
 	<td>css=show_status</td>
 	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50.0</td>
 </tr>
 <!--#hash 11 api for user_reseller-->
 <tr>
@@ -901,6 +973,62 @@
 	<td>css=show_status</td>
 	<td>all</td>
 </tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_user</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>40.0</td>
+</tr>
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
@@ -1061,6 +1189,11 @@
 	<td>css=period_start</td>
 	<td>2008-03-07 11:48:18</td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>1</td>
+</tr>
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
@@ -1107,6 +1240,11 @@
 	<td>css=currency</td>
 	<td>USD</td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50</td>
+</tr>
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
@@ -1128,6 +1266,11 @@
 	<td>css=total_calls</td>
 	<td>16</td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50</td>
+</tr>
 <!--#hash 13 api for accountant-->
 <tr>
 	<td>open</td>
@@ -1148,6 +1291,11 @@
 	<td>assertText</td>
 	<td>css=total_calls</td>
 	<td>13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50</td>
 </tr>
 <!--#hash 14 full api for admin-->
 <tr>
@@ -1397,6 +1545,11 @@
 	<td>css=total_calls</td>
 	<td>4</td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>30.0</td>
+</tr>
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
@@ -1479,6 +1632,11 @@
 	<td>assertText</td>
 	<td>css=currency</td>
 	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50.0</td>
 </tr>
 <!--#hash 14 full api for admin-->
 <tr>
@@ -1751,6 +1909,11 @@
 	<td>css=show_status</td>
 	<td>answered</td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50.0</td>
+</tr>
 <!--#hash 18 full api for admin-->
 <!--4. Kažkodėl nuo mor10 vykdant paiešką pagal destination(prefix) netsižvelgia į tai kas nustayta-->
 <tr>
@@ -1807,6 +1970,11 @@
 	<td>assertText</td>
 	<td>css=dst</td>
 	<td>37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>20.0</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -2394,6 +2562,109 @@
 	<td>assertText</td>
 	<td>css=show_status</td>
 	<td>all</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=inv_user_billsec</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>30.0</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>40.0</td>
+</tr>
+<!--#hash 9 api for reseller-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>40.0</td>
+</tr>
+<!--#hash 6 full api for 101-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=101&amp;p=1011&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>30.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1&amp;hash=${hash17}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50.0</td>
 </tr>
 </tbody></table>
 </body>
