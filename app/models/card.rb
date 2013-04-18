@@ -47,33 +47,19 @@ class Card < ActiveRecord::Base
   # Needs refactoring!
   def Card.delete_from_sql(options={})
     cards_deleted = 0
-    query = "DELETE cards
-               FROM cards
-               JOIN (SELECT cards.id
-                     FROM cards
-                     LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
-                     LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
-                     WHERE activecalls.id IS NULL AND
-                           cards.call_count = 0 AND
-                           payments.id IS NULL AND
-                           cards.cardgroup_id = #{options[:cardgroup_id]} AND
-                           cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
-                     GROUP BY cards.id
-                     LIMIT 100) tmp USING(id)"
-    begin
+    limit  = 1000000
+    @chunks =[]
+    (options[:start_num].to_i..options[:end_num].to_i).each_slice(limit) { |slice| @chunks << [slice.first, slice.last] }
+    @chunks.each do |leading, trailing|
+      query = "DELETE FROM cards USING cards LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card') WHERE payments.id IS NULL AND cards.number BETWEEN #{leading} AND #{trailing}"
       rows_affected = ActiveRecord::Base.connection.delete(query)
-
       cards_deleted += rows_affected
-    end while rows_affected > 0
+    end
     query = "SELECT COUNT(*)
                FROM  (SELECT cards.id
                       FROM cards
                       LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card')
-                      LEFT JOIN activecalls ON (activecalls.card_id = cards.id)
-                      WHERE (activecalls.id IS NOT NULL OR
-                             cards.call_count != 0 OR
-                             payments.id IS NOT NULL) AND
-                             cards.cardgroup_id = #{options[:cardgroup_id]} AND
+                      WHERE (payments.id IS NOT NULL) AND
                              cards.number BETWEEN #{options[:start_num]} AND #{options[:end_num]}
                       GROUP BY cards.id) tmp"
     cards_not_deleted = ActiveRecord::Base.connection.select_value(query).to_i
