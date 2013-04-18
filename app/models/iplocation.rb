@@ -99,32 +99,16 @@ class Iplocation < ActiveRecord::Base
       return loc
     end
     begin
-      if dst != ""
-        address = dir+" "+dst
-        res = Net::HTTP.get_response(URI.parse("http://maps.google.com/maps/geo?q=#{address.gsub(" ", "+")}&output=csv&sensor=false")).body.to_s.split(",")
-      end
+      res = JSON.parse(Net::HTTP.get_response(URI.parse("http://maps.googleapis.com/maps/api/geocode/json?address=#{dir}&output=csv&sensor=false")).body)["results"].first["geometry"]["location"]
 
-      if dst == "" or res[0] != "200"
-        res = Net::HTTP.get_response(URI.parse("http://maps.google.com/maps/geo?q=#{dir.gsub(" ", "+")}&output=csv&key=sensor=false")).body.split(",")
-        dst = ""
-      end
-
-      if dir == "Georgia"
+      if res
         loc.ip = prefix
-        loc.latitude = 42
-        loc.longitude = 44
+        loc.latitude = res["lat"].to_d
+        loc.longitude = res["lng"].to_d
         loc.city = ""
-        loc.country = "Georgia"
-      else
-        if res[0] == "200"
-          loc.ip = prefix
-          loc.latitude = res[2].to_d
-          loc.longitude = res[3].to_d
-          loc.city = ""
-          loc.city = dst.lstrip if dst and dst != ""
-          loc.country = dir.lstrip
-        end
+        loc.country = dir.lstrip
       end
+
     rescue Exception => exc
       MorLog.my_debug("IpLocation error: #{exc.to_yaml}")
       loc.ip = prefix
