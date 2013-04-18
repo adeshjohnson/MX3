@@ -3170,7 +3170,7 @@ Localization.define('en') do |l|
   l.store 'gateway_a_last_name', "Last Name"
 
   l.store 'Payment_Successful', 'Payment was successful'
-  l.store 'Payment_Error', 'Payment was unsuccessful, wrong gateway settings'
+  l.store 'Payment_Error', 'Payment was unsuccessful, answer from gateway:'
   l.store 'Payment_Processing', 'Processing..'
   l.store 'Invalid_Credit_Card', 'Invalid credit card, check number and CVV2 values'
   l.store 'Inactive_Gateway', 'Sorry, there is no gateway enabled by that name.'
