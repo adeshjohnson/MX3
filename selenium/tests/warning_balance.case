@@ -68,7 +68,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/list</td>
+	<td>/billing/users/edit/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT-10:00) Hawaii</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: System Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -90,6 +105,21 @@
 	<td>type</td>
 	<td>id=user_warning_email_balance</td>
 	<td>2.0000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT-03:00) Buenos Aires</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=11</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -117,6 +147,21 @@
 	<td>2.0000</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+05:00) Islamabad</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=11</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
@@ -142,6 +187,21 @@
 	<td>2.0000</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+08:00) Hong Kong</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=11</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
@@ -165,6 +225,21 @@
 	<td>type</td>
 	<td>id=user_warning_email_balance</td>
 	<td>2.0000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+10:00) Hobart</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=11</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -215,6 +290,21 @@
 	<td>type</td>
 	<td>id=user_warning_email_balance</td>
 	<td>2.0000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT-10:00) Hawaii</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=11</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -370,6 +460,156 @@
 	<td>assertNotText</td>
 	<td>devices_with_weak_password_size</td>
 	<td>4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=users</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Hawaii</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=warning_email_hour_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Buenos Aires</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=warning_email_hour_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Islamabad</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=warning_email_hour_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Hong Kong</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=warning_email_hour_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Hobart</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=warning_email_hour_value</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Vilnius</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=warning_email_hour_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=time_zone_value</td>
+	<td>Hawaii</td>
 </tr>
 </tbody></table>
 </body>
