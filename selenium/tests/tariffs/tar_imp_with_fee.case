@@ -1621,6 +1621,177 @@
 	<td>min_time_541</td>
 	<td>15.0000</td>
 </tr>
+<!--tarifo importas, kada yra connection fee su kableliu-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/1?step=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/notworking.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 2&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Column assignment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please confirm Column Separator and Decimal Separator for CSV file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 2&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Column assignment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prefix_id</td>
+	<td>label=Prefix</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=rate_id</td>
+	<td>label=Rate(EUR)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=connection_fee_id</td>
+	<td>label=Connection Fee(EUR)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=increment_id</td>
+	<td>label=Increment</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=min_time_id</td>
+	<td>label=Minimal Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=country_id</td>
+	<td>label=Direction</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=country_code_id</td>
+	<td>label=Country code</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=subcode</td>
+	<td>label=Subcode</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 3&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Column confirmation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imp_connection_fee_1</td>
+	<td>0,14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imp_connection_fee_2</td>
+	<td>0,14</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 4&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Analysis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Created destinations: 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 6&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Updating rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Import from CSV&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Step: 7&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Creating new rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/569</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=connection_fee_569</td>
+	<td>0.1400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_569</td>
+	<td>0.2626</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_details/568</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=connection_fee_568</td>
+	<td>0.1400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate_568</td>
+	<td>0.2425</td>
+</tr>
 </tbody></table>
 </body>
 </html>
