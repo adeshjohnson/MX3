@@ -44,12 +44,18 @@ class Card < ActiveRecord::Base
     end
   end
 
-  # Needs refactoring!
+  # A: Fast adaptive delete
   def Card.delete_from_sql(options={})
     cards_deleted = 0
-    limit  = 1000000
     @chunks =[]
-    (options[:start_num].to_i..options[:end_num].to_i).each_slice(limit) { |slice| @chunks << [slice.first, slice.last] }
+    @scope  = (options[:start_num].to_i..options[:end_num].to_i)
+    case @scope.count
+      when (0..999999) 		# ZAP/Adaptive delete if below default limit
+        limit = @scope.count
+      else
+        limit = 1000000		# For Huge batches
+    end
+    @scope.each_slice(limit) { |slice| @chunks << [slice.first, slice.last] }
     @chunks.each do |leading, trailing|
       query = "DELETE FROM cards USING cards LEFT JOIN payments ON (payments.user_id = cards.id and paymenttype='Card') WHERE payments.id IS NULL AND cards.number BETWEEN #{leading} AND #{trailing}"
       rows_affected = ActiveRecord::Base.connection.delete(query)
