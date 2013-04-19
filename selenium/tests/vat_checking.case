@@ -18,6 +18,41 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>startPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>http://ec.europa.eu/taxation_customs/vies/vatRequest.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=countryCombobox</td>
+	<td>label=LT-Lithuania</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>100003884617</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextPresent</td>
+	<td>unavailable</td>
+	<td>positive</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>storedVars.positive</td>
+	<td>label1</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -930,6 +965,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Registration successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label1</td>
 	<td></td>
 </tr>
 </tbody></table>
