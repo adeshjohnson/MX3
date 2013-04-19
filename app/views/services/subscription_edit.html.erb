@@ -27,11 +27,11 @@
       </tr>
       <tr>
         <td> <%= _('Activation_start') %>   </td>
-        <td> <%= select_datetime(@sub.activation_start, :start_year => Date.today.year-1, :end_year => Date.today.year+10, :prefix => "activation_start", :use_month_numbers => false) %>   </td>
+        <td> <%= select_datetime(Time.zone.parse(@sub.activation_start.to_s), :start_year => Time.zone.now.year-1, :end_year => Time.zone.now.year+10, :prefix => "activation_start", :use_month_numbers => false) %>   </td>
       </tr>
       <tr>
         <td> <%= _('Activation_end') %>   </td>
-        <td> <%= select_datetime(@sub.activation_end, :start_year => Date.today.year-1, :end_year => Date.today.year+10, :prefix => "activation_end", :use_month_numbers => false) %>   </td>
+        <td> <%= select_datetime(Time.zone.parse(@sub.activation_end.to_s), :start_year => Time.zone.now.year-1, :end_year => Time.zone.now.year+10, :prefix => "activation_end", :use_month_numbers => false) %>   </td>
       </tr>
 
 
