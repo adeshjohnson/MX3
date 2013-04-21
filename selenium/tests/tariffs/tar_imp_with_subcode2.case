@@ -31,6 +31,167 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--tikriniu, ar permeta i kita destination grupe-->
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations/251</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>370463</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>370462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/import_csv2/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=file</td>
+	<td>/home/mor/selenium/files/csv/destination_group_update.csv</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=update_subcodes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prefix_id</td>
+	<td>label=370</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=rate_id</td>
+	<td>label=0.1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=country_code_id</td>
+	<td>label=LTU</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=subcode</td>
+	<td>label=NGN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Columns assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imp_subcode_0</td>
+	<td>NGN</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=imp_cc_0</td>
+	<td>LTU</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Analysis completed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.nb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Subcodes updated: 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Congratulations, successfully imported CSV file!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations/250</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>NGN</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>370463</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>370462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destination_groups/destinations/251</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>370463</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>370462</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>370</td>
+	<td></td>
+</tr>
 <!--WITH DESTINATIONS-->
 <tr>
 	<td>open</td>
@@ -488,27 +649,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tier_504</td>
+	<td>id=tier_511</td>
 	<td>6</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tier_509</td>
+	<td>id=tier_516</td>
 	<td>7</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=subcode_511</td>
+	<td>id=subcode_518</td>
 	<td>1DHFDH</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=subcode_508</td>
+	<td>id=subcode_515</td>
 	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>destroy_img_503</td>
+	<td>destroy_img_510</td>
 	<td></td>
 </tr>
 <tr>
@@ -523,7 +684,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>destroy_img_509</td>
+	<td>destroy_img_516</td>
 	<td></td>
 </tr>
 <tr>
@@ -1249,12 +1410,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tier_504</td>
+	<td>id=tier_511</td>
 	<td>6</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=tier_505</td>
+	<td>id=tier_512</td>
 	<td>4</td>
 </tr>
 <tr>
@@ -1674,22 +1835,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=name_553</td>
+	<td>id=name_560</td>
 	<td>ALBANIA Cha</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=name_557</td>
+	<td>id=name_564</td>
 	<td>ALBANIA Tirane</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=subcode_546</td>
+	<td>id=subcode_553</td>
 	<td>MOB</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=subcode_553</td>
+	<td>id=subcode_560</td>
 	<td>FIX</td>
 </tr>
 <tr>
@@ -1714,12 +1875,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=subcode_539</td>
+	<td>id=subcode_546</td>
 	<td>FIX</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=subcode_545</td>
+	<td>id=subcode_552</td>
 	<td>FIX</td>
 </tr>
 </tbody></table>
