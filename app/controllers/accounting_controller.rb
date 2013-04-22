@@ -461,8 +461,12 @@ class AccountingController < ApplicationController
                 # suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
                 last_day_of_month = start_date.to_time.end_of_month.to_date
                 last_day_of_month2 = end_date.to_time.end_of_month.to_date
-                invd_price += service.read_attribute(:price)/last_day_of_month.day * (last_day_of_month - start_date + 1).to_i
-                invd_price += service.read_attribute(:price)/last_day_of_month2.day * (end_date.day)
+                if start_date.day == end_date.day
+                  invd_price += service.read_attribute(:price)
+                else
+                  invd_price += service.read_attribute(:price)/last_day_of_month.day * (last_day_of_month - start_date + 1).to_i
+                  invd_price += service.read_attribute(:price)/last_day_of_month2.day * (end_date.day)
+                end
               end
             end
           end
@@ -682,8 +686,12 @@ class AccountingController < ApplicationController
               # suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
               last_day_of_month = start_date.to_time.end_of_month.to_date
               last_day_of_month2 = end_date.to_time.end_of_month.to_date
-              invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date + 1).to_i
-              invd_price += service.price/last_day_of_month2.day * (end_date.day)
+              if start_date.day == end_date.day
+                invd_price += service.price
+              else
+                invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
+                invd_price += service.price/last_day_of_month2.day * (end_date.day)
+              end
             end
           end
 
@@ -1965,9 +1973,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
               end 
               #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas 
               last_day_of_month = start_date.to_time.end_of_month.to_date 
-              last_day_of_month2 = end_date.to_time.end_of_month.to_date 
-              invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i 
-              invd_price += service.price/last_day_of_month2.day * (end_date.day) 
+              last_day_of_month2 = end_date.to_time.end_of_month.to_date
+              if start_date.day == end_date.day
+                invd_price += service.price
+              else
+                invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i 
+                invd_price += service.price/last_day_of_month2.day * (end_date.day)
+              end
             end
           end
         end
