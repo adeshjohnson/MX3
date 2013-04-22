@@ -161,7 +161,7 @@ class FunctionsController < ApplicationController
         legA_cid = @src if legA_cid.blank?
         legB_cid = @src if legB_cid.blank?
 
-        separator = (AST_18 == 1 ? "," : "|")
+        separator = (ast_18? ? "," : "|")
 
         server = Confline.get_value("Web_Callback_Server").to_i
         server = 1 if server == 0
@@ -236,7 +236,7 @@ class FunctionsController < ApplicationController
         legA_cid = @src if legA_cid.blank?
         legB_cid = @src if legB_cid.blank?
 
-        separator = (AST_18 == 1 ? "," : "|")
+        separator = (ast_18? ? "," : "|")
 
         server = Confline.get_value("Web_Callback_Server").to_i
         server = 1 if server == 0
