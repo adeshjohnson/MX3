@@ -197,7 +197,7 @@ class PaymentsControllerTest < Test::Unit::TestCase
 
   def test_unsuccessful_payment_no_params
     post :paypal_ipn
-    assert_equal 'Don\'t be so smart...', flash[:notice]
+    assert_equal _('Dont_be_so_smart'), flash[:notice]
     assert_redirected_to :controller => "callc", :action => "main"
   end
 
@@ -217,7 +217,7 @@ class PaymentsControllerTest < Test::Unit::TestCase
     assert_operator Action.count, :>, actions
     assert_equal Action.find(:first, :order => "id desc").action, "hacking_attempt" # Action.last :|
     assert_equal payment.completed, 0
-    assert_equal 'Don\'t be so smart...', flash[:notice]
+    assert_equal _('Dont_be_so_smart'), flash[:notice]
     assert_redirected_to :controller => "callc", :action => "main"
   end
 
@@ -235,7 +235,7 @@ class PaymentsControllerTest < Test::Unit::TestCase
         "item_number" => payment.id,
     }
 
-    assert_equal 'Don\'t be so smart...', flash[:notice]
+    assert_equal _('Dont_be_so_smart'), flash[:notice]
     assert_redirected_to :controller => "callc", :action => "main"
   end
 
