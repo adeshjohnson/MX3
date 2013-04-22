@@ -5,7 +5,7 @@
     <p><label for="id"><%= _('ID') %></label><br/>
       <%= text_field_tag 'id' %>
     </p>
-    <p><%= submit_tag 'select', :disable_with => _('Processing..'), :id => 'search_devices_all' %></p<
+    <p><%= submit_tag 'select', :disable_with => _('Processing..'), :id => 'search_devices_all' %></p>
 <% end %>
 
 <% if @select %>
@@ -18,7 +18,7 @@
           <% @table.singularize.titleize.gsub(' ', '').constantize.column_names.each_with_index { |column, i| %>
               <tr class="row<%= (i % 2 + 1).to_s %>">
                 <td align="left"><%= column %></td>
-                <td align="left" id="<%= column %>_value"><%= @select.send(column) %></td>
+                <td align="left" id="<%= column %>_value"><%= @select.read_attribute(column) %></td>
               </tr>
           <% } %>
         </table>
