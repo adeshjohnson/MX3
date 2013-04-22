@@ -37,7 +37,7 @@ class RecordingsController < ApplicationController
     rec_id = params[:rec]
     rec = Recording.where(:id => params[:rec]).first rescue nil
     rec_user = User.where(:id => rec.user_id).first rescue nil
-    is_authorized = ( current_user.id == rec_user.owner_id or (rec.visible_to_user == 1 and current_user.id == rec.user_id) ? true : false ) rescue false
+    is_authorized = ( current_user.id == rec_user.owner_id or (rec.visible_to_user == 1 and current_user.id == rec.user_id or rec.dst_user_id)) rescue false
 
     if rec_id.blank? or rec_user.blank?
         flash[:notice] = _('Dont_be_so_smart')
