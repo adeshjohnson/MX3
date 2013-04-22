@@ -27,7 +27,7 @@
     <% end %>
 
     <% if @options[:billed_time_orig_show] == 1 or @options[:billed_time_term_show] == 1 %>
-        <th id="billed_duration" align="center" colspan="<%= @options[:price_orig_show].to_i + @options[:price_term_show].to_i %>" style="white-space:nowrap;"><%= _("Billed_Duration") %></th>
+        <th id="billed_duration" align="center" colspan="<%= @options[:billed_time_orig_show].to_i + @options[:billed_time_term_show].to_i %>" style="white-space:nowrap;"><%= _("Billed_Duration") %></th>
     <% end %>
     <th id="duration" align="center" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("duration", "duration", "Duration", @options) %> </th>
     <th id="answered_calls" align="right" rowspan="<%= h_rows %>" style="white-space:nowrap;"> <%= ordered_list_header("answered_calls", "answered_calls", "Answered_calls", @options) %> </th>
