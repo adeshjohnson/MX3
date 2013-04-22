@@ -219,7 +219,7 @@ class ApiController < ApplicationController
       end
       invoices = Invoice.select("invoices.*").joins("JOIN users on (users.id = invoices.user_id)").where(["period_start >= ? AND period_end <= ? AND users.generate_invoice != 0 #{cond}", from_nice, till_nice])
 
-      if invoices or invoices.size == 0
+      if !invoices.blank? or invoices.size != 0
         doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
         doc.Invoices("from" => from_nice, "till" => till_nice) {
           for inv in invoices
