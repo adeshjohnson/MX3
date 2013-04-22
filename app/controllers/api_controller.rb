@@ -165,7 +165,7 @@ class ApiController < ApplicationController
       end
     else
       doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-      doc.Status("Dont be so smart")
+      doc.Status(_('Dont_be_so_smart'))
     end
     send_xml_data(out_string, params[:test].to_i)
 
@@ -1560,7 +1560,7 @@ class ApiController < ApplicationController
           doc.error("User was not found")
         end
       else
-        doc.error('Dont be so smart')
+        doc.error(_('Dont_be_so_smart'))
         MorApi.create_error_action(params, request, 'API : User not found by login and password')
       end
     else
@@ -1950,7 +1950,7 @@ class ApiController < ApplicationController
       check_user(params[:u], params[:p])
       if @user
         if @user.usertype == 'user' or (@user.usertype == 'accountant' and (values[:user_id].to_i == 0 or values[:user_id].to_i == @user.id))
-          doc.error("Don't be so smart")
+          doc.error(_('Dont_be_so_smart'))
         else
           if @user.usertype == 'accountant'
             owner_id = 0
@@ -2094,7 +2094,7 @@ class ApiController < ApplicationController
             end
           else
             dont_be_so_smart(@user.id)
-            doc.error("Dont be so smart")
+            doc.error(_('Dont_be_so_smart'))
           end
         else
           doc.error("Device was not found")
@@ -2766,7 +2766,7 @@ class ApiController < ApplicationController
           end
         else
           dont_be_so_smart(@user.id)
-          doc.error("Dont be so smart")
+          doc.error(_('Dont_be_so_smart'))
         end
       else
         doc.error("Bad login")
@@ -2845,7 +2845,7 @@ class ApiController < ApplicationController
           doc.error("Device was not found")
         end
        else
-         doc.error("Don\'t be so smart")
+         doc.error(_('Dont_be_so_smart'))
        end
       else
         doc.error("Bad login")
@@ -2911,7 +2911,7 @@ class ApiController < ApplicationController
               doc.error("You are not authorized to manage DIDs")
             end
         else
-          doc.error("Don\'t be so smart")
+          doc.error(_('Dont_be_so_smart'))
         end
       else
         doc.error("Bad login")
@@ -2977,7 +2977,7 @@ class ApiController < ApplicationController
           doc.error("Provider was not found")
         end
        else
-         doc.error("Don\'t be so smart")
+         doc.error(_('Dont_be_so_smart'))
        end
       else
         doc.error("Bad login")
@@ -3049,7 +3049,7 @@ class ApiController < ApplicationController
         ph = Phonebook.where(:id => params[:phonebook_id]).first
         if ph
           if ph.user_id != @user.id and @user.usertype != "admin"
-            doc.error("Dont be so smart")
+            doc.error(_('Dont_be_so_smart'))
           else
             ph.number = params[:number] if params[:number]
             ph.name = params[:name] if params[:name]
@@ -3374,7 +3374,7 @@ class ApiController < ApplicationController
           }
         }
       else
-        doc.error("Dont be so smart")
+        doc.error(_('Dont_be_so_smart'))
       end
     else
       doc.error("Bad login")
@@ -3458,7 +3458,7 @@ class ApiController < ApplicationController
             doc.error("No currency")
           end
         else
-          doc.error("Dont be so smart")
+          doc.error(_('Dont_be_so_smart'))
         end
       else
         doc.error("Payments not allow from api")
@@ -4188,7 +4188,7 @@ class ApiController < ApplicationController
               doc = MorApi.return_error("Email not found", doc)
             end
           else
-            doc = MorApi.return_error("Don't be so smart", doc)
+            doc = MorApi.return_error(_('Dont_be_so_smart'), doc)
           end
         else
           doc = MorApi.return_error("Bad login", doc)
@@ -4214,7 +4214,7 @@ class ApiController < ApplicationController
         allow = false if @user.usertype == "accountant" and !@user.accountant_allow_read('device_manage')
         if allow
           if user and user.owner_id != owner_id
-            doc.error("Don't be so smart") 
+            doc.error(_('Dont_be_so_smart'))
           elsif user and !user_id.blank?
             if user.devices.blank?
               doc.error("Device not found")
@@ -4250,7 +4250,7 @@ class ApiController < ApplicationController
 
   def check_sms_addon
     unless sms_active?
-      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
+      send_xml_data(MorApi.return_error(_('Dont_be_so_smart')), params[:test].to_i)
       return false
     end
   end
@@ -4405,7 +4405,7 @@ class ApiController < ApplicationController
   def check_calling_card_addon
     reseller_cc_permission = (defined?(CC_Active) and (CC_Active == 1) and (!@current_user.is_reseller? or (@current_user.is_reseller? and (@current_user.reseller_allow_edit('calling_cards')))))
     if !reseller_cc_permission or @current_user.is_user? or (@current_user.is_accountant? and !@current_user.accountant_allow_read('callingcard_manage')) or (@current_user.is_reseller? and !@current_user.reseller_allow_read('calling_cards'))
-      send_xml_data(MorApi.return_error('Dont be so smart'), params[:test].to_i)
+      send_xml_data(MorApi.return_error(_('Dont_be_so_smart')), params[:test].to_i)
       return false
     end
   end

@@ -801,7 +801,7 @@ Localization.define('en') do |l|
   l.store 'Callback_device_notice', 'This device will be charged for callback.'
   l.store 'Execute', 'Execute'
   l.store 'Source_should_be_entered_for_callback', 'Source should be entered for callback'
-  l.store 'Dont_be_so_smart', 'Don\'t be so smart...'
+  l.store 'Dont_be_so_smart', 'Access Denied'
   l.store 'No_devices_callback_not_possible', 'You don\'t have devices. Callback not possible.'
 
   l.store 'Imported_CDRs', 'Imported CDRs'
@@ -2128,7 +2128,7 @@ Localization.define('en') do |l|
   l.store 'Task_was_not_updated', 'Task was not updated'
   l.store 'Task_was_destroyed', 'Task deleted'
   l.store 'Task_was_not_destroyed', 'Task was not deleted'
-  l.store 'Dont_Be_So_Smart', 'Dont be so smart!'
+  l.store 'Dont_Be_So_Smart', 'Access Denied'
   l.store 'Task_Information', 'Task Information'
   l.store 'CallCenter_Clients', 'Call Center Clients'
   l.store 'Edit_Client', 'Edit Client'
