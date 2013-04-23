@@ -596,6 +596,176 @@
 	<td>id=device_recording_keep_1</td>
 	<td>on</td>
 </tr>
+<!--useris turi galeti parsisiusti recordinga nepaisant to jis dst ar src-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<!--cia viskas gerai, nes to recordingo dst yra test user, o src - user_reseller-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>1011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--sito recordingo dst yra user 101, o src - user_reseller-->
+<tr>
+	<td>assertText</td>
+	<td>id=calldate_7</td>
+	<td>2010-02-18 00:00:01</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=billsec_7</td>
+	<td>exact:00:01:28</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=recording_7</td>
+	<td>37046246362</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<!--cia viskas gerai, nes to recordingo dst yra test user, o src - user_reseller-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/recordings/list_recordings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<!--sito recordingo src yra user 101, o src - user_reseller-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#download_5 &gt; a &gt; img[alt=&quot;Database_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Recording was not found</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

@@ -10,3 +10,4 @@ update calls set real_duration=60 where id in (211,224,273);
 update calls set real_billsec=50 where id in (211,224,273);
 update calls set real_duration=30 where id in (236,241,248);
 update calls set real_billsec=0 where id in (236,241,248);
+UPDATE `mor`.`recordings` SET `dst_device_id` = '7' WHERE `recordings`.`id` =5 LIMIT 1 ;
