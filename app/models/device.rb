@@ -1050,7 +1050,7 @@ class Device < ActiveRecord::Base
         s[:acc_device_create] = 0
       end
       if  notice.blank? and s[:acc_device_create] != 2
-        notice = _('dont_be_so_smart')
+        notice = _('Dont_be_so_smart')
       end
     end
 
