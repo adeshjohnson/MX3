@@ -1006,7 +1006,8 @@ in before filter : user (:find_user_from_id_or_session)
       when 'csv'
         options[:test] = 1 if params[:test]
         options[:collumn_separator], options[:column_dem] = current_user.csv_params
-        options[:current_user] = current_user
+        options[:current_user]	= current_user
+        options[:show_full_src] = session[:show_full_src]
         filename, test_data = Call.last_calls_csv(options)
         filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
         if filename

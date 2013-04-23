@@ -606,12 +606,13 @@ class Call < ActiveRecord::Base
   def Call.last_calls_csv(options={})
     cond, var, jn = Call.last_calls_parse_params(options)
     s =[]
-    format = Confline.get_value('Date_format', options[:current_user].owner_id).gsub('M', 'i')
+    format	 = Confline.get_value('Date_format', options[:current_user].owner_id).gsub('M', 'i')
+    csv_full_src = true if options[:show_full_src].to_i == 1
     #calldate2 - because something overwites calldate when changing date format
     time_offset = options[:current_user].time_offset
     s << SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => format, :offset => time_offset}), "calldate2")
-    s << SqlExport.column_escape_null("calls.src", "src")
-    if options[:pdf].to_i == 1
+    s << SqlExport.column_escape_null("calls.src", "src") unless csv_full_src
+    if csv_full_src or options[:pdf].to_i == 1
       s << SqlExport.column_escape_null("calls.clid", "clid")
     end
 
