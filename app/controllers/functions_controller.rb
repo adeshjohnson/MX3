@@ -1822,6 +1822,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value2("Frontpage_Text", params[:frontpage_text].to_s, session[:user_id])
     Confline.set_value("Show_advanced_Provider_settings", params[:provider_settings].to_i, session[:user_id])
     Confline.set_value("Show_advanced_Device_settings", params[:device_settings].to_i, session[:user_id])
+    Confline.set_value("Invoice_user_billsec_show", params[:invoice_user_billsec_show].to_i, session[:user_id])
 
     #boolean values
 

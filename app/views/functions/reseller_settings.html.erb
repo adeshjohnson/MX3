@@ -134,6 +134,7 @@
           <td><b><%= _('Show_advanced_rates_for_users') %>: </b></td>
           <td><%= check_box_tag 'show_advanced_rates_for_users', "1", Confline.get_value("Show_Advanced_Rates_For_Users", session[:user_id]).to_i == 1 %></td>
         </tr>
+        <%= raw setting_boolean(_('Instead_billsec_show_user_billsec'), 'invoice_user_billsec_show', "Invoice_user_billsec_show", session[:user_id], {:id => 'inv_user_billsec', :tip => tooltip(_('billsec_and_user_billsec'), _('billsec_and_user_billsec_explanation'))}) %>
         <%= raw setting_boolean(_('Hide_device_passwords_for_users'), 'hide_device_passwords_for_users', "Hide_Device_Passwords_For_Users", session[:user_id]) %>
         <%= raw setting_boolean(_('Disallow_Email_Editing'), 'disallow_email_editing', "Disallow_Email_Editing", session[:user_id]) %>
         <tr>

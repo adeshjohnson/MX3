@@ -46,7 +46,7 @@ class Call < ActiveRecord::Base
   end
 
   def Call.nice_billsec_sql
-    if User.current.is_user? and !User.current.owner.is_reseller? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1 
+    if User.current.is_user? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1 
       "CEIL(user_billsec) as 'nice_billsec'" 
     else
       "IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec) as 'nice_billsec'"
@@ -580,7 +580,7 @@ class Call < ActiveRecord::Base
       user_price = SqlExport.user_price_no_dids_sql
       reseller_price = SqlExport.admin_reseller_price_no_dids_sql
     end
-    if User.current.is_user? and !User.current.owner.is_reseller? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1
+    if User.current.is_user? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1
       billsec_sql = "CEIL(user_billsec)"
     else
       billsec_sql = "IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)"

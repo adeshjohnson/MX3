@@ -2961,7 +2961,7 @@ Variables: (Names marked with * are required)
   end
 
   def show_user_billsec?
-    (user? and !current_user.owner.is_reseller? and Confline.get_value("Invoice_user_billsec_show", current_user.owner.id).to_i == 1)
+    (user? and Confline.get_value("Invoice_user_billsec_show", current_user.owner.id).to_i == 1)
   end
 
   def cc_active?
