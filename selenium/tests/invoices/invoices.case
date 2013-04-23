@@ -1346,6 +1346,47 @@
 	<td>css=issue_date</td>
 	<td>2012-12-12</td>
 </tr>
+<!--No invoices-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=accountant&amp;p=accountant1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>no invoices found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>no invoices found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=reseller&amp;p=reseller1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>no invoices found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=101&amp;p=1011&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>no invoices found</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
