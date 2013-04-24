@@ -74,6 +74,8 @@ module ActiveMerchant #:nodoc:
       TEST_URL = 'https://www.secure-epayments.apixml.hsbc.com'
       LIVE_URL = 'https://www.secure-epayments.apixml.hsbc.com'
 
+      @remote_ip = ""
+
       def initialize(options = {})
         requires!(options, :login, :password, :client_id, :xml_url, :default_geteway_currency)
         @options = options
@@ -95,6 +97,7 @@ module ActiveMerchant #:nodoc:
       end
 
       def authorize(money, credit_card, options = {})
+        @remote_ip = options[:ip]
         options = {
             :money => money,
             :credit_card => credit_card,
@@ -133,6 +136,7 @@ module ActiveMerchant #:nodoc:
           xml.DocVersion(:DataType => "String") { |x| x.text! "1.0" }
           xml.EngineDoc do
             xml.ContentType(:DataType => "String") { |x| x.text! "OrderFormDoc" }
+            xml.IPAddress(:DataType => "String") { |x| x.text! @remote_ip.to_s }
             xml.User do
               xml.ClientId(:DataType => "S32") { |x| x.text! self.options[:client_id] }
               xml.Name(:DataType => "String") { |x| x.text! self.options[:login] }
