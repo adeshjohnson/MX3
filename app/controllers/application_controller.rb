@@ -1810,7 +1810,7 @@ class ApplicationController < ActionController::Base
       accs = acc.to_s
       variable = "MOR_ACC=#{accs}"
 
-      sep = (AST_18 == 1 ? "," : "|")
+      sep = (ast_18? ? "," : "|")
 
       variable += sep + var2 if var2 and var2.length > 0
 
