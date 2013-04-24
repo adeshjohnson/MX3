@@ -34,12 +34,12 @@ class RecordingsController < ApplicationController
 =end
 
   def get_recording
-    rec_id = params[:rec]
-    rec = Recording.where(:id => params[:rec]).first rescue nil
-    rec_user = User.where(:id => rec.user_id).first rescue nil
-    is_authorized = ( current_user.id == rec_user.owner_id or (rec.visible_to_user == 1 and current_user.id == rec.user_id or rec.dst_user_id)) rescue false
+    rec_id	   = params[:rec]
+    rec		   = Recording.where(:id => params[:rec]).first
+    rec_users      = User.where(:id => [rec.user_id, rec.dst_user_id])
+    is_authorized  = (rec_users.collect(&:owner_id) + [rec.user_id, rec.dst_user_id]).include? current_user.id
 
-    if rec_id.blank? or rec_user.blank?
+    if rec_id.blank? or rec_users.blank?
         flash[:notice] = _('Dont_be_so_smart')
         redirect_to :controller=>"callc", :action => 'main' and return false
     elsif !is_authorized
