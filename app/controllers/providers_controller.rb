@@ -653,7 +653,7 @@ class ProvidersController < ApplicationController
     device = @provider.device
     if device
       if @provider.tech == "SIP" or @provider.tech == "IAX2"
-        exceptions = device.prune_device_in_all_servers(nil, 1)
+        exceptions = device.prune_device_in_all_servers(nil, 0)
         raise exceptions[0] if exceptions.size > 0
       end
       if @provider.tech == "H323"
