@@ -2666,6 +2666,71 @@
 	<td>css=nice_billsec</td>
 	<td>50.0</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=inv_user_billsec</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>1</td>
+</tr>
 </tbody></table>
 </body>
 </html>
