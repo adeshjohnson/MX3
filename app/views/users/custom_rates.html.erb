@@ -1,18 +1,28 @@
+<% rw = [1,2]; w = [2] %>
 <b><%= b_user + _('User') %>:</b> <%= link_to nice_user(@user), action: 'edit', id: @user.id %>
   <br>
   <b><%= b_view + _('Tariff') %>
-    :</b> <%= link_to @tariff.name, :controller => "tariffs", :action => "user_rates_list", :id => @tariff.id %>
+    <% if rw.include? @acc_manage_tariffs %>
+      :</b> <%= link_to @tariff.name, :controller => "tariffs", :action => "user_rates_list", :id => @tariff.id %>
+    <% else%>
+      :</b> <%= @tariff.name %>
+    <% end %>
   <br><br>
-
 
   <table width="100%" class="maintable">
     <tr>
       <th align="left"><%= _('Name') %></th>
       <th align="left"><%= _('Type') %></th>
-      <th align="center"><%= _('Destinations') %></th>
-      <th align="center"><%= _('Rate') %> (<%= session[:default_currency] %>)</th>
+      <% unless accountant? %>
+        <th align="center"><%= _('Destinations') %></th>
+      <% end %>
+      <% if rw.include? @acc_finances %>
+        <th align="center"><%= _('Rate') %> (<%= session[:default_currency] %>)</th>
+      <% end %>
       <th align="center"><%= _('Round_by') %> (s)</th>
-      <th colspan=2></th>
+      <% if w.include? @acc_finances and rw.include? @acc_tariff %>
+        <th colspan=2></th>
+      <% end %>
     </tr>
 
 
@@ -47,17 +57,21 @@
              end
           %>
 
-          <td align="center"><%= link_to b_view + _('View'), :controller => :destination_groups, :action => :destinations, :id => dg.id %>
-            (<%= dg.destinations.size %>)
-          </td>
+          <% unless accountant? %>
+            <td align="center"><%= link_to b_view + _('View'), :controller => :destination_groups, :action => :destinations, :id => dg.id %> (<%= dg.destinations.size %>)</td>
+          <% end %>
           <% if show_rr %>
+            <% if rw.include? @acc_finances %>
               <td align="center"><%= price %></td>
+            <% end %>
               <td align="center"><%= roundby %></td>
           <% else %>
               <td colspan="2" align="center"><%=raw _('Check_advanced_rates') + b_forward %></td>
           <% end %>
-          <td align="center"><%= link_to b_rates, :action => 'user_acustrates_full', :id => @user.id, :dg => dg.id %> </td>
-          <td align="center"><%= link_to b_cross, :action => 'user_delete_custom_rate', :id => cr.id %> </td>
+          <% if w.include? @acc_finances and rw.include? @acc_tariff %>
+            <td align="center"><%= link_to b_rates, :action => 'user_acustrates_full', :id => @user.id, :dg => dg.id %> </td>
+            <td align="center"><%= link_to b_cross, :action => 'user_delete_custom_rate', :id => cr.id %> </td>
+          <% end %>
         </tr>
 
         <% i += 1 %>
@@ -65,7 +79,7 @@
 
     <%= form_tag :action => 'user_custom_rate_add_new', :id => @user.id do %>
         <tr class="row1">
-          <th align="left" colspan=5>
+          <th align="left" colspan=<%= (w.include? @acc_finances and rw.include? @acc_tariff) ? (accountant? ? 4 : 5) : 2 %>>
             <select name="dg_new">
               <% for dg in @destgroups %>
                   <option value=<%= dg["id"] %>> <%= dg["name"] + " " + dg["desttype"] %> </option>

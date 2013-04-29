@@ -1,3 +1,4 @@
+<% rw = [1,2]; w = [2] %>
 <b><%= b_user + _('User') %>:</b> <%= link_to nice_user(@user), action: 'edit', id: @user.id %>
   <br><br>
   <b><%= _('Destination') %>:</b> <%= draw_flag_by_code @dgroup.flag %> <%= @dgroup.name %> <%= @dgroup.desttype %>

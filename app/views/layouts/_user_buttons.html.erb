@@ -33,7 +33,7 @@
         <td id="manual_payment_<%= user.id %>" align="center"><%= link_to(b_money, {:controller => 'payments', :action => 'manual_payment', :user_id => user.id}, :id => "manual_payment_link_"+user.id.to_s) %></td>
     <% end %>
 
-    <% if admin? %>
+    <% if admin? or reseller? or (accountant? and session[:acc_user_create_opt_4].to_i >= 1) %>
         <td id="custom_rates_<%= user.id %>" align="center"><%= link_to(b_crates, {:controller => 'users', :action => 'custom_rates', :id => user.id}, :id => "custom_rates_link_"+user.id.to_s) if user.tariff and user.tariff.purpose == "user" %></td>
     <% end %>
 

@@ -897,6 +897,11 @@ in before filter : user (:find_user)
     Destinationgroup.order(:name).each { |dg|
       @destgroups << dg unless udg.include?(dg.id)
     }
+
+    @acc_finances       = accountant? ? session[:acc_see_financial_data].to_i   : 2
+    @acc_manage_tariff  = accountant? ? session[:acc_tariff_manage].to_i        : 2
+    @acc_tariff         = accountant? ? session[:acc_user_create_opt_4].to_i    : 2
+
   end
 
 =begin
@@ -1013,6 +1018,11 @@ in before filter : user (:find_user)
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
 
+    if accountant? and session[:acc_user_create_opt_4].to_i != 2
+        flash[:notice] = _('You_have_no_view_permission')
+        redirect_to :controller => "callc", :action => "main" and return false
+    end
+
     @dgroup = Destinationgroup.where(:id => params[:dg]).first
     @custrate = @dgroup.custom_rate(@user.id)
     @rate = @custrate
@@ -1051,6 +1061,12 @@ in before filter : user (:find_user)
 in before filter : customrate (:find_customrate); ards (:find_ard_all)
 =end
   def user_ard_time_edit
+
+    if accountant? and session[:acc_user_create_opt_4].to_i != 2
+      flash[:notice] = _('You_have_no_view_permission')
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
     dt = params[:daytype] ? params[:daytype] : ''
     et = params[:date][:hour] + ":" + params[:date][:minute] + ":" + params[:date][:second]
     st = params[:st]
@@ -1097,6 +1113,12 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
 in before filter : customrate (:find_customrate); ards (:find_ard_all)
 =end
   def user_acustrates
+
+    if accountant? and session[:acc_user_create_opt_4].to_i != 2
+      flash[:notice] = _('You_have_no_view_permission')
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+
     @user = @customrate.user
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
@@ -1113,6 +1135,11 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
       @from = lard.from + lard.duration if lard.artype == "minute"
       @from = lard.from if lard.artype == "event"
     end
+
+    @acc_finances       = accountant? ? session[:acc_see_financial_data].to_i   : 2
+    @acc_manage_tariff  = accountant? ? session[:acc_tariff_manage].to_i        : 2
+    @acc_tariff         = accountant? ? session[:acc_user_create_opt_4].to_i    : 2
+
   end
 
 =begin
