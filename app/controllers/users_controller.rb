@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   before_filter :authorize, :except => [:daily_actions]
   before_filter :check_localization, :except => [:daily_actions]
   before_filter { |c|
-    view = [:list, :index, :reseller_users, :show, :edit, :device_groups, :custom_rates, :user_acustrates_full, :user_acustrates, :default_user]
-    edit = [:new, :create, :update, :destroy, :hide, :device_group_edit, :device_group_update, :device_group_new, :device_group_create, :device_group_delete, :update_personal_details, :user_custom_rate_add_new, :user_delete_custom_rate, :artg_destroy, :ard_manage, :user_ard_time_edit, :user_custom_rate_update, :user_custom_rate_update, :user_custom_rate_delete, :default_user_update]
+    view = [:list, :index, :reseller_users, :show, :edit, :device_groups, :custom_rates, :user_acustrates, :default_user]
+    edit = [:new, :create, :update, :destroy, :hide, :device_group_edit, :user_acustrates_full, :device_group_update, :device_group_new, :device_group_create, :device_group_delete, :update_personal_details, :user_custom_rate_add_new, :user_delete_custom_rate, :artg_destroy, :ard_manage, :user_ard_time_edit, :user_custom_rate_update, :user_custom_rate_update, :user_custom_rate_delete, :default_user_update]
     allow_read, allow_edit = c.check_read_write_permission(view, edit, {:role => "accountant", :right => :acc_user_manage, :ignore => true})
     c.instance_variable_set :@allow_read, allow_read
     c.instance_variable_set :@allow_edit, allow_edit
@@ -1022,9 +1022,14 @@ in before filter : user (:find_user)
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
 
-    if (accountant? and session[:acc_user_create_opt_4].to_i != 2) or params[:dg].blank?
+    if accountant? and (session[:acc_user_create_opt_4].to_i != 2 or session[:acc_see_financial_data].to_i != 2)
         flash[:notice] = _('You_have_no_view_permission')
         redirect_to :controller => "callc", :action => "main" and return false
+    end
+
+    if params[:dg].blank?
+      dont_be_so_smart
+      redirect_to action: 'main', controller: 'callc' and return false
     end
 
     @dgroup = Destinationgroup.where(:id => params[:dg]).first
