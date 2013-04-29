@@ -1022,7 +1022,7 @@ in before filter : user (:find_user)
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
 
-    if accountant? and session[:acc_user_create_opt_4].to_i != 2
+    if (accountant? and session[:acc_user_create_opt_4].to_i != 2) or params[:dg].blank?
         flash[:notice] = _('You_have_no_view_permission')
         redirect_to :controller => "callc", :action => "main" and return false
     end
