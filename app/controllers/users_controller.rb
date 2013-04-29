@@ -908,7 +908,7 @@ in before filter : user (:find_user)
 in before filter : user (:find_user)
 =end
   def user_custom_rate_add_new
-    if !accountant? or (accountant? and (session[:acc_user_create_opt_4].to_i == 2 or session[:acc_see_financial_data].to_i == 2))
+    if accountant? and (session[:acc_user_create_opt_4].to_i != 2 or session[:acc_see_financial_data].to_i != 2)
       flash[:notice] = _('You_have_no_view_permission')
       redirect_to :controller => "callc", :action => "main" and return false
     end
