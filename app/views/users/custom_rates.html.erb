@@ -77,7 +77,8 @@
         <% i += 1 %>
     <% end %>
 
-    <%= form_tag :action => 'user_custom_rate_add_new', :id => @user.id do %>
+    <% if accountant? and (session[:acc_user_create_opt_4].to_i == 2 or session[:acc_see_financial_data].to_i == 2) %>
+      <%= form_tag :action => 'user_custom_rate_add_new', :id => @user.id do %>
         <tr class="row1">
           <th align="left" colspan=<%= (w.include? @acc_finances and rw.include? @acc_tariff) ? (accountant? ? 4 : 5) : 2 %>>
             <select name="dg_new">
@@ -88,6 +89,7 @@
           </th>
           <th align="center" colspan=2>   <%= image_submit_tag "icons/add.png", :title => _('Add_new') %> </th>
         </tr>
+      <% end %>
     <% end %>
 
 
