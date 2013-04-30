@@ -1288,7 +1288,7 @@ class TariffsController < ApplicationController
   def user_rates_list
     check_user_for_tariff(@tariff.id)
 
-    if @tariff.purpose != 'user'
+    if flash[:notice].blank? and @tariff.purpose != 'user'
       flash[:notice] = _('Tariff_type_error')
       redirect_to :controller => :tariffs, :action => :list and return false
     end

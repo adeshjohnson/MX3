@@ -17,6 +17,13 @@ class UsersController < ApplicationController
     c.instance_variable_set :@allow_edit, allow_edit
     true
   }
+  before_filter do |c|
+    view = [:user_custom_rate_add, :custom_rates, :user_acustrates_full, :user_acustrates, :ard_manage, :user_ard_time_edit, :user_delete_custom_rate, :artg_destroy, :user_custom_rate_delete, :user_custom_rate_update]
+    edit = [:user_custom_rate_add, :user_acustrates_full, :user_acustrates, :ard_manage, :user_ard_time_edit, :user_delete_custom_rate, :artg_destroy, :user_custom_rate_delete, :user_custom_rate_update]
+    allow_read, allow_edit = c.check_read_write_permission(view, edit, {:role => "accountant", :right => :acc_user_create_opt_4, :ignore => true})
+    c.instance_variable_set :@allow_read_custrate, allow_read
+    c.instance_variable_set :@allow_edit_custrate, allow_edit
+  end
   before_filter :find_user, :only => [:update, :device_group_create, :device_groups, :device_group_new, :custom_rates, :user_custom_rate_add_new, :user_acustrates_full, :monitorings]
   before_filter :find_user_from_session, :only => [:update_personal_details, :personal_details]
   before_filter :find_devicegroup, :only => [:device_group_delete, :device_group_update, :device_group_edit]
@@ -1027,7 +1034,7 @@ in before filter : user (:find_user)
         redirect_to :controller => "callc", :action => "main" and return false
     end
 
-    if params[:dg].blank?
+    if (@user.owner_id != current_user.id and !accountant?) or (accountant? and @user.owner_id != 0) or params[:dg].blank?
       dont_be_so_smart
       redirect_to action: 'main', controller: 'callc' and return false
     end
@@ -1132,6 +1139,11 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
     @dgroup = @customrate.destinationgroup
+
+    if @user.owner_id != current_user.id or (accountant? and @user.owner_id != 0)
+      dont_be_so_smart
+      redirect_to action: 'main', controller: 'callc' and return false
+    end
 
     @st = params[:st]
     @dt = params[:dt] ? params[:dt] : ''
