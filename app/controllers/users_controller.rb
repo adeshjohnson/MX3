@@ -1061,7 +1061,7 @@ in before filter : user (:find_user)
       @Wet_arr = []
       res.each { |r|
         @Wst_arr << (r["start_time"] ? r["start_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
-        @Wst_arr << (r["end_time"] ? r["end_time"].strftime("%H:%M:%S") : Time.parse("23:59:59").strftime("%H:%M:%S"))
+        @Wet_arr << (r["end_time"] ? r["end_time"].strftime("%H:%M:%S") : Time.parse("23:59:59").strftime("%H:%M:%S"))
 
       }
 
@@ -1069,7 +1069,7 @@ in before filter : user (:find_user)
       @Fst_arr = []
       @Fet_arr = []
       res.each { |r|
-        @Fet_arr << (r["start_time"] ? r["start_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
+        @Fst_arr << (r["start_time"] ? r["start_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
         @Fet_arr << (r["end_time"] ? r["end_time"].strftime("%H:%M:%S") : Time.parse("23:59:59").strftime("%H:%M:%S"))
 
       }
