@@ -905,9 +905,9 @@ in before filter : user (:find_user)
       @destgroups << dg unless udg.include?(dg.id)
     }
 
-    @acc_finances       = accountant? ? session[:acc_see_financial_data].to_i   : 2
-    @acc_manage_tariff  = accountant? ? session[:acc_tariff_manage].to_i        : 2
-    @acc_tariff         = accountant? ? session[:acc_user_create_opt_4].to_i    : 2
+    @acc_finances       = (accountant? ? session[:acc_see_financial_data].to_i   : 2)
+    @acc_manage_tariff  = (accountant? ? session[:acc_tariff_manage].to_i        : 2)
+    @acc_tariff         = (accountant? ? session[:acc_user_create_opt_4].to_i    : 2)
 
   end
 
