@@ -68,7 +68,7 @@
           <% else %>
               <td colspan="2" align="center"><%=raw _('Check_advanced_rates') + b_forward %></td>
           <% end %>
-          <% if w.include? @acc_finances and rw.include? @acc_tariff %>
+          <% if !accountant? or (accountant? and session[:acc_user_create_opt_4].to_i == 2 and session[:acc_see_financial_data].to_i == 2 and session[:acc_user_manage].to_i == 2) %>
             <td align="center"><%= link_to b_rates, :action => 'user_acustrates_full', :id => @user.id, :dg => dg.id %> </td>
             <td align="center"><%= link_to b_cross, :action => 'user_delete_custom_rate', :id => cr.id %> </td>
           <% end %>
