@@ -1133,7 +1133,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
 =end
   def user_acustrates
 
-    if accountant? and session[:acc_user_create_opt_4].to_i != 2
+    if accountant? and (session[:acc_user_create_opt_4].to_i != 2 or session[:acc_see_financial_data].to_i != 2)
       flash[:notice] = _('You_have_no_view_permission')
       redirect_to :controller => "callc", :action => "main" and return false
     end
@@ -1206,37 +1206,42 @@ in before filter : ard (:find_ard)
 in before filter : customrate (:find_customrate)
 =end
   def user_custom_rate_add
-    @ard = Acustratedetail.new
-    artype = params[:artype]
+    if accountant? and (session[:acc_user_create_opt_4].to_i != 2 or session[:acc_see_financial_data].to_i != 2)
+      flash[:notice] = _('You_have_no_view_permission')
+      redirect_to :controller => "callc", :action => "main" and return false
+    else
+      @ard = Acustratedetail.new
+      artype = params[:artype]
 
-    duration = params[:duration].to_i
-    infinity = params[:infinity]
-    duration = -1 if infinity == "1" and artype == "minute"
-    duration = 0 if artype == "event"
+      duration = params[:duration].to_i
+      infinity = params[:infinity]
+      duration = -1 if infinity == "1" and artype == "minute"
+      duration = 0 if artype == "event"
 
-    round = params[:round].to_i
-    price = params[:price].to_d
-    round = 1 if round < 1
+      round = params[:round].to_i
+      price = params[:price].to_d
+      round = 1 if round < 1
 
-    rate_id = @customrate.id
-    st = params[:st]
-    et = params[:et]
-    dt = params[:dt]
-    dt = "" unless params[:dt]
+      rate_id = @customrate.id
+      st = params[:st]
+      et = params[:et]
+      dt = params[:dt]
+      dt = "" unless params[:dt]
 
-    @ard.from = params[:from]
-    @ard.artype = artype
-    @ard.duration = duration
-    @ard.round = round
-    @ard.price = price
-    @ard.customrate_id = @customrate.id
-    @ard.daytype = dt
-    @ard.start_time = st
-    @ard.end_time = et
-    @ard.save
+      @ard.from = params[:from]
+      @ard.artype = artype
+      @ard.duration = duration
+      @ard.round = round
+      @ard.price = price
+      @ard.customrate_id = @customrate.id
+      @ard.daytype = dt
+      @ard.start_time = st
+      @ard.end_time = et
+      @ard.save
 
-    flash[:status] = _('Custom_rate_updated')
-    redirect_to :action => 'user_acustrates', :id => rate_id, :st => st, :dt => dt
+      flash[:status] = _('Custom_rate_updated')
+      redirect_to :action => 'user_acustrates', :id => rate_id, :st => st, :dt => dt
+    end
   end
 
 =begin
