@@ -1044,14 +1044,14 @@ in before filter : user (:find_user)
     @rate = @custrate
     @ards = @custrate.acustratedetails
 
-    if @ards[0].daytype == ""
+    if @ards.first.daytype == ""
       @WDFD = true
       res = Acustratedetail.select("start_time, end_time").where(:daytype => '', :customrate_id => @custrate.id).group(:start_time).order(:start_time)
       @st_arr = []
       @et_arr = []
       res.each { |r|
-        @st_arr << r["start_time"].strftime("%H:%M:%S")
-        @et_arr << r["end_time"].strftime("%H:%M:%S")
+        @st_arr << (r["start_time"] ? r["start_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
+        @et_arr << (r["end_time"] ? r["end_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
       }
     else
       @WDFD = false
@@ -1059,16 +1059,18 @@ in before filter : user (:find_user)
       @Wst_arr = []
       @Wet_arr = []
       res.each { |r|
-        @Wst_arr << r["start_time"].strftime("%H:%M:%S")
-        @Wet_arr << r["end_time"].strftime("%H:%M:%S")
+        @Wst_arr << (r["start_time"] ? r["start_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
+        @Wst_arr << (r["end_time"] ? r["end_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
+
       }
 
       res = Acustratedetail.select("start_time, end_time").where(:daytype => 'FD', :customrate_id => @custrate.id).group(:start_time).order(:start_time)
       @Fst_arr = []
       @Fet_arr = []
       res.each { |r|
-        @Fst_arr << r["start_time"].strftime("%H:%M:%S")
-        @Fet_arr << r["end_time"].strftime("%H:%M:%S")
+        @Fet_arr << (r["start_time"] ? r["start_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
+        @Fet_arr << (r["end_time"] ? r["end_time"].strftime("%H:%M:%S") : Time.parse("00:00:00").strftime("%H:%M:%S"))
+
       }
     end
   end
@@ -1520,7 +1522,7 @@ in before filter : ard (:find_ard)
   def find_customrate
     @customrate = Customrate.where(:id => params[:id]).first
 
-    unless @customrate
+    if @customrate.blank?
       flash[:notice] = _('Customrate_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
@@ -1529,7 +1531,7 @@ in before filter : ard (:find_ard)
   def find_ard
     @ard = Acustratedetail.where(:id => params[:id]).first
 
-    unless @ard
+    if @ard.blank?
       flash[:notice] = _('Acustratedetail_not_found')
       redirect_to(:controller => "callc", :action => "main") and return false
     end
