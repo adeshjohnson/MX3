@@ -918,22 +918,23 @@ in before filter : user (:find_user)
     if accountant? and (session[:acc_user_create_opt_4].to_i != 2 or session[:acc_see_financial_data].to_i != 2)
       flash[:notice] = _('You_have_no_view_permission')
       redirect_to :controller => "callc", :action => "main" and return false
-    end
-    rate = Customrate.new
-    rate.user_id = @user.id
-    rate.destinationgroup_id = params[:dg_new]
-    rate.save
+    else
+      rate = Customrate.new
+      rate.user_id = @user.id
+      rate.destinationgroup_id = params[:dg_new]
+      rate.save
 
-    ard = Acustratedetail.new
-    ard.from = 1
-    ard.duration = -1
-    ard.artype = "minute"
-    ard.round = 1
-    ard.price = 0
-    ard.customrate_id = rate.id
-    ard.save
-    flash[:status] = _('Custom_rate_added')
-    redirect_to :action => 'custom_rates', :id => @user.id
+      ard = Acustratedetail.new
+      ard.from = 1
+      ard.duration = -1
+      ard.artype = "minute"
+      ard.round = 1
+      ard.price = 0
+      ard.customrate_id = rate.id
+      ard.save
+      flash[:status] = _('Custom_rate_added')
+      redirect_to :action => 'custom_rates', :id => @user.id
+    end
   end
 
 =begin
