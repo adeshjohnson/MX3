@@ -1143,7 +1143,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
     @page_icon = "coins.png"
     @dgroup = @customrate.destinationgroup
 
-    if @user.owner_id != current_user.id or (accountant? and @user.owner_id != 0)
+    if (!accountant? and @user.owner_id != current_user.id) or (accountant? and @user.owner_id != 0)
       dont_be_so_smart
       redirect_to action: 'main', controller: 'callc' and return false
     end
