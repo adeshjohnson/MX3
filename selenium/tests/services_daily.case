@@ -754,6 +754,16 @@
 	<td>insufficient funds</td>
 </tr>
 <tr>
+	<td>storeSelectedLabel</td>
+	<td>id=date_from_year</td>
+	<td>current_date</td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>id=date_from_month</td>
+	<td>current_month</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/users/edit/2</td>
 	<td></td>
@@ -1034,6 +1044,61 @@
 	<td></td>
 </tr>
 <tr>
+	<td>store</td>
+	<td>2012</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>-1</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>5</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>12</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['current_date'] - storedVars['2012']}</td>
+	<td>years</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>months</td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>storedVars[ &quot;months&quot; ] &lt; (${current_month})</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars[ &quot;months&quot; ]++}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['5']*(storedVars['12']*storedVars['years']+storedVars['months'] - storedVars['1']) - (storedVars['-1'])}</td>
+	<td>current_balance</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/users/list</td>
 	<td></td>
@@ -1041,7 +1106,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=balance_2</td>
-	<td>76.0054</td>
+	<td>${current_balance}.0000</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1126,7 +1191,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=balance_2</td>
-	<td>76.0054</td>
+	<td>${current_balance}.0000</td>
 </tr>
 <tr>
 	<td>open</td>
