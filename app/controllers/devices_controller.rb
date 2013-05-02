@@ -411,6 +411,7 @@ class DevicesController < ApplicationController
     if !ccl_active?
       @device.server_id = params[:device][:server_id] if params[:device] and params[:device][:server_id]
     end
+
     #========================== check input ============================================
 
     #because block_callerid input may be disabled and it will not be sent in 

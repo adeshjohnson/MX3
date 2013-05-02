@@ -48,7 +48,7 @@ class Device < ActiveRecord::Base
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{ |o| not o.port.blank? }
 
   # before_create :check_callshop_user
-  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi, :ast18
+  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi, :ast18, :t38pt_normalize
   before_update :validate_fax_device_codecs
   after_create :create_codecs, :device_after_create
   after_save :device_after_save#, :prune_device #do not prune devices after save! it abuses AMI and crashes live calls (#11709)! prune_device is done in device_update->configure_extensions->prune_device
@@ -1322,10 +1322,15 @@ class Device < ActiveRecord::Base
     @cid_number = value
   end
 
-
   def Device.integrity_recheck_devices
     ccl_active = Confline.get_value("CCL_Active").to_i
     Device.count(:all, :conditions =>  "host='dynamic' and insecure like '%invite%'  and insecure != 'invite'").to_i > 0 and ccl_active == 0 ? 1 : 0
+  end
+
+  def t38pt_normalize
+    if ["fec", "redundancy","none"].include? self.t38pt_udptl
+        self.t38pt_udptl = "yes, " << self.t38pt_udptl
+    end
   end
 
 end
