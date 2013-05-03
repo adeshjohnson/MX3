@@ -28,7 +28,7 @@
     <th align="center">        <%= _('CLIs') %>      </th>
     <% if session[:usertype] == "admin" %>
         <th></th>
-    <% elsif session[:usertype] == "reseller" %>
+    <% elsif session[:usertype] == "reseller" or (session[:usertype] == "accountant" and session[:acc_device_manage].to_i > 0) %>
         <th></th>
     <% end %>
     <% if rec_active? %>
@@ -78,7 +78,7 @@
               <% end %>
             </td>
         <% end %>
-        <% if session[:usertype] == "admin" or session[:usertype] == "reseller" %>
+        <% if session[:usertype] == "admin" or session[:usertype] == "reseller" or (session[:usertype] == "accountant" and session[:acc_device_manage].to_i > 0) %>
             <td id="all_details_<%= device.id %>" align="center">
               <%= link_to(b_view, {:action => "device_all_details", :id => device.id}, {:id => "all_details_link_" + device.id.to_s}) %>
             </td>
