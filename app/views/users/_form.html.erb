@@ -181,7 +181,7 @@
     </tr>
 <% end %>
 
-<% if !(accountant? and session[:acc_user_create_opt_5].to_i != 2) and can_see_finances? %>
+<% if !(accountant? and session[:acc_user_create_opt_5].to_i != 2 and session[:acc_see_financial_data].to_i != 2) and can_see_finances? %>
     <tr <%= tooltip(_('Balance'), _('Balance_user_edit_explanation')) %>>
       <td id="set_balance_name"><%= _('Balance') %>:</td>
       <td id="user_balance_value">
