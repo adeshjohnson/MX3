@@ -417,7 +417,7 @@ Localization.define('en') do |l|
   l.store 'OCN_Name', 'OCN name'
 
   l.store 'CALLING_CARDS', 'CALLING CARDS'
-  l.store 'Card_groups', 'Card Groups'
+  l.store 'Card_groups', 'Calling Cards'
   l.store 'Setup_fee', 'Setup fee'
   l.store 'Ghost_min_perc', 'Ghost min percent'
   l.store 'Daily_charge', 'Daily charge'
