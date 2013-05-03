@@ -360,15 +360,15 @@ class EmailsController < ApplicationController
 
      begin
 	     files.each do |file| 
-	       File.open("/home/mor/tmp/cache/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_"), 'wb') {|f| f.write(file[:file]) }
+	       File.open("/home/mor/tmp/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_"), 'wb') {|f| f.write(file[:file]) }
 	     end
 
-	     filenames = files.map { |file| "'/home/mor/tmp/cache/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_") + "'" }.join(" ").to_s
+	     filenames = files.map { |file| "'/home/mor/tmp/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_") + "'" }.join(" ").to_s
 	     system_call = "/usr/local/mor/sendEmail -s '#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}' -t '#{to.to_s}' -f '#{from.to_s}' -m '#{email.body.to_s}' -u '#{email.subject.to_s}' -a #{filenames}"
 	     system(system_call)
 
 	     files.each do |file|
-               File.delete("/home/mor/tmp/cache/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_"))
+               File.delete("/home/mor/tmp/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_"))
 	     end
      rescue
        return false
