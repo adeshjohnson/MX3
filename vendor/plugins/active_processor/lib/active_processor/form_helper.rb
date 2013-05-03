@@ -195,7 +195,7 @@ module ActiveProcessor
         when 'billing_address[zip]'
           out = user.address.postcode
         when 'billing_address[country]'
-          out = user.address.direction.name
+          out = user.address.direction.name if user.address.direction
         when 'billing_address[phone]'
           out = user.address.phone
         when 'billing_address[fax]'
