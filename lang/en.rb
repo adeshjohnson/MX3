@@ -4572,6 +4572,8 @@ Localization.define('en') do |l|
   l.store 'cannot_be_empty', 'cannot be empty'
   l.store 'gateway_time', 'Card expiration time'
   l.store 'ERRORs', 'Error(s)'
+  l.store 'Incorrect_Server_IP', 'Incorrect Server IP'
+  l.store 'Incorrect_Host', 'Incorrect Host'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

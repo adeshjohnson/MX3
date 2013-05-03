@@ -2505,6 +2505,12 @@ Variables: (Names marked with * are required)
    (regexp.match(ip) ? (return true) : (return false))
   end
 
+  # Hostname validation
+  def check_hostname_validity(hostname=nil)
+    regexp = /(^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$)|(^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)+([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$)$/
+    (regexp.match(hostname) ? (return true) : (return false))
+  end
+
   # Delegatas. Suderinamumui.
   def email_variables(user, device = nil, variables = {})
     Email.email_variables(user, device, variables, {:nice_number_digits => session[:nice_number_digits], :global_decimal => session[:global_decimal], :change_decimal => session[:change_decimal]})
