@@ -13,6 +13,8 @@ class Card < ActiveRecord::Base
   before_save :validate_pin_length, :validate_number_length, :validate_min_balance
   before_create :card_before_create
 
+  before_destroy :has_payment?
+
   def validate_caller_id
     callerid and !callerid.to_s.blank?
   end
@@ -185,10 +187,16 @@ class Card < ActiveRecord::Base
   end
 
   def destroy_with_check
-    if not self.has_calls? and not self.has_activecalls? and not Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])
+    unless Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])
       self.destroy
     else
       self.hide
+    end
+  end
+
+  def has_payment?
+    if Payment.find(:first, :conditions => ["paymenttype = ? and user_id = ?", "Card", self.id])
+      return false
     end
   end
 
