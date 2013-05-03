@@ -184,7 +184,7 @@
 <!--====EDIT direction======-->
 <tr>
 	<td>open</td>
-	<td>/billing/directions/edit/256</td>
+	<td>/billing/directions/edit/257</td>
 	<td></td>
 </tr>
 <tr>
@@ -205,7 +205,7 @@
 <!--==Delete direction===-->
 <tr>
 	<td>clickAndWait</td>
-	<td>destroy_img256</td>
+	<td>destroy_img257</td>
 	<td></td>
 </tr>
 <tr>
@@ -247,7 +247,7 @@
 <!--==Edit destination group==-->
 <tr>
 	<td>open</td>
-	<td>/billing/destination_groups/edit/583</td>
+	<td>/billing/destination_groups/edit/585</td>
 	<td></td>
 </tr>
 <tr>
@@ -661,7 +661,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[contains(@href, '/billing/destinations/list/257')]</td>
+	<td>//a[contains(@href, '/billing/destinations/list/258')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -773,6 +773,181 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>@#$%^&amp;'345</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_name</td>
+	<td>Thuraya Satellite Code THRC</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_code</td>
+	<td>+</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Direction successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/259</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>88216</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=destination_subcode_FIX</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destinations exists and belongs to Direction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>88218</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=destination_subcode_FIX</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_name</td>
+	<td>destination name 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/259</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>88219</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_NGN</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/destinations/new/259</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination_prefix</td>
+	<td>88222</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=destination_subcode_MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Destination successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>88218</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>88219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>88222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>FIX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>NGN</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>MOB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>destination name 1</td>
 	<td></td>
 </tr>
 </tbody></table>
