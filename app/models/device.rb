@@ -1329,7 +1329,7 @@ class Device < ActiveRecord::Base
 
   def t38pt_normalize
     if ["fec", "redundancy","none"].include? self.t38pt_udptl
-        #self.t38pt_udptl = "yes, " << self.t38pt_udptl
+        self.t38pt_udptl = "yes, " << self.t38pt_udptl
     end
   end
 
