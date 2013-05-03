@@ -44,7 +44,7 @@ class DestinationsController < ApplicationController
 
     params[:destination]["direction_code"] = @direction.code
     dest = Destination.find(:first, :conditions => ["prefix = ?", params[:destination][:prefix]])
-    if dest
+    if dest and dest.direction
       flash[:notice] = _('Destination_exist_and_belong_to_Direction') + " : " + dest.direction.name.to_s
       redirect_to :action => 'new', :id => @direction and return false
     end
