@@ -217,7 +217,7 @@
       </td>
     </tr>
 <% else %>
-    <% if accountant? and session[:acc_user_create_opt_5] > 1 %>
+    <% if accountant? and session[:acc_user_create_opt_5] > 0 %>
         <tr>
           <td id="set_balance_name"><%= _('Balance') %>:</td>
           <td id="user_balance_value"> <%= nice_number @user.balance %> <%= session[:default_currency] %> </td>
