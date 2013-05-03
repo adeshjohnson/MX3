@@ -181,7 +181,7 @@
     </tr>
 <% end %>
 
-<% if !(current_user.is_accountant? and session[:acc_user_create_opt_5].to_i != 2) and can_see_finances? %>
+<% if !(accountant? and session[:acc_user_create_opt_5].to_i != 2) and can_see_finances? %>
     <tr <%= tooltip(_('Balance'), _('Balance_user_edit_explanation')) %>>
       <td id="set_balance_name"><%= _('Balance') %>:</td>
       <td id="user_balance_value">
@@ -217,7 +217,7 @@
       </td>
     </tr>
 <% else %>
-    <% if current_user.is_accountant? and session[:acc_user_create_opt_5] == 1 %>
+    <% if accountant? and session[:acc_user_create_opt_5] == 1 %>
         <tr>
           <td id="set_balance_name"><%= _('Balance') %>:</td>
           <td id="user_balance_value"> <%= nice_number @user.balance %> <%= session[:default_currency] %> </td>
@@ -231,6 +231,7 @@
                 <%= _('Unlimited') %>?
                 <%= @user.credit_unlimited? ? b_check(:id => "1") : b_cross(:id => "1") %>
             <% end %>
+            <span style="visibility: hidden;"><%= check_box_tag 'unlimited', "1", (@user.credit_unlimited?) %></span>
           </td>
         </tr>
     <% end %>

@@ -2413,7 +2413,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         self.credit = 0 if credit < 0 if params[:credit]
       end
     else
-      if params[:unlimited].to_i == 1 and params[:user][:postpaid] == 1
+      if params[:unlimited].to_i == 1 and self.postpaid == 1
         self.credit = -1
       else
         self.credit = params[:credit].to_d
