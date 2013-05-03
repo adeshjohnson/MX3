@@ -71,6 +71,7 @@ Mor::Application.routes.draw do
   match '/webphone' => 'callc#webphone'
   match '/active_processor/callc/main' => 'callc#main'
   match '/images/callc/login' => 'callc#login'
+  match '/active_processor/callc/logout' => 'callc#logout'
   match ':controller/:action.:format'
 
   # turi buti paskutinis !
