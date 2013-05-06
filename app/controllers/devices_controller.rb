@@ -187,8 +187,9 @@ class DevicesController < ApplicationController
     if !notice.blank?
       flash[:notice] = notice
       redirect_to :controller => @return_controller, :action => @return_action, :id => @device.user_id and return false
+    else
+      @device.destroy_all
     end
-    @device.destroy_all
 
     flash[:status] = _('device_deleted')
     redirect_to :controller => @return_controller, :action => @return_action, :id => user_id

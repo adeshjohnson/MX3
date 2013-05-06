@@ -36,6 +36,7 @@ class Device < ActiveRecord::Base
   has_many :devicerules
   has_many :server_devices
   has_many :servers, :through => :server_devices
+  has_many :dialplans, :foreign_key => :data5
 
   before_validation :check_device_username, :on => :create
 
@@ -739,9 +740,9 @@ class Device < ActiveRecord::Base
     return nil
   end
 
-  def dialplans
-    Dialplan.where(:data3 => self.id)
-  end
+  #def dialplans
+  #  return Dialplan.where(:data3 => self.id)
+  #end
 
   # Check if device is used by location rules
   def used_by_location_rules
@@ -985,7 +986,7 @@ class Device < ActiveRecord::Base
     if self.used_by_location_rules and notice.blank?
       notice = _('One_or_more_location_rules_are_using_this_device')
     end
-    notice
+    notice 
   end
 
   def destroy_all
