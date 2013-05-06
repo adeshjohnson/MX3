@@ -650,6 +650,11 @@ class UsersController < ApplicationController
       redirect_to :controller => return_controller, :action => return_action and return false
     end
 
+    if user.groups.size > 0
+      flash[:notice] = _('Cant_delete_user_it_has_callshops')
+      redirect_to :controller => return_controller, :action => return_action and return false
+    end
+
     if user.dids.size > 0
       flash[:notice] = _('Cant_delete_user_it_has_dids')
       redirect_to :controller => return_controller, :action => return_action and return false

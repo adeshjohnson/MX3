@@ -4574,6 +4574,7 @@ Localization.define('en') do |l|
   l.store 'ERRORs', 'Error(s)'
   l.store 'Incorrect_Server_IP', 'Incorrect Server IP'
   l.store 'Incorrect_Host', 'Incorrect Host'
+  l.store 'Cant_delete_user_it_has_callshops', 'Cannot delete user - he is Calls Shop manager'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
