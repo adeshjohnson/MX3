@@ -1255,7 +1255,7 @@ ORDER BY dids.did ASC"
 
 
   def regenerate_dialplan
-    dialplan = Dialplan.find(:first, :conditions => ["id = ? ", params[:id]])
+    dialplan = Dialplan.where(:id => params[:id]).first
     unless dialplan
       flash[:notice]=_('Quickforwarddid_was_not_found')
       redirect_to :action => :index and return false
@@ -1269,7 +1269,7 @@ ORDER BY dids.did ASC"
   end
 
   def reformat_dialplans
-    @dialplans = Dialplan.find(:all, :conditions => "dptype = 'ivr' and data8 = 1")
+    @dialplans = Dialplan.where("dptype = 'ivr' and data8 = 1").all
     for dialplan in @dialplans
       dialplan.regenerate_ivr_dialplan
       dialplan.data8 = 0
@@ -1281,7 +1281,7 @@ ORDER BY dids.did ASC"
   end
 
   def DidsController::reformat_dialplans
-    @dialplans = Dialplan.find(:all, :conditions => "dptype = 'ivr' and data8 = 1")
+    @dialplans = Dialplan.where("dptype = 'ivr' and data8 = 1").all
     for dialplan in @dialplans
       dialplan.regenerate_ivr_dialplan
       dialplan.data8 = 0
@@ -1295,21 +1295,18 @@ ORDER BY dids.did ASC"
   def personal_dids
     @page_title = _('DIDs')
     @page_icon = "did.png"
-    user = User.find(:first, :conditions => ["id = ?", session[:user_id].to_i])
+    user = User.where(:id => session[:user_id].to_i).first
     params[:page] ? @page = params[:page].to_i : @page = 1
     @total_pages = (Did.count(:all, :conditions => ["user_id = ?", user.id])/session[:items_per_page].to_d).ceil
-    @dids = Did.find(:all,
-                     :conditions => ["user_id = ?", user.id],
-                     :offset => session[:items_per_page]*(@page-1),
-                     :limit => session[:items_per_page])
+    @dids = Did.where(:user_id => user.id).offset(session[:items_per_page]*(@page-1)).limit(session[:items_per_page]).all
   end
 
 
   def summary
     @page_title = _('DIDs_report')
 
-    if current_user.is_accountant? and !current_user.accountant_allow_edit('See_Financial_Data')
-      dont_be_so_smart
+    if accountant? and session[:acc_manage_dids_opt_1].to_i == 0
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => "callc", :action => 'main' and return false
     end
 

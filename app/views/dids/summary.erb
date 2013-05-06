@@ -101,22 +101,27 @@
 <br/>
 
 <table class="maintable" width="100%">
-  <tr>
-    <td colspan='3' style='border:0'></td>
-    <th align="center" colspan='3'><%= _('DID_Price') %></th>
+  <% if !accountant? or (accountant? and session[:acc_manage_dids_opt_1].to_i > 0 and can_see_finances?) %>
+    <tr>
+      <td colspan='3' style='border:0'></td>
+      <th align="center" colspan='3'><%= _('DID_Price') %></th>
     </tr>
+  <% end %>
+
   <tr>
 
-    <% if @options[:dids_grouping].to_i == 1%>
-    <th align="left"><%= ordered_list_header("provider", "provider", "Provider",  @options.merge({:order_by => @options[:order_by_name]})) %></th>
-        <%else%>
-    <th align="left"><%= ordered_list_header("nice_user", "nice_user", "User_/_Device", @options.merge({:order_by => @options[:order_by_name]})) %></th>
-        <%end%>
+    <% if @options[:dids_grouping].to_i == 1 %>
+      <th align="left"><%= ordered_list_header("provider", "provider", "Provider",  @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <% else %>
+      <th align="left"><%= ordered_list_header("nice_user", "nice_user", "User_/_Device", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <% end %>
     <th align="right"><%= ordered_list_header("calls", "calls", "Calls", @options.merge({:order_by => @options[:order_by_name]})) %></th>
     <th align="right"><%= ordered_list_header("billed_duration", "billed_duration", "Billed_Duration", @options.merge({:order_by => @options[:order_by_name]})) %></th>
-    <th align="right"><%= ordered_list_header("incoming_price", "incoming_price", "Incoming_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
-    <th align="right"><%= ordered_list_header("owner_price", "owner_price", "Owner_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
-    <th align="right"><%= ordered_list_header("provider_price", "provider_price", "Provider_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <% if !accountant? or (accountant? and session[:acc_manage_dids_opt_1].to_i > 0 and can_see_finances?) %>
+      <th align="right"><%= ordered_list_header("incoming_price", "incoming_price", "Incoming_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+      <th align="right"><%= ordered_list_header("owner_price", "owner_price", "Owner_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+      <th align="right"><%= ordered_list_header("provider_price", "provider_price", "Provider_price", @options.merge({:order_by => @options[:order_by_name]})) %></th>
+    <% end %>
 
 
   </tr>
@@ -151,10 +156,11 @@
             <%end%>
             <td id="calls_<%= row.did_id %>" align="right"><%= row.total_calls %></td>
             <td id="dur_<%= row.did_id %>" align="right"><%= nice_time(row.dids_billsec) %></td>
-            <td id="inc_<%= row.did_id %>" align="right"><%= nice_number(row.inc_price) %></td>
-            <td id="own_<%= row.did_id %>" align="right"><%= nice_number(row.own_price) %></td>
-            <td id="prov_<%= row.did_id %>" align="right"><%= nice_number(row.d_prov_price) %></td>
-
+            <% if !accountant? or (accountant? and session[:acc_manage_dids_opt_1].to_i > 0 and can_see_finances?) %>
+              <td id="inc_<%= row.did_id %>" align="right"><%= nice_number(row.inc_price) %></td>
+              <td id="own_<%= row.did_id %>" align="right"><%= nice_number(row.own_price) %></td>
+              <td id="prov_<%= row.did_id %>" align="right"><%= nice_number(row.d_prov_price) %></td>
+            <% end %>
 
           </tr>
       <% } -%>
@@ -163,10 +169,11 @@
     <th align="left" colspan='1'><%= _("Total") %>:</th>
     <th id="t_calls" align="right"><%= @total[:calls] %></th>
     <th id="t_billsec" align="right"><%= nice_time(@total[:min]) %></th>
-    <th id="t_inc" align="right"><%= nice_number(@total[:inc]) %></th>
-    <th id="t_own" align="right"><%= nice_number(@total[:own]) %></th>
-    <th id="t_prov" align="right"><%= nice_number(@total[:prov]) %></th>
-
+    <% if !accountant? or (accountant? and session[:acc_manage_dids_opt_1].to_i > 0 and can_see_finances?) %>
+      <th id="t_inc" align="right"><%= nice_number(@total[:inc]) %></th>
+      <th id="t_own" align="right"><%= nice_number(@total[:own]) %></th>
+      <th id="t_prov" align="right"><%= nice_number(@total[:prov]) %></th>
+    <% end %>
   </tr>
 </table>
 
