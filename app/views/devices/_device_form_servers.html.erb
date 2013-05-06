@@ -39,7 +39,7 @@
     //<![CDATA[
     function change_servers(type_value, dyncheck_checked) {
         /*if some other than (SIP device type + dynamic IP) was selected, then show all asterisk servers*/
-        var enable = (type_value == 'SIP' && dyncheck_checked);
+        var enable = (type_value == 'SIP');
         var sip_proxy_server = document.getElementById('sip_proxy_server');
         var asterisk_servers = document.getElementById('asterisk_servers');
         <% @sip_proxy_server.each { |serv| %>
@@ -70,26 +70,26 @@
      type checkboxes.*/
 
     Event.observe(window, 'load', function () {
-        var dyncheck = $('ip_authentication_dynamic_2');
+        //var dyncheck = $('ip_authentication_dynamic_2');
         var dyn_uncheck = $('ip_authentication_dynamic_1');
         var type = '<%= @device_type.to_s %>';
         var sip_proxy_server = document.getElementById('add_to_servers_<%= @sip_proxy_server[0].id %>');
-        if (dyncheck == null) {
-            change_servers(type, false);
-            qualify_change(false);
-        } else {
-            change_servers(type, dyncheck.checked);
-            qualify_change(dyncheck.checked);
-        }
+        //if (dyncheck == null) {
+        //    change_servers(type, false);
+        //    qualify_change(false);
+        //} else {
+        //    change_servers(type, dyncheck.checked);
+        //    qualify_change(dyncheck.checked);
+        //}
 
-        Event.observe(dyncheck, 'click', function () {
-            change_servers(type, dyncheck.checked);
-            qualify_change(dyncheck.checked);
-        });
-        Event.observe(dyn_uncheck, 'click', function () {
-            change_servers(type, dyncheck.checked);
-            qualify_change(dyncheck.checked);
-        });
+        //Event.observe(dyncheck, 'click', function () {
+        //    change_servers(type, dyncheck.checked);
+        //    qualify_change(dyncheck.checked);
+        //});
+        //Event.observe(dyn_uncheck, 'click', function () {
+        //    change_servers(type, dyncheck.checked);
+        //    qualify_change(dyncheck.checked);
+        //});
         Event.observe(sip_proxy_server, 'click', function () {
             sip_proxy_server.checked = true;
         });

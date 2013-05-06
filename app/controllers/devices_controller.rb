@@ -367,7 +367,7 @@ class DevicesController < ApplicationController
       device_update_errors += 1
     end
 
-    if params[:add_to_servers].blank? and params[:device][:server_id].blank?
+    if params[:add_to_servers].blank? and params[:device][:server_id].blank? and !reseller?
       @device.errors.add(:add_to_servers_error, _('Please_select_server'))
       device_update_errors += 1
     end
@@ -785,19 +785,19 @@ class DevicesController < ApplicationController
         flash_errors_for(_('Device_not_updated'), @device)
 
         @server_devices = params[:add_to_servers].blank? ? [] : params[:add_to_servers].keys.map(&:to_i)
-        @user = @device.user
-        @device_type = @device.device_type
-        @all_dids = Did.forward_dids_for_select
+        @user		= @device.user
+        @device_type	= @device.device_type
+        @all_dids	= Did.forward_dids_for_select
 
-        @device_dids_numbers = @device.dids_numbers
-        @device_cids = params[:cid_number].to_s
+        @device_dids_numbers	 = @device.dids_numbers
+        @device_cids		 = params[:cid_number].to_s
         @device_caller_id_number = params[:device_caller_id_number].to_i
-        @cid_name = params[:cid_name].to_s.strip
-        @cid_number = params[:cid_number].to_s.strip
+        @cid_name		 = params[:cid_name].to_s.strip
+        @cid_number		 = params[:cid_number].to_s.strip
 
-        @devicetypes = @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
-        @audio_codecs = audio_codecs
-        @video_codecs = video_codecs
+        @devicetypes	= @device.load_device_types("dahdi" => allow_dahdi?, "Virtual" => allow_virtual?)
+        @audio_codecs	= audio_codecs
+        @video_codecs	= video_codecs
 
         @devgroups = @device.user.devicegroups
         if session[:usertype] == 'reseller'
