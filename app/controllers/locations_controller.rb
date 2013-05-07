@@ -106,6 +106,11 @@ Called from views location_rules and location_rule_edit, to update DID list from
         @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC").joins('INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)')
         seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " - " << d.dialplan.name << "</td></tr>"] }
         @total_dids = @seeker.size - 20
+      elsif filter == "ivrs"
+        cond << 'dids.status = "active"'
+        @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")
+        seek = @seeker.limit(20).map { |d| ["<tr><td id='" << d.id.to_s << "' #{style}>" << d.did << " (" << d.status << ")</td></tr>"] }
+        @total_dids = @seeker.size - 20
       elsif filter == "forward_dids"
         cond << "dialplan_id != 0" 
         @seeker = Did.where([cond.join(" AND ")].concat(var)).order("dids.did ASC")

@@ -288,7 +288,7 @@ Generates selector and observer for <b>Transfer To</b> action.
       code += text_field_tag("action_param_#{action.id.to_s}", action.data2.to_s, "class" => "input", :size => "30", :maxlength => "255")
     elsif action.data1 == 'DID'
       code += "<input title='DID live search' type='text' size='20' id='action_param_#{action.id.to_s}' name='action_param_#{action.id.to_s}' autocomplete='off' value='".html_safe + action.data2.to_s + "' />".html_safe
-      code += "<table id='did_list_#{action.id.to_s}' name='did_list_#{action.id.to_s}' style='width: 130px;margin-left:1px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>".html_safe
+      code += "<table id='did_list_#{action.id.to_s}' name='did_list_#{action.id.to_s}' style='width: 130px;margin-left:79px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>".html_safe
       code += "<script type='text/javascript'>
         Event.observe($('action_param_#{action.id.to_s}'), 'click', function(){
             if ($('action_param_#{action.id.to_s}').value == '') {
@@ -297,7 +297,7 @@ Generates selector and observer for <b>Transfer To</b> action.
             }
             Event.observe($('action_param_#{action.id.to_s}'), 'keyup', function(){
                 $('did_list_#{action.id.to_s}').innerHTML = '';
-                #{remote_function(:update => 'did_list_'+action.id.to_s,:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('action_param_#{action.id.to_s}').value").html_safe}
+                #{remote_function(:update => 'did_list_'+action.id.to_s,:url => {:controller => :locations, :action => :get_did_map }, :with => "'filter=ivrs&did_livesearch='+$('action_param_#{action.id.to_s}').value").html_safe}
             });
             Event.observe($('did_list_#{action.id.to_s}'), 'mouseover', function(){
                 var el = document.getElementById('did_list_#{action.id.to_s}').getElementsByTagName('td');
@@ -325,7 +325,7 @@ Generates selector and observer for <b>Transfer To</b> action.
     if action.data1 == 'DID'
 
       code += "<script>Event.observe($('did_list_#{action.id.to_s}'), 'click', function(){
-        new Ajax.Updater('action_param_#{action.id.to_s}', '#{Web_Dir}/ivr/update_data2/#{action.id.to_s}?data=' + $('action_param_#{action.id}').value, {
+        new Ajax.Updater('action_param_#{action.id.to_s}', '#{Web_Dir}/ivr/update_data2/#{action.id.to_s}?data=' + $('action_param_#{action.id}').value.split(' ')[0], {
           method:'post',
           asynchronous:true,
           evalScripts:true,
