@@ -283,14 +283,64 @@ Generates selector and observer for <b>Transfer To</b> action.
         devices = ActiveRecord::Base.connection.select_all(sql)
         options = devices.map { |d| ["#{nice_user_from_data(d["username"], d["first_name"], d["last_name"])} - #{device_info_from_data(d["dev_type"], d["dev_name"], d["dev_extension"])}", d["dev_extension"].to_s] }
     end
-
+# javascript parts are to make DID live search work same as other actions
     if action.data1 == 'Extension'
       code += text_field_tag("action_param_#{action.id.to_s}", action.data2.to_s, "class" => "input", :size => "30", :maxlength => "255")
+    elsif action.data1 == 'DID'
+      code += "<input title='DID live search' type='text' size='20' id='action_param_#{action.id.to_s}' name='action_param_#{action.id.to_s}' autocomplete='off' value='".html_safe + action.data2.to_s + "' />".html_safe
+      code += "<table id='did_list_#{action.id.to_s}' name='did_list_#{action.id.to_s}' style='width: 130px;margin-left:1px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>".html_safe
+      code += "<script type='text/javascript'>
+        Event.observe($('action_param_#{action.id.to_s}'), 'click', function(){
+            if ($('action_param_#{action.id.to_s}').value == '') {
+                $('did_list_#{action.id.to_s}').innerHTML = '';
+                #{remote_function(:update => 'did_list_'+action.id.to_s,:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'").html_safe}
+            }
+            Event.observe($('action_param_#{action.id.to_s}'), 'keyup', function(){
+                $('did_list_#{action.id.to_s}').innerHTML = '';
+                #{remote_function(:update => 'did_list_'+action.id.to_s,:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('action_param_#{action.id.to_s}').value").html_safe}
+            });
+            Event.observe($('did_list_#{action.id.to_s}'), 'mouseover', function(){
+                var el = document.getElementById('did_list_#{action.id.to_s}').getElementsByTagName('td');
+                for(var i=0;i<el.length;i++){
+                    el[i].onclick=function(){
+                        if (this.id != -2) {
+                            document.getElementById('action_param_#{action.id.to_s}').value = this.innerHTML
+                            #{remote_function(:update => 'did_list_'+action.id.to_s, :url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='").html_safe}
+                        }
+                    }
+                    el[i].onmouseover=function(){
+                        this.style.backgroundColor='#BBBBBB';
+                    }
+                    el[i].onmouseout=function(){
+                      this.style.backgroundColor='rgb(255, 255, 255)';
+                    }
+                }
+            });
+        });
+      </script>".html_safe
     else
       code += select_tag(action.id, options_for_select(options, action.data2.to_s), {:id => "action_param_#{action.id}"})
     end
-    code += generate_default_observer(action, nil, {:update => "goto_params_#{action.id}"})
-    code += generate_default_observer2(action, "action_param_#{action.id.to_s}")
+    code += generate_default_observer(action, nil, {:update => "goto_params_#{action.id.to_s}"})
+    if action.data1 == 'DID'
+
+      code += "<script>Event.observe($('did_list_#{action.id.to_s}'), 'click', function(){
+        new Ajax.Updater('action_param_#{action.id.to_s}', '#{Web_Dir}/ivr/update_data2/#{action.id.to_s}?data=' + $('action_param_#{action.id}').value, {
+          method:'post',
+          asynchronous:true,
+          evalScripts:true,
+          onComplete:function (request) {
+              Element.hide('spinner');
+              $('clock_commit').disabled = false
+          },
+          onLoading:function (request) {
+              Element.show('spinner');
+              $('clock_commit').disabled = true
+          }});
+        ;});</script>".html_safe
+    else
+      code += generate_default_observer2(action, "action_param_#{action.id.to_s}")
+    end
     code
   end
 

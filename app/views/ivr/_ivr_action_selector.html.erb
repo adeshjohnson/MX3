@@ -22,7 +22,7 @@
 
       <script type="text/javascript">
           function view_extension(val, id) {
-          <%  iv = IvrAction.find(:first, :conditions => ["ivr_block_id = ? AND name = 'Transfer To'",@block.id ], :order =>"id asc")%>
+          <%  iv = IvrAction.where("ivr_block_id = #{@block.id} AND name = 'Transfer To'").order("id asc").first %>
               var t_to_id = <%= iv ?  iv.id : 10000 %>;
               if (val == "Transfer To" && id < t_to_id) {
                   t_to_id = id;

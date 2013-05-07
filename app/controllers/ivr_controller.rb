@@ -240,7 +240,7 @@ class IvrController < ApplicationController
           ivr = current_user.ivrs.find(:first)
           @action.data2 = ivr ? ivr.start_block_id : 0
         when 'DID'
-          did = current_user.load_dids(:first)
+          did = current_user.load_dids(:first, :conditions => "status = 'active'")
           @action.data2 = did ? did.did : 0
         when 'Device'
           device = Device.find_by_sql("SELECT devices.id as id, users.first_name as first_name, users.last_name as last_name, devices.device_type as dev_type, devices.name as dev_name, devices.extension as dev_extension FROM devices LEFT JOIN users ON (devices.user_id = users.id) WHERE devices.user_id > -1 AND users.owner_id = #{current_user.id}")
@@ -279,7 +279,12 @@ class IvrController < ApplicationController
 
   def update_data2
     if @action and params[:data]
-      @action.data2 = params[:data]
+      if @action.data1 == 'DID'
+        d = Did.where(:did => params[:data].to_s).first
+        @action.data2 = d.blank? ? "0" : params[:data]
+      else
+        @action.data2 = params[:data]
+      end
       @action.save
       critical_update(@action)
     end

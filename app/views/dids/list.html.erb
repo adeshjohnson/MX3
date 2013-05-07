@@ -26,7 +26,8 @@
           <td>
             <%= hidden_field_tag 'search_on', 1 %>
             <%= _('DID') %>
-            : <%= text_field_tag 's_did', @search_did, "class" => "input", :size => "20", :maxlength => "30" %>
+            : <input title="DID live search" type="text" size="20" id="s_did" name="s_did" autocomplete="off" value="<%=raw @search_did.to_s %>" />
+            <table id="did_list" style='width: 130px;margin-left:30px;margin-top:0px;position:absolute;min-width:100px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
 
             <% unless current_user.usertype == "reseller" %>
                 &nbsp;&nbsp;<%= _('Provider') %>:
@@ -192,3 +193,35 @@
 <%= render :partial => "page_select_header" if @total_pages > 1 %>
 
 <%= raw(iwantto_list(@iwantto_links)).html_safe %>
+
+<script type='text/javascript'>
+    Event.observe(window, 'load',  function() {
+        Event.observe($('s_did'), 'click', function(){
+            if ($('s_did').value == "") {
+                $('did_list').innerHTML = "";
+                <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'empty_click=true'") %>
+            }
+            Event.observe($('s_did'), 'keyup', function(){
+                $('did_list').innerHTML = "";
+                <%=raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='+$('s_did').value") %>
+            });
+            Event.observe($('did_list'), 'mouseover', function(){
+                var el = document.getElementById('did_list').getElementsByTagName('td');
+                for(var i=0;i<el.length;i++){
+                    el[i].onclick=function(){
+                        if (this.id != -2) {
+                            document.getElementById('s_did').value = this.innerHTML
+                            <%= raw remote_function(:update => 'did_list',:url => {:controller => :locations, :action => :get_did_map }, :with => "'did_livesearch='") %>
+                        }
+                    }
+                    el[i].onmouseover=function(){
+                        this.style.backgroundColor="#BBBBBB";
+                    }
+                    el[i].onmouseout=function(){
+                        this.style.backgroundColor="rgb(255, 255, 255)";
+                    }
+                }
+            });
+        });
+    });
+</script>
