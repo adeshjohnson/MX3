@@ -695,9 +695,9 @@
 	<td>5000</td>
 </tr>
 <tr>
-	<td>waitForSelectedLabel</td>
-	<td>action_param_6</td>
-	<td>123456 (active)</td>
+	<td>assertValue</td>
+	<td>id=action_param_6</td>
+	<td>123456</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -801,7 +801,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>[ivr_block1] exten =&gt; s,10,Goto(mor,37063042438,1)</td>
+	<td>[ivr_block1] exten =&gt; s,10,Goto(mor,123456,1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -951,19 +951,9 @@
 	<td>action_param_5:2</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>action_param_6</td>
-	<td>label=123457 (active)</td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>5000</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//option[@value='123457']</td>
-	<td></td>
+	<td>type</td>
+	<td>id=action_param_6</td>
+	<td>123457</td>
 </tr>
 <tr>
 	<td>waitForCondition</td>
@@ -1089,6 +1079,21 @@
 	<td>assertElementPresent</td>
 	<td>link=exact:Playback:</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_param_6</td>
+	<td>123457</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>action_param_6</td>
+	<td>123457</td>
 </tr>
 <tr>
 	<td>open</td>
