@@ -222,7 +222,8 @@ class CallcController < ApplicationController
         redirect_to :action => "login"
       end
     else
-      redirect_to Confline.get_value("Logout_link", owner_id).to_s
+      link = (Confline.get_value("Logout_link", owner_id).to_s.include?("http") ? "" : "http://") + Confline.get_value("Logout_link", owner_id).to_s
+      redirect_to link
     end
   end
 
