@@ -3702,7 +3702,7 @@ class ApiController < ApplicationController
 
       if values[:pin] and !values[:pin].blank?
         # II
-        device = Device.find(:first, :include => [:user, :callerids], :conditions => ['callerids.cli = ? OR callerids.cli LIKE ?', params[:callerid], '%' + params[:callerid] + '%']).first
+        device = Device.find(:first, :include => [:user, :callerids], :conditions => ['callerids.cli = ? OR callerids.cli LIKE ?', params[:callerid], '%' + params[:callerid] + '%'])
         if !device or (device and device.user and device.user.owner_id == @current_user.get_correct_owner_id)
           if device
             #4 * We find device by callerid and card by PIN, device.user.balance+=card.balance, card.disable
