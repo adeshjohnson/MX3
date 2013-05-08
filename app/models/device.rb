@@ -36,7 +36,6 @@ class Device < ActiveRecord::Base
   has_many :devicerules
   has_many :server_devices
   has_many :servers, :through => :server_devices
-  has_many :dialplans, :foreign_key => :data5
 
   before_validation :check_device_username, :on => :create
 
@@ -740,9 +739,9 @@ class Device < ActiveRecord::Base
     return nil
   end
 
-  #def dialplans
-  #  return Dialplan.where(:data3 => self.id)
-  #end
+  def dialplans
+    return Dialplan.where("(dptype = 'authbypin' and data5 = '#{self.id}') or (dptype != 'authbypin' and data3 = '#{self.id}')")
+  end
 
   # Check if device is used by location rules
   def used_by_location_rules
