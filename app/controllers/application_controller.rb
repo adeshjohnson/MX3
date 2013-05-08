@@ -2546,10 +2546,10 @@ Variables: (Names marked with * are required)
     if (f_size.to_i / 1024).to_d >= size.to_d
       `rm -rf #{path}/#{filename}.tar.gz`
       `cd #{path}; tar -czf #{filename}.tar.gz #{filename}.#{extension}`
-      `rm -rf #{path}/#{full_name}.#{extension}`
+      `rm -rf #{path}/#{full_name}`
       return "#{path}/#{filename}.tar.gz"
     else
-      return "#{path}/#{full_name}.#{extension}"
+      return "#{path}/#{full_name}"
     end
   end
 
