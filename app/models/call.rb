@@ -8,7 +8,7 @@ class Call < ActiveRecord::Base
   has_many :cc_actions
   has_one :recording
   belongs_to :card
-  belongs_to :server
+  belongs_to :server, :primary_key => "server_id" 
 
   has_and_belongs_to_many :cs_invoices
 
