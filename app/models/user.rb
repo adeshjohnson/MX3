@@ -2269,6 +2269,9 @@ GROUP BY terminators.id;").map { |t| t.id }
     #error checking
     username = params[:username]
 
+    # tmp user for model methods
+    user = User.new
+
     if username.to_s.blank?
       notice = _('Please_enter_username')
     end
@@ -2281,8 +2284,12 @@ GROUP BY terminators.id;").map { |t| t.id }
       notice = _('Passwords_do_not_match')
     end
 
-    if (!params[:password] or params[:password].length < 5 or (Confline.get_value("Allow_registration_username_passwords_in_devices").to_i == 1 and Confline.get_value("Allow_short_passwords_in_devices").to_i == 0 and params[:password].length < 8)) and notice.blank?
-      notice = _('Password_is_too_short')
+    if params[:password].strip.length < user.minimum_password
+      notice = _('Password_must_be_longer', user.minimum_password-1)
+    end
+
+    if params[:username].strip.length < user.minimum_username
+      notice = _('Username_must_be_longer', user.minimum_username-1)
     end
 
     if params[:password].blank? and notice.blank?
@@ -2371,6 +2378,10 @@ GROUP BY terminators.id;").map { |t| t.id }
       end
     end
     logger.fatal "***** TIME : #{Time.now.to_s} - VAT CHECKING END"
+
+    # tmp user destroy
+    user.destroy
+
     return notice
   end
 
@@ -3051,7 +3062,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def minimum_password
     min = Confline.get_value("Default_User_password_length", self.get_correct_owner_id).to_i
-    min = 5 if min < 5
+    min = 6 if min < 6
     min
   end
 

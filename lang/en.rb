@@ -2693,7 +2693,7 @@ Localization.define('en') do |l|
   l.store 'User_was_not_found', 'User was not found'
   l.store 'Device_was_not_found', 'Device was not found'
   l.store 'Default_Password_length', 'Minimum Password length'
-  l.store 'Default_Username_length', 'Minimum username length'
+  l.store 'Default_Username_length', 'Minimum Username length'
   l.store 'Username_must_be_longer', 'Username must be longer than %s characters'
   l.store 'Password_must_be_longer', 'Password must be longer than %s characters'
 

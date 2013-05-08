@@ -1383,8 +1383,8 @@ in before filter : ard (:find_ard)
       redirect_to :action => :default_user and return false
     end
 
-    if params[:password_length].strip.to_i < 5
-      flash[:notice] = _('Password_must_be_longer', 4)
+    if params[:password_length].strip.to_i < 6
+      flash[:notice] = _('Password_must_be_longer', 5)
       redirect_to :action => :default_user and return false
     end
 
