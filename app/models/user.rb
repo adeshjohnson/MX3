@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
   has_many :usergroups, :dependent => :destroy
   belongs_to :tax, :dependent => :destroy
   belongs_to :acc_group
-  has_many :groups
   has_many :usergroups
   has_many :cs_invoices, :conditions => ["state = 'unpaid'"]
   has_many :all_cs_invoices, :class_name => 'CsInvoice'
