@@ -2730,6 +2730,106 @@
 	<td>DB is outdated, please upgrade it</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>no</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes, redundancy</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes, redundancy</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes, fec</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes, none</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes, fec</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=t38pt_udptl_value</td>
+	<td>yes, none</td>
+</tr>
 </tbody></table>
 </body>
 </html>
