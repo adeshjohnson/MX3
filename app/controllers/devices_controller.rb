@@ -1881,6 +1881,11 @@ class DevicesController < ApplicationController
 
     Confline.set_value("Default_device_trustrpid", params[:device][:trustrpid], session[:user_id])
     Confline.set_value("Default_device_sendrpid", params[:device][:sendrpid], session[:user_id])
+
+    if ["fec", "redundancy","none"].include? params[:device][:t38pt_udptl]
+        params[:device][:t38pt_udptl] = "yes, " << params[:device][:t38pt_udptl]
+    end
+
     Confline.set_value("Default_device_t38pt_udptl", params[:device][:t38pt_udptl], session[:user_id])
     Confline.set_value("Default_device_promiscredir", params[:device][:promiscredir], session[:user_id])
     Confline.set_value("Default_device_progressinband", params[:device][:progressinband], session[:user_id])
