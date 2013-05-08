@@ -519,7 +519,7 @@ Localization.define('en') do |l|
   l.store 'Did_assigned_to_dp', 'DID assigned to Dial Plan'
   l.store 'Dialplan', 'Dial Plan'
   l.store 'Calling_Cards', 'Calling Cards'
-  l.store 'Card_Groups', 'Card Groups'
+  l.store 'Card_Groups', 'Calling Cards'
   l.store 'Card_number', 'Card number'
 
   l.store 'USA_specifics', 'USA specifics'
