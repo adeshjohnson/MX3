@@ -94,7 +94,7 @@
     <th align="left"><%= b_server + _('Server') %></th>
     <td id="server" align="right">
       <% if server %>
-          <%= link_to _("ID") + ": #{server.id} / IP: " + server.server_ip.to_s, {:controller => "servers", :action => :list} %>
+          <%= link_to _("ID") + ": #{server.server_id} / IP: " + server.server_ip.to_s, {:controller => "servers", :action => :list} %>
       <% else %>
           <%= _('Server_not_found') %>
       <% end %>
