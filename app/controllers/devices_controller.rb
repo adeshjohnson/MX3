@@ -286,13 +286,12 @@ class DevicesController < ApplicationController
 
     #-------multi server support------
 
-    @asterisk_servers = Server.where("server_type = 'asterisk'").order("server_id ASC")
-    @sip_proxy_server = [Server.where("server_type = 'sip_proxy'").first]
+    @servers = Server.where("server_type = 'asterisk'").order("server_id ASC").all
 
-    if @device.device_type == 'SIP' and @device.dynamic? and ccl_active?
+    @sip_proxy_server = Server.where("server_type = 'sip_proxy'").limit(1).all
+    @asterisk_servers = @servers
+    if ccl_active?
       @servers = @sip_proxy_server
-    else
-      @servers = @asterisk_servers
     end
 
     #------ permits --------
