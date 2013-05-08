@@ -3049,6 +3049,18 @@ GROUP BY terminators.id;").map { |t| t.id }
     Confline.active_calls_show_did?
   end
 
+  def minimum_password
+    min = Confline.get_value("Default_User_password_length", self.get_correct_owner_id).to_i
+    min = 5 if min < 5
+    min
+  end
+
+  def minimum_username
+    min = Confline.get_value("Default_User_username_length", self.get_correct_owner_id).to_i
+    min = 1 if min < 1
+    min
+  end
+
   def alow_device_types_dahdi_virt
     return (usertype != "reseller" or (Confline.get_value("Resellers_Allow_Use_dahdi_Device", 0).to_i != 0)), (usertype != "reseller" or (Confline.get_value("Resellers_Allow_Use_Virtual_Device", 0).to_i != 0))
   end

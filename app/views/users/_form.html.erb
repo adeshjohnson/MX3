@@ -19,16 +19,20 @@
 <tr>
 <td valign="top" colspan="2">
 <table class="simple">
-<tr>
-  <td width="150"> <%= _('username') %>:</td>
-  <td><%= text_field 'user', 'username', "class" => "input" %> </td>
-</tr>
 <% if params[:controller] == "users" and params[:action] == "default_user" %>
+    <tr>
+      <td> <%= _('Default_Username_length') %>:</td>
+      <td> <%= text_field_tag('username_length', @username_length.to_i, "class" => "input") %> </td>
+    </tr>
     <tr>
       <td> <%= _('Default_Password_length') %>:</td>
       <td> <%= text_field_tag('password_length', @password_length.to_i, "class" => "input") %> </td>
     </tr>
 <% else %>
+    <tr>
+      <td width="150"> <%= _('username') %>:</td>
+      <td><%= text_field 'user', 'username', "class" => "input" %> </td>
+    </tr>
     <% if current_user.is_accountant? %>
         <% if session[:acc_user_create_opt_1].to_i == 2 and not @user.is_admin? %>
             <tr>

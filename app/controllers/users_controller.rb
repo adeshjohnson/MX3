@@ -368,6 +368,9 @@ class UsersController < ApplicationController
     @user.owner_id = owner_id
     @user.warning_email_balance = params[:user][:warning_email_balance].to_d
     @user.warning_email_active = params[:user][:warning_email_active].to_i
+    if params[:password][:password].strip.length < @user.minimum_password
+      @user.errors.add(:password, _('Password_must_be_longer', @user.minimum_password-1))
+    end
     @user.password = Digest::SHA1.hexdigest(params[:password][:password].to_s.strip)
     @user.recording_hdd_quota = (params[:user][:recording_hdd_quota].to_d * 1048576).to_i
     @user.agreement_date = params[:agr_date][:year].to_s + "-" + params[:agr_date][:month].to_s + "-" + params[:agr_date][:day].to_s
@@ -450,8 +453,11 @@ class UsersController < ApplicationController
       end
     end
 
+    if params[:user][:username].strip.length < @user.minimum_username
+      @user.errors.add(:username, _('Username_must_be_longer', @user.minimum_username-1))
+    end
 
-    if @user.valid?
+    if @user.errors.count.zero? and @user.valid?
       @user_create = User.create(@user.attributes)
       if @user_create.errors.count == 0
         flash[:status] = _('user_created')
@@ -548,6 +554,9 @@ class UsersController < ApplicationController
       params[:own_providers] = 1
     end
 
+    bad_username = true if not params[:user][:username].blank? and params[:user][:username].to_s.strip.length < @user.minimum_username
+    bad_password = true if not params[:password][:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
+
     notice, par = @user.validate_from_update(current_user, params, @allow_edit)
     if !notice.blank?
       flash[:notice] = notice
@@ -560,7 +569,7 @@ class UsersController < ApplicationController
 
     @user.address.email = nil if @user.address.email.to_s.blank?
 
-    if @user.address.valid? and @user.save
+    if not bad_username and not bad_password and @user.address.valid? and @user.save
       if @user.usertype == "reseller"
         @user.check_default_user_conflines
 
@@ -611,6 +620,9 @@ class UsersController < ApplicationController
       @groups = AccGroup.where(:group_type => 'accountant')
       @groups_resellers = AccGroup.where(:group_type => 'reseller')
       @devices = @user.devices(:conditions => "device_type != 'FAX'")
+
+      @user.errors.add(:password, _('Password_must_be_longer', @user.minimum_password-1)) if bad_password
+      @user.errors.add(:username, _('Username_must_be_longer', @user.minimum_username-1)) if bad_username
 
       if !@user.address.valid?
         flash_errors_for(_('User_was_not_updated'), @user.address)
@@ -841,6 +853,9 @@ in before filter : devicegroup (:find_devicegroup)
       @user.send_invoice_types = @invoice
     end
 
+    bad_username = true if not params[:user][:username].blank? and params[:user][:username].to_s.strip.length < @user.minimum_username
+    bad_password = true if not params[:password][:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
+
     @user.update_attributes(current_user.safe_attributtes(params[:user].each_value(&:strip!), @user.id))
     @user.usertype = usertype
     @user.warning_email_active = params[:warning_email_active].to_i
@@ -854,7 +869,7 @@ in before filter : devicegroup (:find_devicegroup)
     end
     @user.address.email = nil if @user.address.email.to_s.blank?
 
-    if @user.address.valid? and @user.save
+    if not bad_username and not bad_password and @user.address.valid? and @user.save
 
       #renew_session(@user)
 
@@ -874,12 +889,16 @@ in before filter : devicegroup (:find_devicegroup)
       @total_recordings_size = Recording.select("SUM(size) AS 'total_size'").where(:user_id => @user.id).first["total_size"].to_d
       @i = @user.get_invoices_status
       @address = @user.address
+
+      @user.errors.add(:password, _('Password_must_be_longer', @user.minimum_password-1)) if bad_password
+      @user.errors.add(:username, _('Username_must_be_longer', @user.minimum_username-1)) if bad_username
+
       if !@user.address.valid?
         flash_errors_for(_('User_was_not_updated'), @user.address)
       else
         flash_errors_for(_('User_was_not_updated'), @user)
       end
-      render :action => 'personal_details'
+      redirect_to :action => 'personal_details'
     end
   end
 
@@ -1301,7 +1320,8 @@ in before filter : ard (:find_ard)
     @countries = Direction.order(:name)
 
     @password_length = Confline.get_value("Default_User_password_length", owner).to_i
-    @password_lenght = 8 if @password_length < 1
+    @username_length = Confline.get_value("Default_User_username_length", owner).to_i
+
 
     if @lcrs.empty? and allow_manage_providers?
       flash[:notice] = _('No_lcrs_found_user_not_functional')
@@ -1358,6 +1378,16 @@ in before filter : ard (:find_ard)
       end
     end
 
+    if params[:username_length].strip.to_i < 1
+      flash[:notice] = _('Username_must_be_longer', 0)
+      redirect_to :action => :default_user and return false
+    end
+
+    if params[:password_length].strip.to_i < 5
+      flash[:notice] = _('Password_must_be_longer', 4)
+      redirect_to :action => :default_user and return false
+    end
+
     if  !Email.address_validation(params[:address][:email]) and params[:address][:email].to_s.length.to_i > 0
       flash[:notice] = _("Email_address_not_correct")
       redirect_to :action => :default_user and return false
@@ -1376,6 +1406,8 @@ in before filter : ard (:find_ard)
 
     params[:password_length] = 8 if params[:password_length].to_i < 1
     Confline.set_value("Default_User_password_length", params[:password_length].to_i, owner)
+    Confline.set_value("Default_User_username_length", params[:username_length].to_i, owner)
+
     flash[:status] = _("Default_User_Saved")
     redirect_to :action => :default_user
   end
