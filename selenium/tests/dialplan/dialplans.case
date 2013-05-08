@@ -1624,6 +1624,26 @@
 	<td>label=End IVR #3</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=User Resellers (5)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;5&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=users_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=users_device</td>
+	<td>label=IAX2/105</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>css=input[type=&quot;image&quot;]</td>
 	<td></td>
@@ -1659,6 +1679,7 @@
 	<td>Device has Dial Plans - we cannot delete it</td>
 	<td></td>
 </tr>
+<!--istrinamas auth by pin dialplan su devaisu, kad butu galima istestuoti kita plana-->
 <tr>
 	<td>open</td>
 	<td>/billing/dialplans/dialplans</td>
@@ -1666,7 +1687,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#diaplan_delete_27 &gt; img</td>
+	<td>css=#diaplan_delete_29 &gt; img</td>
 	<td></td>
 </tr>
 <tr>
@@ -1704,72 +1725,12 @@
 	<td>id=cb_add</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully created</td>
+	<td></td>
+</tr>
 <!--reseller qf-->
-<tr>
-	<td>open</td>
-	<td>/billing/devices/show_devices/5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img[alt=&quot;Delete&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device has Dial Plans - we cannot delete it</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/dialplans</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#quickforward_dp_delete_30 &gt; a &gt; img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/dialplans/edit/29</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=user</td>
-	<td>label=User Resellers (5)</td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
-	<td>10000</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=users_device</td>
-	<td>label=IAX2/105</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input[type=&quot;image&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Dial Plan successfully updated</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/5</td>
@@ -1885,7 +1846,7 @@
 <tr>
 	<td>type</td>
 	<td>//input[@id='quickforward_dp_name']</td>
-	<td>qf</td>
+	<td>qf dialplan</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1904,10 +1865,15 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>id=cb_add</td>
+	<td>xpath=(//input[@id='cb_add'])[2]</td>
 	<td></td>
 </tr>
-<!--IAX2/101  priskirtas qf-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan successfully created</td>
+	<td></td>
+</tr>
+<!--IAX2/1004  priskirtas qf-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/devices_all</td>
@@ -1930,7 +1896,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/callback_dialplan</td>
+	<td>/billing/test/load_delta_sql/dialplan/callback_dialplan</td>
 	<td></td>
 </tr>
 <tr>
@@ -1959,13 +1925,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#diaplan_delete_29 &gt; img</td>
+	<td>clickAndWait</td>
+	<td>css=#quickforward_dp_delete_30 &gt; a &gt; img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dial Plan deleted: qf</td>
 	<td></td>
 </tr>
 <tr>
