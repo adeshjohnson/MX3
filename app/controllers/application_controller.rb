@@ -2216,7 +2216,7 @@ Variables: (Names marked with * are required)
 
             subject = "#{ExceptionNotifier_email_prefix} Exception. ID: #{id.to_s}"
             time = Confline.get_value("Last_Crash_Exception_Time", 0)
-            if time and !time.blank? and (Time.now - time.to_time) > 1.minute
+            if time and !time.blank? and (Time.now - Time.parse(time)) < 1.minute
               MorLog.my_debug("Crash email NOT sent : Time.now #{Time.now.to_s(:db)} - Last_Crash_Exception_Time #{time}")
             else
               send_crash_email(address, subject, message.join("\n")) if params[:do_not_log_test_exception].to_i == 0
@@ -2252,7 +2252,7 @@ Variables: (Names marked with * are required)
       end
     rescue Exception => e
       MorLog.log_exception(e, id, params[:controller].to_s, params[:action].to_s)
-      `/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail1999' -m 'Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}' -o tls='auto'`
+      `/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail19999' -m 'Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}' -o tls='auto'`
       flash[:notice] = "INTERNAL ERROR."
       #redirect_to Web_Dir + "/callc/main" and return false
     end
@@ -2310,7 +2310,7 @@ Variables: (Names marked with * are required)
     else
       a_user_id = 0
     end
-    Action.new(:user_id => a_user_id, :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save
+    Action.new(:user_id => a_user_id, :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save if !flash.to_s.blank?
     flash
   end
 
@@ -2884,7 +2884,7 @@ Variables: (Names marked with * are required)
     MorLog.my_debug("  >> Before sending message.", true)
     local_filename = "/tmp/mor_crash_email.txt"
     File.open(local_filename, 'w') { |f| f.write(message) }
-    command = "/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{subject}' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail1999' -o message-file='#{local_filename}' tls='auto'"
+    command = "/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{subject}' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail19999' -o message-file='#{local_filename}' tls='auto'"
     system(command)
     MorLog.my_debug("  >> Crash email sent to #{address}", true)
     MorLog.my_debug("  >> COMMAND : #{command.inspect}", true)
