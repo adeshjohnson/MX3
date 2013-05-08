@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
     devgroup = Devicegroup.new
     devgroup.init_primary(id, "primary", address_id)
 
-    Action.add_action_hash(get_correct_owner_id, {:target_id => id, :target_type => "user", :action => "user_created"})
+    Action.add_action_hash((User.current.try(:id) || self.get_correct_owner_id), {:target_id => id, :target_type => "user", :action => "user_created"})
 
   end
 
