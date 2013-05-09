@@ -254,7 +254,7 @@
 <tr>
 	<td>select</td>
 	<td>name=user_id</td>
-	<td>label=101 - Test User #1</td>
+	<td>label=user_admin - Test User #1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -455,7 +455,102 @@
 <tr>
 	<td>assertText</td>
 	<td>name=user_id</td>
-	<td>All accountant - Test Accountant reseller - Test Reseller 101 - Test User #1</td>
+	<td>All accountant - Test Accountant reseller - Test Reseller user_admin - Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=csv_file_size</td>
+	<td>9999999999999999999999999999</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/country_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Export to CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/country_stats?csv=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;dg_name&quot;=&gt;&quot;Lithuania&quot;, &quot;dg_type&quot;=&gt;&quot;MOB&quot;, &quot;calls&quot;=&gt;&quot;8&quot;, &quot;billsec&quot;=&gt;&quot;400&quot;, &quot;selfcost&quot;=&gt;&quot;92&quot;, &quot;price&quot;=&gt;&quot;79&quot;, &quot;profit&quot;=&gt;&quot;-13&quot;</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
