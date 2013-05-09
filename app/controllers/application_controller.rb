@@ -794,7 +794,7 @@ class ApplicationController < ActionController::Base
           if @device.istrunk == 1
             Extline.mcreate(default_context, i, "GotoIf", "$[${LEN(${MOR_DID})} > 0]?" + "#{i+1}:#{i+3}", @device.extension, device_id)
             i += 1
-            Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + "/${MOR_DID}", @device.extension, device_id)
+            Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + "/${MOR_DID}|#{timeout.to_s}|il", @device.extension, device_id)
             i += 1
             Extline.mcreate(default_context, i, "Goto", "#{i+2}", @device.extension, device_id)
             i += 1
