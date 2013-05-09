@@ -801,7 +801,7 @@ class ApplicationController < ActionController::Base
             trunk = "/${EXTEN}"
           end
           # end trunk support
-          Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + trunk + "|#{timeout.to_s}", @device.extension, device_id)
+          Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + trunk + "|#{timeout.to_s}|il", @device.extension, device_id) #il disables transfers
 
         end # sip proxy support
         

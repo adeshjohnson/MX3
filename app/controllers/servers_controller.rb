@@ -229,7 +229,7 @@ class ServersController < ApplicationController
       redirect_to :action => 'list' and return false
     end
 
-    serverprovider=Serverprovider.find(:all, :conditions => ["provider_id=? and server_id=?", provider.id, server.server_id])
+    serverprovider = Serverprovider.find(:all, :conditions => ["provider_id=? and server_id=?", provider.id, server.server_id])
 
     for providers in serverprovider
       providers.destroy
