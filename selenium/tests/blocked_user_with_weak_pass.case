@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<link rel="selenium.base" href="http://192.168.0.95" />
 <title>blocked_user_with_weak_pass</title>
 </head>
 <body>
@@ -29,11 +29,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
 	<td></td>
 </tr>
 <tr>
@@ -63,6 +58,36 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters<br /></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>useris</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter password not equal to username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>useris1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>User successfully created</td>
 	<td></td>
 </tr>
@@ -83,7 +108,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User's settings successfully changed:</td>
+	<td>User's settings successfully changed: useris</td>
 	<td></td>
 </tr>
 <tr>
@@ -103,7 +128,37 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters<br /></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>userisč</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter password not equal to username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>userisč1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -128,7 +183,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User's settings successfully changed:</td>
+	<td>User's settings successfully changed: userisč</td>
 	<td></td>
 </tr>
 <tr>
