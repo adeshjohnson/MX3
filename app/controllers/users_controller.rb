@@ -555,7 +555,7 @@ class UsersController < ApplicationController
     end
 
     bad_username = true if not params[:user][:username].blank? and params[:user][:username].to_s.strip.length < @user.minimum_username
-    bad_password = true if not params[:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
+    bad_password = true if not params[:password].blank? and not params[:password][:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
 
     notice, par = @user.validate_from_update(current_user, params, @allow_edit)
     if !notice.blank?
@@ -854,7 +854,7 @@ in before filter : devicegroup (:find_devicegroup)
     end
 
     bad_username = true if not params[:user][:username].blank? and params[:user][:username].to_s.strip.length < @user.minimum_username
-    bad_password = true if not params[:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
+    bad_password = true if not params[:password].blank? and not params[:password][:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
 
     @user.update_attributes(current_user.safe_attributtes(params[:user].each_value(&:strip!), @user.id))
     @user.usertype = usertype
@@ -1322,6 +1322,9 @@ in before filter : ard (:find_ard)
     @password_length = Confline.get_value("Default_User_password_length", owner).to_i
     @username_length = Confline.get_value("Default_User_username_length", owner).to_i
 
+
+    @password_length = 8 if @password_length.equal? 0
+    @username_length = 1 if @username_length.equal? 0
 
     if @lcrs.empty? and allow_manage_providers?
       flash[:notice] = _('No_lcrs_found_user_not_functional')
