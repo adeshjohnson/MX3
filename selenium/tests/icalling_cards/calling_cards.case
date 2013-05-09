@@ -3532,6 +3532,26 @@
 	<td>Bad pin length should be: 30</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/list?cg=1&amp;clean=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card was not deleted</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
