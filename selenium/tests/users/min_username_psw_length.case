@@ -1,0 +1,3412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.112" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_all_permissions_write</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed</td>
+	<td></td>
+</tr>
+<!--userio kurimas, kol default userio setingai nepakeisti (vis dar po 0)-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>ce</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>cart</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User successfully created</td>
+	<td></td>
+</tr>
+<!--user api registracija, kol default userio setingai nepakeisti (vis dar po 0)-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_login_redirect_to_main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>api_secret_key</td>
+	<td>123450</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=a&amp;password=11&amp;password2=11&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default user is not present</td>
+	<td></td>
+</tr>
+<!--user edit, kol setingai nepakeisti-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>1 </td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not updated<br /> * Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>bam</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Minimum Username length:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Minimum Password length:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>1,5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>asgfaadfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>1.6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/users/default_user_update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_1</td>
+	<td>username_length</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_2</td>
+	<td>password_length</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_3</td>
+	<td>user[lcr_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_3</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_4</td>
+	<td>user[tariff_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_4</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_4</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_5</td>
+	<td>user_balance</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_5</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_5</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_6</td>
+	<td>credit</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_6</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_7</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_7</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_7</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_8</td>
+	<td>user[postpaid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_8</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_8</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_9</td>
+	<td>allow_loss_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_9</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_9</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_10</td>
+	<td>user[call_limit]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_10</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_10</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_11</td>
+	<td>user[blocked]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_11</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_11</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_12</td>
+	<td>block_at_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_12</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_12</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_13</td>
+	<td>block_at_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_13</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_13</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_14</td>
+	<td>block_at_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_14</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_14</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_15</td>
+	<td>block_at_conditional</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_15</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_15</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_16</td>
+	<td>block_conditional_use</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_16</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_16</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_17</td>
+	<td>warning_email_active</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_17</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_17</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_18</td>
+	<td>user[warning_email_balance]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_18</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_18</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_19</td>
+	<td>user[warning_email_hour]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_19</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_19</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_20</td>
+	<td>date[user_warning_email_hour]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_20</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_20</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_21</td>
+	<td>user[warning_balance_call]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_21</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_21</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_22</td>
+	<td>user[warning_balance_sound_file_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_22</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_22</td>
+	<td>125</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_23</td>
+	<td>user[generate_invoice]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_23</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_23</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_24</td>
+	<td>i1</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_24</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_24</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_25</td>
+	<td>i2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_25</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_25</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_26</td>
+	<td>i3</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_26</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_26</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_27</td>
+	<td>i4</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_27</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_27</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_28</td>
+	<td>i5</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_28</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_28</td>
+	<td>32</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_29</td>
+	<td>i7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_29</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_29</td>
+	<td>128</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_30</td>
+	<td>i6</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_30</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_30</td>
+	<td>64</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_31</td>
+	<td>show_zero_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_31</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_31</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_32</td>
+	<td>cyberplat_active</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_32</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_32</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_33</td>
+	<td>user[hidden]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_33</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_33</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_34</td>
+	<td>user[primary_device_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_34</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_34</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_35</td>
+	<td>ignore_global_monitorings</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_35</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_35</td>
+	<td>1</td>
+</tr>
+<!--details-->
+<tr>
+	<td>type</td>
+	<td>c_36</td>
+	<td>user[first_name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_36</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_36</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_37</td>
+	<td>user[last_name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_37</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_37</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_38</td>
+	<td>user[clientid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_38</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_38</td>
+	<td>4444444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_39</td>
+	<td>user[agreement_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_39</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_39</td>
+	<td>0000000005</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_40</td>
+	<td>agr_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_40</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_40</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_41</td>
+	<td>agr_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_41</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_41</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_42</td>
+	<td>agr_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_42</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_42</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_43</td>
+	<td>user[language]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_43</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_43</td>
+	<td>aaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_44</td>
+	<td>user[taxation_country]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_44</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_44</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_45</td>
+	<td>user[vat_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_45</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_45</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_46</td>
+	<td>user[accounting_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_46</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_46</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--userio registracija su per trumpais duomenimis-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>b</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>comp</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>vic</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>Test@email.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>bum</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>testeris</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>testeris</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Registration successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--user edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not updated<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>bam</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>bam</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: Test User #1</td>
+	<td></td>
+</tr>
+<!--userio kurimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>bu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>plum</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User successfully created</td>
+	<td></td>
+</tr>
+<!--testing API - user register-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=a&amp;password=11&amp;password2=11&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=abc&amp;password=1122&amp;password2=11&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=abc&amp;password=14125454541&amp;password2=14125454541&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Registration successful</td>
+	<td></td>
+</tr>
+<!--testing API - user update-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=2&amp;pswd=bb&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=2&amp;u9=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>bu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>bb</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad username and/or password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=reseller&amp;p=reseller1&amp;user_id=2&amp;pswd=bb&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--userio kurimas, kol default userio setingai nepakeisti (vis dar po 0)-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>ce</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>orange</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User successfully created</td>
+	<td></td>
+</tr>
+<!--RESELLER testing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=registration_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=qg2audn8qa&amp;username=a&amp;password=11&amp;password2=11&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default user is not present</td>
+	<td></td>
+</tr>
+<!--default userio tetavimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Minimum Username length:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Minimum Password length:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>1,5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>asgfaadfg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>1.6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/fake_form?path_to_action=/billing/users/default_user_update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_1</td>
+	<td>username_length</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_1</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_1</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Field']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_2</td>
+	<td>password_length</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_2</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_2</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_3</td>
+	<td>user[lcr_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_3</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_3</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_4</td>
+	<td>user[tariff_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_4</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_4</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_5</td>
+	<td>user_balance</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_5</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_5</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_6</td>
+	<td>credit</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_6</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_6</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_7</td>
+	<td>unlimited</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_7</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_7</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_8</td>
+	<td>user[postpaid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_8</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_8</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_9</td>
+	<td>allow_loss_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_9</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_9</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_10</td>
+	<td>user[call_limit]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_10</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_10</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_11</td>
+	<td>user[blocked]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_11</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_11</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_12</td>
+	<td>block_at_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_12</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_12</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_13</td>
+	<td>block_at_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_13</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_13</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_14</td>
+	<td>block_at_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_14</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_14</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_15</td>
+	<td>block_at_conditional</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_15</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_15</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_16</td>
+	<td>block_conditional_use</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_16</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_16</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_17</td>
+	<td>warning_email_active</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_17</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_17</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_18</td>
+	<td>user[warning_email_balance]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_18</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_18</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_19</td>
+	<td>user[warning_email_hour]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_19</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_19</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_20</td>
+	<td>date[user_warning_email_hour]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_20</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_20</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_21</td>
+	<td>user[warning_balance_call]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_21</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_21</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_22</td>
+	<td>user[warning_balance_sound_file_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_22</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_22</td>
+	<td>125</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_23</td>
+	<td>user[generate_invoice]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_23</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_23</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_24</td>
+	<td>i1</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_24</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_24</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_25</td>
+	<td>i2</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_25</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_25</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_26</td>
+	<td>i3</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_26</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_26</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_27</td>
+	<td>i4</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_27</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_27</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_28</td>
+	<td>i5</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_28</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_28</td>
+	<td>32</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_29</td>
+	<td>i7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_29</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_29</td>
+	<td>128</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_30</td>
+	<td>i6</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_30</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_30</td>
+	<td>64</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_31</td>
+	<td>show_zero_calls</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_31</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_31</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_32</td>
+	<td>cyberplat_active</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_32</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_32</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_33</td>
+	<td>user[hidden]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_33</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_33</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_34</td>
+	<td>user[primary_device_id]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_34</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_34</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_35</td>
+	<td>ignore_global_monitorings</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_35</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_35</td>
+	<td>1</td>
+</tr>
+<!--details-->
+<tr>
+	<td>type</td>
+	<td>c_36</td>
+	<td>user[first_name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_36</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_36</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_37</td>
+	<td>user[last_name]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_37</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_37</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_38</td>
+	<td>user[clientid]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_38</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_38</td>
+	<td>4444444</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_39</td>
+	<td>user[agreement_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_39</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_39</td>
+	<td>0000000005</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_40</td>
+	<td>agr_date[year]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_40</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_40</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_41</td>
+	<td>agr_date[month]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_41</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_41</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_42</td>
+	<td>agr_date[day]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_42</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_42</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_43</td>
+	<td>user[language]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_43</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_43</td>
+	<td>aaaaaaaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_44</td>
+	<td>user[taxation_country]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_44</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_44</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_45</td>
+	<td>user[vat_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_45</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_45</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>c_46</td>
+	<td>user[accounting_number]</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>c_46</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>n_c_46</td>
+	<td>11111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 0 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=username_length</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_length</td>
+	<td>6</td>
+</tr>
+<!--user edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>us</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not updated<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>us</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>res</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>res</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: </td>
+	<td></td>
+</tr>
+<!--userio kurimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>bu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>apple</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User successfully created</td>
+	<td></td>
+</tr>
+<!--testing API - user update-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;pswd=bb&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=reseller&amp;p=reseller1&amp;user_id=5&amp;u9=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>res</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>bb</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad username and/or password</td>
+	<td></td>
+</tr>
+<!--userio registracija su per trumpais duomenimis-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/qg2audn8qa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>b</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>comp</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>vic</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>Tesdsft@email.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>drum</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>testeris</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>testeris</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Registration successful</td>
+	<td></td>
+</tr>
+<!--testing API - user register-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=qg2audn8qa&amp;username=a&amp;password=11&amp;password2=11&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=qg2audn8qa&amp;username=abc&amp;password=1122&amp;password2=11&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=tesdfdsf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=qg2audn8qa&amp;username=abcd&amp;password=14125454541&amp;password2=14125454541&amp;first_name=asasdf&amp;last_name=sasa&amp;country_id=2&amp;email=tesdfdsfsdf@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Registration successful</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--user edit-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>us</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not updated<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>us</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>acc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>acc</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed: </td>
+	<td></td>
+</tr>
+<!--userio kurimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>bu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:User was not created<br /> * Password must be longer than 5 characters<br /> * Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=password_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>pear</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>paswordas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User successfully created</td>
+	<td></td>
+</tr>
+<!--testing API - user update-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;pswd=cc&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Password must be longer than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;u9=1&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 2 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>acc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>cc</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad username and/or password</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
