@@ -720,7 +720,7 @@
 <!--#hash 1-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/show_calling_card_group?u=101&amp;p=1011&amp;id=1&amp;test=1&amp;hash=${hash1}</td>
+	<td>/billing/api/show_calling_card_group?u=user_admin&amp;p=user_admin1&amp;id=1&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -731,7 +731,7 @@
 <!--#hash 3-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/show_calling_card_group?u=101&amp;p=1011&amp;id=3&amp;test=1&amp;hash=${hash3}</td>
+	<td>/billing/api/show_calling_card_group?u=user_admin&amp;p=user_admin1&amp;id=3&amp;test=1&amp;hash=${hash3}</td>
 	<td></td>
 </tr>
 <tr>
@@ -742,7 +742,7 @@
 <!--#hash 4-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/show_calling_card_group?u=101&amp;p=1011&amp;id=4&amp;test=1&amp;hash=${hash4}</td>
+	<td>/billing/api/show_calling_card_group?u=user_admin&amp;p=user_admin1&amp;id=4&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1181,7 +1181,7 @@
 <!--#hash 7-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/buy_card_from_callingroup?u=101&amp;p=1011&amp;id=1&amp;quantity=2&amp;test=1&amp;hash=${hash7}</td>
+	<td>/billing/api/buy_card_from_callingroup?u=user_admin&amp;p=user_admin1&amp;id=1&amp;quantity=2&amp;test=1&amp;hash=${hash7}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1192,7 +1192,7 @@
 <!--#hash 10-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/buy_card_from_callingroup?u=101&amp;p=1011&amp;id=4&amp;quantity=3&amp;test=1&amp;hash=${hash10}</td>
+	<td>/billing/api/buy_card_from_callingroup?u=user_admin&amp;p=user_admin1&amp;id=4&amp;quantity=3&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1715,6 +1715,17 @@
 	<td>assertText</td>
 	<td>css=number_length</td>
 	<td>10</td>
+</tr>
+<!--tikrinama, ar si komanda neismeta "We're sorry but something went wrong"-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;callerid=661234567&amp;cardgroup=7&amp;pin=7856&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Cannot sell already sold card</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
