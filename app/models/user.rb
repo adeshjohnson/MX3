@@ -1097,8 +1097,8 @@ class User < ActiveRecord::Base
 
     total_calls = 0
     calls_price = 0
-    zero_calls_sql = invoice_zero_calls_sql
     up = SqlExport.user_price_sql
+    zero_calls_sql = invoice_zero_calls_sql(up)
   
     val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did WHERE dids.did IS NOT NULL AND disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
 
