@@ -2694,6 +2694,14 @@ GROUP BY terminators.id;").map { |t| t.id }
     if !params[:user][:tariff_id].blank? and !Tariff.find(:first, :conditions => {:id => params[:user][:tariff_id], :owner_id => co})
       notice = _('Tariff_not_found')
     end
+
+    if params[:pswd] and params[:pswd].strip.length < self.minimum_password
+      notice = _('Password_must_be_longer', self.minimum_password-1)
+    end
+
+    if params[:u9] and params[:u9].strip.length < self.minimum_username
+      notice = _('Username_must_be_longer', self.minimum_username-1)
+    end
     
     params[:user] = params[:user].each_value(&:strip!)
     params[:address] = params[:address].each_value(&:strip!) if params[:address]
