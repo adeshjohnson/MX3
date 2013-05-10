@@ -203,7 +203,7 @@ class User < ActiveRecord::Base
 
     #only admin's user can have responsible_accountant_id set to some other value than -1
     #invalid_value = (responsible_accountant_id != -1 and (not is_user? or owner_id != 0))
-    if responsible_accountant_id != -1 and not User.find(:first, :conditions => {:usertype => 'accountant', :hidden => 0, :id => responsible_accountant_id})
+    if responsible_accountant_id.to_i != -1 and not User.find(:first, :conditions => {:usertype => 'accountant', :hidden => 0, :id => responsible_accountant_id})
       errors.add(:email, _("Responsible_accountant_is_invalid"))
       return false
     end
