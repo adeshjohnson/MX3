@@ -87,7 +87,7 @@ class Server < ActiveRecord::Base
 
       end 
 
-      client.stop
+      client.respond_to?(:stop) ? client.stop : false
 
     end
 
