@@ -2284,11 +2284,11 @@ GROUP BY terminators.id;").map { |t| t.id }
       notice = _('Passwords_do_not_match')
     end
 
-    if params[:password].strip.length < user.minimum_password
+    if params[:password] and params[:password].to_s.strip.length < user.minimum_password
       notice = _('Password_must_be_longer', user.minimum_password-1)
     end
 
-    if params[:username].strip.length < user.minimum_username
+    if params[:username] and params[:username].to_s.strip.length < user.minimum_username
       notice = _('Username_must_be_longer', user.minimum_username-1)
     end
 
