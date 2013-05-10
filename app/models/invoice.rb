@@ -514,7 +514,7 @@ class Invoice < ActiveRecord::Base
       pdf.table(items2,
                 :width => 550,
                 :font_size => 7, :border_width => 0, :vertical_padding => 1,
-                :align => {0 => :left, 1 => :right, 2 => :left, 3 => :right})
+                :align => {0 => :left, 1 => :right, 2 => :left, 3 => :right}) if dgids.size > 0
     end
 
     if page_limit_error == 1
