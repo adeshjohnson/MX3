@@ -367,6 +367,11 @@ class ProvidersController < ApplicationController
     params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
 
     @provider.set_old
+    
+    # saving old values for registration_drop 
+    old_register = @provider.register.to_i 
+    old_username = @provider.device.username.to_s 
+    old_server_ip = @provider.server_ip.to_s     
 
     # if higher than zero -> do not update provider
     provider_update_errors = 0
@@ -523,10 +528,14 @@ class ProvidersController < ApplicationController
         raise exceptions[0] if exceptions.size > 0
       end
 
-      if @provider.tech == "Skype"
-        exceptions = @provider.skype_reload
-        raise exceptions[0] if exceptions.size > 0
-      end
+      # dropping registration if it was present before  
+      if old_register == 1 
+        exception = @provider.registration_drop(old_username, old_server_ip) 
+        raise exceptions[0] if exceptions.size > 0       
+      end 
+ 
+      exception = @provider.registration_add 
+      raise exceptions[0] if exceptions.size > 0 
 
 
       flash[:status] = _('Provider_was_successfully_updated')
@@ -661,11 +670,10 @@ class ProvidersController < ApplicationController
         raise exceptions[0] if exceptions.size > 0
       end
 
-      if @provider.tech == "Skype"
-        exceptions = @provider.skype_reload
-        raise exceptions[0] if exceptions.size > 0
-      end
-
+      if @provider.register.to_i == 1 
+        exception = @provider.registration_drop(device.username, @provider.server_ip) 
+        raise exceptions[0] if exceptions.size > 0 
+      end 
 
     end
 

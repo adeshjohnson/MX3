@@ -235,7 +235,57 @@ class Provider < ActiveRecord::Base
     res = ActiveRecord::Base.connection.select_value(sql)
   end
 
-  #    Calls.count_by_sql "SELECT COUNT(calls.id) FROM calls WHERE calls.provider_id = '#{self.id}' AND status = 'completed'"
+
+  # function to add outbound registration to provider without 'sip reload' (analog to register=> line in sip.conf file, which needs 'sip reload') 
+  # 'sip reload' is not usable because it kills all incoming registrations until devices reregister themselves, e.g. no incoming calls till then 
+  def registration_add 
+    exceptions = [] 
+    for server in self.servers 
+      begin 
+        if self.register.to_i == 1 
+ 
+          if self.reg_line.to_s.length > 0 
+            server.ami_cmd("sip registration add #{self.reg_line.to_s}") 
+          else 
+             
+            # forming registry line manually 
+            device = self.device 
+            if !device or device.username.to_s.length == 0 or device.secret.to_s.length == 0 or self.server_ip.to_s.length == 0 
+              # do nothing 
+            else 
+              port = self.port.to_s.length == 0 ? "5060" : self.port.to_s 
+              server.ami_cmd("sip registration add #{device.username.to_s}:#{device.secret.to_s}@#{self.server_ip.to_s}:#{port}/#{self.reg_extension.to_s}") 
+            end 
+             
+          end 
+        end 
+      rescue Exception => e 
+        exceptions << e 
+      end 
+    end 
+    exceptions 
+  end 
+ 
+ 
+  # function to remove outbound registration to provider without 'sip reload' (analog to register=> line in sip.conf file, which needs 'sip reload') 
+  # 'sip reload' is not usable because it kills all incoming registrations until devices reregister themselves, e.g. no incoming calls till then 
+  def registration_drop(username, server_ip) 
+    exceptions = [] 
+    for server in self.servers 
+      begin 
+ 
+            if username.to_s.length > 0 and server_ip.to_s.length > 0 
+              server.ami_cmd("sip registration drop #{username.to_s} #{server_ip.to_s}") 
+            end 
+ 
+      rescue Exception => e 
+        exceptions << e 
+      end 
+    end 
+    exceptions 
+  end 
+
+
 
   def reload
     exceptions = []
