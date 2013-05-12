@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://192.168.0.112" />
+<link rel="selenium.base" href="" />
 <title>email_variables</title>
 </head>
 <body>
@@ -171,11 +171,7 @@
 	<td>User's settings successfully changed:</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/good_calls</td>
-	<td></td>
-</tr>
+<!--testuojama su senais duomenimis del crash-->
 <tr>
 	<td>open</td>
 	<td>/billing/accounting/generate_invoices</td>
@@ -184,17 +180,32 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2012</td>
+	<td>label=2009</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_month</td>
-	<td>label=November</td>
+	<td>label=January</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_from_day</td>
 	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=20</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -229,17 +240,112 @@
 <tr>
 	<td>select</td>
 	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_period_start&quot;]</td>
-	<td>label=2012-11-30</td>
+	<td>label=2009-01-31</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_period_end&quot;]</td>
-	<td>label=2013-05-10</td>
+	<td>label=2012-11-20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to send invoices by email?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoices sent: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_issue_date&quot;]</td>
-	<td>label=2013-05-10</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=19</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=20</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=link_send_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_period_start&quot;]</td>
+	<td>label=2012-11-19</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_period_end&quot;]</td>
+	<td>label=2012-11-20</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -257,7 +363,6 @@
 	<td></td>
 </tr>
 <!--patikrinti irasius gerus email, ar atsisiunte-->
-
 </tbody></table>
 </body>
 </html>
