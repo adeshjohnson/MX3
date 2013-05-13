@@ -564,6 +564,241 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_number_type_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=21</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=25</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoices generated: 1 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/3?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_18</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_18</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_18</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_19</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_19</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_19</td>
+	<td>4.6917</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_19</td>
+	<td>4.6917</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_21</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_21</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_21</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>10.2360</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=full_price</td>
+	<td>10.2360</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Arrow_refresh&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_22</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_22</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_22</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_23</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_23</td>
+	<td>4.6917</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_23</td>
+	<td>4.6917</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_24</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_24</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_24</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/update_calls_set_zero_price</td>
 	<td></td>
 </tr>
@@ -659,102 +894,77 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoice_details/3?currency=USD</td>
+	<td>/billing/accounting/invoice_details/4?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_18</td>
+	<td>id=id_name_25</td>
 	<td>Calls</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_18</td>
+	<td>id=id_quantity_25</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_18</td>
+	<td>id=id_price_25</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_18</td>
+	<td>id=id_total_price_25</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_19</td>
+	<td>id=id_name_26</td>
 	<td>Calls to DIDs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_19</td>
+	<td>id=id_quantity_26</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_19</td>
+	<td>id=id_price_26</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_19</td>
+	<td>id=id_total_price_26</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_20</td>
-	<td>Calls from Users</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_20</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_20</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_20</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_total_price_20</td>
-	<td>0.0000</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_name_21</td>
+	<td>id=id_name_27</td>
 	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_21</td>
+	<td>id=id_quantity_27</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_21</td>
+	<td>id=id_price_27</td>
 	<td>5.6300</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_22</td>
+	<td>id=id_name_28</td>
 	<td>Test_periodic_service - Test_preriodic_service_memo</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_22</td>
+	<td>id=id_quantity_28</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_22</td>
+	<td>id=id_price_28</td>
 	<td>1.6667</td>
 </tr>
 <tr>
@@ -774,63 +984,188 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_23</td>
+	<td>id=id_name_29</td>
 	<td>Calls</td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>id=id_quantity_23</td>
+	<td>id=id_quantity_29</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_23</td>
+	<td>id=id_price_29</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_24</td>
+	<td>id=id_name_30</td>
 	<td>Calls to DIDs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_24</td>
+	<td>id=id_quantity_30</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_24</td>
+	<td>id=id_price_30</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_25</td>
+	<td>id=id_name_31</td>
 	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_25</td>
+	<td>id=id_quantity_31</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_25</td>
+	<td>id=id_price_31</td>
 	<td>5.6300</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_26</td>
+	<td>id=id_name_32</td>
 	<td>Test_periodic_service - Test_preriodic_service_memo</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_26</td>
+	<td>id=id_quantity_32</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_26</td>
+	<td>id=id_price_32</td>
 	<td>1.6667</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoice_detailed_pdf/4?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>price: 0.0000 (0.0000)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_link_4 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoice deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/delete_from_subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=21</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=25</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoices generated: 3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_price_6</td>
+	<td>8.7333</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=inv_full_price_6</td>
+	<td>8.7333</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/6?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_33</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_33</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Test_periodic_service - Test_preriodic_service_memo</td>
+	<td>Test_periodic_service - Test_preriodic_service_memo</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -859,7 +1194,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#delete_link_3 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td>css=#delete_link_6 &gt; img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -870,6 +1205,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Invoice deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
 	<td></td>
 </tr>
 <tr>
@@ -939,63 +1279,48 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoice_details/4?currency=USD</td>
+	<td>/billing/accounting/invoice_details/8?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_27</td>
+	<td>id=id_name_38</td>
 	<td>Calls to DIDs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_27</td>
+	<td>id=id_quantity_38</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_27</td>
+	<td>id=id_price_38</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_27</td>
+	<td>id=id_total_price_38</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_28</td>
+	<td>id=id_name_39</td>
 	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_28</td>
+	<td>id=id_quantity_39</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_28</td>
+	<td>id=id_price_39</td>
 	<td>5.6300</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_28</td>
+	<td>id=id_total_price_39</td>
 	<td>5.6300</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_name_29</td>
-	<td>Test_periodic_service - Test_preriodic_service_memo</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_29</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_29</td>
-	<td>1.6667</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1014,77 +1339,62 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_30</td>
-	<td>DID Owner Cost</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_quantity_30</td>
-	<td>5</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_price_30</td>
-	<td>5.6300</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_total_price_30</td>
-	<td>5.6300</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=id_name_31</td>
+	<td>id=id_name_40</td>
 	<td>Calls to DIDs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_31</td>
+	<td>id=id_quantity_40</td>
 	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_31</td>
+	<td>id=id_price_40</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_31</td>
+	<td>id=id_total_price_40</td>
 	<td>3.1033</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_name_32</td>
-	<td>Test_periodic_service - Test_preriodic_service_memo</td>
+	<td>id=id_name_41</td>
+	<td>DID Owner Cost</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_32</td>
-	<td>1</td>
+	<td>id=id_quantity_41</td>
+	<td>5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_32</td>
-	<td>1.6667</td>
+	<td>id=id_price_41</td>
+	<td>5.6300</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_41</td>
+	<td>5.6300</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_pdf/3?test=1</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>price: 0.0000 (0.0000)</td>
-	<td></td>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/delete_from_subscriptions</td>
-	<td></td>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1093,18 +1403,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=#delete_link_1 &gt; img[alt=&quot;Delete&quot;]</td>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Invoice deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -1119,8 +1424,38 @@
 </tr>
 <tr>
 	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=21</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=25</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>id=date_till_year</td>
 	<td>label=2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1134,53 +1469,218 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Invoices generated: 2</td>
+	<td>Invoices generated: 1 </td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoices</td>
+	<td>/billing/accounting/invoice_details/9?currency=USD</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_price_4</td>
+	<td>id=price</td>
+	<td>5.5443</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=full_price</td>
+	<td>5.5443</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_42</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_42</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_42</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_43</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_43</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_full_price_4</td>
+	<td>id=id_total_price_43</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_price_5</td>
+	<td>id=id_quantity_45</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_45</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_45</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Arrow_refresh&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>5.5443</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=full_price</td>
+	<td>5.5443</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_46</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_46</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_46</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_47</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_47</td>
 	<td>0.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=inv_full_price_5</td>
+	<td>id=id_total_price_47</td>
 	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_48</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_48</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_48</td>
+	<td>4.6550</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/invoice_details/5?currency=USD</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=show_zero_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/9?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Arrow_refresh&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_quantity_19</td>
-	<td>8</td>
+	<td>id=id_quantity_49</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_price_19</td>
-	<td>0.0000</td>
+	<td>id=id_quantity_49</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=id_total_price_19</td>
-	<td>0.0000</td>
+	<td>id=id_price_49</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_49</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_49</td>
+	<td>0.8893</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_quantity_50</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_50</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_50</td>
+	<td>4.6550</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=price</td>
+	<td>5.5443</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=full_price</td>
+	<td>5.5443</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Calls to DIDs </td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
