@@ -1874,18 +1874,18 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       price = 0
 
       # --- add own outgoing calls ---
-      if show_zero_calls or (outgoing_calls_price > 0)
+      if (show_zero_calls or (outgoing_calls_price > 0)) and outgoing_calls > 0
         invoice.invoicedetails.create(:name => _('Calls'), :price => invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls, :invdet_type => 0)
         price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
-      if show_zero_calls or (outgoing_calls_price > 0)
+      if (show_zero_calls or (outgoing_calls_price > 0)) and outgoing_calls_to_dids > 0
         invoice.invoicedetails.create(:name => _('Calls_To_Dids'), :price => invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_to_dids, :invdet_type => 0)
         price += invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
       # --- add resellers users outgoing calls ---
-      if show_zero_calls or (outgoing_calls_by_users_price > 0)
+      if (show_zero_calls or (outgoing_calls_by_users_price > 0)) and outgoing_calls_by_users > 0
         invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_by_users, :invdet_type => 0)
         price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
