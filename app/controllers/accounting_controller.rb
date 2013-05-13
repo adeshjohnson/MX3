@@ -1879,7 +1879,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         price += invoice.nice_invoice_number(outgoing_calls_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
 
-      if (show_zero_calls or (outgoing_calls_price > 0)) and outgoing_calls_to_dids > 0
+      if (show_zero_calls or (outgoing_calls_to_dids > 0)) and outgoing_calls_to_dids > 0
         invoice.invoicedetails.create(:name => _('Calls_To_Dids'), :price => invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_to_dids, :invdet_type => 0)
         price += invoice.nice_invoice_number(outgoing_calls_price_to_dids.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
       end
