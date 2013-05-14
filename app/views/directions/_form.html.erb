@@ -3,6 +3,6 @@
   <%= text_field 'direction', 'name', "class" => "input" %></p>
 
 <p><label for="direction_code"><%= _('Code') %></label><br/>
-  <%= text_field 'direction', 'code', "class" => "input", :disabled => (params[:action] != 'new') %></p>
+  <%= text_field 'direction', 'code', "class" => "input", :disabled => (params[:action] != 'new' and params[:action] != 'create') %></p>
 <!--[eoform:direction]-->
 

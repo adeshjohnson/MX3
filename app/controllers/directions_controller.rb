@@ -35,6 +35,7 @@ class DirectionsController < ApplicationController
       flash[:status] = _('Direction_was_successfully_created')
       redirect_to :action => 'list'
     else
+      flash_errors_for(_('Direction_not_updated'), @direction)
       render :action => 'new'
     end
   end
@@ -49,6 +50,7 @@ class DirectionsController < ApplicationController
       flash[:status] = _('Direction_was_successfully_updated')
       redirect_to :action => 'list', :id => @direction
     else
+      flash_errors_for(_('Direction_not_updated'), @direction)
       render :action => 'edit'
     end
   end

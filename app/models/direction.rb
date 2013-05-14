@@ -2,8 +2,10 @@
 class Direction < ActiveRecord::Base
   has_many :destinations, :finder_sql => 'SELECT * FROM destinations WHERE direction_code = \'#{code}\' ORDER BY prefix'
 
-  validates_uniqueness_of :name, :code
-  validates_presence_of :name, :code
+  validates_uniqueness_of :name, :message => _('Such_name_already')
+  validates_uniqueness_of :code, :message => _('Such_code_already')
+  validates_presence_of :name, :message => _('Name_cannot_be_empty')
+  validates_presence_of :code, :message => _('Code_cannot_be_empty')
 
   def dest_count
     sql = "SELECT COUNT(*) FROM destinations WHERE direction_code = '#{self.code}'"
