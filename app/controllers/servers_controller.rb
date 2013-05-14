@@ -125,7 +125,12 @@ class ServersController < ApplicationController
       end
     end
 
-    if server.save
+    serv = Rami::Server.new({'host' => server.server_ip, 'username' => self.ami_username, 'secret' => self.ami_secret})
+    serv.console =1
+    serv.event_cache = 100
+
+    if server.valid? and serv.run
+      server.save
       unless server.server_device
         server.create_server_device
       end

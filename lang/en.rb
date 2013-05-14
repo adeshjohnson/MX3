@@ -4583,6 +4583,8 @@ Localization.define('en') do |l|
   l.store 'Such_name_already', 'Such Name already exists'
   l.store 'Such_code_already', 'Such Code already exists'
   l.store 'Direction_not_updated', 'Direction was not updated'
+  l.store 'Server_IP_cannot_be_empty', 'Server IP cannot be empty'
+  l.store 'Hostname_cannot_be_empty', 'Hostname cannot be empty'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
