@@ -1853,7 +1853,7 @@ class Call < ActiveRecord::Base
     # this is nasty but oh well.
     
     unless options[:s_card_number].to_s.strip.blank?
-      cond << "cards.number = ?"
+      cond << "cards.number LIKE ?"
       var << options[:s_card_number]
     end
 
