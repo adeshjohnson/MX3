@@ -950,6 +950,131 @@
 	<td>destination name 1</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_name</td>
+	<td>new direction</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Direction was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Code cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=direction_name</td>
+	<td>new direction</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_code</td>
+	<td>dfsdf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Direction was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Name cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=direction_code</td>
+	<td>DFSDF</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_name</td>
+	<td>new direction</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_code</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Direction successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/directions/edit/260</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_name</td>
+	<td>new direction - edited</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=direction_code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=direction_code</td>
+	<td>dfsdf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Direction successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>new direction - edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>123456</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>dfsdf</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
