@@ -1453,13 +1453,9 @@ class ApplicationController < ActionController::Base
               UNION ALL
               (SELECT data2 c FROM dialplans  WHERE (dptype = 'pbxfunction' AND data2 REGEXP '^[0-9]+$' = 1 AND data2 BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
               UNION ALL
-              (SELECT data2 + 1 AS c FROM dialplans  WHERE (dptype = 'pbxfunction' AND data2 REGEXP '^[0-9]+$' = 1 AND data2 BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
+              (SELECT extension c FROM devices WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
               UNION ALL
-              (SELECT extension c FROM devices  WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
-              UNION ALL
-              (SELECT extension + 1 AS c FROM devices WHERE (extension REGEXP '^[0-9]+$' = 1 AND extension BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
-              UNION ALL
-              (SELECT username + 1 AS c FROM devices WHERE (username REGEXP '^[0-9]+$' = 1 AND username BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
+              (SELECT username AS c FROM devices WHERE (username REGEXP '^[0-9]+$' = 1 AND username BETWEEN #{ran_min} AND #{ran_max}) GROUP BY c)
             ) AS v GROUP BY free HAVING free BETWEEN #{ran_min} AND #{ran_max} ORDER BY CONVERT(free, UNSIGNED);"
     devices = ActiveRecord::Base.connection.select_all(sql)
 
