@@ -125,7 +125,7 @@ class ServersController < ApplicationController
       end
     end
 
-    serv = Rami::Server.new({'host' => server.server_ip, 'username' => self.ami_username, 'secret' => self.ami_secret})
+    serv = Rami::Server.new({'host' => server.server_ip, 'username' => server.ami_username, 'secret' => server.ami_secret})
     serv.console =1
     serv.event_cache = 100
 
