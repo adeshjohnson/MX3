@@ -1749,6 +1749,126 @@
 	<td>id=s_provider</td>
 	<td>All provider_re</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/icalling_cards/calls_for_cardgroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_card_number</td>
+	<td>370%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_127</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_27</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_132</td>
+	<td>Card/#37046246362</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_card_number</td>
+	<td>%438</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Card/#37046246362</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_27</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_128</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_130</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_card_number</td>
+	<td>%43%</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_129</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_127</td>
+	<td>Card/#37063042438</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=card_27</td>
+	<td>Card/#37063042438</td>
+</tr>
 </tbody></table>
 </body>
 </html>
