@@ -377,7 +377,7 @@ class AccountingController < ApplicationController
         end
 
         # --- add resellers users outgoing calls ---
-        if (outgoing_calls_by_users_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and incoming_made_calls_price > 0)
+        if (outgoing_calls_by_users_price > 0) or ( user.invoice_zero_calls == 1 and outgoing_calls_by_users_price >= 0 and outgoing_calls_by_users > 0)
           invoice.invoicedetails.create(:name => _('Calls_from_users'), :price => invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => outgoing_calls_by_users, :invdet_type => 0)
           price += invoice.nice_invoice_number(outgoing_calls_by_users_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
         end
