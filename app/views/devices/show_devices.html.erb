@@ -47,7 +47,7 @@
         <td id="status_<%= device.id %>" align="center"><%= device_reg_status(device) %></td>
         <td id="description_<%= device.id %>"><%= b_primary_device if device.id == @user.primary_device_id %><%= device.description %></td>
         <% if !(session[:usertype] == "accountant" and session[:acc_device_pin].to_i == 0) %>
-            <td id="pin_<%= device.id %>"><%= device.pin if device.device_type != "Skype" %></td>
+            <td id="pin_<%= device.id %>"><%= device.pin %></td>
         <% end %>
         <td id="pic_<%= device.id %>" align="center"><%= nice_device_pic device %></td>
         <td id="type_<%= device.id %>"><%= print_tech device.device_type %></td>
@@ -69,7 +69,7 @@
             </td>
         <% end %>
         <td id="cli_<%= device.id %>" align="center">
-          <%= link_to(b_cli, {:action => "device_clis", :id => device.id}, {:id => "cli_link_" + device.id.to_s}) if device.device_type != "Skype" %>
+          <%= link_to(b_cli, {:action => "device_clis", :id => device.id}, {:id => "cli_link_" + device.id.to_s}) %>
         </td>
         <% if (session[:usertype] == "admin") or (show_recordings?) %>
             <td id="recordings_<%= device.id %>" align="center">

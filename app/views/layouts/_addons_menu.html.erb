@@ -94,19 +94,6 @@
     addons_menu.add(<%= i %>, <%= a %>, '<%= _('Lcr') %>', '<%= Web_Dir %>/sms/lcrs');
     <% i += 1 -%>
     <% end %>
-
-
-
-
-
-
-    <% if skp_active?%>
-    <% if admin? or accountant? %>
-    addons_menu.add(<%= i %>, <%= si %>, '<%= _('Skype') %>', '<%= Web_Dir %>/functions/skype');
-    <% i += 1 %>
-    <% end %>
-    <% end %>
-
     <% end %>
 
     <% if erp_active?%>

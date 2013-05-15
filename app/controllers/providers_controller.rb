@@ -279,12 +279,7 @@ class ProvidersController < ApplicationController
     @providertypes = Providertype.all
     @curr = current_user.currency
 
-    if @provider.tech == "Skype"
-      @audio_codecs = @provider.codecs_order('audio', {:skype => true})
-    else
-      @audio_codecs = @provider.codecs_order('audio')
-    end
-
+    @audio_codecs = @provider.codecs_order('audio')
     @video_codecs = @provider.codecs_order('video')
 
     @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id]).all
@@ -348,8 +343,6 @@ class ProvidersController < ApplicationController
     end
 
     render :action => 'edit_h323' if @provider.tech == "H323"
-    render :action => 'edit_skype' if @provider.tech == "Skype"
-
   end
 
   def update
@@ -553,12 +546,7 @@ class ProvidersController < ApplicationController
       @providertypes = Providertype.all
       @curr = current_user.currency
 
-      if @provider.tech == "Skype"
-        @audio_codecs = @provider.codecs_order('audio', {:skype => true})
-      else
-        @audio_codecs = @provider.codecs_order('audio')
-      end
-
+      @audio_codecs = @provider.codecs_order('audio')
       @video_codecs = @provider.codecs_order('video')
 
       @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id]).all

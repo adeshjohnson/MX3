@@ -26,8 +26,6 @@ class Provider < ActiveRecord::Base
   validates_presence_of :name, :message => _("Provider_should_have_name")
   validates_format_of :port, :with => /^\d+$|^$/, :message => _("Provider_port_is_not_valid")
   validates_uniqueness_of :name, :message => _('Provider_Name_Must_Be_Unique')
-  #skype provider must have skype name, no blank field allowed
-  validates_presence_of :login, :message => _("Skype_provider_should_have_name"), :if => lambda { |o| o.tech == "Skype" }
 
   before_save :before_save_timeout, :check_location_id, :check_login
   before_destroy :provider_before_destroy
@@ -78,12 +76,6 @@ class Provider < ActiveRecord::Base
     end
 
     self.device.destroy if self.device
-  end
-
-  def after_create
-    if tech == 'Skype' and Provider.count(:all, :conditions => ['tech = "Skype"']).to_i == 1
-      Confline.set_value("Skype_Default_Provider", id, 0)
-    end
   end
 
   def type
@@ -164,11 +156,7 @@ class Provider < ActiveRecord::Base
   end
 
   def codecs_order(type, options={})
-    if options[:skype]
-      Codec.find_by_sql("SELECT codecs.*,  IF(providercodecs.priority is null, 100, providercodecs.priority)  as bb FROM codecs  LEFT Join providercodecs on (providercodecs.codec_id = codecs.id and providercodecs.provider_id = #{self.id.to_i})  where codec_type = '#{type}' AND name IN('g729', 'alaw', 'ulaw') ORDER BY bb asc, codecs.id")
-    else
-      Codec.find_by_sql("SELECT codecs.*,  IF(providercodecs.priority is null, 100, providercodecs.priority)  as bb FROM codecs  LEFT Join providercodecs on (providercodecs.codec_id = codecs.id and providercodecs.provider_id = #{self.id.to_i})  where codec_type = '#{type}' ORDER BY bb asc, codecs.id")
-    end
+    Codec.find_by_sql("SELECT codecs.*,  IF(providercodecs.priority is null, 100, providercodecs.priority)  as bb FROM codecs  LEFT Join providercodecs on (providercodecs.codec_id = codecs.id and providercodecs.provider_id = #{self.id.to_i})  where codec_type = '#{type}' ORDER BY bb asc, codecs.id")
   end
 
   def codecs
@@ -306,18 +294,6 @@ class Provider < ActiveRecord::Base
     for server in self.servers
       begin
         server.ami_cmd('h.323 reload')
-      rescue Exception => e
-        exceptions << e
-      end
-    end
-    exceptions
-  end
-
-  def skype_reload
-    exceptions = []
-    for server in self.servers
-      begin
-        server.ami_cmd('reload chan_skype.so')
       rescue Exception => e
         exceptions << e
       end

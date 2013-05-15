@@ -315,7 +315,6 @@ class DevicesController < ApplicationController
     set_voicemail_variables(@device)
 
     render :action => :device_edit_h323 if @device.device_type == "H323"
-    render :action => :device_edit_skype if @device.device_type == "Skype"
   end
 
   # in before filter : device (:find_device)

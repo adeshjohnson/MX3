@@ -54,12 +54,7 @@
         <td id="tech_<%= prov.id %>"><%= prov.tech if admin? or (reseller? and prov.user_id == current_user.id) %></td>
         <td id="device_<%= prov.id %>">
           <% if admin? or (reseller? and prov.user_id == current_user.id) %>
-              <% if prov.tech != "Skype" %>
-                  <%= prov.server_ip.to_s + ":" + prov.port.to_s %>
-              <% else %>
-                  <%= _('Skype_Network') %>: <%= prov.login %>
-              <% end %>
-
+             <%= prov.server_ip.to_s + ":" + prov.port.to_s %>
           <% end %>
         </td>
 
@@ -91,11 +86,7 @@
             <option value="<%= prov.id %>"> <%= prov.name %>
               <% if admin? or (reseller? and prov.user_id == current_user.id) %>
                   -
-                  <% if prov.tech != "Skype" %>
-                      <%= prov.tech %>/<%= prov.server_ip %>
-                  <% else %>
-                      <%= prov.tech %>/<%= prov.login %>
-                  <% end %>
+                  <%= prov.tech %>/<%= prov.server_ip %>
               <% end %>
             </option>
         <% end %>
@@ -132,11 +123,7 @@
                     <%= prov.name %>
                     <%  if admin? or (reseller? and prov.user_id == current_user.id) %>
                         -
-                        <% if prov.tech != "Skype" %>
-                            <%= prov.tech %>/<%= prov.server_ip %>
-                        <% else %>
-                            <%= prov.tech %>/<%= prov.login %>
-                        <% end %>
+                        <%= prov.tech %>/<%= prov.server_ip %>
                     <%end%>
                   </option>
               <% end %>

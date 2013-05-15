@@ -24,11 +24,6 @@
         <% for pt in @providertypes %>
             <%= radio_button_tag('provider[tech]', pt.name, @provider.tech == pt.name) %> <%= print_tech pt.name %>
         <% end %>
-
-        <% if skp_active? %>
-            <%= radio_button_tag('provider[tech]', "Skype", (@device_type == "Skype")) %> Skype
-        <% end %>
-
     <% else %>
         <b><%= @provider.tech %></b>
     <% end %>

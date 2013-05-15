@@ -90,10 +90,6 @@
             <% i += 1 %>
         <% end %>
 
-        <% if skp_active? and @new_device %>
-            <%= radio_button_tag('device[device_type]', "Skype", (@device_type == "Skype")) %> Skype
-        <% end %>
-
         <% if @fax_enabled and (session[:usertype] == "admin" or session[:usertype] == "reseller") %>
             <%= radio_button_tag('device[device_type]', "FAX", (@device_type == "FAX")) %> FAX
         <% end %>

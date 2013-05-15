@@ -139,11 +139,10 @@ class Device < ActiveRecord::Base
   if username is blank it means that ip authentication is enabled and there's
   no need to check for valid passwords.
   server device is an exception, so there's no need to check whether it's pass is valid or not.
-  skype device does not have any password at all.
   TODO: each device type should have separate class. there might be PasswordlessDevice
 =end
   def check_password
-    unless self.server_device? or self.username.blank? or self.provider or ["dahdi", "virtual", "h323", "skype"].include?(self.device_type.downcase)
+    unless self.server_device? or self.username.blank? or self.provider or ["dahdi", "virtual", "h323"].include?(self.device_type.downcase)
       if self.name and self.secret.to_s == self.name.to_s
         errors.add(:secret, _("Name_And_Secret_Cannot_Be_Equal"))
         return false
@@ -1081,7 +1080,7 @@ class Device < ActiveRecord::Base
       notice = _('Device_group_invalid')
     end
 
-    type_array = ['SIP', 'IAX2', 'FAX', 'H323', 'Skype', '']
+    type_array = ['SIP', 'IAX2', 'FAX', 'H323', '']
     type_array << "dahdi" if allow_dahdi
     type_array << "Virtual" if allow_virtual
     if notice.blank? and !type_array.include?(params[:device][:device_type].to_s)
@@ -1091,15 +1090,15 @@ class Device < ActiveRecord::Base
   end
 
 =begin
-  only SIP, IAX and skype devices can have name. but only first two can be authenticated by ip.
-  users can not see skype device's username and nor they can see SIP/IAX2 device's username if ip
+  only SIP and IAX devices can have name. but only first two can be authenticated by ip.
+  users can not see SIP/IAX2 device's username if ip
   authentication is set. and we determine whether ip auth is set by checking if username is empty.
 
   *Returns*
     *boolean* true or false depending whether we should show username or not
 =end
   def show_username?
-    (not username.blank? and (device_type == "SIP" or device_type == "IAX2")) or device_type == "Skype"
+    (not username.blank? and (device_type == "SIP" or device_type == "IAX2"))
   end
 
 

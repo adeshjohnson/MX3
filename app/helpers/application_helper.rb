@@ -765,7 +765,6 @@ module ApplicationHelper
     d = b_trunk_ani if device.istrunk == 1 and device.ani and device.ani == 1
     d = b_fax if device.device_type == "FAX"
     d = b_virtual_device if device.device_type == "Virtual"
-    d = b_skype if device.device_type == "Skype"
     d = b_provider if provider
     d.html_safe
   end

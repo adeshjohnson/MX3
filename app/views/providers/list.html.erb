@@ -74,14 +74,10 @@
         <td id="ani_<%= prov.id %>" <%= @n_class %>><%= b_provider_ani if prov.ani == 1 %><%= prov.name %></td>
         <td id="tech_<%= prov.id %>" <%= @n_class %>><%= print_tech prov.tech %></td>
         <td id="channel_<%= prov.id %>" <%= @n_class %>><%= h(prov.channel) %></td>
-        <td id="login_<%= prov.id %>" <%= @n_class %>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
-        <td id="password_<%= prov.id %>" <%= @n_class %>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2" or prov.tech == "Skype" %></td>
+        <td id="login_<%= prov.id %>" <%= @n_class %>><%= h(prov.login) if prov.tech == "SIP" or prov.tech == "IAX2" %></td>
+        <td id="password_<%= prov.id %>" <%= @n_class %>><%= h(prov.password) if prov.tech == "SIP" or prov.tech == "IAX2" %></td>
         <td id="server_ip_<%= prov.id %>" <%= @n_class %>>
-          <% if prov.tech != "Skype" %>
-              <%= h(prov.server_ip) %>
-          <% else %>
-              <%= _('Skype_Network') %>
-          <% end %>
+          <%= h(prov.server_ip) %>
         </td>
         <td id="tariff_name_<%= prov.id %>" <%= @n_class %>><%= h(prov.tariff.name) if prov.tariff %></td>
         <%= render :partial => "/layouts/provider_buttons", :locals => {:provider => prov, :provider_used_by_resellers => @provider_used_by_resellers} %>
