@@ -2,7 +2,7 @@
 class Device < ActiveRecord::Base
 
   # all this nonsense based on http://www.ruby-forum.com/topic/101557
-  set_inheritance_column :ruby_type # we have devices.type column for asterisk 1.8 support, so we need this to allow such column
+  self.inheritance_column = :_type_disabled # we have devices.type column for asterisk 1.8 support, so we need this to allow such column
 
   # getter for the "type" column
   def device_ror_type

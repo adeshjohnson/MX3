@@ -522,7 +522,7 @@ class FunctionsController < ApplicationController
       redirect_to :action => 'call_tracing_user', :user => @user.id and return false
     end
 
-    if @device.device_type == "H323" and @device.port.to_i != 1720
+    if @device.device_type == "H323" and ![1720,0].include?(@device.port.to_i)
       flash[:notice] = _('H323_device_port_is_not_1720')
     end
 
