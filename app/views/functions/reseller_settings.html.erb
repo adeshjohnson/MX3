@@ -320,6 +320,11 @@
           <br />
           <br />
           <table class="simple" width="100%">
+            <tr>
+              <td></td>
+              <td><b><%= _('Allow_API') %>:</b></td>
+              <td><%= check_box_tag 'allow_api', value = "1", Confline.get_value('Allow_API', @user_id).to_i == 1 %></td>
+            </tr>
             <tr <%= tooltip(_('API_Secret_Key'), _('API_Secret_Key_Explanation'))%>>
               <td></td>
               <td><b><%= _('API_Secret_Key')%>:</b></td>
