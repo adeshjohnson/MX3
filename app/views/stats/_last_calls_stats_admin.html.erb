@@ -69,6 +69,10 @@
               <% options = @resellers_with_dids.map{|u| [nice_user(u), u.id.to_i]} %>
               <% options.insert(0, [_('All'), "all"]) if @resellers_with_dids.size > 0 %>
               <td nowrap="true"><%= select_tag("s_reseller_did", options_for_select(options, @options[:s_reseller_did].to_i), :disabled => @resellers_with_dids.empty?, :style => "max-width:200px")  %></td>
+              <td><%= _('DID_Provider') %>:</td>
+              <% options = @providers.map{|p| [p.name, p.id]} %>
+              <% options.insert(0, [_('All'), "all"]) if @providers.size > 0 %>
+              <td nowrap="true"><%= select_tag("s_did_provider", options_for_select(options, @options[:s_did_provider].to_i), :disabled => @providers.empty?, :style => "width:115px")  %></td>
             </tr>
             <% if cc_active? %>
                 <tr>

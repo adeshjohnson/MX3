@@ -1835,9 +1835,16 @@ class Call < ActiveRecord::Base
       var << '0'
     end
 
-    if options[:provider]
-      cond << "(calls.provider_id = ? or calls.did_provider_id=?)"
-      var += [options[:provider].id, options[:provider].id]
+    if options[:provider] or options[:did_provider]
+      c = ""
+      c << "(" if options[:provider] and options[:did_provider]
+      c << "calls.provider_id = ?" if options[:provider]
+      c << " or " if options[:provider] and options[:did_provider]
+      c << "calls.did_provider_id = ?" if options[:did_provider]
+      c << ")" if options[:provider] and options[:did_provider]
+      cond << c
+      var += [options[:provider].id] if options[:provider]
+      var += [options[:did_provider].id] if options[:did_provider]
     end
 
     if options[:reseller]

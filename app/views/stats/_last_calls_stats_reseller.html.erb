@@ -66,6 +66,15 @@
                 </span>
               </td>
             </tr>
+            <% if current_user.reseller_allow_providers_tariff? %>
+              <tr>
+                <td colspan=5></td>
+                <td><%= _('Provider') %>:</td>
+                <% options = @providers.map{|p| [p.name, p.id]} %>
+                <% options.insert(0, [_('All'), "all"]) if @providers.size > 0 %>
+                <td nowrap="true"><%= select_tag("s_did_provider", options_for_select(options, @options[:s_did_provider].to_i), :disabled => @providers.empty?, :style => "width:115px")  %></td>
+              </tr>
+            <% end %>
             <% if cc_active? %>
                 <tr>
                   <td><%= _('Card_number') %>:</td>

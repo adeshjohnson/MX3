@@ -962,15 +962,15 @@ in before filter : user (:find_user_from_id_or_session)
     end
 
     if session[:usertype] == "reseller"
-      @users, @user, @devices, @device, @hgcs, @hgc, @providers, @provider, @did = last_calls_stats_reseller(@options)
+      @users, @user, @devices, @device, @hgcs, @hgc, @providers, @provider, @did, @did_provider = last_calls_stats_reseller(@options)
     end
 
 
     if ["admin", "accountant"].include?(session[:usertype])
-      @users, @user, @devices, @device, @hgcs, @hgc, @did, @providers, @provider, @reseller, @resellers, @resellers_with_dids = last_calls_stats_admin(@options)
+      @users, @user, @devices, @device, @hgcs, @hgc, @did, @providers, @provider, @reseller, @resellers, @resellers_with_dids, @did_provider = last_calls_stats_admin(@options)
     end
     session[:last_calls_stats] = @options
-    options = last_calls_stats_set_variables(@options, {:user => @user, :device => @device, :hgc => @hgc, :did => @did, :current_user => current_user, :provider => @provider, :can_see_finances => can_see_finances?, :reseller => @reseller})
+    options = last_calls_stats_set_variables(@options, {:user => @user, :device => @device, :hgc => @hgc, :did => @did, :current_user => current_user, :provider => @provider, :can_see_finances => can_see_finances?, :reseller => @reseller, :did_provider => @did_provider})
 
     type = 'html'
     type = 'csv' if params[:csv].to_i == 1
@@ -3629,6 +3629,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :s_call_type => "all",
         :s_device => "all",
         :s_provider => "all",
+        :s_did_provider => "all",
         :s_hgc => 0,
         :search_on => 1,
         :s_user => "all",
@@ -3700,12 +3701,19 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
           redirect_to :controller => :callc, :action => :main and return false
         end
       end
+      if options[:s_did_provider].to_i > 0
+        did_provider = Provider.find(:first, :conditions => ["providers.id = ?", options[:s_did_provider]])
+        unless did_provider
+          dont_be_so_smart
+          redirect_to :controller => :callc, :action => :main and return false
+        end
+      end
     else
-      providers = nil; provider = nil
+      providers = nil; provider = nil; did_provider = nil
     end
     did = Did.where(:id => options[:s_did]).first if options[:s_did] != "all" and !options[:s_did].blank?
 
-    return users, user, devices, device, hgcs, hgc, providers, provider, did
+    return users, user, devices, device, hgcs, hgc, providers, provider, did, did_provider
   end
 
   def last_calls_stats_admin(options)
@@ -3717,6 +3725,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     hgcs = Hangupcausecode.find_all_for_select
     providers = Provider.find_all_for_select
     provider = Provider.where(:id => options[:s_provider]).first if options[:s_provider].to_i > 0
+    did_provider = Provider.where(:id => options[:s_did_provider]).first if options[:s_did_provider].to_i > 0
     resellers = User.where(:usertype => "reseller").all
     resellers_with_dids = User.find(:all, :joins => 'JOIN dids ON (users.id = dids.reseller_id)', :conditions => 'usertype = "reseller"', :group => 'users.id')
     resellers = [] if !resellers
@@ -3726,7 +3735,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     else
       devices = Device.find_all_for_select
     end
-    return users, user, devices, device, hgcs, hgc, did, providers, provider, reseller, resellers, resellers_with_dids
+    return users, user, devices, device, hgcs, hgc, did, providers, provider, reseller, resellers, resellers_with_dids, did_provider
   end
 
   def last_calls_stats_set_variables(options, values)
