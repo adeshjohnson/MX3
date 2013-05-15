@@ -58,6 +58,11 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
+</tr>
 <!--edit sip-->
 <tr>
 	<td>clickAndWait</td>
@@ -110,6 +115,12 @@
 	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
+</tr>
+<!--sukuriamas dar vienas toks pat extension, nes anas 1003 jau sunaikintas-->
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
 </tr>
 <!--update iax-->
 <tr>
@@ -211,6 +222,11 @@
 	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
 </tr>
 <!--update dahdi-->
 <tr>
@@ -318,6 +334,11 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
+</tr>
 <!--update fax-->
 <tr>
 	<td>clickAndWait</td>
@@ -404,6 +425,11 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
+</tr>
 <!--edit sip-->
 <tr>
 	<td>clickAndWait</td>
@@ -456,6 +482,11 @@
 	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_extension</td>
+	<td>1004</td>
 </tr>
 <!--update iax-->
 <tr>
@@ -632,6 +663,11 @@
 	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_extension</td>
+	<td>1004</td>
 </tr>
 <!--update dahdi-->
 <tr>
@@ -1133,6 +1169,11 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
+</tr>
 <!--edit sip-->
 <tr>
 	<td>clickAndWait</td>
@@ -1186,6 +1227,11 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
+</tr>
 <!--update iax-->
 <tr>
 	<td>clickAndWait</td>
@@ -1234,6 +1280,11 @@
 	<td>Device created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1003</td>
+</tr>
 <!--update h323-->
 <!--<tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Device's settings updated</td> 	<td></td> </tr>-->
 <!--delete h323-->
@@ -1263,6 +1314,11 @@
 	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1004</td>
 </tr>
 <!--update dahdi-->
 <tr>
@@ -1645,6 +1701,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1004</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
@@ -1666,6 +1727,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1005</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
@@ -1673,7 +1739,7 @@
 <tr>
 	<td>assertText</td>
 	<td>extension_24</td>
-	<td>1006</td>
+	<td>1004</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1691,6 +1757,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1006</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
@@ -1698,7 +1769,7 @@
 <tr>
 	<td>assertText</td>
 	<td>extension_25</td>
-	<td>1008</td>
+	<td>1005</td>
 </tr>
 <!--destroy device-->
 <tr>
@@ -1715,12 +1786,12 @@
 <tr>
 	<td>assertElementNotPresent</td>
 	<td>extension_24</td>
-	<td>1006</td>
+	<td>1004</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>extension_25</td>
-	<td>1008</td>
+	<td>1005</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1738,6 +1809,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1004</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
@@ -1745,7 +1821,7 @@
 <tr>
 	<td>assertText</td>
 	<td>extension_27</td>
-	<td>1006</td>
+	<td>1004</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1763,6 +1839,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1007</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/show_devices/2</td>
 	<td></td>
@@ -1770,7 +1851,7 @@
 <tr>
 	<td>assertText</td>
 	<td>extension_26</td>
-	<td>1010</td>
+	<td>1006</td>
 </tr>
 <!--FAX-->
 <tr>
@@ -1868,6 +1949,11 @@
 	<td>assertTextPresent</td>
 	<td>Device created</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_extension</td>
+	<td>1008</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -2175,6 +2261,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1009</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -2252,11 +2343,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/show_devices/2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
 	<td></td>
 </tr>
@@ -2271,10 +2357,11 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/devices/show_devices/2</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>id=device_extension</td>
+	<td>1010</td>
 </tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/devices/show_devices/2</td> 	<td></td> </tr>-->
 <!--<tr> 	<td>assertText</td> 	<td>name_33</td> 	<td>1008</td> </tr>-->
 <tr>
 	<td>open</td>
