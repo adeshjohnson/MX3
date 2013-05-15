@@ -51,6 +51,8 @@ class RecordingsController < ApplicationController
         flash[:notice] = _('Recording_was_not_found')
         redirect_to :controller=>"callc", :action => 'main' and return false
       else
+        rec_user = User.where(:id => rec.user_id).first
+        rec_user = User.where(:id => rec.dst_user_id).first if rec_user.blank?
         send_data(File.open("/home/mor/public/recordings/#{rec.uniqueid}.mp3").read, :filename => rec.datetime.strftime("%F_%T_") + nice_user(rec_user).gsub(" ", "_").to_s + "_[" + rec.uniqueid + "].mp3")
       end
     end
