@@ -1307,49 +1307,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=provider_name</td>
-	<td>skype provider</td>
-</tr>
-<tr>
-	<td>click</td>
+	<td>assertElementNotPresent</td>
 	<td>id=provider_tech_Skype</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=add_to_servers_1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Provider successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//a[contains(text(),'Calls')])[5]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=page_title</td>
-	<td>Last Calls</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Provider's calls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=s_provider</td>
-	<td>skype provider</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1484,7 +1444,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/providers_calls/5</td>
+	<td>/billing/stats/providers_calls/4</td>
 	<td></td>
 </tr>
 <tr>
@@ -1578,39 +1538,9 @@
 	<td>skype provider 2</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>assertElementNotPresent</td>
 	<td>id=provider_tech_Skype</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Provider successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img[alt=&quot;Call&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=page_title</td>
-	<td>Last Calls</td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Provider's calls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=s_provider</td>
-	<td>skype provider 2</td>
 </tr>
 <tr>
 	<td>open</td>
