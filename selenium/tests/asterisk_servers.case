@@ -44,12 +44,12 @@
 <tr>
 	<td>type</td>
 	<td>id=server_hostname</td>
-	<td>123.123.123.123</td>
+	<td>127.0.0.1</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=server_ip</td>
-	<td>123.123.123.123</td>
+	<td>127.0.0.1</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -89,12 +89,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=hostname_2</td>
-	<td>123.123.123.123</td>
+	<td>127.0.0.1</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=ip_2</td>
-	<td>123.123.123.123</td>
+	<td>127.0.0.1</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -134,12 +134,12 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=server_hostname</td>
-	<td>123.123.123.123</td>
+	<td>127.0.0.1</td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>id=server_ip</td>
-	<td>123.123.123.123</td>
+	<td>127.0.0.1</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -190,6 +190,262 @@
 	<td>assertValue</td>
 	<td>id=server_ssh_port</td>
 	<td>22</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>dfdsfdsf</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>sdfsdfsdf</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Server IP is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Server IP cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Hostname cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=server_hostname</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=server_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>12..123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>abcd.65.12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Server IP is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Hostname is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Server IP cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Hostname cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>fgdfgdfg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Server IP is not valid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>123.123.123.123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>123.123.123.123</td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>200000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Configuration error. Please consult this help link.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_id</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_hostname</td>
+	<td>123.123.123.123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_ip</td>
+	<td>123.123.123.123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_type</td>
+	<td>main</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_maxcalllimit</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=server_comment</td>
+	<td>test</td>
+</tr>
+<!--bando jungtis prie neegzistuojancio serverio ir tai uztrunka, del to reikia ilgai laukti, kad butu gautas error-->
+<tr>
+	<td>setTimeout</td>
+	<td>200000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Configuration error. Please consult this help link.</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
