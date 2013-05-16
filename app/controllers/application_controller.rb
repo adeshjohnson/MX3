@@ -2818,6 +2818,14 @@ Variables: (Names marked with * are required)
     (current_user.reseller_allow_providers_tariff? and current_user.usertype == 'reseller') or ['admin', 'accountant'].include?(current_user.usertype)
   end
 
+  def load_ok?
+    val = Confline.select("SQL_NO_CACHE value").where("name = 'load_ok'").first
+    if !val.blank? and val.value.to_i == 0
+      flash[:notice] = _('Server_is_overloaded')
+      redirect_to :controller => "callc", :action => "main" and return false
+    end
+  end
+
   private
 
   def store_location

@@ -11,6 +11,7 @@ class StatsController < ApplicationController
   before_filter :authorize, :except => [:active_calls_longer_error, :active_calls_longer_error_send_email]
   before_filter :check_if_can_see_finances, :only => [:profit]
   before_filter :check_authentication, :only => [:active_calls, :active_calls_count, :active_calls_order, :active_calls_show]
+  before_filter :load_ok?, :only => [:show_user_stats, :active_calls, :calls_by_scr, :calls_per_day, :all_users_detailed, :last_calls_stats, :load_stats, :loss_making_calls, :old_calls_stats, :users_finances, :profit, :country_stats, :dids, :dids_usage, :faxes, :first_activity, :hangup_cause_codes_stats, :providers, :subscriptions_stats, :system_stats, :action_log, :google_maps]
   before_filter :find_user_from_id_or_session, :only => [:reseller_all_user_stats, :call_list, :index, :user_stats, :missed_calls, :call_list_to_csv, :call_list_from_link, :new_calls_list, :user_logins, :call_list_to_pdf]
   before_filter :find_provider, :only => [:providers_calls]
   before_filter :check_reseller_in_providers, :only => [:providers, :providers_stats, :country_stats]

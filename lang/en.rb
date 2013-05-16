@@ -4578,6 +4578,7 @@ Localization.define('en') do |l|
   l.store 'Server_IP_cannot_be_empty', 'Server IP cannot be empty'
   l.store 'Hostname_cannot_be_empty', 'Hostname cannot be empty'
   l.store 'Allow_API_globally', 'Allow API globally'
+  l.store 'Server_is_overloaded', 'Server is overloaded, please try later'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

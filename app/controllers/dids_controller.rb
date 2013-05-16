@@ -22,6 +22,7 @@ class DidsController < ApplicationController
   before_filter :find_provider, :only => [:create]
   before_filter :check_dids_creation, :only => [:new, :create, :confirm_did]
   before_filter :check_did_params, :only => [:update]
+  before_filter :load_ok?, :only => [:summary]
 
   def index
     redirect_to :action => :list and return false

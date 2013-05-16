@@ -5,6 +5,7 @@ class CallsController < ApplicationController
   before_filter :check_localization
   before_filter :authorize
   before_filter :find_call, :only => [:call_info]
+  before_filter :load_ok?, :only => [:aggregate, :summary]
 =begin rdoc
  Agregated call summary. Bu user/provider/destination.
 =end
