@@ -263,7 +263,7 @@ class ApiController < ApplicationController
 
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
 
-    check_user(params[:u], params[:p])
+    check_user_for_login(params[:u], params[:p])
 
     if @user
       @user.logged = 1
@@ -4339,6 +4339,14 @@ class ApiController < ApplicationController
       User.current = @user
     end
 
+    return @user
+  end
+
+  def check_user(login='', password='')
+    @user = User.where(:username => login.to_s, :password => Digest::SHA1.hexdigest(password.to_s)).first
+    if @user
+      User.current = @user
+    end
     return @user
   end
 
