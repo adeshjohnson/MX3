@@ -121,7 +121,7 @@ class TestController < ApplicationController
     MorLog.my_debug(path)
     # MorLog.my_debug(params[:path].join("/"))
     MorLog.my_debug(File.exist?("#{Rails.root}/config/routes.rb"))
-    filename = "#{Rails.root}/selenium/tests/#{path.to_s.gsub(/[^A-Za-z_\/]/, "")}.sql"
+    filename = "#{Rails.root}/selenium/tests/#{path.to_s.gsub(/[^A-Za-z0-9_\/]/, "")}.sql"
     MorLog.my_debug(filename)
     if File.exist?(filename)
       command = "mysql -u mor -pmor mor < #{filename}"
@@ -136,6 +136,30 @@ class TestController < ApplicationController
     renew_session(sys_admin)  if sys_admin
     render :text => rez
   end
+
+
+  # loads bundle file which has patch to sql files which are loaded one-by-one
+  # used for tests to prepare data before testing
+  # called by Selenium script through MOR GUI
+  def load_bundle_sql
+    path = (params[:path].to_s.empty? ? params[:id] : params[:path])
+    MorLog.my_debug(path)
+    # MorLog.my_debug(params[:path].join("/"))
+    MorLog.my_debug(File.exist?("#{Rails.root}/config/routes.rb"))
+    filename = "#{Rails.root}/selenium/bundles/#{path.to_s.gsub(/[^A-Za-z0-9_\/]/, "")}.bundle"
+    MorLog.my_debug(filename)
+    if File.exist?(filename)
+      command = "/home/mor/selenium/scripts/load_bundle.sh #{filename}"
+      MorLog.my_debug(command)
+      rez = `#{command}`
+      MorLog.my_debug("BUNDLE WAS LOADED: #{filename}")
+    else
+      MorLog.my_debug("Bundle file was not found: #{filename}")
+      rez = "Not Found"
+    end
+    render :text => rez
+  end
+
 
   def restart
     `mor -l`
