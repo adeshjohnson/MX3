@@ -43,10 +43,15 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
 	<td></td>
 </tr>
 <!--<tr> 	<td>click</td> 	<td>api_login_redirect_to_main</td> 	<td></td> </tr>-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Allow API globally:</td>
+	<td></td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>api_allow_registration</td>
@@ -100,6 +105,36 @@
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Allow API:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=allow_api</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_api</td>
 	<td></td>
 </tr>
 <tr>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Pazymetas: "Do not allow duplicated usernames" - turi neleisti issaugoti tu prov, kurie egzistuoja pas kita owneri arba papr. devaise bei sutampa Username+Password+IP. Jei sutampa pas to paties ownerio kita provaideri, kurti galima. -->
+<!--#padaromas reseleris rspro, ikeliami 4 provaideriai, iš kurių 2 priklauso adminui, kiti 2 rspro. Rspro turi Sipa, Iax2b, Admin turi Sipa, Sipb-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=provider_auth_unique/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>#bundle loaded</td>
+	<td></td>
+</tr>
+<!--admin:Sa - rspro:Sa - 0 - technologijos ir duomenys sutampa, kurti negalima-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>res_prov_sip</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>res_prov_password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>75.24.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>75.24.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was not updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Such username already used in Device or Provider</td>
+	<td></td>
+</tr>
+<!--admin:Sa - rpsor Sb - 1 - tos pacios technologijos, kurti galima-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>res_prov_sip</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>res_prov_password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>75.24.98.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>75.24.98.1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<!--admin Sa - rspro Ib - 1 - skirtingos technologijos, duomenys nesutampa, kurti galima-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>res_prov_iax2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>wrong_password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>23.45.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>23.45.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>4569</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<!-- admin Sa - rspro Ia - 1 - viskas sutampa, bet skirtingos technologijos, tad kurti galima-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>res_prov_iax2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>res_prov_password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>23.45.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>23.45.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>4569</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<!--admin Sa - admin Sb - 1 - admin duomenys gali ir nesutapti-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>admin_prov_sip</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>incorrect_password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>33.44.55.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>33.44.55.3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<!--admin Sa - admin Sa - 1 pas admina gali sutapti viskas-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>admin_prov_sip2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>admin_prov_password2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>33.44.55.77</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>33.44.55.77</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--rspro Sa - rspro Ib - 1 - skirtingos technologijos, skirtingi duomenys - turi leisti saugoti-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>res_prov_iax2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>different_password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>33.44.55.6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>33.44.55.6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<!--rspro Sa - rspro Ia - 1 - skirtingos technologijos ir viskas sutampa, turi leisti kurti-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3304</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>res_prov_iax2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>res_prov_password2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>23.45.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>23.45.98.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>4569</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
