@@ -34,7 +34,7 @@ class ApiController < ApplicationController
   def login
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
-    check_user(params[:u], params[:p])
+    check_user_for_login(params[:u], params[:p])
     login_ok = false
     if @user
       add_action(@user.id, "login", request.env["REMOTE_ADDR"].to_s)
@@ -4342,7 +4342,7 @@ class ApiController < ApplicationController
     return @user
   end
 
-  def check_user(login='', password='')
+  def check_user_for_login(login='', password='')
     @user = User.where(:username => login.to_s, :password => Digest::SHA1.hexdigest(password.to_s)).first
     if @user
       User.current = @user
