@@ -362,9 +362,141 @@
 	<td></td>
 </tr>
 <!--#hash 4 just period_start-->
+<!--su password-->
 <tr>
 	<td>open</td>
 	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_device</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pagename</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=show_status</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=total_calls</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=nice_billsec</td>
+	<td>30.0</td>
+</tr>
+<!--visi kiti be password-->
+<tr>
+	<td>open</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -425,7 +557,7 @@
 <!--#hash 5 in some period and user_was not found-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=121&amp;period_start=1204883298&amp;period_end=1331113561&amp;test=1&amp;hash=${hash5}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=121&amp;period_start=1204883298&amp;period_end=1331113561&amp;test=1&amp;hash=${hash5}</td>
 	<td></td>
 </tr>
 <tr>
@@ -447,18 +579,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Access Denied</td>
-	<td></td>
-</tr>
-<!--#hash 6 full api for 101-->
-<tr>
-	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -519,7 +640,7 @@
 <!--#hash 7 api for 101 find one day calls-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1&amp;hash=${hash7}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1&amp;hash=${hash7}</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,7 +696,7 @@
 <!--#hash 8 without user_id find one day calls-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;period_start=1320364800&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash8}</td>
+	<td>billing/api/user_calls?u=admin&amp;period_start=1320364800&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash8}</td>
 	<td></td>
 </tr>
 <tr>
@@ -626,7 +747,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
@@ -667,7 +788,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
 	<td></td>
 </tr>
 <tr>
@@ -713,7 +834,7 @@
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -759,7 +880,7 @@
 <!--#hash 11 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
 	<td></td>
 </tr>
 <tr>
@@ -795,7 +916,7 @@
 <!--#hash 12 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=busy&amp;test=1&amp;hash=${hash12}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=busy&amp;test=1&amp;hash=${hash12}</td>
 	<td></td>
 </tr>
 <tr>
@@ -831,7 +952,7 @@
 <!--#hash 13 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
 	<td></td>
 </tr>
 <tr>
@@ -872,7 +993,7 @@
 <!--#hash 14 full api for admin-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
 	<td></td>
 </tr>
 <!--5. Dėl kažkokios priežasties, api pasirinkus andmin_id, parodo per daug skambučiu. Call fix uždėtas, tai neturėtų taip būti.-->
@@ -914,7 +1035,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -925,7 +1046,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
@@ -976,7 +1097,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1032,7 +1153,7 @@
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1068,7 +1189,7 @@
 <!--#hash 11 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1114,7 +1235,7 @@
 <!--#hash 13 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1125,7 +1246,7 @@
 <!--#hash 14 full api for admin-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1136,7 +1257,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=user_admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1197,7 +1318,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td>billing/api/user_calls?u=user_admin&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1248,7 +1369,7 @@
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td>billing/api/user_calls?u=user_admin&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1274,7 +1395,7 @@
 <!--#hash 13 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td>billing/api/user_calls?u=user_admin&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1300,7 +1421,7 @@
 <!--#hash 14 full api for admin-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td>billing/api/user_calls?u=user_admin&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1336,7 +1457,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1377,7 +1498,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1398,7 +1519,7 @@
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1439,7 +1560,7 @@
 <!--#hash 11 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash11}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1485,7 +1606,7 @@
 <!--#hash 13 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1506,7 +1627,7 @@
 <!--#hash 14 full api for admin-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1527,7 +1648,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=accountant&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1553,7 +1674,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
+	<td>billing/api/user_calls?u=accountant&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1574,7 +1695,7 @@
 <!--#hash 10 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
+	<td>billing/api/user_calls?u=accountant&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=324a&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1595,7 +1716,7 @@
 <!--#hash 13 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
+	<td>billing/api/user_calls?u=accountant&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;test=1&amp;hash=${hash13}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1641,7 +1762,7 @@
 <!--#hash 14 full api for admin-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
+	<td>billing/api/user_calls?u=accountant&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;test=1&amp;hash=${hash14}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1749,7 +1870,7 @@
 <!--#hash 15 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=7&amp;s_provider=11&amp;s_did=0&amp;test=1&amp;hash=${hash15}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=5&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=7&amp;s_provider=11&amp;s_did=0&amp;test=1&amp;hash=${hash15}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1820,7 +1941,7 @@
 <!--#hash 16 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash16}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;test=1&amp;hash=${hash16}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1866,7 +1987,7 @@
 <!--#hash 17 api for accountant-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1&amp;hash=${hash17}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1&amp;hash=${hash17}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1918,7 +2039,7 @@
 <!--4. Kažkodėl nuo mor10 vykdant paiešką pagal destination(prefix) netsižvelgia į tai kas nustayta-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;s_destination=3706&amp;test=1&amp;hash=${hash18}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=0&amp;period_start=1204883298&amp;period_end=1331113561&amp;direction=incoming&amp;s_call_type=all&amp;s_destination=3706&amp;test=1&amp;hash=${hash18}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2004,7 +2125,7 @@
 <!--#hash 19 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;order_by=time&amp;order_desc=1&amp;test=1&amp;hash=${hash19}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;order_by=time&amp;order_desc=1&amp;test=1&amp;hash=${hash19}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2181,7 +2302,7 @@
 <!--#hash 20 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;test=1&amp;hash=${hash20}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;test=1&amp;hash=${hash20}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2192,7 +2313,7 @@
 <!--#hash 21 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;s_provider=12&amp;test=1&amp;hash=${hash21}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;s_provider=12&amp;test=1&amp;hash=${hash21}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2253,7 +2374,7 @@
 <!--#hash 22 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1&amp;hash=${hash22}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1&amp;hash=${hash22}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2264,7 +2385,7 @@
 <!--#hash 23 api for user_reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;only_did=1&amp;test=1&amp;hash=${hash23}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=5&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_device=7&amp;only_did=1&amp;test=1&amp;hash=${hash23}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2275,7 +2396,7 @@
 <!--#hash 22 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1&amp;hash=${hash22}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_provider=1&amp;only_did=1&amp;test=1&amp;hash=${hash22}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2357,7 +2478,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2418,7 +2539,7 @@
 <!--#hash 7 api for 101 find one day calls-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1321228800&amp;period_end=1321315199&amp;s_call_type=all&amp;s_device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2474,7 +2595,7 @@
 <!--#hash 8 without user_id find one day calls-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;period_start=1320364800&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
+	<td>billing/api/user_calls?u=admin&amp;period_start=1320364800&amp;period_end=1322697599&amp;s_call_type=all&amp;s_device=4&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2525,7 +2646,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=3&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2605,7 +2726,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=2&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=2&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2616,7 +2737,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2627,7 +2748,7 @@
 <!--#hash 9 api for reseller-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2638,7 +2759,7 @@
 <!--#hash 6 full api for 101-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_admin&amp;p=user_admin1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=user_admin&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2648,7 +2769,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=accountant&amp;p=accountant1&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
+	<td>billing/api/user_calls?u=accountant&amp;s_user=2&amp;period_start=1204883298&amp;period_end=1331113561&amp;s_call_type=all&amp;s_device=4&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2658,7 +2779,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=admin&amp;p=admin1&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1&amp;hash=${hash17}</td>
+	<td>billing/api/user_calls?u=admin&amp;s_user=4&amp;period_start=1320191999&amp;period_end=1322697599&amp;s_call_type=answered&amp;s_hgc=15&amp;test=1&amp;hash=${hash17}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2713,7 +2834,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=reseller&amp;p=reseller1&amp;s_user=5&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
+	<td>billing/api/user_calls?u=reseller&amp;s_user=5&amp;period_start=1204883298&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -2723,7 +2844,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_calls?u=user_reseller&amp;p=user_reseller1&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
+	<td>billing/api/user_calls?u=user_reseller&amp;s_user=3&amp;period_start=1020191999&amp;period_end=1322697599&amp;s_call_type=all&amp;test=1&amp;hash=${hash92}</td>
 	<td></td>
 </tr>
 <tr>
