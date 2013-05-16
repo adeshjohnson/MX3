@@ -362,8 +362,8 @@ class ProvidersController < ApplicationController
     @provider.set_old
     
     # saving old values for registration_drop 
-    old_register = @provider.register.to_i 
-    old_username = @provider.device.username.to_s 
+    old_register = @provider.register.to_i
+    old_username = @provider.device ? @provider.device.username.to_s : ""
     old_server_ip = @provider.server_ip.to_s     
 
     # if higher than zero -> do not update provider
