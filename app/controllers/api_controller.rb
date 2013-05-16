@@ -1459,6 +1459,10 @@ class ApiController < ApplicationController
 =end
 
   def user_calls
+    redirect_to action: 'user_calls_get', params: params
+  end
+
+  def user_calls_get
 
     allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
@@ -4328,15 +4332,13 @@ class ApiController < ApplicationController
 =begin
  Obsolete method. Used in former authentication.
 =end
-  def check_user(login='', password='')
-    if params[:action] == 'send_email'
-      @user = User.where(:username => login.to_s).first
-    else
-      @user = User.where(:username => login.to_s, :password => Digest::SHA1.hexdigest(password.to_s)).first
-    end
+  def check_user(login='', *args)
+    @user = User.where(:username => login.to_s).first
+
     if @user
       User.current = @user
     end
+
     return @user
   end
 
