@@ -1813,6 +1813,8 @@ class TariffsController < ApplicationController
               #ard.destroy
             else
               from_duration_db = ard.from.to_i + ard.duration.to_i
+              rrate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i
+              rrate.save
               if ard.duration.to_i != -1 and from_duration_db < round.to_i
                 flash[:notice] = _('Rate_not_updated_round_by_is_too_big') + ': '+ "#{dg.name}"
                 redirect_to :action => 'user_rates_list', :id => @tariff.id, :page => params[:page], :st => params[:st], :s_prefix => params[:s_prefix] and return false
