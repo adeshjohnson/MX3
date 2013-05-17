@@ -1055,7 +1055,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=25</td>
+	<td>label=24</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1150,7 +1150,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=14</td>
+	<td>label=13</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1335,7 +1335,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=14</td>
+	<td>label=13</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1490,7 +1490,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=16</td>
+	<td>label=15</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1631,7 +1631,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=14</td>
+	<td>label=13</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1822,7 +1822,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=10</td>
+	<td>label=9</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1963,7 +1963,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=14</td>
+	<td>label=13</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2159,7 +2159,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_day</td>
-	<td>label=10</td>
+	<td>label=9</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2449,12 +2449,152 @@
 <tr>
 	<td>assertText</td>
 	<td>id=price</td>
-	<td>10.0000</td>
+	<td>10.3226</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=full_price</td>
-	<td>10.0000</td>
+	<td>10.3226</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=26</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=26</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/12?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_12</td>
+	<td>10.3226</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_12</td>
+	<td>10.3226</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=November</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=27</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=25</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoice_details/13?currency=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_price_13</td>
+	<td>9.3978</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_total_price_13</td>
+	<td>9.3978</td>
 </tr>
 </tbody></table>
 </body>
