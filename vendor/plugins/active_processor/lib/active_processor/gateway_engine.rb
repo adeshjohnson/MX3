@@ -147,6 +147,10 @@ module ActiveProcessor
         @params, errors = params, 0 # these may be needed in callback
         run("on", "before", scope.to_s, "update")
 
+        if params.blank?
+          return false
+        end
+
         @params.each { |engine, gateways|
           gateways.each { |gateway, settings|
             ActiveProcessor.log("updating gateway: #{gateway} #{scope}")
