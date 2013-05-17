@@ -38,9 +38,9 @@ INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `
 /*created by admin, provider_common_use_1*/
 (4, 'commonusepro3', 'SIP', '', 'commonusepro3', 'please_change', '0.0.0.0', '5060', 1, 1, 1, 0, 0, '', '', 10, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 0, 1, 0.000000000000000),
 /*created by reseller*/
-(5, 'pro1', 'SIP', '', 'pro1', 'please_change', '0.0.0.0', '5060', 1, 1, 7, 0, 0, '', '', 11, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000),
+(5, 'pro1', 'SIP', '', 'pro1', 'pro1password', '5.96.9.7', '5060', 1, 1, 7, 0, 0, '', '', 11, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000),
 /*created by reseller*/
-(6, 'pro2', 'SIP', '', 'pro2', 'please_change', '0.0.0.0', '5060', 1, 1, 7, 0, 0, '', '', 12, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000),
+(6, 'pro2', 'SIP', '', 'pro1', 'pro1password', '5.96.9.7', '5060', 1, 1, 7, 0, 0, '', '', 12, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000),
 /*created by reseller*/
 (7, 'pro3', 'SIP', '', 'pro3', 'please_change', '0.0.0.0', '5060', 1, 1, 7, 0, 0, '', '', 13, 0, 60, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 3, 0, 0.000000000000000),
 /*created by admin*/
@@ -52,9 +52,9 @@ INSERT INTO `providers` (`id`, `name`, `tech`, `channel`, `login`, `password`, `
 /*created by admin*/
 (11, 'proforrspro1', 'SIP', '', 'proforrspro1', 'please_change', '0.0.0.0', '5060', 1, 1, 8, 0, 0, '', '', 17, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
 /*created by admin*/
-(12, 'proforrspro2', 'SIP', '', 'proforrspro2', 'please_change', '0.0.0.0', '5060', 1, 1, 8, 0, 0, '', '', 18, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
+(12, 'proforrspro2', 'SIP', '', 'proforrspro2', 'proforrspro2password', '98.64.7.2', '5060', 1, 1, 8, 0, 0, '', '', 18, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
 /*created by admin*/
-(13, 'proforrspro3', 'SIP', '', 'proforrspro3', 'please_change', '0.0.0.0', '5060', 1, 1, 8, 0, 0, '', '', 19, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
+(13, 'proforrspro3', 'SIP', '', 'proforrspro2', 'proforrspro2password', '98.64.7.2', '5060', 1, 1, 8, 0, 0, '', '', 19, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
 /*created by admin*/
 (14, 'proforrspro4', 'SIP', '', 'proforrspro4', 'please_change', '0.0.0.0', '5060', 1, 1, 8, 0, 0, '', '', 20, 0, 60, 0, 0, 0, 0, '', 0, '', 0, 0, 6, 0, 0.000000000000000),
 /*created by admin*/
