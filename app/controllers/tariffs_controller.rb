@@ -1079,7 +1079,7 @@ class TariffsController < ApplicationController
                   end
                   if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_destination_groups].to_i == 1
                     session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_groups] = @tariff.update_destination_groups(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
-                    flash[:status] += "<br />"+ _('Destination_groups_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_groups]}"
+                    #flash[:status] += "<br />"+ _('Destination_groups_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_groups]}"
                   end
                 rescue Exception => e
                   my_debug_time e.to_yaml

@@ -654,13 +654,12 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
   def update_destination_groups(name, options, options2)
     CsvImportDb.log_swap('update_destination_groups_start')
     MorLog.my_debug("CSV update_destination_groups #{name}", 1)
-    count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i
+    count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i
 
     sql ="UPDATE destinations 
          JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
-         JOIN destinationgroups ON desttype = subcode AND flag = LOWER(direction_code) 
-         SET destinationgroup_id = destinationgroups.id
-         WHERE ned_update IN (2, 3, 6, 7)"
+         JOIN destinationgroups ON destinationgroups.desttype = destinations.subcode AND flag = LOWER(direction_code) 
+         SET destinations.destinationgroup_id = destinationgroups.id"
 
     ActiveRecord::Base.connection.update(sql)
     CsvImportDb.log_swap('update_destination_groups_end')
