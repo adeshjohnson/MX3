@@ -4579,6 +4579,7 @@ Localization.define('en') do |l|
   l.store 'Hostname_cannot_be_empty', 'Hostname cannot be empty'
   l.store 'Allow_API_globally', 'Allow API globally'
   l.store 'Server_is_overloaded', 'Server is overloaded, please try later'
+  l.store 'Avoid_routing_problems', 'To avoid routing problems, all Providers with identical registration must be also assigned to the same User'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

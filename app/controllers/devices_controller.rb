@@ -2044,10 +2044,14 @@ class DevicesController < ApplicationController
   def assign_provider
     device = Device.includes(:provider).where(["devices.id = ? AND providers.user_id = ?", params[:provdevice], current_user.id]).first
     if device
-      device.description = device.provider.name if device.provider
+      @prov = device.provider
+      device.description = @prov.name if @prov
       device.user_id = params[:id]
       if device.save
         flash[:status] = _('Provider_assigned')
+        if Provider.joins(:device).where("providers.password = '#{@prov.password}' AND providers.login = '#{@prov.login}' AND providers.server_ip = '#{@prov.server_ip}' AND providers.port = '#{@prov.port}' AND providers.id != #{@prov.id} AND providers.user_id = #{current_user.id} AND devices.user_id != #{params[:id]}").count > 0
+          flash[:notice] = _('Avoid_routing_problems')
+        end
       else
         flash_errors_for(_('Device_not_updated'), device)
       end

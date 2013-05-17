@@ -1,5 +1,41 @@
 <div class="nb"><%= b_user + _('user') %>: <%= link_nice_user(@user) %></div>
 <br/>
+<table>
+  <tr style="height: 25px">
+    <td>
+      <% if !(session[:usertype] == "accountant" and session[:acc_device_create].to_i == 0 or session[:acc_device_create].to_i == 1) %>
+          <%= link_to b_add + _('Add_new_device'), :controller => 'devices', :action => "new", :user_id => @user.id, :return_to_controller => @return_controller, :return_to_action => @return_action %>
+      <% end %>
+    </td>
+    <td nowrap>
+      <% if @user.usertype == "user" %>
+          <% if @provdevices and not @provdevices.empty? and allow_manage_providers? %>
+              <%= link_to_function(b_add + _('Assign_Provider'), "Element.toggle('addprov_details')") %>
+          <% end %>
+          </td>
+          <td>
+            <%= form_tag :action => 'assign_provider', :id => @user.id do %>
+                <div id="addprov_details" <%= "style='display:none;'" %>>
+                  <% if @provdevices %>
+                      <select name="provdevice">
+                        <% for device in @provdevices %>
+                            <% provider = device.provider %>
+                            <% if provider %>
+                                <option value="<%= device.id %>"> <%= provider.name %> - <%= device.device_type %>
+                                  /<%= device.ipaddr %></option>
+                            <% end %>
+                        <% end %>
+                      </select>
+                  <% end %>
+                  <%= submit_tag _('Assign'), :disable_with => _('Processing..') %>
+                </div>
+            <% end %>
+      <% end %>
+      </td>
+      </tr>
+</table>
+<br />
+
 <%= page_select_header(@page, @total_pages) %>
 <table width="100%" class="maintable">
   <tr>
@@ -103,38 +139,3 @@
   <% } %>
 </table>
 <br/>
-
-<% if !(session[:usertype] == "accountant" and session[:acc_device_create].to_i == 0 or session[:acc_device_create].to_i == 1) %>
-    <%= link_to b_add + _('Add_new_device'), :controller => 'devices', :action => "new", :user_id => @user.id, :return_to_controller => @return_controller, :return_to_action => @return_action %>
-    <br/>
-    <br/>
-<% end %>
-<br/>
-<% if @user.usertype == "user" %>
-    <% if @provdevices and not @provdevices.empty? and allow_manage_providers? %>
-        <%= link_to_function(b_add + _('Assign_Provider'), "Element.toggle('addprov_details')") %>
-    <% end %>
-    <%= form_tag :action => 'assign_provider', :id => @user.id do %>
-        <div id="addprov_details" <%= "style='display:none;'" %>>
-          <br/>
-          <table width="100%" class="simple">
-            <tr>
-              <td>
-                <% if @provdevices %>
-                    <select name="provdevice">
-                      <% for device in @provdevices %>
-                          <% provider = device.provider %>
-                          <% if provider %>
-                              <option value="<%= device.id %>"> <%= provider.name %> - <%= device.device_type %>
-                                /<%= device.ipaddr %></option>
-                          <% end %>
-                      <% end %>
-                    </select>
-                <% end %>
-                <%= submit_tag _('Assign'), :disable_with => _('Processing..') %>
-              </td>
-            </tr>
-          </table>
-        </div>
-    <% end %>
-<% end %>
