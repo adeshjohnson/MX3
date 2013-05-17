@@ -651,15 +651,30 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     return count
   end
 
+  def update_destination_groups(name, options, options2)
+    CsvImportDb.log_swap('update_destination_groups_start')
+    MorLog.my_debug("CSV update_destination_groups #{name}", 1)
+    count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i
+
+    sql ="UPDATE destinations 
+         JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
+         JOIN destinationgroups ON desttype = subcode AND flag = LOWER(direction_code) 
+         SET destinationgroup_id = destinationgroups.id
+         WHERE ned_update IN (2, 3, 6, 7)"
+
+    ActiveRecord::Base.connection.update(sql)
+    CsvImportDb.log_swap('update_destination_groups_end')
+    return count
+  end
+
   def update_subcodes(name, options, options2)
     CsvImportDb.log_swap('update_subcodes_start')
     MorLog.my_debug("CSV update_subcodes #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i
-    
+
     sql ="UPDATE destinations 
          JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
-         JOIN destinationgroups ON desttype = replace(col_#{options[:imp_subcode]}, '\\r', '') AND flag = LOWER(direction_code)
-         SET subcode = replace(col_#{options[:imp_subcode]}, '\\r', ''), destinationgroup_id = destinationgroups.id
+         SET subcode = replace(col_#{options[:imp_subcode]}, '\\r', '')
          WHERE ned_update IN (2, 3, 6, 7)"
     ActiveRecord::Base.connection.update(sql)
     CsvImportDb.log_swap('update_subcodes_end')

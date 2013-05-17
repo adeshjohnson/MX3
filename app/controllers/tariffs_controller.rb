@@ -992,6 +992,7 @@ class TariffsController < ApplicationController
             @optins[:imp_time_till_type] = params[:time_till][:hour].to_s + ":" + params[:time_till][:minute].to_s + ":" + params[:time_till][:second].to_s if params[:time_till]
             @optins[:imp_update_dest_names] = params[:update_dest_names].to_i if admin?
             @optins[:imp_update_subcodes] = params[:update_subcodes].to_i if admin?
+            @optins[:imp_update_destination_groups] = params[:update_destination_groups].to_i if admin?
 
             if admin? and params[:update_dest_names].to_i == 1
               if params[:destination_id] and params[:destination_id].to_i >=0
@@ -1075,6 +1076,10 @@ class TariffsController < ApplicationController
                   if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_directions].to_i == 1
                     session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file] = @tariff.update_directions(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
                     flash[:status] += "<br />"+ _('Directions_based_on_country_code_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_directions_from_file]}"
+                  end
+                  if session["tariff_import_csv2_#{@tariff.id}".to_sym][:imp_update_destination_groups].to_i == 1
+                    session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_groups] = @tariff.update_destination_groups(session["tariff_name_csv_#{@tariff.id}".to_sym], session["tariff_import_csv2_#{@tariff.id}".to_sym], session["tariff_analize_csv2_#{@tariff.id}".to_sym])
+                    flash[:status] += "<br />"+ _('Destination_groups_updated') + ": #{session["tariff_analize_csv2_#{@tariff.id}".to_sym][:updated_destination_groups]}"
                   end
                 rescue Exception => e
                   my_debug_time e.to_yaml
