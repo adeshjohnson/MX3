@@ -498,7 +498,7 @@
 <tr>
 	<td>select</td>
 	<td>name=provdevice</td>
-	<td>pro1 - SIP /0.0.0.0</td>
+	<td>pro1 - SIP /5.96.9.7</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -759,6 +759,96 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>SIP/prov_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;User_delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Assign Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider assigned</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>To avoid routing problems, all Providers with identical registration must be also assigned to the same User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/show_devices/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Assign Provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=provdevice</td>
+	<td>label=commonusepro4 - SIP /65.8.78.45</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>To avoid routing problems, all Providers with identical registration must be also assigned to the same User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider assigned</td>
 	<td></td>
 </tr>
 </tbody></table>
