@@ -55,5 +55,5 @@
 <br/>
 <br/>
 <% if Confline.get_value("Hide_HELP_banner").to_i == 0 # checking if help links are disabled %>
-    <%= link_to  b_info + _('for_more_details_about_integrity_check_click_here'), @help_link ,:target => '_blank', :class => 'external_link', :style => 'text-decoration: underline; color: #0000ff;'  %>
+    <%= link_to  b_info + _('for_more_details_about_integrity_check_click_here'), @help_link ,:target => '_blank', :class => 'external_link' %>
 <% end %>
