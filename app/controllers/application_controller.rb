@@ -2819,9 +2819,10 @@ Variables: (Names marked with * are required)
   end
 
   def load_ok?
-    val = Confline.select("SQL_NO_CACHE value").where("name = 'load_ok'").first
-    if !val.blank? and val.value.to_i == 0
+    val = Confline.select("SQL_NO_CACHE value").where(name: 'load_ok').first.try(:value)
+    if val and val.to_i == 0
       flash[:notice] = _('Server_is_overloaded')
+      flash[:notice] += " <a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Server_is_overloaded' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>".html_safe
       redirect_to :controller => "callc", :action => "main" and return false
     end
   end
