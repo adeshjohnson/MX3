@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   require 'builder/xmlbase'
 
+
   if !Rails.env.development?
     rescue_from Exception do |exc|
       #log_exception_handler(exc) and return false
@@ -36,7 +37,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
 
   rescue_from ActiveRecord::RecordNotFound, :with => :action_missing
   rescue_from AbstractController::ActionNotFound, :with => :action_missing
