@@ -78,27 +78,41 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/callback?u=admin&amp;p=admin1&amp;device=&amp;src=&amp;dst=351915017343&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNALL ERROR</td>
+	<td>/billing/api/callback?u=admin&amp;device=&amp;src=&amp;dst=351915017343&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Bad device</td>
+	<td>Incorrect hash</td>
 	<td></td>
 </tr>
+<!--#hash1-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/callback?u=admin&amp;p=admin1&amp;device=5&amp;src=&amp;dst=351915017343&amp;test=1</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;device=5&amp;src=&amp;dst=351915017343&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNALL ERROR</td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--su slaptazodziu-->
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;p=admin1&amp;device=5&amp;src=&amp;dst=351915017343&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>No source</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=&amp;dst=351915017343&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -108,12 +122,29 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/callback?u=admin&amp;p=admin1&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;test=1</td>
+	<td>/billing/api/callback?u=adm&amp;device=5&amp;src=&amp;dst=351915017343&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNALL ERROR</td>
+	<td>assertTextPresent</td>
+	<td>Not authenticated</td>
+	<td></td>
+</tr>
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;test=1&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,14 +152,60 @@
 	<td>Ok</td>
 	<td></td>
 </tr>
+<!--be hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/callback?u=admin&amp;p=admin1&amp;device=&amp;src=306984327343&amp;dst=351915017343&amp;test=1</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNALL ERROR</td>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=&amp;src=306984327343&amp;dst=351915017343&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -138,12 +215,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/callback?u=admin&amp;p=admin1&amp;device=5&amp;src=306984327343&amp;dst=&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNALL ERROR</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
