@@ -2174,8 +2174,9 @@ class ApiController < ApplicationController
 
               logger.fatal "DESTINATIONS FOUND: " +value[:destinations].size.to_s
 
-              value[:destinations].each do |key, val|
-                destination = val.symbolize_keys!
+              value[:destinations].each { |_, dest| dest.each do |destination|
+                destination.symbolize_keys!
+
                 logger.fatal "----------DATA -------------------------------------"
                 logger.fatal "Direction name: '" + destination[:direction].to_s + "'"
                 logger.fatal "Destination name: '" + destination[:destination_group_name].to_s + "'"
@@ -2254,7 +2255,7 @@ class ApiController < ApplicationController
                   bad_destination_array << destination
                 end
 
-              end
+              end }
 
               bad_rates_array = bad_rates_array + bad_rates_time_array
 
