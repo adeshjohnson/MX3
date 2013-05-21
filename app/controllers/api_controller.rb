@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -183,14 +183,12 @@ class ApiController < ApplicationController
     ["true", "false"].include?(params[:file].to_s) ? opts[:file] = params[:file] : opts[:file] = "true"
 
     username = params[:u]
-    password = params[:p]
     from = params[:from]
     till = params[:till]
 
     username = "" if not username
-    password = "" if not password
-    from = 0 if not password
-    till = 0 if not password
+    from = 0 if not from
+    till = 0 if not till
 
     from_t = Time.at(from.to_i)
     till_t = Time.at(till.to_i)
@@ -198,7 +196,7 @@ class ApiController < ApplicationController
     from_nice = nice_date(from_t, 0)
     till_nice = nice_date(till_t, 0)
 
-    user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
+    user = User.where(:username => username).first
 
     if user
       User.current = user
