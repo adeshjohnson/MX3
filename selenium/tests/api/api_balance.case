@@ -33,22 +33,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/functions/settings</td>
+	<td>/billing/test/load_delta_sql/sql/update_balance</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
 	<td></td>
 </tr>
 <tr>
 	<td>check</td>
 	<td>devices_check_ballance</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_9']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,44 +57,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Invalid API secret key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=allow_api</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=allow_get_api</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=allow_api</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=allow_get_api</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=api_secret_key</td>
-	<td>qwe</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>devices_check_ballance</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -108,47 +73,104 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Invalid API secret key</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?username=user_admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?username=admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=allow_api</td>
-	<td>off</td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
 </tr>
 <tr>
-	<td>assertValue</td>
-	<td>id=allow_get_api</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=allow_api</td>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
-	<td>id=allow_get_api</td>
+	<td>open</td>
+	<td>/billing/api/balance?username=user_admin&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/balance?username=user_admin&amp;hash=${hash1}&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>26.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/balance?username=admin&amp;hash=${hash1}&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/balance?username=admin&amp;hash=${hash2}&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>60.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=api_secret_key</td>
-	<td>secret</td>
+	<td>login_username</td>
+	<td>admin</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_5']/span</td>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
-	<td>devices_check_ballance</td>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,19 +188,10 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
+<!--no hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>0.00</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/api/balance?username=admin666</td>
+	<td>/billing/api/balance?username=admin666&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,7 +201,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/callc/login</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,127 +246,12 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=admin</td>
+	<td>/billing/api/balance?username=admin&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Feature disabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>admin1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=allow_api</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=api_secret_key</td>
-	<td>sec</td>
-</tr>
-<tr>
-	<td>mouseOver</td>
-	<td>id=api_secret_key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>If API is disabled secret can be blank or at least 6 symbols, when enabled it has to be at least 6 symbols</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseOut</td>
-	<td>id=api_secret_key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Invalid API secret key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=allow_api</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=api_secret_key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Invalid API secret key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_9 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=allow_api</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=api_secret_key</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Settings saved</td>
 	<td></td>
 </tr>
 </tbody></table>
