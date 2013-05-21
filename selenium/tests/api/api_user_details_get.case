@@ -959,6 +959,17 @@
 	<td>css=taxation_country</td>
 	<td>Lithuania</td>
 </tr>
+<!--incorrect login-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_details_get?u=adm&amp;user_id=4&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
