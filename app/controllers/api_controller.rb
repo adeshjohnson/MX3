@@ -17,7 +17,8 @@ class ApiController < ApplicationController
 		:only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register,
 			  :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
 			  :wholesale_tariff, :device_create, :device_destroy, :device_list, :did_create, :did_assign_device, :did_unassign_device, :ma_activate,
-			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update, :credit_note_create, :credit_note_delete]
+			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update, :credit_note_create, :credit_note_delete,
+			  :create_payment]
 
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
@@ -3234,34 +3235,32 @@ class ApiController < ApplicationController
 
 
   def create_payment
-    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    if allow == true
       if Confline.get_value("API_Allow_payments_ower_API").to_i == 1
         if !@current_user.is_user?
           coi = @current_user.usertype == 'accountant' ? 0 : @current_user.id
-          user = User.where(:id => values[:user_id], :owner_id => coi).first if values[:user_id]
+          user = User.where(:id => @values[:user_id], :owner_id => coi).first if @values[:user_id]
         end
 
         if user
-          currency = Currency.get_by_name(values[:p_currency])
+          currency = Currency.get_by_name(@values[:p_currency])
           if currency
 
-            pttype = "from_api : #{values[:paymenttype]}"
-            if values[:tax_in_amount].to_i == 1
-              gross = values[:amount].to_d
+            pttype = "from_api : #{@values[:paymenttype]}"
+            if @values[:tax_in_amount].to_i == 1
+              gross = @values[:amount].to_d
               amount = user.get_tax.count_amount_without_tax(gross).to_d
             else
-              amount = values[:amount].to_d
+              amount = @values[:amount].to_d
               gross = user.get_tax.apply_tax(amount).to_d
             end
             tax = gross - amount
             comfirm = Confline.get_value("API_payment_confirmation").to_i
-            paym = Payment.create_for_user(user, {:pending_reason => comfirm == 1 ? 'Waiting for confirmation' : "completed", :paymenttype => pttype, :currency => currency.name, :gross => gross.to_d, :tax => tax, :amount => amount.to_d, :transaction_id => values[:transaction], :payer_email => values[:payer_email], :shipped_at => values[:shipped_at], :fee => values[:fee]})
+            paym = Payment.create_for_user(user, {:pending_reason => comfirm == 1 ? 'Waiting for confirmation' : "completed", :paymenttype => pttype, :currency => currency.name, :gross => gross.to_d, :tax => tax, :amount => amount.to_d, :transaction_id => @values[:transaction], :payer_email => @values[:payer_email], :shipped_at => @values[:shipped_at], :fee => @values[:fee]})
             paym.completed = comfirm == 1 ? 0 : 1
-            paym.description = values[:description].to_s
+            paym.description = @values[:description].to_s
             if paym.save
               if comfirm.to_i == 0
                 exchange_rate = Currency.count_exchange_rate(Currency.get_default.name, currency.name)
@@ -3312,10 +3311,6 @@ class ApiController < ApplicationController
       else
         doc.error("Payments not allow from api")
       end
-    else
-      doc.error("Incorrect hash")
-    end
-
              }
     send_xml_data(out_string, params[:test].to_i)
   end
