@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -588,11 +588,9 @@ class ApiController < ApplicationController
 =end
 
   def user_details
-    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 
-    if allow == true
       #a bit nasty, huh? there are some issues after disabling session.
       #if current user is set then currency would be converted to logged 
       #in user's currency, but tests say it should be default currency and
@@ -600,9 +598,8 @@ class ApiController < ApplicationController
       User.current = nil
 
       username = params[:u].to_s
-      password = params[:p].to_s
 
-      @user_logged = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
+      @user_logged = User.where(:username => username).first
       if @user_logged
         if @user_logged.usertype == 'admin'
           @user = User.where(:id => values[:user_id].to_i).first if values [:user_id]
@@ -617,7 +614,7 @@ class ApiController < ApplicationController
           end
 
         else
-          @user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
+          @user = User.where(:username => username).first
         end
 
         if @user
@@ -673,9 +670,6 @@ class ApiController < ApplicationController
         doc.error("User was not found")
         MorApi.create_error_action(params, request, 'API : User not found by login and password')
       end
-    else
-      doc.error("Incorrect hash")
-    end
     send_xml_data(out_string, params[:test].to_i)
   end
 
