@@ -77,11 +77,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=api_disable_hash_checking</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -213,18 +208,86 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/rate?username=reseller&amp;prefix=9320</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=9320&amp;test=1</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?username=reseller&amp;prefix=9320</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
 <!--useris turi custom rate sitam prefixui, todel rodo kaina is custom rates-->
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=9320&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>0.987#Afghanistan Kabul#9320</td>
 	<td></td>
 </tr>
+<!--be hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/rate?username=reseller&amp;prefix=542214</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=542214&amp;test=1</td>
 	<td></td>
 </tr>
 <!--useris neturi custom rate sitam prefixui, todel rodo kaina is tarifu puslapio. -->
@@ -235,7 +298,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/rate?username=user_admin&amp;prefix=542214</td>
+	<td>/billing/api/rate?username=user_admin&amp;prefix=542214&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -295,7 +358,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/rate?username=reseller&amp;prefix=93</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=93&amp;test=1</td>
 	<td></td>
 </tr>
 <!--useris turi custom rate sitam prefixui, todel rodo kaina is custom rates-->
@@ -306,7 +369,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/rate?username=reseller&amp;prefix=54</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=54&amp;test=1</td>
 	<td></td>
 </tr>
 <!--useris neturi custom rate sitam prefixui, todel rodo kaina is tarifu puslapio. -->
