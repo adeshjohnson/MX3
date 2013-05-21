@@ -602,15 +602,15 @@ class ApiController < ApplicationController
       @user_logged = User.where(:username => username).first
       if @user_logged
         if @user_logged.usertype == 'admin'
-          @user = User.where(:id => values[:user_id].to_i).first if values [:user_id]
+          @user = User.where(:id => @values[:user_id].to_i).first if @values[:user_id]
         elsif @user_logged.usertype == 'reseller'
-          if values [:user_id]
-            if @user_logged.id.to_i == values[:user_id].to_i
+          if @values[:user_id]
+            if @user_logged.id.to_i == @values[:user_id].to_i
               owner = 0
             else
               owner = @user_logged.id
             end
-            @user = User.where(:id => values[:user_id].to_i, :owner_id => owner.to_i).first
+            @user = User.where(:id => @values[:user_id].to_i, :owner_id => owner.to_i).first
           end
 
         else
@@ -1942,7 +1942,7 @@ class ApiController < ApplicationController
     doc.page {
       check_user(params[:u])
       if @user
-        if @user.usertype == 'user' or (@user.usertype == 'accountant' and (values[:user_id].to_i == 0 or values[:user_id].to_i == @user.id))
+        if @user.usertype == 'user' or (@user.usertype == 'accountant' and (@values[:user_id].to_i == 0 or @values[:user_id].to_i == @user.id))
           doc.error(_('Dont_be_so_smart'))
         else
           if @user.usertype == 'accountant'
@@ -1951,10 +1951,10 @@ class ApiController < ApplicationController
             owner_id = @user.id
           end
           if @user.usertype == 'reseller'
-            user_u = User.where(:id => values[:user_id], :owner_id => owner_id).first if values[:user_id]
-            user_u = @user if values[:user_id] == owner_id
+            user_u = User.where(:id => @values[:user_id], :owner_id => owner_id).first if @values[:user_id]
+            user_u = @user if @values[:user_id] == owner_id
           else
-            user_u = User.where(:id => values[:user_id], :owner_id => owner_id).first if values[:user_id]
+            user_u = User.where(:id => @values[:user_id], :owner_id => owner_id).first if @values[:user_id]
           end
           if user_u
 
