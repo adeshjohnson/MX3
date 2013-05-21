@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -83,14 +83,12 @@ class ApiController < ApplicationController
   #logout user from the system
   def logout
 
-    username = params[:u]
-    password = params[:p]
-
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
 
-    if username.length > 0 and password.length > 0 and user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
+    username = params[:u]
+
+    if username.length > 0 and user = User.where(:username => username).first
 
       add_action(@current_user.id, "logout", "")
 
@@ -107,7 +105,6 @@ class ApiController < ApplicationController
       }
     end
     send_xml_data(out_string, params[:test].to_i)
-
   end
 
   #Initiates callback
