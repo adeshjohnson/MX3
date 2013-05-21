@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -112,11 +112,10 @@ class ApiController < ApplicationController
 
     if callback_active?
       username = params[:u].to_s
-      password = params[:p].to_s
 
-      user = User.where(:username => username, :password => Digest::SHA1.hexdigest(password)).first
+      user = User.where(:username => username).first
 
-      if username.length > 0 and password.length > 0 and user
+      if username.length > 0 and user
         device = Device.where(:id => params[:device]).first
         if params[:device] and device and device.user_id == user.id
           if params[:src] and params[:src].length > 0
