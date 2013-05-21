@@ -1679,6 +1679,9 @@ class ApiController < ApplicationController
   end
 
   def balance
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
       user = User.where(:username => params[:username]).first
       if user
@@ -1691,13 +1694,14 @@ class ApiController < ApplicationController
         else # in case invalid currency value was supplied, return currency in system's currency
           user_balance = user.balance
         end
-        render :text => nice_number(user_balance).to_s
+        doc.balance nice_number(user_balance).to_s
       else
-        render :text => _("User_Not_Found")
+        doc.error _("User_Not_Found")
       end
     else
-      render :text => _("Feature_Disabled")
-    end
+      doc.error _("Feature_Disabled")
+    end }
+    send_xml_data(out_string, params[:test].to_i)
   end
 
   def rate
