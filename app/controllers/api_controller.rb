@@ -109,6 +109,8 @@ class ApiController < ApplicationController
 
   #Initiates callback
   def callback
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "yes"
 
     if callback_active?
       username = params[:u].to_s
@@ -145,23 +147,18 @@ class ApiController < ApplicationController
             else
               st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
             end
-            doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-            doc.Status(st.to_i == 0 ? "Ok" : _('Cannot_connect_to_asterisk_server'))
+            doc.status(st.to_i == 0 ? "Ok" : _('Cannot_connect_to_asterisk_server'))
           else
-            doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-            doc.Status("No source")
+            doc.status("No source")
           end
         else
-          doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-          doc.Status("Bad device")
+          doc.status("Bad device")
         end
       else
-        doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-        doc.Status("Not authenticated")
+        doc.status("Not authenticated")
       end
     else
-      doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
-      doc.Status(_('Dont_be_so_smart'))
+      doc.status(_('Dont_be_so_smart'))
     end
     send_xml_data(out_string, params[:test].to_i)
 
