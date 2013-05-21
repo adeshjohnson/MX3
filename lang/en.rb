@@ -4218,7 +4218,7 @@ Localization.define('en') do |l|
   l.store 'ERP_settings_are_invalid', 'ERP settings are invalid'
   l.store 'Device_voicemail_box_not_found', 'Device voicemail box was not found'
   l.store 'Cannot_delete_did', 'Cannot delete did'
-  l.store 'Cannot_delete_did_associated_with_calls', 'Cannot delete did associated with calls'
+  l.store 'Cannot_delete_did_associated_with_calls', 'Cannot delete DID associated with calls'
   l.store 'When_IP_Authentication_checked_IP_and_port_must_be_unique', 'When IP Authentication checked IP and port must be unique'
   l.store 'This_IP_and_port_is_not_available', 'This IP and port is not available.'
   l.store 'API_allow_Payments', 'API allow Payments'
