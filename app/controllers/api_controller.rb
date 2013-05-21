@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate, :get_tariff, :import_tariff_retail, :wholesale_tariff, :device_create, :device_destroy]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate, :get_tariff, :import_tariff_retail, :wholesale_tariff, :device_create, :device_destroy, :device_list]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -4110,12 +4110,10 @@ class ApiController < ApplicationController
   end
 
   def device_list
-    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    if allow
-      check_user(params[:u], params[:p])
+      check_user(params[:u])
       if @user
         user_id = params[:user_id].to_s.strip
         owner_id = (@user.usertype == "accountant" ? 0 : @user.id)
@@ -4146,9 +4144,6 @@ class ApiController < ApplicationController
       else
         doc.error("Bad login")
       end
-    else
-      doc.error("Incorrect hash")
-    end
     }
     send_xml_data(out_string, params[:test].to_i)
   end
