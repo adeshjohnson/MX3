@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices, :balance, :simple_balance]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -1889,18 +1889,16 @@ class ApiController < ApplicationController
 =end
 
   def user_balance_change
-    allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    if allow == true
-      check_user(params[:u], params[:p])
+      check_user(params[:u])
       if @user
-        user_b = User.where(:id => values[:user_id], :owner_id => @user.id).first if values[:user_id]
+        user_b = User.where(:id => @values[:user_id], :owner_id => @user.id).first if @values[:user_id]
         if user_b
           old_balance = user_b.balance.to_d
-          if values[:balance]
-            user_b.balance = user_b.balance + values[:balance].to_d
+          if @values[:balance]
+            user_b.balance = user_b.balance + @values[:balance].to_d
             if user_b.save
               Action.add_action_hash(@user, {:target_id => user_b.id, :target_type => 'User', :action => 'User balance changed from API', :data => old_balance, :data2 => user_b.balance, :data3 => request.env["REMOTE_ADDR"].to_s})
               doc.page {
@@ -1926,9 +1924,6 @@ class ApiController < ApplicationController
       else
         doc.error("Bad login")
       end
-    else
-      doc.error("Incorrect hash")
-    end
            }
     send_xml_data(out_string, params[:test].to_i)
   end
