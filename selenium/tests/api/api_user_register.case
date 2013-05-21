@@ -148,14 +148,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//error</td>
-	<td>Access Denied</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -163,8 +158,63 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -224,12 +274,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -239,12 +284,152 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;test=1</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--# hash 1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--# hash 2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--# hash 3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--# hash 4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<!--# hash 5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<!--# hash 6-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<!--# hash 7-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
+</tr>
+<!--# hash 8-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
+</tr>
+<!--# hash 9-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=cccccccc&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
+</tr>
+<!--# hash 10-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?id=hfttv7bcqt&amp;username=${@print(md5(acunetix)&amp;password=11111111&amp;password2=11111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=femail@email.com&amp;device_type=SIP&amp;mob_phone=867756473&amp;phone=856700439&amp;fax=8548938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -254,12 +439,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;test=1&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
 <tr>
@@ -269,12 +449,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;test=1&amp;hash=${hash3}</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,12 +459,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;test=1&amp;hash=${hash5}</td>
 	<td></td>
 </tr>
 <tr>
@@ -299,12 +469,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -314,38 +479,28 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;test=1</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;test=1&amp;hash=${hash6}</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//error</td>
+	<td>assertTextPresent</td>
 	<td>Please enter correct email</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;test=1</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;test=1&amp;hash=${hash7}</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//error</td>
+	<td>assertTextPresent</td>
 	<td>Enter device type</td>
+	<td></td>
 </tr>
 <!--<tr> 	<td>open</td> 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=111111&amp;password2=111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;device_type=SIP&amp;test=1</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Tariff was not found cannot create</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1&amp;hash=${hash8}</td>
 	<td></td>
 </tr>
 <tr>
@@ -376,7 +531,7 @@
 <!--user with the same email-->
 <tr>
 	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=cccccccc&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=cccccccc&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;amp;country_id=2&amp;email=aisteaisteb@gmail.com&amp;device_type=SIP&amp;test=1&amp;hash=${hash9}</td>
 	<td></td>
 </tr>
 <tr>
@@ -441,7 +596,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=${@print(md5(acunetix)&amp;password=11111111&amp;password2=11111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=femail@email.com&amp;device_type=SIP&amp;mob_phone=867756473&amp;phone=856700439&amp;fax=8548938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=${@print(md5(acunetix)&amp;password=11111111&amp;password2=11111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=femail@email.com&amp;device_type=SIP&amp;mob_phone=867756473&amp;phone=856700439&amp;fax=8548938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1&amp;hash=${hash10}</td>
 	<td></td>
 </tr>
 <tr>
@@ -459,6 +614,47 @@
 	<td>css=device_id</td>
 	<td>9</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--API commands without hash-->
 <tr>
 	<td>open</td>
 	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=^@*!&amp;password=11111111&amp;password2=11111111&amp;first_name=basasas&amp;last_name=absasasa&amp;country_id=10&amp;email=femail@email.com&amp;device_type=SIP&amp;mob_phone=867756473&amp;phone=856700439&amp;fax=8548938475&amp;client_id=23454332&amp;vat_number=234323&amp;state=lisbona&amp;county=america&amp;city=mlt&amp;postcode=345434&amp;address=mechanizatoriai&amp;test=1</td>
@@ -1508,147 +1704,6 @@
 	<td>assertText</td>
 	<td>id=balance</td>
 	<td>20.0000 ALL</td>
-</tr>
-<!--API commands without hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>admin1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=api_disable_hash_checking</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222222&amp;password2=22222222&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Please enter first name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222222&amp;password2=22222222&amp;first_name=asasas&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Please enter last name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222222&amp;password2=22222222&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Please select country</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222222&amp;password2=22222222&amp;device_type=SIP&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//error</td>
-	<td>Please enter correct email</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222222&amp;password2=22222222&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=email@email.com&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//error</td>
-	<td>Enter device type</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=bbbb&amp;password=22222222&amp;password2=22222222&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=test@gmail.com&amp;device_type=SIP&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//success</td>
-	<td>Registration successful</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=server_ip</td>
-	<td>111.222.333.444</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=user_id</td>
-	<td>11</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=device_id</td>
-	<td>13</td>
 </tr>
 </tbody></table>
 </body>
