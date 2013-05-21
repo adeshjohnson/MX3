@@ -1772,6 +1772,9 @@ class ApiController < ApplicationController
   end
 
   def rate
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+    doc.page {
     if Confline.get_value("Devices_Check_Rate").to_i == 1
       prefix = split_number(params[:prefix])
       if prefix.size > 0
@@ -1784,11 +1787,11 @@ class ApiController < ApplicationController
             customrate = Customrate.includes(:acustratedetails).where("customrates.destinationgroup_id = #{dg.id} AND customrates.user_id = #{user.id}").first
             if customrate and customrate.acustratedetails.size > 0
               text = "#{customrate.acustratedetails[0].price}\##{destination.name}\##{destination.prefix}"
-              render :text => text.to_s
+              doc.rate text.to_s
             elsif rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
               text = "#{rate.aratedetails[0].price}\##{destination.name}\##{destination.prefix}" if rate.aratedetails.size > 0
               text = "#{rate.ratedetails[0].rate}\##{destination.name}\##{destination.prefix}" if rate.ratedetails.size > 0
-              render :text => text.to_s
+              doc.rate text.to_s
             else
               tariff = user.tariff
               err = ["MorApi.Rate error: rate not found"]
@@ -1798,24 +1801,25 @@ class ApiController < ApplicationController
               err << "  >> RateDetails: #{rate.ratedetails.size}" if rate and rate.ratedetails
               err << "  >> aRateDetails: #{rate.aratedetails.size}" if rate and rate.aratedetails
               MorLog.my_debug(err.join("\n"))
-              render :text => _("Rate_was_not_found") # Rate not found
+              doc.error _("Rate_was_not_found") # Rate not found
             end
           else
             MorLog.my_debug("MorApi.Rate error: destination/prefix was not found")
-            render :text => _("Prefix_not_found") # Destination/prefix not found
+            doc.error _("Prefix_not_found") # Destination/prefix not found
           end
         else
           MorLog.my_debug("MorApi.Rate error: user was not found")
-          render :text => _("User_not_found") # User not found
+          doc.error _("User_not_found") # User not found
         end
       else
         MorLog.my_debug("MorApi.Rate error: prefix is blank")
-        render :text => _("Empty_prefix") # empty prefix
+        doc.error _("Empty_prefix") # empty prefix
       end
     else
       MorLog.my_debug("MorApi.Rate error: Feature is disabled")
-      render :text => _("Feature_Disabled")
-    end
+      doc.error _("Feature_Disabled")
+    end }
+    send_xml_data(out_string, params[:test].to_i)
   end
 
   def user_register
