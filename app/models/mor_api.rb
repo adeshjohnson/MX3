@@ -61,11 +61,7 @@ class MorApi
 
   def MorApi.check_params_with_all_keys(params, request)
     #hack find user from params u and p
-    if params[:action] == 'send_email'
       user = User.find(:first, :conditions => ["username = ?", params[:u].to_s])
-    else
-      user = User.find(:first, :conditions => ["username = ? and password = ?", params[:u].to_s, Digest::SHA1.hexdigest(params[:p].to_s)])
-    end
 
       MorLog.my_debug params.to_yaml
       ret = {}
