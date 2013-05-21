@@ -272,6 +272,8 @@ class CallcController < ApplicationController
 
   def main
 
+    'a'.a
+
     @Show_Currency_Selector=1 
 
     if not session[:user_id]
