@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate]
+  before_filter :check_api_parrams_with_hash, :only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register, :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate, :get_tariff]
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
 
@@ -997,31 +997,23 @@ class ApiController < ApplicationController
 
 
   def get_tariff
-    allow, values = MorApi.check_params_with_all_keys(params, request)
-    #doc = Builder::XmlMarkup.new( :target => out_string = "", :indent => 2 )
-
-    #doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-
-    check_user(params[:u], params[:p])
+    check_user(params[:u])
     outstring = '<?xml version="1.0" encoding="UTF-8"?>'
 
-    if allow
       if @user
-        #admin? reseller? user?
-
-        if !values[:user_id].blank?
-          rate_user_id = values[:user_id]
+        if !@values[:user_id].blank?
+          rate_user_id = @values[:user_id]
           is_self = false
         else
           rate_user_id = @user.id
           is_self = true
         end
 
-        if values[:tariff_id] and @user.usertype != 'user' and @user.usertype != 'accountant' and values[:user_id].blank?
+        if @values[:tariff_id] and @user.usertype != 'user' and @user.usertype != 'accountant' and @values[:user_id].blank?
           if @user.usertype == 'admin'
-            @tariff = Tariff.where(:id => values[:tariff_id]).first
+            @tariff = Tariff.where(:id => @values[:tariff_id]).first
           else
-            @tariff = Tariff.where(["id = ? and owner_id = ?", values[:tariff_id], @user.id]).first
+            @tariff = Tariff.where(["id = ? and owner_id = ?", @values[:tariff_id], @user.id]).first
           end
         else
           if is_self
@@ -1035,7 +1027,7 @@ class ApiController < ApplicationController
         @cust_tariff = Customrate.where(:user_id => rate_user_id)
         @cust_destinations = []
 
-        if ((is_self and values[:tariff_id].blank?) or !is_self) and @cust_tariff.count > 0
+        if ((is_self and @values[:tariff_id].blank?) or !is_self) and @cust_tariff.count > 0
           destinations = @cust_tariff.collect {|x| [:rates => x.acustratedetails, :dest_group => x.destinationgroup] }.flatten
 
 	      outstring << "<page>
@@ -1131,32 +1123,6 @@ class ApiController < ApplicationController
 
             outstring << "</rates>
                         </page>"
-
-            #            doc.page{
-            #              doc.pagename("#{_('Tariff')}")
-            #              doc.tariff_name("#{@tariff.name.to_s}")
-            #              doc.currency("#{@tariff.currency}")
-            #              doc.rates{
-            #                result.each{ |rate|
-            #                  doc.rate{
-            #                    doc.destination_group_name("#{rate['name'].to_s}")
-            #                    doc.destination_group_type("#{rate['desttype'].to_s}")
-            #                    if rate["duration"].to_i == -1
-            #                      doc.duration("Infinity")
-            #                    else
-            #                      doc.duration("#{rate["duration"]}")
-            #                    end
-            #                    doc.type("#{rate['artype'].to_s}")
-            #                    doc.round_by("#{rate['round'].to_s}")
-            #                    doc.tariff_rate("#{rate['price'].to_s}")
-            #                    doc.start_time("#{rate['start_time'].to_s}")
-            #                    doc.end_time("#{rate['end_time'].to_s}")
-            #                    doc.daytype("#{rate['daytype'].to_s}")
-            #                  }
-            #                }
-            #              }
-            #            }
-
           else
 
             result = @tariff.tariffs_api_wholesale
@@ -1186,29 +1152,6 @@ class ApiController < ApplicationController
             outstring << "</rates>
                          </page>"
 
-            #            doc.page{
-            #              doc.pagename("#{_('Tariff')}")
-            #              doc.tariff_name("#{@tariff.name.to_s}")
-            #              doc.currency("#{@tariff.currency}")
-            #              doc.rates{
-            #                result.each{ |rate|
-            #                  doc.rate{
-            #                    doc.direction("#{rate['direction'].to_s}")
-            #                    doc.destination("#{rate['destination'].to_s}")
-            #                    doc.prefix("#{rate['prefix'].to_s}")
-            #                    doc.subcode("#{rate['subcode'].to_s}")
-            #                    doc.code("#{rate['code'].to_s}")
-            #                    doc.tariff_rate("#{nice_number(rate["rate"]).to_s}")
-            #                    doc.con_fee("#{nice_number(rate["connection_fee"]).to_s}")
-            #                    doc.increment("#{rate['increment_s'].to_s}")
-            #                    doc.min_time("#{rate['min_time'].to_s}")
-            #                    doc.start_time("#{rate['start_time'].to_s}")
-            #                    doc.end_time("#{rate['end_time'].to_s}")
-            #                    doc.daytype("#{rate['daytype'].to_s}")
-            #                  }
-            #                }
-            #              }
-            #            }
           end
         else
           outstring << "<status><error>No tariff found</error></status>"
@@ -1216,9 +1159,6 @@ class ApiController < ApplicationController
       else
         outstring << "<status><error>Bad login</error></status>"
       end
-    else
-      outstring << "<status><error>Incorrect hash</error></status>"
-    end
     send_xml_data(outstring, params[:test].to_i, "get_tariff_#{Time.now.to_i}.xml", true)
   end
 
