@@ -4583,6 +4583,7 @@ Localization.define('en') do |l|
   l.store 'Destination_groups_updated', 'Destination Groups updated'
   l.store 'Update_destination_groups', 'Update Destination Groups'
   l.store 'ip_prefix_size_should_be_between_24_and_32', 'IP Prefix size should be between 24 and 32. For example: 192.168.0.1/24'
+  l.store 'Password_cannot_be_longer_than', 'Password cannot be longer than 30'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

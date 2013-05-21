@@ -1391,6 +1391,11 @@ in before filter : ard (:find_ard)
       redirect_to :action => :default_user and return false
     end
 
+    if params[:password_length].strip.to_i > 30
+      flash[:notice] = _('Password_cannot_be_longer_than')
+      redirect_to :action => :default_user and return false
+    end
+
     if  !Email.address_validation(params[:address][:email]) and params[:address][:email].to_s.length.to_i > 0
       flash[:notice] = _("Email_address_not_correct")
       redirect_to :action => :default_user and return false
