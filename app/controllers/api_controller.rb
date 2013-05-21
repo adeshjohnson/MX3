@@ -4328,7 +4328,7 @@ class ApiController < ApplicationController
 
   def check_api_parrams_with_hash
     allow, @values = MorApi.check_params_with_all_keys(params, request)
-    if allow != true
+    unless allow
       send_xml_data(MorApi.return_error('Incorrect hash'), params[:test].to_i)
       return false
     end

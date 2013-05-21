@@ -2,7 +2,7 @@
 class MorApi
   def MorApi.check_params_with_key(params, request)
     #hack find user from params u and p
-    user = User.find(:first, :conditions => ["username = ? and password = ?", params[:u].to_s, Digest::SHA1.hexdigest(params[:p].to_s)])
+    user = User.find(:first, :conditions => ["username = ?", params[:u].to_s])
 
       ret = {}
       ret[:user_id] = params[:user_id].to_i if params[:user_id] and params[:user_id].to_s !~ /[^0-9]/ and params[:user_id].to_i >= 0
