@@ -17,7 +17,7 @@ class ApiController < ApplicationController
 		:only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register,
 			  :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
 			  :wholesale_tariff, :device_create, :device_destroy, :device_list, :did_create, :did_assign_device, :did_unassign_device, :ma_activate,
-			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update]
+			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update, :credit_note_create]
 
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
@@ -3116,12 +3116,10 @@ class ApiController < ApplicationController
   note that is issue_date must be specified, if not we dont event try to save note(cause it would crash)
 =end
   def credit_note_create
-    allow, values = MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
-    if allow == true
-      check_user(params[:u], params[:p])
+      check_user(params[:u])
       if @user and (@user.is_admin? or @user.is_reseller? or (@user.is_accountant? and @user.accountant_allow_read('invoices_manage') and @user.accountant_allow_edit('see_financial_data')))
         if @user.is_reseller?
           condition = ['users.owner_id = ? AND users.id = ?', @user.id, params[:user_id].to_i]
@@ -3148,9 +3146,6 @@ class ApiController < ApplicationController
       else
         doc.error("Bad login")
       end
-    else
-      doc.error("Incorrect hash")
-    end
     }
     send_xml_data(out_string, params[:test].to_i)
   end
