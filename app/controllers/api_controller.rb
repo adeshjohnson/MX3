@@ -3325,7 +3325,7 @@ class ApiController < ApplicationController
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
     doc.page {
     if allow
-      check_user(params[:u], params[:p])
+      check_user(params[:u])
       if @user and @user.usertype != 'user'
         callerid = params[:callerid].to_s
         if callerid.blank?
