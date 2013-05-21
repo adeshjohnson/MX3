@@ -62,11 +62,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/update_balance</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
 	<td>//body</td>
 	<td></td>
@@ -107,9 +102,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -117,9 +112,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -127,9 +122,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -137,9 +132,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -147,9 +142,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -157,9 +152,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -167,9 +162,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash7</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -177,9 +172,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash8</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -187,9 +182,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash9</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -197,9 +192,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash10</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -207,120 +202,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--user_details-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=user_admin&amp;p=user_admin1&amp;user_id=2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=user_admin&amp;p=user_admin1&amp;user_id=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=reseller&amp;p=reseller1&amp;user_id=5</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=accountant&amp;p=accountant1&amp;user_id=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash11</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1037,702 +921,6 @@
 	<td>assertText</td>
 	<td>//call[2]/calldate2</td>
 	<td>2009-01-02 00:00:03</td>
-</tr>
-<!--admin ->admin-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=0&amp;hash=60fc593f766e7412c1059da8847ef755cef541a3&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_number</td>
-	<td>60.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_currency</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>60.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>System</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2007-03-26</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Afghanistan</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>18.0</td>
-</tr>
-<!--admin ->101-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_number</td>
-	<td>26.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_currency</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>26.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>user_admin</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>Test User</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>18.0</td>
-</tr>
-<!--admin ->reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=3&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>3</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_number</td>
-	<td>36.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_currency</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>36.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>reseller</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=surname</td>
-	<td>Reseller</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_number</td>
-	<td>0000000001</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2009-03-31</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Lithuania</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>19.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=reg_direction</td>
-	<td>test_reseller@email.test</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=reg_email</td>
-	<td>test_reseller@email.test</td>
-</tr>
-<!--admin -> accountant-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=4&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=pagename</td>
-	<td>Personal details</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_number</td>
-	<td>44.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_currency</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>4</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>44.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>accountant</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>Test</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_number</td>
-	<td>0000000002</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2009-03-31</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Lithuania</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>0.0</td>
-</tr>
-<!--admin -> user_reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=4&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_number</td>
-	<td>44.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_currency</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>4</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>44.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>accountant</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>Test</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_number</td>
-	<td>0000000002</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2009-03-31</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Lithuania</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>0.0</td>
-</tr>
-<!--101->101-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=user_admin&amp;p=user_admin1&amp;user_id=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_number</td>
-	<td>26.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance_currency</td>
-	<td>USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>26.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>user_admin</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>Test User</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=surname</td>
-	<td>#1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>18.0</td>
-</tr>
-<!--101->reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=user_admin&amp;p=user_admin1&amp;user_id=3&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>2</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>26.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>user_admin</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>Test User</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>18.0</td>
-</tr>
-<!--reseller->101-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=reseller&amp;p=reseller1&amp;user_id=2&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>User was not found</td>
-	<td></td>
-</tr>
-<!--reseller->reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=reseller&amp;p=reseller1&amp;user_id=3&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>3</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>36.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>reseller</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=surname</td>
-	<td>Reseller</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_number</td>
-	<td>0000000001</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2009-03-31</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Lithuania</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>19.0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=reg_direction</td>
-	<td>test_reseller@email.test</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=reg_email</td>
-	<td>test_reseller@email.test</td>
-</tr>
-<!--reseller->user_reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=reseller&amp;p=reseller1&amp;user_id=5&amp;hash=d303ad2eaef52ff1993350cf96ca3fecbadf78ce&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=userid</td>
-	<td>5</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>20.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>user_reseller</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=surname</td>
-	<td>Resellers</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_number</td>
-	<td>0000000003</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2009-03-31</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Afghanistan</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>19.0</td>
-</tr>
-<!--accountant->reseller-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_details?u=accountant&amp;p=accountant1&amp;user_id=3&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Personal details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>44.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>accountant</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=surname</td>
-	<td>Accountant</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_number</td>
-	<td>0000000002</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2009-03-31</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Lithuania</td>
 </tr>
 <!--API commands without hash-->
 <tr>
