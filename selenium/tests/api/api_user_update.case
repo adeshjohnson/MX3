@@ -132,50 +132,61 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--#X hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=400&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
 <!--admin -> admin-->
 <!--#1 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=6&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=6&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
 </tr>
 <!--#2 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
 </tr>
 <!--#3 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
 </tr>
 <!--#4 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -185,7 +196,7 @@
 <!--#1 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=6&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=d87ab738199d37b379c31a922f6e793fcbd3e728</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=6&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,7 +207,7 @@
 <!--#2 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=5cddc3507dc42ce268fa99272c9bc7c575468020&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=3&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=${hash2}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -353,13 +364,13 @@
 <!--#5 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;u28=0&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=3&amp;u28=0</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -369,7 +380,7 @@
 <!--#5 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=3&amp;u28=0&amp;hash=93c874122a8d6cf1ac46a1529ca1d157b8af6eb9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=3&amp;u28=0&amp;hash=${hash5}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -751,9 +762,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -763,7 +774,7 @@
 <!--#6 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=4&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=4&amp;hash=${hash6}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1185,7 +1196,7 @@
 <!--#3 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=b83ec217a7d53ba74331ff18b97e8a91554559ad&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=6&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=${hash3}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1197,7 +1208,7 @@
 <!--change accountant to resseller-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=a157cb1c069ce85bb527498c13cd132790467afe&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=4&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1686,70 +1697,25 @@
 	<td>User's settings successfully changed:</td>
 	<td></td>
 </tr>
-<!--#8 hash-->
+<!--No hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=499</td>
+	<td>/billing/functions/settings</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#9 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;u15=0&amp;u25=1</td>
+	<td>check</td>
+	<td>id=api_disable_hash_checking</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#10 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1</td>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#11 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=6&amp;u15=0&amp;u25=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#12 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=5&amp;u15=1&amp;u25=0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#13 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
 	<td></td>
 </tr>
 <tr>
@@ -1757,10 +1723,44 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--#12 hash-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>aaaaaa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=5&amp;u15=1&amp;u25=0&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1812,18 +1812,7 @@
 <!--#X hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=400&amp;a0=parko&amp;a1=vilnius&amp;a2=2222&amp;a3=lietuva&amp;a4=867788776&amp;u0=6432&amp;u1=1&amp;u2=6&amp;u3=6&amp;u4=6&amp;u5=1&amp;u6=6&amp;u7=6&amp;u8=6&amp;u9=qwertyui&amp;u10=6&amp;u11=6&amp;u12=6&amp;u13=reseller&amp;u14=6&amp;u15=6&amp;u16=6&amp;u17=6&amp;u18=6&amp;u19=6&amp;u20=6&amp;u21=6&amp;u22=aaa@kkk.lt&amp;u23=api_reseller&amp;u24=6&amp;u25=6&amp;u26=6&amp;u27=6&amp;u28=6&amp;ay=2010&amp;am=12&amp;ad=14&amp;by=2011&amp;bm=11&amp;bd=10&amp;pswd=aaaaa&amp;user_warning_email_hour=00&amp;pgui=0&amp;pcsv=1&amp;ppdf=0&amp;recording_forced_enabled=1&amp;i4=16&amp;tax4_enabled=1&amp;tax2_enabled=1&amp;accountant_type_invalid=1&amp;block_at_conditional=15&amp;tax3_enabled=1&amp;accountant_type=2&amp;tax1_value=0.0&amp;show_zero_calls=1&amp;return_controller=users&amp;warning_email_active=1&amp;compound_tax=1&amp;tax4_name=&amp;allow_loss_calls=1&amp;tax3_name=&amp;tax2_name=&amp;credit=1.0&amp;id=17&amp;tax1_name=Tax&amp;total_tax_name=Tax&amp;tax2_value=0.0&amp;tax4_value=0.0&amp;ignore_global_monitorings=1&amp;i1=2&amp;tax3_value=0.0&amp;controller=users&amp;cyberplat_active=1&amp;i2=4&amp;i3=8&amp;recording_enabled=1&amp;email_warning_sent_test=0&amp;own_providers=1&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Incorrect hash</td>
-	<td></td>
-</tr>
-<!--#X hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=499&amp;hash=ee6c57cda72d6d96ea2e60f93c04377fa18cc85a&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=499&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1834,7 +1823,7 @@
 <!--#X hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=adm&amp;p=a34567n1&amp;user_id=499&amp;hash=ee6c57cda72d6d96ea2e60f93c04377fa18cc85a&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=adm&amp;user_id=499&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1845,7 +1834,7 @@
 <!--#9 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=1fe850b1e66401c7e89f34b801f5c925f0816e31&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=2&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1856,7 +1845,7 @@
 <!--#10 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=a2954da4d6ad8bb8f0f5719d7f153a694a81daa9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1867,7 +1856,7 @@
 <!--#11 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=6&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1878,7 +1867,7 @@
 <!--#12 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=5&amp;u15=1&amp;u25=0&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1889,7 +1878,7 @@
 <!--#13 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2090,10 +2079,9 @@
 	<td>id=user_blocked_1</td>
 	<td>off</td>
 </tr>
-<!--#9 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=1fe850b1e66401c7e89f34b801f5c925f0816e31&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=2&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2101,10 +2089,9 @@
 	<td>User was not found</td>
 	<td></td>
 </tr>
-<!--#10 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=a2954da4d6ad8bb8f0f5719d7f153a694a81daa9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2112,10 +2099,9 @@
 	<td>User was updated</td>
 	<td></td>
 </tr>
-<!--#11 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=6&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2123,10 +2109,9 @@
 	<td>User was not found</td>
 	<td></td>
 </tr>
-<!--#12 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=5&amp;u15=1&amp;u25=0&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2134,10 +2119,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#13 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2347,10 +2331,9 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--#9 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=1fe850b1e66401c7e89f34b801f5c925f0816e31&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;user_id=2&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2358,10 +2341,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#10 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=a2954da4d6ad8bb8f0f5719d7f153a694a81daa9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2369,10 +2351,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#11 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;user_id=6&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2380,10 +2361,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#12 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;user_id=5&amp;u15=1&amp;u25=0&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2391,10 +2371,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#13 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_reseller&amp;p=user_reseller1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_reseller&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2599,10 +2578,9 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--#9 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=1fe850b1e66401c7e89f34b801f5c925f0816e31&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=2&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2610,10 +2588,9 @@
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
-<!--#10 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=a2954da4d6ad8bb8f0f5719d7f153a694a81daa9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2621,10 +2598,9 @@
 	<td>You do not have rights to edit this</td>
 	<td></td>
 </tr>
-<!--#11 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2632,10 +2608,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#12 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2643,10 +2618,9 @@
 	<td>User was not found</td>
 	<td></td>
 </tr>
-<!--#13 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3037,10 +3011,9 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--#9 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=1fe850b1e66401c7e89f34b801f5c925f0816e31&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=2&amp;u15=0&amp;u25=1&amp;hash=1fe850b1e66401c7e89f34b801f5c925f0816e31&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3048,10 +3021,9 @@
 	<td>User was updated</td>
 	<td></td>
 </tr>
-<!--#10 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=a2954da4d6ad8bb8f0f5719d7f153a694a81daa9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=3&amp;own_providers=1&amp;u15=0&amp;u25=1&amp;hash=a2954da4d6ad8bb8f0f5719d7f153a694a81daa9&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3059,10 +3031,9 @@
 	<td>User was updated</td>
 	<td></td>
 </tr>
-<!--#11 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=6&amp;u15=0&amp;u25=1&amp;hash=51ba7ae4d5742527ba30e8dbe766e1b904611c3b&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3070,10 +3041,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#12 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=5&amp;u15=1&amp;u25=0&amp;hash=136aa47d908785cb053cabedc90d6993912a57c2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3081,10 +3051,9 @@
 	<td>User was not found</td>
 	<td></td>
 </tr>
-<!--#13 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=0&amp;u15=1&amp;u25=0&amp;u5=1&amp;hash=4b63372c04043de439e7badcbb5dca7adfce3c46&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3264,66 +3233,6 @@
 	<td>User's settings successfully changed:</td>
 	<td></td>
 </tr>
-<!--#14 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=accountant&amp;p=accountant1&amp;user_id=6&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#15 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=accountant&amp;p=accountant1&amp;user_id=6&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#16 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?warning_email_active=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<!--#17 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?user_id=3&amp;warning_email_active=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<!--#14 hash-->
-<tr>
-	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -3419,10 +3328,9 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--#14 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=6&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=20ab5a816cf25c00f94bea4cd31d428940065f3e&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=6&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=20ab5a816cf25c00f94bea4cd31d428940065f3e&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3430,10 +3338,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#9 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=2&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=016f269ecb34bd5ca7cf870cecdd57f4f947a8d8&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=2&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=016f269ecb34bd5ca7cf870cecdd57f4f947a8d8&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3547,10 +3454,9 @@
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
-<!--#15 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=6&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=fff425dbdebb6e863567b038851c6a15ef24d70e&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=6&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=fff425dbdebb6e863567b038851c6a15ef24d70e&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3558,10 +3464,9 @@
 	<td>Access Denied</td>
 	<td></td>
 </tr>
-<!--#15 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=6&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=fff425dbdebb6e863567b038851c6a15ef24d70e&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=6&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=fff425dbdebb6e863567b038851c6a15ef24d70e&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3614,10 +3519,9 @@
 	<td>Personal details changed</td>
 	<td></td>
 </tr>
-<!--#16 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;warning_email_active=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;warning_email_active=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3655,10 +3559,9 @@
 	<td>id=warning_email_active</td>
 	<td>off</td>
 </tr>
-<!--#17 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=3&amp;warning_email_active=1&amp;hash=e8f6a1b208f255408b55fde9c935d8a6e6840ad9&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=3&amp;warning_email_active=1&amp;hash=e8f6a1b208f255408b55fde9c935d8a6e6840ad9&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3698,51 +3601,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/functions/reseller_settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_5 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=api_disable_hash_checking</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_5 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/users/edit/5</td>
 	<td></td>
 </tr>
@@ -3753,7 +3611,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;warning_email_active=1&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;warning_email_active=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3763,7 +3621,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=5&amp;warning_email_active=1&amp;&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=5&amp;warning_email_active=1&amp;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3808,46 +3666,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=api_disable_hash_checking</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/users/edit/3</td>
 	<td></td>
 </tr>
@@ -3858,7 +3676,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;warning_email_active=1&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;warning_email_active=1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3868,7 +3686,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=3&amp;warning_email_active=0&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=3&amp;warning_email_active=0&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3889,7 +3707,7 @@
 <!--updeitinama emailas i toki, koks jau yra sistemoje-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=admin&amp;p=admin1&amp;user_id=2&amp;a8=test_reseller@email.test&amp;hash=ab22e29a8ed57eae21cea69d354ef2992a135143&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=2&amp;a8=test_reseller@email.test&amp;hash=ab22e29a8ed57eae21cea69d354ef2992a135143&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3900,7 +3718,7 @@
 <!--this is reseller updating-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=6&amp;p=aaaaaa&amp;user_id=5&amp;a8=test_reseller@email.test&amp;hash=b9cffa3c5cbca7c5e1a5586bc520c1c923c10034&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=6&amp;user_id=5&amp;a8=test_reseller@email.test&amp;hash=b9cffa3c5cbca7c5e1a5586bc520c1c923c10034&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3910,7 +3728,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=accountant&amp;p=accountant1&amp;user_id=2&amp;a8=test_reseller@email.test&amp;hash=ab22e29a8ed57eae21cea69d354ef2992a135143&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=accountant&amp;user_id=2&amp;a8=test_reseller@email.test&amp;hash=ab22e29a8ed57eae21cea69d354ef2992a135143&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3920,12 +3738,23 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_update_api?u=user_admin&amp;p=user_admin1&amp;user_id=3&amp;a8=test_reseller@email.test&amp;hash=9c5b41ab01464404239827d5e4ff6f0f9c24be59&amp;test=1</td>
+	<td>/billing/api/user_update_api?u=user_admin&amp;user_id=3&amp;a8=test_reseller@email.test&amp;hash=9c5b41ab01464404239827d5e4ff6f0f9c24be59&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--password ignoruojamas-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_update_api?u=admin&amp;user_id=2&amp;u15=0&amp;u25=1&amp;i1=2&amp;i2=4&amp;i3=8&amp;i4=16&amp;hash=016f269ecb34bd5ca7cf870cecdd57f4f947a8d8&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was updated</td>
 	<td></td>
 </tr>
 </tbody></table>
