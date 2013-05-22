@@ -1171,6 +1171,50 @@
 	<td>full_price</td>
 	<td>36.9925</td>
 </tr>
+<!--hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
+</tr>
+<!--hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
+</tr>
+<!--hash3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=user_admin&amp;p=user_admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<!--hash4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=accountant&amp;p=accountant1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -1211,21 +1255,54 @@
 	<td>price_with_vat_6</td>
 	<td>36.9926</td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
 <!--from api-->
 <!--admin-->
 <tr>
-	<td>setTimeout</td>
-	<td>10000</td>
+	<td>open</td>
+	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--hash1-->
+<!--su password-->
+<tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=name</td>
+	<td>Calls</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=quantity</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=price</td>
+	<td>3.3453</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=date_added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=issue_date</td>
+	<td></td>
+</tr>
+<!--be password-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/invoices?u=admin&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1254,9 +1331,10 @@
 	<td></td>
 </tr>
 <!--reseller-->
+<!--hash2-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=reseller&amp;p=reseller1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=reseller&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1295,9 +1373,10 @@
 	<td>2012-10-10</td>
 </tr>
 <!--user-->
+<!--hash3-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=user_admin&amp;p=user_admin1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=user_admin&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;hash=${hash3}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1321,9 +1400,10 @@
 	<td></td>
 </tr>
 <!--accountant-->
+<!--hash4-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=accountant&amp;p=accountant1&amp;from=1350777600&amp;till=1354233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=accountant&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1346,10 +1426,101 @@
 	<td>css=issue_date</td>
 	<td>2012-12-12</td>
 </tr>
+<!--no hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
 <!--No invoices-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=accountant&amp;p=accountant1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=accountant&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
@@ -1359,7 +1530,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=admin&amp;p=admin1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=admin&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
@@ -1369,7 +1540,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=reseller&amp;p=reseller1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=reseller&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
@@ -1379,7 +1550,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=user_admin&amp;p=user_admin1&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
+	<td>/billing/api/invoices?u=user_admin&amp;from=1450777600&amp;till=1454233600&amp;file=false</td>
 	<td></td>
 </tr>
 <tr>
