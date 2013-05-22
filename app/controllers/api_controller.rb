@@ -2049,8 +2049,7 @@ class ApiController < ApplicationController
     clean_keys(h)
   end
 
-  #----
-
+  #---- VERY nasty, SHOULD be refactored.
   def import_tariff_retail
 
     doc = Builder::XmlMarkup.new(:target => out_string4 = "", :indent => 2)
@@ -2090,10 +2089,8 @@ class ApiController < ApplicationController
               #go trough destinations
 
               logger.fatal "DESTINATIONS FOUND: " +value[:destinations].size.to_s
-
-              value[:destinations].each { |_, dest| dest.each do |destination|
-                destination.is_a?(Hash) ? destination.symbolize_keys! : next
-
+              value[:destinations].each { |_, dest| (dest.is_a?(Array) ? dest : [dest]).each do |destination|
+                destination.symbolize_keys!
                 logger.fatal "----------DATA -------------------------------------"
                 logger.fatal "Direction name: '" + destination[:direction].to_s + "'"
                 logger.fatal "Destination name: '" + destination[:destination_group_name].to_s + "'"
