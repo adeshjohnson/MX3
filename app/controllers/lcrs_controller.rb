@@ -379,7 +379,11 @@ class LcrsController < ApplicationController
     else
       @lcr.failover_provider = nil
       @lcr.save
-      flash[:notice] = _('Failover_provider_unassigned')
+      if @prov != @lcr.failover_provider
+        flash[:status] = _('Failover_provider_unassigned')
+      else
+        flash[:status] = _('Settings_saved')
+      end
     end
 
     redirect_to :action => 'providers_list', :id => @lcr
