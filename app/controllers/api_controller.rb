@@ -2092,7 +2092,7 @@ class ApiController < ApplicationController
               logger.fatal "DESTINATIONS FOUND: " +value[:destinations].size.to_s
 
               value[:destinations].each { |_, dest| dest.each do |destination|
-                destination.symbolize_keys!
+                destination.is_a?(Hash) ? destination.symbolize_keys! : next
 
                 logger.fatal "----------DATA -------------------------------------"
                 logger.fatal "Direction name: '" + destination[:direction].to_s + "'"
