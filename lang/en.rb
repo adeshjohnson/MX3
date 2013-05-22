@@ -4585,6 +4585,8 @@ Localization.define('en') do |l|
   l.store 'Update_destination_groups', 'Update Destination Groups'
   l.store 'ip_prefix_size_should_be_between_24_and_32', 'IP Prefix size should be between 24 and 32. For example: 192.168.0.1/24'
   l.store 'Password_cannot_be_longer_than', 'Password cannot be longer than 30'
+  l.store 'legA_info', 'If Callback or Device CID for legA is empty, Source(CallerID of originator) will be sent back to originator as CallerID'
+  l.store 'legB_info', 'If Callback or Device CID for legB is empty, Source(CallerID of originator) will be sent to Destination as CallerID'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
