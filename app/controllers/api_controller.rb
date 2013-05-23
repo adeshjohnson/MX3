@@ -4044,8 +4044,7 @@ class ApiController < ApplicationController
         user_id = params[:user_id].to_s.strip
         owner_id = (@user.usertype == "accountant" ? 0 : @user.id)
         user = User.where(:id => user_id).first
-        allow = false if @user.usertype == "accountant" and !@user.accountant_allow_read('device_manage')
-        if allow
+        unless (@user.usertype == "accountant" and !@user.accountant_allow_read('device_manage'))
           if user and user.owner_id != owner_id
             doc.error(_('Dont_be_so_smart'))
           elsif user and !user_id.blank?
