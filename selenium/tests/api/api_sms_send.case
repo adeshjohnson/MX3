@@ -1096,7 +1096,12 @@
 <tr>
 	<td>assertText</td>
 	<td>css=price</td>
-	<td>11.0000 USD</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=currency</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1111,12 +1116,17 @@
 <tr>
 	<td>assertText</td>
 	<td>css=message_id</td>
-	<td>8</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=price</td>
-	<td>11.0000 USD</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=currency</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1131,7 +1141,12 @@
 <tr>
 	<td>assertText</td>
 	<td>css=price</td>
-	<td>11.0000 USD</td>
+	<td>11.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=currency</td>
+	<td>USD</td>
 </tr>
 <tr>
 	<td>setTimeout</td>
@@ -1201,7 +1216,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_sms</td>
-	<td>2.0</td>
+	<td>3.0</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1216,7 +1231,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=total_price</td>
-	<td>22.0000</td>
+	<td>33.0000</td>
 </tr>
 <!--#hash17-->
 <tr>
@@ -1628,7 +1643,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>ok 12 SMS is sent 33.0000 USD</td>
+	<td>ok 13 SMS is sent 33.0000 USD</td>
 	<td></td>
 </tr>
 <tr>
@@ -2030,6 +2045,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Currencies rates updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
 	<td></td>
 </tr>
 <tr>
