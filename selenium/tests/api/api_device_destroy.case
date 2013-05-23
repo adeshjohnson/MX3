@@ -128,7 +128,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=0</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,7 +148,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2</td>
+	<td>/billing/test/test_api?u=admin&amp;s_user=2&amp;device=2</td>
 	<td></td>
 </tr>
 <tr>
@@ -158,7 +158,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,19 +166,20 @@
 	<td>Cannot delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
 	<td></td>
 </tr>
+<!--#hash1-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=123&amp;hash=7231f4386f58b131b079775673dff9aae165dd6c</td>
+	<td>/billing/test/test_api?u=admin&amp;s_user=2&amp;device=123</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=123&amp;hash=c5e97deb9e3b1e7c72cc15abee85b1d79ae9e798&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=123&amp;hash=${hash1}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,19 +187,20 @@
 	<td>Device was not found</td>
 	<td></td>
 </tr>
+<!--#hash2-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=8&amp;hash=a95b461ed7abd736b96ab5859691fa46c8b6f046</td>
+	<td>/billing/test/test_api?u=admin&amp;s_user=2&amp;device=8&amp;hash=a95b461ed7abd736b96ab5859691fa46c8b6f046</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=8&amp;hash=636b72d16af9d4065ff69eab3ed5a4394cc066a1&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=8&amp;hash=${hash2}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -208,7 +210,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=7&amp;hash=636b72d16af9d4065ff69eab3ed5a4394cc066a1&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=7&amp;hash=636b72d16af9d4065ff69eab3ed5a4394cc066a1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,19 +218,20 @@
 	<td>Incorrect hash</td>
 	<td></td>
 </tr>
+<!--#hash3-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;s_user=0&amp;device=7&amp;hash=c1b046000bef3cde3ab96dc8f51d516878a29432</td>
+	<td>/billing/test/test_api?u=admin&amp;s_user=2&amp;device=7&amp;hash=c1b046000bef3cde3ab96dc8f51d516878a29432</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//body</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=7&amp;hash=1b42983c11ed279b5ba95af9abab6ed1852bc07b&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=7&amp;hash=${hash3}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -238,7 +241,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -248,7 +251,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -258,7 +261,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -268,7 +271,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,7 +301,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -308,7 +311,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,7 +321,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -328,7 +331,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -338,7 +341,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -368,7 +371,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -378,7 +381,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -388,7 +391,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -398,7 +401,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -408,7 +411,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -438,7 +441,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -448,7 +451,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -458,7 +461,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -468,7 +471,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -478,7 +481,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -513,7 +516,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -523,7 +526,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -533,7 +536,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -543,7 +546,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -553,7 +556,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -568,7 +571,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -578,7 +581,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -588,7 +591,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -598,7 +601,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_admin&amp;p=user_admin1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_admin&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -608,7 +611,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=user_reseller&amp;p=user_reseller1&amp;s_user=0&amp;device=2&amp;hash=06729f4b524fbb9cfedfc3bd003613537334fe34&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=user_reseller&amp;s_user=2&amp;device=2&amp;hash=215b5f23b2258f7fed84c02c8f291671b8f00c83&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -620,7 +623,7 @@
 <!--Checking if admin and reseller can user api commands without hash when "disable_hash_checking" is off-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -630,7 +633,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -663,21 +666,6 @@
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -720,21 +708,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
-</tr>
-<tr>
 	<td>check</td>
 	<td>id=api_disable_hash_checking</td>
 	<td></td>
@@ -751,7 +724,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -761,7 +734,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=123&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=123&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -771,7 +744,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=6&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=6&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -781,7 +754,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=admin&amp;s_user=2&amp;device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -791,7 +764,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;s_user=2&amp;device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -801,12 +774,33 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/device_destroy?u=accountant&amp;p=accountant1&amp;s_user=0&amp;device=2&amp;test=1</td>
+	<td>/billing/api/device_destroy?u=accountant&amp;s_user=2&amp;device=2&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>You do not have rights to edit this</td>
+	<td></td>
+</tr>
+<!--su slaptazodziu-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=admin&amp;p=admin1&amp;s_user=2&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Cannot delete device - it has calls. You can only hide device's user. Why is that and how to do that - please read in manual.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_destroy?u=reseller&amp;p=reseller1&amp;s_user=2&amp;device=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 </tbody></table>
