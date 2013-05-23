@@ -2975,8 +2975,8 @@ class ApiController < ApplicationController
         end
         if params[:credit_note_id]
           condition << "credit_notes.id = #{params[:credit_note_id].to_i}"
-        elsif values[:user_id]
-          condition << "credit_notes.user_id = #{values[:user_id].to_i}"
+        elsif @values[:user_id]
+          condition << "credit_notes.user_id = #{@values[:user_id].to_i}"
         end
         notes = CreditNote.includes(:user).where(condition.join(' AND '))
         if notes and notes.size.to_i > 0
