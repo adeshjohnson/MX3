@@ -200,46 +200,46 @@
 <!--#1 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1</td>
+	<td>/billing/test/test_api?u=admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash1</td>
 </tr>
 <!--#2 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=22</td>
+	<td>/billing/test/test_api?u=admin&amp;tariff_id=22</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash2</td>
 </tr>
 <!--#3 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=22222</td>
+	<td>/billing/test/test_api?u=admin&amp;tariff_id=22222</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>10c7329056bda7077ba354de6781c5ea1c4e9a2b</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
 </tr>
 <!--#4 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=14</td>
+	<td>/billing/test/test_api?u=admin&amp;tariff_id=14</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>10ff9cb27171a0ff3e0e2f0708e76a2391b173b7</td>
-	<td></td>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -250,7 +250,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=admin&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,7 +307,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td>/billing/api/get_tariff?u=admin&amp;tariff_id=22&amp;test=1&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
 <tr>
@@ -359,7 +359,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;tariff_id=14&amp;test=1&amp;hash=10ff9cb27171a0ff3e0e2f0708e76a2391b173b7</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;tariff_id=14&amp;test=1&amp;hash=${hash4}</td>
 	<td></td>
 </tr>
 <tr>
@@ -376,7 +376,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;tariff_id=22&amp;test=1&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
 <tr>
@@ -413,7 +413,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -450,7 +450,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=retail_accountant&amp;p=retail_accountant1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=retail_accountant&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -492,7 +492,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_wrspro_user&amp;p=wholesale_wrspro_user1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=wholesale_wrspro_user&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -519,7 +519,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=retail_user&amp;p=retail_user1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=retail_user&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,7 +556,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;p=wholesale_accountant1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;test=1&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -583,7 +583,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=retail_accountant&amp;p=retail_accountant1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td>/billing/api/get_tariff?u=retail_accountant&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
 	<td></td>
 </tr>
 <tr>
@@ -650,7 +650,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_wrspro_user&amp;p=wholesale_wrspro_user1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td>/billing/api/get_tariff?u=wholesale_wrspro_user&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
 	<td></td>
 </tr>
 <tr>
@@ -692,7 +692,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=retail_user&amp;p=retail_user1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td>/billing/api/get_tariff?u=retail_user&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
 	<td></td>
 </tr>
 <tr>
@@ -764,7 +764,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;p=wholesale_accountant1&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
+	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;tariff_id=22&amp;test=1&amp;hash=a98ed7ee09b9ef1149fd2b40485041f4e192e514</td>
 	<td></td>
 </tr>
 <tr>
@@ -810,7 +810,7 @@
 <!--incorrect hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f6srydtuea5af4e3d</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;test=1&amp;hash=5b1d5b1569de26f6srydtuea5af4e3d</td>
 	<td></td>
 </tr>
 <tr>
@@ -821,7 +821,7 @@
 <!--bad login-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_rrrrreseller&amp;p=wholesale_reseller1&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
+	<td>/billing/api/get_tariff?u=wholesale_rrrrreseller&amp;test=1&amp;hash=5b1d5b1569de26f631ba3edf0d89f65be5af4e3d</td>
 	<td></td>
 </tr>
 <tr>
@@ -833,7 +833,7 @@
 <!--no tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;p=wholesale_reseller1&amp;tariff_id=22222&amp;test=1&amp;hash=10c7329056bda7077ba354de6781c5ea1c4e9a2b</td>
+	<td>/billing/api/get_tariff?u=wholesale_reseller&amp;tariff_id=22222&amp;test=1&amp;hash=10c7329056bda7077ba354de6781c5ea1c4e9a2b</td>
 	<td></td>
 </tr>
 <tr>
@@ -844,7 +844,7 @@
 <!--<tr> 	<td>open</td> 	<td>/billing/callc/logout</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>login_username</td> 	<td>admin</td> </tr> <tr> 	<td>type</td> 	<td>login_psw</td> 	<td>admin1</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Successfully logged in</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/tariffs/import_csv2/15</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=file</td> 	<td>/home/mor/selenium/files/csv/very_big.csv</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>File uploaded</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>name=prefix_id</td> 	<td>label=Prefix</td> </tr> <tr> 	<td>select</td> 	<td>name=rate_id</td> 	<td>label=Rate/min</td> </tr> <tr> 	<td>select</td> 	<td>name=connection_fee_id</td> 	<td>label=Connection Unit</td> </tr> <tr> 	<td>select</td> 	<td>name=increment_id</td> 	<td>label=Effective Date</td> </tr> <tr> 	<td>select</td> 	<td>name=min_time_id</td> 	<td>label=Effective Time</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Columns assigned</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>xpath=(//input[@name='commit'])[2]</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Analysis completed</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Created destinations: 45074</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=status</td> 	<td>Rates updated: 3</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>New rates created: 52750</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>link=Fix</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Destinations not assigned to Destination Groups</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=input[type=&quot;submit&quot;]</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>This step is dangerous! Make sure you know what you are doing.</td> 	<td></td> </tr> <tr> 	<td>click</td> 	<td>css=input[type=&quot;submit&quot;]</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure?</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Destinations assigned</td> 	<td></td> </tr> <!--#5 hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;tariff_id=15</td>
+	<td>/billing/test/test_api?u=admin&amp;tariff_id=15</td>
 	<td></td>
 </tr>
 <!--<tr> 	<td>assertTextPresent</td> 	<td>784a244b4a33fed28b40d40b38b4484fd81f32ab</td> 	<td></td> </tr>-->
@@ -855,7 +855,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;tariff_id=15&amp;test=1&amp;hash=784a244b4a33fed28b40d40b38b4484fd81f32ab</td>
+	<td>/billing/api/get_tariff?u=admin&amp;tariff_id=15&amp;test=1&amp;hash=784a244b4a33fed28b40d40b38b4484fd81f32ab</td>
 	<td></td>
 </tr>
 <tr>
@@ -889,21 +889,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
-</tr>
-<tr>
 	<td>check</td>
 	<td>id=api_disable_hash_checking</td>
 	<td></td>
@@ -926,7 +911,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -983,7 +968,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;tariff_id=22&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;tariff_id=22&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1035,7 +1020,7 @@
 <!--own tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;p=wholesale_accountant1&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=wholesale_accountant&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1062,7 +1047,7 @@
 <!--user_reseller tariff-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=retail_accountant&amp;p=retail_accountant1&amp;tariff_id=22&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=retail_accountant&amp;tariff_id=22&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1184,7 +1169,7 @@
 <!--naudojant user_id turi paimti userio custom rates ir tarifus-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;user_id=8&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1215,7 +1200,7 @@
 <!--tariff_id turi ignoruoti, kada yra user_id-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;tariff_id=10&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;user_id=8&amp;tariff_id=10&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1241,7 +1226,7 @@
 <!--tariff_id turi ignoruoti, kada yra user_id-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;tariff_id=14&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;user_id=8&amp;tariff_id=14&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1268,7 +1253,7 @@
 <!--jei custom rates nėra, tai imami userio tarifai-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1313,7 +1298,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=admin&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1333,7 +1318,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/get_tariff?u=retail_user&amp;p=retail_user1&amp;test=1</td>
+	<td>/billing/api/get_tariff?u=retail_user&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1354,6 +1339,32 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>0.4023</td>
+	<td></td>
+</tr>
+<!--su slaptazodziu-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/get_tariff?u=admin&amp;p=admin1&amp;user_id=8&amp;tariff_id=10&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Custom Rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_rate</td>
+	<td>898.0</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0.4023</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff Retail_user_tariff</td>
 	<td></td>
 </tr>
 -->
