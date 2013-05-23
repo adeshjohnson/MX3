@@ -365,10 +365,10 @@ class LcrsController < ApplicationController
 
   def try_to_add_failover_provider
     prov_id = params[:select_prov]
+    @prov = Provider.find(:first, :conditions => ['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
 
     @lcr.no_failover = params[:no_failover].to_i 
-    if prov_id != "0" and @lcr.no_failover.to_i == 0
-      @prov = Provider.find(:first, :conditions => ['id = ? AND (user_id = ? OR common_use = 1)', prov_id, current_user.id])
+    if prov_id != "0" and @lcr.no_failover.to_i == 0 and prov_id.to_i != @lcr.failover_provider.try(:id).to_i
       unless @prov
         flash[:notice] = _('Provider_was_not_found')
         redirect_to :action => :list and return false
@@ -377,13 +377,14 @@ class LcrsController < ApplicationController
       @lcr.save
       flash[:status] = _('Failover_provider_added')
     else
-      @lcr.failover_provider = nil
-      @lcr.save
-      if @prov != @lcr.failover_provider
+      if @prov.try(:id) != @lcr.failover_provider.try(:id)
         flash[:status] = _('Failover_provider_unassigned')
       else
         flash[:status] = _('Settings_saved')
       end
+      @prov = nil if @lcr.no_failover.to_i == 1
+      @lcr.failover_provider = @prov
+      @lcr.save
     end
 
     redirect_to :action => 'providers_list', :id => @lcr
