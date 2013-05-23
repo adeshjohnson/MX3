@@ -994,7 +994,8 @@ class ApiController < ApplicationController
 
   def get_tariff
     check_user(params[:u])
-    outstring = '<?xml version="1.0" encoding="UTF-8"?>'
+    outstring = '<?xml version="1.0" encoding="UTF-8"?>
+                 <page>'
 
       if @user
         if !@values[:user_id].blank?
@@ -1026,7 +1027,7 @@ class ApiController < ApplicationController
         if ((is_self and @values[:tariff_id].blank?) or !is_self) and @cust_tariff.count > 0
           destinations = @cust_tariff.collect {|x| [:rates => x.acustratedetails, :dest_group => x.destinationgroup] }.flatten
 
-	      outstring << "<page>
+	      outstring << "
                   <pagename>#{_('Tariff')}</pagename>
                   <tariff_name>Custom Rates</tariff_name>
                   <purpose>user</purpose>
@@ -1061,8 +1062,7 @@ class ApiController < ApplicationController
 
               end
               
-              outstring << "</rates>
-                            </page>"
+              outstring << "</rates>"
 
         end
         if @tariff
@@ -1079,7 +1079,7 @@ class ApiController < ApplicationController
               rates[rate['name'].to_s][rate['desttype'].to_s] << rate
             }
 
-            outstring << "<page>
+            outstring << "
                             <pagename>#{_('Tariff')}</pagename>
                             <tariff_name>#{CGI::escapeHTML(@tariff.name.to_s)}</tariff_name>
                             <purpose>#{@tariff.purpose}</purpose>
@@ -1117,13 +1117,12 @@ class ApiController < ApplicationController
               }
             }
 
-            outstring << "</rates>
-                        </page>"
+            outstring << "</rates>"
           else
 
             result = @tariff.tariffs_api_wholesale
 
-            outstring << "<page>
+            outstring << "
                                      <pagename>#{_('Tariff')}</pagename>
                                      <tariff_name>#{CGI::escapeHTML(@tariff.name.to_s)}</tariff_name>
                                      <purpose>#{@tariff.purpose}</purpose>
@@ -1145,8 +1144,7 @@ class ApiController < ApplicationController
                                        <daytype>#{rate['daytype'].to_s}</daytype>
                                        </rate>"
             }
-            outstring << "</rates>
-                         </page>"
+            outstring << "</rates>"
 
           end
         else
@@ -1155,6 +1153,7 @@ class ApiController < ApplicationController
       else
         outstring << "<status><error>Bad login</error></status>"
       end
+      outstring << "</page>"
     send_xml_data(outstring, params[:test].to_i, "get_tariff_#{Time.now.to_i}.xml", true)
   end
 
