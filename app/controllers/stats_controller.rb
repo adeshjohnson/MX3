@@ -1881,7 +1881,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     total = Call.find(:all, :select => select.join(", "), :joins => "LEFT JOIN users ON (users.id = calls.user_id) #{ SqlExport.left_join_reseler_providers_to_calls_sql}", :conditions => (conditions +["disposition = 'ANSWERED'"]).join(" AND "))[0]
     @total_duration = (total["billsec"]).to_i
     @total_call_price = (total["user_price"]).to_d
-    @total_call_selfprice = (total["provider_price"].to_d - total["did_prov_price"].to_d)         # did_provider_price minusuojamas dėl to, kad If the rate is less than zero, this price is paid TO the Provider for the DID usage.
+    @total_call_selfprice = (total["provider_price"].to_d - (reseller? ? 0 : total["did_prov_price"].to_d))
     select_total = ["COUNT(*) AS 'total_calls'"]
     select_total << "SUM(IF(calls.disposition = 'ANSWERED', 1, 0)) AS 'answered_calls'"
     select_total << "SUM(IF(calls.disposition = 'BUSY', 1, 0)) AS 'busy_calls'"
