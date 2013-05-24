@@ -3844,7 +3844,7 @@ class ApiController < ApplicationController
     cards_size = @values[:quantity].to_i < 1 ? 1 : @values[:quantity].to_i
     if cg
       cards = cg.cards.where(:sold => 0).limit(cards_size).order("rand()")
-      if cards
+      unless cards.blank?
         doc.cards {
           for card in cards
             if card.sell
@@ -3880,15 +3880,15 @@ class ApiController < ApplicationController
                 doc.currency(Currency.get_default.name)
               }
             else
-              doc = MorApi.return_error("Card error", doc)
+              doc.error('Card error') #= MorApi.return_error("Card error", doc)
             end
           end
         }
       else
-        doc = MorApi.return_error("Free cards was not found", doc)
+        doc.error('Free cards was not found') #= MorApi.return_error("Free cards was not found", doc)
       end
     else
-      doc = MorApi.return_error("Cardgroup was not found", doc)
+      doc.error('Cardgroup was not found') #= MorApi.return_error("Cardgroup was not found", doc)
     end
                }
     send_xml_data(out_string, params[:test].to_i)
