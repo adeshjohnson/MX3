@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
   # before_filter :set_timezone
 
   def redirect_callshop_manager
-    if current_user and current_user.is_callshop_manager?
+    if current_user and not admin? and current_user.is_callshop_manager?
       redirect_to :controller => "callshop", :action => "show", :id => current_user.callshop_manager_group.group_id
       return false
     end
