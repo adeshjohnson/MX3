@@ -166,7 +166,7 @@
 <!--Check if one cannot edit phonebook with incorect hash-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=2&amp;test=1&amp;hash=invalid_ask23u23o</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;phonebook_id=2&amp;test=1&amp;hash=invalid_ask23u23o</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,7 +177,7 @@
 <!--Try to edit phonebook but do not supply phonebook's id-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;test=1&amp;hash=e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;test=1&amp;hash=e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,12 +188,12 @@
 <!--Try to edit non existing phonebook-->
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=100</td>
+	<td>billing/test/test_api?u=admin&amp;phonebook_id=100</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=100&amp;test=1&amp;hash=4a1069b7711e1374dac5eee130a771cef40f9b98</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;phonebook_id=100&amp;test=1&amp;hash=4a1069b7711e1374dac5eee130a771cef40f9b98</td>
 	<td></td>
 </tr>
 <tr>
@@ -204,7 +204,7 @@
 <!--Edit admins phopnebook, but nothing has been changed so we should assert that-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=1</td>
+	<td>/billing/test/test_api?u=admin&amp;phonebook_id=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,7 +214,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=2</td>
+	<td>/billing/test/test_api?u=admin&amp;phonebook_id=2</td>
 	<td></td>
 </tr>
 <tr>
@@ -224,7 +224,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
 	<td></td>
 </tr>
 <tr>
@@ -255,7 +255,7 @@
 <!--Edit admins phopnebook-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/test_api?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;name=phonebook2&amp;number=222&amp;speeddial=222&amp;test=1</td>
+	<td>/billing/test/test_api?u=admin&amp;phonebook_id=1&amp;name=phonebook2&amp;number=222&amp;speeddial=222&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -265,7 +265,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;name=phonebook2&amp;number=222&amp;speeddial=222&amp;test=1&amp;hash=291c26fff79c4c652495c5b20312aede20d8bc67</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;phonebook_id=1&amp;name=phonebook2&amp;number=222&amp;speeddial=222&amp;test=1&amp;hash=291c26fff79c4c652495c5b20312aede20d8bc67</td>
 	<td></td>
 </tr>
 <tr>
@@ -295,7 +295,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=3</td>
+	<td>billing/test/test_api?u=user_reseller&amp;phonebook_id=3</td>
 	<td></td>
 </tr>
 <tr>
@@ -305,7 +305,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=88&amp;speeddial=88</td>
+	<td>billing/test/test_api?u=user_reseller&amp;phonebook_id=4&amp;name=phonebook8&amp;number=88&amp;speeddial=88</td>
 	<td></td>
 </tr>
 <tr>
@@ -315,7 +315,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=accountant&amp;p=accountant1&amp;phonebook_id=2&amp;name=phonebook4&amp;number=444&amp;speeddial=444</td>
+	<td>billing/test/test_api?u=accountant&amp;phonebook_id=2&amp;name=phonebook4&amp;number=444&amp;speeddial=444</td>
 	<td></td>
 </tr>
 <tr>
@@ -325,7 +325,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=reseller&amp;p=reseller1&amp;phonebook_id=3&amp;name=phonebook6&amp;number=666&amp;speeddial=666</td>
+	<td>billing/test/test_api?u=reseller&amp;phonebook_id=3&amp;name=phonebook6&amp;number=666&amp;speeddial=666</td>
 	<td></td>
 </tr>
 <tr>
@@ -335,7 +335,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg</td>
+	<td>billing/test/test_api?u=user_reseller&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg</td>
 	<td></td>
 </tr>
 <tr>
@@ -345,7 +345,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/test/test_api?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;number=33d4&amp;speeddial=9.0</td>
+	<td>billing/test/test_api?u=user_reseller&amp;phonebook_id=4&amp;number=33d4&amp;speeddial=9.0</td>
 	<td></td>
 </tr>
 <tr>
@@ -412,7 +412,7 @@
 <!--Verify that accountant cannot edit admins phonebook-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=accountant&amp;p=accountant1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td>billing/api/phonebook_edit?u=accountant&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
 	<td></td>
 </tr>
 <tr>
@@ -423,7 +423,7 @@
 <!--Edit accountant's phonebook-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=accountant&amp;p=accountant1&amp;phonebook_id=2&amp;name=phonebook4&amp;number=444&amp;speeddial=444&amp;test=1&amp;hash=6b697851ea915cb6a5e94a22621300e84da8b51b</td>
+	<td>billing/api/phonebook_edit?u=accountant&amp;phonebook_id=2&amp;name=phonebook4&amp;number=444&amp;speeddial=444&amp;test=1&amp;hash=6b697851ea915cb6a5e94a22621300e84da8b51b</td>
 	<td></td>
 </tr>
 <tr>
@@ -510,7 +510,7 @@
 <!--Verify that reseller cannot edit admin's or accountant's phonebooks-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
 	<td></td>
 </tr>
 <tr>
@@ -520,7 +520,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;phonebook_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
 	<td></td>
 </tr>
 <tr>
@@ -531,7 +531,7 @@
 <!--Edit reseller's phonebook-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=3&amp;name=phonebook6&amp;number=666&amp;speeddial=666&amp;test=1&amp;hash=fe2532c8b6b0a04fa8610bb666614a821f269b85</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;phonebook_id=3&amp;name=phonebook6&amp;number=666&amp;speeddial=666&amp;test=1&amp;hash=fe2532c8b6b0a04fa8610bb666614a821f269b85</td>
 	<td></td>
 </tr>
 <tr>
@@ -624,7 +624,7 @@
 <!--Verify that reseller's user cannot edit admin's, resellers or accountant's phonebooks-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=1&amp;test=1&amp;hash=bc2f114099d16656d37e45fd9e8744cb9386d462</td>
 	<td></td>
 </tr>
 <tr>
@@ -634,7 +634,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c6448df4</td>
 	<td></td>
 </tr>
 <tr>
@@ -644,7 +644,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=3&amp;test=1&amp;hash=7f544a3f166563efce4dc5da5425cdd0d7a41634</td>
 	<td></td>
 </tr>
 <tr>
@@ -655,7 +655,7 @@
 <!--Edit reseller user's phonebook-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=88&amp;speeddial=88&amp;test=1&amp;hash=68bc975f9773138b262dc5fdfcdab60d947b32cb</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=4&amp;name=phonebook8&amp;number=88&amp;speeddial=88&amp;test=1&amp;hash=68bc975f9773138b262dc5fdfcdab60d947b32cb</td>
 	<td></td>
 </tr>
 <tr>
@@ -686,7 +686,7 @@
 <!--Try to set speed dial and number to not numeri values-->
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg&amp;test=1&amp;hash=623e667d1e54a8023f11ff8349e6e258df880116</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg&amp;test=1&amp;hash=623e667d1e54a8023f11ff8349e6e258df880116</td>
 	<td></td>
 </tr>
 <tr>
@@ -696,7 +696,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;number=33d4&amp;speeddial=9.0&amp;test=1&amp;hash=639e09da3b9c31fc9d682c392f17b7cf6c9d6cb9</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=4&amp;number=33d4&amp;speeddial=9.0&amp;test=1&amp;hash=639e09da3b9c31fc9d682c392f17b7cf6c9d6cb9</td>
 	<td></td>
 </tr>
 <tr>
@@ -762,7 +762,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=reseller&amp;p=reseller1&amp;phonebook_id=3&amp;name=phonebook6&amp;number=777&amp;speeddial=777&amp;test=1</td>
+	<td>billing/api/phonebook_edit?u=reseller&amp;phonebook_id=3&amp;name=phonebook6&amp;number=777&amp;speeddial=777&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -792,7 +792,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=user_reseller&amp;p=user_reseller1&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg&amp;test=1</td>
+	<td>billing/api/phonebook_edit?u=user_reseller&amp;phonebook_id=4&amp;name=phonebook8&amp;number=dfg&amp;speeddial=dfg&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -857,7 +857,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;test=1</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -867,7 +867,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=100&amp;test=1</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;phonebook_id=100&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -877,7 +877,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;name=phonebook2&amp;number=333&amp;speeddial=333&amp;test=1</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;phonebook_id=1&amp;name=phonebook2&amp;number=333&amp;speeddial=333&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -904,6 +904,17 @@
 	<td>assertText</td>
 	<td>id=speeddial_1</td>
 	<td>333</td>
+</tr>
+<!--su slaptazodziu-->
+<tr>
+	<td>open</td>
+	<td>billing/api/phonebook_edit?u=admin&amp;p=admin1&amp;phonebook_id=1&amp;name=phonebook2&amp;number=333&amp;speeddial=333&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Phonebook saved</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
