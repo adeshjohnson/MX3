@@ -145,6 +145,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/api/simple_balance?id=hfttv7bcqt&amp;currency=USD&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/simple_balance?id=hfttv7bcqt&amp;currency=USD&amp;test=1&amp;hash=a22e83e00f350846c51fe57eabd6f86030568e49</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>60.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -197,6 +217,16 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/simple_balance?id=hfttv7bcqt&amp;currency=USD&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>60.0000</td>
 	<td></td>
 </tr>
 <tr>
