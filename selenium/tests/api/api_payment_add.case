@@ -1,0 +1,1299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>mor_12_api_payment_add</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">mor_12_api_payment_add</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/mor_eleven_extend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_8']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=allow_api</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=allow_get_api</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=xml_api_extension</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>123456</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_chech_curr_upd_disable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Currency update disabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=exchange_rate</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;image&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=icon_cross_curr_upd_enable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Currency update enabled</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Payments not allow from api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Payments not allow from api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tabTabdhtmlgoodies_tabView1_7']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>API allow Payments:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>API Payment Confirmation:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;p_currency=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4cfb074e61ce69b9634d5d838d05e20888572905</td>
+	<td></td>
+</tr>
+<!--#3 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;p_currency=EUR&amp;amount=100</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>a7338c6cccac11338782a0ceba9d127011519589</td>
+	<td></td>
+</tr>
+<!--#4 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;p_currency=USD&amp;amount=33</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>053f9dfec5c64e7f5b8c352251235394d7d48fa0</td>
+	<td></td>
+</tr>
+<!--#6 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=78yu&amp;p_currency=USD&amp;amount=55&amp;payer_email=agser@dzbsr.er</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>6a081bfedb11e06368a601a6325e59b574950fc4</td>
+	<td></td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=5&amp;p_currency=USD&amp;amount=55&amp;payer_email=sdfg@sdfg.sd&amp;tax_in_amount=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>599d125dec2d2b4b5bc44aea4153cdf2d3172095</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;amount=55&amp;p_currency=USD&amp;paymenttype=manual&amp;transaction=12345678976543</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>59cb152af1e93963c8edd3ae1707e8d79bf565d7</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin1&amp;user_id=2&amp;p_currency=EUR&amp;test=1&amp;hash=4cfb074e61ce69b9634d5d838d05e20888572905</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin1&amp;user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#1 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;test=1&amp;hash=a09edbe69cdd33c11eab3e22a1b2c57bb42d4ce8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>No currency</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;p_currency=2&amp;test=1&amp;hash=4cfb074e61ce69b9634d5d838d05e20888572905</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--#2 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin1&amp;user_id=2&amp;p_currency=EUR&amp;test=1&amp;hash=4cfb074e61ce69b9634d5d838d05e20888572905</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;p_currency=EUR&amp;test=1&amp;hash=4cfb074e61ce69b9634d5d838d05e20888572905</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>0.0000</td>
+</tr>
+<!--#3 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;p_currency=EUR&amp;amount=100&amp;test=1&amp;hash=a7338c6cccac11338782a0ceba9d127011519589</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>100.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_0</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_4</td>
+	<td>8.8000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>7.2000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_2</td>
+	<td>15.2000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#4 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=3&amp;p_currency=USD&amp;amount=33&amp;test=1&amp;hash=053f9dfec5c64e7f5b8c352251235394d7d48fa0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>33.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>33.0000</td>
+</tr>
+<!--#4 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=3&amp;p_currency=USD&amp;amount=33&amp;test=1&amp;hash=053f9dfec5c64e7f5b8c352251235394d7d48fa0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>33.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>33.0000</td>
+</tr>
+<!--#5 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=3&amp;p_currency=USD&amp;amount=55&amp;payer_email=test@test.lt&amp;test=1&amp;hash=b5d09310735a51c2cb9e1d81eb921cb9e84ca589</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>55.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>55.0000</td>
+</tr>
+<!--#6 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=78yu&amp;p_currency=USD&amp;amount=55&amp;payer_email=agser@dzbsr.er&amp;test=1&amp;hash=6a081bfedb11e06368a601a6325e59b574950fc4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=5&amp;p_currency=USD&amp;amount=55&amp;payer_email=sdfg@sdfg.sd&amp;tax_in_amount=1&amp;test=1&amp;hash=599d125dec2d2b4b5bc44aea4153cdf2d3172095</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=3&amp;p_currency=USD&amp;amount=55&amp;paymenttype=manual&amp;transaction=12345678976543&amp;test=1&amp;hash=59cb152af1e93963c8edd3ae1707e8d79bf565d7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>55.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>55.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_0</td>
+	<td>12.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_4</td>
+	<td>8.8000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>42.4000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_2</td>
+	<td>15.2000</td>
+</tr>
+<!--#9 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=0&amp;amount=14&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>4da342086e9e9f3b0b50535f91c154bc9d6b644d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=reseller&amp;user_id=5&amp;p_currency=USD&amp;amount=55&amp;payer_email=sdfg@sdfg.sd&amp;tax_in_amount=1&amp;test=1&amp;hash=69763c9edfb7282dd3cf3b5d93c48d4496abd784</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>55.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>55.0000</td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=resller&amp;user_id=3&amp;p_currency=USD&amp;amount=55&amp;paymenttype=manual&amp;transaction=12345678976543&amp;test=1&amp;hash=6ffc9f55c0c7494c04d6cd633be3b85caced0621</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=reseller&amp;user_id=3&amp;p_currency=USD&amp;amount=55&amp;paymenttype=manual&amp;transaction=12345678976543&amp;test=1&amp;hash=6ffc9f55c0c7494c04d6cd633be3b85caced0621 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#9 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=reseller&amp;user_id=0&amp;amount=14&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;test=1&amp;hash=5268cfc2563c58338071c9c3beb1a6bbacb9fd3e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=user_reseller&amp;user_id=5&amp;p_currency=USD&amp;amount=55&amp;payer_email=sdfg@sdfg.sd&amp;tax_in_amount=1&amp;test=1&amp;hash=69763c9edfb7282dd3cf3b5d93c48d4496abd784</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=user_reseller&amp;user_id=3&amp;p_currency=USD&amp;amount=55&amp;paymenttype=manual&amp;transaction=12345678976543&amp;test=1&amp;hash=6ffc9f55c0c7494c04d6cd633be3b85caced0621</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#9 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=user_reseller&amp;user_id=0&amp;amount=14&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;test=1&amp;hash=5268cfc2563c58338071c9c3beb1a6bbacb9fd3e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#7 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=accountant&amp;p=accountant1&amp;user_id=5&amp;p_currency=USD&amp;amount=55&amp;payer_email=sdfg@sdfg.sd&amp;tax_in_amount=1&amp;test=1&amp;hash=599d125dec2d2b4b5bc44aea4153cdf2d3172095</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<!--#8 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=accountant&amp;p=accountant1&amp;user_id=3&amp;p_currency=USD&amp;amount=55&amp;paymenttype=manual&amp;transaction=12345678976543&amp;test=1&amp;hash=59cb152af1e93963c8edd3ae1707e8d79bf565d7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>55.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>55.0000</td>
+</tr>
+<!--#9 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=accountant&amp;p=accountant1&amp;user_id=0&amp;amount=14&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;test=1&amp;hash=4da342086e9e9f3b0b50535f91c154bc9d6b644d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=payment_id</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>14.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_5</td>
+	<td>90.0000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>50.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User's settings successfully changed:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>53.4000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_4</td>
+	<td>8.8000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_0</td>
+	<td>14.8000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_2</td>
+	<td>15.2000</td>
+</tr>
+<!--#10 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;amount=-14&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>12368e8634ce83063bfa807fe8eeb5722d17e1f9</td>
+	<td></td>
+</tr>
+<!--#11 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;amount=-105&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>53e7db377c850ee43179609e61974e29b4e89108</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#10 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=2&amp;amount=-14&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=1&amp;test=1&amp;hash=12368e8634ce83063bfa807fe8eeb5722d17e1f9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>-4.6667</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>-9.3333</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>-14.0000</td>
+</tr>
+<!--#11 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=3&amp;amount=-105&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=0&amp;test=1&amp;hash=53e7db377c850ee43179609e61974e29b4e89108</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tax</td>
+	<td>-52.5000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=amount</td>
+	<td>-105.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=gross</td>
+	<td>-157.5000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_0</td>
+	<td>14.8000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_4</td>
+	<td>8.8000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_3</td>
+	<td>32.4000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_2</td>
+	<td>13.3333</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_payment_confirmation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=api_payment_confirmation</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_35</td>
+	<td>payment: from_api :</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_58</td>
+	<td>payment: from_api : gateways_paypal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_38</td>
+	<td>payment: from_api : manual</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=transaction_15</td>
+	<td>12345678976543</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_15</td>
+	<td>From_api : manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_19</td>
+	<td>From_api : gateways_paypal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_20</td>
+	<td>-105.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amount_13</td>
+	<td>33.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=amout_with_tax_17</td>
+	<td>55.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_with_tax</td>
+	<td>41.3800 (EGP)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_11</td>
+	<td>EUR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=currency_17</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_amount_completed</td>
+	<td>52.0133 (EGP)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_with_tax_completed</td>
+	<td>41.3800 (EGP)</td>
+</tr>
+<!--#12 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=3&amp;amount=^&amp;*&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=&amp;&amp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>753c9f0ed6659a9bcd89eb9bee09f6ef4ebc9c65</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--#12 hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;user_id=3&amp;amount=^&amp;*&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=&amp;&amp;&amp;test=1&amp;hash=753c9f0ed6659a9bcd89eb9bee09f6ef4ebc9c65</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ok 21 0.0000 0.0000 0.0000</td>
+	<td></td>
+</tr>
+<!--su slaptazodziu-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/create_payment?u=admin&amp;p=admin1&amp;user_id=3&amp;amount=^&amp;*&amp;p_currency=USD&amp;paymenttype=gateways_paypal&amp;transaction=12345678976543&amp;tax_in_amount=&amp;&amp;&amp;test=1&amp;hash=753c9f0ed6659a9bcd89eb9bee09f6ef4ebc9c65</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ok 22 0.0000 0.0000 0.0000</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
