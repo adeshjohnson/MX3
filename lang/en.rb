@@ -4587,6 +4587,7 @@ Localization.define('en') do |l|
   l.store 'Password_cannot_be_longer_than', 'Password cannot be longer than 30'
   l.store 'legA_info', 'If Callback or Device CID for legA is empty, Source(CallerID of originator) will be sent back to originator as CallerID'
   l.store 'legB_info', 'If Callback or Device CID for legB is empty, Source(CallerID of originator) will be sent to Destination as CallerID'
+  l.store 'Change_LCR_priority_using_drag_and_drop', 'Change LCR priority by using drag and drop'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

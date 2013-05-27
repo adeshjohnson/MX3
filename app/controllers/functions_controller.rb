@@ -1313,8 +1313,10 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i                                                                                                         
     Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)                                                                                                                    
     Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)                                                                                                                  
-    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)   
-      
+    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
+
+    Confline.set_value('LCR_priority_using_drag_and_drop', params[:lcr_priority_using_drag_and_drop])
+
     # PRIVACY settings
     Confline.set_value("Hide_Destination_End", params[:hide_destination_ends_gui].to_i + params[:hide_destination_ends_csv].to_i + params[:hide_destination_ends_pdf].to_i)
     # /PRIVACY settings
