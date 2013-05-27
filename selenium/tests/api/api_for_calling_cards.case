@@ -1542,21 +1542,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_7 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
-</tr>
-<tr>
 	<td>check</td>
 	<td>id=api_disable_hash_checking</td>
 	<td></td>
@@ -1595,21 +1580,6 @@
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#tabTabdhtmlgoodies_tabView1_6 &gt; span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Disable hash checking:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=api_disable_hash_checking</td>
-	<td>off</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -1868,6 +1838,108 @@
 	<td>assertText</td>
 	<td>css=currency</td>
 	<td>XAF</td>
+</tr>
+<!--cc by cli api testing (password)-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=id</td>
+	<td>41</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=cardgroup_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=callerid</td>
+	<td>4444</td>
+</tr>
+<!--su slaptazodziu-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cc_by_cli?u=admin&amp;p=admin1&amp;cardgroup_id=1&amp;callerid=4444&amp;amount=100&amp;test=1&amp;hash=d703d39e26dd770b614d3e0786373aecb4378fa3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=id</td>
+	<td>41</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=cardgroup_id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_with_vat</td>
+	<td>0.0000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=callerid</td>
+	<td>4444</td>
 </tr>
 </tbody></table>
 </body>
