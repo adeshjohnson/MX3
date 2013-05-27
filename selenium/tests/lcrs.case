@@ -1185,6 +1185,63 @@
 	<td>css=#item_2 &gt; td</td>
 	<td>exact:Test2:SIP:</td>
 </tr>
+<!--drag and drop functionality-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_10 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Change LCR priority by using drag and drop:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=lcr_priority_using_drag_and_drop</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=lcr_priority_using_drag_and_drop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_10 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=lcr_priority_using_drag_and_drop</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_sort/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=img[alt=&quot;Arrow_down_blue&quot;]</td>
+	<td></td>
+</tr>
+<!--patikrinti drag and drop-->
 </tbody></table>
 </body>
 </html>
