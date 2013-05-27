@@ -9,7 +9,7 @@
   	    <%= image_tag 'icons/cross.png', :title => _('Enable') if not @lcr.provider_active(item.id) %>
         <%= item.name %>
         <% unless current_user.usertype == 'reseller' and item.common_use == 1 %>
-          :<%= item.tech %>:<%= item.tariff.name %>
+          :<%= item.tech.to_s %><%= (":" + item.tariff.name.to_s) if item.tariff %>
         <% end %>
       </li>
     <% end %>
