@@ -225,6 +225,7 @@ begin
   end
   #------------- Device model ----------------
   class Device < ActiveRecord::Base
+    set_inheritance_column :ruby_type
   end
   #------------- devicetypes model ----------------
   class Devicetype < ActiveRecord::Base
