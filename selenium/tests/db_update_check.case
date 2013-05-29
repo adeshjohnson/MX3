@@ -51,6 +51,41 @@
 	<td># bundle loaded</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>2012-11-30 19:16:26</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
