@@ -67,15 +67,12 @@
      <td colspan="2" height="10"></td>
    </tr>
    <tr>
-     <td colspan="2" class="bottom_border">
-       <b><%= _('Call_over_quick_forward_did') %></b>
+     <td colspan="2">
+       <%= _('Call_over_quick_forward_did') %>
      </td>
    </tr>
-   <tr>
-     <td colspan="2" height="10"></td>
-   </tr>
     <tr>
-      <td><%= _('Tell_balance') %>:</td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Tell_balance') %>:</td>
       <td>
         <%= radio_button_tag('device[qf_tell_balance]', 0, checked = (device_qf_tell_balance.to_i == 0)) %> <%= _('No') %>
         <%= radio_button_tag('device[qf_tell_balance]', 1, checked = (device_qf_tell_balance.to_i == 1)) %> <%= _('Yes') %>
@@ -83,7 +80,7 @@
       </td>
     </tr>
     <tr>
-      <td> <%= _('Tell_time') %>:</td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= _('Tell_time') %>:</td>
       <td>
         <%= radio_button_tag('device[qf_tell_time]', 0, checked = (device_qf_tell_time.to_i == 0)) %> <%= _('No') %>
         <%= radio_button_tag('device[qf_tell_time]', 1, checked = (device_qf_tell_time.to_i == 1)) %> <%= _('Yes') %>
