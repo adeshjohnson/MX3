@@ -2194,7 +2194,7 @@ class TariffsController < ApplicationController
     @add_percent = params[:add_percent].to_d
     @add_confee_amount = params[:add_confee_amount].to_d
     @add_confee_percent = params[:add_confee_percent].to_d
-    if session[:usertype] == "admin"
+    if admin? or accountant?
       @t_type = params[:t_type] if params[:t_type].to_s.length > 0
     end
     if session[:usertype] == "reseller"

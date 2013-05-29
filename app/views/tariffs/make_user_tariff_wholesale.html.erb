@@ -16,7 +16,7 @@
     <%= _('Add_connection_fee_amount') %>: <%= text_field_tag 'add_confee_amount', "", "class" => "input", :size => "5", :maxlength => "4" %>
     <br>
     <%= _('Add_connection_fee_percent') %>: <%= text_field_tag 'add_confee_percent', "", "class" => "input", :size => "5", :maxlength => "4" %>%
-    <% if session[:usertype] == "admin" %>
+    <% if admin? or accountant? %>
         <br>
         <br>
         <select name="t_type">
