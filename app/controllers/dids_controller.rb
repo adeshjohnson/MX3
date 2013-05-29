@@ -1456,6 +1456,7 @@ ORDER BY dids.did ASC"
       if @device
         cond << "dids.device_id = ?"
         var  << params[:device].strip
+        @opts[:device] = @device.id
       end
     end
     if params[:did] and params[:did][:provider_id] and !params[:did][:provider_id].strip.blank?

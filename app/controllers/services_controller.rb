@@ -296,7 +296,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @subs = []
     iend = ((session[:items_per_page] * @page) - 1)
     iend = @all_subs.size - 1 if iend > (@all_subs.size - 1)
-    for i in ((@page - 1) * session[:items_per_page])..iend
+    for i in ((@page - 1) * session[:items_per_page].to_i)..iend
       @subs << @all_subs[i]
     end
   end
