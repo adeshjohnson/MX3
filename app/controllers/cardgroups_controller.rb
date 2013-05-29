@@ -320,9 +320,14 @@ class CardgroupsController < ApplicationController
 
     if @cg.destroy_or_hide
       flash[:status] = _('Cardgroup_was_deleted')
+      unless @cg.status.blank?
+        @cg.status.each do |msg|
+          flash[:status] += "<br />* #{msg}"
+        end
+      end
       redirect_to :action => 'list'
     else
-      flash_errors_for(_('Card_was_not_deleted'), cg)
+      flash_errors_for(_('Card_was_not_deleted'), @cg)
       redirect_to :action => 'list' and return false
     end
   end

@@ -2,6 +2,7 @@
 class Cardgroup < ActiveRecord::Base
 
   attr_accessor :temp_pl   #nasty hack for pin_length. When you call pin_length returns always int value, we dont need this ! Used only in group creation.
+  attr_accessor :status
 
 
   belongs_to :tariff
@@ -93,9 +94,11 @@ class Cardgroup < ActiveRecord::Base
         end
       end
 
-
-      Card.delete_and_hide_from_sql({:cardgroup_id => id, :start_num => self.first_start_number, :end_num => self.last_end_number})
-
+      deleted, hidden = Card.delete_and_hide_from_sql({:cardgroup_id => id, :start_num => self.first_start_number, :end_num => self.last_end_number})
+      self.status =[]
+      (self.status << "#{deleted.to_i} " + _("Deleted")) unless deleted.to_i.zero?
+      (self.status << "#{hidden.to_i} " + _("Hidden")) unless hidden.to_i.zero?
+     
     end
 
     unless Card.where(['cardgroup_id = ?', id]).first
@@ -114,7 +117,6 @@ class Cardgroup < ActiveRecord::Base
       self.save
       Action.add_action_hash(User.current, {:action => 'calling_card_group_deleted_and_hidden', :target_id => id, :target_type => 'CardGroup'})
     end
-
   end
 
   def first_start_number
