@@ -96,8 +96,8 @@ class Cardgroup < ActiveRecord::Base
 
       deleted, hidden = Card.delete_and_hide_from_sql({:cardgroup_id => id, :start_num => self.first_start_number, :end_num => self.last_end_number})
       self.status =[]
-      (self.status << "#{deleted.to_i} " + _("Deleted")) unless deleted.to_i.zero?
-      (self.status << "#{hidden.to_i} " + _("Hidden")) unless hidden.to_i.zero?
+      (self.status << "#{deleted.to_i} " + _("Cards_Deleted")) unless deleted.to_i.zero?
+      (self.status << "#{hidden.to_i} "  + _("Cards_Hidden"))  unless hidden.to_i.zero?
      
     end
 

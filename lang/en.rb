@@ -2557,6 +2557,8 @@ Localization.define('en') do |l|
   l.store 'Total_price', 'Total price'
   l.store 'Buy', 'Buy'
   l.store 'Cards_were_successfully_bought', 'Cards bought'
+  l.store 'Cards_Deleted', 'Card(s) deleted'
+  l.store 'Cards_Hidden', 'Card(s) hidden'
   l.store 'Cannot_fill_unsold_Card', 'Cannot fill unsold Card'
   l.store 'Not_enough_columns_check_csv_separators', 'Not enough columns - select correct Column Separator'
   l.store 'Buy_Card', 'Buy Card'
