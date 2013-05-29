@@ -1451,6 +1451,13 @@ ORDER BY dids.did ASC"
 
     var = [@from, @till]
     cond = ["dids.did BETWEEN ? AND ?"]
+    unless params[:device].to_s.strip.blank?
+      @device = Device.where(id: params[:device].to_s.strip).first
+      if @device
+        cond << "dids.device_id = ?"
+        var  << params[:device].strip
+      end
+    end
     if params[:did] and params[:did][:provider_id] and !params[:did][:provider_id].strip.blank?
       @provider = Provider.where(:id => params[:did][:provider_id]).first
       var << params[:did][:provider_id].to_i
@@ -1471,14 +1478,6 @@ ORDER BY dids.did ASC"
         end
         var << params[:user].strip
         @opts[:user] = @user.id
-        if params[:device] and !params[:device].strip.blank?
-          @device = Device.where(:id => params[:device].strip, :user_id => @user.id).first
-          if @device
-            cond << "dids.device_id = ?"
-            var << params[:device].strip
-            @opts[:device] = @device.id
-          end
-        end
       end
     end
     if active.to_i == 1
