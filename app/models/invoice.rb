@@ -807,7 +807,9 @@ class Invoice < ActiveRecord::Base
   end
 
   def pdf_end(pdf, options)
-    if Confline.get_value("#{options[:prepaid]}Invoice_show_additional_details_on_separate_page", options[:owner].id).to_i == 1
+    add_details = Confline.get_value("#{options[:prepaid]}Invoice_show_additional_details_on_separate_page", options[:owner].id)
+    add_details2 = Confline.get_value2("#{options[:prepaid]}Invoice_show_additional_details_on_separate_page", options[:owner].id)
+    if add_details.to_i == 1 and !add_details2.to_s.strip.blank?
       pdf = PdfGen::Generate.generate_additional_details_for_invoice_pdf(pdf, Confline.get_value2("#{options[:prepaid]}Invoice_show_additional_details_on_separate_page", options[:owner].id))
     end
     string = "<page>/<total>"
