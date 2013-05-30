@@ -201,6 +201,159 @@
 	<td>id=activation_end_minute</td>
 	<td>59</td>
 </tr>
+<!--pakeiciamas admin timezone-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT+09:00) Tokyo</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details changed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_start_year</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_start_month</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_start_day</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_start_hour</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_start_minute</td>
+	<td>00</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_end_year</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_end_month</td>
+	<td>February</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_end_day</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_end_hour</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_end_minute</td>
+	<td>59</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscriptions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=activation_start_2</td>
+	<td>2013-01-25 00:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=activation_end_2</td>
+	<td>2013-02-25 23:59:00</td>
+</tr>
+<!--atkomentuoti, kai bus padarytas #7440-->
+<!--<tr> 	<td>open</td> 	<td>/billing/services/subscription_new/5</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_year</td> 	<td>label=2013</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_year</td> 	<td>label=2013</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_month</td> 	<td>label=February</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_day</td> 	<td>label=31</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_month</td> 	<td>label=March</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_day</td> 	<td>label=31</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_hour</td> 	<td>label=00</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_minute</td> 	<td>label=00</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_hour</td> 	<td>label=23</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_minute</td> 	<td>label=59</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Subscription added</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_start_3</td> 	<td>2013-03-03 00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_end_3</td> 	<td>2013-03-31 23:59:00</td> </tr>-->
 </tbody></table>
 </body>
 </html>
