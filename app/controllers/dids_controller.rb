@@ -1167,7 +1167,7 @@ ORDER BY dids.did ASC"
         flash[:status] = _('Did_interval_rate_edited')
       end
 
-      redirect_to :action => 'dids_interval_rates', :from => params[:from], :till => params[:till], :user => params[:user]
+      redirect_to :action => 'dids_interval_rates', :from => params[:from], :till => params[:till], :user => params[:user], :device => params[:device]
 
     else
       update_rate(params[:id], params[:rate], params[:con_fee], params[:inc], params[:min_time])
