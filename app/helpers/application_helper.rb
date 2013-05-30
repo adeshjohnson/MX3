@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def nice_user_timezone(datetime)
-    time = datetime.to_time.in_time_zone(current_user.time_zone)
+    time = Time.zone.parse(datetime.to_s)
     format = session[:date_time_format].to_s.blank? ? "%Y-%m-%d %H:%M:%S" : session[:date_time_format].to_s
     d = time.strftime(format.to_s)
     return d
