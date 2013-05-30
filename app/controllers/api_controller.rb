@@ -2655,6 +2655,8 @@ class ApiController < ApplicationController
                 a = Thread.new { configure_extensions(device.id, {:api => 1, :current_user => @user}) }
                 doc.status(device.check_callshop_user(_('device_created')))
                 doc.id(device.id)
+                doc.username(device.username)
+                doc.password(device.secret)
               else
                 doc.error("Device was not created")
                 device.errors.each { |key, value|
