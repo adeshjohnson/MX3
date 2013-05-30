@@ -42,8 +42,7 @@ class Device < ActiveRecord::Base
   validates_presence_of :name, :message => _('Device_must_have_name')
   validates_presence_of :extension, :message => _('Device_must_have_extension')
   validates_uniqueness_of :extension, :message => _('Device_extension_must_be_unique')
-  validates_uniqueness_of :username, :message => _('Device_Username_Must_Be_Unique'), :if => :username_must_be_unique_check
-  # validates_format_of :name, :with => /^\w+$/,  :on=>:create, :message => _('Device_username_must_consist_only_of_digits_and_letters')
+  validates_uniqueness_of :username, :scope => [:username, :secret, :ipaddr, :port, :device_type], :message => _('Device_Username_Must_Be_Unique'), :if => :with_owner_credentials
   validates_format_of :max_timeout, :with => /^[0-9]+$/, :message => _('Device_Call_Timeout_must_be_greater_than_or_equal_to_0')
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{ |o| not o.port.blank? }
 
@@ -747,8 +746,12 @@ class Device < ActiveRecord::Base
     Locationrule.where(:device_id => self.id).first
   end
 
+  def with_owner_credentials
+    Confline.get_value("Disalow_Duplicate_Device_Usernamess", 0).to_i == 1 and (user_id.to_i == -1 or (self.provider.user_id.to_s != User.current.to_s))
+  end
+
   def username_must_be_unique_on_creation
-    self.device_ip_authentication_record.to_i == 0 and !self.provider
+    self.device_ip_authentication_record.to_i == 0 and self.provider and Confline.get_value("Disalow_Duplicate_Device_Usernamess").to_i == 1
   end
 
   def dynamic? 

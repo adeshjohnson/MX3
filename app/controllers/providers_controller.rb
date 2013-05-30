@@ -198,12 +198,6 @@ class ProvidersController < ApplicationController
 
     params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
 
-    login_unique = Device.where(:username => @provider.login.strip).first
-    if !login_unique.blank? and Confline.get_value("Disalow_Duplicate_Device_Usernames").to_i == 1
-      flash[:notice] = _('Device_Username_Must_Be_Unique')
-      redirect_to :action => 'new' and return false
-    end
-
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
       flash[:notice] = _('Please_select_server')
       redirect_to :action => 'new' and return false
