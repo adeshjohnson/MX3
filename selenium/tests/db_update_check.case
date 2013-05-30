@@ -43,13 +43,23 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_bundle_sql/?path=deactivate_addons/ad</td>
+	<td>/billing/test/load_bundle_sql/?path=test/rspro</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
+	<td>assertTextPresent</td>
 	<td># bundle loaded</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=own_providers</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>open</td>
