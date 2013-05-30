@@ -191,7 +191,7 @@ class AccountingController < ApplicationController
             MorLog.my_debug("Try send invoice to : #{user.address.email}, Invoice : #{invoice.id}, User : #{user.id}, Email : #{email.id}", 1)
             #@num = EmailsController.send_email_with_attachment(email, email_from, user, attach, variables)
 
-            email.body = email.body.to_s.gsub('<%= login_url %>', Web_URL.to_s + Web_Dir + "/callc/login/" + current_user.get_hash).gsub('<%= login_username %>', user.username).gsub('<%= login_password %>', "*****")
+            email.body = nice_email_body(email.body)
 
             @num = EmailsController.send_invoices(email, user.email.to_s, email_from, attach, invoice.number.to_s)
 

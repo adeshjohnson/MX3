@@ -2827,6 +2827,12 @@ Variables: (Names marked with * are required)
     end
   end
 
+  def nice_email_body(email_body)
+    p = email_body.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s.gsub(/<%=/, '??!!@proc#@').gsub(/%>/, '??!!@proc#$') }
+    p = p.gsub(/<%=|<%|%>/, '').gsub('??!!@proc#@', '<%=').gsub('??!!@proc#$', '%>')
+    p.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s if Email::ALLOWED_VARIABLES.include?(s.match(/<%=?\s*(\S+)\s*%>/)[1]) }
+  end
+
   private
 
   def store_location
