@@ -1118,6 +1118,11 @@ ORDER BY dids.did ASC"
         add_condition = ""
       end
 
+      device_id = params[:device].to_s.strip
+      unless device_id.blank?
+        add_condition << " and device_id = #{device_id} "
+      end
+
       if reseller?
         @dids = Did.find(:all, :conditions => ["did >= ? AND did <= ? AND dids.reseller_id = ? #{add_condition}", params[:from], params[:till], current_user.id])
       else
