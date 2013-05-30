@@ -985,23 +985,25 @@ ORDER BY dids.did ASC"
       cond << "reseller_id = ?"
       var << current_user.id
     end
+
+    if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all')
+      @device = current_user.load_users_devices(:first, :conditions => ["devices.id = #{params[:device]}"])
+      if @device
+        cond << "dids.device_id = ?"
+        var << @device.id
+        @opts[:device] = @device.id
+      else
+        flash[:notice] = _("Device_not_found")
+        redirect_to({:action => 'dids_interval_add_to_user'}.merge(@opts)) and return false
+      end
+    end
+
     if params[:user] and !params[:user].strip.blank?
       @user = User.find(:first, :conditions => {:id => params[:user].strip})
       if @user and @user.owner_id == correct_owner_id
         cond << "dids.user_id = ?"
         var << @user.id
         @opts[:user] = @user.id
-        if params[:device] and not (params[:device].strip.blank? or params[:device].strip.downcase == 'all')
-          @device = current_user.load_users_devices(:first, :conditions => ["devices.id = #{params[:device]}"])
-          if @device
-            cond << "dids.device_id = ?"
-            var << @device.id
-            @opts[:device] = @device.id
-          else
-            flash[:notice] = _("Device_not_found")
-            redirect_to({:action => 'dids_interval_add_to_user'}.merge(@opts)) and return false
-          end
-        end
       else
         dont_be_so_smart
         redirect_to :controller => :callc, :action => :main and return false
