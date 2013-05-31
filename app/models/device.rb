@@ -42,13 +42,13 @@ class Device < ActiveRecord::Base
   validates_presence_of :name, :message => _('Device_must_have_name')
   validates_presence_of :extension, :message => _('Device_must_have_extension')
   validates_uniqueness_of :extension, :message => _('Device_extension_must_be_unique')
-  validates_uniqueness_of :username, :scope => [:username, :secret, :ipaddr, :port, :device_type], :message => _('Device_Username_Must_Be_Unique'), :if => :with_owner_credentials
+  #validates_uniqueness_of :username, :scope => [:username, :secret, :ipaddr, :port, :device_type], :message => _('Device_Username_Must_Be_Unique'), :if => :with_owner_credentials
   validates_format_of :max_timeout, :with => /^[0-9]+$/, :message => _('Device_Call_Timeout_must_be_greater_than_or_equal_to_0')
   validates_numericality_of :port, :message => _("Port_must_be_number"), :if => Proc.new{ |o| not o.port.blank? }
 
   # before_create :check_callshop_user
-  before_save :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi, :ast18, :t38pt_normalize, :check_subnet
-  before_update :validate_fax_device_codecs, :check_subnet
+  before_save :uniqueness_check, :validate_extension_from_pbx, :ensure_server_id, :random_password, :check_and_set_defaults, :check_password, :ip_must_be_unique_on_save, :check_language, :check_location_id, :check_dymanic_and_ip, :set_qualify_if_ip_auth, :validate_trunk, :update_mwi, :ast18, :t38pt_normalize, :check_subnet
+  before_update :uniqueness_check, :validate_fax_device_codecs, :check_subnet
   after_create :create_codecs, :device_after_create
   after_save :device_after_save#, :prune_device #do not prune devices after save! it abuses AMI and crashes live calls (#11709)! prune_device is done in device_update->configure_extensions->prune_device
 
@@ -746,8 +746,22 @@ class Device < ActiveRecord::Base
     Locationrule.where(:device_id => self.id).first
   end
 
-  def with_owner_credentials
-    Confline.get_value("Disalow_Duplicate_Device_Usernamess", 0).to_i == 1 and (user_id.to_i == -1 or (self.provider.user_id.to_s != User.current.to_s))
+  def uniqueness_check
+    fields	= %w{ username secret ipaddr port device_type }
+    query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
+
+    if self.provider
+      is_owner	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
+    else
+      is_owner	= ["devices.id != ?", self.id]    
+    end
+
+    filter_active	= Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
+    no_duplicates	= Device.where(query).joins('LEFT JOIN providers on providers.device_id = devices.id').where(is_owner).size.zero?
+
+    unless (filter_active and no_duplicates)
+      errors.add(:username, _('Device_Username_Must_Be_Unique')) and return false
+    end
   end
 
   def username_must_be_unique_on_creation
