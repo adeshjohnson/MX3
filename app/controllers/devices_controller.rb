@@ -675,9 +675,6 @@ class DevicesController < ApplicationController
         @device.port = 0
       end
 
-      @device.canreinvite = params[:canreinvite]
-      @device.transfer = params[:canreinvite]
-
       #asterisk 1.2.x
       #@device.notransfer = "yes"
       #@device.notransfer = "no" if params[:canreinvite] = "yes"
@@ -1940,8 +1937,8 @@ class DevicesController < ApplicationController
       Confline.set_value("Default_device_ipaddr", "", session[:user_id])
     end
 
-    Confline.set_value("Default_device_regseconds", params[:canreinvite], session[:user_id])
-    Confline.set_value("Default_device_canreinvite", params[:canreinvite], session[:user_id])
+    Confline.set_value("Default_device_regseconds", params[:device][:canreinvite], session[:user_id])
+    Confline.set_value("Default_device_canreinvite", params[:device][:canreinvite], session[:user_id])
 
     default_transport = 'udp'
     valid_transport_options = ['tcp', 'udp', 'tcp,udp', 'udp,tcp']

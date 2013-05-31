@@ -61,9 +61,14 @@
       <% if session[:usertype] != "reseller" %>
           <tr>
             <td colspan=2>
-              <%= _('Media_control') %> - <%= _('canreinvite') %>/<%= _('transfer') %>:
-              <%= radio_button_tag('canreinvite', 'no', checked = (device_canreinvite == 'no')) %> <%= _('No') %>
-              <%= radio_button_tag('canreinvite', 'yes', checked = (device_canreinvite == 'yes')) %> <%= _('Yes') %>
+              <%= _('Media_control') %> - <%= _('canreinvite') %>:
+              <select id="canreinvite" name="device[canreinvite]">
+                <option value="no" <%= "selected" if device_canreinvite == "no" %>> <%= _('No') %></option>
+                <option value="yes" <%= "selected" if device_canreinvite == "yes" %>> <%= _('Yes') %></option>
+                <option value="nonat" <%= "selected" if device_canreinvite == "nonat" %>> nonat</option>
+                <option value="update" <%= "selected" if device_canreinvite == "update" %>> <%= _('Update') %></option>
+                <option value="update,nonat" <%= "selected" if device_canreinvite == "update,nonat" %>> <%= _('Update') %>,nonat</option>
+              </select>
             </td>
           </tr>
           <script type="text/javascript">
@@ -71,11 +76,9 @@
               function disable_media_control_if_necesary(value) {
                   /*if some other than SIP device type was selected, then disable
                    canreinvite option completly*/
-                  var canreinvite_yes = $('canreinvite_yes');
-                  var canreinvite_no = $('canreinvite_no');
+                  var canreinvite = $('canreinvite');
                   var enable = (value != 'SIP');
-                  canreinvite_yes.disabled = enable;
-                  canreinvite_no.disabled = enable;
+                  canreinvite.disabled = enable;
               }
 
               /*add event listener for onload event and for onclick event for all device
