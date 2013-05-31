@@ -2827,6 +2827,14 @@ Variables: (Names marked with * are required)
     end
   end
 
+  def nice_email_sent(email, assigns = {})
+    email_builder = ActionView::Base.new(nil, assigns)
+    email_builder.render(
+        :inline => nice_email_body(email.body),
+        :locals => assigns
+    )
+  end
+
   def nice_email_body(email_body)
     p = email_body.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s.gsub(/<%=/, '??!!@proc#@').gsub(/%>/, '??!!@proc#$') }
     p = p.gsub(/<%=|<%|%>/, '').gsub('??!!@proc#@', '<%=').gsub('??!!@proc#$', '%>')
