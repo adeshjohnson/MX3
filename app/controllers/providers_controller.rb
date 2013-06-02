@@ -427,9 +427,8 @@ class ProvidersController < ApplicationController
       @device.qualify = "no"
     end
 
-    params[:canreinvite] = @device.canreinvite if not params[:canreinvite]
-    @device.canreinvite = params[:canreinvite].strip
-    @device.transfer = params[:canreinvite].strip
+    @device.canreinvite = @device.canreinvite.strip
+    @device.transfer = @device.canreinvite.strip
 
     @device.fromuser = params[:fromuser]
     @device.fromuser = nil if not params[:fromuser] or params[:fromuser].length < 1

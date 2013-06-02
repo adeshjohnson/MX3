@@ -288,9 +288,14 @@
 
         <tr>
           <td colspan=2>
-            <%= _('Media_control') %> - <%= _('can_reinvite') %>/<%= _('transfer') %>:
-            <%= radio_button_tag('canreinvite', 'no', @device.canreinvite == 'no') %> <%= _('No') %>
-            <%= radio_button_tag('canreinvite', 'yes', @device.canreinvite == 'yes') %> <%= _('Yes') %>
+            <%= _('Media_control') %> - <%= _('canreinvite') %>:
+            <select id="canreinvite" name="device[canreinvite]">
+              <option value="no" <%= "selected" if @device.canreinvite == "no" %>> <%= _('No') %></option>
+              <option value="yes" <%= "selected" if @device.canreinvite == "yes" %>> <%= _('Yes') %></option>
+              <option value="nonat" <%= "selected" if @device.canreinvite == "nonat" %>> <%= _('Nonat') %></option>
+              <option value="update" <%= "selected" if @device.canreinvite == "update" %>> <%= _('Update') %></option>
+              <option value="update,nonat" <%= "selected" if @device.canreinvite == "update,nonat" %>> <%= _('Update') %>,<%= _('Nonat') %></option>
+            </select>
           </td>
         </tr>
 
