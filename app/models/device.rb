@@ -750,16 +750,16 @@ class Device < ActiveRecord::Base
 
     if self.provider
       fields	= %w{ username secret ipaddr port device_type }
-      is_owner	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
+      matches	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
     else
       fields	= %w{ username secret }
-      is_owner	= ["devices.id != ?", self.id]    
+      matches	= ["host = 'dynamic' AND devices.id != ?", self.id]    
     end
 
     query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
 
     filter_active	= Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
-    zero_duplicates	= Device.where(query).joins('LEFT JOIN providers on providers.device_id = devices.id').where(is_owner).size.zero?
+    zero_duplicates	= Device.where(query).joins('LEFT JOIN providers on providers.device_id = devices.id').where(matches).size.zero?
 
     if filter_active and not zero_duplicates
       errors.add(:username, _('Device_Username_Must_Be_Unique')) and return false
