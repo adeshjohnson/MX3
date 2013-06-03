@@ -143,7 +143,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Such username already used in Device or Provider</td>
+	<td>Provider was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Provider name must be unique</td>
 	<td></td>
 </tr>
 <tr>
@@ -252,54 +257,54 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu9</td>
-	<td>Calls</td>
+	<td>assertElementPresent</td>
+	<td>xpath=(//a[contains(@href, '/billing/stats/last_calls_stats')])[2]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu10</td>
-	<td>Last calls</td>
+	<td>assertElementPresent</td>
+	<td>xpath=(//a[contains(@href, '/billing/stats/last_calls_stats')])[3]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu11</td>
-	<td>Missed calls</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/stats/missed_calls')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu12</td>
-	<td>Graphs</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/stats/user_stats')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu13</td>
-	<td>Recordings</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/recordings/list_recordings')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu15</td>
-	<td>CLIs</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/devices/user_device_clis')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu16</td>
-	<td>PhoneBook</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/phonebooks/list')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu17</td>
-	<td>Quick Forwards</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/dids/quickforwarddids')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=spersonal_menu18</td>
-	<td>Faxes</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/stats/faxes_list/3')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>spersonal_menu19</td>
-	<td>Callback</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/functions/callback')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -758,9 +763,9 @@
 	<td>5060</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>canreinvite_no</td>
-	<td></td>
+	<td>assertSelectedLabel</td>
+	<td>canreinvite</td>
+	<td>no</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -969,9 +974,9 @@
 	<td>1.0.0.2</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>canreinvite_yes</td>
-	<td></td>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=yes</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1205,9 +1210,9 @@
 	<td>5061</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>canreinvite_yes</td>
-	<td></td>
+	<td>assertSelectedLabel</td>
+	<td>canreinvite</td>
+	<td>yes</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -1874,9 +1879,9 @@
 	<td>4569</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>canreinvite_no</td>
-	<td></td>
+	<td>assertSelectedLabel</td>
+	<td>canreinvite</td>
+	<td>no</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
@@ -2050,9 +2055,9 @@
 	<td>5061</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>canreinvite_yes</td>
-	<td></td>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=yes</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2261,9 +2266,9 @@
 	<td>5061</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>canreinvite_yes</td>
-	<td></td>
+	<td>assertSelectedLabel</td>
+	<td>canreinvite</td>
+	<td>yes</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
