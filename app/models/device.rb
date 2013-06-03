@@ -752,7 +752,7 @@ class Device < ActiveRecord::Base
       fields	= %w{ username secret ipaddr port device_type }
       matches	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
     else
-      fields	= %w{ username secret }
+      fields	= %w{ username } # why only username?
       matches	= ["host = 'dynamic' AND devices.id != ?", self.id]    
     end
 
