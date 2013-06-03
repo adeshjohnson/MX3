@@ -192,7 +192,7 @@ class AccountingController < ApplicationController
             #@num = EmailsController.send_email_with_attachment(email, email_from, user, attach, variables)
 
             variables = Email.email_variables(user)
-            email.body = nice_email_sent(email, variables)
+            email.body = nice_email_sent(email, variables).gsub("'", "&#8216;")
 
             @num = EmailsController.send_invoices(email, user.email.to_s, email_from, attach, invoice.number.to_s)
 
