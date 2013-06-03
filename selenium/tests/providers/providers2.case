@@ -303,7 +303,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Such username already used in Device or Provider</td>
+	<td>Provider was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * Provider name must be unique</td>
 	<td></td>
 </tr>
 <tr>
@@ -433,12 +438,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/providercodecs_sort?1&amp;codec_id=999999999</td>
+	<td>/billing/providers/providercodecs_sort?1&amp;codec_id=999999999</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider was not found</td>
 	<td></td>
 </tr>
 <tr>
@@ -1375,13 +1385,18 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=hostname_ip_dynamic</td>
+	<td>id=hostname_ip_ip</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=provider_login</td>
-	<td>test</td>
+	<td>short_pass_prov</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>short_pass_prov</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1395,7 +1410,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Such username already used in Device or Provider</td>
+	<td> * Authentication details should be unique</td>
 	<td></td>
 </tr>
 <!--device id-->
@@ -1443,7 +1458,12 @@
 <tr>
 	<td>type</td>
 	<td>id=provider_login</td>
-	<td>test</td>
+	<td>short_pass_prov</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>short_pass_prov</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1458,7 +1478,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=login_9</td>
-	<td>test</td>
+	<td>short_pass_prov</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1484,6 +1504,16 @@
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=login_5</td>
+	<td>short_pass_prov</td>
 </tr>
 <!--tikrinama, ar sukurus provaideri susikuria jo devaisas, kuris neatvaizduojamas last calls search-->
 <tr>
