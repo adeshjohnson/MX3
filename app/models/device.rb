@@ -747,19 +747,21 @@ class Device < ActiveRecord::Base
   end
 
   def uniqueness_check
-    fields	= %w{ username secret ipaddr port device_type }
-    query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
 
     if self.provider
+      fields	= %w{ username secret ipaddr port device_type }
       is_owner	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
     else
+      fields	= %w{ username secret }
       is_owner	= ["devices.id != ?", self.id]    
     end
 
-    filter_active	= Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
-    no_duplicates	= Device.where(query).joins('LEFT JOIN providers on providers.device_id = devices.id').where(is_owner).size.zero?
+    query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
 
-    unless (filter_active and no_duplicates)
+    filter_active	= Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
+    zero_duplicates	= Device.where(query).joins('LEFT JOIN providers on providers.device_id = devices.id').where(is_owner).size.zero?
+
+    if filter_active and not zero_duplicates
       errors.add(:username, _('Device_Username_Must_Be_Unique')) and return false
     end
   end
