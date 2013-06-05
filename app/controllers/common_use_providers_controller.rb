@@ -43,8 +43,8 @@ class CommonUseProvidersController < ApplicationController
 
     #@data = CommonUseProvider.find(:all, :include => [:user,:provider,:tariff], :order => (@options[:order_by]) + ' ' + order)
     @common_use_providers = Provider.find(:all, :conditions => 'common_use = 1', :order => 'name asc')
-    @resellers = User.find(:all, :conditions => 'usertype = "reseller" AND own_providers = 1')
-    @tariffs = Tariff.find(:all, :conditions => "purpose != 'provider' AND owner_id = 0", :order => "purpose ASC, name ASC")
+    @resellers = User.select("users.*, #{SqlExport.nice_user_sql}").where('usertype = "reseller" AND own_providers = 1').order("nice_user ASC")
+    @tariffs = Tariff.where("purpose != 'provider' AND owner_id = 0").order("purpose ASC, name ASC")
     session[:common_use_providers_list_options] = @options
   end
 
@@ -73,9 +73,9 @@ class CommonUseProvidersController < ApplicationController
     @page_icon = "edit.png"
 
     @data = @commmon_use_provider
-    @common_use_providers = Provider.find(:all, :conditions => 'common_use = 1', :order => 'name asc')
-    @resellers = User.find(:all, :conditions => 'usertype = "reseller" AND own_providers = 1')
-    @tariffs = Tariff.find(:all, :conditions => "purpose != 'provider' AND owner_id = 0", :order => "purpose ASC, name ASC")
+    @common_use_providers = Provider.where('common_use = 1').order('name asc')
+    @resellers = User.select("users.*, #{SqlExport.nice_user_sql}").where('usertype = "reseller" AND own_providers = 1').order("nice_user ASC")
+    @tariffs = Tariff.where("purpose != 'provider' AND owner_id = 0").order("purpose ASC, name ASC")
   end
 
   def update

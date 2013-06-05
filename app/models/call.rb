@@ -1792,7 +1792,7 @@ class Call < ActiveRecord::Base
 
     unless options[:destination].blank?
       cond << "localized_dst like ?"
-      var << "#{options[:destination]}%"
+      var << "#{options[:destination]}"
     end
 
     if options[:s_reseller_did] != 'all' and !options[:s_reseller_did].blank?
@@ -1826,7 +1826,7 @@ class Call < ActiveRecord::Base
       var << options[:did].id
     elsif !options[:s_did_pattern].to_s.strip.blank? 
       cond << "dids.did LIKE ?" 
-      var << '%' + options[:s_did_pattern].to_s.strip + '%' 
+      var << options[:s_did_pattern].to_s.strip
     end 
 
     #find_calls_only_with_did
@@ -1853,7 +1853,7 @@ class Call < ActiveRecord::Base
 
     if options[:source] and not options[:source].blank?
       cond << "calls.src LIKE ?"
-      var << '%' + options[:source] + '%'
+      var << options[:source]
     end
     # this is nasty but oh well.
     
