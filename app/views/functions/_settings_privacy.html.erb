@@ -11,18 +11,18 @@
       </tr>
       <tr>
         <td><b><%= _("GUI") %></b></td>
-        <td><%= radio_button_tag :hide_destination_ends_gui, "1", checked_possition?(hide_dest, 1) %>
-          <%= radio_button_tag :hide_destination_ends_gui, "0", !checked_possition?(hide_dest, 1) %></td>
+        <td><%= radio_button_tag :hide_destination_ends_gui, "1", SqlExport.checked_possition?(hide_dest, 1) %>
+          <%= radio_button_tag :hide_destination_ends_gui, "0", !SqlExport.checked_possition?(hide_dest, 1) %></td>
       </tr>
       <tr>
         <td><b><%= _("CSV") %></b></td>
-        <td><%= radio_button_tag :hide_destination_ends_csv, "2", checked_possition?(hide_dest, 2) %>
-          <%= radio_button_tag :hide_destination_ends_csv, "0", !checked_possition?(hide_dest, 2) %></td>
+        <td><%= radio_button_tag :hide_destination_ends_csv, "2", SqlExport.checked_possition?(hide_dest, 2) %>
+          <%= radio_button_tag :hide_destination_ends_csv, "0", !SqlExport.checked_possition?(hide_dest, 2) %></td>
       </tr>
       <tr>
         <td><b><%= _("PDF") %></b></td>
-        <td><%= radio_button_tag :hide_destination_ends_pdf, "4", checked_possition?(hide_dest, 3) %>
-          <%= radio_button_tag :hide_destination_ends_pdf, "0", !checked_possition?(hide_dest, 3) %></td>
+        <td><%= radio_button_tag :hide_destination_ends_pdf, "4", SqlExport.checked_possition?(hide_dest, 3) %>
+          <%= radio_button_tag :hide_destination_ends_pdf, "0", !SqlExport.checked_possition?(hide_dest, 3) %></td>
       </tr>
   <% } %>
   </td>

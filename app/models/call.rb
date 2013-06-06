@@ -607,8 +607,7 @@ class Call < ActiveRecord::Base
     if csv_full_src or options[:pdf].to_i == 1
       s << SqlExport.column_escape_null("calls.clid", "clid")
     end
-
-    options[:usertype] == 'user' ? s << hide_dst_for_user_sql(self, "csv", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : s << SqlExport.column_escape_null("calls.localized_dst", "dst")
+    options[:current_user].usertype == 'user' ? s << SqlExport.hide_dst_for_user_sql(options[:current_user], "csv", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : s << SqlExport.column_escape_null("calls.localized_dst", "dst")
     s << SqlExport.column_escape_null("calls.prefix", "prefix") if options[:current_user].usertype != 'reseller'
     s << "CONCAT(#{SqlExport.column_escape_null("directions.name")}, ' ', #{SqlExport.column_escape_null("destinations.subcode")}, ' ', #{SqlExport.column_escape_null("destinations.name")}) as destination"
     s << Call.nice_billsec_sql

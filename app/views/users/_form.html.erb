@@ -597,18 +597,18 @@
              def_hide_dest = Confline.get_value("Hide_Destination_End", @user.owner_id).to_i -%>
           <tr>
             <td><b><%= _("GUI") %></b></td>
-            <td><%= radio_button_tag("privacy[gui]", "1", checked_possition?(hide_dest, 1), {:id => "privacy_gui_1"}) %>
-              <%= radio_button_tag("privacy[gui]", "0", !checked_possition?(hide_dest, 1), {:id => "privacy_gui_0"}) %></td>
+            <td><%= radio_button_tag("privacy[gui]", "1", SqlExport.checked_possition?(hide_dest, 1), {:id => "privacy_gui_1"}) %>
+              <%= radio_button_tag("privacy[gui]", "0", !SqlExport.checked_possition?(hide_dest, 1), {:id => "privacy_gui_0"}) %></td>
           </tr>
           <tr>
             <td><b><%= _("CSV") %></b></td>
-            <td><%= radio_button_tag("privacy[csv]", "2", checked_possition?(hide_dest, 2), {:id => "privacy_csv_2"}) %>
-              <%= radio_button_tag("privacy[csv]", "0", !checked_possition?(hide_dest, 2), {:id => "privacy_csv_0"}) %></td>
+            <td><%= radio_button_tag("privacy[csv]", "2", SqlExport.checked_possition?(hide_dest, 2), {:id => "privacy_csv_2"}) %>
+              <%= radio_button_tag("privacy[csv]", "0", !SqlExport.checked_possition?(hide_dest, 2), {:id => "privacy_csv_0"}) %></td>
           </tr>
           <tr>
             <td><b><%= _("PDF") %></b></td>
-            <td><%= radio_button_tag("privacy[pdf]", "4", checked_possition?(hide_dest, 3), {:id => "privacy_pdf_4"}) %>
-              <%= radio_button_tag("privacy[pdf]", "0", !checked_possition?(hide_dest, 3), {:id => "privacy_pdf_0"}) %></td>
+            <td><%= radio_button_tag("privacy[pdf]", "4", SqlExport.checked_possition?(hide_dest, 3), {:id => "privacy_pdf_4"}) %>
+              <%= radio_button_tag("privacy[pdf]", "0", !SqlExport.checked_possition?(hide_dest, 3), {:id => "privacy_pdf_0"}) %></td>
           </tr>
         </table>
         <script type="text/javascript">
@@ -633,12 +633,12 @@
             }
 
             function adjust_privacy() {
-                var def_gui = <%=checked_possition?(def_hide_dest, 1) %>;
-                var def_csv = <%=checked_possition?(def_hide_dest, 2) %>;
-                var def_pdf = <%=checked_possition?(def_hide_dest, 3) %>;
-                var gui = <%=checked_possition?(hide_dest, 1) %>;
-                var csv = <%=checked_possition?(hide_dest, 2) %>;
-                var pdf = <%=checked_possition?(hide_dest, 3) %>;
+                var def_gui = <%=SqlExport.checked_possition?(def_hide_dest, 1) %>;
+                var def_csv = <%=SqlExport.checked_possition?(def_hide_dest, 2) %>;
+                var def_pdf = <%=SqlExport.checked_possition?(def_hide_dest, 3) %>;
+                var gui = <%=SqlExport.checked_possition?(hide_dest, 1) %>;
+                var csv = <%=SqlExport.checked_possition?(hide_dest, 2) %>;
+                var pdf = <%=SqlExport.checked_possition?(hide_dest, 3) %>;
 
                 if ($("privacy_global").checked) {
                     disable_values(true);

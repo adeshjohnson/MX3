@@ -1563,7 +1563,7 @@ class User < ActiveRecord::Base
     select << "calls.calldate"
     select << "IF(#{options[:show_full_src].to_i} = 1 AND CHAR_LENGTH(clid)>0 AND clid REGEXP'\"' , CONCAT(src, '  ' ,REPLACE(SUBSTRING_INDEX(clid, '\"', 2), '\"', '('), ')'), src) as 'src'"
 
-    options[:usertype] == 'user' ? select << hide_dst_for_user_sql(self, "csv", "calls.dst", {:as => "dst"}) : select << "calls.dst"
+    options[:usertype] == 'user' ? select << SqlExport.hide_dst_for_user_sql(self, "csv", "calls.dst", {:as => "dst"}) : select << "calls.dst"
 
     select << "CONCAT(IF(directions.name IS NULL, '',directions.name), ' ', IF(destinations.name IS NULL, '',destinations.name), ' ', IF(destinations.subcode IS NULL, '',destinations.subcode)) as 'direction'"
     select << "IF(providers.name IS NULL, '', providers.name) as 'prov_name' " if options[:usertype] == "admin"
@@ -1683,7 +1683,7 @@ class User < ActiveRecord::Base
       format = Confline.get_value('Date_format', owner_id).gsub('M', 'i')
       s << SqlExport.nice_date('calldate', {:reference => 'calldate', :format => format, :tz => time_offset})
       s << "calls.src"
-      options[:usertype] == 'user' ? s << hide_dst_for_user_sql(self, "csv", "calls.dst", {:as => "dst"}) : s << "calls.dst"
+      options[:usertype] == 'user' ? s << SqlExport.hide_dst_for_user_sql(self, "csv", "calls.dst", {:as => "dst"}) : s << "calls.dst"
       s << "IF(calls.billsec = 0, IF(calls.real_billsec = 0, 0, calls.real_billsec) ,calls.billsec)"
       if usertype != 'user' or (Confline.get_value('Show_HGC_for_Resellers').to_i == 1 and usertype == 'reseller')
         s << "CONCAT(calls.disposition, '(', calls.hangupcause, ')')"

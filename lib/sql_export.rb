@@ -8,11 +8,11 @@ module SqlExport
   # marks type possitions in user.hide_destination_end numbers
   @@types = {"gui" => 1, "csv" => 2, "pdf" => 3}
 
-  def checked_possition?(permission_number, possition)
+  def SqlExport.checked_possition?(permission_number, possition)
     (permission_number.to_i & 2**(possition.to_i-1)) != 0
   end
 
-  def hide_last_numbers(number)
+  def SqlExport.hide_last_numbers(number)
     number = number.to_s
     if number.length < 3
       return "X" * number.length
@@ -22,7 +22,7 @@ module SqlExport
     end
   end
 
-  def hide_last_numbers_sql(column, options={})
+  def SqlExport.hide_last_numbers_sql(column, options={})
     opts = {
         :with => "XXX",
         :last => 3,
@@ -31,13 +31,13 @@ module SqlExport
     "concat(substring(#{column}, 1, length(#{column})-#{opts[:last]}), '#{opts[:with]}') as #{opts[:as]}"
   end
 
-  def hide_dst_for_user_sql(user, type, dst, options)
+  def SqlExport.hide_dst_for_user_sql(user, type, dst, options)
     reference = options[:as].to_s.blank? ? dst : options[:as].to_s
-    (checked_possition?(user.hide_destination_end, @@types[type]) and user.usertype == 'user') ? hide_last_numbers_sql(dst, options) : SqlExport.column_escape_null(dst, reference, "")
+    (SqlExport.checked_possition?(user.hide_destination_end, @@types[type]) and user.usertype == 'user') ? SqlExport.hide_last_numbers_sql(dst, options) : SqlExport.column_escape_null(dst, reference, "")
   end
 
   def hide_dst_for_user(user, type, dst)
-    (checked_possition?(user.hide_destination_end, @@types[type]) and user.usertype == 'user') ? hide_last_numbers(dst) : dst
+    (SqlExport.checked_possition?(user.hide_destination_end, @@types[type]) and user.usertype == 'user') ? SqlExport.hide_last_numbers(dst) : dst
   end
 
   def SqlExport.column_escape_null(column, reference = nil, escape_to = "")

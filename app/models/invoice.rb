@@ -640,7 +640,7 @@ class Invoice < ActiveRecord::Base
   def direction_calls_by_direction(current_user, dgid, user_rate_s, prefix, options = {})
 
     logger.fatal dgid
-    dst = options[:email_or_not] ? hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
+    dst = options[:email_or_not] ? SqlExport.hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : SqlExport.hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
 
     calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => Time.zone.now.utc_offset()}), "calldate")
 
@@ -678,7 +678,7 @@ class Invoice < ActiveRecord::Base
 
     cids = ActiveRecord::Base.connection.select_all(sql)
     items = []
-    dst = options[:email_or_not] ? hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
+    dst = options[:email_or_not] ? SqlExport.hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : SqlExport.hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
     calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => current_user.time_offset}), "calldate")
     ttp = 0
     for cid in cids
