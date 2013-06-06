@@ -184,12 +184,7 @@ class StatsController < ApplicationController
     @users = User.find(:all, :conditions => "hidden = 0") #, :conditions => "usertype = 'user'") #, :limit => 6)
     @help_link = "http://wiki.kolmisoft.com/index.php/Integrity_Check"
 
-    session[:hour_from] = "00"
-    session[:minute_from] = "00"
-    session[:hour_till] = "23"
-    session[:minute_till] = "59"
-
-    call_stats = Call.total_calls_by_direction_and_disposition(session_from_datetime, session_till_datetime)
+    call_stats = Call.total_calls_by_direction_and_disposition(session_time_from_db, session_time_till_db)
 
     @o_answered_calls = 0
     @o_no_answer_calls = 0
@@ -226,8 +221,8 @@ class StatsController < ApplicationController
     @incoming_calls = @i_answered_calls + @i_no_answer_calls + @i_busy_calls + @i_failed_calls
     @total_calls = @incoming_calls + @outgoing_calls
 
-    sfd = session_from_datetime
-    std = session_till_datetime
+    sfd = session_time_from_db
+    std = session_time_till_db
 
     @outgoing_perc = 0
     @outgoing_perc = @outgoing_calls.to_d / @total_calls * 100 if @total_calls > 0
@@ -266,19 +261,15 @@ class StatsController < ApplicationController
     @t_failed_perc = 0
     @t_failed_perc = @t_failed_calls.to_d / @total_calls * 100 if @total_calls > 0
 
-    @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(sfd, std)
+    @a_date, @a_calls, @a_billsec, @a_avg_billsec, @total_sums = Call.answered_calls_day_by_day(session_time_from_db, session_time_till_db)
 
-    @t_calls = @a_calls.last.to_i
-    @t_billsec = @a_billsec.last.to_i
-    @t_avg_billsec = @a_avg_billsec.last.to_i
+    @t_calls = @total_sums['total_calls'].to_i
+    @t_billsec = @total_sums['total_billsec'].to_i
+    @t_avg_billsec = @total_sums['average_billsec'].to_i
 
-    @a_calls.delete_at(@a_calls.length - 1)
-    @a_billsec.delete_at(@a_billsec.length  - 1)
-    @a_avg_billsec.delete_at(@a_billsec.length)
+    index = @a_date.length
 
-    index = @a_date.length - 1
-
-    @t_avg_billsec = @t_billsec / @t_calls if @t_calls > 0
+#    @t_avg_billsec =  @t_billsec / @t_calls if @t_calls > 0
 
     #formating graph for INCOMING/OUTGOING calls
 

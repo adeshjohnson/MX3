@@ -161,49 +161,45 @@ class Call < ActiveRecord::Base
   end
 
   def Call::answered_calls_day_by_day(start_date, end_date, users = [])
-    #parameters:
-    #  start_date - min date for filtering out calls, expected to be date/datetime
-    #    instance or date/datetime as string
-    #  end_date - max date for filtering out calls, expected to be date instance or date as
-    #    string.
-    #  users - array of user id's
-    #returns answered call count, total billsec, and average billsec for everyday in datetime
-    #interval for specified users or if no user is specified - for all users
-    day_by_day_stats = Call.total_calls_by(['ANSWERED'], {:outgoing => true, :incoming => true}, start_date, end_date, {:date => true}, users)
 
-    start_date = (start_date.to_time + Time.zone.now.utc_offset().second - Time.now.utc_offset().second).to_s(:db)
-    end_date = (end_date.to_time + Time.zone.now.utc_offset().second - Time.now.utc_offset().second).to_s(:db)
+    raw_calls = Call.total_calls_by(['ANSWERED'], {:outgoing => true, :incoming => true}, start_date, end_date, {:date => true}, users)
+    totals    = raw_calls.pop
+    tz        = User.current.time_zone
 
-    start_date = Date.strptime(start_date, "%Y-%m-%d").to_date
-    end_date = Date.strptime(end_date, "%Y-%m-%d").to_date
-    date = []
-    calls = []
-    billsec = []
-    avg_billsec = []
-    index = 0
-    i = 0
-    start_date.upto(end_date) do |day|
-      day_stats = day_by_day_stats[i]
-      if day_stats and day_stats['calldate'] and day.to_date == day_stats['calldate'].to_date
-        date[index] = day_stats['calldate'].strftime("%Y-%m-%d")
-        calls[index] = day_stats['total_calls'].to_i
-        billsec[index] = day_stats['total_billsec'].to_i
-        avg_billsec[index] = day_stats['average_billsec'].to_i
-        i += 1
-      else
-        date[index] = day
-        calls[index] = 0
-        billsec[index] = 0
-        avg_billsec[index] = 0
-      end
-      index += 1
+    start_time = Time.parse(start_date).in_time_zone(tz).strftime('%F')
+    end_time = Time.parse(end_date).in_time_zone(tz).strftime('%F')
+
+    dates	= (start_time.to_date..end_time.to_date).map{ |date| date.strftime("%F") }
+    calls	=[]
+    t_billsec	=[]
+    avg_billsec	=[]
+
+    date_get = lambda do |i|
+      (Time.parse(start_date).in_time_zone(tz) + (i).days).strftime("%F %T")
     end
 
-    calls << day_by_day_stats.last['total_calls']
-    billsec << day_by_day_stats.last['total_billsec']
-    avg_billsec << day_by_day_stats.last['average_billsec']
+    dates.each_with_index do |date, i|
+      interval = raw_calls.select do |summary|
+        date = summary[:calldate].strftime("%F %T")
+        date >= date_get[i] && date < date_get[i+1]
+      end
 
-    return date, calls, billsec, avg_billsec
+      unless interval.blank?
+
+        call_count  = interval.collect(&:total_calls).sum
+        billsec     = interval.collect(&:total_billsec).sum
+
+        calls       << call_count
+        t_billsec   << billsec
+        avg_billsec << (billsec / call_count)
+      else
+        calls       << 0
+        t_billsec   << 0
+        avg_billsec << 0
+      end
+    end
+
+    return dates, calls, t_billsec, avg_billsec, totals
   end
 
   def Call::total_calls_by(disposition, direction, start_date, end_date, group_options = [], users = [])
@@ -262,11 +258,7 @@ class Call < ActiveRecord::Base
     group = []
     if group_options[:date]
       select << "(calls.calldate) AS 'calldate'"
-      if Time.zone.now().utc_offset.to_i == 0
-        group << 'FLOOR((UNIX_TIMESTAMP(calls.calldate)) / 86400)' # grouping by intervals of exact 24 hours
-      else
-        group << 'year(calldate), month(calldate), (day(calldate) + FLOOR(HOUR(calldate) / 24)) ORDER BY calldate ASC'
-      end
+      group << 'year(calldate), month(calldate), day(calldate), hour(calldate)'
     end
     if group_options[:disposition]
       select << 'calls.disposition'

@@ -1226,6 +1226,14 @@ class ApplicationController < ActionController::Base
     current_user.system_time(sfd, 1)
   end
 
+  def session_time_from_db
+    Time.zone.local(session[:year_from].to_i, session[:month_from].to_i, session[:day_from].to_i).getlocal.strftime("%F %T")
+  end
+
+  def session_time_till_db
+    (Time.zone.local(session[:year_till].to_i, session[:month_till].to_i, session[:day_till].to_i) + (1.day - 1.second)).getlocal.strftime("%F %T")
+  end
+
   def session_from_datetime
     sfd = session[:year_from].to_s + "-" + good_date(session[:month_from].to_s) + "-" + good_date(session[:day_from].to_s) + " " + good_date(session[:hour_from].to_s) + ":" + good_date(session[:minute_from].to_s) + ":00"
     current_user.system_time(sfd)
