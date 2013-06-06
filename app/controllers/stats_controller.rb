@@ -638,19 +638,15 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     sfd = session_from_datetime
     std = session_till_datetime
 
-    @a_date, @a_calls, @a_billsec, @a_avg_billsec = Call.answered_calls_day_by_day(sfd, std, [@user.id])
+    @a_date, @a_calls, @a_billsec, @a_avg_billsec, @total_sums = Call.answered_calls_day_by_day(sfd, std, [@user.id])
 
-    @t_calls = @a_calls.last.to_i
-    @t_billsec = @a_billsec.last.to_i
-    @t_avg_billsec = @a_avg_billsec.last.to_i
+    @t_calls = @total_sums['total_calls'].to_i
+    @t_billsec = @total_sums['total_billsec'].to_i
+    @t_avg_billsec = @total_sums['average_billsec'].to_i
 
-    @a_calls.delete_at(@a_calls.length - 1)
-    @a_billsec.delete_at(@a_billsec.length - 1)
-    @a_avg_billsec.delete_at(@a_billsec.length)
+    index = @a_date.length
 
-    index = @a_date.length - 1
-
-    @t_avg_billsec = @t_billsec / @t_calls if @t_calls > 0
+    #@t_avg_billsec = @t_billsec / @t_calls if @t_calls > 0
     @t_avg_normative = @t_normative / @t_norm_days if @t_norm_days > 0
 
     #formating graph for INCOMING/OUTGING calls
