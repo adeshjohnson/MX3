@@ -15,7 +15,7 @@ class ApiController < ApplicationController
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
   before_filter :check_api_parrams_with_hash, 
 		:only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register,
-			  :user_update_api, :callback, :invoices, :balance, :simple_balance, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
+			  :user_update_api, :callback, :invoices, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
 			  :wholesale_tariff, :device_create, :device_destroy, :device_list, :did_create, :did_assign_device, :did_unassign_device, :ma_activate,
 			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update, :credit_note_create, :credit_note_delete,
 			  :create_payment, :send_sms, :send_email]
