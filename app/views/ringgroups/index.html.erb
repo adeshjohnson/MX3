@@ -1,6 +1,7 @@
 <%= link_to b_add + _('New_Ring_Group'), :action => 'new' %>
 <br/>
 <br/>
+<%= page_select_header(@options[:page], @total_pages, @options) %>
 
 <table width="100%" class="maintable">
   <tr>
