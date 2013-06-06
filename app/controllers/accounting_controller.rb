@@ -442,9 +442,9 @@ class AccountingController < ApplicationController
             count_subscription = 1
 
             #from which day used?
-            use_start = (sub.activation_start < period_start) ? period_start : sub.activation_start
+            use_start = (sub.activation_start < period_start) ? period_start : sub.activation_start.in_time_zone(User.current.time_zone)
             #till which day used?
-            use_end = (sub.activation_end > period_end) ? period_end : sub.activation_end
+            use_end = (sub.activation_end > period_end) ? period_end : sub.activation_end.in_time_zone(User.current.time_zone)
             start_date = use_start.to_date
             end_date = use_end.to_date
             days_used = end_date - start_date
@@ -1951,13 +1951,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
           if sub.activation_start < period_start_with_time
             use_start = period_start_with_time
           else
-            use_start = sub.activation_start
+            use_start = sub.activation_start.in_time_zone(User.current.time_zone)
           end
           #till which day used?
           if sub.activation_end > period_end_with_time
             use_end = period_end_with_time
           else
-            use_end = sub.activation_end
+            use_end = sub.activation_end.in_time_zone(User.current.time_zone)
           end
           start_date = use_start.to_date
           end_date = use_end.to_date
