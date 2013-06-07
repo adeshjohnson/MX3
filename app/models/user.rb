@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
   #validates_presence_of :first_name, :last_name
   #
   before_save :user_before_save
-  before_create :user_before_create
+  before_create :user_before_create, :new_user_balance
   before_destroy :user_before_destroy
 
   after_create :after_create_localization, :after_create_user, :create_balance_payment
@@ -106,6 +106,7 @@ class User < ActiveRecord::Base
 
 
   def after_create_user
+
     devgroup = Devicegroup.new
     devgroup.init_primary(id, "primary", address_id)
 
@@ -3598,6 +3599,12 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def rs_active?
     (defined?(RS_Active) and RS_Active.to_i == 1)
+  end
+
+  def new_user_balance
+    # A.S: To convert set balance to default system currency. #7856
+    self.balance		  = self.convert_curr(self.balance)
+    self.warning_email_balance = self.convert_curr(self.warning_email_balance)
   end
 
 end
