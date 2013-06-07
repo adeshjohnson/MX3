@@ -72,13 +72,14 @@ class User < ActiveRecord::Base
   #validates_presence_of :first_name, :last_name
   #
   before_save :user_before_save
-  before_create :user_before_create, :new_user_balance
+  before_create :user_before_create
+  before_create :new_user_balance, :if => lambda {|user| not user.registration }
   before_destroy :user_before_destroy
 
   after_create :after_create_localization, :after_create_user, :create_balance_payment
   after_save :after_create_localization, :check_address
 
-  attr_accessor :imported_user
+  attr_accessor :imported_user, :registration
 
   def after_create_localization
     logger.fatal('after_create checkin usertype and location.size')
@@ -2156,6 +2157,10 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def User.create_from_registration(params, owner, reg_ip, free_ext, pin, pasw, nan, api=0)
     user = Confline.get_default_object(User, owner.id)
+
+    # to skip balance conversion like in user creation from GUI.
+    user.registration = true
+
     user.recording_enabled = 0 if !user.recording_enabled
     user.recording_forced_enabled = 0 if !user.recording_forced_enabled
     user.username = params[:username]
@@ -2210,6 +2215,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     tax.save
     user.tax = tax
     user.address_id = address.id
+
     logger.fatal "***** TIME : #{Time.now.to_s} - User before save 1"
     user.save
     logger.fatal "***** TIME : #{Time.now.to_s} - User after save 1"
