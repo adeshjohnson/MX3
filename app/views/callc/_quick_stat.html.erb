@@ -111,3 +111,11 @@
       </td>
     </tr>
 <% end %>
+            <% if allow_manage_providers? %>
+                <%= periodically_call_remote(:update => 'active_calls_count',
+                                             :url => {:controller => "stats", :action => "active_calls_count"},
+                                             :frequency => session[:active_calls_refresh_interval],
+                                             :loading => "Element.show('spinner');",
+                                             :complete => "Element.hide('spinner');") %>
+            <% end %>
+

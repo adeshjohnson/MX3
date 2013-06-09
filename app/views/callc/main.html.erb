@@ -118,18 +118,22 @@
 
       <% if Confline.get_value("Hide_quick_stats").to_i == 0 %>
           <div id="quick_stats">
-            <b><%= _('Quick_stats') %></b><br/><br/>
-            <table class="nb" width="50%">
-              <%= render :partial => "quick_stat" %>
+            <b><%= _('Quick_stats') %></b> <%= link_to b_refresh+_('Refresh'), '?refresh_stats', onclick: "reload_stats();" %><br/><br/>
+            <table id="quick" class="nb" width="50%">
+              <%= image_tag("290.gif", alt: 'loading', id: 'stat_spinner', border: 0, style: 'margin: 200px; display: none;') %> 
+              <% if params.key? :refresh_stats %>
+                <div id='quick_stat'>
+                  <%= load_ok? %>
+                  <%= render :partial => 'quick_stat' %>
+                </div>
+              <% end %>
+              <script type="text/javascript">
+                function reload_stats() {
+                  document.getElementById('stat_spinner').style.display = 'block';
+                  document.getElementById('quick_stat').style.display = 'none';
+                }
+              </script>
             </table>
-            <% if allow_manage_providers? %>
-                <%= periodically_call_remote(:update => 'active_calls_count',
-                                             :url => {:controller => "stats", :action => "active_calls_count"},
-                                             :frequency => session[:active_calls_refresh_interval],
-                                             :loading => "Element.show('spinner');",
-                                             :complete => "Element.hide('spinner');") %>
-            <% end %>
-
           </div>
       <% end %>
     </td>
