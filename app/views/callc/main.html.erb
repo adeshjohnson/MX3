@@ -122,15 +122,15 @@
             <table id="quick" class="nb" width="50%">
               <%= image_tag("290.gif", alt: 'loading', id: 'stat_spinner', border: 0, style: 'margin: 200px; display: none;') %> 
               <% if params.key? :refresh_stats %>
-                <div id='quick_stat'>
-                  <%= load_ok? %>
+                <tbody id='quick_stat'>
+                  <% load_ok? %>
                   <%= render :partial => 'quick_stat' %>
-                </div>
+                </tbody>
               <% end %>
               <script type="text/javascript">
                 function reload_stats() {
-                  document.getElementById('stat_spinner').style.display = 'block';
-                  document.getElementById('quick_stat').style.display = 'none';
+                  this.document.getElementById('stat_spinner').style.display = 'block';
+                  this.document.getElementById('quick_stat').style.display = 'none';
                 }
               </script>
             </table>
