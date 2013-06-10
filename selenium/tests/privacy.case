@@ -959,14 +959,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=dst_3</td>
-	<td>63727007XXX&nbsp;&nbsp;DID (37063042438 )</td>
+	<td>assertTextPresent</td>
+	<td>37063042438</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=dst_0</td>
-	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td>
+	<td>assertTextPresent</td>
+	<td>63727007XXX</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1240,8 +1240,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=dst_0</td>
-	<td>numeris System Admin / IAX2/103</td>
+	<td>id=dst_2</td>
+	<td>63727007886&nbsp;&nbsp;DID (37063042438 )</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1250,7 +1250,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37063042987</td>
+	<td>37063042438</td>
 	<td></td>
 </tr>
 <tr>
@@ -3286,7 +3286,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>37063042XXX</td>
+	<td>37063042438</td>
 	<td></td>
 </tr>
 <tr>
@@ -3325,6 +3325,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>mouseOver</td>
 	<td>id=dst_25</td>
 	<td></td>
@@ -3342,21 +3362,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/stats/loss_making_calls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>37063042438</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_pdf/1?test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>123XXX</td>
 	<td></td>
 </tr>
 <tr>
