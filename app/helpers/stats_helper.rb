@@ -40,7 +40,7 @@ module StatsHelper
       direction = @direction_cache[dest.direction_code.to_s] ||= dest.direction
       dest_txt << "#{direction.name.to_s + " " if direction }#{dest.subcode} #{dest.name}"
     end
-    dest_txt << _("User_dialed")+ ": " + hide_dst_for_user(current_user, 'gui', call.dst)
+    dest_txt << _("User_dialed")+ ": " + (hide_gui_dst? ? call.dst[0..-4]+"XXX" : call.dst)
     dest_txt << _("Prefix_used")+ ": " + call.prefix.to_s if call.prefix.to_s.length > 0
 
     rez = ["<td id='dst_#{call.id}' 
@@ -48,11 +48,7 @@ module StatsHelper
                 align='left'
                 onmouseover=\"Tip(\'#{ dest_txt.join('<br>') }\')\" 
                 onmouseout = \"UnTip()\">"]
-    if session[:usertype] == "user"
-      rez << hide_dst_for_user(current_user, "gui", call.localized_dst)
-    else
-      rez << call.localized_dst
-    end
+    rez << (hide_gui_dst? ? call.localized_dst[0..-4]+"XXX" : call.localized_dst)
     rez << "</td>"
     rez.join("").html_safe
   end
