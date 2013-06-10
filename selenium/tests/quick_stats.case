@@ -202,7 +202,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>check</td>
 	<td>id=hide_quick_stats</td>
 	<td></td>
 </tr>
@@ -245,6 +245,16 @@
 </tr>
 <!--Login as reseller-->
 <tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Quick Stats</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
@@ -285,6 +295,11 @@
 	<td>quick_stats</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
 <!--Verify that quick stats are not shown in main page-->
 <tr>
 	<td>open</td>
@@ -320,6 +335,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <!--Verify that thers new menu item 'Quick stats' and that quick stats are shown-->
@@ -376,6 +396,11 @@
 	<td></td>
 </tr>
 <!--Verify that thers new menu item 'Quick stats' and that quick stats are shown-->
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
 <tr>
 	<td>assertText</td>
 	<td>id=spersonal_menu2</td>
@@ -443,7 +468,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>uncheck</td>
 	<td>id=hide_quick_stats</td>
 	<td></td>
 </tr>
@@ -460,6 +485,11 @@
 <tr>
 	<td>open</td>
 	<td>/billing/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <tr>
@@ -491,6 +521,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <tr>
@@ -551,6 +586,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <tr>
@@ -631,6 +671,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>4.8233</td>
@@ -646,6 +691,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>3.5622</td>
@@ -658,6 +708,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <tr>
@@ -766,6 +821,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>505.7989</td>
@@ -781,6 +841,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>4.8233</td>
@@ -793,6 +858,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=EUR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
 	<td></td>
 </tr>
 <tr>
@@ -831,6 +901,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextNotPresent</td>
 	<td>DID Owner Cost</td>
 	<td></td>
@@ -851,6 +926,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>4.8233</td>
@@ -866,6 +946,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>3.5622</td>
@@ -874,6 +959,41 @@
 	<td>assertText</td>
 	<td>id=month_cost</td>
 	<td>3.5622</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/server_load_ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Server is overloaded, please try later</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=day_cost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=month_cost</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
