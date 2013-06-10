@@ -494,6 +494,13 @@
             <%= radio_button_tag('provider[use_p_asserted_identity]', '1', checked = (@provider.use_p_asserted_identity == 1)) %> <%= _('Yes') %>
           </td>
         </tr>
+        <tr>
+          <td> <%= _('periodic_check') %>:</td>
+          <td>
+            <%= radio_button_tag('provider[periodic_check]', 0, (@provider.periodic_check == 0)) %> <%= _('No') %>
+            <%= radio_button_tag('provider[periodic_check]', 1, (@provider.periodic_check == 1)) %> <%= _('Yes') %>
+          </td>
+        </tr>
 
     <% end %>
 
