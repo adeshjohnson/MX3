@@ -56,7 +56,7 @@
             </td>
 
             <td id="dst_<%= i %>" align="left">
-              <%= hide_gui_dst? and  current_user.devices.map(&:id).member?(call["device_id"]) ? call["localized_dst"].to_s[0..-4]+"XXX" : call["localized_dst"].to_s %>&nbsp;
+              <%= (hide_gui_dst? and current_user.devices.map(&:id).member?(call["device_id"])) ? call["localized_dst"].to_s[0..-4]+"XXX" : call["localized_dst"].to_s %>&nbsp;
               <% if call["dst_user_id"] %>
 
                   <% if session[:usertype] == "admin" %>

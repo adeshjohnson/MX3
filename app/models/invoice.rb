@@ -279,7 +279,7 @@ class Invoice < ActiveRecord::Base
     options = self.genereate_options(current_user, ex)
     user = options[:user]
     limit = Confline.get_value("Invoice_page_limit", user.owner).to_i
-    hide_dst = current_user.id == user.id and [2,3,6,7].member? Confline.get_value("Hide_Destination_End", current_user.owner_id).to_i
+    hide_dst = (current_user.id == user.id and [2,3,6,7].member? Confline.get_value("Hide_Destination_End", current_user.owner_id).to_i)
     # 71 = number of rows on the page
     page_limit = (71 * limit) - 1
     page_limit_error = 0
