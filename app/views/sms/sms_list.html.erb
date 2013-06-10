@@ -31,7 +31,7 @@
             <td id="date_<%= sms.id %>" align="left"><%= nice_date_time(sms.sending_date) %></td>
             <td id="status_<%= sms.id %>" class="n" align="left" <%= "onmouseover=\"Tip(\' #{(sms.sms_status_code_tip).to_s} \')\" onmouseout = \"UnTip()\"" %>><%= sms.sms_status_code %></td>
             <td id="dest_<%= sms.id %>" align="left"><%= direction_name if direction_name %> <%= draw_flag(direction_code) if direction_code %></td>
-            <td id="number_<%= sms.id %>" align="left"><%= sms.number %></td>
+            <td id="number_<%= sms.id %>" align="left"><%= hide_gui_dst? ? sms.number[0..-4]+"XXX" : sms.number %></td>
             <td id="user_rate_<%= sms.id %>" align="right"><%= nice_number(sms.user_rate) %></td>
             <td id="quantity_<%= sms.id %>" align="right"><%= nice_number(sms.user_price.to_f/sms.user_rate.to_f).to_i %></td>
             <td id="price_<%= sms.id %>" align="right"><%= nice_number(sms.user_price) %></td>

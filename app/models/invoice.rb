@@ -275,9 +275,11 @@ class Invoice < ActiveRecord::Base
   def generate_invoice_detailed_pdf(current_user, dc, ex, nc, cde, gde, show_avg_rate, testing_mode = false)
     nice_number_hash = {:change_decimal => cde, :global_decimal => gde, :nc => nc}
 
+
     options = self.genereate_options(current_user, ex)
     user = options[:user]
     limit = Confline.get_value("Invoice_page_limit", user.owner).to_i
+    hide_dst = current_user.id == user.id and [2,3,6,7].member? Confline.get_value("Hide_Destination_End", current_user.owner_id).to_i
     # 71 = number of rows on the page
     page_limit = (71 * limit) - 1
     page_limit_error = 0
@@ -476,7 +478,7 @@ class Invoice < ActiveRecord::Base
               items2 << [
                   item['calldate'],
                   item["#{options[:billsec_cond]}"],
-                  item['dst'].to_s.strip,
+                  (hide_dst ? item['dst'].to_s.strip[0..-4]+"XXX" : item['dst'].to_s.strip),
                   nice_invoice_number(item["user_price"].to_d, nice_number_hash).to_s
               ]
               tprice += item["user_price"].to_d
@@ -496,7 +498,7 @@ class Invoice < ActiveRecord::Base
               items2 << [
                   item['calldate'],
                   item["#{options[:billsec_cond]}"],
-                  item['dst'].to_s.strip,
+                  (hide_dst ? item['dst'].to_s.strip[0..-4]+"XXX" : item['dst'].to_s.strip),
                   nice_invoice_number(item["reseller_price"].to_d, nice_number_hash).to_s
               ]
               tprice += item["reseller_price"].to_d
