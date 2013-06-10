@@ -70,7 +70,6 @@ class ProvidersController < ApplicationController
     session[:providers_list_options] = @options
     session[:back] = params
     store_location
-
   end
 
   # in before filter : provider (find_provider)
