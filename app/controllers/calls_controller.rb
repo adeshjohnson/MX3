@@ -74,6 +74,10 @@ class CallsController < ApplicationController
 
     # form condition array for sql
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
+    # A.S: #7897. Adding indexed date for query speed
+    if Call.column_names.include? 'date'
+      cond << ("date BETWEEN '" + session_from_datetime.split[0] + "' AND '" + session_till_datetime.split[0] + "'")
+    end
     cond << "users.owner_id = #{current_user.id}" if reseller?
     #cond << "calls.user_id != -1" # This allows to filter invalid calls
     cond << "(users.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})" if @options[:originator] != "any"
@@ -207,6 +211,12 @@ class CallsController < ApplicationController
     @options[:terminator] != "any" ? terminator_cond = @options[:terminator] : terminator_cond = ""
 
     cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
+
+    # A.S: #7897. Adding indexed date for query speed
+    if Call.column_names.include? 'date'
+      cond << ("date BETWEEN '" + session_from_datetime.split[0] + "' AND '" + session_till_datetime.split[0] + "'")
+    end
+
     #cond << "calls.user_id != -1"
     cond << "calls.user_id IN (SELECT id FROM users WHERE id = #{@options[:originator].to_i} OR users.owner_id = #{@options[:originator].to_i})" if @options[:originator] != "any"
     cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
