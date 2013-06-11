@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class TestController < ApplicationController
-  before_filter :authorize_admin, :except => [:fake_form]
+  before_filter :authorize_admin, :except => [:fake_form, :vat_checking_get_status]
   require 'google4r/checkout'
   include Google4R::Checkout
 
@@ -18,6 +18,11 @@ class TestController < ApplicationController
 
   def time
     @time = Time.now()
+  end
+
+  def vat_checking_get_status
+    condition = Timeout::timeout(5) { !!Net::HTTP.new('ec.europa.eu',80).request_get('/taxation_customs/vies/vatRequest.html').code } rescue false
+    render :text => (condition ? 1 : 0)
   end
 
   def vat_checking_get_status
