@@ -25,11 +25,6 @@ class TestController < ApplicationController
     render :text => (condition ? 1 : 0)
   end
 
-  def vat_checking_get_status
-    condition = Timeout::timeout(5) { !!Net::HTTP.new('ec.europa.eu',80).request_get('/taxation_customs/vies/vatRequest.html').code } rescue false
-    render :text => (condition ? 1 : 0)
-  end
-
   def check_db_update
     value = Confline.get_value('DB_Update_From_Script', 0)
     render :text => (value.to_i == 1 ? value : '')
