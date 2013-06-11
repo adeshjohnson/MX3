@@ -2573,34 +2573,37 @@ GROUP BY terminators.id;").map { |t| t.id }
     self.tax.save
 
     if is_reseller?
+
       if api == 1
         self.own_providers = params[:own_providers].to_i if params[:own_providers]
       else
         self.own_providers = params[:own_providers].to_i
       end
+
       # force resellers to have uniquehash
       self.uniquehash = ApplicationController::random_password(10) if  self.uniquehash.to_s.blank?
 
-    end
 
-    # this piece of code is not necessary because following code changes lcr_id for all user of reseller
-    #change LCR for all users of reseller
-    if is_reseller? and own_providers.to_i == 0
+      # this piece of code is not necessary because following code changes lcr_id for all user of reseller
+      # change LCR for all users of reseller
+      if user_old.own_providers.to_i != self.own_providers.to_i and params[:own_providers].to_i == 1
 
-      Action.add_action_hash(current_user.id, {:action => 'reseller_lcr_change', :target_id => id, :target_type => "user", :data => user_old.lcr_id, :data2 => lcr_id})
+        new_blank_lcr = Lcr.create(name: 'BLANK', user_id: self.id)
 
+        #Action.add_action_hash(current_user.id, {:action => 'reseller_lcr_change', :target_id => id, :target_type => "user", :data => user_old.lcr_id, :data2 => lcr_id})
 
-      User.find(:all, :conditions => ["owner_id = ?", id]).each { |res_user|
-        res_user.lcr_id = lcr_id
-        res_user.save
-      }
+        User.find(:all, :conditions => ["owner_id = ?", id]).each { |res_user|
+          res_user.lcr_id = new_blank_lcr.id
+          res_user.save
+        }
 
-      Cardgroup.find(:all, :conditions => ["owner_id = ?", id]).each { |cg|
-        cg.lcr_id =lcr_id
-        cg.save
-      }
+        Cardgroup.find(:all, :conditions => ["owner_id = ?", id]).each { |cg|
+          cg.lcr_id = new_blank_lcr.id
+          cg.save
+        }
 
-      clean_after_own_providers_disable
+      end
+
     end
 
     if monitoring_a
@@ -3587,20 +3590,6 @@ GROUP BY terminators.id;").map { |t| t.id }
 
   def save_with_balance
     @save_with_balance_record
-  end
-
-  def clean_after_own_providers_disable
-    lcrs = Lcr.find(:all, :conditions => {:user_id => id})
-    if lcrs
-      lcrs.each { |l|
-        lrules= Locationrule.find(:all, :conditions => "lcr_id='#{l.id}'")
-        lrules.each { |lr| lr.destroy } if lrules
-        lpt = l.lcr_partials
-        lpt.each { |t| t.destroy } if lpt
-        lcrptov = l.lcrproviders
-        lcrptov.each { |p| p.destroy } if lcrptov
-        l.destroy }
-    end
   end
 
   def rs_active?
