@@ -14,13 +14,28 @@
 <!--VAT numeris priklauso nuo to numerio tiekeju, ne nuo musu. Netaisyti, jei registration unsuccsessful. -->
 <tr>
 	<td>setTimeout</td>
-	<td>100000</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>label</td>
 	<td>startPoint</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/vat_checking_get_status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextPresent</td>
+	<td>0</td>
+	<td>timeout</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>storedVars.timeout</td>
+	<td>label1</td>
 </tr>
 <tr>
 	<td>open</td>
