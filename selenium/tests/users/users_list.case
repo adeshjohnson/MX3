@@ -1247,33 +1247,13 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=lcr_name</td>
-	<td>new_lcr</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>LCR successfully created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/users/edit/5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=user_lcr_id</td>
-	<td>new_lcr</td>
+	<td>BLANK</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1302,7 +1282,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>LCR: new_lcr</td>
+	<td>LCR: BLANK</td>
 	<td></td>
 </tr>
 <tr>

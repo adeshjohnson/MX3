@@ -255,34 +255,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertTextNotPresent</td>
 	<td>No available LCR for user. Please create LCR and assign it to user. Otherwise this user will be unable to call.</td>
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=user_lcr_id</td>
+	<td>BLANK</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>user_lcr_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>user_lcr_id</td>
-	<td></td>
-</tr>
-<!---->
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lcr_name</td>
-	<td>test_re_lcr</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,7 +282,7 @@
 <tr>
 	<td>assertText</td>
 	<td>name_3</td>
-	<td>test_re_lcr</td>
+	<td>BLANK</td>
 </tr>
 <!--try open admins lcr-->
 <tr>
@@ -317,26 +301,6 @@
 	<td></td>
 </tr>
 <!------------->
-<tr>
-	<td>open</td>
-	<td>/billing/lcrs/edit/3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>lcr[order]</td>
-	<td>label=Percent</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>order_3</td>
-	<td>percent</td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/lcrs/edit/3</td>
@@ -364,7 +328,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>LCR : test_re_lcr</td>
+	<td>LCR : BLANK</td>
 	<td></td>
 </tr>
 <tr>
@@ -410,7 +374,7 @@
 <tr>
 	<td>select</td>
 	<td>//div[@id='new_provider']/table/tbody/tr[2]/td[3]/select</td>
-	<td>label=test_re_lcr (priority)</td>
+	<td>label=BLANK (priority)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -460,7 +424,7 @@
 <tr>
 	<td>assertText</td>
 	<td>lname_2</td>
-	<td>test_re_lcr</td>
+	<td>BLANK</td>
 </tr>
 <tr>
 	<td>waitForCondition</td>
@@ -475,7 +439,7 @@
 <tr>
 	<td>assertText</td>
 	<td>lname_3</td>
-	<td>test_re_lcr</td>
+	<td>BLANK</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -680,7 +644,7 @@
 <tr>
 	<td>select</td>
 	<td>user_lcr_id</td>
-	<td>label=test_re_lcr</td>
+	<td>label=BLANK</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -700,7 +664,7 @@
 <tr>
 	<td>select</td>
 	<td>user_lcr_id</td>
-	<td>label=test_re_lcr</td>
+	<td>label=BLANK</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2593,7 +2557,7 @@
 <tr>
 	<td>assertText</td>
 	<td>user_lcr_id</td>
-	<td>test_re_lcr</td>
+	<td>BLANK</td>
 </tr>
 <tr>
 	<td>assertValue</td>

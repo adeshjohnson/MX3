@@ -183,6 +183,46 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/lcrs/providers_list/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=provas - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=Provider common use</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=goog_1381570996</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/call_tracing</td>
 	<td></td>
 </tr>

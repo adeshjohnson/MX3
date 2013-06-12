@@ -333,6 +333,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/lcrs/providers_list/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=provas - SIP/0.0.0.0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/call_tracing</td>
 	<td></td>
 </tr>
