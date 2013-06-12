@@ -2587,7 +2587,6 @@ GROUP BY terminators.id;").map { |t| t.id }
       # this piece of code is not necessary because following code changes lcr_id for all user of reseller
       # change LCR for all users of reseller
       if user_old.own_providers.to_i != self.own_providers.to_i and params[:own_providers].to_i == 1
-
         new_blank_lcr = Lcr.create(name: 'BLANK', user_id: self.id)
 
         User.find(:all, :conditions => ["owner_id = ?", id]).each { |res_user|
@@ -2599,9 +2598,7 @@ GROUP BY terminators.id;").map { |t| t.id }
           cg.lcr_id = new_blank_lcr.id
           cg.save
         }
-
-      elsif user_old.own_providers.to_i != self.own_providers.to_i and params[:own_providers].to_i == 0
-
+      elsif params[:own_providers].to_i == 0
         Action.add_action_hash(current_user.id, {:action => 'reseller_lcr_change', :target_id => id, :target_type => "user", :data => user_old.lcr_id, :data2 => lcr_id})
 
         User.find(:all, :conditions => ["owner_id = ?", id]).each { |res_user|
@@ -2614,7 +2611,6 @@ GROUP BY terminators.id;").map { |t| t.id }
           cg.save
         }
       end
-
     end
 
     if monitoring_a
