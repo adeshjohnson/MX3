@@ -254,7 +254,8 @@ INSERT INTO `lcrproviders` (`id`, `lcr_id`, `provider_id`, `active`, `priority`,
 (10, 3, 2, 1, 1, 0),
 (11, 6, 9, 1, 2, 0),
 (12, 4, 3, 1, 1, 0),
-(13, 7, 10, 1, 1, 0);
+(13, 7, 10, 1, 1, 0),
+(14, 8, 8, 1, 1, 0);
 
 INSERT INTO `common_use_providers` (`id`, `provider_id`, `reseller_id`, `tariff_id`) VALUES
 (1, 9, 3, 21),
