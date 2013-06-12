@@ -1273,14 +1273,15 @@ class AccountingController < ApplicationController
       zero_calls_sql = ""
     end
 
-    sql = "SELECT #{user_rate}, destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{billsec_cond}) as 'billsec', #{selfcost}, SUM(#{user_price}) as 'price'  " +
+    sql = "SELECT #{user_rate}, destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(#{billsec_cond}) as 'billsec', #{selfcost}, SUM(#{user_price}) as 'price', dids.did as 'to_did' " +
         "FROM calls "+
+        "LEFT JOIN dids on calls.did_id = dids.id AND dids.did = calls.dst "+
         "LEFT JOIN devices ON (calls.src_device_id = devices.id)
         LEFT JOIN destinations ON (destinations.prefix = calls.prefix)  "+
         "LEFT JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}"+
         "WHERE calls.calldate BETWEEN '#{invoice.period_start} 00:00:00' AND '#{invoice.period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
         " AND devices.user_id = '#{user.id}' AND calls.card_id = 0  #{zero_calls_sql}" +
-        "GROUP BY destinationgroups.id, calls.user_rate "+
+        "GROUP BY destinationgroups.id, to_did, calls.user_rate "+
         "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
 
     if user.usertype == "reseller"
@@ -1304,7 +1305,7 @@ class AccountingController < ApplicationController
 
     res.each { |r|
 
-      country = r["dg_name"].to_s.blank? ? _('Calls_To_Dids') : r["dg_name"]
+      country = (not r["to_did"].to_s.blank?) ? _('Calls_To_Dids') : r["dg_name"]
       type = r["dg_type"]
       calls = r["calls"]
       billsec = r["billsec"]
