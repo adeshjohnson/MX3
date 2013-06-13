@@ -780,7 +780,6 @@ class Invoice < ActiveRecord::Base
     items += items_t
     items << ['', {:text => _('TOTAL')+ ":", :colspan => 3, :align => :right}, {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :align => :right}, dc]
 
-
     ###### Generate PDF ########
     pdf = Prawn::Document.new(:size => 'A4', :layout => :portrait)
     pdf.font("#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf")
@@ -792,7 +791,8 @@ class Invoice < ActiveRecord::Base
     pdf.table(items,
               :width => 550,
               :font_size => 7, :border_width => 0, :vertical_padding => 1,
-              :align => {0 => :left, 1 => :right, 2 => :left, 3 => :right})
+              :align => {0 => :left, 1 => :right, 2 => :left, 3 => :right},
+              :column_widths => {1=> 100, 2 => 50, 4 => 50})
 
     pdf = pdf_end(pdf, options)
 
