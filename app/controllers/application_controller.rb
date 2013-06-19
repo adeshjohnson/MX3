@@ -1080,7 +1080,7 @@ class ApplicationController < ActionController::Base
 
         if dev.device_type == "H323"
           for server in Server.all
-            server.ami_cmd('h.323 reload')
+            server.ami_cmd('h323 reload')
             server.ami_cmd('extensions reload')
           end
         end
