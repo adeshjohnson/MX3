@@ -796,11 +796,13 @@ class Call < ActiveRecord::Base
     cond << 'calls.disposition = "ANSWERED"'
 
     calls_all = Call.find(:all,
+                          :from => 'calls FORCE INDEX (calldate)',
                           :conditions => [cond.join(' AND ').to_s] + var,
                           :select => "COUNT(*) as 'calls', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec', SUM(#{provider_price}) as 'selfcost', SUM(#{user_price}) as 'price', SUM(#{user_price}-#{provider_price}) as calls_profit",
                           :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}")
 
     calls = Call.find(:all,
+                      :from => 'calls FORCE INDEX (calldate)',
                       :conditions => [cond.join(' AND ').to_s] + var,
                       :select => "destinations.direction_code as 'direction_code', destinationgroups.id, destinationgroups.flag as 'dg_flag', destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  COUNT(*) as 'calls', SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec', SUM(#{provider_price}) as 'selfcost', SUM(#{user_price}) as 'price'",
                       :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
@@ -808,6 +810,7 @@ class Call < ActiveRecord::Base
                       :order => 'destinationgroups.name ASC, destinationgroups.desttype ASC')
 
     calls_for_pie_graph = Call.find(:all,
+                                    :from => 'calls FORCE INDEX (calldate)',
                                     :conditions => [cond.join(' AND ').to_s] + var,
                                     :select => "destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',SUM(IF(calls.billsec > 0, calls.billsec, CEIL(calls.real_billsec) )) as 'billsec'",
                                     :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
@@ -815,6 +818,7 @@ class Call < ActiveRecord::Base
                                     :order => 'billsec desc')
 
     calls_for_price = Call.find(:all,
+                                :from => 'calls FORCE INDEX (calldate)',
                                 :conditions => [cond.join(' AND ').to_s] + var,
                                 :select => "destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type',  SUM(#{user_price}) as 'price'",
                                 :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
@@ -822,6 +826,7 @@ class Call < ActiveRecord::Base
                                 :order => 'price desc')
 
     calls_for_profit = Call.find(:all,
+                                 :from => 'calls FORCE INDEX (calldate)',
                                  :conditions => [cond.join(' AND ').to_s] + var,
                                  :select => "destinationgroups.name as 'dg_name', destinationgroups.desttype as 'dg_type', SUM(#{user_price}-#{provider_price}) as calls_profit",
                                  :joins => "LEFT JOIN destinations ON (destinations.prefix = calls.prefix) JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql}",
