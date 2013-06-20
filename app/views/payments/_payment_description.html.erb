@@ -1,11 +1,11 @@
 <% if payment.paymenttype == 'manual' or payment.paymenttype == 'Card' %>
     <div id="payment_des_<%= payment.id %>">
       <div id="payment_description_link_<%= payment.id %>">
-        <%= link_to_function(b_commnet_edit(payment.description.force_encoding("UTF-8").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")), "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');") %>
+        <%= link_to_function(b_comment_edit(to_utf(payment.description)), "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');") %>
       </div>
       <div id="payment_description_<%= payment.id %>" style='display:none;'>
       <span style="float: left;">
-        <%= text_area_tag 'payment_desciption', payment.description.force_encoding("UTF-8").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?"), :cols => 60, :rows => 6, :id => "payment_description_tag_#{payment.id}" %>
+        <%= text_area_tag 'payment_desciption', to_utf(payment.description), :cols => 60, :rows => 6, :id => "payment_description_tag_#{payment.id}" %>
       </span>
       <span style="float: left;">
         <%= submit_to_remote "ok_#{payment.id}", _('ok'), :update => "payment_des_#{payment.id}", :url => {:controller => :payments, :action => :change_description, :id => payment.id}, :with => "'description='+escape($('payment_description_tag_#{payment.id}').value)", :onclick => "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');" %>

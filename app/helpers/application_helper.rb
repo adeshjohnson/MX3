@@ -205,7 +205,7 @@ module ApplicationHelper
   end
 
   # ================ BUTTONS - ICONS =============
-  def b_commnet_edit(title)
+  def b_comment_edit(title)
     image_tag('icons/comment_edit.png', :title => title) + " "
   end
 
@@ -859,8 +859,12 @@ module ApplicationHelper
     end
   end
 
-  def to_utf
-    self.force_encoding("UTF-8").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
+  def to_utf(str = nil)
+    if str
+      str.force_encoding("UTF-8").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?") if str.is_a? String
+    else
+      self.force_encoding("UTF-8").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?") if self.is_a? String
+    end
   end
 
   def nice_user(user)
