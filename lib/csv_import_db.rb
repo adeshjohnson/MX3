@@ -87,13 +87,11 @@ module CsvImportDb
     sql += ") ENGINE=InnoDB DEFAULT CHARSET=utf8 ;"
     ActiveRecord::Base.connection.execute(sql)
 
-    #load
-    # http://bugs.mysql.com/bug.php?id=10195 mysql utf=>latin!!!!
     if options[:xml]
-      load = "LOAD XML INFILE '/home/kristina/fifty_rates.xml' IGNORE INTO TABLE #{tname} character set latin1"
+      load = "LOAD XML INFILE '/home/kristina/fifty_rates.xml' IGNORE INTO TABLE #{tname} character set utf8"
       load+= ";"
     else
-      load = "LOAD DATA LOCAL INFILE '#{full_file_path}' IGNORE INTO TABLE #{tname} character set latin1"
+      load = "LOAD DATA LOCAL INFILE '#{full_file_path}' IGNORE INTO TABLE #{tname} character set utf8"
       load += " FIELDS TERMINATED BY '#{sep}' "
       load += " OPTIONALLY  ENCLOSED BY '\"' "
       load += " lines terminated by '\n' ;"
