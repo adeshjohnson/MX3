@@ -1700,7 +1700,7 @@ class ApiController < ApplicationController
     else
       doc.error _("Feature_Disabled")
     end }
-    send_xml_data(out_string, params[:test].to_i)
+    send_xml_data(out_string, 1)
   end
 
   def rate
