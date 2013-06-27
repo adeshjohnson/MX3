@@ -50,7 +50,7 @@ class Invoice < ActiveRecord::Base
 
     else
       if tax
-        tax.apply_tax(price, options)
+        tax.apply_tax(read_attribute(:price), options)
       else
         if options[:precision]
           format("%.#{options[:precision].to_i}f", price_with_vat).to_d
@@ -907,7 +907,7 @@ class Invoice < ActiveRecord::Base
   end
 
 
-  def generate_taxes_for_invoice(nc, ex = 0)
+  def generate_taxes_for_invoice(nc, ex = 0)     dfghj
     taxes = self.tax.applied_tax_list(self.price, {:precision => nc})
     self.tax_1_value = self.nice_invoice_number(taxes[0][:tax] , {:nc => nc, :apply_rounding=>true})
     self.tax_2_value =  self.nice_invoice_number(taxes[1][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[1]
