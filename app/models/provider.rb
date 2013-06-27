@@ -293,7 +293,7 @@ class Provider < ActiveRecord::Base
     exceptions = []
     for server in self.servers
       begin
-        server.ami_cmd('h.323 reload')
+        server.ami_cmd('h323 reload')
       rescue Exception => e
         exceptions << e
       end
