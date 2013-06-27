@@ -105,6 +105,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/api/balance?username=user_admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>26.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/api/balance?username=user_admin&amp;test=1</td>
 	<td></td>
 </tr>
@@ -115,7 +125,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=user_admin&amp;hash=${hash1}&amp;test=1</td>
+	<td>/billing/api/balance?username=user_admin&amp;hash=${hash1}</td>
 	<td></td>
 </tr>
 <tr>
@@ -125,7 +135,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=admin&amp;test=1</td>
+	<td>/billing/api/balance?username=admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -135,7 +145,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=admin&amp;hash=${hash2}&amp;test=1</td>
+	<td>/billing/api/balance?username=admin&amp;hash=${hash2}</td>
 	<td></td>
 </tr>
 <tr>
@@ -211,7 +221,7 @@
 <!--no hash-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=admin666&amp;test=1</td>
+	<td>/billing/api/balance?username=admin666</td>
 	<td></td>
 </tr>
 <tr>
@@ -276,7 +286,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/balance?username=admin&amp;test=1</td>
+	<td>/billing/api/balance?username=admin</td>
 	<td></td>
 </tr>
 <tr>
