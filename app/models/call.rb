@@ -602,7 +602,11 @@ class Call < ActiveRecord::Base
     csv_full_src = true if options[:show_full_src].to_i == 1
     #calldate2 - because something overwites calldate when changing date format
     time_offset = options[:current_user].time_offset
-    s << SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => format, :offset => time_offset}), "calldate2")
+    if options[:api].to_i == 1
+      s << SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => format, :offset => 0}), "calldate2")
+    else
+      s << SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => format, :offset => time_offset}), "calldate2")
+    end
     s << SqlExport.column_escape_null("calls.src", "src") unless csv_full_src
     if csv_full_src or options[:pdf].to_i == 1
       s << SqlExport.column_escape_null("calls.clid", "clid")
