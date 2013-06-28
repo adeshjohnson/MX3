@@ -478,12 +478,12 @@ class AccountingController < ApplicationController
 
 
           if count_subscription == 1
-            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
-            price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
+            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price.to_d, :quantity => "1")
+            price += invd_price.to_d
           end
         }
         MorLog.my_debug("end subscriptions sum", 1)
-        invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
+        invoice.price = price.to_d
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
         invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type), 1)
@@ -699,13 +699,13 @@ class AccountingController < ApplicationController
           end
 
           if count_subscription == 1
-            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc => nc, :apply_rounding => true}), :quantity => "1")
-            price += invoice.nice_invoice_number(invd_price.to_d, {:nc => nc, :apply_rounding => true}).to_d
+            invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price.to_d, :quantity => "1")
+            price += invd_price.to_d
           end
           MorLog.my_debug("end subscriptions periodic_fee", 1)
         }
         MorLog.my_debug("end subscriptions sum", 1)
-        invoice.price = invoice.nice_invoice_number(price.to_d, {:nc => nc, :apply_rounding => true})
+        invoice.price = price.to_d
         invoice.number_type = invoice_number_type
         invoice.number = generate_invoice_number(invoice_number_start, invoice_number_length, invoice_number_type, invoice.id, period_start)
         invoice = invoice.generate_taxes_for_invoice(nc)
@@ -1992,12 +1992,12 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         #my_debug("    Invoice Subscriptions price: #{invd_price.to_s}")
 
         if count_subscription == 1
-          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d * ex, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
-          price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
+          invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invd_price.to_d, :quantity => "1")
+          price += invd_price.to_d
         end
       }
       invoice.invoice_precision=nc
-      invoice.price = invoice.nice_invoice_number(price.to_d * ex.to_d, {:nc=>nc, :apply_rounding=>true})
+      invoice.price = price.to_d
       invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type))
       MorLog.my_debug(" Recalculated Invoice number: #{invoice.number}", 1)
       invoice.save
