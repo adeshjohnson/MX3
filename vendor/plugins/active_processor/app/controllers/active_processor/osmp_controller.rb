@@ -77,8 +77,7 @@ class ActiveProcessor::OsmpController < ActiveProcessor::BaseController
             redirect_to :action => :index and return false
         end
       else
-        flash[:notice] = _("Inactive_Gateway")
-        redirect_to :controller => "/callc", :action => "main" and return false
+        fail_request(transaction[:id], "Wrong request parameters.") and return false
       end
     rescue Exception => e
       MorLog.log_exception(e, transaction[:id], "OSMP_CONTROLLER", "NOTIFY")
