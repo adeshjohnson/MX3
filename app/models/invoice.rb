@@ -50,7 +50,7 @@ class Invoice < ActiveRecord::Base
 
     else
       if tax
-        tax.apply_tax(read_attribute(:price), options)
+        tax.apply_tax(price, options)
       else
         if options[:precision]
           format("%.#{options[:precision].to_i}f", price_with_vat).to_d
