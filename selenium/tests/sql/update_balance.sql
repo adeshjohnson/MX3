@@ -23,5 +23,5 @@ update tariffs set currency ='CRC' where id = 22;
 update tariffs set currency ='EGP' where id = 23;
 update tariffs set currency ='CRC' where id = 21;
 update tariffs set currency ='BHD' where id = 18;
-
+UPDATE `mor`.`users` SET `uniquehash` = '5918yqwx4u' WHERE `users`.`id` =5 LIMIT 1 ;
 UPDATE `mor`.`users` SET `uniquehash` = 'mjq4dcbqkw' WHERE `users`.`id` =2 LIMIT 1 ;
