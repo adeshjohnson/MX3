@@ -1993,7 +1993,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
         if count_subscription == 1
           invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d * ex, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
-          price += invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}).to_d
+          price += invoice.nice_invoice_number(invd_price.to_d * ex, {:nc=>nc, :apply_rounding=>true}).to_d
         end
       }
       invoice.invoice_precision=nc
