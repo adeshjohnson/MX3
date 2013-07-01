@@ -1662,9 +1662,9 @@ class ApiController < ApplicationController
       @user = User.where(:uniquehash => params[:id]).first if params[:id]
       if @user
         if Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
-          user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
+          user_balance = @user.read_attribute(:balance) * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
         else # in case invalid or no currency value was supplied, return currency in system's currency
-          user_balance = @user.balance
+          user_balance = @user.read_attribute(:balance)
         end
         render :text => nice_number(user_balance).to_s
       else
@@ -1683,9 +1683,9 @@ class ApiController < ApplicationController
       user = User.where(:username => params[:username]).first
       if user
         if Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
-          user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
+          user_balance = user.read_attribute(:balance) * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
         else # in case invalid or no currency value was supplied, return currency in system's currency
-          user_balance = user.balance
+          user_balance = user.read_attribute(:balance)
         end
         doc.balance nice_number(user_balance).to_s
       else
