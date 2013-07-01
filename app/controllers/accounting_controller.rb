@@ -1997,7 +1997,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         end
       }
       invoice.invoice_precision=nc
-      invoice.price = invoice.nice_invoice_number(price.to_d * ex.to_d, {:nc=>nc, :apply_rounding=>true})
+      invoice.price = invoice.nice_invoice_number(price.to_d, {:nc=>nc, :apply_rounding=>true})
       invoice = invoice.generate_taxes_for_invoice(nice_invoice_number_digits(invoice.invoice_type), 1)
       MorLog.my_debug(" Recalculated Invoice number: #{invoice.number}", 1)
       invoice.save
