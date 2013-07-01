@@ -1471,7 +1471,8 @@ class ApiController < ApplicationController
                         case key.to_s
                           when 'calldate2'
                             doc.tag!(key, nice_date_time(value, 0))
-                            doc.timezone(Time.zone.now.time_zone)
+                            Time.zone = Rails.configuration.time_zone
+                            doc.timezone(Time.zone)
                           when 'dst'
                             doc.tag!(key, hide_dst_for_user(@user_logged, "gui", value))
                           else
