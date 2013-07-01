@@ -1659,15 +1659,11 @@ class ApiController < ApplicationController
 
   def simple_balance
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
-      @user = User.where(:uniquehash => params[:id]).first
+      @user = User.where(:uniquehash => params[:id]).first if params[:id]
       if @user
-        if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
-          user_balance = @user.balance
-        elsif params[:currency].to_s.downcase == 'user'
-          user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, @user.currency.name)
-        elsif Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
+        if Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
           user_balance = @user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
-        else # in case invalid currency value was supplied, return currency in system's currency
+        else # in case invalid or no currency value was supplied, return currency in system's currency
           user_balance = @user.balance
         end
         render :text => nice_number(user_balance).to_s
@@ -1686,13 +1682,9 @@ class ApiController < ApplicationController
     if Confline.get_value("Devices_Check_Ballance").to_i == 1
       user = User.where(:username => params[:username]).first
       if user
-        if params[:currency].to_s.blank? # in case currency was not supplied or is blank return balance in system's currency
-          user_balance = user.balance
-        elsif params[:currency].to_s.downcase == 'user'
-          user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, user.currency.name)
-        elsif Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
+        if Currency.where(:name => params[:currency]).first # in case valid currency was supplied return balance in that currency
           user_balance = user.balance * Currency.count_exchange_rate(Currency.get_default.name, params[:currency])
-        else # in case invalid currency value was supplied, return currency in system's currency
+        else # in case invalid or no currency value was supplied, return currency in system's currency
           user_balance = user.balance
         end
         doc.balance nice_number(user_balance).to_s
