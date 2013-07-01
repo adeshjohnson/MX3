@@ -914,9 +914,9 @@ class Invoice < ActiveRecord::Base
     self.tax_3_value =  self.nice_invoice_number(taxes[2][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[2]
     self.tax_4_value =   self.nice_invoice_number(taxes[3][:tax] , {:nc => nc, :apply_rounding=>true})   if   taxes[3]
     if ex != 0
-      self.price_with_vat = self.price_with_tax({:precision => nc, :ex => ex})
+      self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc, :ex => ex}) , {:nc => nc, :apply_rounding=>true})
     else
-      self.price_with_vat = self.price_with_tax({:precision => nc})
+      self.price_with_vat = self.nice_invoice_number(self.price_with_tax({:precision => nc}) , {:nc => nc, :apply_rounding=>true})
     end
     self
   end
