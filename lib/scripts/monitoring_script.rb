@@ -137,16 +137,17 @@ else
         find_all_users_sql = " AND users.owner_id = #{self.owner_id} "
         if self.monitoring_type == 'simultaneous'
           Monitoring.debug("Monitoring for simultaneous calls")
+          calls_sql = "SELECT T1.id, T1.dst, T1.user_id, T1.src, T1.calldate FROM calls T1 LEFT JOIN users ON (users.id = T1.user_id), calls T2 WHERE T1.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) AND T2.calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) AND users.blocked = 0 AND users.ignore_global_monitorings = 0 AND T1.calldate BETWEEN T2.calldate AND ADDTIME(T2.calldate,T2.duration) AND T1.id != T2.id AND T1.dst = T2.dst #{find_all_users_sql}"
           if user_type && user_type =~ /postpaid|prepaid/ # monitoring for postpaids and prepaids
             Monitoring.debug("Monitoring for POSTPAID OR PREPAID users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst having count(*) > 1) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0} order by dst; "
+            calls_sql << " AND users.postpaid = #{self.user_type == "postpaid" ? 1 : 0}"
           elsif user_type && user_type =~ /all/ # monitoring for all users
             Monitoring.debug("Monitoring for ALL users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst having count(*) > 1) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql}  order by dst; "
           else # monitoring for individual users
             Monitoring.debug("Monitoring for PERSONAL users")
-            calls_sql = "select calls.id, dst, user_id, src, calldate from calls JOIN users ON (users.id = calls.user_id) where  users.blocked = 0 AND users.ignore_global_monitorings = 0 AND dst in (select dst from calls where calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE) group by dst having count(*) > 1) AND calldate > DATE_SUB(NOW(), INTERVAL #{self.period_in_past.to_i} MINUTE)  #{find_all_users_sql} AND users.id = #{self.id} order by dst; "
+            calls_sql << " AND users.id = #{self.id}"
           end
+          calls_sql << " order by dst;"
         end
         if  calls_sql and !calls_sql.blank?
           calls = Call.find_by_sql(calls_sql)
