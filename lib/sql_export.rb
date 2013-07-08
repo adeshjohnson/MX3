@@ -74,7 +74,7 @@ module SqlExport
 
   def SqlExport.reseller_provider_price_sql
     if (defined?(RSPRO_Active) and RSPRO_Active.to_i == 1)
-      "(IF(providers.user_id > 0,  provider_price, reseller_price))"
+      "(IF(providers.user_id > 0,  calls.provider_price, calls.reseller_price))"
     else
       "calls.reseller_price"
     end

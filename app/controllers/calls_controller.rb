@@ -388,7 +388,7 @@ class CallsController < ApplicationController
   def summary_order_by(params, options)
     case params[:order_by].to_s
       when "orig_name" then
-        order_by = "users.first_name"
+        order_by = "u.first_name"
       when "orig_calls" then
         order_by = "total_calls"
       when "orig_exec_billsec" then

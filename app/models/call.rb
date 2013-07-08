@@ -304,48 +304,55 @@ class Call < ActiveRecord::Base
   end
 
   def Call::summary_by_terminator(cond, terminator_cond, order_by, user)
+    cond2 = []
     if user.usertype == "reseller"
-      provider_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_billsec, 0)) AS 'provider_billsec'"
-      provider_price = SqlExport.replace_price("SUM(#{SqlExport.reseller_provider_price_sql})", {:reference => 'provider_price'})
-      cond << "users.owner_id = #{user.id}"
+      provider_billsec = "SUM(IF(c.disposition = 'ANSWERED', c.reseller_billsec, 0)) AS 'provider_billsec'"
+      provider_price = SqlExport.replace_price("SUM(#{SqlExport.reseller_provider_price_sql.gsub("providers.", "p.").gsub("calls.", "c.")})", {:reference => 'provider_price'})
+      cond2 << "u.owner_id = #{user.id}"
     else
-      provider_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'provider_billsec'"
-      provider_price = SqlExport.replace_price("SUM(#{SqlExport.admin_provider_price_sql} - calls.did_prov_price)", {:reference => 'provider_price'})
+      provider_billsec = "SUM(IF(c.disposition = 'ANSWERED', c.provider_billsec, 0)) AS 'provider_billsec'"
+      provider_price = SqlExport.replace_price("SUM(#{SqlExport.admin_provider_price_sql.gsub("providers.", "p.").gsub("calls.", "c.")} - c.did_prov_price)", {:reference => 'provider_price'})
     end
 
     #limit terminators to allowed ones.
     term_ids = user.load_terminators_ids
-    if term_ids.size == 0
-      cond << "provider.terminator_id = 0"
+    if terminator_cond.blank?
+      if term_ids.size == 0
+        cond2 << "p.terminator_id = 0"
+      else
+        cond2 << "p.terminator_id IN (#{term_ids.join(", ")})"
+      end
     else
-      cond << "provider.terminator_id IN (#{term_ids.join(", ")})"
+      cond2 << "p.terminator_id = #{terminator_cond.to_s}"
     end
 
     sql = "
     SELECT
-    #{SqlExport.nice_user_sql},
-    provider.name AS 'provider_name',
-    provider.id AS 'prov_id',
-    COUNT(*) AS 'total_calls',
-    SUM(IF(calls.disposition = 'ANSWERED', 1,0)) AS 'answered_calls',
-    SUM(IF(calls.disposition = 'ANSWERED', calls.billsec, 0)) AS 'exact_billsec',
+    #{SqlExport.nice_user_sql("u")},
+    t.name AS 'provider_name',
+    p.id AS 'prov_id',
+    SUM(c.total_calls) AS 'total_calls',
+    SUM(IF(c.disposition = 'ANSWERED', c.total_calls, 0)) AS 'answered_calls',
+    SUM(IF(c.disposition = 'ANSWERED', c.billsec, 0)) AS 'exact_billsec',
     #{[provider_billsec, provider_price].join(",\n ")}
 
-    FROM calls  FORCE INDEX (calldate)
-    LEFT JOIN devices ON (calls.src_device_id = devices.id)
-    LEFT JOIN users ON (users.id = devices.user_id)
-    INNER JOIN (
-      SELECT providers.id, terminators.name, providers.terminator_id
-      FROM providers
-       INNER JOIN terminators ON (providers.terminator_id = terminators.id) #{terminator_cond.to_s == '' ? '' : ' WHERE terminators.id = '+ terminator_cond.to_s })
-      AS provider ON (provider.id = calls.provider_id)
-    LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
-    LEFT JOIN directions ON (destinations.direction_code = directions.code)
-    #{SqlExport.left_join_reseler_providers_to_calls_sql}
-    WHERE(" + cond.join(" AND ")+ ")
-    GROUP BY provider.name
-    #{order_by.size > 0 ? 'ORDER BY ' +order_by : ''}
-    "
+    FROM (
+      SELECT c.src_device_id, c.provider_id, c.disposition, COUNT(c.id) AS total_calls,
+        SUM(c.billsec) AS billsec, SUM(c.provider_billsec) AS provider_billsec,
+        SUM(c.provider_price) AS provider_price, SUM(c.did_prov_price) AS did_prov_price,
+        SUM(c.reseller_billsec) AS reseller_billsec, SUM(c.reseller_price) AS reseller_price,
+        SUM(c.did_inc_price) AS did_inc_price
+      FROM calls c FORCE INDEX (calldate)
+      WHERE " + cond.join(" AND ").gsub("calls.", "c.") + "
+      GROUP BY provider_id, disposition
+    ) c
+    JOIN providers p ON (c.provider_id = p.id)
+    JOIN devices d ON (c.src_device_id = d.id)
+    JOIN users u ON (d.user_id = u.id)
+    JOIN terminators t ON (t.id = p.terminator_id)
+    WHERE (" + cond2.join(" AND ")+ ")
+    GROUP BY t.id
+    #{order_by.size > 0 ? 'ORDER BY ' +order_by : ''};"
 
     Call.find_by_sql(sql)
   end
@@ -354,45 +361,55 @@ class Call < ActiveRecord::Base
 =end
 
   def Call::summary_by_originator(cond, terminator_cond, order_by, user)
+    cond2 = []
     if user.usertype == "reseller"
-      cond << "users.owner_id = #{user.id}"
-      originator_billsec= "SUM(IF(calls.user_billsec IS NULL AND calls.disposition = 'ANSWERED', 0, calls.user_billsec)) AS 'originator_billsec'"
-      originator_price = "SUM(IF(calls.user_price IS NULL AND calls.disposition = 'ANSWERED', 0, #{SqlExport.replace_price(SqlExport.user_price_sql)})) AS 'originator_price'"
+      cond2 << "u.owner_id = #{user.id}"
+      originator_billsec= "SUM(IF(c.user_billsec IS NULL AND c.disposition = 'ANSWERED', 0, c.user_billsec)) AS 'originator_billsec'"
+      originator_price = "SUM(IF(c.user_price IS NULL AND c.disposition = 'ANSWERED', 0, #{SqlExport.replace_price(SqlExport.user_price_sql.gsub("calls.", "c."))})) AS 'originator_price'"
     else
-      originator_billsec= "SUM(IF(owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originator_billsec'"
-      originator_price = "SUM(#{SqlExport.replace_price(SqlExport.admin_user_price_no_dids_sql)}) AS 'originator_price'"
+      originator_billsec= "SUM(IF(owner_id = 0 AND c.disposition = 'ANSWERED', IF(c.user_billsec IS NULL, 0, c.user_billsec), if(c.reseller_billsec IS NULL, 0, c.reseller_billsec))) AS 'originator_billsec'"
+      originator_price = "SUM(#{SqlExport.replace_price(SqlExport.admin_user_price_no_dids_sql.gsub("providers.", "p.").gsub("calls.", "c."))}) AS 'originator_price'"
     end
 
     #limit terminators to allowed ones.
     term_ids = user.load_terminators_ids
-    if term_ids.size == 0
-      cond << "provider.terminator_id = 0"
+    if terminator_cond.blank?
+      if term_ids.size == 0
+        cond2 << "p.terminator_id = 0"
+      else
+        cond2 << "p.terminator_id IN (#{term_ids.join(", ")})"
+      end
     else
-      cond << "provider.terminator_id IN (#{term_ids.join(", ")})"
+      cond2 << "p.terminator_id = #{terminator_cond.to_s}"
     end
 
     sql = "
     SELECT
-    #{SqlExport.nice_user_sql},
+    #{SqlExport.nice_user_sql("u")},
 
-    COUNT(*) AS 'total_calls',
-    SUM(IF(calls.disposition = 'ANSWERED', 1,0)) AS 'answered_calls',
-    devices.user_id AS 'dev_user_id',
-    SUM(IF(calls.disposition = 'ANSWERED', calls.billsec, 0)) AS 'exact_billsec',
+    SUM(c.total_calls) AS total_calls,
+    SUM(IF(c.disposition = 'ANSWERED', 1,0)) AS 'answered_calls',
+    d.user_id AS 'dev_user_id',
+    SUM(IF(c.disposition = 'ANSWERED', c.billsec, 0)) AS 'exact_billsec',
     #{[originator_billsec, originator_price].join(",\n")}
-    FROM calls FORCE INDEX (calldate)
-    LEFT JOIN devices ON (calls.src_device_id = devices.id)
-    LEFT JOIN users ON (users.id = devices.user_id)
-    INNER JOIN (
-    SELECT providers.id, terminators.name, providers.terminator_id
-    FROM providers
-    INNER JOIN terminators ON (providers.terminator_id = terminators.id) #{terminator_cond.to_s == '' ? '' : ' WHERE terminators.id = '+ terminator_cond.to_s })
-    AS provider ON (provider.id = calls.provider_id)
-    LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
-    LEFT JOIN directions ON (destinations.direction_code = directions.code)
-    #{SqlExport.left_join_reseler_providers_to_calls_sql}
-    WHERE(" + cond.join(" AND ")+ ")
-    GROUP BY devices.user_id
+
+    FROM (
+      SELECT c.provider_id, c.reseller_id, c.src_device_id, c.disposition,
+        COUNT(c.id) AS total_calls, SUM(c.billsec) AS billsec,
+        SUM(c.user_billsec) AS user_billsec, SUM(c.reseller_billsec) AS reseller_billsec,
+        SUM(c.user_price) AS user_price, SUM(c.reseller_price) AS reseller_price,
+        SUM(c.did_inc_price) AS did_inc_price
+      FROM calls c FORCE INDEX (calldate)
+      WHERE (" + cond.join(" AND ").gsub("calls.", "c.") + ")
+      GROUP BY c.provider_id, c.reseller_id, c.src_device_id, c.disposition
+    ) c
+
+    JOIN providers p ON p.id = c.provider_id
+    LEFT JOIN devices d ON c.src_device_id = d.id
+    LEFT JOIN users u ON u.id = d.user_id
+    LEFT JOIN taxes ON (taxes.id = u.tax_id)
+    WHERE(" + cond2.join(" AND ")+ ")
+    GROUP BY d.user_id
     #{order_by.size > 0 ? 'ORDER BY ' +order_by : ''}
     "
     Call.find_by_sql(sql)
