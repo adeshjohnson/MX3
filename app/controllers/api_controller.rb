@@ -1512,6 +1512,7 @@ class ApiController < ApplicationController
     users = []
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
       if defined?(MA_Active) and MA_Active == 1
+        @values.symbolize_keys!
         if (@values.keys & [:monitoring_id, :users, :block, :email, :mtype]).size == 5
           monitoring = Monitoring.where(:id => @values[:monitoring_id], :block => (@values[:block] == "true") ? true : false, :email => (@values[:email] == "true") ? true : false, :mtype => @values[:mtype]).first
           if monitoring
