@@ -2257,7 +2257,9 @@ Variables: (Names marked with * are required)
       end
     rescue Exception => e
       MorLog.log_exception(e, id, params[:controller].to_s, params[:action].to_s)
-      `/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail19999' -m 'Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}' -o tls='auto'`
+      message ="Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}"
+      command = send_email_dry("fail2ban@kolmisoft.com", address, message, "#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION", "-o tls='auto'")
+      system(command)
       flash[:notice] = "INTERNAL ERROR."
       #redirect_to Web_Dir + "/callc/main" and return false
     end
@@ -2850,6 +2852,14 @@ Variables: (Names marked with * are required)
     p.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s if Email::ALLOWED_VARIABLES.include?(s.match(/<%=?\s*(\S+)\s*%>/)[1]) }
   end
 
+  def send_email_dry(from = "", to = "", message = "", subject = "", files = "", smtp = "localhost")
+
+    cmd = "/usr/local/mor/sendEmail -s #{smtp} -f '#{from}' -t '#{to}' -u '#{subject}'"
+    cmd << " -m '#{message}'" if message != ""
+    cmd << " #{files}" if files != ""
+    cmd
+  end
+
   private
 
   def store_location
@@ -2913,7 +2923,7 @@ Variables: (Names marked with * are required)
     MorLog.my_debug("  >> Before sending message.", true)
     local_filename = "/tmp/mor_crash_email.txt"
     File.open(local_filename, 'w') { |f| f.write(message) }
-    command = "/usr/local/mor/sendEmail -f 'support@kolmisoft.com' -t '#{address}' -u '#{subject}' -s 'smtp.gmail.com' -xu 'crashemail1' -xp 'crashemail19999' -o message-file='#{local_filename}' tls='auto'"
+    command = send_email_dry("fail2ban@kolmisoft.com", address, "", subject, "-o message-file='#{local_filename}' tls='auto'")
     system(command)
     MorLog.my_debug("  >> Crash email sent to #{address}", true)
     MorLog.my_debug("  >> COMMAND : #{command.inspect}", true)
