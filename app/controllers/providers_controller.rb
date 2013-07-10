@@ -11,6 +11,7 @@ class ProvidersController < ApplicationController
                                           :provider_rule_change_status, :provider_rule_add, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update, :unassign]
   before_filter :find_providerrule, :only => [:provider_rule_change_status, :provider_rule_destroy, :provider_rule_edit, :provider_rule_update]
 
+
   def index
     redirect_to :action => :list and return false
   end
