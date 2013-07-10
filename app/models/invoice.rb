@@ -908,6 +908,8 @@ class Invoice < ActiveRecord::Base
 
 
   def generate_taxes_for_invoice(nc, ex = 0)
+
+    self.tax = self.user.get_tax unless tax
     taxes = self.tax.applied_tax_list(self.price, {:precision => nc})
     self.tax_1_value = self.nice_invoice_number(taxes[0][:tax] , {:nc => nc, :apply_rounding=>true})
     self.tax_2_value =  self.nice_invoice_number(taxes[1][:tax] , {:nc => nc, :apply_rounding=>true})    if   taxes[1]
