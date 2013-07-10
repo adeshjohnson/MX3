@@ -196,7 +196,7 @@ class ProvidersController < ApplicationController
     #      redirect_to :action => :list and return false
     #    end
 
-    params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
+    params[:add_to_servers] = {Confline.get_value("Resellers_server_id").to_s => '1'} if session[:usertype] == "reseller"
 
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
       flash[:notice] = _('Please_select_server')
@@ -228,6 +228,7 @@ class ProvidersController < ApplicationController
       dev.extension = random_password(10) #should be not-quesable
       dev.username = @provider.login.strip
       dev.trustrpid = 'yes'
+      dev.server_id = Confline.get_value("Resellers_server_id").to_i if reseller?
       dev.insecure = "port,invite"
       dev.device_type = @provider.tech.strip
       dev.user_id = -1 #means it's not ordinary user
@@ -391,7 +392,7 @@ class ProvidersController < ApplicationController
       provider_update_errors += 1
     end
 
-    params[:add_to_servers] = {'1' => '1'} if session[:usertype] == "reseller"
+    params[:add_to_servers] = {Confline.get_value("Resellers_server_id").to_s => '1'} if session[:usertype] == "reseller"
     if !params[:add_to_servers] or params[:add_to_servers].size.to_i == 0
       @provider.errors.add(:add_to_servers_error, _('Please_select_server'))
       provider_update_errors += 1
@@ -408,6 +409,7 @@ class ProvidersController < ApplicationController
 
     @device.update_cid(params[:cid_name], params[:cid_number])
     @device.attributes = params[:device]
+    @device.server_id = Confline.get_value("Resellers_server_id").to_i if reseller?
 
     if params[:mask1]
       if !Device.validate_permits_ip([params[:ip1], params[:ip2], params[:ip3], params[:mask1], params[:mask2], params[:mask3]])
