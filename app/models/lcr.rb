@@ -170,6 +170,9 @@ class Lcr < ActiveRecord::Base
 
     t_name = "Temp_#{id}_#{Time.now().to_i}"
 
+    currency = Currency.where(:name => options[:curr].to_s).first
+    exchange_rate = !currency.blank? ? currency.exchange_rate : 1
+
     if options[:current_user].usertype == 'reseller' and options[:current_user].tariff.purpose == 'user'
 
       tariffs = Tariff.find_by_sql("SELECT DISTINCT(providers.tariff_id) as tid FROM lcrproviders
@@ -178,16 +181,14 @@ class Lcr < ActiveRecord::Base
                                   WHERE lcr_id = #{id} and tariff_id is not null")
 
       t_ids = tariffs.map { |i| i.tid }
-      create_temp_table = "CREATE TABLE #{t_name}_2 AS (SELECT  destinationgroup_id, #{SqlExport.replace_dec("CAST(MIN( price / exchange_rate) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( price / exchange_rate) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
+      create_temp_table = "CREATE TABLE #{t_name}_2 AS (SELECT  destinationgroup_id, #{SqlExport.replace_dec("CAST(MIN( price * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( price * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
                            JOIN aratedetails ON (rates.id = rate_id)
                            JOIN tariffs ON (tariffs.id = tariff_id)
-                           JOIN currencies ON (currencies.name = tariffs.currency)
                      WHERE tariff_id IN (#{options[:current_user].tariff_id}) group by destinationgroup_id);"
       ActiveRecord::Base.connection.execute(create_temp_table)
-      cretate_table_2 = " CREATE TABLE #{t_name}_1 AS (SELECT destination_id as did, #{SqlExport.replace_dec("CAST(MIN( rate / exchange_rate) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( rate / exchange_rate) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
+      cretate_table_2 = " CREATE TABLE #{t_name}_1 AS (SELECT destination_id as did, #{SqlExport.replace_dec("CAST(MIN( rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
                            JOIN ratedetails ON (rates.id = rate_id)
                            JOIN tariffs ON (tariffs.id = tariff_id)
-                           JOIN currencies ON (currencies.name = tariffs.currency)
                      WHERE tariff_id IN (#{t_ids.size.to_i > 0 ? t_ids.join(' , ') : -100}) GROUP BY destination_id);"
       ActiveRecord::Base.connection.execute(cretate_table_2)
       sql_m = "SELECT #{s.join(' , ')} ,  rate_min, rate_max FROM (
@@ -209,12 +210,11 @@ class Lcr < ActiveRecord::Base
       end
 
       sql_m = "SELECT #{s.join(' , ')},
-                      CAST(MIN(rate / exchange_rate) AS DECIMAL(15,10)) AS rate_min, 
-                      CAST(MAX(rate / exchange_rate) AS DECIMAL(15,10)) AS rate_max 
+                      CAST(MIN(rate * #{exchange_rate}) AS DECIMAL(15,10)) AS rate_min,
+                      CAST(MAX(rate * #{exchange_rate}) AS DECIMAL(15,10)) AS rate_max
             FROM rates
             JOIN ratedetails ON (rates.id = rate_id)
             JOIN tariffs ON (tariffs.id = tariff_id)
-            JOIN currencies ON (currencies.name = tariffs.currency)
 	    JOIN destinations ON (rates.destination_id = destinations.id)
             LEFT JOIN directions ON (destinations.direction_code = directions.code)
             WHERE #{cond} 
