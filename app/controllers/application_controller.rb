@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   # session :session_key => '_mor_session_id'
 
-  helper_method :convert_curr, :see_providers_in_dids?, :allow_manage_providers?, :allow_manage_dids?, :allow_manage_providers_tariffs?, :correct_owner_id, :pagination_array, :invoice_state, :nice_invoice_number, :nice_invoice_number_digits, :current_user, :can_see_finances?, :hide_finances, :render_email, :session_from_datetime_array, :session_till_datetime_array, :accountant_can_write?, :accountant_can_read?, :nice_date, :nice_date_time, :monitoring_enabled_for, :rs_active?, :rec_active?, :cc_active?, :ad_active?, :ccl_active?, :is_number?, :is_numeric?, :show_user_billsec?, :load_ok?
+  helper_method :convert_curr, :see_providers_in_dids?, :allow_manage_providers?, :allow_manage_dids?, :allow_manage_providers_tariffs?, :correct_owner_id, :pagination_array, :invoice_state, :nice_invoice_number, :nice_invoice_number_digits, :current_user, :can_see_finances?, :hide_finances, :render_email, :session_from_datetime_array, :session_till_datetime_array, :accountant_can_write?, :accountant_can_read?, :nice_date, :nice_date_time, :monitoring_enabled_for, :rs_active?, :rec_active?, :cc_active?, :ad_active?, :ccl_active?, :is_number?, :is_numeric?, :show_user_billsec?, :load_ok?, :send_email_dry
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
@@ -2258,7 +2258,7 @@ Variables: (Names marked with * are required)
     rescue Exception => e
       MorLog.log_exception(e, id, params[:controller].to_s, params[:action].to_s)
       message ="Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}"
-      command = send_email_dry("fail2ban@kolmisoft.com", address, message, "#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION", "-o tls='auto'")
+      command = ApplicationController::send_email_dry("fail2ban@kolmisoft.com", address, message, "#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION", "-o tls='auto'")
       system(command)
       flash[:notice] = "INTERNAL ERROR."
       #redirect_to Web_Dir + "/callc/main" and return false
@@ -2852,7 +2852,7 @@ Variables: (Names marked with * are required)
     p.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s if Email::ALLOWED_VARIABLES.include?(s.match(/<%=?\s*(\S+)\s*%>/)[1]) }
   end
 
-  def send_email_dry(from = "", to = "", message = "", subject = "", files = "", smtp = "localhost")
+  def ApplicationController::send_email_dry(from = "", to = "", message = "", subject = "", files = "", smtp = "localhost")
 
     cmd = "/usr/local/mor/sendEmail -s #{smtp} -f '#{from}' -t '#{to}' -u '#{subject}'"
     cmd << " -m '#{message}'" if message != ""
@@ -2923,7 +2923,7 @@ Variables: (Names marked with * are required)
     MorLog.my_debug("  >> Before sending message.", true)
     local_filename = "/tmp/mor_crash_email.txt"
     File.open(local_filename, 'w') { |f| f.write(message) }
-    command = send_email_dry("fail2ban@kolmisoft.com", address, "", subject, "-o message-file='#{local_filename}' tls='auto'")
+    command = ApplicationController::send_email_dry("fail2ban@kolmisoft.com", address, "", subject, "-o message-file='#{local_filename}' tls='auto'")
     system(command)
     MorLog.my_debug("  >> Crash email sent to #{address}", true)
     MorLog.my_debug("  >> COMMAND : #{command.inspect}", true)

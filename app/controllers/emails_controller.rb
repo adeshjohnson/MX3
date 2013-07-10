@@ -364,7 +364,7 @@ class EmailsController < ApplicationController
 	     end
 
 	     filenames = files.map { |file| "'/home/mor/tmp/" + number.to_s + "_" + file[:filename].to_s.gsub(" ","_") + "'" }.join(" ").to_s
-       system_call = send_email_dry(from.to_s, to.to_s, email.body.to_s, email.subject.to_s, "-a #{filenames}", "'#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}'")
+       system_call = ApplicationController::send_email_dry(from.to_s, to.to_s, email.body.to_s, email.subject.to_s, "-a #{filenames}", "'#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}'")
        system(system_call)
 
 	     files.each do |file|
