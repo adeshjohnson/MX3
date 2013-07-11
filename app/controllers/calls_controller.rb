@@ -65,78 +65,91 @@ class CallsController < ApplicationController
 
     # groups by those params that are not in search conditions
     group_by = []
-    @options[:destination_grouping].to_i == 1 ? group_by << "destinations.direction_code, destinations.prefix" : group_by << "destinations.direction_code, destinations.subcode"
+    @options[:destination_grouping].to_i == 1 ? group_by << "ds.direction_code, ds.prefix" : group_by << "ds.direction_code, ds.subcode"
+    cond = []
 
     if @options[:customer_orig_show].to_i == 1 or @options[:customer_term_show].to_i == 1
-      group_by << "devices.user_id" if @options[:originator] == "any"
-      group_by << "providers.terminator_id" if @options[:terminator] == "any"
+      group_by << "dv.user_id" if @options[:originator] == "any"
+      group_by << "p.terminator_id" if @options[:terminator] == "any"
     end
 
     # form condition array for sql
-    cond = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
-    cond << "users.owner_id = #{current_user.id}" if reseller?
-    #cond << "calls.user_id != -1" # This allows to filter invalid calls
-    cond << "(users.id = #{q(@options[:originator].to_i)} OR users.owner_id = #{q(@options[:originator].to_i)})" if @options[:originator] != "any"
-    cond << "calls.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
+    cond2 = ["calldate BETWEEN '" + session_from_datetime + "' AND '" + session_till_datetime + "'"]
+    cond << "u.owner_id = #{current_user.id}" if reseller?
+
+    cond << "(u.id = #{q(@options[:originator].to_i)} OR u.owner_id = #{q(@options[:originator].to_i)})" if @options[:originator] != "any"
+    cond2 << "c.prefix LIKE '#{@options[:prefix].gsub(/[^0-9]/, "")}%'" if  @options[:prefix].to_s != ""
     if terminator_cond.to_s != ''
-      cond << "providers.terminator_id = #{terminator_cond.to_s}"
+      cond << "p.terminator_id = #{terminator_cond.to_s}"
     else
-      cond << "providers.terminator_id > 0"
+      cond << "p.terminator_id > 0"
     end
     #limit terminators to allowed ones.
     term_ids = current_user.load_terminators_ids
     if term_ids.size == 0
-      cond << "providers.terminator_id = 0"
+      cond << "p.terminator_id = 0"
     else
-      cond << "providers.terminator_id IN (#{term_ids.join(", ")})"
+      cond << "p.terminator_id IN (#{term_ids.join(", ")})"
     end
 
-    cond << "NOT (billsec = 0 AND disposition = 'ANSWERED')"
+    cond2 << "NOT (billsec = 0 AND disposition = 'ANSWERED')"
     # terminator requires other conditions
 
     if reseller?
-      originating_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, #{SqlExport.user_price_sql}), 0))", {:reference => 'originating_billed'})
-      originating_billsec = "SUM(IF(calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), 0)) AS 'originating_billsec'"
+      originating_billed = SqlExport.replace_price("SUM(IF(c.disposition = 'ANSWERED', if(c.user_price is NULL, 0, #{SqlExport.user_price_sql.gsub("calls.", "c.")}), 0))", {:reference => 'originating_billed'})
+      originating_billsec = "SUM(IF(c.disposition = 'ANSWERED', IF(c.user_billsec IS NULL, 0, c.user_billsec), 0)) AS 'originating_billsec'"
 
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', #{SqlExport.reseller_provider_price_sql}, 0))", {:reference => 'terminating_billed'})
-      terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.reseller_billsec, 0)) AS 'terminating_billsec'"
+      terminator_billed = SqlExport.replace_price("SUM(IF(c.disposition = 'ANSWERED', #{SqlExport.reseller_provider_price_sql.gsub("calls.", "c.").gsub("providers.", "p.")}, 0))", {:reference => 'terminating_billed'})
+      terminator_billsec = "SUM(IF(c.disposition = 'ANSWERED', c.reseller_billsec, 0)) AS 'terminating_billsec'"
     else
       # Check if call belongs to resellers user if yes then admins income is reseller perice
-      originating_billed = SqlExport.replace_price("SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', if(calls.user_price is NULL, 0, #{SqlExport.user_price_sql}), if(calls.reseller_price IS NULL, 0, (calls.reseller_price + calls.did_inc_price))))", {:reference => 'originating_billed'})
-      originating_billsec = "SUM(IF(users.owner_id = 0 AND calls.disposition = 'ANSWERED', IF(calls.user_billsec IS NULL, 0, calls.user_billsec), if(calls.reseller_billsec IS NULL, 0, calls.reseller_billsec))) AS 'originating_billsec'"
+      originating_billed = SqlExport.replace_price("SUM(IF(u.owner_id = 0 AND c.disposition = 'ANSWERED', if(c.user_price is NULL, 0, #{SqlExport.user_price_sql.gsub("calls.", "c.")}), IF(c.reseller_price IS NULL, 0, (c.reseller_price + c.did_inc_price))))", {:reference => 'originating_billed'})
+      originating_billsec = "SUM(IF(u.owner_id = 0 AND c.disposition = 'ANSWERED', IF(c.user_billsec IS NULL, 0, c.user_billsec), IF(c.reseller_billsec IS NULL, 0, c.reseller_billsec))) AS 'originating_billsec'"
 
-      terminator_billed = SqlExport.replace_price("SUM(IF(calls.disposition = 'ANSWERED', #{SqlExport.admin_provider_price_sql}, 0)) - calls.did_prov_price", {:reference => 'terminating_billed'})
-      terminator_billsec = "SUM(IF(calls.disposition = 'ANSWERED', calls.provider_billsec, 0)) AS 'terminating_billsec'"
+      terminator_billed = SqlExport.replace_price("SUM(IF(c.disposition = 'ANSWERED', #{SqlExport.admin_provider_price_sql.gsub("calls.", "c.").gsub("providers.", "p.")}, 0)) - c.did_prov_price", {:reference => 'terminating_billed'})
+      terminator_billsec = "SUM(IF(c.disposition = 'ANSWERED', c.provider_billsec, 0)) AS 'terminating_billsec'"
     end
 
     sql = "
     SELECT
-    #{SqlExport.nice_user_sql},
-    calls.prefix,
-    destinations.direction_code AS 'code',
-    destinations.subcode AS 'subcode',
-    destinations.name AS 'dest_name',
-    users.username AS 'username',
-    users.first_name AS 'first_name',
-    users.last_name AS 'last_name',
-    providers.terminator_id AS 'terminator_id',
+    #{SqlExport.nice_user_sql("u")},
+    c.prefix,
+    ds.direction_code AS 'code',
+    ds.subcode AS 'subcode',
+    ds.name AS 'dest_name',
+    u.username AS 'username',
+    u.first_name AS 'first_name',
+    u.last_name AS 'last_name',
+    p.terminator_id AS 'terminator_id',
 
     #{[originating_billed, terminator_billed, originating_billsec, terminator_billsec].join(",\n")},
 
-    SUM(IF(calls.disposition = 'ANSWERED', calls.billsec, 0)) AS 'duration',
+    SUM(IF(c.disposition = 'ANSWERED', c.billsec, 0)) AS 'duration',
     COUNT(*) AS 'total_calls',
-    SUM(IF(calls.disposition = 'ANSWERED', 1,0)) AS 'answered_calls',
-    SUM(IF(calls.disposition = 'ANSWERED', 1,0))/COUNT(*)*100 AS 'asr',
-    SUM(IF(calls.disposition = 'ANSWERED', calls.billsec, 0))/SUM(IF(calls.disposition = 'ANSWERED', 1,0)) AS 'acd',
-    #{SqlExport.nice_user_sql}
-    FROM calls FORCE INDEX (calldate)
-    LEFT JOIN devices ON (calls.src_device_id = devices.id)
-    LEFT JOIN users ON (users.id = devices.user_id)
-    INNER JOIN providers ON (providers.id = calls.provider_id)
-    #{"LEFT JOIN terminators ON (terminators.id = providers.terminator_id)" if @options[:order_by] == "terminators.name"}
+    SUM(IF(c.disposition = 'ANSWERED', 1,0)) AS 'answered_calls',
+    SUM(IF(c.disposition = 'ANSWERED', 1,0))/COUNT(*)*100 AS 'asr',
+    SUM(IF(c.disposition = 'ANSWERED', c.billsec, 0))/SUM(IF(c.disposition = 'ANSWERED', 1,0)) AS 'acd'
 
-    LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
-    WHERE(" + cond.join(" AND ")+ ")
+    FROM (
+      SELECT c.prefix, c.provider_id, c.src_device_id, disposition,
+      SUM(c.user_price) AS user_price, SUM(c.reseller_price) AS reseller_price,
+      SUM(c.did_inc_price) AS did_inc_price,
+      SUM(c.provider_price) AS provider_price, SUM(c.did_prov_price) AS did_prov_price,
+      SUM(c.user_billsec) AS user_billsec, SUM(c.reseller_billsec) AS reseller_billsec,
+      SUM(c.provider_billsec) AS provider_billsec, SUM(c.billsec) AS billsec,
+      COUNT(c.id) AS total_calls
+      FROM calls c FORCE INDEX (calldate)
+      WHERE " + cond2.join(" AND ")+ "
+      GROUP BY c.prefix, c.provider_id, c.src_device_id, disposition
+    ) c
+
+    JOIN providers p ON p.id = c.provider_id
+    LEFT JOIN devices dv ON c.src_device_id = dv.id
+    LEFT JOIN users u ON u.id = dv.user_id
+    LEFT JOIN destinations ds ON ds.prefix = c.prefix
+    #{"LEFT JOIN terminators t ON t.id = p.terminator_id" if @options[:order_by] == "terminators.name"}
+
+    WHERE (" + cond.join(" AND ")+ ")
     #{group_by.size > 0 ? 'GROUP BY ' +group_by.join(", ") : ''}
     #{order_by.size > 0 ? 'ORDER BY ' +order_by : ''}"
 
