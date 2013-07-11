@@ -49,12 +49,7 @@
 <!--main window for cli-->
 <tr>
 	<td>open</td>
-	<td>/billing/devices/clis</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Add</td>
+	<td>/billing/devices/cli_new</td>
 	<td></td>
 </tr>
 <tr>
@@ -79,7 +74,7 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Device:</td>
+	<td>Device</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,7 +84,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI created</td>
+	<td>CLI successfully created</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,7 +99,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,7 +129,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI updated</td>
+	<td>CLI successfully updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,7 +144,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI deleted: 222223</td>
+	<td>CLI successfully deleted: 222223</td>
 	<td></td>
 </tr>
 <!--manage cli for some users device-->
@@ -190,7 +185,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI created</td>
+	<td>CLI successfully created</td>
 	<td></td>
 </tr>
 <tr>
@@ -240,7 +235,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI updated</td>
+	<td>CLI successfully updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -255,10 +250,9 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI deleted: 33334</td>
+	<td>CLI successfully deleted: 33334</td>
 	<td></td>
 </tr>
-<!--manage own cli-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@type='image']</td>
@@ -270,88 +264,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>cli</td>
-	<td>55555</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>description</td>
-	<td>55555</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>comment</td>
-	<td>55555</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>email_callback</td>
-	<td>label=Use for Email Callback</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextPresent</td>
-	<td>CLI created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>cli</td>
-	<td>555556</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>description</td>
-	<td>555556</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>comment</td>
-	<td>555556</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>email_callback</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>banned</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CLI updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CLI deleted: 555556</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <!--login as reseller-->
@@ -423,7 +337,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI created</td>
+	<td>CLI successfully created</td>
 	<td></td>
 </tr>
 <tr>
@@ -468,7 +382,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI updated</td>
+	<td>CLI successfully updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -483,88 +397,13 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI deleted: 11112</td>
+	<td>CLI successfully deleted: 11112</td>
 	<td></td>
 </tr>
 <!--manage own device for reseller-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/user_device_clis</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>cli</td>
-	<td>2222</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>description</td>
-	<td>2222</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>email_callback</td>
-	<td>label=Use for Email Callback</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>comment</td>
-	<td>2222</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CLI created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>cli</td>
-	<td>22223</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>description</td>
-	<td>222233</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>email_callback</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CLI updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CLI deleted: 22223</td>
 	<td></td>
 </tr>
 <!--login as simple user 101-->
@@ -621,7 +460,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI created</td>
+	<td>CLI successfully created</td>
 	<td></td>
 </tr>
 <tr>
@@ -656,7 +495,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI updated</td>
+	<td>CLI successfully updated</td>
 	<td></td>
 </tr>
 <tr>
@@ -691,7 +530,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI deleted: 22223</td>
+	<td>CLI successfully deleted: 22223</td>
 	<td></td>
 </tr>
 <!--signup-->
@@ -821,34 +660,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>cli_7</td>
-	<td>37000688888</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>cli_8</td>
-	<td>370006</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>cli_9</td>
-	<td>123456789</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>description_7</td>
-	<td>Mobile Phone</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>description_8</td>
-	<td>Phone</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>description_9</td>
-	<td>Fax</td>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
 </tr>
 <!--* trying to delete nonexistent cli device-->
 <tr>
@@ -884,7 +698,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/cli_device_delete/9</td>
+	<td>/billing/devices/cli_device_delete/7</td>
 	<td></td>
 </tr>
 <tr>
@@ -894,7 +708,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/change_email_callback_status_device/9?device_id=5&amp;email_callback=0</td>
+	<td>/billing/devices/change_email_callback_status_device/7?device_id=5&amp;email_callback=0</td>
 	<td></td>
 </tr>
 <tr>
@@ -922,30 +736,10 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_clis/8</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>cli_9</td>
-	<td>123456789</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>calback_9</td>
-	<td></td>
-</tr>
 <!--* validate CLI uniqueness-->
 <tr>
 	<td>open</td>
-	<td>/billing/devices/clis</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Add</td>
+	<td>/billing/devices/cli_new</td>
 	<td></td>
 </tr>
 <tr>
@@ -1001,7 +795,7 @@
 <!--* user's cli uniqueness-->
 <tr>
 	<td>open</td>
-	<td>/billing/devices/user_device_clis</td>
+	<td>/billing/devices/cli_new</td>
 	<td></td>
 </tr>
 <tr>
@@ -1015,8 +809,23 @@
 	<td>orig</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='cli_table']/tbody/tr[2]/td[6]/select[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_new</td>
 	<td></td>
 </tr>
 <tr>
@@ -1030,8 +839,18 @@
 	<td>duplicate</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='cli_table']/tbody/tr[2]/td[6]/select[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1051,12 +870,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@type='image']</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/cli_user_edit/11</td>
+	<td>/billing/devices/cli_edit/9</td>
 	<td></td>
 </tr>
 <tr>
@@ -1284,7 +1103,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/devices/cli_edit/11</td>
+	<td>/billing/devices/cli_edit/9</td>
 	<td></td>
 </tr>
 <tr>
@@ -1299,12 +1118,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Please enter details</td>
+	<td>CLI was not created</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>CLI was not created</td>
+	<td> * CLI must be provided</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> * CLI must be numeric</td>
 	<td></td>
 </tr>
 </tbody></table>
