@@ -128,11 +128,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/lcrs/make_tariff/1?test=1</td>
 	<td></td>
 </tr>
@@ -188,6 +183,71 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/make_tariff/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;93&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;9320&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;9330&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;370&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;3706&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;370604&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;1.0600000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0.9000000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0.6660000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0.4240000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/settings</td>
 	<td></td>
 </tr>
@@ -219,6 +279,16 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=USD</td>
 	<td></td>
 </tr>
 <tr>
@@ -274,6 +344,71 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>rate_min&quot;=&gt;&quot;0,2120000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/make_tariff/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;93&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;9320&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;9330&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;370&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;3706&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>prefix&quot;=&gt;&quot;370604&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;1,0600000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,9000000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,6660000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,4240000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -406,12 +541,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_max&quot;=&gt;&quot;0,1230000000&quot;</td>
+	<td>rate_max&quot;=&gt;&quot;0,2460000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min&quot;=&gt;&quot;0,1230000000&quot;</td>
+	<td>rate_min&quot;=&gt;&quot;0,2460000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,12 +556,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_max&quot;=&gt;&quot;0,9800000000</td>
+	<td>rate_max&quot;=&gt;&quot;1,9600000000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min&quot;=&gt;&quot;0,9800000000</td>
+	<td>rate_min&quot;=&gt;&quot;1,9600000000</td>
 	<td></td>
 </tr>
 <tr>
@@ -441,22 +576,67 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_max&quot;=&gt;&quot;0,3330000000&quot;</td>
+	<td>rate_max&quot;=&gt;&quot;0,6660000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min&quot;=&gt;&quot;0,2120000000&quot;</td>
+	<td>rate_min&quot;=&gt;&quot;0,4240000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>0,0000200000</td>
+	<td>0,0000400000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>2e05</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=DZD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/make_tariff/1?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;0,4920000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,4920000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;3,9200000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;3,9200000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_max&quot;=&gt;&quot;1,3320000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>rate_min&quot;=&gt;&quot;0,8480000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -526,6 +706,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=USD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/lcrs/make_tariff/1?test=1</td>
 	<td></td>
 </tr>
@@ -541,7 +731,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min&quot;=&gt;&quot;0,0615000000&quot;</td>
+	<td>rate_min&quot;=&gt;&quot;0,3100000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -551,12 +741,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_max&quot;=&gt;&quot;0,4900000000</td>
+	<td>rate_max&quot;=&gt;&quot;0,9800000000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min&quot;=&gt;&quot;0,4900000000</td>
+	<td>rate_min&quot;=&gt;&quot;0,9800000000</td>
 	<td></td>
 </tr>
 <tr>
@@ -576,7 +766,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>rate_min&quot;=&gt;&quot;0,1060000000&quot;</td>
+	<td>rate_min&quot;=&gt;&quot;0,2120000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
@@ -675,6 +865,71 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,7120000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,7120000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,6450000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,6450000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,0777000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=DZD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/make_tariff/3?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;2,8480000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;2,8480000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;2,5800000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;2,5800000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,3108000000&quot;</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/lcrs/providers_list/3</td>
 	<td></td>
@@ -702,6 +957,11 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>css=img[alt=&quot;Excel&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=USD</td>
 	<td></td>
 </tr>
 <tr>
@@ -1037,22 +1297,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;rate_min&quot;=&gt;&quot;0,4900000000&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,9800000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;rate_max&quot;=&gt;&quot;0,4900000000&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,9800000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;rate_min&quot;=&gt;&quot;0,1665000000&quot;</td>
+	<td>&quot;rate_min&quot;=&gt;&quot;0,2120000000&quot;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;rate_max&quot;=&gt;&quot;0,2120000000&quot;</td>
+	<td>&quot;rate_max&quot;=&gt;&quot;0,3330000000&quot;</td>
 	<td></td>
 </tr>
 </tbody></table>
