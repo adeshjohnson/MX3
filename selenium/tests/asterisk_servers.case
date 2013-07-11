@@ -447,6 +447,325 @@
 	<td>Configuration error. Please consult this help link.</td>
 	<td></td>
 </tr>
+<!--pagal defaulta reselerio devaisai saugomi ant pirmojo serverio iš dropdown-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/resellers/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=resellers_server</td>
+	<td>label=Server_5: 127.0.0.1|123.123.123.123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--pasirinkus kita serveri reseleriui, pasikeicia serveriai-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<!--make rspro-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=asterisk_servers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--nauji reselerio provai ir devaisai turi buti saugomi ant pasirinkto severio-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>test provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>test device</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=serverproviders</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=server_devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>3</td>
+</tr>
 </tbody></table>
 </body>
 </html>
