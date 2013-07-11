@@ -158,7 +158,7 @@
   </tr>
   </thead>
   <tbody>
-  <% for call in @invoice.calls(nice_date_time((@invoice.paid_at || @invoice.updated_at), ofset=0)) %>
+  <% for call in @invoice.calls((@invoice.paid_at || @invoice.updated_at).strftime("%Y-%m-%d %H:%M:%S")) %>
       <tr>
         <td><%= nice_date_time(call.calldate, ofset=0) %></td>
         <td><%= call.dst %></td>
