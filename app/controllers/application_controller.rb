@@ -2258,7 +2258,7 @@ Variables: (Names marked with * are required)
     rescue Exception => e
       MorLog.log_exception(e, id, params[:controller].to_s, params[:action].to_s)
       message ="Exception in exception at: #{escape_for_email(request.env['SERVER_ADDR'])} \n --------------------------------------------------------------- \n #{escape_for_email(%x[tail -n 50 /var/log/mor/test_system])}"
-      command = ApplicationController::send_email_dry("fail2ban@kolmisoft.com", address, message, "#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION", "-o tls='auto'")
+      command = ApplicationController::send_email_dry("guicrashes@kolmisoft.com", address, message, "#{ExceptionNotifier_email_prefix} SERIOUS EXCEPTION", "-o tls='auto'")
       system(command)
       flash[:notice] = "INTERNAL ERROR."
       #redirect_to Web_Dir + "/callc/main" and return false
@@ -2923,7 +2923,7 @@ Variables: (Names marked with * are required)
     MorLog.my_debug("  >> Before sending message.", true)
     local_filename = "/tmp/mor_crash_email.txt"
     File.open(local_filename, 'w') { |f| f.write(message) }
-    command = ApplicationController::send_email_dry("fail2ban@kolmisoft.com", address, "", subject, "-o message-file='#{local_filename}' tls='auto'")
+    command = ApplicationController::send_email_dry("guicrashes@kolmisoft.com", address, "", subject, "-o message-file='#{local_filename}' tls='auto'")
     system(command)
     MorLog.my_debug("  >> Crash email sent to #{address}", true)
     MorLog.my_debug("  >> COMMAND : #{command.inspect}", true)
