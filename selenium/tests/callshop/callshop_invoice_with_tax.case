@@ -214,13 +214,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
+	<td>setTimeout</td>
 	<td>15000</td>
 	<td></td>
 </tr>
 <!--set  calls-->
 <tr>
-	<td>assertElementPresent</td>
+	<td>waitForElementPresent</td>
 	<td>link=Start</td>
 	<td></td>
 </tr>
@@ -505,6 +505,117 @@
 	<td>assertText</td>
 	<td>//table[@id='calls']/tfoot[1]/tr/td[3]</td>
 	<td>8.2583</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--buvo kilusi problema, kad keiciant datos formata, callshop invoisuose viskas virsta nuliais-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=date_format</td>
+	<td>label=d.m.Y H:M:S</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>cs_manager</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>111111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/invoice_print/10?invoice_id=111?&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tbody/tr/td[5]</td>
+	<td>5.0000 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot[2]/tr/td[2]</td>
+	<td>0.50</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot[3]/tr/td[2]</td>
+	<td>0.55</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot[4]/tr/td[2]</td>
+	<td>0.30</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot[5]/tr/td[2]</td>
+	<td>1.91</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='calls']/tfoot[1]/tr/td[3]</td>
+	<td>8.2583</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callshop/invoices/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td.amount</td>
+	<td>8.2583 USD</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>8.2583 USD</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
