@@ -2278,6 +2278,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     # tmp user for model methods
     user = User.new
+    user.owner_id = owner_id.to_i
 
     if username.to_s.blank?
       notice = _('Please_enter_username')
