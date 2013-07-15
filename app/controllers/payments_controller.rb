@@ -380,14 +380,14 @@ class PaymentsController < ApplicationController
     custom_redirect_canceled_payment = Confline.get_value('Paypal_cancel_url', @user.owner_id)
 
     if custom_redirect and custom_redirect.to_i == 1
-      @paypal_return_url = Web_URL + "/" + custom_redirect_successful_payment.to_s
-      @paypal_cancel_url = Web_URL + "/" + custom_redirect_canceled_payment.to_s
+      @paypal_return_url = session[:url] + "/" + custom_redirect_successful_payment.to_s
+      @paypal_cancel_url = session[:url] + "/" + custom_redirect_canceled_payment.to_s
     else
-      @paypal_return_url = Web_URL + Web_Dir + "/payments/personal_payments"
-      @paypal_cancel_url = Web_URL + Web_Dir + "/callc/main"
+      @paypal_return_url = session[:url] + Web_Dir + "/payments/personal_payments"
+      @paypal_cancel_url = session[:url] + Web_Dir + "/callc/main"
     end
 
-    @paypal_ipn_url = Web_URL + Web_Dir + "/payments/paypal_ipn"
+    @paypal_ipn_url = session[:url] + Web_Dir + "/payments/paypal_ipn"
 
     @amount = Confline.get_value("PayPal_Default_Amount", @user.owner_id).to_d
     @amount = params[:amount].to_d if params[:amount]

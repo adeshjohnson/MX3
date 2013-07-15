@@ -140,9 +140,9 @@ class CcpanelController < ApplicationController
     @page_title = _('Checkout')
     @page_icon = "cart_edit.png"
 
-    @paypal_return_url = Web_URL + Web_Dir + "/ccpanel/paypal_complete"
-    @paypal_cancel_url = Web_URL + Web_Dir + "/ccpanel/display_cart"
-    @paypal_ipn_url = Web_URL + Web_Dir + "/ccpanel/paypal_ipn"
+    @paypal_return_url = session[:url] + Web_Dir + "/ccpanel/paypal_complete"
+    @paypal_cancel_url = session[:url] + Web_Dir + "/ccpanel/display_cart"
+    @paypal_ipn_url = session[:url] + Web_Dir + "/ccpanel/paypal_ipn"
     @paypal_currency = Confline.get_value("Paypal_Default_Currency")
 
     #	@hanza_ipn_url = "https://lt.hanza.net/cgi-bin/lip/pangalink.jsp"

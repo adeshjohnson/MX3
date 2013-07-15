@@ -3093,6 +3093,10 @@ Variables: (Names marked with * are required)
     ccl_active = Confline.get_value("CCL_Active") rescue NIL
     (!ccl_active.blank? and ccl_active.to_i == 1)
   end
+  
+  def store_url 
+    session[:url] = "#{request.protocol}#{request.host_with_port}" if session[:url].blank? 
+  end
 
   def last_day_month(date)
     year = session["year_#{date}".to_sym]

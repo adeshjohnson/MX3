@@ -864,6 +864,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @login_ok = true
 
     renew_session(@user)
+    
+    store_url
 
     flash[:status] = _('Logged_as') + ": " + nice_user(@user)
 

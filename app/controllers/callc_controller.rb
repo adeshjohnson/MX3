@@ -131,6 +131,7 @@ class CallcController < ApplicationController
     if @user and @user.owner
       @login_ok = true
       renew_session(@user)
+      store_url
       #session[:ssecret] = SSecret
     end
 
