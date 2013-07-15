@@ -1760,7 +1760,7 @@ class ApiController < ApplicationController
         else
           owner = User.where(:uniquehash => params[:id]).first
           if owner
-            notice = User.validate_from_registration(params)
+            notice = User.validate_from_registration(params, owner.id)
             capt = true
             if Confline.get_value("reCAPTCHA_enabled").to_i == 1
               usern = User.new

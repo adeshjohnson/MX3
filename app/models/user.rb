@@ -2174,6 +2174,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     user.vat_number = params[:vat_number] if params[:vat_number].to_s != ""
     user.owner_id = owner.id
     user.acc_group_id = 0
+    user.allow_loss_calls = reseller.allow_loss_calls if reseller
     #looking at code below and thinking 'FUBAR'? well mor currencies/money 
     #is FUBAR, that's just a hack to get around. ticket #5041
     user.balance = owner.to_system_currency(owner.to_system_currency(user.balance))
@@ -2189,7 +2190,6 @@ GROUP BY terminators.id;").map { |t| t.id }
       else
         user.lcr_id = reseller.lcr_id if reseller
       end
-      user.allow_loss_calls = reseller.allow_loss_calls if reseller
     end
 
     address = Confline.get_default_object(Address, owner.id)
@@ -2271,7 +2271,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     return user, send_email_to_user, device, notice
   end
 
-  def User.validate_from_registration(params)
+  def User.validate_from_registration(params, owner.id)
     notice = nil
     #error checking
     username = params[:username]

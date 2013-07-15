@@ -606,7 +606,9 @@ class CallcController < ApplicationController
     session[:reg_email] = params[:email]
     reg_ip= request.remote_ip
 
-    if !params[:id] or !User.where(:uniquehash => params[:id]).first
+    owner = User.where(:uniquehash => params[:id]).first
+
+    if !params[:id] or !owner
       reset_session
       dont_be_so_smart
       redirect_to :action => "login" and return false
@@ -615,7 +617,7 @@ class CallcController < ApplicationController
     if show_debug
       File.open('/tmp/new_log.txt', 'a+') {|f| f.write("\n Start #{Time.now}") }
     end
-    notice = User.validate_from_registration(params)
+    notice = User.validate_from_registration(params, owner.id)
     capt = true
     if Confline.get_value("reCAPTCHA_enabled").to_i == 1
       usern = User.new
