@@ -1317,7 +1317,7 @@ class User < ActiveRecord::Base
     device.permit = Confline.get_value("Default_device_permits", owner_id).to_s
     device.qualify = Confline.get_value("Default_device_qualify", owner_id)
 
-    device.host = Confline.get_value("Default_device_host", owner_id).to_s
+    device.host = "dynamic"
     device.host = "0.0.0.0" if  options[:device_type] == "H323"
     device.ipaddr = Confline.get_value("Default_device_ipaddr", owner_id).to_s
     device.ipaddr = "0.0.0.0" if  options[:device_type] == "H323"
