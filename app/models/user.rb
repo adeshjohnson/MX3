@@ -2174,7 +2174,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     user.vat_number = params[:vat_number] if params[:vat_number].to_s != ""
     user.owner_id = owner.id
     user.acc_group_id = 0
-    user.allow_loss_calls = reseller.allow_loss_calls if reseller
+    user.allow_loss_calls = Confline.get_value('Default_User_allow_loss_calls', owner.id)
     #looking at code below and thinking 'FUBAR'? well mor currencies/money 
     #is FUBAR, that's just a hack to get around. ticket #5041
     user.balance = owner.to_system_currency(owner.to_system_currency(user.balance))
