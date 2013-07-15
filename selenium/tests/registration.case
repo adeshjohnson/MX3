@@ -1223,6 +1223,1678 @@
 	<td>${@print(md5(test_r_email)</td>
 	<td></td>
 </tr>
+<!--registration according to resellers defaul user-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>20.0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=minimal_charge_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT-03:00) Brasilia</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_name</td>
+	<td>tax2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_value</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>0.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>first name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>last name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_address</td>
+	<td>address</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_fax</td>
+	<td>fax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>test_email2@email.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=minimal_charge_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=unlimited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=credit</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_call_limit</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_currency_id</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_month</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=block_at_conditional</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_conditional_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sound_file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>label=en/cc_busy.wav</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_warning_email_balance</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=privacy_global</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=privacy_csv_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=privacy_gui_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user[taxation_country]</td>
+	<td>label=Antarctica</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_clientid</td>
+	<td>company</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_agreement_number</td>
+	<td>987654</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_language</td>
+	<td>lang</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_vat_number</td>
+	<td>tax number</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_accounting_number</td>
+	<td>acc number</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_postcode</td>
+	<td>zp</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_city</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_county</td>
+	<td>country</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_state</td>
+	<td>state</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=address[direction_id]</td>
+	<td>label=Australia</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_phone</td>
+	<td>phone</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_mob_phone</td>
+	<td>mobile</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/qg2audn8qa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>us</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>short1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>short1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>surname</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>Test325@email.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Username must be longer than 9 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>longusername</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Thank you for registering!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>longusername</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>short1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>40.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit</td>
+	<td>40.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=account_type</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_email_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_balance</td>
+	<td>9.0</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i5</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i7</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i8</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_vat_number</td>
+	<td>tax number</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_clientid</td>
+	<td>company</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_address</td>
+	<td>address</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_postcode</td>
+	<td>zp</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_city</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_county</td>
+	<td>country</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_state</td>
+	<td>state</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_phone</td>
+	<td>phone</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_mob_phone</td>
+	<td>mobile</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>longusername</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>20.0000 USD</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=unlimited</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=credit</td>
+	<td>200.0000</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_time_zone</td>
+	<td>(GMT-03:00) Brasilia</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=block_at_date_year</td>
+	<td>2015</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=block_at_date_month</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=block_at_date_day</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=block_at_conditional</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_currency_id</td>
+	<td>ALL</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=allow_loss_calls</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_call_limit</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_conditional_use</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=sound_file</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>en/cc_busy.wav</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_balance</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i5</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i7</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i8</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_global</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_gui_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_csv_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_pdf_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_gui_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_csv_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_pdf_4</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_first_name</td>
+	<td>name</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_last_name</td>
+	<td>surname</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_clientid</td>
+	<td>company</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_agreement_number</td>
+	<td>0000000008</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=user[taxation_country]</td>
+	<td>Antarctica</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_language</td>
+	<td>lang</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_vat_number</td>
+	<td>tax number</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_accounting_number</td>
+	<td>acc number</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=address[direction_id]</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_address</td>
+	<td>address</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_postcode</td>
+	<td>zp</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_city</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_county</td>
+	<td>country</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_state</td>
+	<td>state</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_mob_phone</td>
+	<td>mobile</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_fax</td>
+	<td>fax</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_email</td>
+	<td>Test325@email.com</td>
+</tr>
+<!--registration according to admins defaul user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username_length</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_length</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_balance</td>
+	<td>13.0</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=minimal_charge_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=unlimited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=credit</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_hidden_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=ignore_global_monitorings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_responsible_accountant_id</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_time_zone</td>
+	<td>label=(GMT-03:00) Brasilia</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=i5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=cyberplat_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_name</td>
+	<td>tax2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tax2_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax2_value</td>
+	<td>5.0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tax1_value</td>
+	<td>0.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_first_name</td>
+	<td>first name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_last_name</td>
+	<td>last name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_address</td>
+	<td>address</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_fax</td>
+	<td>fax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>test_email2@email.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=minimal_charge_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_call_limit</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_currency_id</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_month</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=block_at_date_day</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=block_at_conditional</td>
+	<td>label=15</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=block_conditional_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sound_file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>label=en/cc_busy.wav</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_warning_email_balance</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=privacy_global</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=privacy_csv_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=privacy_gui_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user[taxation_country]</td>
+	<td>label=Argentina</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_clientid</td>
+	<td>company</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_agreement_number</td>
+	<td>987654</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_language</td>
+	<td>lang</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_vat_number</td>
+	<td>tax number</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_accounting_number</td>
+	<td>acc number</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_postcode</td>
+	<td>zp</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_city</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_county</td>
+	<td>country</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_state</td>
+	<td>state</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=address[direction_id]</td>
+	<td>label=Argentina</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_phone</td>
+	<td>phone</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_mob_phone</td>
+	<td>mobile</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=recording_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_recording_hdd_quota</td>
+	<td>0.088</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_recordings_email</td>
+	<td>adsfg@SDF.asd</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=recording_forced_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Default User saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>ue</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>short1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>short1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>surname</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>Test985@email.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Password must be longer than 7 characters</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>longerpassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>longerpassword</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Thank you for registering!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>ue</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>longerpassword</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance</td>
+	<td>26.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit</td>
+	<td>26.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_email_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i5</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i7</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i8</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_vat_number</td>
+	<td>tax number</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_clientid</td>
+	<td>company</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_address</td>
+	<td>address</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_postcode</td>
+	<td>zp</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_city</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_county</td>
+	<td>country</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_state</td>
+	<td>state</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_phone</td>
+	<td>phone</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_mob_phone</td>
+	<td>mobile</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_username</td>
+	<td>ue</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>13.0000 USD</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_time_zone</td>
+	<td>(GMT-03:00) Brasilia</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=warning_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=block_at_date_year</td>
+	<td>2015</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=block_at_date_month</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=block_at_date_day</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=block_at_conditional</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_currency_id</td>
+	<td>ALL</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=allow_loss_calls</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_call_limit</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=block_conditional_use</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=sound_file</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_warning_balance_sound_file_id</td>
+	<td>en/cc_busy.wav</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_hour_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=date_user_warning_email_hour</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_warning_email_balance</td>
+	<td>9.0000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i4</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i5</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i3</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i7</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i6</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=i8</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_global</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_gui_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_csv_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_pdf_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_gui_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_csv_0</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=privacy_pdf_4</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_first_name</td>
+	<td>name</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_last_name</td>
+	<td>surname</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_clientid</td>
+	<td>company</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_agreement_number</td>
+	<td>0000000009</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=user[taxation_country]</td>
+	<td>Argentina</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_language</td>
+	<td>lang</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_vat_number</td>
+	<td>tax number</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_accounting_number</td>
+	<td>acc number</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=address[direction_id]</td>
+	<td>Lithuania</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_address</td>
+	<td>address</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_postcode</td>
+	<td>zp</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_city</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_county</td>
+	<td>country</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_state</td>
+	<td>state</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_mob_phone</td>
+	<td>mobile</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_fax</td>
+	<td>fax</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=address_email</td>
+	<td>Test985@email.com</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=recording_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_recording_hdd_quota</td>
+	<td>0.0880</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_recordings_email</td>
+	<td>adsfg@SDF.asd</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=recording_forced_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cyberplat_active</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_hidden_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=ignore_global_monitorings</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=user_responsible_accountant_id</td>
+	<td>Test Accountant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=unlimited</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=credit</td>
+	<td>200.0000</td>
+</tr>
 </tbody></table>
 </body>
 </html>

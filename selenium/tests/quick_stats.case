@@ -982,6 +982,77 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/set_billsec_zero</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<!--billsec nustatytas i 0, bet kaina turi nepasikeisti-->
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_billsec</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/server_load_ok</td>
 	<td></td>
 </tr>
