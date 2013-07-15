@@ -4592,6 +4592,7 @@ Localization.define('en') do |l|
   l.store 'Change_LCR_priority_using_drag_and_drop', 'Change LCR priority by using drag and drop'
   l.store 'nonat', 'nonat'
   l.store 'update_small', 'update'
+  l.store 'Reseller_Group', 'Reseller Group'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

@@ -129,7 +129,7 @@
           <td id="user_link_<%= user.id %>" align="left" class="<%= text_class %>" <%= nice_user_tooltip(user) %> > <%= @allow_edit ? link_nice_user(user) : nice_user(user) %> </td>
           <td id="username_<%= user.id %>" align="left" class="<%= text_class %>"> <%= h user.username %> </td>
           <% if ['admin', 'accountant'].include?(User.current.usertype) %>
-              <td id="usetype_<%= user.id %>" align="left" class="<%= text_class %>" <%= tooltip(_('Accountant_group'), user.acc_group_name) if  user.usertype == 'accountant' and session[:usertype] == 'admin' %>> <%= h user.usertype %> <%= "(Wholesale)" if user.purpose == 'user_wholesale' and ['accountant', 'reseller'].include?(user.usertype) %>  </td>
+              <td id="usetype_<%= user.id %>" align="left" class="<%= text_class %>" <%= tooltip(_('Accountant_group'), user.acc_group_name) if  user.usertype == 'accountant' and !user.acc_group_name.blank? and admin? %> <%= tooltip(_('Reseller_Group'), user.acc_group_name) if  user.usertype == 'reseller' and !user.acc_group_name.blank? and admin? %>> <%= h user.usertype %> <%= ("(" + user.acc_group_name.to_s + ")") if !user.acc_group_name.blank? and ['accountant', 'reseller'].include?(user.usertype) %>  </td>
           <% end %>
           <td id="postpaid_<%= user.id %>" align="left" class="<%= text_class %>"><%= _('Prepaid') if user.postpaid != 1 %>  <%= _('Postpaid') if user.postpaid == 1 %></td>
           <% if can_see_finances? %>
