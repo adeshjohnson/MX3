@@ -2271,7 +2271,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     return user, send_email_to_user, device, notice
   end
 
-  def User.validate_from_registration(params, owner.id)
+  def User.validate_from_registration(params, owner_id = 0)
     notice = nil
     #error checking
     username = params[:username]
