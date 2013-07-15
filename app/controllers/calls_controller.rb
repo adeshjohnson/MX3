@@ -131,16 +131,9 @@ class CallsController < ApplicationController
     SUM(IF(c.disposition = 'ANSWERED', c.billsec, 0))/SUM(IF(c.disposition = 'ANSWERED', 1,0)) AS 'acd'
 
     FROM (
-      SELECT c.prefix, c.provider_id, c.src_device_id, disposition,
-      SUM(c.user_price) AS user_price, SUM(c.reseller_price) AS reseller_price,
-      SUM(c.did_inc_price) AS did_inc_price,
-      SUM(c.provider_price) AS provider_price, SUM(c.did_prov_price) AS did_prov_price,
-      SUM(c.user_billsec) AS user_billsec, SUM(c.reseller_billsec) AS reseller_billsec,
-      SUM(c.provider_billsec) AS provider_billsec, SUM(c.billsec) AS billsec,
-      COUNT(c.id) AS total_calls
+      SELECT c.*
       FROM calls c FORCE INDEX (calldate)
       WHERE " + cond2.join(" AND ")+ "
-      GROUP BY c.prefix, c.provider_id, c.src_device_id, disposition
     ) c
 
     JOIN providers p ON p.id = c.provider_id
