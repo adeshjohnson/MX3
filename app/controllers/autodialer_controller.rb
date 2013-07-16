@@ -205,7 +205,7 @@ class AutodialerController < ApplicationController
       num.destroy
     end
 
-    flash[:notice] = _('All_numbers_deleted')
+    flash[:status] = _('All_numbers_deleted')
     redirect_to :action => 'campaign_numbers', :id => params[:id]
   end
 
@@ -502,14 +502,18 @@ class AutodialerController < ApplicationController
 
     for number in @numbers
       s = []
-      if number.ivr_action_logs and   number.ivr_action_logs.size.to_i > 0
-        s << number.completed_time.to_s(:db)
-        s << number.number
+      
+      s << number.number
+      s << number.executed_time.to_s if !number.executed_time.blank?
+      s << number.completed_time.to_s if !number.completed_time.blank?
+      
+      if number.ivr_action_logs and number.ivr_action_logs.size.to_i > 0 
         for action in number.ivr_action_logs
-          s << action.created_at.to_s(:db)
+          s << action.created_at.to_s
           s << action.action_text.to_s.gsub(sep, '')
         end
       end
+      
       csv_string << s.join(sep) if s and s.size.to_i > 0
     end
 

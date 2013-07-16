@@ -46,7 +46,7 @@
         <td align="center" id="completed_time_<%= number.id %>"><%= nice_date_time number.completed_time %></td>
         <td align="center" id="undo_<%= number.id %>"> <%= link_to b_undo, :action => 'reactivate_number', :id => number.id if number.status == "completed" %> </td>
         <td align="center" id="delete_<%= number.id %>">
-          <% link_to b_delete, {:action => 'number_destroy', :id => number.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
+          <%= link_to b_delete, {:action => 'number_destroy', :id => number.id}, :confirm => _('Are_you_sure'), :method => :post %></td>
       </tr>
       <% i += 1 %>
   <% end %>
