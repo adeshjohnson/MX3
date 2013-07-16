@@ -743,7 +743,7 @@ class User < ActiveRecord::Base
       Confline.new_confline('PayPal_Default_Amount', Confline.get_value('PayPal_Default_Amount'), id)
       Confline.new_confline('PayPal_Min_Amount', Confline.get_value('PayPal_Min_Amount'), id)
       Confline.new_confline('PayPal_Test', Confline.get_value('PayPal_Test'), id)
-      Confline.new_confline('WebMoney_Enabled', Confline.get_value('WebMoney_Enabled'), id)
+      Confline.new_confline('WebMoney_Enabled', 0, id)
       Confline.new_confline('WebMoney_Purse', Confline.get_value('WebMoney_Purse'), id)
       Confline.new_confline('WebMoney_Default_Amount', Confline.get_value('WebMoney_Default_Amount'), id)
       Confline.new_confline('WebMoney_Min_Amount', Confline.get_value('WebMoney_Min_Amount'), id)
