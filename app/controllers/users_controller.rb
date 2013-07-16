@@ -1360,6 +1360,10 @@ in before filter : ard (:find_ard)
     params[:user][:cyberplat_active] = params[:cyberplat_active].to_i
     params[:user][:balance] = current_user.convert_curr(params[:user][:balance].to_d)
     params[:user][:recording_hdd_quota] = (params[:user][:recording_hdd_quota].to_d*1048576).to_i
+    params[:user][:minimal_charge] = params[:minimal_charge_value].to_i
+    year = params[:minimal_charge_date][:year].to_i
+    month = params[:minimal_charge_date][:month].to_i
+    params[:user][:minimal_charge_start_at] = Time.gm(year, month, 1, 0, 0, 0)
 
     if params[:unlimited].to_i == 1
       params[:user][:credit] = -1
