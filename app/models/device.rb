@@ -759,7 +759,13 @@ class Device < ActiveRecord::Base
     query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
 
     filter_active	= Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
-    zero_duplicates	= Device.where(query).joins('LEFT JOIN providers on providers.device_id = devices.id').where(matches).size.zero?
+    zero_duplicates	= (
+      Device.where(query)
+      .joins('LEFT JOIN providers on providers.device_id = devices.id')
+      .where(matches)
+      .reject{ |dev| not self.provider and dev.username.blank? }
+      .size.zero?
+    )
 
     if filter_active and not zero_duplicates
       errors.add(:username, _('Device_Username_Must_Be_Unique')) and return false
