@@ -420,24 +420,24 @@ module ApplicationHelper
     image_tag('icons/cart.png', :title => _('Cart')) + " "
   end
 
-  def b_bullet_white
-    image_tag('icons/bullet_white.png', :title => "") + " "
+  def b_bullet_white(title='')
+    image_tag('icons/bullet_white.png', :title => title) + " "
   end
 
-  def b_bullet_green
-    image_tag('icons/bullet_green.png', :title => "") + " "
+  def b_bullet_green(title='')
+    image_tag('icons/bullet_green.png', :title => title) + " "
   end
 
-  def b_bullet_red
-    image_tag('icons/bullet_red.png', :title => "") + " "
+  def b_bullet_red(title='')
+    image_tag('icons/bullet_red.png', :title => title) + " "
   end
 
-  def b_bullet_yellow
-    image_tag('icons/bullet_yellow.png', :title => "") + " "
+  def b_bullet_yellow(title='')
+    image_tag('icons/bullet_yellow.png', :title => title) + " "
   end
 
-  def b_bullet_grey
-    image_tag('icons/control_blank.png', :title => "") + " "
+  def b_bullet_grey(title='')
+    image_tag('icons/control_blank.png', :title => title) + " "
   end
 
   def b_help_grey
@@ -448,8 +448,8 @@ module ApplicationHelper
     image_tag('icons/bullet_blue.png', :title => "") + " "
   end
 
-  def b_bullet_black
-    image_tag('icons/bullet_black.png', :title => "") + " "
+  def b_bullet_black(title='')
+    image_tag('icons/bullet_black.png', :title => title) + " "
   end
 
   def b_black_bullet
@@ -1552,22 +1552,27 @@ conf_name - name of confline that will be represented by checkbox.
 
     if device.reg_status[0..1] == "OK"
       icon = 'icons/bullet_green.png'
+      title = _('Device_Status_Ok')
     end
 
     if device.reg_status == "Unmonitored"
       icon = 'icons/bullet_white.png'
+      title = _('Device_Status_Unmonitored')
     end
 
     if device.reg_status == "UNKNOWN"
       icon = 'icons/bullet_black.png'
+      title = _('Device_Status_Unknown')
     end
 
     if device.reg_status[0..5] == "LAGGED"
       icon = 'icons/bullet_yellow.png'
+      title = _('Device_Status_Lagged')
     end
 
     if device.reg_status == "UNREACHABLE"
       icon = 'icons/bullet_red.png'
+      title = _('Device_Status_Unreachable')
     end
 
     out = image_tag(icon, :title => device.reg_status)

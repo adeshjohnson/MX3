@@ -1,11 +1,11 @@
 <table width="100%">
   <tr>
     <td align="left">
-      <%= b_bullet_green + _('OK') %>
-      <%= b_bullet_yellow + _('LAGGED') %>
-      <%= b_bullet_red + _('UNREACHABLE') %>
-      <%= b_bullet_black + _('UNKNOWN') %>
-      <%= b_bullet_white + _('Unmonitored') %>
+      <%= b_bullet_green(_('Device_Status_Ok')) + _('OK') %>
+      <%= b_bullet_yellow(_('Device_Status_Lagged')) + _('LAGGED') %>
+      <%= b_bullet_red(_('Device_Status_Unreachable')) + _('UNREACHABLE') %>
+      <%= b_bullet_black(_('Device_Status_Unknown')) + _('UNKNOWN') %>
+      <%= b_bullet_white(_('Device_Status_Unmonitored')) + _('Unmonitored') %>
     </td>
     <td align="right">
       <%= link_to_function(b_search + _('Search'), "Element.toggle('search_details')") %>

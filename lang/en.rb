@@ -2718,6 +2718,11 @@ Localization.define('en') do |l|
   l.store 'Device_create', 'Create Devices'
   l.store 'Callingcard_manage', 'Manage Calling Cards'
   l.store 'Tariff_manage', 'Manage Tariffs'
+  l.store 'Device_Status_Ok', 'Device is registered, everything is OK.' 
+  l.store 'Device_Status_Lagged', 'Device is registered but the connection to it is poor.' 
+  l.store 'Device_Status_Unreachable', 'Device tried to register before, but currently is unreachable.' 
+  l.store 'Device_Status_Unknown', 'Device status could not be found.' 
+  l.store 'Device_Status_Unmonitored', 'Device should not register to the server so it\'s status is unmonitored, this device made calls, so the server is aware of it\'s existence.' 
 
   l.store 'You_have_no_editing_permission', 'You do not have rights to edit this' #----altered by Mindaugas 09 09 11
 
