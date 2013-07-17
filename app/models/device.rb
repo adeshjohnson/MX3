@@ -34,7 +34,7 @@ class Device < ActiveRecord::Base
   has_many :activecalls, :foreign_key => "src_device_id"
   has_many :ringgroups_devices
   has_many :devicerules
-  has_many :server_devices
+  has_many :server_devices, :dependent => :destroy
   has_many :servers, :through => :server_devices
 
   before_validation :check_device_username, :on => :create

@@ -13,7 +13,7 @@ class Provider < ActiveRecord::Base
   belongs_to :user
   has_many :lcrproviders
   has_many :common_use_providers
-  has_many :serverproviders
+  has_many :serverproviders, :dependent => :destroy
 
   attr_protected :user_id
   attr_accessor :old_register_record
