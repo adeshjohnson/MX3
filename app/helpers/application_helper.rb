@@ -1575,7 +1575,7 @@ conf_name - name of confline that will be represented by checkbox.
       title = _('Device_Status_Unreachable')
     end
 
-    out = image_tag(icon, :title => device.reg_status)
+    out = image_tag(icon, :title => title)
 
     out
   end
