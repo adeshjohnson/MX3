@@ -922,7 +922,7 @@ class AccountingController < ApplicationController
     end
     invoice.comment = params[:invoice][:comment].to_s
     if invoice.save
-      flash[:notice] = _("Invoice_Commented")
+      flash[:status] = _("Invoice_Commented")
     else
       flash[:notice] = _("Invoice_Not_Commented")
     end
