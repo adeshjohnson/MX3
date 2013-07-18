@@ -845,6 +845,112 @@
 	<td>id=user_warning_email_hour_-1</td>
 	<td>on</td>
 </tr>
+<!--minimal charge veikimas-->
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_enabled</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_value</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=minimal_charge_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=minimal_charge_date_month</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=minimal_charge_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_username</td>
+	<td>newuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password_password</td>
+	<td>newuser1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=minimal_charge_date_month</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=minimal_charge_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=minimal_charge_date_year</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=minimal_charge_date_month</td>
+	<td>2</td>
+</tr>
 </tbody></table>
 </body>
 </html>
