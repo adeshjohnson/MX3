@@ -62,6 +62,12 @@
 	<td>id=number</td>
 	<td>100003884617</td>
 </tr>
+<!--ilgai neatsiliepia ir galiausiai gauna "exceptionError_lbl_TIMEOUT", dėl ko vėliau lūžta registravimasis. -->
+<tr>
+	<td>setTimeout</td>
+	<td>800000</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
@@ -75,6 +81,16 @@
 <tr>
 	<td>gotoIf</td>
 	<td>storedVars.positive</td>
+	<td>label1</td>
+</tr>
+<tr>
+	<td>storeTextPresent</td>
+	<td>exceptionError_lbl_TIMEOUT</td>
+	<td>timeout2</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>storedVars.timeout2</td>
 	<td>label1</td>
 </tr>
 <tr>
