@@ -224,55 +224,19 @@ class Provider < ActiveRecord::Base
   end
 
 
-  # function to add outbound registration to provider without 'sip reload' (analog to register=> line in sip.conf file, which needs 'sip reload') 
-  # 'sip reload' is not usable because it kills all incoming registrations until devices reregister themselves, e.g. no incoming calls till then 
-  def registration_add 
-    exceptions = [] 
-    for server in self.servers 
-      begin 
-        if self.register.to_i == 1 
- 
-          if self.reg_line.to_s.length > 0 
-            server.ami_cmd("sip registration add #{self.reg_line.to_s}") 
-          else 
-             
-            # forming registry line manually 
-            device = self.device 
-            if !device or device.username.to_s.length == 0 or device.secret.to_s.length == 0 or self.server_ip.to_s.length == 0 
-              # do nothing 
-            else 
-              port = self.port.to_s.length == 0 ? "5060" : self.port.to_s 
-              server.ami_cmd("sip registration add #{device.username.to_s}:#{device.secret.to_s}@#{self.server_ip.to_s}:#{port}/#{self.reg_extension.to_s}") 
-            end 
-             
-          end 
-        end 
-      rescue Exception => e 
-        exceptions << e 
-      end 
-    end 
-    exceptions 
-  end 
- 
- 
-  # function to remove outbound registration to provider without 'sip reload' (analog to register=> line in sip.conf file, which needs 'sip reload') 
-  # 'sip reload' is not usable because it kills all incoming registrations until devices reregister themselves, e.g. no incoming calls till then 
-  def registration_drop(username, server_ip) 
-    exceptions = [] 
-    for server in self.servers 
-      begin 
- 
-            if username.to_s.length > 0 and server_ip.to_s.length > 0 
-              server.ami_cmd("sip registration drop #{username.to_s} #{server_ip.to_s}") 
-            end 
- 
-      rescue Exception => e 
-        exceptions << e 
-      end 
-    end 
-    exceptions 
-  end 
-
+  # uses 'sip reload keeprt' command (added by Kolmisoft) to reload sip configuration, apply all changes to provider registration
+  # but keeping realtime peers intact, e.g. sip show peers will show all previously registered peers
+  def sip_reload_keeprt
+    exceptions = []
+    for server in self.servers
+      begin
+        server.ami_cmd("sip reload keeprt")            
+      rescue Exception => e
+        exceptions << e
+      end
+    end
+    exceptions
+  end
 
 
   def reload

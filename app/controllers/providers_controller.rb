@@ -355,12 +355,7 @@ class ProvidersController < ApplicationController
 
     params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
 
-    @provider.set_old
-    
-    # saving old values for registration_drop 
-    old_register = @provider.register.to_i
-    old_username = @provider.device ? @provider.device.username.to_s : ""
-    old_server_ip = @provider.server_ip.to_s     
+    @provider.set_old   
 
     # if higher than zero -> do not update provider
     provider_update_errors = 0
@@ -510,22 +505,17 @@ class ProvidersController < ApplicationController
       if @provider.tech == "SIP" or @provider.tech == "IAX2"
         exceptions = @device.prune_device_in_all_servers
         raise exceptions[0] if exceptions and exceptions.size > 0
+        
+        # reloading sip and keeping realtime peers intact
+        exception = @provider.sip_reload_keeprt
+        raise exceptions[0] if exceptions and exceptions.size > 0
+        
       end
 
       if @provider.tech == "H323"
         exceptions = @provider.h323_reload
         raise exceptions[0] if exceptions and exceptions.size > 0
       end
-
-      # dropping registration if it was present before  
-      if old_register == 1 
-        exception = @provider.registration_drop(old_username, old_server_ip) 
-        raise exceptions[0] if exceptions and exceptions.size > 0       
-      end 
- 
-      exception = @provider.registration_add 
-      raise exceptions[0] if exceptions and exceptions.size > 0 
-
 
       flash[:status] = _('Provider_was_successfully_updated')
       redirect_to :action => 'list', :id => @provider, :s_hidden => @provider.hidden.to_i and return false
