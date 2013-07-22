@@ -105,6 +105,7 @@ module Paypal
         button << tag(:input, :type => 'hidden', :name => 'invoice', :value => params[:invoice]) if params[:invoice]
         button << tag(:input, :type => 'hidden', :name => 'custom', :value => params[:custom]) if params[:custom]
         button << tag(:input, :type => 'hidden', :name => 'currency', :value => params[:currency]) if params[:currency]
+        button << tag(:input, :type => 'hidden', :name => 'rm', :value => '1') 
 
         # if amount was a object of type money or something compatible we will use its currency, 
         button << tag(:input, :type => 'hidden', :name => 'currency_code', :value => amount.respond_to?(:currency) ? amount.currency : params[:currency])
