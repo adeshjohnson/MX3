@@ -639,15 +639,17 @@ class ProvidersController < ApplicationController
         exceptions = device.prune_device_in_all_servers(nil, 0)
         raise exceptions[0] if exceptions.size > 0
       end
+      
       if @provider.tech == "H323"
         exceptions = @provider.h323_reload
         raise exceptions[0] if exceptions.size > 0
       end
 
-      if @provider.register.to_i == 1 
-        exception = @provider.registration_drop(device.username, @provider.server_ip) 
-        raise exceptions[0] if exceptions.size > 0 
-      end 
+      if @provider.tech == "SIP"
+        # reloading sip and keeping realtime peers intact
+        exception = @provider.sip_reload_keeprt
+        raise exceptions[0] if exceptions and exceptions.size > 0
+      end
 
     end
 
