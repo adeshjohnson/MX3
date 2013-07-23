@@ -37,7 +37,7 @@ class Email < ActiveRecord::Base
 
   def Email.address_validation(addres)
     out = false
-    if addres.match(/^[a-zA-Z0-9_\+-]+(\.[a-zA-Z0-9_\+-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,6})$/)
+    if addres.match(/^[a-zA-Z0-9_\+-]+(\.[a-zA-Z0-9_\+-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z0-9_]{2,15})$/)
       out = true
     end
     out
