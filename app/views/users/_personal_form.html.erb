@@ -26,7 +26,7 @@
               <% if @user.postpaid == 1 %>
                   <tr>
                     <td> <%= _('Credit') %>:</td>
-                    <td id="credit"> <%= nice_number(@user.balance) + " " + current_user.currency.name if @user.credit != -1 %>  <%= _('Unlimited') if @user.credit == -1 %>  </td>
+                    <td id="credit"> <%= nice_number(@user.credit) + " " + current_user.currency.name if @user.credit != -1 %>  <%= _('Unlimited') if @user.credit == -1 %>  </td>
                   </tr>
               <% end %>
               <tr>
