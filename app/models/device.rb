@@ -427,11 +427,11 @@ class Device < ActiveRecord::Base
   #======================= CALLS =============================
 
   def all_calls
-    Call.find(:all, :conditions => "accountcode = '#{self.id}'")
+    Call.where(:src_device_id => self.id)
   end
 
   def any_calls
-    Call.where(:accountcode => self.id).limit(1)
+    Call.where(:src_device_id => self.id).limit(1) 
   end
 
   def calls(type, date_from, date_till)
