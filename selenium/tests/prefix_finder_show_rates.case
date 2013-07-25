@@ -38,6 +38,36 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>provider tariff</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff[currency]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/rate_new/1?st=L</td>
 	<td></td>
 </tr>
@@ -68,6 +98,66 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/rate_new/6?st=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_5786</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_12505</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>wholesale tariff</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff[currency]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_user_wholesale</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/ratedetail_edit/2</td>
 	<td></td>
 </tr>
@@ -83,7 +173,42 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/rates_list/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>355</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/rate_new/1?page=21&amp;st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rate_19976</td>
+	<td>21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rate_new/7?page=21&amp;st=U</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,6 +238,31 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/rates_list/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/ratedetail_edit/10</td>
 	<td></td>
 </tr>
@@ -124,6 +274,31 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Quick add new Rate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -198,6 +373,51 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>retail tariff</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff[currency]</td>
+	<td>label=EUR</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate17</td>
+	<td>33</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/stats/prefix_finder</td>
 	<td></td>
 </tr>
@@ -244,6 +464,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>00:00:00 - 23:59:59 =&gt; 15.0 (USD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 15.0 (EUR) / 20.3106 (USD) </td>
 	<td></td>
 </tr>
 <tr>
@@ -298,12 +523,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 12.0 (EUR) / 16.2485 (USD) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Test Tariff for Users:</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>00:00:00 - 23:59:59 =&gt; 0.0 (USD)</td>
+	<td>00:00:00 - 23:59:59 =&gt; 12.0 (USD)</td>
 	<td></td>
 </tr>
 <tr>
@@ -352,8 +582,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=p</td>
+	<td>Test Tariff: <br /> 00:00:00 - 23:59:59 =&gt; 10.0 (USD)</td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
-	<td>00:00:00 - 23:59:59 =&gt; 10.0 (USD)</td>
+	<td>00:00:00 - 23:59:59 =&gt; 10.0 (EUR) / 13.5404 (USD) </td>
 	<td></td>
 </tr>
 <tr>
@@ -417,6 +652,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[@id='results']/p[2]</td>
+	<td>wholesale tariff: <br /> 00:00:00 - 23:59:59 =&gt; 21.0 (EUR) / 28.4348 (USD)</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/stats/prefix_finder</td>
 	<td></td>
@@ -460,6 +700,11 @@
 	<td>assertTextPresent</td>
 	<td>Test Tariff:</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='results']/p[4]</td>
+	<td>wholesale tariff: <br /> 00:00:00 - 23:59:59 =&gt; 18.0 (EUR) / 24.3727 (USD)</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -777,9 +1022,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>00:00:00 - 23:59:59 =&gt; 33.0 (USD)</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[@id='rate_results']/p[3]</td>
+	<td>retail tariff (prefix: 54) : <br /> FIX Argentina proper <br /> 00:00:00 - 23:59:59 =&gt; 33.0 (EUR) / 44.6833 (USD)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='rate_results']/p[5]</td>
+	<td>wholesale tariff (prefix: 54) : <br /> FIX Argentina proper <br /> 00:00:00 - 23:59:59 =&gt; 18.0 (EUR) / 24.3727 (USD)</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
