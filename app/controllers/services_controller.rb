@@ -349,8 +349,10 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_start = @sub.activation_start.beginning_of_month.change(:hour => 0, :min => 0, :sec => 0)
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
+    
+    valid_membership_time = @user.registered_during_period(@sub.activation_end.to_s(:db))
 
-    if ((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))
+    if (((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))) and valid_membership_time
       @sub.save
       Action.add_action_hash(current_user.id, {:action => 'Subscription_added', :target_id => @sub.id, :target_type => "Subscription", :data => @sub.user_id, :data2 => @sub.service_id})
 
@@ -428,8 +430,10 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_start = @sub.activation_start.beginning_of_month.change(:hour => 0, :min => 0, :sec => 0)
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
+    
+    valid_membership_time = @sub.user.registered_during_period(@sub.activation_end.to_s(:db))
 
-    if (@sub.activation_start <= @sub.activation_end) #and (@sub.added <= @sub.activation_start)
+    if (@sub.activation_start <= @sub.activation_end) and valid_membership_time #and (@sub.added <= @sub.activation_start)
       @sub.save
       flash[:status] = _('Subscription_updated')
       if @back.to_s == "subscriptions"
