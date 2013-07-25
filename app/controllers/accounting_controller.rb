@@ -342,7 +342,7 @@ class AccountingController < ApplicationController
       MorLog.my_debug("  Total subscriptions this period: #{total_subscriptions}", 1)
       
       # check whether the user registered during the invoice generation period 
-      reg_during_period = registered_during_period(user, @period_end) 
+      reg_during_period = user.registered_during_period(@period_end) 
 
       # -- Minimal charge -----
       # Minimal charge is counted for whole month(s), but only for postpaid users. To get a 
@@ -613,7 +613,7 @@ class AccountingController < ApplicationController
       total_subscriptions = subscriptions.size if subscriptions
       
       # check whether the user registered during the invoice generation period 
-      reg_during_period = registered_during_period(user, @period_end)
+      reg_during_period = user.registered_during_period(@period_end)
       
       if ((outgoing_calls_price > 0) or
         (outgoing_calls_by_users_price + incoming_calls_by_users_price > 0) or
@@ -2085,22 +2085,6 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
       return "Prepaid_", "prepaid"
     else
       return "", "postpaid"
-    end
-  end
-  
-  def registered_during_period(user, period_end)
-    user_created_at_action = Action.where(:action => 'user_created', :target_id => user.id).first
-    # If user doesn't have a creation date, probably means this is a testing environment
-    if user_created_at_action.nil?
-      return true
-    else
-      user_created_at = Time.parse(user_created_at_action.date.to_s)
-      period_end = Time.parse(period_end)
-    end
-    if user_created_at < period_end
-      return true
-    else
-      return false
     end
   end
 end

@@ -3577,6 +3577,31 @@ GROUP BY terminators.id;").map { |t| t.id }
   def accountant_users
     User.find(:all, :conditions => {:responsible_accountant_id => self.id});
   end
+  
+  def registered_during_period(period_end)
+    user_created_at_action = Action.where(:action => 'user_created', :target_id => self.id).first
+    # If user doesn't have a creation date, probably means this is a testing environment
+    if user_created_at_action.nil?
+      return true
+    else
+      user_created_at = Time.parse(user_created_at_action.date.to_s)
+      period_end = Time.parse(period_end)
+    end
+    if user_created_at < period_end
+      return true
+    else
+      return false
+    end
+  end
+  
+  def registered_at
+    user_created_at_action = Action.where(:action => 'user_created', :target_id => self.id).first
+    if !user_created_at_action.nil?
+      return user_created_at_action.date
+    else
+      return nil
+    end
+  end
 
   private
 
