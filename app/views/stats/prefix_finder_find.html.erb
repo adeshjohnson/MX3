@@ -19,6 +19,7 @@
     <br/>
     <% tariff_tipe = ''%>
     <% @rates.each { |r| %>
+        <% r['currency'] = r.tariff.currency if r.tariff %> 
         <% if  tariff_tipe.to_s != r.tariff.purpose.to_s %>
 
             <br />
