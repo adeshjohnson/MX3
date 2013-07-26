@@ -181,14 +181,16 @@ class Lcr < ActiveRecord::Base
                                   WHERE lcr_id = #{id} and tariff_id is not null")
 
       t_ids = tariffs.map { |i| i.tid }
-      create_temp_table = "CREATE TABLE #{t_name}_2 AS (SELECT  destinationgroup_id, #{SqlExport.replace_dec("CAST(MIN( price * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( price * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
+      create_temp_table = "CREATE TABLE #{t_name}_2 AS (SELECT  destinationgroup_id, #{SqlExport.replace_dec("CAST(MIN( price / exchange_rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( price * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
                            JOIN aratedetails ON (rates.id = rate_id)
                            JOIN tariffs ON (tariffs.id = tariff_id)
+                           JOIN currencies ON (currencies.name = tariffs.currency)
                      WHERE tariff_id IN (#{options[:current_user].tariff_id}) group by destinationgroup_id);"
       ActiveRecord::Base.connection.execute(create_temp_table)
-      cretate_table_2 = " CREATE TABLE #{t_name}_1 AS (SELECT destination_id as did, #{SqlExport.replace_dec("CAST(MIN( rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
-                           JOIN ratedetails ON (rates.id = rate_id)
-                           JOIN tariffs ON (tariffs.id = tariff_id)
+      cretate_table_2 = " CREATE TABLE #{t_name}_1 AS (SELECT destination_id as did, #{SqlExport.replace_dec("CAST(MIN( rate / exchange_rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_min')}, #{SqlExport.replace_dec("CAST(MAX( rate * #{exchange_rate}) AS DECIMAL(15,10))", options[:column_dem], 'rate_max')} FROM rates
+                          JOIN ratedetails ON (rates.id = rate_id)
+                          JOIN tariffs ON (tariffs.id = tariff_id)
+                          JOIN currencies ON (currencies.name = tariffs.currency)
                      WHERE tariff_id IN (#{t_ids.size.to_i > 0 ? t_ids.join(' , ') : -100}) GROUP BY destination_id);"
       ActiveRecord::Base.connection.execute(cretate_table_2)
       sql_m = "SELECT #{s.join(' , ')} ,  rate_min, rate_max FROM (
@@ -209,18 +211,19 @@ class Lcr < ActiveRecord::Base
                                   WHERE lcr_id = #{id} ) AND tariffs.owner_id = #{options[:current_user].id}) OR tariffs.id = #{options[:current_user].tariff_id}  "
       end
 
-      sql_m = "SELECT #{s.join(' , ')},
-                      CAST(MIN(rate * #{exchange_rate}) AS DECIMAL(15,10)) AS rate_min,
-                      CAST(MAX(rate * #{exchange_rate}) AS DECIMAL(15,10)) AS rate_max
-            FROM rates
-            JOIN ratedetails ON (rates.id = rate_id)
-            JOIN tariffs ON (tariffs.id = tariff_id)
-	    JOIN destinations ON (rates.destination_id = destinations.id)
-            LEFT JOIN directions ON (destinations.direction_code = directions.code)
-            WHERE #{cond} 
-            GROUP BY destination_id
-            #{'HAVING rate_min != 0 AND rate_max != 0' if Confline.get_value('Show_zero_rates_in_LCR_tariff_export').to_i == 0} 
-            ORDER BY dir_name ASC"
+      sql_m = "SELECT #{s.join(' , ')}, " +
+                "CAST(MIN(rate / exchange_rate * #{exchange_rate}) AS DECIMAL(15,10)) AS rate_min, " +
+                "CAST(MAX(rate / exchange_rate * #{exchange_rate}) AS DECIMAL(15,10)) AS rate_max " +
+              "FROM rates " +
+                "JOIN ratedetails ON (rates.id = rate_id) " +
+                "JOIN tariffs ON (tariffs.id = tariff_id) " +
+                "JOIN currencies ON (currencies.name = tariffs.currency) " +
+                "JOIN destinations ON (rates.destination_id = destinations.id) " +
+                "LEFT JOIN directions ON (destinations.direction_code = directions.code) " +
+              "WHERE #{cond} " +
+              "GROUP BY destination_id " +
+              "#{'HAVING rate_min != 0 AND rate_max != 0' if Confline.get_value('Show_zero_rates_in_LCR_tariff_export').to_i == 0} " +
+              "ORDER BY dir_name ASC "
 
     end
 
