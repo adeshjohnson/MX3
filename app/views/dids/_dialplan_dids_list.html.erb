@@ -3,7 +3,7 @@
     <% if dids.size.to_i > 0 %>
 >
 <% if dids.size > 10 %>
-<%=raw dids.size %> DIDs Total 
+<%=raw dids.size %> DID(s) 
 <% else %>
 <% dids.limit(10).map do |did| %>
 <%= link_to did.did, :controller => 'dids', :action => "edit", :id => did.id %>
