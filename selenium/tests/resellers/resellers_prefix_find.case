@@ -472,14 +472,29 @@
 	<td>w</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>css=p</td>
-	<td>provider tariff eur: <br /> 00:00:00 - 23:59:59 =&gt; 8.0 (EUR) / 10.8323 (USD)</td>
+	<td>assertText</td>
+	<td>//p[2]/b</td>
+	<td>provider tariff eur:</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='results']/p[3]</td>
-	<td>wholesale tariff eur: <br /> 00:00:00 - 23:59:59 =&gt; 8.0 (EUR) / 10.8323 (USD)</td>
+	<td>assertTextPresent</td>
+	<td>provider tariff eur: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 8.0 (EUR) / 10.8323 (USD) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td> wholesale tariff eur: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>00:00:00 - 23:59:59 =&gt; 8.0 (EUR) / 10.8323 (USD) </td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
