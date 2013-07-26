@@ -48,6 +48,7 @@ class PhonebooksController < ApplicationController
     @page_title = _('PhoneBook_details') 
     @page_icon = "view.png" 
     @help_link = "http://wiki.kolmisoft.com/index.php/PhoneBook"
+    @user_id = @phonebook.user_id
   end
 
   def new
