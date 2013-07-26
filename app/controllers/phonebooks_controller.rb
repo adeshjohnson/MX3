@@ -3,6 +3,7 @@ class PhonebooksController < ApplicationController
 
   layout "callc"
 
+  before_filter :access_denied, :only => [:list, :add_new, :edit, :destroy, :new, :show], :if => lambda { not (user? or admin?) } 
   before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :authorize
   before_filter :check_localization
@@ -44,6 +45,9 @@ class PhonebooksController < ApplicationController
   # before_filter:
   #   find_phonebook
   def show
+    @page_title = _('PhoneBook_details') 
+    @page_icon = "view.png" 
+    @help_link = "http://wiki.kolmisoft.com/index.php/PhoneBook"
   end
 
   def new
@@ -95,14 +99,15 @@ class PhonebooksController < ApplicationController
   private
 
   def find_phonebook
-    @phonebook = Phonebook.where(:id => params[:id]).first
+    if params[:action] == "show" and !admin?
+      @phonebook = Phonebook.where(:id => params[:id]).first
+    else
+      @phonebook = Phonebook.where(:id => params[:id], :user_id => current_user.id).first
+    end
+    
 
     unless @phonebook
-      flash[:notice]=_('Phonebook_was_not_found')
-      redirect_to :action => :list and return false
-    end
-    if @phonebook.user_id != session[:user_id] and session[:usertype] != "admin"
-      dont_be_so_smart
+      (session[:usertype] == "admin")? flash[:notice]=_('Phonebook_was_not_found') : dont_be_so_smart
       redirect_to :action => :list and return false
     end
   end
@@ -117,7 +122,6 @@ class PhonebooksController < ApplicationController
 
   def find_phonebooks
     user_id = session[:user_id]
-    user_id = params[:id] if params[:id] and session[:usertype] == "admin"
     @user = User.where(:id => user_id).first
 
     unless @user
@@ -129,3 +133,4 @@ class PhonebooksController < ApplicationController
 
   end
 end
+

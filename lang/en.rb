@@ -4598,7 +4598,7 @@ Localization.define('en') do |l|
   l.store 'nonat', 'nonat'
   l.store 'update_small', 'update'
   l.store 'Reseller_Group', 'Reseller Group'
-  #  l.store '', ''
+  l.store 'PhoneBook_details', 'PhoneBook Details'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
