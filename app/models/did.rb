@@ -369,10 +369,10 @@ class Did < ActiveRecord::Base
     # set error flag on not int numbers | code : 3
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\r', '') REGEXP '^[0-9]+$' = 0")
 
-    # set error flag on numbers which comtains \r | code : 4 
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 4 WHERE replace(#{name}.did, '\\\\r', '') REGEXP '^[0-9]+$' = 0") 
+    # set error flag on numbers which comtains \r | code : 3 
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\\\r', '') REGEXP '^[0-9]+$' = 0") 
 
-    # set error flag on collisions with QF | code : 5
+    # set error flag on collisions with QF | code : 4
     all_dids = ActiveRecord::Base.connection.select_all("SELECT * FROM #{name} WHERE f_error = 0").each(&:symbolize_keys!).collect{|v| v[:did]}
     dids_with_collisions = []
     if owner_id.to_i != 0
