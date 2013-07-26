@@ -9,6 +9,7 @@ class Server < ActiveRecord::Base
 
   require 'rami'
 
+  before_destroy :check_if_no_providers_own_server
   before_destroy :check_if_no_devices_own_server
   before_destroy :check_if_server_is_resellers_server
   before_save :check_server_device
@@ -24,6 +25,14 @@ class Server < ActiveRecord::Base
       return false
     end
   end
+
+  def check_if_no_providers_own_server
+    if Serverprovider.count(:conditions => ["server_id = ?", self.id]).to_i > 0
+      errors.add(:server_id, _("Server_Has_Providers"))
+      return false
+    end
+  end
+
 
   def check_if_server_is_resellers_server
     if Confline.get_value("Resellers_server_id") == self.id

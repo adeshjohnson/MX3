@@ -3131,6 +3131,7 @@ Localization.define('en') do |l|
   l.store 'Hide_last_3_digits_of_Destinations_in', 'Hide last 3 digits of Destinations in'
   l.store 'Server_Not_Deleted', 'Server was not deleted'
   l.store 'Server_Has_Devices', 'Server has assigned devices'
+  l.store 'Server_Has_Providers', 'Server has assigned providers'
   l.store 'Provider_Not_Found', 'Provider was not found'
   l.store 'Block_Not_Found', 'Block was not found'
 
