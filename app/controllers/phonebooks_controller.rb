@@ -3,7 +3,7 @@ class PhonebooksController < ApplicationController
 
   layout "callc"
 
-  before_filter :access_denied, :only => [:list, :add_new, :edit, :destroy, :new, :show], :if => lambda { not (user? or admin?) } 
+  before_filter :access_denied, :only => [:list, :add_new, :edit, :destroy, :new, :show], :if => lambda { not (user? or admin? or reseller?) } 
   before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :authorize
   before_filter :check_localization

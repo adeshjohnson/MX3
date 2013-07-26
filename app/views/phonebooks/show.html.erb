@@ -7,4 +7,6 @@
 <tr><td><b><%= _('Updated_at') %>:</b> <%= nice_date_time @phonebook.send(:updated_at) %></td></tr>
 </table>
 <br/>
-<%= link_to b_edit + _('Edit'), :action => 'edit', :id => @phonebook %>
+<% unless @user_id.to_s != session[:user_id].to_s %>
+    <%= link_to b_edit + _('Edit'), :action => 'edit', :id => @phonebook %>
+<% end %>
