@@ -325,6 +325,15 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @user = User.find(:first, :conditions => ["id = ?", params[:id]])
     @sub = Subscription.new
 
+    if session[:subscription_create].blank?
+      @sub.activation_start = @sub.activation_end = Time.zone.now
+    else
+      @sub.activation_start	= session[:subscription_create][:activation_start]
+      @sub.activation_end	= session[:subscription_create][:activation_end]
+    end
+
+    session.try(:delete, :subscription_create)
+
     if @services.empty?
       flash[:notice] = _('No_services_to_subscribe')
       redirect_to :action => 'subscriptions_list', :id => @user.id
@@ -350,7 +359,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    valid_membership_time = @user.registered_during_period(@sub.activation_end.to_s(:db))
+    valid_membership_time = @user.registered_at.to_i <= @sub.activation_start.to_i
 
     if (((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))) and valid_membership_time
       @sub.save
@@ -382,6 +391,10 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       redirect_to :action => 'subscriptions_list', :id => params[:id] and return false
     else
       flash[:notice] = _('Bad_time')
+      session[:subscription_create] = {
+         activation_start: @sub.activation_start,
+         activation_end:   @sub.activation_end
+      }
       redirect_to :action => 'subscription_new', :id => params[:id] and return false
     end
   end
@@ -398,6 +411,11 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @search_memo = params[:s_memo] if params[:s_memo]
     @search_date_from = params[:s_date_from] if params[:s_date_from]
     @search_date_till = params[:s_date_till] if params[:s_date_till]
+
+    @sub.activation_start	= session[:subscription_edit][:activation_start] unless session[:subscription_edit].blank?
+    @sub.activation_end		= session[:subscription_edit][:activation_end]   unless session[:subscription_edit].blank?
+
+    session.try(:delete, :subscription_edit)
 
     @user = @sub.user
     @services = Service.find(:all, :order => "name ASC")
@@ -431,9 +449,9 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    valid_membership_time = @sub.user.registered_during_period(@sub.activation_end.to_s(:db))
+    valid_membership_time = @sub.user.registered_at.to_i < @sub.activation_start.to_i
 
-    if (@sub.activation_start <= @sub.activation_end) and valid_membership_time #and (@sub.added <= @sub.activation_start)
+    if (@sub.activation_start <= @sub.activation_end) and valid_membership_time
       @sub.save
       flash[:status] = _('Subscription_updated')
       if @back.to_s == "subscriptions"
@@ -448,6 +466,10 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
         redirect_to :action => 'subscriptions', :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device => @search_device, :s_date_from => @search_date_from, :s_date_till => @search_date_till, :page => @page
       else
         redirect_to :action => 'subscription_edit', :id => @sub.id
+        session[:subscription_edit] = {
+          activation_start: @sub.activation_start,
+          activation_end:   @sub.activation_end
+        }
       end
     end
   end

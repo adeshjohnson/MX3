@@ -662,7 +662,7 @@ Localization.define('en') do |l|
   l.store 'Service_was_successfully_updated', 'Service successfully updated'
   l.store 'Service_was_successfully_created', 'Service successfully created'
   l.store 'Subscriptions', 'Subscriptions'
-  l.store 'Bad_time', 'Bad time'
+  l.store 'Bad_time', 'Incorrect time period'
   l.store 'Subscription_updated', 'Subscription updated'
   l.store 'New_subscription', 'New subscription'
   l.store 'Subscription_added', 'Subscription added'

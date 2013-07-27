@@ -22,11 +22,11 @@
       </tr>
       <tr>
         <td> <%= _('Activation_start') %></td>
-        <td> <%= select_datetime(Time.zone.now, :end_year => Time.zone.now.year+10, :prefix => "activation_start", :use_month_numbers => false) %></td>
+        <td> <%= select_datetime(@sub.activation_start, :end_year => Time.zone.now.year+10, :prefix => "activation_start", :use_month_numbers => false) %></td>
       </tr>
       <tr id="activation_end">
         <td> <%= _('Activation_end') %></td>
-        <td> <%= select_datetime(Time.zone.now, :end_year => Time.zone.now.year+10, :prefix => "activation_end", :use_month_numbers => false) %></td>
+        <td> <%= select_datetime(@sub.activation_end, :end_year => Time.zone.now.year+10, :prefix => "activation_end", :use_month_numbers => false) %></td>
       </tr>
     </table>
     <%= hidden_field_tag 'subscription[added]', Time.now, {:id => 'subscription_added'} %>
