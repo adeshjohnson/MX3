@@ -173,48 +173,49 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>user_username</td>
-	<td>Sub1</td>
+	<td>login_username</td>
+	<td>admin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password_password</td>
-	<td>SubSub11</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>user_postpaid_2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>user_balance</td>
-	<td>100</td>
+	<td>login_psw</td>
+	<td>admin1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--2 paprasti useriai įkeliami-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
+	<td>/billing/test/load_bundle_sql/?path=reseller_user_services/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>user_username</td>
-	<td>Sub2</td>
+	<td>login_username</td>
+	<td>reseller</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password_password</td>
-	<td>SubSub21</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -582,6 +583,228 @@
 	<td>assertText</td>
 	<td>balance_7</td>
 	<td>-30.0000</td>
+</tr>
+<!--subscription kūrimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/1302</td>
+	<td></td>
+</tr>
+<!--metai, kada useris neegzistavo-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2020</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--tinkami metai, ne tas mėnuo-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--paskutinė praėjusio mėnesio diena-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--geras mėnuo, pirma diena-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=July</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<!--geras mėnuo, user sukūrimo diena-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/1302</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Subscription added</td>
+	<td></td>
+</tr>
+<!--subscription editas-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_edit/1302</td>
+	<td></td>
+</tr>
+<!--metai, kada useris neegzistavo-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>label=2020</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--tinkami metai, ne tas mėnuo-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_year</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--paskutinė praėjusio mėnesio diena-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--geras mėnuo, pirma diena-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=July</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Subscription updated</td>
+	<td></td>
+</tr>
+<!--geras mėnuo, user sukūrimo diena-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_edit/1302</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=28</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Subscription updated</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
