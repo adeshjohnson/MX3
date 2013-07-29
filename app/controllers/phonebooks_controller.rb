@@ -32,7 +32,7 @@ class PhonebooksController < ApplicationController
     end
 
     if @phonebook.valid? and @phonebook.save
-      flash[:status] = _('Added')
+      flash[:status] = _('phonebook_successfully_added')
       redirect_to :action => 'list'
     else
       flash_errors_for(_("Please_fill_all_fields"), @phonebook)
@@ -44,10 +44,10 @@ class PhonebooksController < ApplicationController
   # before_filter:
   #   find_phonebook
   def show
-    @page_title = _('PhoneBook_details') 
+    @page_title = _('phonebook_details') 
     @page_icon = "view.png" 
     @help_link = "http://wiki.kolmisoft.com/index.php/PhoneBook"
-    @phonebook_owner = @phonebook.user_id == current_user.id
+    @is_phonebook_owner = @phonebook.user_id == current_user.id
   end
 
   def new
@@ -69,7 +69,7 @@ class PhonebooksController < ApplicationController
   # before_filter:
   #   find_phonebook
   def edit
-    @page_title = _('Edit_PhoneBook')
+    @page_title = _('edit_phonebook')
     @page_icon = "edit.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/PhoneBook"
   end
@@ -78,7 +78,7 @@ class PhonebooksController < ApplicationController
   #   find_phonebook
   def update
     if @phonebook.update_attributes(params[:phonebook])
-      flash[:status] = _('Updated')
+      flash[:status] = _('phonebook_successfully_updated')
       redirect_to :action => 'list'
     else
       flash_errors_for(_("Record_was_not_saved"), @phonebook)
@@ -92,7 +92,7 @@ class PhonebooksController < ApplicationController
     user_id = @phonebook.user_id
 
     @phonebook.destroy
-    flash[:status] = _('Deleted')
+    flash[:status] = _('phonebook_successfully_deleted')
     redirect_to :action => 'list', :id => user_id
   end
 
@@ -108,7 +108,7 @@ class PhonebooksController < ApplicationController
 
     unless @phonebook
       if admin?
-        flash[:notice]=_('Phonebook_was_not_found')
+        flash[:notice]=_('phonebook_was_not_found')
         redirect_to :action => :list and return false
       else
         dont_be_so_smart

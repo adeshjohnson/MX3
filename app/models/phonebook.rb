@@ -30,7 +30,7 @@ class Phonebook < ActiveRecord::Base
         condition += " AND id != #{self.id} "
       end
     else
-      condition += " AND user_id IN (0, #{user.id})"
+      condition += " AND user_id IN (#{user.id})"
       if self.id
         condition += " AND id != #{self.id}"
       end

@@ -1,6 +1,6 @@
 <table>
   <tr><td><b><%= _('PhoneBook') %>:</b>
-  <% if @phonebook_owner %>
+  <% if @is_phonebook_owner %>
     <%= link_to @phonebook.name, :controller => 'phonebooks', :action => 'edit', :id => @phonebook.id %></td></tr> 
   <% else %>
     <%= @phonebook.name %>
@@ -12,6 +12,6 @@
   <tr><td><b><%= _('Updated_at') %>:</b> <%= nice_date_time @phonebook.send(:updated_at) %></td></tr>
 </table>
 <br/>
-<% unless not @phonebook_owner %>
+<% if @is_phonebook_owner %>
   <%= link_to b_edit + _('Edit'), :action => 'edit', :id => @phonebook %>
 <% end %>
