@@ -26,13 +26,17 @@ class PhonebooksController < ApplicationController
   # before_filter:
   #   find_user
   def add_new
+    @page_title = _('PhoneBook')
+    @page_icon = "book.png"
+    @help_link = "http://wiki.kolmisoft.com/index.php/PhoneBook"
+    
     @phonebook = Phonebook.new(params[:phonebook]) do |p|
       p.added = Time.now
       p.user = @user
     end
 
     if @phonebook.valid? and @phonebook.save
-      flash[:status] = _('phonebook_successfully_added')
+      flash[:status] = _('record_successfully_added')
       redirect_to :action => 'list'
     else
       flash_errors_for(_("Please_fill_all_fields"), @phonebook)
@@ -78,7 +82,7 @@ class PhonebooksController < ApplicationController
   #   find_phonebook
   def update
     if @phonebook.update_attributes(params[:phonebook])
-      flash[:status] = _('phonebook_successfully_updated')
+      flash[:status] = _('record_successfully_updated')
       redirect_to :action => 'list'
     else
       flash_errors_for(_("Record_was_not_saved"), @phonebook)
@@ -92,7 +96,7 @@ class PhonebooksController < ApplicationController
     user_id = @phonebook.user_id
 
     @phonebook.destroy
-    flash[:status] = _('phonebook_successfully_deleted')
+    flash[:status] = _('record_successfully_deleted')
     redirect_to :action => 'list', :id => user_id
   end
 
@@ -108,7 +112,7 @@ class PhonebooksController < ApplicationController
 
     unless @phonebook
       if admin?
-        flash[:notice]=_('phonebook_was_not_found')
+        flash[:notice]=_('Phonebook_was_not_found')
         redirect_to :action => :list and return false
       else
         dont_be_so_smart
