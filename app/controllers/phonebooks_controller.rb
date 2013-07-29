@@ -3,7 +3,6 @@ class PhonebooksController < ApplicationController
 
   layout "callc"
 
-  before_filter :access_denied, :only => [:list, :add_new, :edit, :destroy, :new, :show], :if => lambda { not (user? or admin? or reseller? or accountant?) } 
   before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :authorize
   before_filter :check_localization
@@ -48,7 +47,7 @@ class PhonebooksController < ApplicationController
     @page_title = _('PhoneBook_details') 
     @page_icon = "view.png" 
     @help_link = "http://wiki.kolmisoft.com/index.php/PhoneBook"
-    @user_id = @phonebook.user_id
+    @phonebook_owner = @phonebook.user_id == current_user.id
   end
 
   def new
@@ -101,14 +100,14 @@ class PhonebooksController < ApplicationController
 
   def find_phonebook
     if params[:action] == "show" and !admin?
-      @phonebook = Phonebook.where(:id => params[:id]).first
+      @phonebook = Phonebook.where(:id => params[:id], :user_id => [current_user.id, 0]).first
     else
       @phonebook = Phonebook.where(:id => params[:id], :user_id => current_user.id).first
     end
     
 
     unless @phonebook
-      if session[:usertype] == "admin"
+      if admin?
         flash[:notice]=_('Phonebook_was_not_found')
         redirect_to :action => :list and return false
       else
