@@ -2,7 +2,7 @@
 class Phonebook < ActiveRecord::Base
   belongs_to :user
 
-  validates_format_of :number, :with => /\A\d+\Z/, :message => _('Phonebook_number_must_be_numeric')
+  validates_format_of :number, :with => /\A\d+\Z/, :message => _('Record_number_must_be_numeric')
   validates_format_of :speeddial, :with => /\A\d+\Z/, :message => _('Speeddial_must_be_numeric')
   validates_length_of :speeddial, :minimum => 2, :message => _('Speeddial_can_only_be_2_and_more_digits')
   before_save :validate_speeddial_uniqueness

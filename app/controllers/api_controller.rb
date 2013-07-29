@@ -2935,7 +2935,7 @@ class ApiController < ApplicationController
             end
           end
         else
-          doc.error("Phonebook was not found")
+          doc.error("Record was not found")
         end
       else
         doc.error("Bad login")

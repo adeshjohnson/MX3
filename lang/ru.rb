@@ -2905,7 +2905,6 @@ Localization.define('ru') do |l|
   l.store 'dialplan_was_not_found', 'Правило набора не найдено'
   l.store 'Quickforwarddid_was_not_found', 'Быстрая переадресация DID не найдена'
   l.store 'Email_was_not_found', 'Email не найден'
-  l.store 'Phonebook_was_not_found', 'Телефонная книжка не найдена'
   l.store 'Rate_was_not_found', 'Тарифная ставка не найдена'
   l.store 'Ratedetail_was_not_found', 'Детали тарифной ставки не найдены'
   l.store 'Aratedetail_was_not_found', 'Подробные детали тарифной ставки не найдены'
@@ -3299,7 +3298,7 @@ Localization.define('ru') do |l|
   l.store 'Hide_device_passwords_for_users', 'Скрыть пароли для устройств от Абонента' ## ar teisinga formuluote? Patikrinti!
   l.store 'Hide_manual_link', 'Скрыть ссылку на Инструкцию'
   l.store 'Visual', 'Визуально'
-  l.store 'Phonebook_number_must_be_numeric', 'Номер телефонной книги должен быть в цифровом виде'
+  l.store 'Record_number_must_be_numeric', 'Номер телефонной книги должен быть в цифровом виде'
   l.store 'Speeddial_must_be_numeric', 'Быстрый набор должен быть в цифровом виде'
   l.store 'Drag_and_drop', 'Перетащите для сортировки'
   l.store 'Grace_Time_Explanation', 'Если вызов менее обозначенного нетарифицированного порога - он не будет тарифицирован. Например: порог - 3 сек. Длительность вызова - 3 сек. Стоимость звонка = 0'

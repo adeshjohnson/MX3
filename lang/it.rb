@@ -2009,7 +2009,6 @@ Localization.define('it') do |l|
     l.store 'dialplan_was_not_found', 'Dial Plan not found'
     l.store 'Quickforwarddid_was_not_found', 'Quick Forward DID not found'
     l.store 'Email_was_not_found', 'L\'Email inserita non e\' stata trovata'
-    l.store 'Phonebook_was_not_found', 'Phonebook not found'
     l.store 'Rate_was_not_found', 'Rate not found'
     l.store 'Ratedetail_was_not_found', 'Rate Detail not found'
     l.store 'Aratedetail_was_not_found', 'Advanced Rate Detail not found'

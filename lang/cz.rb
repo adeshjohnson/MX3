@@ -2906,7 +2906,6 @@ Localization.define('cz') do |l|
   l.store 'dialplan_was_not_found', 'Dial Plan not found'
   l.store 'Quickforwarddid_was_not_found', 'Quick Forward DID not found'
   l.store 'Email_was_not_found', 'Email not found'
-  l.store 'Phonebook_was_not_found', 'Phonebook not found'
   l.store 'Rate_was_not_found', 'Rate was not found'
   l.store 'Ratedetail_was_not_found', 'Rate Detail not found'
   l.store 'Aratedetail_was_not_found', 'Advanced Rate Detail not found'
@@ -3300,7 +3299,7 @@ Localization.define('cz') do |l|
   l.store 'Hide_device_passwords_for_users', 'Hide device passwords for users' ## ar teisinga formuluote? Patikrinti!
   l.store 'Hide_manual_link', 'Hide "Manual" link'
   l.store 'Visual', 'Visual'
-  l.store 'Phonebook_number_must_be_numeric', 'Phonebook number must be numeric'
+  l.store 'Record_number_must_be_numeric', 'Record number must be numeric'
   l.store 'Speeddial_must_be_numeric', 'SpeedDial must be numeric'
   l.store 'Drag_and_drop', 'drag & drop to change order'
   l.store 'Grace_Time_Explanation', 'If call duration is less than <i>Grace Time</i>, it will not be accounted.<br>Example: <i>Grace Time</i> = 3s, call duration <= 3s, then price for the call = 0'

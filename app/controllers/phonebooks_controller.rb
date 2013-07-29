@@ -112,7 +112,7 @@ class PhonebooksController < ApplicationController
 
     unless @phonebook
       if admin?
-        flash[:notice]=_('Phonebook_was_not_found')
+        flash[:notice]=_('Record_not_found')
         redirect_to :action => :list and return false
       else
         dont_be_so_smart
