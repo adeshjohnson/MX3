@@ -325,13 +325,12 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @user = User.find(:first, :conditions => ["id = ?", params[:id]])
     @sub = Subscription.new
 
-    if session[:subscription_create].blank?
-      @sub.activation_start = @sub.activation_end = Time.zone.now
-    else
-      @sub.activation_start	= session[:subscription_create][:activation_start]
-      @sub.activation_end	= session[:subscription_create][:activation_end]
-    end
+    @sub.activation_start = @sub.activation_end = Time.zone.now
 
+    # form cache
+    session[:subscription_create].try(:each) do |key, val|
+      @sub[key.to_sym] = val if @sub.respond_to? key.to_sym
+    end
     session.try(:delete, :subscription_create)
 
     if @services.empty?
@@ -359,7 +358,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    valid_membership_time = @user.registered_at.to_i <= @sub.activation_start.to_i
+    valid_membership_time = @user.registered_at.try(:at_beginning_of_month).to_i <= @sub.activation_start.to_i
 
     if (((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))) and valid_membership_time
       @sub.save
@@ -393,7 +392,8 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       flash[:notice] = _('Bad_time')
       session[:subscription_create] = {
          activation_start: @sub.activation_start,
-         activation_end:   @sub.activation_end
+         activation_end:   @sub.activation_end,
+         memo:             @sub.memo
       }
       redirect_to :action => 'subscription_new', :id => params[:id] and return false
     end
@@ -412,9 +412,10 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @search_date_from = params[:s_date_from] if params[:s_date_from]
     @search_date_till = params[:s_date_till] if params[:s_date_till]
 
-    @sub.activation_start	= session[:subscription_edit][:activation_start] unless session[:subscription_edit].blank?
-    @sub.activation_end		= session[:subscription_edit][:activation_end]   unless session[:subscription_edit].blank?
-
+    # form cache
+    session[:subscription_edit].try(:each) do |key, val|
+      @sub[key.to_sym] = val if @sub.respond_to? key.to_sym
+    end
     session.try(:delete, :subscription_edit)
 
     @user = @sub.user
@@ -449,7 +450,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    valid_membership_time = @sub.user.registered_at.to_i < @sub.activation_start.to_i
+    valid_membership_time = @sub.user.registered_at.try(:at_beginning_of_month).to_i <= @sub.activation_start.to_i
 
     if (@sub.activation_start <= @sub.activation_end) and valid_membership_time
       @sub.save
@@ -468,7 +469,8 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
         redirect_to :action => 'subscription_edit', :id => @sub.id
         session[:subscription_edit] = {
           activation_start: @sub.activation_start,
-          activation_end:   @sub.activation_end
+          activation_end:   @sub.activation_end,
+          memo:             @sub.memo
         }
       end
     end
