@@ -1554,12 +1554,57 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Name</td>
+	<td>You are not authorized to view this page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>phonebook_name</td>
+	<td>open</td>
+	<td>/billing/phonebooks/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=phonebook_name</td>
+	<td>test_phonebook_accountant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=phonebook_number</td>
+	<td>37061111112</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=phonebook_speeddial</td>
+	<td>876</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/phonebooks/show/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>PhoneBook: JON </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Number: 37060064753</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Speeddial: 876</td>
 	<td></td>
 </tr>
 <tr>
@@ -2458,11 +2503,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>CLI</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementNotPresent</td>
 	<td>id=cli</td>
 	<td></td>
@@ -2603,8 +2643,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>CLI</td>
+	<td>assertTextPresent</td>
+	<td>CallerID was not found</td>
 	<td></td>
 </tr>
 <tr>
