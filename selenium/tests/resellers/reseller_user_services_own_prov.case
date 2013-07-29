@@ -83,12 +83,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//a[contains(@href, '/billing/services/list')]</td>
+	<td>//a[@href='/billing/services/list']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//a[contains(@href, '/billing/services/subscriptions')]</td>
+	<td>//a[@href='/billing/services/subscriptions']</td>
 	<td></td>
 </tr>
 <tr>
@@ -218,21 +218,6 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/lcrs/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lcr_name</td>
-	<td>sdrftyui</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/users/new</td>
 	<td></td>
 </tr>
@@ -244,7 +229,7 @@
 <tr>
 	<td>type</td>
 	<td>password_password</td>
-	<td>Sub11111</td>
+	<td>SubSub11</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -263,18 +248,44 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>user_username</td>
-	<td>Sub2</td>
+	<td>login_username</td>
+	<td>admin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password_password</td>
-	<td>Sub22221</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--2 paprasti useriai įkeliami-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/resellers/user_created_at_specific_date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -305,11 +316,6 @@
 	<td>type</td>
 	<td>subscription_memo</td>
 	<td>one time fee</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=activation_end_year</td>
-	<td>label=2023</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -478,7 +484,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/services/subscriptions_list/7</td>
+	<td>/billing/services/subscriptions_list/1303</td>
 	<td></td>
 </tr>
 <tr>
@@ -504,7 +510,7 @@
 <tr>
 	<td>select</td>
 	<td>activation_start_year</td>
-	<td>label=2009</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -523,23 +529,23 @@
 </tr>
 <tr>
 	<td>select</td>
+	<td>activation_start_day</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>activation_end_day</td>
 	<td>label=16</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>activation_start_day</td>
-	<td>label=14</td>
+	<td>activation_start_month</td>
+	<td>label=June</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>activation_end_month</td>
 	<td>label=November</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_start_month</td>
-	<td>label=October</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -574,7 +580,7 @@
 <tr>
 	<td>assertText</td>
 	<td>activation_start_4</td>
-	<td>2009-10-01 00:00:00</td>
+	<td>2013-06-01 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -605,7 +611,7 @@
 <!--<tr> 	<td>assertText</td> 	<td>balance_6</td> 	<td>100.0000</td> </tr>-->
 <tr>
 	<td>assertText</td>
-	<td>balance_7</td>
+	<td>balance_1303</td>
 	<td>0.0000</td>
 </tr>
 <tr>
@@ -640,7 +646,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>balance_7</td>
+	<td>balance_1303</td>
 	<td>-30.0000</td>
 </tr>
 </tbody></table>
