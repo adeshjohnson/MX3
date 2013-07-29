@@ -3,7 +3,7 @@ class PhonebooksController < ApplicationController
 
   layout "callc"
 
-  before_filter :access_denied, :only => [:list, :add_new, :edit, :destroy, :new, :show], :if => lambda { not (user? or admin? or reseller?) } 
+  before_filter :access_denied, :only => [:list, :add_new, :edit, :destroy, :new, :show], :if => lambda { not (user? or admin? or reseller? or accountant?) } 
   before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :authorize
   before_filter :check_localization
@@ -108,9 +108,15 @@ class PhonebooksController < ApplicationController
     
 
     unless @phonebook
-      (session[:usertype] == "admin")? flash[:notice]=_('Phonebook_was_not_found') : dont_be_so_smart
-      redirect_to :action => :list and return false
+      if session[:usertype] == "admin"
+        flash[:notice]=_('Phonebook_was_not_found')
+        redirect_to :action => :list and return false
+      else
+        dont_be_so_smart
+        redirect_to :action => :root and return false
+      end
     end
+
   end
 
   def find_user

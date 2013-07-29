@@ -1,12 +1,17 @@
 <table>
-<tr><td><b><%= _('PhoneBook') %>:</b> <%= link_to @phonebook.name, :controller => 'phonebooks', :action => 'edit', :id => @phonebook.id %></td></tr> 
-<tr><td></td></tr>
-<tr><td><b><%= _('Number') %>:</b> <%= @phonebook.send(:number) %></td></tr> 
-<tr><td><b><%= _('Speeddial') %>:</b> <%= @phonebook.send(:speeddial) %></td></tr>     
-<tr><td><b><%= _('Added') %>:</b> <%= nice_date_time @phonebook.send(:added) %></td></tr> 
-<tr><td><b><%= _('Updated_at') %>:</b> <%= nice_date_time @phonebook.send(:updated_at) %></td></tr>
+  <tr><td><b><%= _('PhoneBook') %>:</b>
+  <% if @user_id.to_s == session[:user_id].to_s %>
+    <%= link_to @phonebook.name, :controller => 'phonebooks', :action => 'edit', :id => @phonebook.id %></td></tr> 
+  <% else %>
+    <%= @phonebook.name %>
+  <% end %>
+  <tr><td></td></tr>
+  <tr><td><b><%= _('Number') %>:</b> <%= @phonebook.send(:number) %></td></tr> 
+  <tr><td><b><%= _('Speeddial') %>:</b> <%= @phonebook.send(:speeddial) %></td></tr>     
+  <tr><td><b><%= _('Added') %>:</b> <%= nice_date_time @phonebook.send(:added) %></td></tr> 
+  <tr><td><b><%= _('Updated_at') %>:</b> <%= nice_date_time @phonebook.send(:updated_at) %></td></tr>
 </table>
 <br/>
 <% unless @user_id.to_s != session[:user_id].to_s %>
-    <%= link_to b_edit + _('Edit'), :action => 'edit', :id => @phonebook %>
+  <%= link_to b_edit + _('Edit'), :action => 'edit', :id => @phonebook %>
 <% end %>
