@@ -485,7 +485,7 @@
 <tr>
 	<td>select</td>
 	<td>activation_start_day</td>
-	<td>label=1</td>
+	<td>label=30</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -652,27 +652,6 @@
 	<td>Incorrect time period</td>
 	<td></td>
 </tr>
-<!--paskutinė praėjusio mėnesio diena-->
-<tr>
-	<td>select</td>
-	<td>id=activation_start_month</td>
-	<td>label=May</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=activation_start_day</td>
-	<td>label=31</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Incorrect time period</td>
-	<td></td>
-</tr>
 <!--geras mėnuo, pirma diena-->
 <tr>
 	<td>select</td>
@@ -762,27 +741,6 @@
 	<td>select</td>
 	<td>id=activation_start_month</td>
 	<td>label=January</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Incorrect time period</td>
-	<td></td>
-</tr>
-<!--paskutinė praėjusio mėnesio diena-->
-<tr>
-	<td>select</td>
-	<td>id=activation_start_month</td>
-	<td>label=May</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=activation_start_day</td>
-	<td>label=31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
