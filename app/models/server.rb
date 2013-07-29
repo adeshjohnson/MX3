@@ -27,7 +27,7 @@ class Server < ActiveRecord::Base
   end
 
   def check_if_no_providers_own_server
-    if Serverprovider.count(:conditions => ["server_id = ?", self.id]).to_i > 0
+    if Serverprovider.count(:conditions => ["server_id = ?", self.server_id]).to_i > 0
       errors.add(:server_id, _("Server_Has_Providers"))
       return false
     end
