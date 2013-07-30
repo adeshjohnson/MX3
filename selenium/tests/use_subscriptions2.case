@@ -1419,7 +1419,7 @@
 <tr>
 	<td>select</td>
 	<td>id=activation_start_month</td>
-	<td>label=June</td>
+	<td>label=April</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1530,6 +1530,27 @@
 	<td>select</td>
 	<td>id=activation_start_month</td>
 	<td>label=January</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect time period</td>
+	<td></td>
+</tr>
+<!--paskutinė praėjusio mėnesio diena-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_month</td>
+	<td>label=April</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>label=30</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
