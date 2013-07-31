@@ -1279,6 +1279,25 @@ class Device < ActiveRecord::Base
     end
   end
 
+  # this method just cleans server from device 
+  # used in device_update action
+  # only when device name or server_id changes
+  def sip_prune_realtime_peer(device_name, device_server_id)
+    server = Server.find(device_server_id.to_s)
+    if server and server.active == 1
+      rami_server = Rami::Server.new({'host' => server.server_ip, 'username' => server.ami_username, 'secret' => server.ami_secret})
+      rami_server.console = 1
+      rami_server.event_cache = 100
+      rami_server.run
+      client = Rami::Client.new(rami_server)
+      client.timeout = 3
+      
+      t = client.command("sip prune realtime peer " + device_name.to_s)
+      
+      client.respond_to?(:stop) ? client.stop : false
+    end
+  end
+
   private
 
 =begin
