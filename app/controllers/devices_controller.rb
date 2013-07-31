@@ -757,9 +757,9 @@ class DevicesController < ApplicationController
         ActiveRecord::Base.connection.update(sql)
 
         # cleaning asterisk cache when device details changes
-        if (@device.name != @device.device_old_name) || (@device.server_id != @device.device_old_server)
-            @device.sip_prune_realtime_peer(@device.device_old_name, @device.device_old_server)
-        end 
+        #if (@device.name != @device.device_old_name) || (@device.server_id != @device.device_old_server)
+        #    @device.sip_prune_realtime_peer(@device.device_old_name, @device.device_old_server)
+        #end 
 
         @device = check_context(@device)
         a=configure_extensions(@device.id, {:current_user => current_user})
