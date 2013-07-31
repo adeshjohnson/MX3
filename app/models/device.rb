@@ -1283,6 +1283,9 @@ class Device < ActiveRecord::Base
   # used in device_update action
   # only when device name or server_id changes
   def sip_prune_realtime_peer(device_name, device_server_id)
+    
+    return if self.device_type != "SIP"
+    
     server = Server.find(device_server_id.to_s)
     if server and server.active == 1
       rami_server = Rami::Server.new({'host' => server.server_ip, 'username' => server.ami_username, 'secret' => server.ami_secret})
