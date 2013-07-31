@@ -17,7 +17,7 @@ class Device < ActiveRecord::Base
   #=====================================================================
 
   attr_accessor :device_ip_authentication_record
-  attr_accessor :device_olde_name_record
+  attr_accessor :device_old_name_record
   attr_accessor :device_old_server_record
   attr_accessor :tmp_codec_cache
 
@@ -1178,8 +1178,8 @@ class Device < ActiveRecord::Base
     end
   end
 
-  def device_olde_name
-    @device_olde_name_record
+  def device_old_name
+    @device_old_name_record
   end
 
   def device_old_server
@@ -1187,7 +1187,7 @@ class Device < ActiveRecord::Base
   end
 
   def set_old_name
-    self.device_olde_name_record = name
+    self.device_old_name_record = name
     self.device_old_server_record = server_id
   end
 
@@ -1331,8 +1331,10 @@ class Device < ActiveRecord::Base
     vm
   end
 
+# not used anywhere
+=begin
   def prune_device
-    if device_olde_name_record != name and ['SIP', 'IAX2'].include?(device_type.to_s)
+    if device_old_name_record != name and ['SIP', 'IAX2'].include?(device_type.to_s)
       MorLog.my_debug("Device_name_changed ID:#{id}, old_name:#{device_olde_name_record}, new_name:#{name}", 1)
       if self.provider
         MorLog.my_debug("Provider_name_changed ID:#{id} prune:#{device_olde_name_record}, no reload", 1)
@@ -1357,6 +1359,7 @@ class Device < ActiveRecord::Base
       self.device_olde_name_record = name
     end
   end
+=end
 
 =begin
   #ticket #5133 
