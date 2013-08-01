@@ -95,7 +95,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `usertype`, `logged`, `first_
 UPDATE users SET id = 0 WHERE username = 'admin';
 
 TRUNCATE `subscriptions`;
-INSERT INTO `subscriptions` (`id`, `service_id`, `user_id`, `device_id`, `activation_start`, `activation_end`, `added`, `memo`) VALUES (1,1,2,NULL,'2009-03-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo');
+INSERT INTO `subscriptions` (`id`, `service_id`, `user_id`, `device_id`, `activation_start`, `activation_end`, `added`, `memo`) VALUES (1,1,2,NULL,'2009-03-22 09:25:00','2017-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo');
 
 TRUNCATE `recordings`;
 INSERT INTO `recordings` (`id`, `datetime`, `src`, `dst`, `src_device_id`, `dst_device_id`, `call_id`, `user_id`, `path`, `deleted`, `send_time`, `comment`, `size`, `uniqueid`, `visible_to_user`, `dst_user_id`, `local`, `visible_to_dst_user`) VALUES
