@@ -1812,33 +1812,18 @@
 <!--new-->
 <tr>
 	<td>open</td>
-	<td>/billing/users/new</td>
+	<td>/billing/test/load_bundle_sql/?path=invoices/1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>user_username</td>
-	<td>reseller2no_adr</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password_password</td>
-	<td>reseller2no_adr1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>user_usertype</td>
-	<td>label=reseller</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
 	<td></td>
 </tr>
 <!--...Assign invoice-->
 <tr>
 	<td>open</td>
-	<td>/billing/services/subscription_new/7</td>
+	<td>/billing/services/subscription_new/1002</td>
 	<td></td>
 </tr>
 <tr>
@@ -1940,7 +1925,7 @@
 <tr>
 	<td>select</td>
 	<td>user_id</td>
-	<td>label=reseller2no_adr</td>
+	<td>label=reseller2</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2358,7 +2343,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>a_w_v_8</td>
+	<td>a_w_v_1003</td>
 	<td>25.0000 USD</td>
 </tr>
 <tr>
@@ -2415,7 +2400,7 @@
 <tr>
 	<td>select</td>
 	<td>user_id</td>
-	<td>label=reseller2no_adr</td>
+	<td>label=reseller2</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2603,7 +2588,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>reseller2no_adr</td>
+	<td>reseller2</td>
 	<td></td>
 </tr>
 <tr>
@@ -2699,7 +2684,7 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>reseller2no_adr</td>
+	<td>reseller2</td>
 	<td></td>
 </tr>
 <tr>
@@ -2735,7 +2720,7 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>reseller2no_adr</td>
+	<td>reseller2</td>
 	<td></td>
 </tr>
 <tr>
@@ -2771,7 +2756,7 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>reseller2no_adr</td>
+	<td>reseller2</td>
 	<td></td>
 </tr>
 <!--......Number-->
