@@ -375,7 +375,7 @@
       <td><%= select_tag('user[quickforwards_rule_id]', options_for_select([["None","0"]] + current_user.quickforwards_rules.collect { |t| [t.name, t.id] }, @user.try(:quickforwards_rule_id))) %></td>
     </tr>
 <% end %>
-<% if (admin? or accountant?) and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
+<% if (admin? or accountant?) and (params[:action] == 'default_user' or ((@user.is_user? or @user.is_reseller?) and @user.owner_id.to_i == 0)) %>
     <tr id="responsible_accountant">
       <td><%= _('Responsible_accountant') %>:</td>
       <td><%= select_tag('user[responsible_accountant_id]', options_for_select([[_('Not_selected'), "-1"]] + @responsible_accountants.collect { |accountant| [nice_user(accountant), accountant.id] }, @user.responsible_accountant_id), {:disabled => accountant?}) %></td>
@@ -530,8 +530,6 @@
   </td>
 </tr>
 
-<%#KRISTINA let all resellers set params%>
-<%#unless current_user.reseller_allow_providers_tariff?%>
 <tr>
   <td colspan="2" height="10"></td>
 </tr>
@@ -546,7 +544,6 @@
     <%= render :partial => 'user_invoices_form' %>
   </td>
 </tr>
-<%#end%>
 <tr>
   <td colspan="2" height="10"></td>
 </tr>
