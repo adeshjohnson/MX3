@@ -218,17 +218,21 @@ class Invoice < ActiveRecord::Base
       n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
-    elsif items.size <= 19
+    elsif items.size < 19
       n = 19 - items.size
     else
-      n = items.size - 19
+      n = items.size - 18
       n -= (n / 31) * 31
       n = 31 - n
       x = 2 + (self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1)
       x += 1 if user.minimal_charge_enabled?
       n = 0 if n >= x
       n = -(n) if n < 0
+      
+      # 3 rows are required for first page and 4 for the last if (items.size - 19) is less then 4
+      n = 4 + 3 - (items.size - 19) if items.size - 19 < 4
     end
+
 
     (n-4).times { items << [' ', '', '', ''] } if n > 4
 
@@ -380,17 +384,21 @@ class Invoice < ActiveRecord::Base
       n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
-    elsif items.size <= 19
-      n = 19 - items.size
+    elsif items.size <= 18
+      n = 18 - items.size
     else
-      n = items.size - 19
+      n = items.size - 18
       n -= (n / 31) * 31
       n = 31 - n
       x = 2 + (self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1)
       x += 1 if user.minimal_charge_enabled?
       n = 0 if n >= x
       n = -(n) if n < 0
+      
+      # 3 rows are required for first page and 4 for the last if (items.size - 19) is less then 4
+      n = 4 + 3 - (items.size - 19) if items.size - 19 < 4
     end
+
 
     if options[:show_avg_rate] == 1
       (n-4).times { items << [' ', '', '', '', '', ''] } if n > 0-4
