@@ -4602,6 +4602,7 @@ Localization.define('en') do |l|
   l.store 'record_successfully_added', 'Record successfully added'
   l.store 'record_successfully_updated', 'Record successfully updated'
   l.store 'record_successfully_deleted', 'Record successfully deleted'
+  l.store 'currency_is_used_by_users', 'Currency is used by users'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

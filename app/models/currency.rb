@@ -8,8 +8,16 @@ class Currency < ActiveRecord::Base
   validates_presence_of :name, :message => _('Currency_must_have_name')
   validates_uniqueness_of :name, :message => _('Currency_Name_Must_Be_Unique')
 
+  before_save :is_used_by_users?
+
   def tariffs
     Tariff.find_by_sql ["SELECT tariffs.id FROM tariffs WHERE currency = ? UNION SELECT sms_tariffs.id FROM sms_tariffs WHERE currency = ?", self.name, self.name]
+  end
+
+  def is_used_by_users?
+    if active == 0 and not users.count.zero?
+      errors.add(:active, _('currency_is_used_by_users')) and return false
+    end
   end
 
   def Currency::get_active

@@ -50,6 +50,7 @@ class CurrenciesController < ApplicationController
 
   def currencies_change_status
     @currency.active = @currency.active == 1 ? 0 : 1
+
     if @currency.save
       flash[:status] = @currency.active == 1 ? _('Currency_enabled') : _('Currency_disabled')
     else
