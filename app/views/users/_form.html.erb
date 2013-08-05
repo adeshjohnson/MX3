@@ -97,7 +97,7 @@
                                     var commit = $('commit')
                                     switch (val) {
                                         case "accountant" :
-                                            <%= "$('user_responsible_accountant_id').style.display = 'none';" if admin? and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
+                                            <%= "$('user_responsible_accountant_id').style.visibility = 'hidden';" if admin? and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
                                             $('accountant_type_select').style.display = 'inline';
                                             $('accountant_type_select').name = 'accountant_type';
                                             $('reseller_type_select').style.display = 'none';
@@ -111,7 +111,7 @@
                                             }
                                             break;
                                         case "reseller" :
-                                            <%= "$('user_responsible_accountant_id').style.display = 'none';" if admin? and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
+                                            <%= "$('responsible_accountant').style.visibility = 'visible';" if admin? and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
                                             $('reseller_type_select').style.display = 'inline';
                                             $('reseller_type_select').name = 'accountant_type';
                                             $('accountant_type_select').style.display = 'none';
@@ -125,7 +125,7 @@
                                             }
                                             break;
                                         default :
-                                            <%= "$('user_responsible_accountant_id').style.display = 'inline';" if admin? and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
+                                            <%= "$('responsible_accountant').style.visibility = 'visible';" if admin? and (params[:action] == 'default_user' or (@user.is_user? and @user.owner_id.to_i == 0)) %>
                                             $('accountant_type_select').style.display = 'none';
                                             $('reseller_type_select').style.display = 'none';
                                             if (commit != null) {
