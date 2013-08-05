@@ -218,23 +218,11 @@ class Invoice < ActiveRecord::Base
       n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
-    elsif items.size < 19
-      n = 19 - items.size
-    else
-      n = items.size - 18
-      n -= (n / 31) * 31
-      n = 31 - n
-      x = 2 + (self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1)
-      x += 1 if user.minimal_charge_enabled?
-      n = 0 if n >= x
-      n = -(n) if n < 0
-      
-      # 3 rows are required for first page and 4 for the last if (items.size - 19) is less then 4
-      n = 4 + 3 - (items.size - 19) if items.size - 19 < 4
-    end
-
-
-    (n-4).times { items << [' ', '', '', ''] } if n > 4
+      (n-4).times { items << [' ', '', '', ''] } if n > 4 
+    elsif 27 < ((items.size - 22) % 31) 
+      n = 31 - ((items.size - 22) % 31) 
+      n.times { items << [' ', '', '', ''] } 
+    end 
 
     items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
     items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, {:text => self.nice_invoice_number(self.converted_price(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
@@ -384,28 +372,17 @@ class Invoice < ActiveRecord::Base
       n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
       n -= 1 if user.minimal_charge_enabled?
       n += 3 if n < 0
-    elsif items.size <= 18
-      n = 18 - items.size
-    else
-      n = items.size - 18
-      n -= (n / 31) * 31
-      n = 31 - n
-      x = 2 + (self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1)
-      x += 1 if user.minimal_charge_enabled?
-      n = 0 if n >= x
-      n = -(n) if n < 0
-      
-      # 3 rows are required for first page and 4 for the last if (items.size - 19) is less then 4
-      n = 4 + 3 - (items.size - 19) if items.size - 19 < 4
+      (n-4).times { items << [' ', '', '', '', ''] } if n > 4 
+    elsif 27 < ((items.size - 22) % 31) 
+      n = 31 - ((items.size - 22) % 31) 
+      n.times { items << [' ', '', '', '', ''] } 
     end
 
 
     if options[:show_avg_rate] == 1
-      (n-4).times { items << [' ', '', '', '', '', ''] } if n > 0-4
       items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, nice_cell(' '), nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     else
-      (n-4).times { items << [' ', '', '', '', ''] } if n > 0-4
       items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => [:top]}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d))] if user.minimal_charge_enabled?
       items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, nice_cell(' '), nice_cell(' '), nice_cell(self.nice_invoice_number(self.converted_price(ex)))]
     end
