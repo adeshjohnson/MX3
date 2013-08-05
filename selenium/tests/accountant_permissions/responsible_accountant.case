@@ -12,6 +12,11 @@
 <tr><td rowspan="1" colspan="3">responsible_accountant</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>login_username</td>
 	<td>admin</td>
@@ -242,11 +247,6 @@
 	<td>type</td>
 	<td>id=password_password</td>
 	<td>simplereseller1</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1015,14 +1015,14 @@
 	<td>label=Test Retail Accountant</td>
 </tr>
 <tr>
-	<td>assertEditable</td>
+	<td>assertNotEditable</td>
 	<td>id=user_type</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=responsible_accountant_id</td>
-	<td>label=Test Accountant</td>
+	<td>label=Test Retail Accountant</td>
 </tr>
 <tr>
 	<td>assertNotEditable</td>
@@ -1035,9 +1035,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertSelectedValue</td>
+	<td>assertSelectedLabel</td>
 	<td>id=responsible_accountant_id</td>
-	<td>4</td>
+	<td>Test Retail Accountant</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1238,7 +1238,7 @@
 <tr>
 	<td>select</td>
 	<td>id=responsible_accountant_id</td>
-	<td>label=Test Accountant</td>
+	<td>label=Test Retail Accountant</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1261,9 +1261,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertSelectedValue</td>
+	<td>assertSelectedLabel</td>
 	<td>id=responsible_accountant_id</td>
-	<td>4</td>
+	<td>Test Retail Accountant</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1336,7 +1336,7 @@
 	<td>label=reseller</td>
 </tr>
 <tr>
-	<td>assertNotEditable</td>
+	<td>assertEditable</td>
 	<td>id=responsible_accountant_id</td>
 	<td></td>
 </tr>
@@ -1353,7 +1353,7 @@
 <tr>
 	<td>select</td>
 	<td>id=responsible_accountant_id</td>
-	<td>label=Test Accountant</td>
+	<td>label=Test Retail Accountant</td>
 </tr>
 <tr>
 	<td>keyUp</td>
@@ -1388,7 +1388,7 @@
 <tr>
 	<td>select</td>
 	<td>id=responsible_accountant_id</td>
-	<td>label=Test Accountant</td>
+	<td>label=Test Retail Accountant</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1634,7 +1634,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User's settings successfully changed: Test Retail User</td>
+	<td>User's settings successfully changed:</td>
 	<td></td>
 </tr>
 <tr>
