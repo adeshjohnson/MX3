@@ -6,28 +6,28 @@ module DevicesHelper
     for cf in cfs
       case cf.action
         when "empty"
-          output += "-<br>"
+          output << "-<br>"
         when "forward"
           dev = Device.find(:first, :conditions => ["id = ?", cf.data]) if cf.data2 == "local"
           if cf.data2 == "local"
             if dev
-              output += _('Forward') + " " + b_forward + " " + dev.device_type + "/" + dev.name + "<br>"
+              output << _('Forward') << " " << b_forward << " " << dev.device_type << "/" << dev.name << "<br>"
             else
-              output += _("Device_not_found")
+              output << _("Device_not_found")
             end
           end
-          output += _('Forward') + " " + b_forward + " " + cf.data + "<br>" if cf.data2 == "external"
-          output += b_cross + _('Forward_not_functional_please_enter_dst') + "<br>" if cf.data2 == ""
+          output << _('Forward') << " " << b_forward << " " << cf.data << "<br>" if cf.data2 == "external"
+          output << b_cross << _('Forward_not_functional_please_enter_dst') << "<br>" if cf.data2 == ""
         when "voicemail"
-          output += b_voicemail + _('VoiceMail') + "<br>"
+          output << b_voicemail << _('VoiceMail') << "<br>"
         when "fax_detect"
           dev = Device.find(:first, :conditions => ["id = ?", cf.data]) if cf.data2 == "fax"
           if dev and cf.data2 == "fax"
-            output += _('Fax_detect') + ": " + b_fax + " " + dev.device_type + "/" + dev.extension + "<br>"
+            output << _('Fax_detect') << ": " << b_fax << " " << dev.device_type << "/" << dev.extension << "<br>"
           else
-            output += _('Fax_device_not_found')
+            output << _('Fax_device_not_found')
           end
-          output += b_cross + _('Fax_detect_not_functional_please_select_fax_device') + "<br>" if cf.data2 == ""
+          output << b_cross << _('Fax_detect_not_functional_please_select_fax_device') << "<br>" if cf.data2 == ""
       end
     end
     output.html_safe
