@@ -33,7 +33,7 @@ class ServicesController < ApplicationController
 
   before_filter :find_service, :only => [:show, :edit, :update, :destroy, :destination_prefix_find, :destinations, :destination_add, :destination_destroy, :destination_prefix_find, :destination_prefixes]
   before_filter :find_services, :only => [:index, :list, :subscriptions, :subscription_new]
-  before_filter :find_user, :only => [:subscriptions_list, :subscription_create]
+  before_filter :find_user, :only => [:subscriptions_list, :subscription_create, :subscription_new]
   before_filter :find_subscription, :only => [:subscription_edit, :subscription_update, :subscription_confirm_destroy]
 
   # @services in before filter
