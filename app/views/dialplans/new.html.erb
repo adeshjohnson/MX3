@@ -146,7 +146,7 @@
         <% if calling_cards_active? %>
             <td align="center">
           <span id="dialplan_data_7">
-           <%= select_tag("dialplan[data7]", options_for_select([[_('Not_used'), "0"]]+ @cc_dialplans.map { |dialplan| [dialplan.name, dialplan.id] }, :selected => _('Not_used')), :id => 'cc_dialplan') if @cc_dialplans %>
+           <%= select_tag("dialplan[data7]", options_for_select([[_('Not_used'), "0"]]+ @cc_dialplans.map { |dialplan| [dialplan.name, dialplan.id] }.sort_by { |dialplan_name, dialplan_id| dialplan_name.downcase }, :selected => _('Not_used')), :id => 'cc_dialplan') if @cc_dialplans %>
           </span>
             </td>
         <% end %>

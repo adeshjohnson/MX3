@@ -24,7 +24,7 @@ class CronActionsController < ApplicationController
     @tariffs = current_user.load_tariffs
     @providers = Provider.where(:user_id => current_user.id)
     @provider_tariffs = Tariff.where(purpose:"provider", owner_id: current_user.id)
-    @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+    @lcrs = Lcr.where("user_id = ? ", current_user.id)
   end
 
   def create
@@ -39,8 +39,8 @@ class CronActionsController < ApplicationController
       @tariffs = current_user.load_tariffs
       @users = User.find_all_for_select(current_user.id)
       @providers = Provider.all
-      @provider_tariffs = Tariff.where('purpose = "provider"').all
-      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+      @provider_tariffs = Tariff.where('purpose = "provider"')
+      @lcrs = Lcr.where("user_id = ? ", current_user.id)
       render :action => :new and return false
     end
 
@@ -52,8 +52,8 @@ class CronActionsController < ApplicationController
       @tariffs = current_user.load_tariffs
       @users = User.find_all_for_select(current_user.id)
       @providers = Provider.all
-      @provider_tariffs = Tariff.where('purpose = "provider"').all
-      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+      @provider_tariffs = Tariff.where('purpose = "provider"')
+      @lcrs = Lcr.where("user_id = ? ", current_user.id)
       render :action => :new
     end
 
@@ -67,7 +67,7 @@ class CronActionsController < ApplicationController
     @tariffs = current_user.load_tariffs
     @providers = Provider.where(:user_id => current_user.id)
     @provider_tariffs = Tariff.where(purpose:"provider", owner_id: current_user.id)
-    @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+    @lcrs = Lcr.where("user_id = ? ", current_user.id)
   end
 
   def update
@@ -81,8 +81,8 @@ class CronActionsController < ApplicationController
       @tariffs = current_user.load_tariffs
       @users = User.find_all_for_select(current_user.id)
       @providers = Provider.all
-      @provider_tariffs = Tariff.where('purpose = "provider"').all
-      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+      @provider_tariffs = Tariff.where('purpose = "provider"')
+      @lcrs = Lcr.where("user_id = ? ", current_user.id)
       render :action => :new and return false
     end
 
@@ -94,8 +94,8 @@ class CronActionsController < ApplicationController
       @tariffs = current_user.load_tariffs
       @users = User.find_all_for_select(current_user.id)
       @providers = Provider.all
-      @provider_tariffs = Tariff.where('purpose = "provider"').all
-      @lcrs = Lcr.where("user_id = ? ", current_user.id).all
+      @provider_tariffs = Tariff.where('purpose = "provider"')
+      @lcrs = Lcr.where("user_id = ? ", current_user.id)
       render :action => :edit
     end
   end

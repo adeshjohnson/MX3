@@ -48,12 +48,12 @@ class DialplansController < ApplicationController
 
 #    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND reseller_id = #{current_user.id}")
     @cbdids = Did.where(["dialplans.dptype != 'callback' AND reseller_id = ?", current_user.id]).joins("INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)")
-    @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include => [:user], :order => "name ASC")
+    @cbdevices = Device.where("user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'").include([:user]).order("name ASC")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
     if @dp.dptype == "ivr"
       @dialplan = @dp
-      @ivrs = current_user.ivrs.find(:all)
-      @timeperiods = current_user.ivr_timeperiods.find(:all)
+      @ivrs = current_user.ivrs.order('name ASC').all
+      @timeperiods = current_user.ivr_timeperiods.order('name ASC').all
       @help_link = "http://wiki.kolmisoft.com/index.php/IVR_system"
     end
 
@@ -69,10 +69,10 @@ class DialplansController < ApplicationController
         device_used = Device.where(:id => @dp.data5.to_i).first
         @user_id = device_used.user_id
       end
-      @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
+      @cc_dialplans = Dialplan.where(:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id)
     end
     if @dp.dptype == 'callingcard' 
-      @balance_ivrs = current_user.ivrs.all
+      @balance_ivrs = current_user.ivrs.order('name ASC').all
     end
 
     if @dp.dptype == 'quickforwarddids'
@@ -245,13 +245,13 @@ class DialplansController < ApplicationController
 #    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND dids.reseller_id = #{current_user.id}")
     @cbdids = Did.where(["dialplans.dptype != 'callback' AND reseller_id = ?", current_user.id]).joins("INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
-    @cbdevices = Device.find(:all, :conditions => "user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'", :include => [:user], :order => "name ASC")
-    @cc_dialplans = Dialplan.find(:all, :conditions => {:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id})
-    @balance_ivrs = current_user.ivrs.find(:all)
+    @cbdevices = Device.where("user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'").include([:user]).order("name ASC")
+    @cc_dialplans = Dialplan.where(:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id)
 
+    @balance_ivrs = current_user.ivrs.order('name ASC').all
 
-    @ivrs = current_user.ivrs.find(:all)
-    @timeperiods = current_user.ivr_timeperiods.find(:all)
+    @ivrs = current_user.ivrs.order('name ASC').all
+    @timeperiods = current_user.ivr_timeperiods.order('name ASC').all
 
     @dp_data5 = 3
     @dp_data6 = 3

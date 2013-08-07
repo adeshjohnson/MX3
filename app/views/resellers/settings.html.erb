@@ -6,7 +6,7 @@
       <tr>
         <td></td>
         <td><b><%= _('Default_DID_Provider') %>:</b></td>
-        <td><%= select_tag("did_provider", options_for_select(@providers.map { |pr| [pr.name, pr.id] }, Confline.get_value("DID_default_provider_to_resellers").to_i)) %></td>
+        <td><%= select_tag("did_provider", options_for_select(@providers.map { |pr| [pr.name, pr.id] }.sort_by { |prov_name, prov_id| prov_name.downcase }, Confline.get_value("DID_default_provider_to_resellers").to_i)) %></td>
       </tr>
       <tr>
        <td></td>

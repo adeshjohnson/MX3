@@ -143,9 +143,9 @@ class ProvidersController < ApplicationController
     @provider = Provider.new
     @provider.tech = "SIP"
     @providertypes = Providertype.find(:all)
-    @tariffs = Tariff.where(["purpose = 'provider' AND owner_id = ?", session[:user_id]]).all
+    @tariffs = Tariff.where(["purpose = 'provider' AND owner_id = ?", session[:user_id]])
     @locations = current_user.locations
-    @servers = Server.where("server_type = 'asterisk'").order("server_id").all
+    @servers = Server.where("server_type = 'asterisk'").order("server_id")
     @serverproviders = []
     @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
@@ -269,7 +269,7 @@ class ProvidersController < ApplicationController
   def edit
     @page_title = _('Provider_edit') + ": " + @provider.name
     @page_icon = "edit.png"
-    @servers= Server.where(:server_type => 'asterisk').order(:server_id).all
+    @servers= Server.where(:server_type => 'asterisk').order(:server_id)
     @prules = @provider.providerrules
 
     @providertypes = Providertype.all
@@ -278,7 +278,7 @@ class ProvidersController < ApplicationController
     @audio_codecs = @provider.codecs_order('audio')
     @video_codecs = @provider.codecs_order('video')
 
-    @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id]).all
+    @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id])
 
     @locations = current_user.locations
 
@@ -286,8 +286,8 @@ class ProvidersController < ApplicationController
     @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
     @is_common_use_used = false
-    provider_used_by_resellers_terminator = Provider.where(["id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id]).all
-    provider_used_by_resellers_lcr = Lcrprovider.where(["(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id]).all
+    provider_used_by_resellers_terminator = Provider.where(["id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id])
+    provider_used_by_resellers_lcr = Lcrprovider.where(["(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id])
     if provider_used_by_resellers_terminator.size > 0 or provider_used_by_resellers_lcr.size > 0
       @is_common_use_used = true
     end
@@ -526,7 +526,7 @@ class ProvidersController < ApplicationController
         flash_errors_for(_('Providers_settings_bad'), @provider.device)
       end
 
-      @servers= Server.where(:server_type => 'asterisk').order(:server_id).all
+      @servers= Server.where(:server_type => 'asterisk').order(:server_id)
       @prules = @provider.providerrules
 
       @providertypes = Providertype.all
@@ -535,7 +535,7 @@ class ProvidersController < ApplicationController
       @audio_codecs = @provider.codecs_order('audio')
       @video_codecs = @provider.codecs_order('video')
 
-      @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id]).all
+      @tariffs = Tariff.where(:purpose => 'provider', :owner_id => session[:user_id])
 
       @locations = current_user.locations
 
@@ -543,8 +543,8 @@ class ProvidersController < ApplicationController
       @provider.serverproviders.each { |p| @serverproviders[p.server_id] = 1 }
 
       @is_common_use_used = false
-      provider_used_by_resellers_terminator = Provider.where("id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id).all
-      provider_used_by_resellers_lcr = Lcrprovider.where("(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id).all
+      provider_used_by_resellers_terminator = Provider.where("id = ? AND common_use = 1 and terminator_id IN (select id from terminators where user_id != 0)", @provider.id)
+      provider_used_by_resellers_lcr = Lcrprovider.where("(provider_id = ? and lcr_id IN (select id from lcrs where user_id != 0))", @provider.id)
       if provider_used_by_resellers_terminator.size > 0 or provider_used_by_resellers_lcr.size > 0
         @is_common_use_used = true
       end
@@ -669,8 +669,8 @@ class ProvidersController < ApplicationController
     @page_icon = 'page_white_gear.png'
     @help_link = "http://wiki.kolmisoft.com/index.php/Provider_Rules"
     @rules = @provider.providerrules
-    @rules_dst = Providerrule.where(:provider_id => @provider.id, :pr_type => "dst").all
-    @rules_src = Providerrule.where(:provider_id => @provider.id, :pr_type => "src").all
+    @rules_dst = Providerrule.where(:provider_id => @provider.id, :pr_type => "dst")
+    @rules_src = Providerrule.where(:provider_id => @provider.id, :pr_type => "src")
   end
 
   # in before filter @provider (find_provider), @providerrule  (find_providerrule)
@@ -758,7 +758,7 @@ class ProvidersController < ApplicationController
     @page_icon = "add.png"
     @provider = Provider.new
     @provider.tech = ""
-    @tariffs = Tariff.find(:all, :conditions => ["purpose = 'provider' AND owner_id = ?", session[:user_id]])
+    @tariffs = Tariff.where(["purpose = 'provider' AND owner_id = ?", session[:user_id]])
     @servers= Server.order(:server_id).all
 
     if not @tariffs

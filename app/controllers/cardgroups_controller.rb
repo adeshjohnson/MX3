@@ -157,7 +157,7 @@ class CardgroupsController < ApplicationController
     check_addon
 
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC").all
+      @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC")
     else
       @lcrs = current_user.lcrs.order("name ASC").all
     end
@@ -169,7 +169,7 @@ class CardgroupsController < ApplicationController
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").all
+    @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").order("name ASC")
 
     if @tariffs.empty?
       flash[:notice] = _('No_tariffs_found')
@@ -233,7 +233,7 @@ class CardgroupsController < ApplicationController
     user= User.where(:id => user_id).first
 
     if reseller? and !current_user.reseller_allow_providers_tariff?
-      @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC").all
+      @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC")
     else
       @lcrs = current_user.lcrs.order("name ASC").all
     end
@@ -245,7 +245,7 @@ class CardgroupsController < ApplicationController
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").all
+    @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").order("name ASC")
 
     @price_with_vat =@cardgroup.price.to_d + @cardgroup.get_tax.count_tax_amount(@cardgroup.price.to_d).to_d
 
@@ -294,7 +294,7 @@ class CardgroupsController < ApplicationController
       flash_errors_for(_('Cardgroup_was_not_updated'), @cardgroup)
       user_id = get_user_id()
       if reseller? and !current_user.reseller_allow_providers_tariff?
-        @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC").all
+        @lcrs = current_user.lcrs.where(:id => user.lcr_id).order("name ASC")
       else
         @lcrs = current_user.lcrs.order("name ASC").all
       end
@@ -306,7 +306,7 @@ class CardgroupsController < ApplicationController
         cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
       end
       @cardgroup.fix_when_is_rendering
-      @tariffs= Tariff.find(:all, :conditions => "owner_id = #{user_id} #{cond}")
+      @tariffs= Tariff.where("owner_id = #{user_id} #{cond}").order("name ASC")
       render :action => 'edit'
     end
   end
@@ -496,7 +496,7 @@ class CardgroupsController < ApplicationController
     a = check_user_for_cardgroup(@cg)
     return false if !a
 
-    @gmps = CcGhostminutepercent.where(:cardgroup_id => @cg.id).all
+    @gmps = CcGhostminutepercent.where(:cardgroup_id => @cg.id)
 
   end
 
@@ -679,7 +679,7 @@ class CardgroupsController < ApplicationController
     params[:prefix] ? @options[:prefix] = params[:prefix].gsub(/[^0-9]/, "") : (@options[:prefix] = "" if !@options[:prefix])
 
     @options[:order] = Call.calls_order_by(params, @options)
-    @cardgroups = Cardgroup.includes(:tax).where(:owner_id => user_id).all
+    @cardgroups = Cardgroup.includes(:tax).where(:owner_id => user_id).order('name ASC')
 
     @options[:csv] = params[:csv].to_i
     @options[:from]= session_from_datetime

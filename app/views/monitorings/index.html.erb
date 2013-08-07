@@ -90,7 +90,7 @@
           <%= f.radio_button 'user_type', 'prepaid' %> <%= _('Prepaid') %>
           <br/>
           <%= f.radio_button 'user_type', 'single' %> <%= _('User') %>
-          <%= select('user', 'id', @users.collect { |p| [p.username, p.id] }) %>
+          <%= select('user', 'id', @users.collect { |p| [p.username, p.id] }.sort) %>
         </td>
         <td class="center">
           <%= submit_tag _('Create'), :disable_with => _('Processing..') %>

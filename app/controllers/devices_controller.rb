@@ -1185,13 +1185,13 @@ class DevicesController < ApplicationController
                      where(["callerids.id > 0 " << cond << " AND users.id = devices.user_id and users.owner_id = ?", @current_user_id])
 
 
-    @users = User.where(:owner_id => @current_user_id)
+    @users = User.where(:owner_id => @current_user_id).order("first_name ASC, last_name ASC")
 
     @ivrs = Ivr.select("DISTINCT(callerids.ivr_id), ivrs.name, ivrs.id").
                 joins("LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)").
                 where(["ivrs.user_id = ?", @current_user_id])
 
-    @all_ivrs = @ivrs
+    @all_ivrs = @ivrs.order("name ASC")
 
     @search = 0
     @search = 1 if cond.length > 8

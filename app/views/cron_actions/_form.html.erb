@@ -13,11 +13,11 @@
   </tr>
   <tr id="lcr">
     <td><%= _('LCR') %></td>
-    <td><%= select_tag 'cron_setting[lcr_id]', options_for_select(@lcrs.map { |u| [u.name, u.id.to_s] }, @cron_setting.lcr_id.to_s) %></td>
+    <td><%= select_tag 'cron_setting[lcr_id]', options_for_select(@lcrs.map { |u| [u.name, u.id.to_s] }.sort_by { |u_name, u_id| u_name.downcase }, @cron_setting.lcr_id.to_s) %></td>
   </tr>
   <tr id="provider">
     <td><%= _('Provider') %></td>
-    <td><%= select_tag 'cron_setting[provider_target_id]', options_for_select([[_('All'), -1]] + @providers.map { |u| [u.name, u.id.to_s] }, @cron_setting.provider_target_id.to_s) %></td>
+    <td><%= select_tag 'cron_setting[provider_target_id]', options_for_select([[_('All'), -1]] + @providers.map { |u| [u.name, u.id.to_s] }.sort_by { |u_name, u_id| u_name.downcase }, @cron_setting.provider_target_id.to_s) %></td>
   </tr>
   <tr id="user_tariff">
     <td><%= _('Tariff') %></td>
@@ -25,7 +25,7 @@
   </tr>
   <tr id="provider_tariff">
     <td><%= _('Provider Tariff') %></td>
-    <td><%= select_tag 'cron_setting[provider_to_target_id]', options_for_select(@provider_tariffs.map { |u| [u.name, u.id.to_s] }, @cron_setting.provider_to_target_id.to_s) %></td>
+    <td><%= select_tag 'cron_setting[provider_to_target_id]', options_for_select(@provider_tariffs.map { |u| [u.name, u.id.to_s] }.sort_by { |u_name, u_id| u_name.downcase }, @cron_setting.provider_to_target_id.to_s) %></td>
   </tr>
   <tr>
     <td><%= _('Periodic_type') %></td>

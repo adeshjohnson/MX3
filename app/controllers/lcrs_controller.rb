@@ -261,15 +261,15 @@ class LcrsController < ApplicationController
 
     @providers = @lcr.providers("asc")
 
-    @all_providers = current_user.providers.find(:all, :include => [:device, :tariff])
+    @all_providers = current_user.providers.includes([:device, :tariff]).order('name ASC')
     if current_user.usertype == 'reseller'
       if @all_providers
         #ticket 3906
         #@all_providers += Provider.find(:all, :conditions => "common_use = 1", :order => "name ASC")
-        @all_providers += Provider.find(:all, :conditions => "common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})", :order => "name ASC")
+        @all_providers += Provider.where("common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers WHERE reseller_id = #{current_user.id})").order("name ASC")
       else
         # @all_providers = Provider.find(:all, :conditions => "common_use = 1", :order => "name ASC")
-        @all_providers = Provider.find(:all, :conditions => "common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers where reseller_id = #{current_user.id})", :order => "name ASC")
+        @all_providers = Provider.where("common_use = 1 AND id IN (SELECT provider_id FROM common_use_providers WHERE reseller_id = #{current_user.id})").order("name ASC")
       end
     end
     @other_providers = []
@@ -517,7 +517,7 @@ class LcrsController < ApplicationController
         pn.lcr_id = ln.id
         pn.save
       end
-      @lpp = LcrPartial.where(['main_lcr_id=?', @lcr.id]).all
+      @lpp = LcrPartial.where(['main_lcr_id=?', @lcr.id])
       for l in @lpp
         lp = l.dup
         lp.lcr_id = l.lcr_id

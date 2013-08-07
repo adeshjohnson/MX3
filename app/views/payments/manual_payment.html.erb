@@ -19,7 +19,7 @@
                   <%= nice_user(@users[0]) %>
                   <%= hidden_field_tag("user", @users[0].id) %>
               <% else %>
-                  <%= select_tag("user", options_for_select(@users.map { |user| [nice_user(user), user.id] })) %>
+                  <%= select_tag("user", options_for_select(@users.map { |user| [nice_user(user), user.id] }.sort_by { |user_name, user_id| user_name.downcase })) %>
               <% end %>
             </td>
           </tr>
