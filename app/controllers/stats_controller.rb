@@ -991,7 +991,7 @@ in before filter : user (:find_user_from_id_or_session)
         elsif (@user == nil) or (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i == 0)
           send_data pdf.render, :filename => "Calls_#{session_from_datetime}-#{session_till_datetime}.pdf", :type => "application/pdf"
         else
-          send_data pdf.render, :filename => "#{nice_user(@user)}_Calls_#{session_from_datetime}-#{session_till_datetime}.pdf", :type => "application/pdf"
+          send_data pdf.render, :filename => "#{nice_user(@user).gsub(' ', '_')}_Calls_#{session_from_datetime}-#{session_till_datetime}.pdf", :type => "application/pdf"
         end
       when 'csv'
         options[:test] = 1 if params[:test]
@@ -1003,7 +1003,7 @@ in before filter : user (:find_user_from_id_or_session)
         if filename
           filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
           if (params[:test].to_i == 1) and (@user != nil) and (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i != 0)
-            render :text => ("#{nice_user(@user)}_" <<  filename) + test_data.to_s
+            render :text => ("#{nice_user(@user).gsub(' ', '_')}_" <<  filename) + test_data.to_s
           elsif params[:test].to_i == 1
             render :text => filename + test_data.to_s  
           elsif (@user == nil) or (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i == 0)
@@ -1011,7 +1011,7 @@ in before filter : user (:find_user_from_id_or_session)
             send_data file.read, :filename => filename
           else
             file = File.open(filename)
-            send_data file.read, :filename => "#{nice_user(@user)}_" << filename
+            send_data file.read, :filename => "#{nice_user(@user).gsub(' ', '_')}_" << filename
           end
         else
           flash[:notice] = _("Cannot_Download_CSV_File_From_DB_Server")
