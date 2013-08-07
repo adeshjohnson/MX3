@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <td> <%= _('Tariff') %>:</td>
-          <td><%= collection_select("provider", "tariff_id", @tariffs.order('name ASC'), "id", "name") %> </td>
+          <td><%= collection_select("provider", "tariff_id", @tariffs.sort_by{ |t| t.name.downcase }, "id", "name") %> </td>
         </tr>
         <% if not @new_provider %>
             <tr>
