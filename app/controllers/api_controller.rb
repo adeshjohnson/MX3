@@ -1766,6 +1766,9 @@ class ApiController < ApplicationController
               usern = User.new
               capt = verify_recaptcha(usern) ? true : (false; notice = _('Please_enter_captcha'))
             end
+            if params[:callerid].to_s.gsub(/[0-9]/, "").length > 0 || params[:callerid].blank? 
+	      notice = 'CallerID must be numeric' 
+	    end 
             if capt and notice.blank?
               reg_ip = request.remote_ip
               user, send_email_to_user, device, notice2 = User.create_from_registration(params, owner, reg_ip, free_extension(), new_device_pin(), random_password(12), next_agreement_number, 1)
@@ -1785,6 +1788,7 @@ class ApiController < ApplicationController
                   if device
                     doc.device_type(device.device_type)
                     doc.device_id(device.id)
+                    doc.callerid(device.callerid) if device.callerid 
                     doc.username(device.username)
                     doc.password(device.secret)
                     doc.pin(device.pin)

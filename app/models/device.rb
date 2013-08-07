@@ -406,7 +406,7 @@ class Device < ActiveRecord::Base
     cid_name = "" if not cid_name
     cid_number = "" if not cid_number
 
-    self.callerid = nil
+    self.callerid = nil unless self.callerid 
 
     if cid_name.length > 0 and cid_number.length > 0
       self.callerid = "\"" + cid_name.to_s + "\"" + " <" + cid_number.to_s + ">"
