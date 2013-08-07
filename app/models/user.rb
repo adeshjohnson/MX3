@@ -2231,9 +2231,9 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     logger.fatal "***** TIME : #{Time.now.to_s} - Device before save 1"
     if Confline.get_value("Allow_registration_username_passwords_in_devices").to_i == 1
-      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => params[:password], :username => user.username, :pin => pin, :callerid => params[:callerid]})
+      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => params[:password], :username => user.username, :pin => pin, :callerid => params[:callerid].to_i})
     else
-      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => pasw, :pin => pin, :callerid => params[:callerid]})
+      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => pasw, :pin => pin, :callerid => params[:callerid].to_i})
     end
     logger.fatal "***** TIME : #{Time.now.to_s} - Device after save 1"
     logger.fatal "***** TIME : #{Time.now.to_s} - User before save 2"
