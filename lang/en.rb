@@ -4603,6 +4603,7 @@ Localization.define('en') do |l|
   l.store 'record_successfully_updated', 'Record successfully updated'
   l.store 'record_successfully_deleted', 'Record successfully deleted'
   l.store 'currency_is_used_by_users', 'Currency is used by users'
+  l.store 'show_usernames_on_pdf_csv_export_files_in_last_calls', 'Show Usernames on PDF/CSV Export Files in Last Calls'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''

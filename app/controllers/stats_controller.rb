@@ -988,8 +988,10 @@ in before filter : user (:find_user_from_id_or_session)
         session[:last_calls_stats] = @options
         if params[:test].to_i == 1
           render :text => "OK"
-        else
+        elsif (@user == nil) or (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i == 0)
           send_data pdf.render, :filename => "Calls_#{session_from_datetime}-#{session_till_datetime}.pdf", :type => "application/pdf"
+        else
+          send_data pdf.render, :filename => "#{nice_user(@user)}_Calls_#{session_from_datetime}-#{session_till_datetime}.pdf", :type => "application/pdf"
         end
       when 'csv'
         options[:test] = 1 if params[:test]
@@ -1000,11 +1002,14 @@ in before filter : user (:find_user_from_id_or_session)
         filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
         if filename
           filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
-          if params[:test].to_i != 1
+          if params[:test].to_i == 1
+            render :text => filename + test_data.to_s
+          elsif (@user == nil) or (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i == 0)
             file = File.open(filename)
             send_data file.read, :filename => filename
           else
-            render :text => filename + test_data.to_s
+            file = File.open(filename)
+            send_data file.read, :filename => "#{nice_user(@user)}_" << filename
           end
         else
           flash[:notice] = _("Cannot_Download_CSV_File_From_DB_Server")

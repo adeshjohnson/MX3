@@ -1195,7 +1195,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Confline.set_value("Hide_non_completed_payments_for_user", params[:hide_non_completed_payments_for_user].to_i)
     Confline.set_value("Disallow_Email_Editing", params[:disallow_email_editing], current_user.id)
     Confline.set_value('System_time_zone_daylight_savings', params[:system_time_zone_daylight_savings].to_i)
-
+    Confline.set_value('Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls', params[:show_usernames_on_pdf_csv_export_files_in_last_calls].to_i)
 
     Confline.set_value("AD_Sounds_Folder", params[:ad_sound_folder])
     Confline.set_value("Logout_link", params[:logout_link])
