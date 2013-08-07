@@ -48,7 +48,7 @@ class DialplansController < ApplicationController
 
 #    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND reseller_id = #{current_user.id}")
     @cbdids = Did.where(["dialplans.dptype != 'callback' AND reseller_id = ?", current_user.id]).joins("INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)")
-    @cbdevices = Device.where("user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'").include([:user]).order("name ASC")
+    @cbdevices = Device.where("user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'").includes([:user]).order("name ASC")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
     if @dp.dptype == "ivr"
       @dialplan = @dp
@@ -245,7 +245,7 @@ class DialplansController < ApplicationController
 #    @cbdids = Did.find_by_sql("SELECT dids.* FROM dids JOIN dialplans ON (dids.dialplan_id = dialplans.id) WHERE dialplans.dptype != 'callback' AND dids.reseller_id = #{current_user.id}")
     @cbdids = Did.where(["dialplans.dptype != 'callback' AND reseller_id = ?", current_user.id]).joins("INNER JOIN dialplans ON (dids.dialplan_id = dialplans.id)")
     @cardgroups = Cardgroup.find_by_sql("SELECT cardgroups.id, cardgroups.number_length, cardgroups.pin_length FROM cardgroups WHERE owner_id = #{current_user.id} group by number_length , pin_length ")
-    @cbdevices = Device.where("user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'").include([:user]).order("name ASC")
+    @cbdevices = Device.where("user_id != -1 AND users.owner_id = #{current_user.id} AND name not like 'mor_server_%'").includes([:user]).order("name ASC")
     @cc_dialplans = Dialplan.where(:dptype => 'callingcard', :user_id => current_user.get_corrected_owner_id)
 
     @balance_ivrs = current_user.ivrs.order('name ASC').all
