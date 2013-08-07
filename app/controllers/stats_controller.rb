@@ -1002,7 +1002,7 @@ in before filter : user (:find_user_from_id_or_session)
         filename = load_file_through_database(filename) if Confline.get_value("Load_CSV_From_Remote_Mysql").to_i == 1
         if filename
           filename = archive_file_if_size(filename, "csv", Confline.get_value("CSV_File_size").to_d)
-          if (params[:test].to_i == 1) and ((@user != nil) or (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i != 0))
+          if (params[:test].to_i == 1) and (@user != nil) and (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i != 0)
             render :text => ("#{nice_user(@user)}_" <<  filename) + test_data.to_s
           elsif params[:test].to_i == 1
             render :text => filename + test_data.to_s  
