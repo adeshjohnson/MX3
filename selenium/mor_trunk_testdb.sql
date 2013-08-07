@@ -181,3 +181,4 @@ update servers set active=0;
 UPDATE calls JOIN devices ON calls.dst_device_id = devices.id SET calls.dst_user_id = devices.user_id;
 
 Update users set time_zone = 'Vilnius';
+INSERT INTO conflines (name, value) VALUES ('TEST_DB_Update_From_Script', 1);
