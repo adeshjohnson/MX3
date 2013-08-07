@@ -222,6 +222,22 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--buvo crash dėl neegzistuojančio userio-->
+<tr>
+	<td>open</td>
+	<td>/billing/services/subscription_new/1002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/users/personal_details/0</td>
