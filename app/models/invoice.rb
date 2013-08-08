@@ -214,14 +214,16 @@ class Invoice < ActiveRecord::Base
     # x - number of required rows
 
     if items.size <= 16
-      n = 16 - items.size
-      n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
-      n -= 1 if user.minimal_charge_enabled?
-      n += 3 if n < 0
-      (n-4).times { items << [' ', '', '', ''] } if n > 4 
-    elsif 27 < ((items.size - 22) % 31) 
-      n = 31 - ((items.size - 22) % 31) 
-      n.times { items << [' ', '', '', ''] } 
+      empty_rows_number = 16 - items.size 
+      empty_rows_number -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1 
+      empty_rows_number -= 1 if user.minimal_charge_enabled? 
+      empty_rows_number += 3 if empty_rows_number < 0 
+      (empty_rows_number-4).times { items << [' ', '', '', ''] } if empty_rows_number > 4 
+    elsif items.size == 18 
+      4.times { items << [' ', '', '', ''] } 
+    elsif 26 <= ((items.size - 22) % 31) 
+      empty_rows_number = 31 - ((items.size - 22) % 31) 
+      empty_rows_number.times { items << [' ', '', '', ''] } 
     end 
 
     items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
@@ -364,19 +366,19 @@ class Invoice < ActiveRecord::Base
 
     # first page max 19 rows
     # others 31 rows
-    # n - number of empty rows
-    # x - number of required rows
 
     if items.size <= 16
-      n = 16 - items.size
-      n -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
-      n -= 1 if user.minimal_charge_enabled?
-      n += 3 if n < 0
-      (n-4).times { items << [' ', '', '', '', ''] } if n > 4 
-    elsif 27 < ((items.size - 22) % 31) 
-      n = 31 - ((items.size - 22) % 31) 
-      n.times { items << [' ', '', '', '', ''] } 
-    end
+      empty_rows_number = 16 - items.size 
+      empty_rows_number -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1 
+      empty_rows_number -= 1 if user.minimal_charge_enabled? 
+      empty_rows_number += 3 if empty_rows_number < 0 
+      (empty_rows_number-4).times { items << [' ', '', '', '',''] } if empty_rows_number > 4 
+    elsif items.size == 18 
+      4.times { items << [' ', '', '', '',''] } 
+    elsif 26 <= ((items.size - 22) % 31) 
+      empty_rows_number = 31 - ((items.size - 22) % 31) 
+      empty_rows_number.times { items << [' ', '', '', '',''] } 
+    end 
 
 
     if options[:show_avg_rate] == 1

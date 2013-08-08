@@ -568,6 +568,9 @@ module PdfGen
     pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line3", owner), {:left => 50, :size => 10})
     pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line4", owner), {:left => 50, :size => 10})
     pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line5", owner), {:left => 50, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line6", owner), {:left => 50, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line7", owner), {:left => 50, :size => 10})
+    pdf.text(Confline.get_value("#{prepaid}Invoice_Bank_Details_Line8", owner), {:left => 50, :size => 10})
                                                                                                             #    if opts[:show_end_title] == true
                                                                                                             #      inv_end_title = Confline.get_value("#{prepaid}Invoice_End_Title", owner)
                                                                                                             #      pdf.text(inv_end_title.to_s, {:left => 0, :size =>14, :alignment=>:center})
