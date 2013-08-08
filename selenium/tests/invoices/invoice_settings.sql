@@ -148,7 +148,7 @@ INSERT INTO `conflines` (`id`, `name`, `value`, `owner_id`, `value2`) VALUES
 (422, 'Invoice_allow_recalculate_after_send', '0', 0, NULL),
 (633, 'Prepaid_Invoice_Number_Start', 'INV', 0, NULL),
 (634, 'Prepaid_Invoice_Number_Length', '11', 0, NULL);
-UPDATE `conflines` SET `value` = '1' WHERE `id` =207;
+UPDATE `conflines` SET `value` = '1' WHERE `name` ='Prepaid_Invoice_Number_Type';
 
 UPDATE `devices` set location_id=2 where id=7;
 
