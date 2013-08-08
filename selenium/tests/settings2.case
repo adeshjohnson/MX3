@@ -998,6 +998,217 @@
 	<td></td>
 </tr>
 <!--patikrinti pdf - turi neatvaizduoti nice name-->
+<!--invoice details-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView3_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#inv_bank_details_line_6 &gt; b</td>
+	<td>Bank details line 6:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#inv_bank_details_line_7 &gt; b</td>
+	<td>Bank details line 7:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#inv_bank_details_line_8 &gt; b</td>
+	<td>Bank details line 8:</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=invoice_bank_details_line6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=invoice_bank_details_line7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=invoice_bank_details_line8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=invoice_bank_details_line6</td>
+	<td>line6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=invoice_bank_details_line7</td>
+	<td>line7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=invoice_bank_details_line8</td>
+	<td>line8</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView2_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView4_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line1</td>
+	<td>line1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line2</td>
+	<td>line2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line3</td>
+	<td>line3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line4</td>
+	<td>line4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line5</td>
+	<td>line5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line6</td>
+	<td>line6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line7</td>
+	<td>line7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prepaid_invoice_bank_details_line8</td>
+	<td>line8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView3_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=invoice_bank_details_line6</td>
+	<td>line6</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=invoice_bank_details_line7</td>
+	<td>line7</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=invoice_bank_details_line8</td>
+	<td>line8</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView2_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView4_1 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line1</td>
+	<td>line1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line2</td>
+	<td>line2</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line3</td>
+	<td>line3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line4</td>
+	<td>line4</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line5</td>
+	<td>line5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line6</td>
+	<td>line6</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line7</td>
+	<td>line7</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=prepaid_invoice_bank_details_line8</td>
+	<td>line8</td>
+</tr>
 </tbody></table>
 </body>
 </html>
