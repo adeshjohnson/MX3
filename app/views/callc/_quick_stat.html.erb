@@ -83,7 +83,7 @@
     </tr>
     <tr>
       <td nowrap="true"><%= _('Balance') %>:</td>
-      <td nowrap="true"><%= nice_number(@user.balance.to_f  * Currency.count_exchange_rate(@user.currency.name, session[:show_currency])) %> <%= session[:show_currency] %> <%= "(" + nice_number(@user.get_tax.apply_tax(@user.balance.to_f)) + " " + session[:default_currency] + " "+ _('With_TAX') + ")" if @user.get_tax.sum_tax.to_f != 0.to_f %></td>
+      <td nowrap="true"><%= nice_number(@user.balance.to_f  * Currency.count_exchange_rate(@user.currency.name, session[:show_currency])) %> <%= session[:show_currency] %> <%= "(" + (nice_number(@user.get_tax.apply_tax(@user.balance.to_f) * Currency.count_exchange_rate(@user.currency.name, session[:show_currency]))) + " " + session[:show_currency] + " "+ _('With_TAX') + ")" if @user.get_tax.sum_tax.to_f != 0.to_f %></td>
     </tr>
     <% if @user.postpaid? %>
         <tr>
