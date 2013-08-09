@@ -853,7 +853,7 @@ in before filter : devicegroup (:find_devicegroup)
       @user.send_invoice_types = @invoice
     end
 
-    bad_username = true if not params[:user][:username].blank? and params[:user][:username].to_s.strip.length < @user.minimum_username
+    bad_username = true if not params[:user] and not params[:user][:username].blank? and params[:user][:username].to_s.strip.length < @user.minimum_username
     bad_password = true if not params[:password].blank? and not params[:password][:password].blank? and params[:password][:password].to_s.strip.length < @user.minimum_password
 
     @user.update_attributes(current_user.safe_attributtes(params[:user].each_value(&:strip!), @user.id))
