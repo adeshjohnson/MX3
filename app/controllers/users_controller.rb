@@ -847,6 +847,11 @@ in before filter : devicegroup (:find_devicegroup)
   def update_personal_details
 
     usertype = @user.usertype
+    if params[:user].blank? or @user.id != current_user.id
+      a = check_owner_for_user(@user.id)
+      return false if !a
+    end
+
     unless current_user.check_for_own_providers
       @invoice = invoice_params_for_user
 
