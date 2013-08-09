@@ -1252,7 +1252,7 @@ class User < ActiveRecord::Base
 
     fextension = options[:free_ext]
     device = Device.new({:user_id => id, :devicegroup_id => options[:dev_group].to_i, :context => "mor_local", :device_type => options[:device_type].to_s, :extension => fextension, :pin => options[:pin].to_s, :secret => options[:secret].to_s})
-    device.callerid = options[:callerid].to_i if options[:callerid] 
+    device.callerid = options[:callerid].to_s if options[:callerid] 
     device.description = options[:description] if options[:description]
     device.device_ip_authentication_record = options[:device_ip_authentication_record] if options[:device_ip_authentication_record]
     device.username = options[:username] ? options[:username] : fextension
@@ -2231,9 +2231,9 @@ GROUP BY terminators.id;").map { |t| t.id }
 
     logger.fatal "***** TIME : #{Time.now.to_s} - Device before save 1"
     if Confline.get_value("Allow_registration_username_passwords_in_devices").to_i == 1
-      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => params[:password], :username => user.username, :pin => pin, :callerid => params[:caller_id].to_i})
+      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => params[:password], :username => user.username, :pin => pin, :callerid => params[:caller_id].to_s})
     else
-      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => pasw, :pin => pin, :callerid => params[:caller_id].to_i})
+      device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => pasw, :pin => pin, :callerid => params[:caller_id].to_s})
     end
     logger.fatal "***** TIME : #{Time.now.to_s} - Device after save 1"
     logger.fatal "***** TIME : #{Time.now.to_s} - User before save 2"
@@ -2346,13 +2346,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         notice = _('User_with_fax_already_exists')
       end
     end
-    
-    if params[:caller_id]
-      if params[:caller_id].to_s.gsub(/[0-9]/, "").length > 0 or params[:caller_id].blank? 
-        notice = 'CallerID must be numeric' 
-      end
-    end
-    
+
     if (!params[:device_type] or !['SIP', 'IAX2'].include?(params[:device_type])) and notice.blank?
       notice = _('Enter_device_type')
     end
