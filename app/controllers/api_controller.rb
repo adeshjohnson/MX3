@@ -3915,28 +3915,55 @@ class ApiController < ApplicationController
                   sms.save
                   begin
                     sms.sms_send(@user, @user_tariff, params[:dst], @lcr, @number_of_messages.to_d, URI.unescape(params[:message]), {:src => params[:src]})
-                    if sms.status_code.to_s == "0"
-                      doc.response {
-                        doc.status('ok')
-                        doc.message{
-                          doc.message_id(sms.id)
-                          doc.sms_status_code_tip(sms.sms_status_code_tip)
-                          @curr = Currency.where(:id => @user.currency_id).first
-                          if @user.usertype.to_s == 'reseller'
-                            doc.price(nice_number sms.reseller_price)
-                          else
-                            doc.price(nice_number sms.user_price)
-                          end
-                          doc.currency(@curr.name)
+                    sms_provider = SmsProvider.where(id: sms.provider_id.to_i).first
+                    sms_provider = sms_provider.provider_type if !sms_provider.nil?
+                    if sms_provider == 'clickatell'
+                      succ_sms_status_codes = ['0', '003', '004', '008', '011']
+                      if succ_sms_status_codes.member? sms.status_code.to_s
+                        doc.response {
+                          doc.status('ok')
+                          doc.message{
+                            doc.message_id(sms.id)
+                            doc.sms_status_code_tip(sms.sms_status_code_tip)
+                            @curr = Currency.where(:id => @user.currency_id).first
+                            if @user.usertype.to_s == 'reseller'
+                              doc.price(nice_number sms.reseller_price)
+                            else
+                              doc.price(nice_number sms.user_price)
+                            end
+                            doc.currency(@curr.name)
+                          }
                         }
-                      }
+                      else
+                        doc.error(){
+                          doc.message{
+                            doc.message_id(sms.id)
+                            doc.sms_status_code_tip(sms.sms_status_code_tip)
+                          }
+                        }
+                      end
                     else
-                      doc.error(){
-                        doc.message{
-                          doc.message_id(sms.id)
-                          doc.sms_status_code_tip(sms.sms_status_code_tip)
+                      if sms.status_code.to_s == 0
+                        doc.response {
+                          doc.status('ok')
+                          doc.message{
+                            doc.message_id(sms.id)
+                            @curr = Currency.where(:id => @user.currency_id).first
+                            if @user.usertype.to_s == 'reseller'
+                              doc.price(nice_number sms.reseller_price)
+                            else
+                              doc.price(nice_number sms.user_price)
+                            end
+                            doc.currency(@curr.name)
+                          }
                         }
-                      }
+                      else
+                        doc.error(){
+                          doc.message{
+                            doc.message_id(sms.id)
+                          }
+                        }
+                      end
                     end
                   rescue Exception => exception 
                     doc.error(){ 
