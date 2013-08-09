@@ -3174,27 +3174,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail3@email.com&amp;device_type=SIP&amp;caller_id=dfgdfgdfg&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CallerID must be numeric</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail3@email.com&amp;device_type=SIP&amp;callerid=9,56&amp;test=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>CallerID must be numeric</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail3@email.com&amp;device_type=SIP&amp;callerid=-5&amp;test=1</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail3@email.com&amp;device_type=SIP&amp;caller_id=tekstas&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3203,8 +3183,13 @@
 	<td>Registration successful</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>tekstas</td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser2&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail4@email.com&amp;device_type=SIP&amp;callerid=65.98&amp;test=1</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser5&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail99@email.com&amp;device_type=SIP&amp;caller_id=9,56&gt;&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3213,8 +3198,13 @@
 	<td>Registration successful</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>9,56&gt;</td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser3&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail5@email.com&amp;device_type=SIP&amp;callerid=00000&amp;test=1</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser6&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail9@email.com&amp;device_type=SIP&amp;caller_id=-5&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -3223,14 +3213,54 @@
 	<td>Registration successful</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>-5</td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser4&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail6@email.com&amp;device_type=SIP&amp;callerid=9875642&amp;test=1</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser2&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail4@email.com&amp;device_type=SIP&amp;caller_id=65.98,&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=success</td>
 	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>65.98,</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser3&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail5@email.com&amp;device_type=SIP&amp;caller_id=&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=hfttv7bcqt&amp;username=testuser4&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=simplyemail6@email.com&amp;device_type=SIP&amp;caller_id=9875642&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>9875642</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -3259,22 +3289,182 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calledid_12</td>
-	<td>65.98</td>
+	<td>id=calledid_15</td>
+	<td>tekstas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calledid_13</td>
+	<td>id=calledid_16</td>
+	<td>9,56&gt;</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_17</td>
 	<td>-5</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calledid_14</td>
-	<td>00000</td>
+	<td>id=calledid_18</td>
+	<td>65.98,</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=calledid_15</td>
+	<td>id=calledid_19</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_20</td>
+	<td>9875642</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=qg2audn8qa&amp;username=restestuser&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=ressimplyemail3@email.com&amp;device_type=SIP&amp;caller_id=tekstas&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>tekstas</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=qg2audn8qa&amp;username=restestuser5&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=ressimplyemail99@email.com&amp;device_type=SIP&amp;caller_id=9,56&gt;&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>9,56&gt;</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=qg2audn8qa&amp;username=restestuser6&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=ressimplyemail9@email.com&amp;device_type=SIP&amp;caller_id=-5&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=qg2audn8qa&amp;username=restestuser2&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=ressimplyemail4@email.com&amp;device_type=SIP&amp;caller_id=65.98,&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>65.98,</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=qg2audn8qa&amp;username=restestuser3&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=ressimplyemail5@email.com&amp;device_type=SIP&amp;caller_id=&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_register?id=qg2audn8qa&amp;username=restestuser4&amp;password=longerpassword&amp;password2=longerpassword&amp;first_name=name&amp;last_name=surname&amp;country_id=10&amp;email=ressimplyemail6@email.com&amp;device_type=SIP&amp;caller_id=9875642&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=success</td>
+	<td>Registration successful</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=caller_id</td>
+	<td>9875642</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_21</td>
+	<td>tekstas</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_22</td>
+	<td>9,56&gt;</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_23</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_24</td>
+	<td>65.98,</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_25</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=calledid_26</td>
 	<td>9875642</td>
 </tr>
 </tbody></table>
