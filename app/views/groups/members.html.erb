@@ -70,7 +70,7 @@
           <label for="add_immage"><%= _('Add_new_booth') %>:</label>
 
           <select name="new_member">
-            <% for user in @free_users %>
+            <% for user in @free_users.sort_by{ |u| u.username.downcase } %>
                 <option value=<%= user.id %>> <%= h(user.username) %>
                   - <%= h(user.first_name) %> <%= h(user.last_name) %></option>
             <% end %>

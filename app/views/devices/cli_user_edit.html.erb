@@ -34,7 +34,7 @@
         <% if session[:usertype].to_s == 'admin' %>
             <td><select name="ivr">
               <option value="0" <%= "selected" if 0 == @cli.ivr_id %>><%= _('Not_assigned') %> </option>
-              <% for iv in @all_ivrs %>
+              <% for iv in @all_ivrs.sort_by{ |ivrs| ivrs.name.downcase} %>
                   <option value="<%= iv.id %>" <%= "selected" if iv.id == @cli.ivr_id %>><%= iv.name %> </option>
               <% end %>
             </select></td>

@@ -65,7 +65,7 @@
     <td>
       <%= check_box_tag 'play_ivr_for_200_hgc', "1", Confline.get_value("Play_IVR_for_200_HGC").to_i == 1 %>
       <b><%= _('IVR') %>: </b>
-      <%= select_tag("ivr_for_200_hgc", options_for_select(@all_ivrs.map { |ivr| [ivr.name, ivr.id] }, Confline.get_value("IVR_for_200_HGC").to_i)) %>
+      <%= select_tag("ivr_for_200_hgc", options_for_select(@all_ivrs.map { |ivr| [ivr.name, ivr.id] }.sort_by { |ivr_name, ivr_id| ivr_name.downcase}, Confline.get_value("IVR_for_200_HGC").to_i)) %>
     </td>
   </tr>
   <tr>
@@ -75,7 +75,7 @@
       <select name="banned_clis_default_ivr_id">
         <% banned_clis_ivr = Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i -%>
         <option value="0" <%= "selected" if banned_clis_ivr.to_i == 0 %>><%= _('Not_assigned') %> </option>
-        <% for iv in @all_ivrs %>
+        <% for iv in @all_ivrs.sort_by{ |ivrs| ivrs.name.downcase} %>
             <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == banned_clis_ivr %> ><%= iv.name %></option>
         <% end %>
       </select>

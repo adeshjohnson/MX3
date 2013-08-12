@@ -57,7 +57,7 @@
             <th>
               <select name="ivr">
                 <option value="0" <%= "selected" %>><%= _('Not_assigned') %> </option>
-                <% for iv in @all_ivrs %>
+                <% for iv in @all_ivrs.sort_by{ |ivrs| ivrs.name.downcase} %>
                     <option value="<%= iv.id %>" <%= "selected" if iv.id.to_i == Confline.get_value("Banned_CLIs_default_IVR_id", 0).to_i %> ><%= iv.name %> </option>
                 <% end %>
               </select>

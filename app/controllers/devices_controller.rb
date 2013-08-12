@@ -1191,7 +1191,7 @@ class DevicesController < ApplicationController
                 joins("LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)").
                 where(["ivrs.user_id = ?", @current_user_id])
 
-    @all_ivrs = @ivrs.sort_by { |ivrs| ivrs.name.downcase}
+    @all_ivrs = @ivrs
 
     @search = 0
     @search = 1 if cond.length > 8
