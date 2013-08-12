@@ -3921,7 +3921,7 @@ class ApiController < ApplicationController
                       succ_sms_status_codes = ['0', '003', '004', '008', '011']
                       if succ_sms_status_codes.member? sms.status_code.to_s
                         doc.response {
-                          doc.status('SMS is sent')
+                          doc.status('ok')
                           doc.message{
                             doc.message_id(sms.id)
                             doc.sms_status_code_tip(sms.sms_status_code_tip)
@@ -3945,9 +3945,10 @@ class ApiController < ApplicationController
                     else
                       if sms.status_code.to_s == '0'
                         doc.response {
-                          doc.status('SMS is sent')
+                          doc.status('ok')
                           doc.message{
                             doc.message_id(sms.id)
+                            doc.sms_status_code_tip(sms.sms_status_code_tip)
                             @curr = Currency.where(:id => @user.currency_id).first
                             if @user.usertype.to_s == 'reseller'
                               doc.price(nice_number sms.reseller_price)
