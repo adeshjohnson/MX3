@@ -1061,9 +1061,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>name=new_member</td>
+	<td>reseller_booth - user_reseller - User Resellers</td>
+</tr>
+<tr>
 	<td>assertSelectedLabel</td>
 	<td>new_member</td>
-	<td>user_reseller - User Resellers</td>
+	<td>reseller_booth -</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=new_member</td>
+	<td>label=user_reseller - User Resellers</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1446,6 +1456,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=new_member</td>
+	<td>label=user_admin - Test User #1</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1469,6 +1484,11 @@
 	<td>assertConfirmation</td>
 	<td>Are you sure?</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=new_member</td>
+	<td>label=user_admin - Test User #1</td>
 </tr>
 <tr>
 	<td>chooseCancelOnNextConfirmation</td>
