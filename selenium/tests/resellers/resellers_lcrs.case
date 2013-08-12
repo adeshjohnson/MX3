@@ -2769,6 +2769,51 @@
 	<td>address_email</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>new provider for sorting</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=delete_link_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=select_prov</td>
+	<td>Select provider new provider for sorting - SIP/0.0.0.0 test_prov_for_re - SIP/0.0.0.0 test_prov_for_re2 - SIP/0.0.0.0</td>
+</tr>
 </tbody></table>
 </body>
 </html>

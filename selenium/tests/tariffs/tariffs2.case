@@ -1202,10 +1202,27 @@
 	<td>/billing/users/edit/3</td>
 	<td></td>
 </tr>
+<!--provaiderio tarifu testavimui-->
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
+</tr>
+<!--turi buti rusiuojami pagal abc-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_tariff_id</td>
+	<td>admintariff1 resellertariff1 Test Tariff Test Tariff bad currency</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1710,6 +1727,97 @@
 	<td>assertText</td>
 	<td>id=name_14</td>
 	<td>Test Tariff for Users + 50.0 + 0.0%</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>weird tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>unique tariff</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_purpose_provider</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>test prov</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--turi buti rusiuojami pagal abc-->
+<tr>
+	<td>assertText</td>
+	<td>id=provider_tariff_id</td>
+	<td>unique tariff weird tariff</td>
 </tr>
 </tbody></table>
 </body>

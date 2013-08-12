@@ -1159,6 +1159,36 @@
 	<td>css=#sortable_table &gt; table.2.0</td>
 	<td>exact:Test2:SIP:Test Tariff</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>new provider for sorting</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=select_prov</td>
+	<td>Select provider new provider for sorting - SIP/0.0.0.0 Test Provider - IAX2/22.33.44.55 Test2 - SIP/0.0.0.0 Test3 - SIP/0.0.0.0</td>
+</tr>
 <!--crasho testavimas, kada istrinami visi tarifai-->
 <tr>
 	<td>open</td>
@@ -1247,7 +1277,6 @@
 	<td></td>
 </tr>
 <!--patikrinti drag and drop-->
-<!---->
 </tbody></table>
 </body>
 </html>
