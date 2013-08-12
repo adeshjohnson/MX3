@@ -3921,7 +3921,7 @@ class ApiController < ApplicationController
                       succ_sms_status_codes = ['0', '003', '004', '008', '011']
                       if succ_sms_status_codes.member? sms.status_code.to_s
                         doc.response {
-                          doc.status('ok')
+                          doc.status('SMS is sent')
                           doc.message{
                             doc.message_id(sms.id)
                             doc.sms_status_code_tip(sms.sms_status_code_tip)
@@ -3937,15 +3937,15 @@ class ApiController < ApplicationController
                       else
                         doc.error(){
                           doc.message{
-                            doc.message_id(sms.id)
+			    doc.message_id(sms.id)
                             doc.sms_status_code_tip(sms.sms_status_code_tip)
                           }
                         }
                       end
                     else
-                      if sms.status_code.to_s == 0
+                      if sms.status_code.to_s == '0'
                         doc.response {
-                          doc.status('ok')
+                          doc.status('SMS is sent')
                           doc.message{
                             doc.message_id(sms.id)
                             @curr = Currency.where(:id => @user.currency_id).first
@@ -3960,7 +3960,8 @@ class ApiController < ApplicationController
                       else
                         doc.error(){
                           doc.message{
-                            doc.message_id(sms.id)
+			    doc.message_id(sms.id)
+                            doc.sms_status_code_tip(sms.sms_status_code_tip)
                           }
                         }
                       end
@@ -3970,7 +3971,7 @@ class ApiController < ApplicationController
                       doc.message{ 
                         doc.message_id(sms.id) 
                         doc.sms_status_code_tip(sms.sms_status_code_tip) 
-                        doc.error_message(exception.message) 
+                        doc.error_message(exception.message)
                       } 
                     }
                   end
