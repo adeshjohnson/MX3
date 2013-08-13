@@ -1791,8 +1791,8 @@ class ApiController < ApplicationController
                     doc.pin(device.pin)
                     doc.server_ip(Confline.get_value("Asterisk_Server_IP", 0))
                   end
-                  doc.registration_notice("*#{_('Registration_notice')}")
-                  #end
+		doc.registration_notice("*#{_('Registration_notice').gsub("<br>", "\n").gsub(%r{</?[^>]+?>}, '')}")
+		#end
                 }
               else
                 doc.status { doc.error(notice2) }
