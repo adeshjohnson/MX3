@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       if params[:controller].to_s == 'api'
         doc = Builder::XmlMarkup.new(:target => out_string4 = "", :indent => 2)
         doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-        doc = MorApi.return_error(my_rescue_action_in_public(exc).to_s, doc)
+        doc = MorApi.return_error("There is no such API", doc)
         if params[:test].to_i == 1
           render :text => out_string4 and return false
         else
@@ -82,16 +82,28 @@ class ApplicationController < ActionController::Base
   end
 
   def action_missing(m, *args, &block)
-    MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{params[:controller]}::#{params[:action]}")
-    MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ session["#{params[:controller]}_#{params[:action]}".intern].to_s)
 
-    #MorLog.my_debug("Authorization failed:\n   User_type: " + (session.blank? ? "" : session[:usertype_id].to_s) + "\n   Requested: " + "#{params[:controller] if params}::#{params[:action] if params}")
-    #MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ (session.blank? ? "" : session["#{params[:controller]}_#{params[:action]}".intern].to_s))
+    MorLog.my_debug("Authorization failed:\n   User_type: " + (session.blank? ? "" : session[:usertype_id].to_s) + "\n   Requested: " + "#{params[:controller] if params}::#{params[:action] if params}")
+    MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ (session.blank? ? "" : session["#{params[:controller]}_#{params[:action]}".intern].to_s))
 
-    flash[:notice] = _('You_are_not_authorized_to_view_this_page')
-    Rails.logger.error(m)
-    redirect_to :controller => :callc, :action => :main
-    # or render/redirect_to somewhere else
+    if params[:controller].to_s == 'api'
+      doc = Builder::XmlMarkup.new(:target => out_string4 = "", :indent => 2)
+      doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+      doc = MorApi.return_error("There is no such API", doc)
+      if params[:test].to_i == 1
+        render :text => out_string4 and return false
+      else
+        if confline("XML_API_Extension").to_i == 1
+          send_data(out_string4, :type => "text/xml", :filename => "mor_api_response.xml")    and return false
+        else
+          send_data(out_string4, :type => "text/html", :filename => "mor_api_response.html")  and return false
+        end
+      end
+    else
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+      Rails.logger.error(m)
+      redirect_to :controller => :callc, :action => :main
+    end
   end
 
   def template_missing
