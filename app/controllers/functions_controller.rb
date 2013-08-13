@@ -176,7 +176,6 @@ class FunctionsController < ApplicationController
 
   end
 
-
   def activate_callback
 
     @src = ""
@@ -845,7 +844,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @page_icon = 'key.png'
 
 
-    @users = User.find(:all, :select => "*, #{SqlExport.nice_user_sql}", :conditions => "hidden = 0", :order => "nice_user ASC")
+    @users = User.select("*, #{SqlExport.nice_user_sql}").where(hidden: 0).order("nice_user ASC")
 
   end
 
@@ -856,8 +855,9 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => :index and return false
     end
-
-    if @user.owner_id.to_i != session[:user_id].to_i
+  
+    owner_id = accountant? ? 0 : current_user.id
+    if @user.owner_id.to_i != owner_id or (accountant? and @user.id.to_i.zero?)
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
     end
@@ -885,17 +885,17 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @page_icon = 'cog.png'
     @help_link = 'http://wiki.kolmisoft.com/index.php/Configuration_from_GUI'
 
-    @countries = Direction.find(:all, :order => "name ASC")
+    @countries = Direction.order("name ASC")
     if Confline.get_value("User_Wholesale_Enabled").to_i == 0
       cond = " AND purpose = 'user' "
     else
       cond = " AND (purpose = 'user' OR purpose = 'user_wholesale') "
     end
-    @tariffs = Tariff.find(:all, :conditions => "owner_id = '#{session[:user_id]}' #{cond} ", :order => "purpose ASC, name ASC")
-    @lcrs = current_user.lcrs.find(:all, :order => "name ASC")
+    @tariffs = Tariff.where("owner_id = '#{session[:user_id]}' #{cond} ").order("purpose ASC, name ASC")
+    @lcrs = current_user.lcrs.order("name ASC")
     @currencies = Currency.get_active
-    @servers = Server.find(:all, :order => "server_id ASC")
-    @all_ivrs = Ivr.find(:all)
+    @servers = Server.order("server_id ASC")
+    @all_ivrs = Ivr.all
 
     style(Confline.get_value("Usual_text_font_style").to_i)
     @style1 = @ar[2]
@@ -941,7 +941,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
   end
 
   def send_test_email
-    @emails = Email.find(:all, :conditions => ["owner_id= ? AND (callcenter='0' OR callcenter IS NULL)", session[:user_id]])
+    @emails = Email.where(["owner_id= ? AND (callcenter='0' OR callcenter IS NULL)", session[:user_id]])
     if @emails.size.to_i == 0 and session[:usertype] == "reseller"
       user=User.find(session[:user_id])
       user.create_reseller_emails

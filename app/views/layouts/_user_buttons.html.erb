@@ -13,9 +13,7 @@
     <% if rec_active? %>
       <td id="recordings_<%= user.id %>" align="center"> <%= link_to(b_record, {:controller => "recordings", :action => "list", :id => user.id}, :id => "recordings_link_"+user.id.to_s) %> </td>
     <% end %>
-    <% if admin? or reseller? %>
-        <td id="login_as_<%= user.id %>" align="center"><%= link_to(b_login_as, {:controller => "functions", :action => 'login_as_execute', :user => user}, :id => "login_as_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => :post) if user.id != 0 %></td>
-    <% end %>
+        <td id="login_as_<%= user.id %>" align="center"><%= link_to(b_login_as, {:controller => "functions", :action => 'login_as_execute', :user => user}, :id => "login_as_link_"+user.id.to_s, :confirm => _('are_you_sure'), :method => :post) unless [0, current_user.id].member?(user.id) %></td>
 
     <% if admin? or reseller? %>
         <td id="call_tracing_<%= user.id %>" align="center"><%= link_to(b_call_tracing, {:controller => 'functions', :action => 'call_tracing_user', :user => user.id}, :id => "call_tracing_link_"+user.id.to_s) %> </td>
