@@ -178,7 +178,7 @@ class MorApi
 =end
   def MorApi.return_error(string, doc = nil)
     if doc
-      doc.status { doc.error(string) }
+      doc.status { doc.error("There is no such API") }
       return doc
     else
       doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)

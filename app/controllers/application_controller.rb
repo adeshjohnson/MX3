@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       if params[:controller].to_s == 'api'
         doc = Builder::XmlMarkup.new(:target => out_string4 = "", :indent => 2)
         doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-        doc = API.return_error(my_rescue_action_in_public(exc).to_s, doc)
+        doc = MorApi.return_error(my_rescue_action_in_public(exc).to_s, doc)
         if params[:test].to_i == 1
           render :text => out_string4 and return false
         else
@@ -23,17 +23,17 @@ class ApplicationController < ActionController::Base
           end
         end
       else
-      if !params[:this_is_fake_exception] and session
-        if session[:flash_not_redirect].to_i == 0
-          my_rescue_action_in_public(exc)
-          redirect_to :controller => :callc, :action => :main and return false
+        if !params[:this_is_fake_exception] and session
+          if session[:flash_not_redirect].to_i == 0
+            my_rescue_action_in_public(exc)
+            redirect_to :root and return false
+          else
+            my_rescue_action_in_public(exc)
+            render(:layout => "layouts/mor_min") and return false
+          end
         else
-          my_rescue_action_in_public(exc)
-          render(:layout => "layouts/mor_min") and return false
+          render :text => my_rescue_action_in_public(exc)
         end
-      else
-        render :text => my_rescue_action_in_public(exc)
-      end
       end
     end
   end
@@ -84,6 +84,10 @@ class ApplicationController < ActionController::Base
   def action_missing(m, *args, &block)
     MorLog.my_debug("Authorization failed:\n   User_type: "+session[:usertype_id].to_s+"\n   Requested: " + "#{params[:controller]}::#{params[:action]}")
     MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ session["#{params[:controller]}_#{params[:action]}".intern].to_s)
+
+    #MorLog.my_debug("Authorization failed:\n   User_type: " + (session.blank? ? "" : session[:usertype_id].to_s) + "\n   Requested: " + "#{params[:controller] if params}::#{params[:action] if params}")
+    #MorLog.my_debug("   Session(#{params[:controller]}_#{params[:action]}):"+ (session.blank? ? "" : session["#{params[:controller]}_#{params[:action]}".intern].to_s))
+
     flash[:notice] = _('You_are_not_authorized_to_view_this_page')
     Rails.logger.error(m)
     redirect_to :controller => :callc, :action => :main
