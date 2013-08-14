@@ -962,6 +962,51 @@
 	<td>756</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/autodialer/campaign_numbers/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#delete_25 &gt; a &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Number successfully deleted</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=#delete_25 &gt; a &gt; img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete all numbers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>All numbers deleted</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=number_24</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
