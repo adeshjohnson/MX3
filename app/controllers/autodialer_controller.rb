@@ -2,13 +2,13 @@
 class AutodialerController < ApplicationController
 
   layout "callc"
-  before_filter :check_post_method, :only => [:redial_all_failed_calls, :campaign_update, :campaign_create, :campaign_destroy, :action_destroy, :action_add, :action_update]
+  before_filter :check_post_method, :only => [:redial_all_failed_calls, :campaign_update, :campaign_create, :campaign_destroy, :action_destroy, :action_add, :action_update, :number_destroy]
   before_filter :check_localization
   #before_filter :authorize_admin, :only => [:campaigns]
   before_filter :authorize
   before_filter :find_campaign, :only => [:export_call_data_to_csv, :campaign_destroy, :view_campaign_actions, :campaign_update, :redial_all_failed_calls, :action_add, :campaign_actions, :import_numbers_from_file, :campaign_edit, :campaign_change_status, :campaign_numbers, :delete_all_numbers]
   before_filter :find_campaign_action, :only => [:play_rec, :action_update, :action_edit, :action_destroy]
-  before_filter :find_adnumber, :only => [:reactivate_number]
+  before_filter :find_adnumber, :only => [:reactivate_number, :number_destroy]
   before_filter :check_params_campaign, :only => [:campaign_create, :campaign_update]
 
   def index
@@ -197,6 +197,13 @@ class AutodialerController < ApplicationController
     fpage, @total_pages, options = pages_validator(params, @campaign.adnumbers.size.to_d)
     @page = options[:page]
     @numbers = @campaign.adnumbers.find(:all, :offset => fpage, :limit => session[:items_per_page])
+  end
+  
+  def number_destroy
+    campaign_id = @number.campaign_id
+    @number.destroy
+    flash[:status] = _('number_successfully_deleted')
+    redirect_to :controller => :autodialer, :action => :campaign_numbers, :id => campaign_id
   end
 
 
