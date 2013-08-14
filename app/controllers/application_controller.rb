@@ -9,20 +9,7 @@ class ApplicationController < ActionController::Base
       #log_exception_handler(exc) and return false
       logger.fatal exc.to_yaml
       logger.fatal exc.backtrace.collect { |t| t.to_s }.join("\n")
-      if params[:controller].to_s == 'api'
-        doc = Builder::XmlMarkup.new(:target => out_string4 = "", :indent => 2)
-        doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-        doc = MorApi.return_error("There is no such API", doc)
-        if params[:test].to_i == 1
-          render :text => out_string4 and return false
-        else
-          if confline("XML_API_Extension").to_i == 1
-            send_data(out_string4, :type => "text/xml", :filename => "mor_api_response.xml")    and return false
-          else
-            send_data(out_string4, :type => "text/html", :filename => "mor_api_response.html")  and return false
-          end
-        end
-      else
+      if params[:controller].to_s != 'api'
         if !params[:this_is_fake_exception] and session
           if session[:flash_not_redirect].to_i == 0
             my_rescue_action_in_public(exc)
