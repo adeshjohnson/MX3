@@ -67,7 +67,11 @@
             <td align="right">        <%= fax.size %> </td>
             <td align="center">
               <% if fax.status == "good" %>
-                  <%= link_to(b_pdf, @Fax2Email_Folder+fax.filename, :onclick => "window.open(this.href,'new_window','scrollbars=1,status=0,menubar=0,resizable=1,width=500,height=600');return false;") %>
+                <% if File.exist?(Actual_Dir + "/public/fax2email/" + fax.filename)  %>
+                  <%= link_to(b_pdf, @Fax2Email_Folder+fax.filename) %>
+                <% else %>
+                  <span <%= raw(tooltip(_('File_error'), _('File_does_not_exist_in_a_file_system'))).html_safe %> id="fax_info_img_<%= fax.id %>"> <%= b_info %> </span>
+                <% end %>
               <% end %>
             </td>
           </tr>

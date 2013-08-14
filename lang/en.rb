@@ -4608,6 +4608,8 @@ Localization.define('en') do |l|
   l.store 'currency_is_used_by_users', 'Currency is used by users'
   l.store 'show_usernames_on_pdf_csv_export_files_in_last_calls', 'Show Usernames on PDF/CSV Export Files in Last Calls'
   l.store 'number_successfully_deleted', 'Number successfully deleted'
+  l.store 'File_does_not_exist_in_a_file_system', 'File does not exist in a file system'
+  l.store 'File_error', 'File error'
   #  l.store '', ''
   #  l.store '', ''
   #  l.store '', ''
