@@ -415,6 +415,10 @@ class Device < ActiveRecord::Base
     if cid_name.length > 0 and cid_number.length == 0
       self.callerid = "\"" + cid_name.to_s + "\""
     end
+    
+    if cid_name.length == 0 and cid_number.length == 0
+      self.callerid = ''
+    end
 
     if cid_name.length == 0 and cid_number.length > 0
       self.callerid = "<" + cid_number.to_s + ">"
