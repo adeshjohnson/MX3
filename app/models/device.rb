@@ -306,7 +306,7 @@ class Device < ActiveRecord::Base
         user.primary_device_id = id
         user.save
       end
-      self.update_cid(Confline.get_value("Default_device_cid_name", user.owner_id), Confline.get_value("Default_device_cid_number", user.owner_id))
+      self.update_cid(Confline.get_value("Default_device_cid_name", user.owner_id), Confline.get_value("Default_device_cid_number", user.owner_id))  unless self.callerid 
     end
 
     if self.virtual?

@@ -1377,7 +1377,7 @@ class User < ActiveRecord::Base
       email = Confline.get_value("Default_device_voicemail_box_email", owner_id)
       address = address
       email = address.email if address and address.email.to_s.size > 0
-      device.update_cid(Confline.get_value("Default_device_cid_name", owner_id), Confline.get_value("Default_device_cid_number", owner_id), false)
+      device.update_cid(Confline.get_value("Default_device_cid_name", owner_id), Confline.get_value("Default_device_cid_number", owner_id), false) unless device.callerid
       primary_device_id = device.id
       # configure_extensions(device.id)
     end
