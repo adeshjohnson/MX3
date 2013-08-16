@@ -857,7 +857,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     end
   
     owner_id = accountant? ? 0 : current_user.id
-    if @user.owner_id.to_i != owner_id or (accountant? and @user.id.to_i.zero?)
+    if @user.owner_id.to_i != owner_id or (accountant? and (@user.id.to_i.zero? or not accountant_can_write?('user_manage')))
       dont_be_so_smart
       redirect_to :controller => "callc", :action => 'main' and return false
     end
@@ -876,7 +876,6 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     else
       redirect_to :controller => "callc", :action => 'main' and return false
     end
-
   end
 
 
