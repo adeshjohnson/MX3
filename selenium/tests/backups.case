@@ -657,6 +657,11 @@
 	<td>label=${back_time}</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=backup_number</td>
+	<td>3</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -787,6 +792,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=type_27</td>
+	<td>backup_restored</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_4</td>
+	<td>backup_restored</td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>type_26</td>
 	<td></td>
@@ -795,11 +810,6 @@
 	<td>assertTextNotPresent</td>
 	<td>did_assigned_to_dp</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>type_26</td>
-	<td>backup_restored</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -855,6 +865,61 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Backup File is missing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_5</td>
+	<td>auto</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_9</td>
+	<td>auto</td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>To fast.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/backups/backup_manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=type_5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=type_9</td>
 	<td></td>
 </tr>
 </tbody></table>
