@@ -532,6 +532,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/api/simple_balance/p3a4zhtajc?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body</td>
+	<td>User was not found</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -594,6 +604,16 @@
 	<td>assertText</td>
 	<td>css=html</td>
 	<td>There is no such API</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/simple_balance/p3a4zhtajc?test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body</td>
+	<td>Feature disabled</td>
 </tr>
 </tbody></table>
 </body>
