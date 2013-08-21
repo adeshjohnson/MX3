@@ -79,7 +79,7 @@
               </tr>
               <tr>
                 <td><b><%= _('Balance') %>:</b></td>
-                <td id="balance"><%= text_field('user', 'warning_email_balance', "class" => "input", :size => "35", :maxlength => "255") %></td>
+                <td id="balance"><%= text_field_tag('user[warning_email_balance]', @user.warning_email_balance, "class" => "input", :size => "9", :maxlength => "15") %> <%= current_user.currency.name %></td>
               </tr>
               <tr>
                 <td colspan="4"><%= radio_button_tag("user[warning_email_hour]", "-1", (@user.warning_email_hour.to_i == -1)) %> <%= _('Only_once_as_balance_drops_below_set_value') %></td>
