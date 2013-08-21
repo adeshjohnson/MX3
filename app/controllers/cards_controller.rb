@@ -347,14 +347,19 @@ class CardsController < ApplicationController
 
     start_num = params[:start_number]
     end_num = params[:end_number]
-
-    if ((start_num.length != @cg.number_length) or (end_num.length != @cg.number_length)) or ((start_num.to_i == 0) or (end_num.to_i == 0))
-      flash[:notice] = _('Bad_number_length_should_be') + ": " + @cg.number_length.to_s
+    
+    if (start_num =~ /\D/) or (end_num =~ /\D/)
+      flash[:notice] = _('Number_is_not_numerical_value')
       redirect_to :action => 'new', :cg => @cg and return false
-    elsif end_num.to_i < start_num.to_i
-      flash[:notice] = _('Bad_interval_start_and_end')
-      redirect_to :action => 'new', :cg => @cg and return false
+      if ((start_num.length != @cg.number_length) or (end_num.length != @cg.number_length)) or ((start_num.to_i == 0) or (end_num.to_i == 0))
+        flash[:notice] = _('Bad_number_length_should_be') + ": " + @cg.number_length.to_s
+        redirect_to :action => 'new', :cg => @cg and return false
+      elsif end_num.to_i < start_num.to_i
+        flash[:notice] = _('Bad_interval_start_and_end')
+        redirect_to :action => 'new', :cg => @cg and return false
+      end
     end
+    
 
     user_want_to_create = (end_num.to_i - start_num.to_i)+1
     #only 1/5 to create
