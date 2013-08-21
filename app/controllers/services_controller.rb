@@ -343,11 +343,8 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @sub = Subscription.new(params[:subscription])
     @sub.user_id = @user.id
 
-    @sub.activation_start = Time.gm(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], params[:activation_start][:minute])
-    @sub.activation_end = Time.gm(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], params[:activation_end][:minute])
-
-    @sub.activation_start = Time.zone.parse(@sub.activation_start.to_s(:db)).to_time.localtime
-    @sub.activation_end   = Time.zone.parse(@sub.activation_end.to_s(:db)).to_time.localtime
+    @sub.activation_start = Time.zone.parse("#{params[:activation_start][:year]}-#{params[:activation_start][:month]}-#{params[:activation_start][:day]} #{params[:activation_start][:hour]}:#{params[:activation_start][:minute]}").localtime 
+    @sub.activation_end = Time.zone.parse("#{params[:activation_end][:year]}-#{params[:activation_end][:month]}-#{params[:activation_end][:day]} #{params[:activation_end][:hour]}:#{params[:activation_end][:minute]}").localtime 
 
     @sub.added = @sub.added.change(:sec => 0)
 
@@ -439,11 +436,9 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     ld2 = last_day_of_month(params[:activation_end][:year], params[:activation_end][:month]).to_i
     params[:activation_start][:day] = ld1 if params[:activation_start][:day].to_i > ld1.to_i
     params[:activation_end][:day] = ld2 if params[:activation_end][:day].to_i > ld2.to_i
-    @sub.activation_start = Time.mktime(params[:activation_start][:year], params[:activation_start][:month], params[:activation_start][:day], params[:activation_start][:hour], params[:activation_start][:minute])
-    @sub.activation_end = Time.mktime(params[:activation_end][:year], params[:activation_end][:month], params[:activation_end][:day], params[:activation_end][:hour], params[:activation_end][:minute])
-
-    @sub.activation_start = Time.zone.parse(@sub.activation_start.to_s(:db)).to_time.localtime
-    @sub.activation_end   = Time.zone.parse(@sub.activation_end.to_s(:db)).to_time.localtime
+    
+    @sub.activation_start = Time.zone.parse("#{params[:activation_start][:year]}-#{params[:activation_start][:month]}-#{params[:activation_start][:day]} #{params[:activation_start][:hour]}:#{params[:activation_start][:minute]}").localtime 
+    @sub.activation_end = Time.zone.parse("#{params[:activation_end][:year]}-#{params[:activation_end][:month]}-#{params[:activation_end][:day]} #{params[:activation_end][:hour]}:#{params[:activation_end][:minute]}").localtime 
 
     if @service.servicetype == "flat_rate"
       @sub.activation_start = @sub.activation_start.beginning_of_month.change(:hour => 0, :min => 0, :sec => 0)
