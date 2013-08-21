@@ -343,9 +343,9 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     @sub = Subscription.new(params[:subscription])
     @sub.user_id = @user.id
 
-    @sub.activation_start = Time.zone.parse("#{params[:activation_start][:year]}-#{params[:activation_start][:month]}-#{params[:activation_start][:day]} #{params[:activation_start][:hour]}:#{params[:activation_start][:minute]}").localtime 
-    @sub.activation_end = Time.zone.parse("#{params[:activation_end][:year]}-#{params[:activation_end][:month]}-#{params[:activation_end][:day]} #{params[:activation_end][:hour]}:#{params[:activation_end][:minute]}").localtime 
-
+    @sub.activation_start = user_time_from_params(*params['activation_start'].values).localtime 
+    @sub.activation_end   = user_time_from_params(*params['activation_end'].values).localtime 
+    
     @sub.added = @sub.added.change(:sec => 0)
 
     service = Service.find(:first, :conditions => ["id = ?", @sub.service_id.to_i])
@@ -437,8 +437,8 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     params[:activation_start][:day] = ld1 if params[:activation_start][:day].to_i > ld1.to_i
     params[:activation_end][:day] = ld2 if params[:activation_end][:day].to_i > ld2.to_i
     
-    @sub.activation_start = Time.zone.parse("#{params[:activation_start][:year]}-#{params[:activation_start][:month]}-#{params[:activation_start][:day]} #{params[:activation_start][:hour]}:#{params[:activation_start][:minute]}").localtime 
-    @sub.activation_end = Time.zone.parse("#{params[:activation_end][:year]}-#{params[:activation_end][:month]}-#{params[:activation_end][:day]} #{params[:activation_end][:hour]}:#{params[:activation_end][:minute]}").localtime 
+    @sub.activation_start = user_time_from_params(*params['activation_start'].values).localtime 
+    @sub.activation_end   = user_time_from_params(*params['activation_end'].values).localtime 
 
     if @service.servicetype == "flat_rate"
       @sub.activation_start = @sub.activation_start.beginning_of_month.change(:hour => 0, :min => 0, :sec => 0)

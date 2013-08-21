@@ -3101,6 +3101,30 @@ Variables: (Names marked with * are required)
     current_user.time_zone
   end
   
+  def user_time_from_params(*date) 
+    keys = [:year, :month, :day, :hour, :minute]       
+    
+    now = Time.now 
+        
+    default_date_hash = { 
+      year: now.year, 
+      month: now.month, 
+      day: now.day, 
+      hour: '00', 
+      minute: '00' 
+    } 
+       
+    date_hash = Hash[keys.zip(date)] 
+     
+    date_hash.each do |key, value| 
+      date_hash[key.intern] = default_date_hash[key.intern] unless value.to_s.match(/^\d+$/) 
+    end 
+        
+    date_time_str = "#{date_hash[:year]}-#{date_hash[:month]}-#{date_hash[:day]} #{date_hash[:hour]}:#{date_hash[:minute]}" 
+         
+    Time.zone.parse(date_time_str) 
+  end 
+  
   def store_url 
     session[:url] = "#{request.protocol}#{request.host_with_port}" if session[:url].blank? 
   end
