@@ -921,6 +921,167 @@
 	<td>link=SIP/weak prov</td>
 	<td>SIP/weak prov</td>
 </tr>
+<!--owner stulpelis integrity cheke-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Some of system configuration needs your attention. Please click here to see it.</td>
+	<td>Some of system configuration needs your attention. Please click here to see it.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pospaid_and_loss_calls_size</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=allow_loss_calls</td>
+	<td>Users that are set to postpaid and allowed to make loss calls</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='Wrench'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_link_5</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//th[2]</td>
+	<td>Owner</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=reseller_link_5</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Test Reseller</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title_icon</td>
+	<td>User settings: Test Reseller</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/integrity_check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=pospaid_and_loss_calls_size</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/users_postpaid_and_allowed_loss_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_link_2</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=reseller_link_2</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
