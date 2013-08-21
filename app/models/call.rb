@@ -1833,8 +1833,8 @@ class Call < ActiveRecord::Base
         var += [options[:user].id]
       else
         jn << "LEFT JOIN devices AS dst_device ON (dst_device.id = calls.dst_device_id)"
-        cond << "(calls.user_id = ? OR dst_device.user_id = ? OR calls.dst_user_id = ?)"
-        var += [options[:user].id, options[:user].id, options[:user].id]
+        cond << "(calls.user_id = ? OR dst_device.user_id = ? OR calls.dst_user_id = ? OR cards.user_id = ?)"
+        var += ([options[:user].id] * 4)
       end
     end
 
