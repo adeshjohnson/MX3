@@ -37,6 +37,7 @@
 	<td></td>
 </tr>
 <!--CARD EDIT-->
+<!--assert distrubutor dropdown-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/edit/3</td>
@@ -57,6 +58,7 @@
 	<td>name=card[user_id]</td>
 	<td>None</td>
 </tr>
+<!--choose distributor-->
 <tr>
 	<td>select</td>
 	<td>name=card[user_id]</td>
@@ -77,6 +79,7 @@
 	<td>Distributor : Test User #1</td>
 	<td></td>
 </tr>
+<!--is it saved?-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/edit/3</td>
@@ -102,9 +105,10 @@
 	<td>Distributor : Test User #1</td>
 	<td></td>
 </tr>
+<!--Change distributor-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Edit</td>
+	<td>open</td>
+	<td>/billing/cards/edit/3</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,6 +146,7 @@
 	<td>link=Test Accountant</td>
 	<td></td>
 </tr>
+<!--is it saved?-->
 <tr>
 	<td>open</td>
 	<td>/billing/cards/edit/3</td>
@@ -827,6 +832,37 @@
 	<td>id=start_number</td>
 	<td>1111111019</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--CALLS FOR CC CARDS-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/cc_various_calls</td>
+	<td></td>
+</tr>
 <!--VERIFY USER 101-->
 <tr>
 	<td>open</td>
@@ -1427,6 +1463,51 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats?s_card_id=126</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Total calls: 10</td>
 	<td></td>
 </tr>
 </tbody></table>

@@ -11,6 +11,67 @@
 <thead>
 <tr><td rowspan="1" colspan="3">./basic.case</td></tr>
 </thead><tbody>
+<!--VERIFY USER 101-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Calling Cards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/user_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Batch management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cards/bullk_for_activate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=start_number</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -36,10 +97,10 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--SQL-->
+<!--CALLS FOR CC CARDS-->
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td>/billing/test/load_delta_sql/sql/cc_various_calls</td>
 	<td></td>
 </tr>
 <tr>
@@ -50,7 +111,7 @@
 <!--LET CC FOR RESELLER-->
 <tr>
 	<td>open</td>
-	<td>/billing/permissions/edit/12?group_type=reseller</td>
+	<td>/billing/permissions/edit/1?group_type=reseller</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,46 +209,10 @@
 	<td>LCR successfully created</td>
 	<td></td>
 </tr>
-<!--CREATE A CARD GROUP-->
-<tr>
-	<td>open</td>
-	<td>/billing/cardgroups/new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cardgroup_name</td>
-	<td>card_group</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=price_with_vat</td>
-	<td>5.0000</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cardgroup_setup_fee</td>
-	<td>5.0</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cardgroup_daily_charge</td>
-	<td>5.0</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Card Group successfully created</td>
-	<td></td>
-</tr>
 <!--GENERATE CARDS-->
 <tr>
 	<td>open</td>
-	<td>/billing/cards/new?cg=3</td>
+	<td>/billing/cards/new?cg=112</td>
 	<td></td>
 </tr>
 <tr>
@@ -213,7 +238,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=user_id</td>
-	<td>None Test Reseller User Resellers</td>
+	<td>None Test Reseller User Resellers User RSPRO</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -231,18 +256,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>id=user_25</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=user_154</td>
+	<td>Test Reseller</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_30</td>
+	<td>id=user_158</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_162</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/new?cg=3</td>
+	<td>/billing/cards/new?cg=112</td>
 	<td></td>
 </tr>
 <tr>
@@ -272,17 +302,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_36</td>
+	<td>id=user_165</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_39</td>
+	<td>id=user_167</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_171</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_174</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/new?cg=3</td>
+	<td>/billing/cards/new?cg=112</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,18 +347,28 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_47</td>
+	<td>id=user_176</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_51</td>
+	<td>id=user_180</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_183</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_186</td>
 	<td></td>
 </tr>
 <!--CARD EDIT-->
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/51</td>
+	<td>/billing/cards/edit/186</td>
 	<td></td>
 </tr>
 <tr>
@@ -329,7 +379,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=card_user_id</td>
-	<td>None Test Reseller User Resellers</td>
+	<td>None Test Reseller User Resellers User RSPRO</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -358,7 +408,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/51</td>
+	<td>/billing/cards/edit/186</td>
 	<td></td>
 </tr>
 <tr>
@@ -428,7 +478,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/51</td>
+	<td>/billing/cards/edit/186</td>
 	<td></td>
 </tr>
 <tr>
@@ -458,43 +508,43 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td>/billing/cards/list?cg=112&amp;clean=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_23</td>
+	<td>id=number_155</td>
 	<td>2222222223</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_23</td>
-	<td>5.0000</td>
+	<td>id=balance_155</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_23</td>
+	<td>id=user_155</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_51</td>
-	<td>2222222269</td>
+	<td>id=number_186</td>
+	<td>2222222272</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_51</td>
-	<td>5.0000</td>
+	<td>id=balance_186</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_51</td>
+	<td>id=user_186</td>
 	<td>Test Reseller</td>
 </tr>
 <!--BATCH MANAGEMENT-->
 <tr>
 	<td>open</td>
-	<td>/billing/cards/act?cg=3</td>
+	<td>/billing/cards/act?cg=112</td>
 	<td></td>
 </tr>
 <tr>
@@ -530,7 +580,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=user_id</td>
-	<td>None Test Reseller User Resellers</td>
+	<td>None Test Reseller User Resellers User RSPRO</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -574,23 +624,28 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_26</td>
+	<td>id=user_157</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_28</td>
+	<td>id=user_158</td>
 	<td>User Resellers</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_29</td>
+	<td>id=user_159</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_161</td>
 	<td>User Resellers</td>
 </tr>
 <!--CARD EDIT-->
 <tr>
 	<td>open</td>
-	<td>/billing/cards/edit/29</td>
+	<td>/billing/cards/edit/161</td>
 	<td></td>
 </tr>
 <tr>
@@ -610,17 +665,17 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td>/billing/cards/list?cg=112&amp;clean=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#sold_29 &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_161 &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_29</td>
+	<td>id=user_161</td>
 	<td>Test Reseller</td>
 </tr>
 <!--VERIFY BALANCE-->
@@ -977,83 +1032,22 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cards/list?cg=3&amp;clean=1</td>
+	<td>/billing/cards/list?cg=112&amp;clean=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_51</td>
-	<td>2222222269</td>
+	<td>id=number_186</td>
+	<td>2222222272</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_51</td>
+	<td>id=user_186</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_48</td>
-	<td></td>
-</tr>
-<!--VERIFY USER RESELLER-->
-<tr>
-	<td>open</td>
-	<td>/billing/callc/logout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_username</td>
-	<td>user_admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>login_psw</td>
-	<td>user_admin1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Successfully logged in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Calling Cards</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/user_list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Access Denied</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=Batch management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/cards/bullk_for_activate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Access Denied</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>id=start_number</td>
+	<td>id=user_176</td>
 	<td></td>
 </tr>
 <!--VERIFY USER user_reseller-->
@@ -1144,17 +1138,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_33</td>
+	<td>id=number_165</td>
 	<td>2222222242</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=balance_33</td>
-	<td>5.0000</td>
+	<td>id=balance_165</td>
+	<td>25.0000</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#sold_33 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1274,7 +1268,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#sold_28 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
+	<td>css=#sold_159 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
 	<td></td>
 </tr>
 <!--SEARCH-->
@@ -1290,27 +1284,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_27</td>
+	<td>id=number_159</td>
 	<td>2222222227</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_28</td>
+	<td>id=number_160</td>
 	<td>2222222228</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_33</td>
+	<td>id=number_166</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_26</td>
+	<td>id=number_172</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_25</td>
+	<td>id=number_157</td>
 	<td></td>
 </tr>
 <tr>
@@ -1365,12 +1359,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=number_28</td>
+	<td>id=number_160</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_27</td>
+	<td>id=number_159</td>
 	<td></td>
 </tr>
 <tr>
@@ -1400,12 +1394,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#sold_37 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#sold_37 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1420,12 +1414,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#sold_37 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#sold_37 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1440,7 +1434,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=#sold_37 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1465,7 +1459,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#sold_27 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
+	<td>css=#sold_165 &gt; a &gt; img[alt=&quot;Cross&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1485,17 +1479,17 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_33</td>
+	<td>id=number_165</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_37</td>
+	<td>id=number_157</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_41</td>
+	<td>id=number_172</td>
 	<td></td>
 </tr>
 <tr>
@@ -1520,22 +1514,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_25</td>
+	<td>id=number_157</td>
 	<td>2222222225</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_26</td>
+	<td>id=number_158</td>
 	<td>2222222226</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=number_27</td>
+	<td>id=number_159</td>
 	<td>2222222227</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_28</td>
+	<td>id=number_160</td>
 	<td></td>
 </tr>
 <tr>
@@ -1545,7 +1539,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=number_40</td>
+	<td>id=number_160</td>
 	<td></td>
 </tr>
 <tr>
@@ -1560,22 +1554,17 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_33</td>
+	<td>id=number_165</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_37</td>
+	<td>id=number_157</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>id=number_41</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>id=number_28</td>
+	<td>id=number_172</td>
 	<td></td>
 </tr>
 <tr>
@@ -1611,6 +1600,51 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats?s_card_id=130</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Total calls: 2</td>
 	<td></td>
 </tr>
 </tbody></table>
