@@ -18,7 +18,8 @@ class Service < ActiveRecord::Base
     end
     return true
   end
-
+  
+  before_save :handle_negatives
   before_destroy :s_before_destroy
 
   def s_before_destroy
@@ -32,6 +33,11 @@ class Service < ActiveRecord::Base
   def type
     return servicetype
   end
+  
+  def handle_negatives 
+    write_attribute(:price, 0) if read_attribute(:price).to_i < 0 
+    write_attribute(:selfcost_price, 0) if read_attribute(:selfcost_price).to_i < 0 
+  end 
 
   # converted attributes for user in current user currency
   def price
