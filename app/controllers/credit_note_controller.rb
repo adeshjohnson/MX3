@@ -282,7 +282,6 @@ class CreditNoteController < ApplicationController
         options[key] = params[key]
       end
     }
-    logger.fatal options.to_yaml
     return options
   end
 

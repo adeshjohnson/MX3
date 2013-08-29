@@ -110,7 +110,6 @@ class Payment < ActiveRecord::Base
   end
 
   def Payment.add_for_card(card, amount, currency = nil, owner_id = nil, description='')
-    #logger.fatal description
     Payment.add_global({:paymenttype=>'Card', :tax => card.cardgroup.get_tax.count_tax_amount(amount), :currency => currency ? currency : card.cardgroup.tell_balance_in_currency, :user_id=>card.id, :card=>1, :amount=>amount, :owner_id => owner_id ? owner_id : card.cardgroup.owner_id, :description=>description})
   end
 

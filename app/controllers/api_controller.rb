@@ -2067,14 +2067,12 @@ class ApiController < ApplicationController
           tariffs = Hash.from_xml xml #XmlSimple.xml_in(xml)
           value = tariffs['tariff'].symbolize_keys! #transition_hash(tariffs)
 
-          #---- TO CHECK PARAMS HERE!-------------------
-          logger.fatal "CHECK HERE"
-          logger.fatal value.inspect
+          #---- CHECK PARAMS HERE!-------------------
           value, error = check_params_name_id(value, @user)
 
           if error.empty? #then proceed
 
-            logger.fatal "TARIFF NAME "+ value[:name].to_s
+            #TARIFF NAME value[:name].to_s
 
             #now we have tariff with name and id
             tariff_id = value[:id]
@@ -2083,28 +2081,23 @@ class ApiController < ApplicationController
             if value[:destinations]
               #go trough destinations
 
-              logger.fatal "DESTINATIONS FOUND: " +value[:destinations].size.to_s
+              #DESTINATIONS FOUND: value[:destinations].size.to_s
               value[:destinations].each { |_, dest| (dest.is_a?(Array) ? dest : [dest]).each do |destination|
                 destination.symbolize_keys!
-                logger.fatal "----------DATA -------------------------------------"
-                logger.fatal "Direction name: '" + destination[:direction].to_s + "'"
-                logger.fatal "Destination name: '" + destination[:destination_group_name].to_s + "'"
-                logger.fatal "Destination type: '"+ destination[:destination_group_type].to_s + "'"
-                logger.fatal "Rates for this destination: "+destination[:rates].size.to_s
-
+                #----------DATA -------------------------------------
                 #check for collision in xml rates
                 ##### bad_rates_time TO DO ISVESTI KUR BLOGI LAIKAI, RATES ISTRINAMI
                 destination[:rates].map!(&:symbolize_keys!)
                 collision_rates, bad_rates_time_array = check_params_rates(destination[:rates], destination) if destination[:rates].size > 1
 
-                logger.fatal "Rates for this destination after collision check in xml: "+destination[:rates].size.to_s
-                logger.fatal "----------WORK  WITH DB ----------------------------"
+                #Rates for this destination after collision check in xml: destination[:rates].size.to_s
+                #----------WORK  WITH DB ----------------------------
 
                 #find destinationgroups_id by name and type
                 sql = "SELECT destinationgroup_id FROM destinations WHERE destinationgroup_id = (SELECT id FROM destinationgroups WHERE name = \"#{destination[:destination_group_name].to_s}\" AND desttype = '#{destination[:destination_group_type].to_s}') GROUP BY subcode"
                 rate_destinationgroups_id = ActiveRecord::Base.connection.select_value(sql)
                 if rate_destinationgroups_id
-                  logger.fatal "DB DESTINATION ID: " + rate_destinationgroups_id.to_s
+                  #DB DESTINATION ID: rate_destinationgroups_id.to_s
                   #find rate by tariff id and destination group
                   rate_id = Rate.where(:tariff_id => tariff_id, :destinationgroup_id => rate_destinationgroups_id).first
 
@@ -2119,7 +2112,6 @@ class ApiController < ApplicationController
                       destination[:rates].each do |rate2|
                         if (["WD", "FD"].include?(rate2[:day_type].to_s) and ["WD", "FD"].include?(rate1[:daytype].to_s)) or ([""].include?(rate2[:day_type].to_s) and [""].include?(rate1[:daytype].to_s))
                           if (rate1[:start_time].strftime("%X") != rate2[:rate_start_time] or rate1[:end_time].strftime("%X") != rate2[:rate_end_time]) and (rate1[:start_time].strftime("%X") <= rate2[:rate_end_time] and rate2[:rate_start_time] <= rate1[:end_time].strftime("%X")) and rate2[:day_type].to_s == rate1[:daytype].to_s
-                            logger.fatal 'COLLISION!!!!!!!!!!!!!!!!!'
                             collision_rates_with_db << "#{destination[:destination_group_name]} #{destination[:destination_group_type]} COLLISION WITH EXISTING RATES IN " +[rate1[:start_time].strftime("%X"), rate2[:rate_start_time]].min.to_s + " AND " + [rate1[:end_time].strftime("%X"), rate2[:rate_end_time]].max.to_s + " TIME RANGE"
                             #delete all xml rates in collision time range
                             destination[:rates].delete_if { |el| (([rate1[:end_time].strftime("%X"), rate2[:rate_end_time]].max >= el[:rate_start_time] and el[:rate_start_time] >= [rate1[:start_time].strftime("%X"), rate2[:rate_start_time]].min) or ([rate1[:start_time].strftime("%X"), rate2[:rate_start_time]].min <= el[:rate_end_time] and el[:rate_end_time]<= [rate1[:end_time].strftime("%X"), rate2[:rate_end_time]].max)) and el[:day_type].to_s == rate1[:daytype].to_s }
@@ -2131,13 +2123,11 @@ class ApiController < ApplicationController
                       end
                     end
 
-                    logger.fatal "Rates for this destination after collision check xml with db: "+destination[:rates].size.to_s
-                    logger.fatal "DB RATE ID " + rate_id.id.to_s
+                    #Rates for this destination after collision check xml with db: destination[:rates].size.to_s
                     #create rates and log bad rates
                     bad_rates_array = create_rates_merge(destination, rate_id.id, db_rates)
                   else
-                    logger.fatal "DB RATE ID NOT FOUND"
-                    logger.fatal "LETS CREATE"
+                    #DB RATE ID NOT FOUND,LETS CREATE
 
                     rate_new = Rate.new()
                     rate_new.tariff_id = tariff_id.to_i
@@ -2146,9 +2136,7 @@ class ApiController < ApplicationController
 
                     if rate_new.save
                       #set now existing tariff id
-                      logger.fatal "RATE CREATED " + rate_new.id.to_s
                     else
-                      logger.fatal "RATE exists??!!! "
                       doc.response {
                         doc.error("RATE exists??!!")
                       }
@@ -2158,9 +2146,8 @@ class ApiController < ApplicationController
                     bad_rates_array = create_rates(destination, rate_new.id)
                   end
 
-                  logger.fatal "---------------END----------------------------"
                 else
-                  logger.fatal "THIS DESTINATION NAME OR TYPE IS WRONG!"
+                  #THIS DESTINATION NAME OR TYPE IS WRONG!
                   bad_destination_array << destination
                 end
 
@@ -2237,12 +2224,10 @@ class ApiController < ApplicationController
           end
 
         rescue REXML::ParseException
-          logger.fatal 'No data!'
           doc.response {
             doc.error("Bad XML data")
           }
         rescue ArgumentError
-          logger.fatal 'File does not exist!'
           doc.response {
             doc.error("File does not exist")
           }
@@ -2327,7 +2312,7 @@ class ApiController < ApplicationController
         #if not found - create one with given name
         try_find_tariff = Tariff.where(:id => tariff[:id].to_i).first
         if !try_find_tariff
-          logger.fatal "TARIFF NOT FOUND. CREATING ONE"
+          #TARIFF NOT FOUND. CREATING ONE
           tariff_new = Tariff.new()
           tariff_new.name = tariff[:name].to_s
           tariff_new.purpose = "user"
@@ -2337,14 +2322,11 @@ class ApiController < ApplicationController
           if tariff_new.save
             #set now existing tariff id
             tariff[:id] = tariff_new.id
-            logger.fatal "TARIFF CREATED " + tariff[:id].to_s
           else
             find_tariff_id = Tariff.where(:name => tariff[:name].to_s).first
             if find_tariff_id and (find_tariff_id.owner_id.to_i == user.id or user.usertype.to_s == 'admin')
-              logger.fatal "TARIFF with same name exists, ID:#{find_tariff_id.id}!!! CHANGE NAME OR ID"
               error += "TARIFF with same name exists, ID:#{find_tariff_id.id}!!! CHANGE NAME OR ID"
             else
-              logger.fatal "TARIFF with same name exists, it belongs to other user! CHANGE NAME OR ID"
               error += "TARIFF with same name exists, it belongs to other user! CHANGE NAME OR ID"
             end
           end
@@ -2352,9 +2334,7 @@ class ApiController < ApplicationController
         else
           if try_find_tariff.owner_id.to_i == user.id
             if try_find_tariff.name.to_s == tariff[:name].to_s
-              logger.fatal "TARIFF FOUND ID: " + tariff[:id].to_s
             else
-              logger.fatal "NAME AND ID DO NOT MATCH !!! TARIFF FOUND ID: " + tariff[:id].to_s
               error += "TARIFF NAME WITH THIS ID DO NOT MATCH !!!"
               error += "FOUND " + try_find_tariff.name.to_s
             end
@@ -2363,11 +2343,9 @@ class ApiController < ApplicationController
           end
         end
       else
-        logger.fatal("No tariff name")
         error += "No tariff name"
       end
     else
-      logger.fatal("No tariff id")
       error += "No tariff id"
     end
     return tariff, error
@@ -2384,8 +2362,6 @@ class ApiController < ApplicationController
           rate2.symbolize_keys!
           if rate2[:rate_start_time] and rate2[:rate_start_time].length == 8 and rate2[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate2[:rate_end_time].length == 8 and rate2[:rate_end_time].to_s !~ /[^0-9.\:]/
             if (rate1[:rate_start_time] != rate2[:rate_start_time] or rate1[:rate_end_time] != rate2[:rate_end_time]) and (rate1[:rate_start_time] <= rate2[:rate_end_time] and rate2[:rate_start_time] <= rate1[:rate_end_time]) and rate2[:day_type].to_s == rate1[:daytype].to_s
-              logger.fatal 'COLLISION!!!!!!!!!!!!!!!!!'
-              logger.fatal "#{destination[:destination_group_name]} #{destination[:destination_group_type]} COLLISION IN " +[rate1[:rate_start_time], rate2[:rate_start_time]].min.to_s + " AND " + [rate1[:rate_end_time], rate2[:rate_end_time]].max.to_s + " TIME RANGE "
               collision_rates << "#{destination[:destination_group_name]} #{destination[:destination_group_type]} COLLISION IN " +[rate1[:rate_start_time], rate2[:rate_start_time]].min.to_s + " AND " + [rate1[:rate_end_time], rate2[:rate_end_time]].max.to_s + " TIME RANGE "
               #delete all rates in collision time range
               rates.delete_if { |el| (([rate1[:rate_end_time], rate2[:rate_end_time]].max >= el[:rate_start_time] and el[:rate_start_time] >= [rate1[:rate_start_time], rate2[:rate_start_time]].min) or ([rate1[:rate_start_time], rate2[:rate_start_time]].min <= el[:rate_end_time] and el[:rate_end_time]<= [rate1[:rate_end_time], rate2[:rate_end_time]].max))and el[:day_type].to_s == rate2[:day_type].to_s }
@@ -2393,13 +2369,11 @@ class ApiController < ApplicationController
           else
             bad_destination_time_rates << rate2.merge!(:destination_group_name => destination[:destination_group_name], :destination_group_type => destination[:destination_group_type])
             rates.delete_if { |el| el==rate2 }
-            logger.fatal 'BAD TIME!!!!!!!!!!!!!!!!!'
           end
         end
       else
         bad_destination_time_rates << rate1.merge!(:destination_group_name => destination[:destination_group_name], :destination_group_type => destination[:destination_group_type])
         rates.delete_if { |el| el==rate1 }
-        logger.fatal 'BAD TIME!!!!!!!!!!!!!!!!!'
       end
     end
     return collision_rates, bad_destination_time_rates
@@ -2475,7 +2449,6 @@ class ApiController < ApplicationController
     if !array_of_values.empty?
       sql_insert = "INSERT INTO aratedetails (`duration`, `price`, `end_time`, `daytype`, `from`, `artype`, `rate_id`, `round`, `start_time`)
                   VALUES #{array_of_values.join(',')};"
-      logger.fatal "#{sql_insert}"
       ActiveRecord::Base.connection.execute(sql_insert)
     end
     bad_rates_array
@@ -2569,7 +2542,6 @@ class ApiController < ApplicationController
             bad_rates += "// Price: " +rate[:rate_price].to_s + " Round: " + rate[:rate_round_by].to_s + " Duration: " + rate[:rate_duration].to_s + " From: " + arate_new[:from].to_s + " Artype: "+ rate[:rate_type].to_s + " Start time: "+ rate[:rate_start_time].to_s + " End time: "+ rate[:rate_end_time].to_s + " Daytype: "+ rate[:day_type].to_s + "//"
             rate.merge!(:destination_group_name => destination[:destination_group_name], :destination_group_type => destination[:destination_group_type])
             bad_rates_array << rate
-            logger.fatal rate.inspect
           else
             array_to_create << arate_new
             array_of_values << "('#{arate_new[:duration]}' , '#{arate_new[:price]}' , '#{arate_new[:end_time]}','#{arate_new[:daytype]}' ,'#{arate_new[:from]}' , '#{arate_new[:artype]}' , '#{arate_new[:rate_id]}','#{arate_new[:round]}','#{arate_new[:start_time]}')"
@@ -2581,7 +2553,6 @@ class ApiController < ApplicationController
 
       sql_insert = "INSERT INTO aratedetails (`duration`, `price`, `end_time`, `daytype`, `from`, `artype`, `rate_id`, `round`, `start_time`)
                   VALUES #{array_of_values.join(',')};"
-      logger.fatal "#{sql_insert}"
       ActiveRecord::Base.connection.execute(sql_insert)
     end
     bad_rates_array
@@ -3548,8 +3519,6 @@ class ApiController < ApplicationController
         if !device or (device and device.user and device.user.owner_id == @current_user.get_correct_owner_id)
           if device
             #4 * We find device by callerid and card by PIN, device.user.balance+=card.balance, card.disable
-            logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-            logger.fatal values.to_yaml
             card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => values[:pin], :owner_id => @current_user.get_correct_owner_id})
             if card_by_pin
               if card_by_pin.balance == 0
@@ -3588,14 +3557,10 @@ class ApiController < ApplicationController
                 if  card_by_pin
                   if card.cardgroup_id == card_by_pin.cardgroup_id
                     #2 * We find card2 by callerid and card1 by PIN, then card2.balance += card1.balance, card1.disable.
-                    logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                    logger.fatal values.to_yaml
                     amount = card_by_pin.balance
                     if amount == 0
                       doc.error("PIN number balance is zero")
                     else
-                      logger.fatal card.to_yaml
-                      logger.fatal card_by_pin.to_yaml
                       card_by_pin.disable
                       card_by_pin.add_to_balance(card.balance * -1, false)
                       if card_by_pin.save
@@ -3616,8 +3581,6 @@ class ApiController < ApplicationController
                     end
                   else
                     #3 * We find card2 by callerid and card1 by PIN. card1.callerid=card2.callerid, card2.callerid=nil, card1.balance +=card2.balance, card1.sold, card2.disable
-                    logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%3%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                    logger.fatal values.to_yaml
                     amount = card.balance
                     if amount == 0
                       doc.error("PIN number balance is zero")
@@ -3648,8 +3611,6 @@ class ApiController < ApplicationController
                   doc.error("PIN number not found")
                 end
               else
-                logger.fatal "II%%%%%%%%%%%%%%%%%%%%%%%%1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                logger.fatal values.to_yaml
                 #1 * We check if callerid_id is free. If it is free then we search cardgroup by card using PIN, then we create card2 in same cardgroup.
                 # ** There is no need to create a new card2; just mark the card with the entered PIN number as sold, active, and associate the callerID to it.
                 card_by_pin = Card.find(:first, :include => :cardgroup, :conditions => {:pin => values[:pin], :owner_id => @current_user.get_correct_owner_id})
@@ -3681,8 +3642,6 @@ class ApiController < ApplicationController
         if !device or (device and device.user.owner_id == @current_user.get_correct_owner_id)
           if device
             #4 * We find device by callerid, device.user.balance+=amount
-            logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%4%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-            logger.fatal values.to_yaml
             if device.user.add_to_balance(device.user.get_tax.count_amount_without_tax(values[:amount].to_d), 'card_refill')
               doc.response {
                 doc.status("ok")
@@ -3706,8 +3665,6 @@ class ApiController < ApplicationController
                 if   cardgroup
                   if  cardgroup.id != card.cardgroup_id
                     #3   * We find card1 by callerid and cardgroup2 by cardgroup_id, then we check If card1.cardgroup != cardgroup2, then we create card_n in cardgroup2 , card_n.callerid = Caller_id, card_n.balance = amount + card1.balance, card_n.sold , card1.disable
-                    logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%3%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                    logger.fatal values.to_yaml
                     original_balance = card.balance
                     card.add_to_balance(card.balance * -1, false)
                     card.disable
@@ -3735,8 +3692,6 @@ class ApiController < ApplicationController
                     end
                   else
                     #2  * We find card1 by callerid and cardgroup by card1, we check if cardgroup is allowed for user then then card1.balance += amount
-                    logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                    logger.fatal values.to_yaml
                     card.sell
                     amount = values[:amount].to_d * Currency.count_exchange_rate(card.cardgroup.tell_balance_in_currency, Currency.get_default).to_d
                     amount = cardgroup.get_tax.count_amount_without_tax(amount)
@@ -3751,11 +3706,8 @@ class ApiController < ApplicationController
                 end
               else
                 #1 * We check if callerid_id is free. If it is free then we search cardgroup by cardgroup_id, then we create card_n in cardgroup, card_n.callerid = Caller_id, card_n.balance = amount, card_n.sold
-                logger.fatal "I%%%%%%%%%%%%%%%%%%%%%%%%1%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-                logger.fatal values.to_yaml
                 cardgroup = Cardgroup.where(:id => values[:cardgroup_id], :owner_id => @current_user.get_correct_owner_id).first
                 if cardgroup
-                  logger.fatal cardgroup.tell_balance_in_currency
                   amount = values[:amount].to_d * Currency.count_exchange_rate(cardgroup.tell_balance_in_currency, Currency.get_default).to_d
                   amount = cardgroup.get_tax.count_amount_without_tax(amount)
                   card_n = cardgroup.create_card({:balance => amount, :callerid => values[:callerid]})
@@ -4130,7 +4082,6 @@ class ApiController < ApplicationController
 =end
 
   def check_allow_api
-    #logger.fatal "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
     if Confline.get_value("Allow_API").to_i != 1
       send_xml_data(MorApi.return_error('API Requests are disabled'), params[:test].to_i)
     end

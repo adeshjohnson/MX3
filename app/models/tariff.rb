@@ -47,7 +47,6 @@ class Tariff < ActiveRecord::Base
     adests = Destination.find_by_sql ["SELECT destinations.* FROM destinations, directions WHERE directions.code = destinations.direction_code AND directions.name like ? ORDER BY directions.name ASC, destinations.prefix ASC LIMIT ? OFFSET ?", st.to_s+'%', (limit || 10000), offset]
 
     actual_adest_count = ActiveRecord::Base.connection.select("SELECT COUNT(*) AS count FROM destinations, directions WHERE directions.code = destinations.direction_code AND directions.name like '#{st.to_s}%'")[0]["count"]
-    logger.fatal "found_rows: #{actual_adest_count}"
 
     dests = self.destinations
     fdests = []
@@ -492,7 +491,6 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     end
 
     if ActiveRecord::Base.connection.tables.include?(name)
-    logger.fatal options.inspect
     #ticket #5808 -> since now we dont check for time collisions, 
     #just import anything if posible. else user will be notified 
     #in the last step about rates that was not posible to import 

@@ -20,7 +20,6 @@ class Subscription < ActiveRecord::Base
   way to completele turn it off
 =end  
   def activation_start=(value)
-    logger.fatal value.inspect
     value = (value.respond_to?(:strftime) ? value.strftime('%F %H:%M:%S') : value)
     write_attribute(:activation_start, value)
   end
@@ -29,7 +28,6 @@ class Subscription < ActiveRecord::Base
   note a comment above activation_start method
 =end
   def activation_end=(value)
-    logger.fatal value.inspect
     value = (value.respond_to?(:strftime) ? value.strftime('%F %H:%M:%S') : value)
     write_attribute(:activation_end, value)
   end
@@ -112,16 +110,12 @@ class Subscription < ActiveRecord::Base
           total_price += service.price/last_day_of_month2.day * (end_date.day)
         end
       when "one_time_fee"
-        logger.fatal "one_time_fee"
-        logger.fatal "#{activation_start} >= #{period_start} and #{activation_start} <= #{period_end}"
         if activation_start >= period_start and activation_start <= period_end
           total_price = service.price
         end
       when "periodic_fee"
         start_date, end_date = subscription_period(period_start, period_end)
         days_used = end_date - start_date
-        logger.fatal "periodic_fee"
-        logger.fatal "#{start_date.month} == #{end_date.month} and #{start_date.year} == #{end_date.year}"
         #if periodic fee if daily month should be the same every time and
         #if condition should evaluate to true every time
         if start_date.month == end_date.month and start_date.year == end_date.year

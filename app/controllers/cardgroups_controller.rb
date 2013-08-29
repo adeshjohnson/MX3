@@ -89,9 +89,6 @@ class CardgroupsController < ApplicationController
       params[key] = @options[key].to_s.strip
     }
     @options.merge!(params.slice(*@options.keys))
-    logger.fatal @options.to_yaml
-    logger.fatal params.to_yaml
-    logger.fatal session[:cardgroup_search_options].to_yaml
     session[:cardgroup_search_options] = @options
     @page = params[:page].to_i
 

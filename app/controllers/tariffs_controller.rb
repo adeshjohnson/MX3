@@ -1885,7 +1885,6 @@ class TariffsController < ApplicationController
     iend = @dgroupse.size - 1 if iend > (@dgroupse.size - 1)
     for i in ((@page - 1) * session[:items_per_page])..iend
       @dgroups << @dgroupse[i]
-      logger.fatal "ffffffffffffffffffffffffffff"
     end
 
     if @tariff.purpose == 'user'
@@ -2678,7 +2677,6 @@ class TariffsController < ApplicationController
   private
 
   def check_user_for_tariff(tariff)
-    logger.fatal "aaa1"
 
     if tariff.class.to_s !="Tariff"
       tariff = Tariff.find(:first, :conditions => ["id = ? ", tariff])
@@ -2704,7 +2702,6 @@ class TariffsController < ApplicationController
   end
 
   def find_tariff_whith_currency
-    logger.fatal "aaa2"
     @tariff = Tariff.find(:first, :conditions => ['id=?', params[:id]])
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
@@ -2718,7 +2715,6 @@ class TariffsController < ApplicationController
   end
 
   def find_tariff_from_id
-    logger.fatal "aaa3"
     @tariff = Tariff.find(:first, :conditions => ['id=?', params[:id]])
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
@@ -2727,7 +2723,6 @@ class TariffsController < ApplicationController
   end
 
   def find_user_from_session
-    logger.fatal "aaa4"
     @user = User.find(:first, :include => [:tariff], :conditions => ["users.id = ?", session[:user_id]])
     unless @user
       flash[:notice]=_('User_was_not_found')
@@ -2736,7 +2731,6 @@ class TariffsController < ApplicationController
   end
 
   def find_user_tariff
-    logger.fatal "aaa5"
     @tariff = @user.tariff
     unless @tariff
       flash[:notice]=_('Tariff_was_not_found')
@@ -2750,7 +2744,6 @@ class TariffsController < ApplicationController
   end
 
   def get_user_id()
-    logger.fatal "aaa6"
     if session[:usertype].to_s == "accountant"
       user_id = 0
     else
@@ -2760,7 +2753,6 @@ class TariffsController < ApplicationController
   end
 
   def get_provider_rate_details(rate, exrate)
-    logger.fatal "aaa7"
     @rate_details = Ratedetail.find(:all, :conditions => ["rate_id = ?", rate.id], :order => "rate DESC")
     if @rate_details.size > 0
       @rate_increment_s=@rate_details[0]['increment_s']
@@ -2774,7 +2766,6 @@ class TariffsController < ApplicationController
 =end
 
   def accountant_permissions
-    logger.fatal "aaa8"
     allow_manage = !(session[:usertype] == "accountant" and (session[:acc_tariff_manage].to_i == 0 or session[:acc_tariff_manage].to_i == 1))
     allow_read = !(session[:usertype] == "accountant" and (session[:acc_tariff_manage].to_i == 0))
     return allow_manage, allow_read

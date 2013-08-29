@@ -2398,7 +2398,6 @@ Sets default tax values for users or cardgroups
 
             if err == ""
               my_debug("ADDING")
-              logger.fatal params.to_yaml
 
               new_cli = Callerid.new(params[:cli])
               new_cli.cli = cli

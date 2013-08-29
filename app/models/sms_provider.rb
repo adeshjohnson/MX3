@@ -180,7 +180,6 @@ class SmsProvider < ActiveRecord::Base
       response = http.request(request)
       response.body
     rescue Exception => e
-      logger.fatal e.to_yaml
       errors.add(:api, _('invalid_url'))
       return false
     end

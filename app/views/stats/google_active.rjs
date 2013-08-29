@@ -12,7 +12,6 @@ if @calls
     end
     loc2 = Iplocation.get_location(call.prefix, 1)
 
-    logger.fatal loc2.to_yaml
     if loc.longitude != 0 and loc.latitude != 0 and loc2.latitude != 0 and loc2.longitude != 0
       device = call.src_device
       provider = call.provider

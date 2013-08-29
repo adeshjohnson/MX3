@@ -82,11 +82,8 @@ class User < ActiveRecord::Base
   attr_accessor :imported_user, :registration
 
   def after_create_localization
-    logger.fatal('after_create checkin usertype and location.size')
-    logger.fatal(usertype.to_yaml)
     #uses resellers id
     if usertype.to_s == 'reseller'
-      logger.fatal "Ddddddddddddddddddddddddddddddddddddd"
       locations = Location.find(:first, :conditions => ['user_id=? and name=?', id, 'Default location'])
       if locations.blank?
         #create new default location  if reseller has no localization
@@ -133,19 +130,13 @@ class User < ActiveRecord::Base
 
 
   def create_reseller_localization
-    logger.fatal(' in create_reseller_localization')
-    logger.fatal(id.to_yaml)
     #uses resellers id
     loc = Location.new({:name => 'Default location', :user_id => id})
     loc.user_id = id
     loc.save
-    logger.fatal('Location created')
     #delete confline if exists device with location id = 1 and replace with new location id
     Confline.delete_all("owner_id = #{id} and name = 'Default_device_location_id'")
     Confline.new_confline("Default_device_location_id", loc.id, id)
-    logger.fatal('confline')
-    logger.fatal(Confline.get_value("Default_device_location_id", id))
-    logger.fatal(id)
     all_default_rules = Locationrule.find(:all, :conditions => "location_id = 1")
 
     for default_rules in all_default_rules
@@ -156,36 +147,23 @@ class User < ActiveRecord::Base
       rule.minlen = default_rules.minlen if !default_rules.minlen.blank?
       rule.maxlen = default_rules.maxlen if !default_rules.maxlen.blank?
       rule.save
-      logger.fatal('rule created')
     end
-    logger.fatal('going to update_resellers_device_location')
-    #and update devices
+    #going to update_resellers_device_location and update devices
     update_resellers_device_location(loc.id)
-    logger.fatal "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
   end
 
   def update_resellers_device_location(locationid)
 
-    logger.fatal('in update_resellers_device_location')
-    logger.fatal(locationid.to_yaml)
-    logger.fatal('reseller id')
-    logger.fatal(id.to_yaml)
-
     #uses new default location id and resellers id
     Device.update_all "location_id = #{locationid.to_i}", "(user_id IN (SELECT id from users where owner_id = #{id}) OR id IN (SELECT device_id FROM providers WHERE user_id = #{id})) and location_id = 1"
-    logger.fatal('updated all devices')
+
     update_resellers_cardgroup_location(locationid)
   end
 
   def update_resellers_cardgroup_location(locationid)
-    logger.fatal('in update_resellers_cardgroup_location')
-    logger.fatal(locationid.to_yaml)
-    logger.fatal('reseller id')
-    logger.fatal(id.to_yaml)
 
     #uses new default location id and resellers id
     Cardgroup.update_all "location_id = #{locationid}", "owner_id = #{id} and location_id = 1"
-    logger.fatal('updated all cardgroups')
   end
 
   def user_before_save
@@ -1273,11 +1251,6 @@ class User < ActiveRecord::Base
       device.check_location_id
       device.location_id = Confline.get_value("Default_device_location_id", owner_id).to_i
 
-      logger.fatal('setting location_id:')
-      logger.fatal(Confline.get_value("Default_device_location_id", owner_id))
-      logger.fatal('now device location id:')
-      logger.fatal(device.location_id.to_yaml)
-
     else
       device.location_id = set_location_id
     end
@@ -1403,7 +1376,6 @@ class User < ActiveRecord::Base
     else
       new_tax = Tax.new(taxs)
     end
-    logger.fatal new_tax.to_yaml
     new_tax.save if options[:save] == true
     self.tax_id = new_tax.id
     self.tax = new_tax
@@ -2217,9 +2189,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     user.tax = tax
     user.address_id = address.id
 
-    logger.fatal "***** TIME : #{Time.now.to_s} - User before save 1"
     user.save
-    logger.fatal "***** TIME : #{Time.now.to_s} - User after save 1"
     # my_debug @user.to_yaml
     dev_group = Devicegroup.new
     dev_group.user_id = user.id
@@ -2229,16 +2199,12 @@ GROUP BY terminators.id;").map { |t| t.id }
     dev_group.primary = 1
     dev_group.save
 
-    logger.fatal "***** TIME : #{Time.now.to_s} - Device before save 1"
     if Confline.get_value("Allow_registration_username_passwords_in_devices").to_i == 1
       device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => params[:password], :username => user.username, :pin => pin, :callerid => params[:caller_id].to_s})
     else
       device = user.create_default_device({:device_type => params[:device_type], :dev_group => dev_group.id, :free_ext => free_ext, :secret => pasw, :pin => pin, :callerid => params[:caller_id].to_s})
     end
-    logger.fatal "***** TIME : #{Time.now.to_s} - Device after save 1"
-    logger.fatal "***** TIME : #{Time.now.to_s} - User before save 2"
     user.save
-    logger.fatal "***** TIME : #{Time.now.to_s} - User after save 2"
 
     cb = (defined?(CALLB_Active) and (CALLB_Active == 1)) ? 1 : 0
     if params[:mob_phone].to_s.gsub(/[^0-9]/, "").length > 0
@@ -2370,9 +2336,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       end
     end
 
-    logger.fatal "***** TIME : #{Time.now.to_s} - VAT CHECKING Starts"
     if notice.blank? and Confline.get_value("Registration_Enable_VAT_checking", u.id).to_i == 1
-      #logger.fatal params.to_yaml
       if params[:vat_number] and params[:country_id]
         dr = Direction.find(:first, :conditions => {:id => params[:country_id]})
         if params[:vat_number].blank?
@@ -2386,7 +2350,6 @@ GROUP BY terminators.id;").map { |t| t.id }
         end
       end
     end
-    logger.fatal "***** TIME : #{Time.now.to_s} - VAT CHECKING END"
 
     # tmp user destroy
     user.destroy

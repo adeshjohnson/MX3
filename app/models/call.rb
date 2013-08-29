@@ -1866,7 +1866,6 @@ class Call < ActiveRecord::Base
       cond << "calls.reseller_id = ?"
       var << options[:reseller].id
     end
-    logger.fatal options[:caller_id].inspect
 
     if options[:source] and not options[:source].blank?
       cond << "calls.src LIKE ?"

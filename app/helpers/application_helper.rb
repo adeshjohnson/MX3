@@ -1599,14 +1599,10 @@ conf_name - name of confline that will be represented by checkbox.
     #returns a link to card, that should have been passed as parameter.
     #link text will be whatever you passed as value or if nothing was
     #passed it'll be nice_card
-    logger.fatal card.inspect
-    logger.fatal value.inspect
     if value
       link = link_to value, {:controller => "cards", :action => "show", :id => card.id}.merge(options)
-      logger.fatal link
     else
       link = link_nice_card(card, options)
-      logger.fatal link
     end
     return link
   end

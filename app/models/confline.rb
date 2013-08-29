@@ -58,7 +58,6 @@ class Confline < ActiveRecord::Base
 
   def Confline::set_value2(name, value = 0, id = 0)
     cl = Confline.find(:first, :conditions => ["name = ? and owner_id = ?", name, id])
-    #logger.fatal User.current_user.to_yaml
     if cl
       if cl.value2.to_s != value.to_s
         if User.current_user

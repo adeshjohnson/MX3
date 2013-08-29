@@ -326,7 +326,7 @@ in before filter : rule (:find_location_rule)
         loc = Location.new({:name => a_location.name, :user_id => a_location.user_id})
         loc.user_id = a_location.user_id
         loc.save
-        logger.fatal('Location created')
+        #Location created
 
         for a_rules in a_location.locationrules
           rule = Locationrule.new({:name => a_rules.name, :enabled => 1, :lr_type => a_rules.lr_type})
@@ -336,7 +336,7 @@ in before filter : rule (:find_location_rule)
           rule.minlen = a_rules.minlen if !a_rules.minlen.blank?
           rule.maxlen = a_rules.maxlen if !a_rules.maxlen.blank?
           rule.save
-          logger.fatal('rule created')
+          #rule created
         end
       end
       redirect_to :action => 'localization'

@@ -33,7 +33,6 @@ class IvrController < ApplicationController
     @page_icon = "play.png"
     @help_link = "http://wiki.kolmisoft.com/index.php/IVR_system"
 
-    #logger.fatal session[:ivr_index].to_yaml
     if session[:ivr_index] and session[:ivr_index].to_i > 0
       session_page_no = session[:ivr_index]
     else

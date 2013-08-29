@@ -2180,7 +2180,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     end
 
-    logger.fatal items.to_yaml
     pdf.table(items,
               :width => 550, :border_width => 0,
               :font_size => 9) do
@@ -3164,9 +3163,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     change_date
 
-
-    #    logger.fatal current_user.time_zone.to_i
-    #     logger.fatal  User.system_time_offset.to_i
     calldate = "(calls.calldate + INTERVAL #{current_user.time_offset} SECOND)"
 
     session[:hour_from] = "00"
@@ -3381,7 +3377,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @options[:page] = @total_pages if @options[:page].to_i > @total_pages.to_i and @total_pages.to_i > 0
     fpage = ((@options[:page] -1) * session[:items_per_page]).to_i
     @search = 1
-    logger.fatal cond_arr
     # search
     @actions = Action.find(:all,
                            :select => " actions.*, users.username, users.first_name, users.last_name ",

@@ -448,7 +448,6 @@ class Invoice < ActiveRecord::Base
     if Confline.get_value("#{options[:prepaid]}Invoice_Show_Calls_In_Detailed", user.owner_id).to_i == 1 and has_calls == 1
 
       items2 = []
-      logger.fatal dgids.size
       dgids.each { |dca|
         calls2, rcalls = self.direction_calls_by_direction(current_user, dca[0], dca[1], dca[2], options)
         tcalls = 0
@@ -591,13 +590,11 @@ class Invoice < ActiveRecord::Base
     tax = self.tax
 
     tax = self.user.get_tax unless tax
-    logger.fatal tax.to_yaml
     tax_amount = 0
     up_string = 60
     colspain = type == 1 ? 3 : 2
     if self.tax
       taxes = tax.applied_tax_list(self.converted_price(ex), :precision => nc)
-      logger.fatal taxes.to_yaml
       taxes.each_with_index { |tax_hash, index|
         if tax.get_tax_count > 0
           up_string += 10
@@ -628,7 +625,6 @@ class Invoice < ActiveRecord::Base
 
   def direction_calls_by_direction(current_user, dgid, user_rate_s, prefix, options = {})
 
-    logger.fatal dgid
     dst = options[:email_or_not] ? SqlExport.hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : SqlExport.hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
 
     calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => Time.zone.now.utc_offset()}), "calldate")

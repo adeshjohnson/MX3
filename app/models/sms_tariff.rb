@@ -25,7 +25,6 @@ class SmsTariff < ActiveRecord::Base
   def free_destinations_by_st(st, limit = nil, offset = 0)
     adests = Destination.find(:all, :select => "SQL_CALC_FOUND_ROWS destinations.*, directions.name AS direction_name, directions.code AS direction_code", :joins => "JOIN directions ON(directions.code = destinations.direction_code)", :conditions => "directions.name like '#{st.to_s}%'", :order => "directions.name ASC, destinations.prefix ASC", :limit => (limit || 1000000), :offset => offset)
     actual_adest_count = ActiveRecord::Base.connection.select("SELECT found_rows() AS count")[0]["count"]
-    logger.fatal "found_rows() returned: #{actual_adest_count}"
     dests = self.destinations
     fdests = adests - dests
     actual_fdest_count = actual_adest_count - dests.size

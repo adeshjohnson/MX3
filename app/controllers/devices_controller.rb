@@ -2131,7 +2131,7 @@ class DevicesController < ApplicationController
           begin
             pc.save
           rescue
-            logger.fatal 'could not save codec, may be unique constraint was violated?'
+            #logger.fatal 'could not save codec, may be unique constraint was violated?'
           end
         else
           pc = Devicecodec.where(:device_id => params[:id], :codec_id => params[:codec_id]).first
