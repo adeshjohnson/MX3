@@ -35,8 +35,8 @@ class Service < ActiveRecord::Base
   end
   
   def handle_negatives 
-    write_attribute(:price, 0) if read_attribute(:price).to_i < 0 
-    write_attribute(:selfcost_price, 0) if read_attribute(:selfcost_price).to_i < 0 
+    write_attribute(:price, 0) if read_attribute(:price).to_f < 0 
+    write_attribute(:selfcost_price, 0) if read_attribute(:selfcost_price).to_f < 0 
   end 
 
   # converted attributes for user in current user currency
