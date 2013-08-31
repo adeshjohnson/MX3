@@ -82,17 +82,17 @@
                         }
                 );
 
-                if (Boolean(parseFloat($('dialplan[data11]').value))) {
-                    $('ivr_balance').show();
+                if (Boolean(parseFloat($('dialplan_data11').value))) {
+                    $('ivr_balance').disabled = false;
                 } else {
-                    $('ivr_balance').hide();
+                    $('ivr_balance').disabled = true;
                 }
 
-                Event.observe($('dialplan[data11]'), 'change', function () {
-                            if (Boolean(parseFloat($('dialplan[data11]').value))) {
-                                $('ivr_balance').show();
+                Event.observe($('dialplan_data11'), 'change', function () {
+                            if (Boolean(parseFloat($('dialplan_data11').value))) {
+                                $('ivr_balance').disabled = false;
                             } else {
-                                $('ivr_balance').hide();
+                                $('ivr_balance').disabled = true;
                             }
                         }
                 );
