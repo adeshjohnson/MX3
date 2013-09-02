@@ -266,8 +266,7 @@ module ActiveMerchant #:nodoc:
       end
 
       def commit(action, xml)
-        ActiveProcessor.log("------------------------")
-        ActiveProcessor.log(xml)
+        #ActiveProcessor.log(xml)
         response = parse(action, ssl_post(self.options[:xml_url], xml, "Content-Type" => "application/xml"))
         ActiveProcessor.log("*******************************")
         ActiveProcessor.log(response.to_yaml)
