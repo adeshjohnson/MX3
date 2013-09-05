@@ -68,21 +68,6 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=card_first_use_1i</td>
-	<td>label=2013</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=card_first_use_2i</td>
-	<td>label=February</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=card_first_use_3i</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>id=card_daily_charge_paid_till_1i</td>
 	<td>label=2013</td>
 </tr>
@@ -369,7 +354,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=first_use_7</td>
-	<td>2013-02-01</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -380,16 +365,6 @@
 	<td>open</td>
 	<td>/billing/cards/edit/7</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_2i</td>
-	<td>February</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_3i</td>
-	<td>1</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -407,9 +382,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>First use: 2013-02-01 </td>
-	<td></td>
+	<td>assertText</td>
+	<td>//p[5]</td>
+	<td>First use:</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -444,7 +419,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=first_use_7</td>
-	<td>2013-01-31</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -455,16 +430,6 @@
 	<td>open</td>
 	<td>/billing/cards/edit/7</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_2i</td>
-	<td>January</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_3i</td>
-	<td>31</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -483,7 +448,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>First use: 2013-01-31</td>
+	<td>First use:</td>
 	<td></td>
 </tr>
 <tr>
@@ -883,21 +848,6 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=card_first_use_1i</td>
-	<td>label=2013</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=card_first_use_2i</td>
-	<td>label=February</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=card_first_use_3i</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>id=card_daily_charge_paid_till_1i</td>
 	<td>label=2013</td>
 </tr>
@@ -1114,7 +1064,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=first_use_26</td>
-	<td>2013-02-01</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1125,16 +1075,6 @@
 	<td>open</td>
 	<td>/billing/cards/edit/26</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_2i</td>
-	<td>February</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_3i</td>
-	<td>1</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -1153,7 +1093,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>First use: 2013-02-01 </td>
+	<td>First use:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1189,7 +1129,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=first_use_26</td>
-	<td>2013-01-31</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1200,16 +1140,6 @@
 	<td>open</td>
 	<td>/billing/cards/edit/26</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_2i</td>
-	<td>January</td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>id=card_first_use_3i</td>
-	<td>31</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -1224,11 +1154,6 @@
 <tr>
 	<td>open</td>
 	<td>/billing/cards/show/26</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>First use: 2013-01-31</td>
 	<td></td>
 </tr>
 <tr>
