@@ -577,7 +577,7 @@
                 <td id="w_uln_<%= tl %>"> <%= clean_value_all(arr[session[:imp_user_last_name]].to_s) if session[:imp_user_last_name] >= 0 %>    </td>
                 <td id="w_c_<%= tl %>"> <%= clean_value_all(arr[session[:imp_user_country]].to_s) if session[:imp_user_country] >= 0 %>    </td>
                 <td id="w_e_<%= tl %>"> <%= clean_value_all(arr[session[:imp_user_email]].to_s) if session[:imp_user_email] >= 0 %>    </td>
-                <td id="w_msg_<%= tl %>"> <%= @warn_msg[tl] %> </td>
+                <td id="w_msg_<%= tl %>"> <%= raw @warn_msg[tl] %> </td>
               </tr>
               <% tl += 1 %>
           <% end %>
