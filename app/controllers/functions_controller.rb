@@ -2531,7 +2531,7 @@ Sets default tax values for users or cardgroups
       @warn_msg=[]
       if session[:file]
         array = []
-        @file = session[:file].force_encoding('UTF-8')
+        @file = session[:file].force_encoding("ISO-8859-1").encode("utf-8", replace: nil)
         array = @file.split("\n")
         for arr in array
           if inc == 0
