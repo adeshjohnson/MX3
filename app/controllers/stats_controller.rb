@@ -3275,11 +3275,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     sql = "SELECT COUNT(subscriptions.id) AS sub_size  FROM subscriptions
     WHERE activation_start = '#{a1}'"
     @res2 = ActiveRecord::Base.connection.select_all(sql)
-    sql = "SELECT users.id, users.username, users.first_name, users.last_name, activation_start, activation_end, added, subscriptions.id AS subscription_id, memo, services.name AS service_name, services.price AS service_price, services.servicetype AS servicetype, #{SqlExport.nice_user_sql} FROM subscriptions
-    JOIN users on (subscriptions.user_id = users.id)
-    JOIN services on (services.id = subscriptions.service_id)
-    WHERE ((activation_start < '#{a1}' AND activation_end BETWEEN '#{a1}' AND '#{a2}') OR (activation_start BETWEEN '#{a1}' AND '#{a2}' AND activation_end < 'a2') OR (activation_start > '#{a1}' AND activation_end < '#{a2}') OR (activation_start < '#{a1}' AND activation_end > '#{a2}')) ORDER BY #{@options[:order]}"
-    @res3 = ActiveRecord::Base.connection.select_all(sql)
+    @res3 = Subscription.select("users.id, users.username, users.first_name, users.last_name, activation_start, activation_end, added, subscriptions.id AS subscription_id, memo, services.name, services.name AS service_name, services.price AS service_price, services.servicetype AS servicetype, services.quantity, #{SqlExport.nice_user_sql}").where("((activation_start < '#{a1}' AND activation_end BETWEEN '#{a1}' AND '#{a2}') OR (activation_start BETWEEN '#{a1}' AND '#{a2}' AND activation_end < 'a2') OR (activation_start > '#{a1}' AND activation_end < '#{a2}') OR (activation_start < '#{a1}' AND activation_end > '#{a2}'))").joins("JOIN users on (subscriptions.user_id = users.id) JOIN services on (services.id = subscriptions.service_id)").order(@options[:order]) 
 
     params[:page] ? @page = params[:page].to_i : (@options[:page] ? @page = @options[:page] : @page = 1)
     @total_pages = (@res3.size.to_d / session[:items_per_page].to_d).ceil
