@@ -2858,7 +2858,7 @@ Localization.define('he') do |l|
   l.store 'Price_should_be_digit', 'מחיר צריך להיות ספרה'
   l.store 'Should_have_price', 'צריך להזן מחיר'
   l.store 'Should_have_quantity', 'צריך להזן כמות'
-  l.store 'Price_should_be_positive', 'המחיר צריך להיות חיובי'
+  l.store 'price_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
   l.store 'Quantity_should_be_positive', 'המחיר צריך להיות חיובי'
           
   l.store 'Cardgroup_not_found', 'קבוצת כרטיסים לא נמצאה'

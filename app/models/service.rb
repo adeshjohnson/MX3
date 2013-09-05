@@ -10,16 +10,20 @@ class Service < ActiveRecord::Base
 
   def validate
     if servicetype == 'flat_rate'
-      errors.add(:price, _("Should_have_price")) if !price
-      errors.add(:quantity, _("Should_have_quantity")) if !quantity
-      errors.add(:price, _("Price_should_be_positive")) if price and price.to_i < 0
+      errors.add(:price, _("price_must_be_greater_than_zero")) if price and price.to_i < 0
+      errors.add(:selfcost_price, _("price_must_be_greater_than_zero")) if price and price.to_i < 0
+      errors.add(:quantity, _("Should_have_quantity")) if !quantity      
       errors.add(:quantity, _("Quantity_should_be_positive")) if quantity and quantity < 0
+      return false if errors.size > 0
+    else
+      errors.add(:price, _("price_must_be_greater_than_zero")) if price and price.to_i < 0
+      errors.add(:selfcost_price, _("price_must_be_greater_than_zero")) if price and price.to_i < 0
       return false if errors.size > 0
     end
     return true
   end
   
-  before_save :handle_negatives
+  before_save :validate
   before_destroy :s_before_destroy
 
   def s_before_destroy
@@ -33,11 +37,6 @@ class Service < ActiveRecord::Base
   def type
     return servicetype
   end
-  
-  def handle_negatives 
-    write_attribute(:price, 0) if read_attribute(:price).to_d < 0 
-    write_attribute(:selfcost_price, 0) if read_attribute(:selfcost_price).to_d < 0 
-  end 
 
   # converted attributes for user in current user currency
   def price

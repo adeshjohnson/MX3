@@ -2791,7 +2791,7 @@ Localization.define('cr') do |l|
   l.store 'Price_should_be_digit', 'Iznos mora biti brojčani'
   l.store 'Should_have_price', 'Mora imati cijenu'
   l.store 'Should_have_quantity', 'Mora imati količinu'
-  l.store 'Price_should_be_positive', 'Iznos mora biti pozitivan'
+  l.store 'price_must_be_greater_than_zero', 'Iznos mora biti pozitivan'
   l.store 'Quantity_should_be_positive', 'Količina mora biti pozitivna'
 
   l.store 'Cardgroup_not_found', 'CardGrupa nije pronađena'

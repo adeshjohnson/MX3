@@ -2850,7 +2850,7 @@ Localization.define('ru') do |l|
   l.store 'Price_should_be_digit', 'Стоимость должна быть цифровой'
   l.store 'Should_have_price', 'Необходимо указать стоимость'
   l.store 'Should_have_quantity', 'Необходимо указать количество'
-  l.store 'Price_should_be_positive', 'Стоимость должна быть больше 0'
+  l.store 'price_must_be_greater_than_zero', 'Стоимость должна быть больше 0'
   l.store 'Quantity_should_be_positive', 'Количество должно быть больше 0'
 
   l.store 'Cardgroup_not_found', 'Группа карт не найдена'
