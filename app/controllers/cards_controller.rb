@@ -492,7 +492,7 @@ class CardsController < ApplicationController
     @card.attributes = params[:card]
 
     # first_use and daily_charge_paid_till are saved in DB converted from GUI timezone into DB timezone
-    @card.first_use = current_user.system_time(@card.first_use)
+    @card.first_use = current_user.system_time(@card.first_use) unless @card.first_use.blank?
     @card.daily_charge_paid_till = current_user.system_time(@card.daily_charge_paid_till)
 
     if @card.save
