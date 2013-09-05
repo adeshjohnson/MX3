@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   if !Rails.env.development?
     rescue_from Exception do |exc|
       #log_exception_handler(exc) and return false
+      logger.fatal exc.to_yaml
+      logger.fatal exc.backtrace.collect { |t| t.to_s }.join("\n")
       if params[:controller].to_s != 'api'
         if !params[:this_is_fake_exception] and session
           if session[:flash_not_redirect].to_i == 0
