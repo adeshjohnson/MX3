@@ -65,7 +65,7 @@ class Lcr < ActiveRecord::Base
   end
 
   def active_providers
-    Provider.find_by_sql ["SELECT providers.* FROM providers, lcrproviders WHERE providers.id = lcrproviders.provider_id AND active = 1 AND lcrproviders.lcr_id = ? AND providers.hidden = 0 ORDER BY providers.name ASC", self.id]
+    Provider.find_by_sql ["SELECT providers.* FROM providers, lcrproviders WHERE providers.id = lcrproviders.provider_id AND lcrproviders.active = 1 AND lcrproviders.lcr_id = ? AND providers.hidden = 0 ORDER BY providers.name ASC", self.id]
   end
 
   def add_provider(prov)
