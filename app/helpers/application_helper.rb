@@ -102,7 +102,7 @@ module ApplicationHelper
     n
   end
 
-  def nice_bytes(bytes, sufix_stop = "")
+  def nice_bytes(bytes = 0, sufix_stop = "")
     bytes = bytes.to_d
     sufix_pos = 0
     sufix = ["b", "Kb", "Mb", "Gb", "Tb"]
@@ -120,7 +120,7 @@ module ApplicationHelper
     session[:nice_number_digits] ||= Confline.get_value("Nice_Number_Digits").to_i
     session[:nice_number_digits] ||= 2
     bytes = 0 unless bytes
-    n = sprintf("%0.#{session[:nice_number_digits]}f", bytes.to_d)+" "+sufix[sufix_pos]
+    n = sprintf("%0.#{session[:nice_number_digits]}f", bytes.to_d) + " " + sufix[sufix_pos].to_s
     if session[:change_decimal]
       n = n.gsub('.', session[:global_decimal])
     end
