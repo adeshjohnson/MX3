@@ -117,7 +117,7 @@ module StatsHelper
   def time_untill_expire(record) 
     time = Time.now 
     out = 0 
-    if time > record.activation_start and (record.activation_end.blank? or time < record.activation_end or record.no_expire == 1) 
+    if (time > record.activation_start) and (record.activation_end.blank? or (time < record.activation_end)) 
       year_month = time.strftime("%Y-%m") 
       data = FlatrateData.where(year_month: year_month, subscription_id: record.id).first 
       out = data.seconds.to_i if data 
