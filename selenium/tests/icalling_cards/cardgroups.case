@@ -509,6 +509,152 @@
 	<td>Test_cardgroup_test_1</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=own_providers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/12?group_type=reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=calling_cards_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as_execute?user=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardgroup_pin_length</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name_1</td>
+	<td>test dp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_calling_card</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<!--Buvo problema: Kai dviejų CC groups Number/PIN length sutampa, nėra galimybės ištrinti CC groups, jei kitas useris sistemoje prijungęs CC prie DP.-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>* Card Group is associated with Dial Plans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Card Group deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/login_as_execute?user=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/dialplans/dialplans</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cc_dp_name_2</td>
+	<td>test dp</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cardgroups/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_3</td>
+	<td>test</td>
+</tr>
 </tbody></table>
 </body>
 </html>
