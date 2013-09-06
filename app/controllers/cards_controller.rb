@@ -467,8 +467,7 @@ class CardsController < ApplicationController
   def edit
     @return_controller = params[:return_to_controller] if params[:return_to_controller]
     @return_action = params[:return_to_action] if params[:return_to_action]
-    if @card.first_use and @card.daily_charge_paid_till
-      @card.first_use += Time.zone.now.utc_offset().second - Time.now.utc_offset().second
+    if @card.daily_charge_paid_till
       @card.daily_charge_paid_till += Time.zone.now.utc_offset().second - Time.now.utc_offset().second
     end
     @page_title = _('Edit_card')
