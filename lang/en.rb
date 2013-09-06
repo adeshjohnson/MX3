@@ -2868,7 +2868,7 @@ Localization.define('en') do |l|
   l.store 'Should_have_price', 'Should have price'
   l.store 'Should_have_quantity', 'Should have quantity'
   l.store 'price_must_be_greater_than_zero', 'Price must be greater than zero'
-  l.store 'Quantity_should_be_positive', 'Quantity should be positive'
+  l.store 'Quantity_must_be_greater_than_zero', 'Quantity must be greater than zero'
 
   l.store 'Cardgroup_not_found', 'Card Group was not found'
   l.store 'Record_calls_for_this_device', 'Record calls for this Device'
@@ -4610,7 +4610,7 @@ Localization.define('en') do |l|
   l.store 'number_successfully_deleted', 'Number successfully deleted'
   l.store 'File_does_not_exist_in_a_file_system', 'File does not exist in a file system'
   l.store 'File_error', 'File error'
-  #  l.store '', ''
+  l.store 'self_cost_price_must_be_greater_than_zero', 'Self Cost Price must be greater than zero'
   #  l.store '', ''
   #  l.store '', ''
 

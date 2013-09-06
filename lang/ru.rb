@@ -2851,7 +2851,7 @@ Localization.define('ru') do |l|
   l.store 'Should_have_price', 'Необходимо указать стоимость'
   l.store 'Should_have_quantity', 'Необходимо указать количество'
   l.store 'price_must_be_greater_than_zero', 'Стоимость должна быть больше 0'
-  l.store 'Quantity_should_be_positive', 'Количество должно быть больше 0'
+  l.store 'Quantity_must_be_greater_than_zero', 'Количество должно быть больше 0'
 
   l.store 'Cardgroup_not_found', 'Группа карт не найдена'
   l.store 'Record_calls_for_this_device', 'Записывать вызовы с этого терминала'

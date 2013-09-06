@@ -2859,7 +2859,7 @@ Localization.define('he') do |l|
   l.store 'Should_have_price', 'צריך להזן מחיר'
   l.store 'Should_have_quantity', 'צריך להזן כמות'
   l.store 'price_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
-  l.store 'Quantity_should_be_positive', 'המחיר צריך להיות חיובי'
+  l.store 'Quantity_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
           
   l.store 'Cardgroup_not_found', 'קבוצת כרטיסים לא נמצאה'
   l.store 'Record_calls_for_this_device', 'הקלט שיחות ליחידת קצה זו'

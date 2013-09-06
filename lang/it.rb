@@ -1955,7 +1955,7 @@ Localization.define('it') do |l|
     l.store 'Should_have_price', 'Should have price'
     l.store 'Should_have_quantity', 'Should have quantity'
     l.store 'Price_should_be_possitive', 'Price must be greater than zero'
-    l.store 'Quantity_should_be_possitive', 'Quantity should be positive'
+    l.store 'Quantity_should_be_possitive', 'Quantity must be greater than zero'
 
     l.store 'Cardgroup_not_found', 'Cardgroup not found'
     l.store 'Record_calls_for_this_device', 'Record calls for this Device'

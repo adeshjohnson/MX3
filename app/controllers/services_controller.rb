@@ -58,6 +58,8 @@ class ServicesController < ApplicationController
   end
 
   def create
+    @page_title = _('New_service')
+    @page_icon = "add.png"
     @service = Service.new(params[:service])
     @service.owner_id = correct_owner_id
     if @service.save

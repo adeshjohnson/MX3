@@ -2792,7 +2792,7 @@ Localization.define('cr') do |l|
   l.store 'Should_have_price', 'Mora imati cijenu'
   l.store 'Should_have_quantity', 'Mora imati količinu'
   l.store 'price_must_be_greater_than_zero', 'Iznos mora biti pozitivan'
-  l.store 'Quantity_should_be_positive', 'Količina mora biti pozitivna'
+  l.store 'Quantity_must_be_greater_than_zero', 'Količina mora biti pozitivna'
 
   l.store 'Cardgroup_not_found', 'CardGrupa nije pronađena'
   l.store 'Record_calls_for_this_device', 'Snimati pozive za ovaj uređaj'
