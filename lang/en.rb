@@ -4610,7 +4610,7 @@ Localization.define('en') do |l|
   l.store 'number_successfully_deleted', 'Number successfully deleted'
   l.store 'File_does_not_exist_in_a_file_system', 'File does not exist in a file system'
   l.store 'File_error', 'File error'
-  l.store 'self_cost_price_must_be_greater_than_zero', 'Self Cost Price must be greater than zero'
+  l.store 'self_cost_must_be_greater_than_zero', 'Self Cost must be greater than zero'
   #  l.store '', ''
   #  l.store '', ''
 

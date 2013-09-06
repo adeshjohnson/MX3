@@ -10,13 +10,13 @@ class Service < ActiveRecord::Base
   def validate
     if servicetype == 'flat_rate'
       errors.add(:price, _("price_must_be_greater_than_zero")) if price and price.to_i < 0
-      errors.add(:selfcost_price, _("self_cost_price_must_be_greater_than_zero")) if selfcost_price and selfcost_price.to_i < 0
+      errors.add(:selfcost_price, _("self_cost_must_be_greater_than_zero")) if selfcost_price and selfcost_price.to_i < 0
       errors.add(:quantity, _("Should_have_quantity")) if !quantity      
       errors.add(:quantity, _("Quantity_must_be_greater_than_zero")) if quantity and quantity < 0
       return false if errors.size > 0
     else
       errors.add(:price, _("price_must_be_greater_than_zero")) if price and price.to_i < 0
-      errors.add(:selfcost_price, _("self_cost_price_must_be_greater_than_zero")) if selfcost_price and selfcost_price.to_i < 0
+      errors.add(:selfcost_price, _("self_cost_must_be_greater_than_zero")) if selfcost_price and selfcost_price.to_i < 0
       return false if errors.size > 0
     end
     return true

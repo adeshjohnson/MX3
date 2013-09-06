@@ -79,6 +79,9 @@ class ServicesController < ApplicationController
 
   # @service in before filter
   def update
+    @page_title = _('Edit')
+    @page_icon = "edit.png"
+    
     if current_user.is_accountant? and not accountant_can_write?('see_financial_data')
       params[:service].delete(:price)
       params[:service].delete(:selfcost_price)
