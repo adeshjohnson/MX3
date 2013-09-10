@@ -871,8 +871,11 @@ class AccountingController < ApplicationController
         paym = invoice.payment
         paym = Payment.new if not paym
         paym.paymenttype = "invoice"
-        paym.amount = (invoice.price * Currency.where(name: session[:show_currency]).first.exchange_rate).to_d
-        paym.currency = session[:show_currency].to_s
+        currency = Currency.where(id: user.currency_id).try(:first)
+        if currency
+          paym.amount = (invoice.price * currency.exchange_rate).to_d
+          paym.currency = currency.name.to_s
+        end
         paym.date_added = Time.now
         paym.shipped_at = Time.now
         paym.completed = 1
