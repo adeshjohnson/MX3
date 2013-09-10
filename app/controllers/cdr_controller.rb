@@ -340,7 +340,7 @@ class CdrController < ApplicationController
   end
 
   def not_import_bad_cdr
-    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id].to_i}")
+    @cdr = ActiveRecord::Base.connection.select_all("SELECT * FROM #{session[:temp_cdr_import_csv]} WHERE f_error = 1 and id = #{params[:id].to_i} LIMIT 1")
 
     unless @cdr
       @error = _('CDR_not_found')

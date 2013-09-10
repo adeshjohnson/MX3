@@ -49,7 +49,6 @@
     <td id="error_<%= @cdr[0]['id'] %>" align="center"></td>
     <td id="action_<%= @cdr[0]['id'] %>" align="center">
       <% if @cdr[0]['do_not_import'].to_i == 0 %>
-          <span onclick="new Ajax.Updater('bad_crd_<%=@cdr[0]['id']%>', '<%=Web_Dir%>/cdr/not_import_bad_cdr/<%=@cdr[0]['id']%>', {method: 'post', asynchronous: true, onComplete:function(request){Element.hide('spinner');}, onLoading:function(request){Element.show('spinner');}});"> <%= b_delete %> </span>
       <% else %>
           <%= _('This_cdr_wil_not_imported') %>
       <% end %></td>
