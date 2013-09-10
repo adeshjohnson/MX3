@@ -64,10 +64,7 @@ class PaymentsController < ApplicationController
     cond << "amount >= '#{current_user.to_system_currency(q(@options[:s_amount_min]))}' " if !@options[:s_amount_min].blank?
     cond << "amount <= '#{current_user.to_system_currency(q(@options[:s_amount_max]))}' " if !@options[:s_amount_max].blank?
 
-    @payments = Payment.find(:all,
-                             :select => "payments.*, payments.user_id as 'user_id', payments.first_name as 'payer_first_name', payments.last_name as 'payer_last_name', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",
-                             :joins => "left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)",
-                             :conditions => [cond.join(" AND ")] + cond_param)
+    @payments = Payment.select("payments.*, payments.user_id as 'user_id', payments.first_name as 'payer_first_name', payments.last_name as 'payer_last_name', users.username, users.first_name, users.last_name, cards.number, cards.pin, cards.id as card_id",).where([cond.join(" AND ")] + cond_param).joins("left join users on (payments.user_id = users.id and payments.card = '0') left join cards on (payments.user_id = cards.id and payments.card != '0')   left join cardgroups on (cards.cardgroup_id = cardgroups.id)")
 
     @search = 1
 
