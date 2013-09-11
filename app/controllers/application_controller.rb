@@ -2156,6 +2156,12 @@ Variables: (Names marked with * are required)
           exception_send_email = 0
         end
 
+        # Specific case for acunetix security scanner
+        if exception.message.include?('invalid byte sequence in UTF-8') and ['try_to_login', 'signup_end'].member?(params[:action])
+          flash_notice = _('Internal_Error_Contact_Administrator')
+          exception_send_email = 0
+        end
+
         if exception_send_email == 1 and exception_class != exception_class_previous and !flash_help_link  or params[:this_is_fake_exception].to_s == "YES"
           MorLog.my_debug("  >> Need to send email", true)
 
