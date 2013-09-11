@@ -160,7 +160,7 @@
         <td id="amount_<%= payment.id %>" align="right"><%= nice_number(payment.payment_amount) %></td>
         <td id="fee_<%= payment.id %>" align="right"><%= nice_number(payment.fee) %></td>
         <% digits = (payment.paymenttype == "invoice" and payment.invoice) ? nice_invoice_number_digits(payment.invoice.invoice_type) : 0 %>
-        <td id="amout_with_tax_<%= payment.id %>" align="right"><%= nice_number(payment.payment_amount_with_vat(digits) * currency_exchange_rate(payment)) %></td>
+        <td id="amout_with_tax_<%= payment.id %>" align="right"><%= nice_number(payment.payment_amount_with_vat(digits)) %></td>
         <td id="currency_<%= payment.id %>" align="center"><%= payment.currency %></td>
         <td id="completed_<%= payment.id %>" align="center"><%= completed %></td>
         <% if @allow_edit %>
