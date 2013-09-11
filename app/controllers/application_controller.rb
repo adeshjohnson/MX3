@@ -2157,7 +2157,7 @@ Variables: (Names marked with * are required)
         end
 
         # Specific case for acunetix security scanner
-        if exception.message.include?('invalid byte sequence in UTF-8') and ['try_to_login', 'signup_end'].member?(params[:action])
+        if (exception.message.include?('invalid byte sequence in UTF-8') or exception.message.include?('{"$acunetix"=>"1"}')) and ['try_to_login', 'signup_end'].member?(params[:action])
           flash_notice = _('Internal_Error_Contact_Administrator')
           exception_send_email = 0
         end
