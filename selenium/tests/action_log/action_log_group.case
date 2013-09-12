@@ -38,6 +38,21 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -425,6 +440,61 @@
 	<td>assertText</td>
 	<td>user_6</td>
 	<td>System Admin</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/monthly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=service</td>
+	<td>Test_periodic_service</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_26</td>
+	<td>user_balance_at_month_end</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_26</td>
+	<td>5.2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data4_26</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_46</td>
+	<td>subscription_paid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=target_46</td>
+	<td>Subscription</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=target_46</td>
+	<td>Subscription</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_46</td>
+	<td>2.000000000000000015</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data4_46</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
