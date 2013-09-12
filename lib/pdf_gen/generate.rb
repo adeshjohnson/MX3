@@ -549,6 +549,9 @@ module PdfGen
     if Confline.get_value("#{prepaid.to_s}Invoice_Show_Balance_Line", user.owner_id).to_i == 1
       balance = invoice.owned_balance_from_previous_month
       if balance
+        default_currency = Currency.get_default.name
+        exrate = Currency.count_exchange_rate(currency, default_currency).to_d
+        balance.map! { |value| value / exrate }
         pdf.text(Confline.get_value("#{prepaid.to_s}Invoice_Balance_Line", user.owner_id) + " " + sprintf("%0.#{2}f", balance[0].to_f) + " (" + _('With_TAX') + " " + sprintf("%0.#{2}f", balance[1]).to_s + ") " + currency.to_s, {:left => 40, :size => 12})
       end
     end
