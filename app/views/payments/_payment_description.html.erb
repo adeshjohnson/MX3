@@ -8,7 +8,7 @@
         <%= text_area_tag 'payment_desciption', to_utf(payment.description), :cols => 60, :rows => 6, :id => "payment_description_tag_#{payment.id}" %>
       </span>
       <span style="float: left;">
-        <%= submit_to_remote "ok_#{payment.id}", _('ok'), :update => "payment_des_#{payment.id}", :url => {:controller => :payments, :action => :change_description, :id => payment.id}, :with => "'description='+escape($('payment_description_tag_#{payment.id}').value)", :onclick => "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');" %>
+        <%= submit_to_remote "ok_#{payment.id}", _('ok'), :update => "payment_des_#{payment.id}", :url => {:controller => :payments, :action => :change_description, :id => payment.id}, :with => "'description='+encodeURI($('payment_description_tag_#{payment.id}').value)", :onclick => "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');" %>
       </span>
       <span style="float: left;">
         <%= link_to_function _('cancel'), "Element.toggle('payment_description_#{payment.id}');Element.toggle('payment_description_link_#{payment.id}');" %>
