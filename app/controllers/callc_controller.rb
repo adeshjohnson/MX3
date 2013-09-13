@@ -747,7 +747,6 @@ class CallcController < ApplicationController
   def monthly_actions
     if active_heartbeat_server
       periodic_action("monthly", @@monthly_action_cooldown) {
-
         # --------- count/deduct subscriptions --------
         year = Time.now.year.to_i
         month = Time.now.month.to_i - 1
@@ -965,7 +964,7 @@ class CallcController < ApplicationController
             flash[:notice] = "Failed to update"
             redirect_to :action => :additional_modules and return false
         end
-   
+
         
     end
     redirect_to :action => :additional_modules
@@ -1007,7 +1006,7 @@ class CallcController < ApplicationController
       old_action = Action.where(:data => date, :user_id => user.id).first
       if not old_action
         MorLog.my_debug("Creating new action user_balance_at_month_end for user with id: #{user.id}, balance: #{user.balance}")
-        Action.add_action2(user.id, "user_balance_at_month_end", date, user.balance.to_s)
+        Action.add_action_hash(user, {action: 'user_balance_at_month_end', data: date, data2: user.balance.to_s, data3: Currency.get_default.name})
       else
         MorLog.my_debug("Action user_balance_at_month_end for user with id: #{user.id} present already, balance: #{old_action.data2}")
       end
