@@ -2028,6 +2028,10 @@ GROUP BY terminators.id;").map { |t| t.id }
     rate * User.current.currency.exchange_rate.to_d
   end
 
+  def raw_balance
+    read_attribute(:balance).to_d
+  end
+
   # converted attributes for user in current user currency
   def balance
     b = read_attribute(:balance)

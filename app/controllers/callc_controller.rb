@@ -1005,8 +1005,8 @@ class CallcController < ApplicationController
     for user in users
       old_action = Action.where(:data => date, :user_id => user.id).first
       if not old_action
-        MorLog.my_debug("Creating new action user_balance_at_month_end for user with id: #{user.id}, balance: #{user.balance}")
-        Action.add_action_hash(user, {action: 'user_balance_at_month_end', data: date, data2: user.balance.to_s, data3: Currency.get_default.name})
+        MorLog.my_debug("Creating new action user_balance_at_month_end for user with id: #{user.id}, balance: #{user.raw_balance}")
+        Action.add_action_hash(user, {action: 'user_balance_at_month_end', data: date, data2: user.raw_balance.to_s, data3: Currency.get_default.name})
       else
         MorLog.my_debug("Action user_balance_at_month_end for user with id: #{user.id} present already, balance: #{old_action.data2}")
       end
