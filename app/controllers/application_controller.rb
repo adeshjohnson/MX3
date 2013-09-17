@@ -611,7 +611,7 @@ class ApplicationController < ActionController::Base
     @user = User.where(:id => @device.user_id).first if @device.user_id.to_i > -1
 
     user_id = 0
-    user_id = @device.user.id if @user
+    user_id = @device.user_id if @user
 
     timeout = @device.timeout
 
