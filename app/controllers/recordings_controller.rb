@@ -6,6 +6,7 @@ class RecordingsController < ApplicationController
   before_filter :check_localization
   before_filter :authorize
   before_filter :check_post_method, :only => [:destroy_recording, :destroy, :update, :update_recordings, :list_users_update]
+  before_filter :res_authorization, :only => [:show]
 
   before_filter { |c|
     view = [:index, :list, :play_rec, :show, :get_recording]
@@ -713,4 +714,11 @@ class RecordingsController < ApplicationController
     end
     return true
   end
+  
+  def res_authorization 
+    if current_user.usertype == 'reseller' 
+      flash[:notice] = _('You_have_no_view_permission') 
+      redirect_to :root and return false 
+    end 
+  end 
 end
