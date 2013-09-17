@@ -2125,44 +2125,44 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
     items = []
 
-    item = [_('Total_calls'), {:text => params[:total_calls], :align => :left}, {:text => ' ', :colspan => 3}]
+    item = [_('Total_calls'), {:text => params[:total_calls].to_s, :align => :left}, {:text => ' ', :colspan => 3}]
     items << item
 
-    item = [_('Answered_calls'), {:text => params[:total_answered_calls], :align => :left}, {:text => nice_number(params[:total_answer_percent]) + " %", :align => :left}, _('Duration') + ": " + nice_time(params[:total_duration]), _('Average_call_duration') + ": " + nice_time(params[:average_call_duration])]
+    item = [_('Answered_calls'), {:text => params[:total_answered_calls].to_s, :align => :left}, {:text => nice_number(params[:total_answer_percent].to_s) + " %", :align => :left}, _('Duration') + ": " + nice_time(params[:total_duration]), _('Average_call_duration') + ": " + nice_time(params[:average_call_duration])]
     items << item
 
-    item = [_('No_Answer'), {:text => params[:total_not_ans_calls], :align => :left}, {:text => nice_number(params[:total_not_ans_percent]) + " %", :align => :left}, {:text => ' ', :colspan => 2}]
+    item = [_('No_Answer'), {:text => params[:total_not_ans_calls].to_s, :align => :left}, {:text => nice_number(params[:total_not_ans_percent].to_s) + " %", :align => :left}, {:text => ' ', :colspan => 2}]
     items << item
 
-    item = [_('Busy_calls'), {:text => params[:total_busy_calls], :align => :left}, {:text => nice_number(params[:total_busy_percent]) + " %", :align => :left}, {:text => ' ', :colspan => 2}]
+    item = [_('Busy_calls'), {:text => params[:total_busy_calls].to_s, :align => :left}, {:text => nice_number(params[:total_busy_percent].to_s) + " %", :align => :left}, {:text => ' ', :colspan => 2}]
     items << item
 
-    item = [_('Error_calls'), {:text => params[:total_error_calls], :align => :left}, {:text => nice_number(params[:total_error_percent]) + " %", :align => :left}, {:text => ' ', :colspan => 2}]
+    item = [_('Error_calls'), {:text => params[:total_error_calls].to_s, :align => :left}, {:text => nice_number(params[:total_error_percent].to_s) + " %", :align => :left}, {:text => ' ', :colspan => 2}]
     items << item
 
     # bold
     item = [' ', {:text => _('Price'), :align => :left, :style => :bold}, {:text => _('Percent'), :align => :left, :style => :bold}, {:text => _('Call_time'), :align => :left, :style => :bold}, {:text => _('Active_users'), :align => :left, :style => :bold}]
     items << item
 
-    item = [_('Total_call_price'), {:text => nice_number(params[:total_call_price]), :align => :left}, {:text => nice_number(params[:total_percent]), :align => :left}, {:text => nice_time(params[:total_duration]), :align => :left}, {:text => params[:active_users].to_i.to_s, :align => :left}]
+    item = [_('Total_call_price'), {:text => nice_number(params[:total_call_price].to_s), :align => :left}, {:text => nice_number(params[:total_percent].to_s), :align => :left}, {:text => nice_time(params[:total_duration].to_s), :align => :left}, {:text => params[:active_users].to_i.to_s, :align => :left}]
     items << item
 
-    item = [_('Total_call_self_price'), {:text => nice_number(params[:total_call_selfprice]), :align => :left}, {:text => nice_number(params[:total_selfcost_percent]), :align => :left}, {:text => ' ', :colspan => 2}]
+    item = [_('Total_call_self_price'), {:text => nice_number(params[:total_call_selfprice].to_s), :align => :left}, {:text => nice_number(params[:total_selfcost_percent].to_s), :align => :left}, {:text => ' ', :colspan => 2}]
     items << item
 
-    item = [_('Calls_profit'), {:text => nice_number(params[:total_profit]), :align => :left}, {:text => nice_number(params[:total_percent_percent]), :align => :left}, {:text => ' ', :colspan => 2}]
+    item = [_('Calls_profit'), {:text => nice_number(params[:total_profit].to_s), :align => :left}, {:text => nice_number(params[:total_percent_percent].to_s), :align => :left}, {:text => ' ', :colspan => 2}]
     items << item
 
-    item = [_('Average_profit_per_call_min'), {:text => nice_number(params[:avg_profit_call_min]), :align => :left}, {:text => ' ', :colspan => 3}]
+    item = [_('Average_profit_per_call_min'), {:text => nice_number(params[:avg_profit_call_min].to_s), :align => :left}, {:text => ' ', :colspan => 3}]
     items << item
 
-    item = [_('Average_profit_per_call'), {:text => nice_number(params[:avg_profit_call]), :align => :left}, {:text => ' ', :colspan => 3}]
+    item = [_('Average_profit_per_call'), {:text => nice_number(params[:avg_profit_call].to_s), :align => :left}, {:text => ' ', :colspan => 3}]
     items << item
 
-    item = [_('Average_profit_per_day'), {:text => nice_number(params[:avg_profit_day]), :align => :left}, {:text => ' ', :colspan => 3}]
+    item = [_('Average_profit_per_day'), {:text => nice_number(params[:avg_profit_day].to_s), :align => :left}, {:text => ' ', :colspan => 3}]
     items << item
 
-    item = [_('Average_profit_per_active_user'), {:text => nice_number(params[:avg_profit_user]), :align => :left}, {:text => ' ', :colspan => 3}]
+    item = [_('Average_profit_per_active_user'), {:text => nice_number(params[:avg_profit_user].to_s), :align => :left}, {:text => ' ', :colspan => 3}]
     items << item
 
     if session[:usertype] != 'reseller'
@@ -2171,11 +2171,11 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       items << item
 
       # bold  1 collumn
-      item = [{:text => _('Subscriptions_profit'), :align => :left, :style => :bold}, {:text => nice_number(params[:sub_price]), :align => :left}, {:text => ' ', :colspan => 3}]
+      item = [{:text => _('Subscriptions_profit'), :align => :left, :style => :bold}, {:text => nice_number(params[:sub_price].to_s), :align => :left}, {:text => ' ', :colspan => 3}]
       items << item
 
       # bold  1 collumn
-      item = [{:text => _('Total_profit'), :align => :left, :style => :bold}, {:text => nice_number(params[:s_total]), :align => :left}, {:text => ' ', :colspan => 3}]
+      item = [{:text => _('Total_profit'), :align => :left, :style => :bold}, {:text => nice_number(params[:s_total].to_s), :align => :left}, {:text => ' ', :colspan => 3}]
       items << item
 
     end
