@@ -367,18 +367,19 @@ class Invoice < ActiveRecord::Base
     # first page max 19 rows
     # others 31 rows
 
+    empty_row = options[:show_avg_rate].zero? ? [' ', '', '', '',''] : [' ', '', '', '', '', '']
     if items.size <= 16
-      empty_rows_number = 16 - items.size 
-      empty_rows_number -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1 
-      empty_rows_number -= 1 if user.minimal_charge_enabled? 
-      empty_rows_number += 3 if empty_rows_number < 0 
-      (empty_rows_number-4).times { items << [' ', '', '', '',''] } if empty_rows_number > 4 
-    elsif items.size == 18 
-      4.times { items << [' ', '', '', '',''] } 
-    elsif 26 <= ((items.size - 22) % 31) 
-      empty_rows_number = 31 - ((items.size - 22) % 31) 
-      empty_rows_number.times { items << [' ', '', '', '',''] } 
-    end 
+      empty_rows_number = 16 - items.size
+      empty_rows_number -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
+      empty_rows_number -= 1 if user.minimal_charge_enabled?
+      empty_rows_number += 3 if empty_rows_number < 0
+      (empty_rows_number-4).times { items << empty_row } if empty_rows_number > 4
+    elsif items.size == 18
+      4.times { items << empty_row }
+    elsif 26 <= ((items.size - 22) % 31)
+      empty_rows_number = 31 - ((items.size - 22) % 31)
+      empty_rows_number.times { items << empty_row }
+    end
 
 
     if options[:show_avg_rate] == 1
