@@ -2790,7 +2790,7 @@ Localization.define('cr') do |l|
   l.store 'Quantity_should_be_digit', 'Količina mora biti brojčana'
   l.store 'Price_should_be_digit', 'Iznos mora biti brojčani'
   l.store 'Should_have_price', 'Mora imati cijenu'
-  l.store 'Should_have_quantity', 'Mora imati količinu'
+  l.store 'Service_should_have_quantity', 'Mora imati količinu'
   l.store 'price_must_be_greater_than_zero', 'Iznos mora biti pozitivan'
   l.store 'Quantity_must_be_greater_than_zero', 'Količina mora biti pozitivna'
 

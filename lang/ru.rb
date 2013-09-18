@@ -2849,7 +2849,7 @@ Localization.define('ru') do |l|
   l.store 'Quantity_should_be_digit', 'Количество должно быть цифровым'
   l.store 'Price_should_be_digit', 'Стоимость должна быть цифровой'
   l.store 'Should_have_price', 'Необходимо указать стоимость'
-  l.store 'Should_have_quantity', 'Необходимо указать количество'
+  l.store 'Service_should_have_quantity', 'Необходимо указать количество'
   l.store 'price_must_be_greater_than_zero', 'Стоимость должна быть больше 0'
   l.store 'Quantity_must_be_greater_than_zero', 'Количество должно быть больше 0'
 

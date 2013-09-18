@@ -1953,7 +1953,7 @@ Localization.define('it') do |l|
     l.store 'Quantity_should_be_digit', 'Quantity should be digit'
     l.store 'Price_should_be_digit', 'Price shoudl be digit'
     l.store 'Should_have_price', 'Should have price'
-    l.store 'Should_have_quantity', 'Should have quantity'
+    l.store 'Service_should_have_quantity', 'Service should have quantity'
     l.store 'Price_should_be_possitive', 'Price must be greater than zero'
     l.store 'Quantity_should_be_possitive', 'Quantity must be greater than zero'
 

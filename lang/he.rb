@@ -2857,7 +2857,7 @@ Localization.define('he') do |l|
   l.store 'Quantity_should_be_digit', 'כמות צריך להיות ספרה'
   l.store 'Price_should_be_digit', 'מחיר צריך להיות ספרה'
   l.store 'Should_have_price', 'צריך להזן מחיר'
-  l.store 'Should_have_quantity', 'צריך להזן כמות'
+  l.store 'Service_should_have_quantity', 'צריך להזן כמות'
   l.store 'price_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
   l.store 'Quantity_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
           

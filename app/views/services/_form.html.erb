@@ -35,7 +35,7 @@
   <% end %>
   <tr id="quantity_options">
     <td> <%= _('Minutes') %>/<%= _('month') %>:</td>
-    <td> <%= text_field 'service', 'quantity', "class" => "input" %></td>
+    <td> <%= text_field_tag 'service[quantity]', @service.quantity, "class" => "input", :onkeyup=>"this.value=this.value.replace(/[^0-9.-]/,'');" %></td>
   </tr>
 
 
