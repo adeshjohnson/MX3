@@ -264,10 +264,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def hide_destination_end
-    attributes["hide_destination_end"] == -1 ? Confline.get_value("Hide_Destination_End", owner_id).to_i : attributes["hide_destination_end"]
-  end
-
 =begin
   Check whether user is admin type, only one user can be system admin,
   valid admin user has to got id = 0 and his usertype has to be set to 'admin'
