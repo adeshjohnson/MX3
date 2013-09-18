@@ -127,7 +127,7 @@ class DeviceRulesController < ApplicationController
   end
 
   def allow_to_use
-    if ['user', 'accountant'].include?(current_user.usertype or current_user.blank?)
+    if ['user', 'accountant'].include?(current_user.usertype) or current_user.blank?
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
