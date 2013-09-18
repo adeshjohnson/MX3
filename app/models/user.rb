@@ -3490,7 +3490,11 @@ GROUP BY terminators.id;").map { |t| t.id }
     users = [self, owner]
     em= Email.find(:first, :conditions => ["name = 'block_when_no_balance' AND owner_id = ?", owner_id])
     variables = Email.email_variables(self)
-    num = EmailsController::send_email(em, Confline.get_value("Email_from", owner_id), users, variables)
+    begin
+      num = EmailsController::send_email(em, Confline.get_value("Email_from", owner_id), users, variables)
+    rescue
+      MorLog.my_debug('Failed to send email to the user')
+    end
 
     # num = Email.send_email(em, users, Confline.get_value("Email_from", owner_id), 'send_email', {:assigns=>variables, :owner=>variables[:owner]})
     if num.to_s != _('Email_sent')
