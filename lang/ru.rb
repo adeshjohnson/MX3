@@ -2846,10 +2846,10 @@ Localization.define('ru') do |l|
   l.store 'Or', 'или'
   l.store 'Provider_should_have_name', 'Задайте имя провайдеру'
   l.store 'Service_must_have_a_service_type', 'Услуге должен быть сопоставлен тип'
-  l.store 'Quantity_should_be_digit', 'Количество должно быть цифровым'
-  l.store 'Price_should_be_digit', 'Стоимость должна быть цифровой'
+  l.store 'Quantity_must_be_numeric', 'Количество должно быть цифровым'
+  l.store 'Price_must_be_numeric', 'Стоимость должна быть цифровой'
   l.store 'Should_have_price', 'Необходимо указать стоимость'
-  l.store 'Service_should_have_quantity', 'Необходимо указать количество'
+  l.store 'Service_must_have_quantity', 'Необходимо указать количество'
   l.store 'price_must_be_greater_than_zero', 'Стоимость должна быть больше 0'
   l.store 'Quantity_must_be_greater_than_zero', 'Количество должно быть больше 0'
 

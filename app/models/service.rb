@@ -5,7 +5,10 @@ class Service < ActiveRecord::Base
 
   validates_presence_of :name, :message => _("Service_must_have_a_name")
   validates_presence_of :servicetype, :message => _("Service_must_have_a_service_type")
-  validates_presence_of :quantity, :message => _("Service_should_have_quantity") 
+  validates_presence_of :quantity, :message => _("Service_must_have_quantity") 
+  validates_numericality_of :price, :message => _("Price_must_be_numeric") 
+  validates_numericality_of :selfcost_price, :message => _("Self_cost_must_be_numeric") 
+  validates_numericality_of :quantity, :message => _("Quantity_must_be_numeric")
   validates_format_of :quantity, :with => /^[1-9][0-9]*$/, :message => _("Quantity_must_be_greater_than_zero") 
   
   before_destroy :s_before_destroy

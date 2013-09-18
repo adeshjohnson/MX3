@@ -2854,10 +2854,10 @@ Localization.define('he') do |l|
   l.store 'Or', 'או'
   l.store 'Provider_should_have_name', 'לספק צריך להיות שם'
   l.store 'Service_must_have_a_service_type', 'לשרות צריך להיות סוג שרות'
-  l.store 'Quantity_should_be_digit', 'כמות צריך להיות ספרה'
-  l.store 'Price_should_be_digit', 'מחיר צריך להיות ספרה'
+  l.store 'Quantity_must_be_numeric', 'כמות צריך להיות ספרה'
+  l.store 'Price_must_be_numeric', 'מחיר צריך להיות ספרה'
   l.store 'Should_have_price', 'צריך להזן מחיר'
-  l.store 'Service_should_have_quantity', 'צריך להזן כמות'
+  l.store 'Service_must_have_quantity', 'צריך להזן כמות'
   l.store 'price_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
   l.store 'Quantity_must_be_greater_than_zero', 'המחיר צריך להיות חיובי'
           

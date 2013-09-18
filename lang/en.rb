@@ -2863,10 +2863,10 @@ Localization.define('en') do |l|
   l.store 'Or', 'or'
   l.store 'Provider_should_have_name', 'Provider should have a name'
   l.store 'Service_must_have_a_service_type', 'Service must have a service type'
-  l.store 'Quantity_should_be_digit', 'Quantity should be digit'
-  l.store 'Price_should_be_digit', 'Price should be digit'
+  l.store 'Quantity_must_be_numeric', 'Quantity must be numeric'
+  l.store 'Price_must_be_numeric', 'Price must be numeric'
   l.store 'Should_have_price', 'Should have price'
-  l.store 'Service_should_have_quantity', 'Service should have quantity'
+  l.store 'Service_must_have_quantity', 'Service must have quantity'
   l.store 'price_must_be_greater_than_zero', 'Price must be greater than zero'
   l.store 'Quantity_must_be_greater_than_zero', 'Quantity must be greater than zero'
 
@@ -4610,7 +4610,7 @@ Localization.define('en') do |l|
   l.store 'number_successfully_deleted', 'Number successfully deleted'
   l.store 'File_does_not_exist_in_a_file_system', 'File does not exist in a file system'
   l.store 'File_error', 'File error'
-  l.store 'self_cost_must_be_greater_than_zero', 'Self Cost must be greater than zero'
+  l.store 'Self_cost_must_be_numeric', 'Self Cost must be numeric'
   #  l.store '', ''
   #  l.store '', ''
 
