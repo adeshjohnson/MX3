@@ -6,7 +6,7 @@ class Service < ActiveRecord::Base
   validates_presence_of :name, :message => _("Service_must_have_a_name")
   validates_presence_of :servicetype, :message => _("Service_must_have_a_service_type")
   validates_presence_of :quantity, :message => _("Service_should_have_quantity") 
-  validates_format_of :quantity, :with => /^[^-]+$/, :message => _("Quantity_must_be_greater_than_zero") 
+  validates_format_of :quantity, :with => /^[1-9][0-9]*$/, :message => _("Quantity_must_be_greater_than_zero") 
   
   before_destroy :s_before_destroy
 
