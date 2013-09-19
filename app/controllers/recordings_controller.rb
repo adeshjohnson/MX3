@@ -716,7 +716,7 @@ class RecordingsController < ApplicationController
   end
   
   def res_authorization 
-    if (current_user.usertype == 'reseller') and not params[:show_rec] 
+    if reseller? and (Device.where(id: params[:show_rec]).first.user_id != current_user.id)  
       flash[:notice] = _('You_have_no_view_permission') 
       redirect_to :root and return false 
     end 
