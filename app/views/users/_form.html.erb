@@ -590,8 +590,8 @@
             <td></td>
             <td><b><%= _("Yes") %>/<%= _("No") %></b></td>
           </tr>
-          <% hide_dest = hide_destination_end(@user)
-             def_hide_dest = session["owner_hide_dst_end_#{@user.owner_id}".to_sym].blank? ? Confline.get_value("Hide_Destination_End", @user.owner_id).to_i : session["owner_hide_dst_end_#{@user.owner_id}".to_sym].to_i -%>
+          <% hide_dest = @user.hide_destination_end
+             def_hide_dest = Confline.get_value("Hide_Destination_End", @user.owner_id).to_i -%>
           <tr>
             <td><b><%= _("GUI") %></b></td>
             <td><%= radio_button_tag("privacy[gui]", "1", SqlExport.checked_possition?(hide_dest, 1), {:id => "privacy_gui_1"}) %>

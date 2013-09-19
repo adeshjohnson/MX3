@@ -16,7 +16,7 @@
                 <th align="right"><%= remote_sortable_list_header("server_id", _('Server'), @options).html_safe %></th>
             <% end %>
         <% end %>
-        <% if @ma_active and not @chanspy_disabled %>
+        <% if monitorings_addon_active? and not @chanspy_disabled %>
             <th align="center"><%= _('Spy') %></th>
         <% end %>
         <% if session[:usertype] == "admin" or allow_manage_providers? %>
@@ -108,7 +108,7 @@
                     <td id="server_<%= i %>" align="right"><%= nice_server_from_data(call["server_id"].to_s, {:link => true, :server_id => call["server_id"].to_i}) %></td>
                 <% end %>
             <% end %>
-            <% if @ma_active and not @chanspy_disabled %>
+            <% if monitorings_addon_active? and not @chanspy_disabled %>
                 <% if call["device_type"] != 'Virtual' %>
                     <% if !@spy_device.blank? and (call["server_id"].to_i != @spy_device.server_id.to_i) %>
                         <td align="center" style="opacity:0.4" <%= tooltip(_('Can not spy'), _('Spy_device_is_registered_on_different_server_than_this_call')) %>> <%= image_tag('icons/sound.png', :title => _('Spy_Channel'), :disabled => true ) %> </td>

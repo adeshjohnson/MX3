@@ -2440,7 +2440,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     end
 
     @show_did = current_user.active_calls_show_did?
-    @ma_active = monitorings_addon_active?
 
     #@active_calls = Activecall.find(:all, :order => "id")
     sql = "

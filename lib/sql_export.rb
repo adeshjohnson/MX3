@@ -33,11 +33,11 @@ module SqlExport
 
   def SqlExport.hide_dst_for_user_sql(user, type, dst, options)
     reference = options[:as].to_s.blank? ? dst : options[:as].to_s
-    (SqlExport.checked_possition?(hide_destination_end(user), @@types[type]) and user.usertype == 'user') ? SqlExport.hide_last_numbers_sql(dst, options) : SqlExport.column_escape_null(dst, reference, "")
+    (SqlExport.checked_possition?(user.hide_destination_end, @@types[type]) and user.usertype == 'user') ? SqlExport.hide_last_numbers_sql(dst, options) : SqlExport.column_escape_null(dst, reference, "")
   end
 
   def hide_dst_for_user(user, type, dst)
-    (SqlExport.checked_possition?(hide_destination_end(user), @@types[type]) and user.usertype == 'user') ? SqlExport.hide_last_numbers(dst) : dst
+    (SqlExport.checked_possition?(user.hide_destination_end, @@types[type]) and user.usertype == 'user') ? SqlExport.hide_last_numbers(dst) : dst
   end
 
   def SqlExport.column_escape_null(column, reference = nil, escape_to = "")

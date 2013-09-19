@@ -73,7 +73,7 @@ module StatsHelper
     legb = ""
     pdd = ""
 
-    if @ma_active
+    if monitorings_addon_active?
       lega = _("LegA_Codec") + ": " + call["lega_codec"].to_s
       if call["answer_time"]
         legb = _("LegB_Codec") + ": " + call["legb_codec"].to_s
