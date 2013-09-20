@@ -8,7 +8,7 @@
 
       <tr>
         <td> <%= _('Service') %>   </td>
-        <td> <%= @sub.service.name %>   </td>
+        <td> <%= @sub.service.name if @sub.service %>   </td>
       </tr>
       <% if not current_user.is_accountant? or (current_user.is_accountant? and current_user.accountant_allow_read('see_financial_data')) %>
       <tr>

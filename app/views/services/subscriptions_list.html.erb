@@ -35,7 +35,7 @@
             <td id="memo_<%= sub.id %>" align="left"> <%= sub.memo[0..50] if sub.memo %> </td>
             <td id="added_<%= sub.id %>" align="center"> <%= nice_date_time sub.added %> </td>
             <td id="activation_start_<%= sub.id %>" align="center"> <%= nice_user_timezone sub.activation_start %> </td>
-            <td id="activation_end_<%= sub.id %>" align="center"> <%= nice_user_timezone sub.activation_end %> </td>
+            <td id="activation_end_<%= sub.id %>" align="center"> <%= nice_user_timezone sub.activation_end unless (sub.service and sub.service.type == 'one_time_fee') %> </td>
             <td id="time_left_<%= sub.id %>" align="center"> <%= nice_time sub.time_left if sub.service.servicetype == "flat_rate" %></td>
             <% if @allow_edit %>
                 <td id="edit_<%= sub.id %>" align="center"><%= link_to(b_edit, {:action => 'subscription_edit', :id => sub}, :id => "edit_link_" + sub.id.to_s) %></td>
