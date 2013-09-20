@@ -1651,8 +1651,7 @@ conf_name - name of confline that will be represented by checkbox.
   end
 
   def hide_gui_dst?
-    settings = Confline.get_value("Hide_Destination_End", current_user.owner_id).to_i
-    settings = current_user.hide_destination_end.to_i unless current_user.hide_destination_end.to_i == -1
+    settings = current_user.hide_destination_end.to_i
     if not admin? and [1,3,5,7].member? settings.to_i
       return true
     else
