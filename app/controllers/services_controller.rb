@@ -360,9 +360,11 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    # check if users registration date(first day in month,time 00:00:00) is smaller than subscriptions activation date (both in users tz, not system)
-    # check dates as string without timezone value(e. g., datetime => 2013-09-20 15:47:54 +0300; datetime.to_s(:number) => "20130920154754")
-    valid_membership_time = @user.registered_at.try(:at_beginning_of_month).to_s(:number) <= user_time_from_params(*params['activation_start'].values).to_s(:number)
+    # check if users registration date(first day in month,time 00:00:00) is smaller than subscriptions activation date (both in users tz, not system) 
+    # check dates as integers in one timezone(e. g., datetime => 2013-09-01 00:00:00 +0300; datetime.strftime("%Y-%m-%d %H:%M:%S").to_time => 2013-09-01 00:00:00 UTC; 
+    #                                                datetime => 2013-09-01 00:00:00 +1000; datetime.strftime("%Y-%m-%d %H:%M:%S").to_time => 2013-09-01 00:00:00 UTC) 
+    # done in ticket #8424 
+    valid_membership_time = @user.registered_at.try(:at_beginning_of_month).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i <= @sub.activation_start.in_time_zone(user_tz).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i
 
     if (((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))) and valid_membership_time
       @sub.save
@@ -452,10 +454,12 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    # check if users registration date(first day in month,time 00:00:00) is smaller than subscriptions activation date (both in users tz, not system)
-    # check dates as string without timezone value(e. g., datetime => 2013-09-20 15:47:54 +0300; datetime.to_s(:number) => "20130920154754")
-    valid_membership_time = @sub.user.registered_at.try(:at_beginning_of_month).to_s(:number) <= user_time_from_params(*params['activation_start'].values).to_s(:number)
-    
+    # check if users registration date(first day in month,time 00:00:00) is smaller than subscriptions activation date (both in users tz, not system) 
+    # check dates as integers in one timezone(e. g., datetime => 2013-09-01 00:00:00 +0300; datetime.strftime("%Y-%m-%d %H:%M:%S").to_time => 2013-09-01 00:00:00 UTC; 
+    #                                                datetime => 2013-09-01 00:00:00 +1000; datetime.strftime("%Y-%m-%d %H:%M:%S").to_time => 2013-09-01 00:00:00 UTC) 
+    # done in ticket #8424 
+    valid_membership_time = @user.registered_at.try(:at_beginning_of_month).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i <= @sub.activation_start.in_time_zone(user_tz).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i
+
     if (@sub.activation_start <= @sub.activation_end) and valid_membership_time
       @sub.save
       flash[:status] = _('Subscription_updated')
