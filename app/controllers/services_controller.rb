@@ -360,7 +360,9 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    valid_membership_time = @user.registered_at.try(:at_beginning_of_month).to_i <= @sub.activation_start.to_i
+    # check if users registration date(first day in month,time 00:00:00) is smaller than subscriptions activation date (both in users tz, not system)
+    # check dates as string without timezone value(e. g., datetime => 2013-09-20 15:47:54 +0300; datetime.to_s(:number) => "20130920154754")
+    valid_membership_time = @user.registered_at.try(:at_beginning_of_month).to_s(:number) <= user_time_from_params(*params['activation_start'].values).to_s(:number)
 
     if (((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))) and valid_membership_time
       @sub.save
@@ -393,8 +395,8 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     else
       flash[:notice] = _('Bad_time')
       session[:subscription_create] = {
-         activation_start: @sub.activation_start,
-         activation_end:   @sub.activation_end,
+         activation_start: @sub.activation_start.in_time_zone(user_tz),
+         activation_end:   @sub.activation_end.in_time_zone(user_tz),
          memo:             @sub.memo
       }
       redirect_to :action => 'subscription_new', :id => params[:id] and return false
@@ -450,8 +452,10 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
       @sub.activation_end = @sub.activation_end.end_of_month.change(:hour => 23, :min => 59, :sec => 59)
     end
     
-    valid_membership_time = @sub.user.registered_at.try(:at_beginning_of_month).to_i <= @sub.activation_start.to_i
-
+    # check if users registration date(first day in month,time 00:00:00) is smaller than subscriptions activation date (both in users tz, not system)
+    # check dates as string without timezone value(e. g., datetime => 2013-09-20 15:47:54 +0300; datetime.to_s(:number) => "20130920154754")
+    valid_membership_time = @sub.user.registered_at.try(:at_beginning_of_month).to_s(:number) <= user_time_from_params(*params['activation_start'].values).to_s(:number)
+    
     if (@sub.activation_start <= @sub.activation_end) and valid_membership_time
       @sub.save
       flash[:status] = _('Subscription_updated')

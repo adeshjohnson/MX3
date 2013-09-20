@@ -14,7 +14,7 @@
       </tr>
       <tr>
         <td><%= _('Memo') %>:</td>
-        <td><%= text_field_tag 'subscription[memo]', "", "class" => "input", :size => "50", :maxlength => "150", :id => 'subscription_memo' %></td>
+        <td><%= text_field_tag 'subscription[memo]', @sub.memo, "class" => "input", :size => "50", :maxlength => "150", :id => 'subscription_memo' %></td>
       </tr>
       <tr>
         <td> <%= _('Date') %>:</td>
