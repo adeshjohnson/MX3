@@ -93,9 +93,9 @@ class TariffsController < ApplicationController
   def create
     @page_title = _('Tariff_new')
     @page_icon = "add.png"
-    @currs = Currency.get_active
-
     @tariff = Tariff.new(params[:tariff])
+    @currs = Currency.get_active
+    @user_wholesale_enabled = (confline("User_Wholesale_Enabled") == "1")
 
     user_id = get_user_id()
 
