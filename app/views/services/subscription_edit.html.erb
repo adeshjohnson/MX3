@@ -1,5 +1,5 @@
-<div class="nb"><%= b_user + _('user') %>: <%= @user.first_name %> <%= @user.last_name %></div>
-<br>
+<div class="nb"><%= b_user + _('user') %>: <%= link_nice_user(@user) %> </div>
+</br>
 
 <%= form_tag :action => 'subscription_update', :id => @sub, :s_memo => @search_memo, :s_service => @search_service, :s_user => @search_user, :s_device => @search_device, :s_date_from => @search_date_from, :s_date_till => @search_date_till, :page => @page, :back => @back do %>
 
