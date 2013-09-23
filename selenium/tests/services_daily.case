@@ -40,6 +40,36 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_smtp_server</td>
+	<td>mor.brokenmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>no-reply@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/sql/update_currencies</td>
 	<td></td>
 </tr>
@@ -459,9 +489,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Service periodic fee day</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Configuration error. Please consult this help link.</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -480,32 +510,47 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_13</td>
+	<td>id=type_28</td>
+	<td>error</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_28</td>
+	<td>Cant_send_email</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data2_28</td>
+	<td>Connection refused - connect(2)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_24</td>
 	<td>subscription_paid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=target_13</td>
+	<td>id=target_24</td>
 	<td>Subscription</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_13</td>
+	<td>id=data2_24</td>
 	<td>7.0</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_16</td>
+	<td>id=type_27</td>
 	<td>subscription_paid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=target_16</td>
+	<td>id=target_27</td>
 	<td>Subscription</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_16</td>
+	<td>id=data2_27</td>
 	<td>7.0</td>
 </tr>
 <tr>
@@ -694,9 +739,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Service periodic fee day</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Configuration error. Please consult this help link.</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -730,27 +775,42 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_28</td>
+	<td>id=user_35</td>
+	<td>Test User #1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_35</td>
+	<td>error</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_35</td>
+	<td>Cant_send_email</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_32</td>
 	<td>subscription_paid</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data2_28</td>
+	<td>id=data2_32</td>
 	<td>11.0</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>id=type_32</td>
+	<td>id=type_36</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=type_32</td>
+	<td>id=type_36</td>
 	<td>user_blocked</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=data_32</td>
+	<td>id=data_36</td>
 	<td>insufficient funds</td>
 </tr>
 <tr>
