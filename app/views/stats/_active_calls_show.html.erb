@@ -1,4 +1,5 @@
 <% show_servers = (session[:active_calls_show_server].to_i == 1) %>
+<% @hide_gui_dst = hide_gui_dst? %>
 <% if @active_calls.size < Confline.get_value("Active_Calls_Maximum_Calls").to_i %>
     <table width="100%" class="maintable">
       <tr>
