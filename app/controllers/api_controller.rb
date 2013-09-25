@@ -595,7 +595,13 @@ class ApiController < ApplicationController
       @user_logged = User.where(:username => username).first
       if @user_logged
         if @user_logged.usertype == 'admin'
-          @user = User.where(:id => @values[:user_id].to_i).first if @values[:user_id]
+          if @values[:user_id] and @values[:username]
+            @user = User.where(:id => @values[:user_id].to_i, :username => @values[:username].to_s).first
+          elsif @values[:user_id]
+            @user = User.where(:id => @values[:user_id].to_i).first
+          elsif @values[:username]
+            @user = User.where(:username => @values[:username].to_s).first
+          end
         elsif @user_logged.usertype == 'reseller'
           if @values[:user_id]
             if @user_logged.id.to_i == @values[:user_id].to_i
@@ -603,7 +609,14 @@ class ApiController < ApplicationController
             else
               owner = @user_logged.id
             end
-            @user = User.where(:id => @values[:user_id].to_i, :owner_id => owner.to_i).first
+
+            if @values[:user_id] and @values[:username]
+              @user = User.where(:id => @values[:user_id].to_i, :username => @values[:username].to_s, :owner_id => owner.to_i).first
+            elsif @values[:user_id]
+              @user = User.where(:id => @values[:user_id].to_i, :owner_id => owner.to_i).first
+            elsif @values[:username]
+              @user = User.where(:username => @values[:username].to_s, :owner_id => @user_logged.id).first
+            end
           end
 
         else
