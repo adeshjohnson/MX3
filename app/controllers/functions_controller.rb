@@ -2006,6 +2006,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value("PayPal_Default_Amount", params[:reseller_paypal_default_amount], session[:user_id])
     Confline.set_value("PayPal_User_Pays_Transfer_Fee", params[:paypal_user_pays_transfer_fee], session[:user_id])
     Confline.set_value("PayPal_Min_Amount", params[:reseller_paypal_min_amount], session[:user_id])
+    Confline.set_value("PayPal_Max_Amount", params[:reseller_paypal_max_amount], session[:user_id])
     Confline.set_value("PayPal_Test", params[:reseller_paypal_test], session[:user_id])
     Confline.set_value("PayPal_Email_Notification", params[:reseller_paypal_email_notification], session[:user_id])
     Confline.set_value("PayPal_Payment_Confirmation", params[:reseller_paypal_payment_confirmation], session[:user_id])

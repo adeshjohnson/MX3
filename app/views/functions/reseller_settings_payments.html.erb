@@ -32,17 +32,30 @@
         <tr>
           <td></td>
           <td><b><%= _('PayPal_User_Pays_Transfer_Fee') %>:</b></td>
-          <td>      <%= check_box_tag 'paypal_user_pays_transfer_fee', value = "1", Confline.get_value("PayPal_User_Pays_Transfer_Fee", session[:user_id]).to_i == 1 %>                </td>
+          <td>
+            <%= check_box_tag 'paypal_user_pays_transfer_fee', value = "1", Confline.get_value("PayPal_User_Pays_Transfer_Fee", session[:user_id]).to_i == 1 %>
+          </td>
         </tr>
         <tr>
           <td></td>
           <td><b><%= _('PayPal_Default_Amount') %>:</b></td>
-          <td>      <%= text_field_tag('reseller_paypal_default_amount', Confline.get_value("PayPal_Default_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+          <td>
+            <%= text_field_tag('reseller_paypal_default_amount', Confline.get_value("PayPal_Default_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>
+          </td>
         </tr>
         <tr>
           <td></td>
           <td><b><%= _('PayPal_Min_Amount') %>:</b></td>
-          <td>      <%= text_field_tag('reseller_paypal_min_amount', Confline.get_value("PayPal_Min_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>                </td>
+          <td>
+            <%= text_field_tag('reseller_paypal_min_amount', Confline.get_value("PayPal_Min_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b><%= _('PayPal_Max_Amount') %>:</b></td>
+          <td>
+            <%= text_field_tag('reseller_paypal_max_amount', Confline.get_value("PayPal_Max_Amount", session[:user_id]), "class" => "input", :size => "35", :maxlength => "50") %>
+          </td>
         </tr>
         <tr>
           <td></td>
