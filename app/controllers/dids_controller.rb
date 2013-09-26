@@ -1211,15 +1211,13 @@ ORDER BY dids.did ASC"
     @page_title = _('Dids_interval_assign_to_dialplan')
     @page_icon = "edit.png"
 
-    @ccdps = Dialplan.find(:all, :conditions => "dptype = 'callingcard'", :order => "name ASC")
-    @abpdps = Dialplan.find(:all, :conditions => "dptype = 'authbypin'", :order => "name ASC")
-
-    @cbdps = Dialplan.find(:all, :conditions => "dptype = 'callback' AND data1 NOT IN ('#{@dids.map { |d| d.id }.join("','")}')", :order => "name ASC")
-
-    @qfddps = Dialplan.find(:all, :conditions => "id != 1 and dptype = 'quickforwarddids'", :order => "name ASC")
-
-    @pbxfdps = Dialplan.find(:all, :conditions => "dptype = 'pbxfunction'", :order => "name ASC")
-    @ivrs = Dialplan.find(:all, :conditions => "dptype = 'ivr'", :order => "name ASC")
+    user_id = accountant? ? 0 : current_user.id
+    @ccdps = Dialplan.where(dptype: 'callingcard', user_id: user_id).order('name ASC')
+    @abpdps = Dialplan.where(dptype: 'authbypin', user_id: user_id).order('name ASC')
+    @cbdps = Dialplan.where("dptype = 'callback' AND data1 NOT IN ('#{@dids.map { |d| d.id }.join("','")}') AND user_id = #{user_id}").order('name ASC')
+    @qfddps = Dialplan.where("id != 1 AND dptype = 'quickforwarddids' AND user_id = #{user_id}").order('name ASC')
+    @pbxfdps = Dialplan.where(dptype: 'pbxfunction', user_id: user_id).order('name ASC')
+    @ivrs = Dialplan.where(dptype: 'ivr', user_id: user_id).order('name ASC')
 
     @vm_extension = Confline.get_value("VM_Retrieve_Extension", 0)
 
