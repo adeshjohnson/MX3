@@ -196,8 +196,8 @@
              call_reseller = call.reseller
              call_user = call.user
 
-             call_user = dst_device.user if dst_device and call.user_id == -1
-             card = call.card_id > 0 ? call.card : nil
+             call_user = dst_device.user if dst_device and call.user_id.to_i == -1
+             card = call.card_id.to_i > 0 ? call.card : nil
              call.processed == 0 ? text_class="n" : text_class="n_disabled"
              did = Did.find(:first, :conditions => ["id = ?", call.did_id.to_i]) -%>
           <tr class="row<%= (i % 2 + 1).to_s %>">
