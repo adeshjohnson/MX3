@@ -80,7 +80,7 @@ class Provider < ActiveRecord::Base
 
   def type
     return "dynamic" if self.server_ip == "dynamic"
-    return "hostname" if self.device.ipaddr.to_s == ""
+    return "hostname" if self.device and self.device.ipaddr.to_s == ""
     return "ip"
   end
 
