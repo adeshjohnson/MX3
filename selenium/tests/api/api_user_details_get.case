@@ -978,9 +978,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>css=pagename</td>
 	<td>Personal details</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1039,9 +1039,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>css=pagename</td>
 	<td>Personal details</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1125,9 +1125,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>css=pagename</td>
 	<td>Personal details</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1183,6 +1183,17 @@
 	<td>assertText</td>
 	<td>css=vat_percent</td>
 	<td>19.0</td>
+</tr>
+<!--reseller ->101-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_details?u=reseller&amp;username=user_admin&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=error</td>
+	<td>User was not found</td>
 </tr>
 </tbody></table>
 </body>
