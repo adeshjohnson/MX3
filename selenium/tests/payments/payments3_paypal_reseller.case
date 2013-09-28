@@ -53,6 +53,11 @@
 	<td>paypal@email.com</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>paypal_max_amount</td>
+	<td>50</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -93,9 +98,25 @@
 	<td>//img[@alt='Paypal_logo']</td>
 	<td></td>
 </tr>
+<!--#check whether paypal maximum balance is working for reseller-->
 <tr>
 	<td>assertTextPresent</td>
 	<td>Please enter amount to update your balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please press here to pay* 50.0000 USD </td>
 	<td></td>
 </tr>
 <tr>
@@ -139,6 +160,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
+<!--#check whether paypal maximum balance is working for user_admin-->
 <tr>
 	<td>assertText</td>
 	<td>//img[@alt='Paypal_logo']</td>
@@ -152,6 +174,21 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Please enter amount to update your balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please press here to pay* 50.0000 USD </td>
 	<td></td>
 </tr>
 <tr>
@@ -526,7 +563,108 @@
 	<td>paypal_user_pays_transfer_fee</td>
 	<td></td>
 </tr>
-
+<!--#check whether paypal maximum balance is working for user_reseller-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>reseller_paypal_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reseller_paypal_email</td>
+	<td>paypal@email.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reseller_paypal_max_amount</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<!--...Reseller User-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//img[@alt='Paypal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Paypal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter amount to update your balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please press here to pay* 50.0000 USD </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//img[@alt='Paypal_logo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/paypal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter amount to update your balance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//img[@alt='Paypal_logo']</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
