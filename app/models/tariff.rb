@@ -704,7 +704,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     if options[:manual_connection_fee] and !options[:manual_connection_fee].blank?
       conection_fee = options[:manual_connection_fee]
     elsif !options[:imp_connection_fee].blank? and options[:imp_connection_fee].to_i > -1
-      conection_fee = "replace(col_#{options[:imp_connection_fee]}, '\\r', '')"
+      conection_fee = "replace(replace(col_#{options[:imp_connection_fee]}, '\\r', ''), '#{options[:dec]}', '.')"
     else
       conection_fee = 0
     end
