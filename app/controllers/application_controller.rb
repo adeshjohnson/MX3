@@ -645,8 +645,8 @@ class ApplicationController < ActionController::Base
       # Handling transfers
       Extline.mcreate(default_context, i, "GotoIf", "$[${LEN(${CALLED_TO})} > 0]?" + (i+1).to_s + ":" + (i+3).to_s, @device.extension, device_id)
       i+=1
-      #            Extline.mcreate(default_context, i, "Set", "CALLERID(NAME)=TRANSFER FROM ${CALLED_TO}", @device.extension, device_id)
-      Extline.mcreate(default_context, i, "NoOp", "CALLERID(NAME)=TRANSFER FROM ${CALLED_TO}", @device.extension, device_id)
+      Extline.mcreate(default_context, i, "Set", "CALLERID(NAME)=${CALLED_TO}", @device.extension, device_id)
+      #Extline.mcreate(default_context, i, "NoOp", "CALLERID(NAME)=TRANSFER FROM ${CALLED_TO}", @device.extension, device_id)
       i+=1
       Extline.mcreate(default_context, i, "Goto", @device.extension.to_s + "|" + (i+2).to_s, @device.extension, device_id)
       i+=1
