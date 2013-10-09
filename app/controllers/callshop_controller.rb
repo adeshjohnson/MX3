@@ -370,6 +370,8 @@ class CallshopController < ApplicationController
         :user_type => "users.postpaid",
         :timestamp => "activecalls.start_time",
         :balance => "ABS(users.balance)",
+        :server => "activecalls.server_id",
+        :channel => "activecalls.channel",
     }
 
     sql = "SELECT #{columns.map { |key, value| "#{value} AS #{key.to_s}" }.join(", ")} FROM users
@@ -378,7 +380,7 @@ class CallshopController < ApplicationController
     #MorLog.my_debug("-----------------------------------------------\n"  + sql.to_s)
     rez = ActiveRecord::Base.connection.select_all(sql)
     all_booths = rez.inject([]) { |booths, row|
-      booth = {:id => nil, :created_at => nil, :number => nil, :duration => nil, :user_rate => nil, :country => nil, :user_type => nil, :timestamp => nil, :balance => nil, :state => nil}
+      booth = {:id => nil, :created_at => nil, :number => nil, :duration => nil, :user_rate => nil, :country => nil, :user_type => nil, :timestamp => nil, :balance => nil, :state => nil, :server => nil, :channel => nil}
       row.each { |key, value| booth[key.to_sym] = value if booth.has_key?(key.to_sym) } # parse values from SQL
 
       #replaced duration counting from sql NOW() to Time.now.getlocal()

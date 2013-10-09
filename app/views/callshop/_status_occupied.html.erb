@@ -4,6 +4,8 @@
     <tr id="booth-<%= user.id %>" class="booth occupied booth-<%= user.id %>">
       <td class="status"><span></span></td>
       <td class="num"><%= index + 1 %></td>
+      <td style="display: none" class="server"></td>
+      <td style="display: none" class="channel"></td>
       <td class="created_at"><%= nice_date_time(invoice.created_at) %></td>
       <td class="duration"><%= nice_time(active_calls.try(:duration)) %></td>
       <td class="user_rate"><%= active_calls.try(:user_rate) %></td>
