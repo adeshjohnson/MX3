@@ -288,13 +288,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//tr[@id='booth-7']/td[6]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//tr[@id='booth-7']/td[6]</td>
+	<td>css=td.country</td>
 	<td>Philippines</td>
 </tr>
 <tr>
@@ -325,7 +320,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//tr[@id='booth-7']/td[10]/div/div</td>
+	<td>css=span.yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=span.cancel-confirm</td>
 	<td></td>
 </tr>
 <tr>
@@ -335,7 +335,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[@id='booth-7']/td[10]/div/div/span[2]</td>
+	<td>css=span.cancel-confirm</td>
 	<td></td>
 </tr>
 <tr>
@@ -345,7 +345,7 @@
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>//tr[@id='booth-7']/td[10]/div/div</td>
+	<td>css=span.cancel-confirm</td>
 	<td></td>
 </tr>
 <!--* reserve booth-->
@@ -553,12 +553,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//tr[@id='booth-7']/td[9]</td>
+	<td>css=td.comment</td>
 	<td>komentaras</td>
 </tr>
 <tr>
-	<td>waitForNotText</td>
-	<td>//tr[@id='booth-7']/td[9]</td>
+	<td>waitForElementNotPresent</td>
+	<td>css=td.comment</td>
 	<td>komentaras</td>
 </tr>
 <tr>
@@ -567,7 +567,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForTextPresent</td>
 	<td>Free booths: 3</td>
 	<td></td>
 </tr>
@@ -1668,7 +1668,7 @@
 <tr>
 	<td>assertText</td>
 	<td>css=span.balance-value.green</td>
-	<td>PREPAID (5.00)</td>
+	<td>PREPAID (5.0000)</td>
 </tr>
 <tr>
 	<td>open</td>
