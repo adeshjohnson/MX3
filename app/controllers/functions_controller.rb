@@ -1143,7 +1143,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("3_first_rows_color", params[:colorfield7])
 
     #Various
-    if params[:device_range_min].length != params[:device_range_max].length
+    if params[:device_range_min].size != params[:device_range_max].size
       flash[:notice] = _("device_range_numbers_not_same")
       redirect_to :action => 'settings' and return false
     end
