@@ -157,15 +157,15 @@ class CardsController < ApplicationController
     @page_icon = "groups.png"
 
     @activate = params[:activate].to_i
-    if @activate.to_i == 6 and params[:card][:min_balance] !~ /^[-+]?[0-9]*\.?[0-9]+$/
+    if @activate.to_i == 6 and params[:card] and params[:card][:min_balance] !~ /^[-+]?[0-9]*\.?[0-9]+$/
       flash[:notice] = _('Bad_minimal_balance')
       redirect_to :action => 'act', :cg => @cg and return false
     end
     @start_num = params[:start_number].to_i <= params[:end_number].to_i ? params[:start_number] : params[:end_number]
     @end_num = params[:end_number].to_i >= params[:start_number].to_i ? params[:end_number] : params[:start_number]
     @u_id = params[:user_id].to_i
-    @min_balance = params[:card][:min_balance].to_d
-    @card_language = params[:card][:language].to_s
+    @min_balance = params[:card] ? params[:card][:min_balance].to_d : 0.0
+    @card_language = params[:card] ? params[:card][:language].to_s : ""
 
     if ((@start_num.length != @cg.number_length) or (@end_num.length != @cg.number_length)) or ((@start_num.to_i == 0) or (@end_num.to_i == 0))
       flash[:notice] = _('Bad_number_length_should_be') + ": " + @cg.number_length.to_s
