@@ -1142,6 +1142,13 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Row2_color", params[:colorfield6])
     update_confline("3_first_rows_color", params[:colorfield7])
 
+    #Various
+    if params[:device_range_min].length != params[:device_range_max].length
+      flash[:notice] = _("device_range_numbers_not_same")
+      redirect_to :action => 'settings' and return false
+    end
+    #/Various
+
     #Tax
     params[:total_tax] = "TAX" if params[:total_tax].blank?
     params[:tax1name] = params[:total_tax].to_s if params[:tax1name].blank?

@@ -4611,6 +4611,7 @@ Localization.define('en') do |l|
   l.store 'File_does_not_exist_in_a_file_system', 'File does not exist in a file system'
   l.store 'File_error', 'File error'
   l.store 'Self_cost_must_be_numeric', 'Self Cost must be numeric'
+  l.store 'device_range_numbers_not_same', 'Device range MIN and MAX values must be same length'
   #  l.store '', ''
   #  l.store '', ''
 
