@@ -366,7 +366,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     # done in ticket #8424
     @user_registered = 0
     @user_registered = @user.registered_at.try(:at_beginning_of_month).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i if (@user and @user.registered_at)
-    valid_membership_time = @user_registered <= @sub.activation_start.in_time_zone(@user.owner.time_zone).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i
+    valid_membership_time = @user_registered <= @sub.activation_start.in_time_zone(user_tz).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i
         
     if (((@sub.activation_start < @sub.activation_end) and service.servicetype == "periodic_fee") or service.servicetype == "one_time_fee" or ((service.servicetype == "flat_rate") and (@sub.activation_start < @sub.activation_end))) and valid_membership_time
       @sub.save
@@ -463,7 +463,7 @@ sql = "SELECT services.name as serv_name , users.first_name, users.last_name, us
     # done in ticket #8424
     @user_registered = @user.registered_at.try(:at_beginning_of_month).strftime("%Y-%m-%d %H:%M:%S").to_time if (@user and @user.registered_at)
     @user_registered = @user_registered.to_i
-    valid_membership_time = @user_registered <= @sub.activation_start.in_time_zone(@user.owner.time_zone).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i
+    valid_membership_time = @user_registered <= @sub.activation_start.in_time_zone(user_tz).strftime("%Y-%m-%d %H:%M:%S").to_time.to_i
     if (@sub.activation_start <= @sub.activation_end) and valid_membership_time
       @sub.save
       flash[:status] = _('Subscription_updated')
