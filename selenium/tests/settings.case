@@ -407,7 +407,7 @@
 <tr>
 	<td>type</td>
 	<td>device_range_max</td>
-	<td>10</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -437,12 +437,12 @@
 <tr>
 	<td>type</td>
 	<td>device_range_min</td>
-	<td>10</td>
+	<td>40</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>device_range_max</td>
-	<td>4</td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -453,6 +453,36 @@
 	<td>assertTextPresent</td>
 	<td>Device Range interval is not valid</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_range_min</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>device_range_max</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Device range MIN and MAX values must be same length</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_range_min</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=device_range_max</td>
+	<td>40</td>
 </tr>
 <!--LOGO-->
 <!--admin logo-->
