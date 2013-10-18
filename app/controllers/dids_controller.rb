@@ -110,7 +110,7 @@ class DidsController < ApplicationController
       @dids = Did.select("dids.*, #{SqlExport.nice_user_sql}").joins(dids_joins).where([cond.join(" AND ")].concat(var))
       @dids = @dids.having("nice_user like ?", '%'+@search_did_owner.to_s.strip) if @search_did_owner and @search_did_owner.to_s.strip.length > 0
 
-      total_dids = @dids.offset(session[:items_per_page]).all.count
+      total_dids = @dids.all.count
       @total_pages = (total_dids.to_d / session[:items_per_page].to_d).ceil
       @page = @total_pages if @page > @total_pages
       @page = 1 if @page < 1
