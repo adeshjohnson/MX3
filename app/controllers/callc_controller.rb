@@ -936,7 +936,9 @@ class CallcController < ApplicationController
             old_id = Server.select("MAX(server_id) AS last_old_id").first.last_old_id rescue 0
             new_id = old_id.to_i + 1
 
-            if (created_server = Server.create(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" ) rescue false) and 
+            created_server = Server.new(:server_id => new_id, :server_ip => ip, :hostname => host, :server_type => "sip_proxy", :comment => "SIP Proxy" )
+
+            if (created_server.save rescue false) and
               Device.where(:name => "mor_server_" + new_id.to_s).update_all(:nat => "yes", :allow => "alaw;g729;ulaw;g723;g726;gsm;ilbc;lpc10;speex;adpcm;slin;g722")
 
               @sd.each do |d|
