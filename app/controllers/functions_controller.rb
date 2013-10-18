@@ -639,7 +639,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
       sql = "SELECT A.prefix, acustratedetails.id as 'acid', acustratedetails.from as 'acfrom', acustratedetails.duration as 'acdur', acustratedetails.artype as 'actype', acustratedetails.round as 'acround', acustratedetails.price as 'acprice', destinationgroups.id as 'dgid', acustratedetails.start_time, acustratedetails.end_time "+
           "FROM  destinationgroups   " +
-          "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix like CONCAT(SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix)), '%')  ORDER BY LENGTH(destinations.prefix) AND destinationgroup_id > 0 DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id)   " +
+          "JOIN (SELECT destinations.* FROM  destinations WHERE destinations.prefix=SUBSTRING('#{dst}', 1, LENGTH(destinations.prefix))  ORDER BY LENGTH(destinations.prefix) AND destinationgroup_id > 0 DESC LIMIT 1) as A ON (A.destinationgroup_id = destinationgroups.id)   " +
           "JOIN customrates ON (customrates.destinationgroup_id = destinationgroups.id AND customrates.user_id = #{user.id})  " +
           "JOIN acustratedetails ON (acustratedetails.customrate_id = customrates.id  AND '#{time}' BETWEEN acustratedetails.start_time AND acustratedetails.end_time AND (acustratedetails.daytype = 'FD' OR acustratedetails.daytype = ''))  "
 
