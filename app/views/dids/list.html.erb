@@ -67,7 +67,10 @@
             </select>
             <br/>
             <br/>
-            <%= _('User') %>
+            <%= _('Owner') + ':' %>
+            <input title="DID live search" type="text" size="20" id="s_did_owner" name="s_did_owner" autocomplete="off" value="<%=raw @search_did_owner.to_s %>" />
+            <table id="did_owner_list" style='margin-left:2px;margin-top:0px;position:absolute;width:130px;border-width: 1px;border-image: initial;-webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;background-clip: initial;background-color: rgb(255, 255, 255);background-position: initial initial;background-repeat: initial initial;'></table>
+            &nbsp;&nbsp;<%= _('User') %>
             : <%= select_tag("s_user", options_for_select([[_('All'), ""]] + @users.map { |u| [h(nice_user(u)), u.id.to_s] }, @search_user.to_s)) %>
             &nbsp;&nbsp;<%= _('Device') %>:
           <span id="device_list_span">

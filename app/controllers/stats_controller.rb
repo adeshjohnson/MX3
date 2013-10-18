@@ -3353,7 +3353,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     params[:target_type] ? @options[:s_target_type] = params[:target_type].to_s : (params[:clean]) ? @options[:s_target_type] = '' : (@options[:s_target_type]) ? @options[:s_target_type] = session[:action_log_stats_options][:s_target_type] : @options[:s_target_type] = ''
     params[:target_id] ? @options[:s_target_id] = params[:target_id].to_s : (params[:clean]) ? @options[:s_target_id] = '' : (@options[:s_target_id]) ? @options[:s_target_id] = session[:action_log_stats_options][:s_target_id] : @options[:s_target_id] = ''
     params[:did] ? @options[:s_did] = params[:did].to_s : (params[:clean]) ? @options[:s_did] = '' : (@options[:s_did]) ? @options[:s_did] = session[:action_log_stats_options][:s_did] : @options[:s_did] = ''
-
+    
     # order
     params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
     params[:order_by] ? @options[:order_by] = params[:order_by].to_s : @options[:order_by] == "acc"

@@ -2354,13 +2354,11 @@ Variables: (Names marked with * are required)
     session[:usertype] == "accountant" ? 0 : session[:user_id]
   end
 
-=begin rdoc
- Returns correct owner_id if usertype is accountant
-=end
+ # Returns correct owner_id if usertype is accountant
 
   def correct_owner_id
-    return 0 if session[:usertype] == 'accountant' or session[:usertype] == 'admin'
-    return session[:user_id] if session[:usertype] == 'reseller'
+    return 0 if accountant? or admin?
+    return session[:user_id] if reseller?
     return session[:owner_id]
   end
 

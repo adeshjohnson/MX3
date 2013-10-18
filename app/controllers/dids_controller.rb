@@ -47,14 +47,15 @@ class DidsController < ApplicationController
 
     #seach
 
-    params[:search_on] ? @search = 1 : @search = 0
+    session[:dids_search] = 1 if params[:search_on]
     params[:page] ? @page = params[:page].to_i : @page = 1
+    session[:dids_search] = 0 if params[:clean].to_i == 1
 
     if params[:clean].to_i == 1 or !session[:did_search_options]
       session[:did_search_options] = {:s_language => 'all'}
       params[:s_language] = 'all' if !params[:s_language]
     end
-    [:search_did, :search_provider, :search_dialplan, :search_language, :search_status, :search_user, :search_device].each do |param|
+    [:search_did, :search_did_owner, :search_provider, :search_dialplan, :search_language, :search_status, :search_user, :search_device].each do |param|
       set_search_param(param)
     end
 
@@ -65,6 +66,7 @@ class DidsController < ApplicationController
     cond = ["dids.id > 0"]
     var = []
     cond << "did like ?" and var << @search_did.to_str.strip if @search_did.to_s.strip.length > 0
+    cond << "dids.status != 'free'" if @search_did_owner.to_s.strip.length > 0
     cond << "dids.provider_id = ?" and var << @search_provider if @search_provider.to_s.length > 0
     cond << "dids.dialplan_id = ?" and var << @search_dialplan if @search_dialplan.to_s.length > 0
     cond << "dids.language = ? " and var << @search_language.to_s if @search_language.to_s != 'all'
@@ -77,13 +79,16 @@ class DidsController < ApplicationController
         cond << "dids.status = ?" and var << @search_status
       end
     end
-    cond << "dids.user_id = ?" and var << @search_user if @search_user.to_s.length > 0
+    cond << "(dids.user_id = ? OR dids.reseller_id = ?)" and var += [@search_user, @search_user] if @search_user.to_s.length > 0
     cond << "dids.device_id = ?" and var << @search_device if @search_device.to_s.length > 0  and  @search_device.to_s != 'all'
-    cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller'
+    cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller' 
+    #@search = (var.size > 0 ? 1 : 0)
 
-    @search = (var.size > 0 ? 1 : 0)
-
-
+    dids_joins  = "left join users on users.id = dids.user_id "
+    dids_joins << "left join devices on devices.id = dids.device_id "
+    dids_joins << "left join providers on providers.id = dids.provider_id "
+    dids_joins << "left join dialplans on dialplans.id = dids.dialplan_id "
+        
     if params[:csv].to_i == 0
       unless current_user.usertype == 'reseller'
         @providers = current_user.load_providers(:all, {})
@@ -101,20 +106,26 @@ class DidsController < ApplicationController
       else
         @devices = current_user.load_users_devices(:all, {})
       end
+      
+      @dids = Did.select("dids.*, #{SqlExport.nice_user_sql}").joins(dids_joins).where([cond.join(" AND ")].concat(var))
+      @dids = @dids.having("nice_user like ?", '%'+@search_did_owner.to_s.strip) if @search_did_owner and @search_did_owner.to_s.strip.length > 0
 
-      total_dids = Did.count(:all, :conditions => [cond.join(" AND ")].concat(var)).to_d
-      @total_pages = (total_dids / session[:items_per_page].to_d).ceil
+      total_dids = @dids.offset(session[:items_per_page]).all.count
+      @total_pages = (total_dids.to_d / session[:items_per_page].to_d).ceil
       @page = @total_pages if @page > @total_pages
       @page = 1 if @page < 1
 
       @show_did_rates = !(session[:usertype] == "accountant" and session[:acc_manage_dids_opt_1] == 0 or reseller?)
 
       iend = session[:items_per_page] * (@page-1)
-      @dids = Did.includes([:user, :device, :provider, :dialplan]).where([cond.join(" AND ")].concat(var)).order("dids.did ASC").limit(session[:items_per_page]).offset(iend).all
 
+      @dids = @dids.limit(session[:items_per_page]).offset(iend).all
+    
     else
 
-      @dids = Did.includes([:user, :device, :provider, :dialplan]).where([cond.join(" AND ")].concat(var)).order("dids.did ASC").all
+      @dids = Did.select("dids.*, #{SqlExport.nice_user_sql}").joins(dids_joins).where([cond.join(" AND ")].concat(var))
+      @dids = @dids.having("nice_user like ?", '%'+@search_did_owner.to_s.strip) if @search_did_owner and @search_did_owner.to_s.strip.length > 0
+
       sep, dec = current_user.csv_params
 
       csv_string = "DID#{sep}Provider#{sep}Language#{sep}Status#{sep}User/Dial_Plan#{sep}Device#{sep}Call_limit#{sep}Comment\n"
