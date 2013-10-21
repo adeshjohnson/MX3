@@ -79,7 +79,7 @@ class DidsController < ApplicationController
         cond << "dids.status = ?" and var << @search_status
       end
     end
-    cond << "(dids.user_id = ? OR dids.reseller_id = ?)" and var += [@search_user, @search_user] if @search_user.to_s.length > 0
+    cond << "(dids.user_id = ? OR (dids.reseller_id = ? AND dids.reseller_id > 0))" and var += [@search_user, @search_user] if @search_user.to_s.length > 0
     cond << "dids.device_id = ?" and var << @search_device if @search_device.to_s.length > 0  and  @search_device.to_s != 'all'
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller' 
     @search = (var.size > 0 ? 1 : 0)
@@ -110,7 +110,7 @@ class DidsController < ApplicationController
       @dids = Did.select("dids.*, #{SqlExport.nice_user_sql}").joins(dids_joins).where([cond.join(" AND ")].concat(var))
       @dids = @dids.having("nice_user like ?", '%'+@search_did_owner.to_s.strip) if @search_did_owner and @search_did_owner.to_s.strip.length > 0
 
-      total_dids = @dids.all.count
+      total_dids = @dids.length
       @total_pages = (total_dids.to_d / session[:items_per_page].to_d).ceil
       @page = @total_pages if @page > @total_pages
       @page = 1 if @page < 1
