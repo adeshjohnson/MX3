@@ -957,7 +957,7 @@ class CallcController < ApplicationController
               redirect_to :action => :additional_modules and return true
 
             else
-              flash[:notice] = "Failed to update"
+              flash[:notice] = created_server.errors.values.first.first
               redirect_to :action => :additional_modules and return false
             end
 
