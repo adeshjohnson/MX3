@@ -925,11 +925,11 @@ class CallcController < ApplicationController
           ip = params[:ip_address]
           host = params[:host]
 
-          if ip.blank? or !check_ip_validity(ip)
+          if ip.blank? or !check_ip_validity(ip) #or not Server.where(server_ip: ip).count.zero? 
             flash[:notice] = _('Incorrect_Server_IP')
             redirect_to :action => :additional_modules and return false
           elsif host.blank? or !check_hostname_validity(host)
-            flash[:notice] = _('Incorrect_Host')
+            flash[:notice] = _('Incorrect_Host') or not Server.where(hostname: host).count.zero?
             redirect_to :action => :additional_modules and return false
           else
 
