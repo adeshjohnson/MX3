@@ -82,7 +82,7 @@ class DidsController < ApplicationController
     cond << "(dids.user_id = ? OR dids.reseller_id = ?)" and var += [@search_user, @search_user] if @search_user.to_s.length > 0
     cond << "dids.device_id = ?" and var << @search_device if @search_device.to_s.length > 0  and  @search_device.to_s != 'all'
     cond << "dids.reseller_id = ?" and var << current_user.id if current_user.usertype == 'reseller' 
-    #@search = (var.size > 0 ? 1 : 0)
+    @search = (var.size > 0 ? 1 : 0)
 
     dids_joins  = "left join users on users.id = dids.user_id "
     dids_joins << "left join devices on devices.id = dids.device_id "
