@@ -1,7 +1,7 @@
 <table width="100%" class="simple">
 
   <tr class="row2">
-    <th align="left" id="lcr"><%= b_lcr + _('LCR') %>: <%= link_nice_lcr_if_own(lcr) %></th>
+    <th align="left" id="lcr"><%= b_lcr + _('LCR') %>: <%= accountant? ? nice_lcr(lcr) : link_nice_lcr_if_own(lcr) %></th>
     <th align="right"></th>
   </tr>
 

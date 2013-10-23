@@ -5,7 +5,7 @@
   </tr>
   <tr class="row1">
     <td align="left"><%= b_view + _('Tariff') + "/" + _('Type') %>:</td>
-    <td align="right" id="tariff_<%= user.id %>"><%= link_nice_tariff_if_own(tariff) %>
+    <td align="right" id="tariff_<%= user.id %>"><%= (accountant? and session[:acc_tariff_manage].to_i.zero?) ? nice_tariff(tariff) : link_nice_tariff_if_own(tariff) %>
       /<%= {"user" => _('Retail'), "user_wholesale" => _('Wholesale')}[tariff.purpose] %></td>
   </tr>
   <tr class="row2">

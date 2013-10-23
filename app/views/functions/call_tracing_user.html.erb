@@ -6,7 +6,7 @@
 
   <tr class="row2">
     <th class="title"><%= b_user + _('user') %>:</th>
-    <th class="name"><%= link_nice_user_if_own(@user) %></th>
+    <th class="name"><%= (accountant? and session[:acc_user_manage].to_i.zero?) ? nice_user(@user) : link_nice_user_if_own(@user) %></th> 
     <th class="status"><%= _('Status') %></th>
     <th class="explanation"><%= _('Explanation') %></th>
   </tr>
@@ -52,7 +52,7 @@
 
   <tr class="row1">
     <td align="left"><%= b_view + _('Tariff') %>:</td>
-    <td id="tariff" align="right" width="20%"><%= link_nice_tariff_if_own(@u_tariff) %></td>
+    <td id="tariff" align="right" width="20%"><%= (accountant? and session[:acc_tariff_manage].to_i.zero?) ? nice_tariff(@u_tariff) : link_nice_tariff_if_own(@u_tariff) %></td> 
     <td colspan=2></td>
   </tr>
 
@@ -85,7 +85,7 @@
 
   <tr class="row2">
     <td><%= b_device + _('Total_devices') %>:</td>
-    <td id="total_devices" align="right"><%= link_show_devices_if_own(@user, :text => dev_count) %> </td>
+    <td id="total_devices" align="right"><%= (accountant? and session[:acc_device_manage].to_i.zero?) ? dev_count : link_show_devices_if_own(@user, :text => dev_count) %> </td>
     <td id="total_devices_status" align="center"> <%= status == 1 ? b_check : b_cross %></td>
     <td id="total_devices_explanation" align="center"> <%= _('CT_user_no_devices') if status == 0 %></td>
   </tr>
@@ -151,7 +151,7 @@
     <table width="100%" class="maintable">
       <tr class="row2">
         <th align="left"><%= b_lcr + _('LCR') %>:</th>
-        <th id="lcr" align="right" width="20%"><%= link_nice_lcr_if_own(@lcr) %></th>
+        <th id="lcr" align="right" width="20%"><%= accountant? ? nice_lcr(@lcr) : link_nice_lcr_if_own(@lcr) %></th>
         <th width="10%" align="center"><%= _('Status') %></th>
         <th width="50%"><%= _('Explanation') %></th>
       </tr>
@@ -250,13 +250,13 @@
     <% unless @hide_lcrs_and_providers %>
         <% @disabled ? text_class="n_disabled" : text_class="n" -%>
         <tr class=<%= "row" + i.to_s %>>
-          <td align="left" id="privider_id_<%= prov.id %>" class="<%= text_class %>"><%= link_nice_provider_if_own(prov) %></td>
+          <td align="left" id="privider_id_<%= prov.id %>" class="<%= text_class %>"><%= accountant? ? nice_provider(prov) : link_nice_provider_if_own(prov) %></td>
           <td align="left" id="privider_tariff_<%= prov.id %>" class="<%= text_class %>">
             <% if tariff %>
                 <% if  tariff.purpose == 'user' %>
-                    <%= link_to(tariff.name, :controller => "tariffs", :action => 'user_rates_list', :id => tariff.id) %>
+                    <%= (accountant? and session[:acc_tariff_manage].to_i.zero?) ? nice_tariff(tariff) : link_to(tariff.name, :controller => "tariffs", :action => 'user_rates_list', :id => tariff.id) %>
                 <% else %>
-                    <%= link_to(tariff.name, :controller => "tariffs", :action => "rates_list", :id => tariff.id) %>
+                    <%= (accountant? and session[:acc_tariff_manage].to_i.zero?) ? nice_tariff(tariff) : link_to(tariff.name, :controller => "tariffs", :action => "rates_list", :id => tariff.id) %>
                 <% end %>
             <% end %>
           </td>

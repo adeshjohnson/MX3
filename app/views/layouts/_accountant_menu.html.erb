@@ -1,9 +1,9 @@
-<%  if session[:acc_tariff_manage].to_i > 0 or session[:acc_manage_dids_opt_1].to_i > 0 or (cc_active? and session[:acc_callingcard_manage].to_i > 0) or session[:acc_user_manage].to_i > 0 or session[:acc_services_manage].to_i > 0 or session[:acc_invoices_manage].to_i > 0 or can_see_finances? or session[:acc_manage_subscriptions_opt_1].to_i > 0 or  (web_phone_active? and session[:acc_webphone_acc].to_i > 0)  %>
-    <script type="text/javascript">
+<% if session[:acc_tariff_manage].to_i > 0 or (session[:acc_manage_queues].to_i > 0 and pbx_active?) or session[:acc_manage_dids_opt_1].to_i > 0 or session[:acc_callingcard_manage].to_i > 0 or session[:acc_user_manage].to_i > 0 or session[:acc_services_manage].to_i > 0 or session[:acc_invoices_manage].to_i > 0 or can_see_finances? or session[:acc_manage_subscriptions_opt_1].to_i > 0 or session[:acc_call_tracing_usage].to_i > 0 or (web_phone_active? and session[:acc_webphone_acc].to_i > 0) %>     
+        <script type="text/javascript">
         acc_menu = new dTree('acc_menu');
         acc_menu.config.inOrder = true;
         acc_menu.add(0, -1, '<%= _('ACCOUNTANT_MENU') %>');
-        <% if (session[:acc_tariff_manage].to_i > 0 and can_see_finances?) or session[:acc_manage_dids_opt_1].to_i > 0 %>
+        <% if (session[:acc_tariff_manage].to_i > 0 and can_see_finances?) or session[:acc_manage_dids_opt_1].to_i > 0 or (session[:acc_manage_queues].to_i > 0 and pbx_active?) or session[:acc_call_tracing_usage].to_i > 0 %>
         acc_menu.add(1, 0, '<%= _('Billing') %>');
         <%if session[:acc_tariff_manage].to_i > 0 and can_see_finances? %>
         acc_menu.add(2, 1, '<%= _('Tariffs') %>', '<%= Web_Dir %>/tariffs/list');
@@ -11,6 +11,10 @@
         <% end %>
         <%if session[:acc_manage_dids_opt_1].to_i > 0 %>
         acc_menu.add(4, 1, '<%= _('DIDs') %>', '<%= Web_Dir %>/dids/list');
+        <% end %> 
+        <% if session[:acc_call_tracing_usage].to_i > 0 %> 
+        acc_menu.add(8, 1, '<%= _('Functions') %>'); 
+        acc_menu.add(9, 8, '<%= _('Call_Tracing') %>', '<%= Web_Dir %>/functions/call_tracing');
         <% end %>
         <% end %>
         <% if session[:acc_user_manage].to_i > 0 %>

@@ -7,7 +7,7 @@
 
   <tr class="row1">
     <td align="left"><%= b_user + _('user') %>:</td>
-    <td align="right" id="user"><%= link_nice_user_if_own(user) %></td>
+    <td align="right" id="user"><%= (accountant? and session[:acc_user_manage].to_i.zero?) ? nice_user(user) : link_nice_user_if_own(user) %></td>
   </tr>
 
   <tr class="row2">

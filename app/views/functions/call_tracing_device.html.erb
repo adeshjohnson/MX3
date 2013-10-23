@@ -29,9 +29,9 @@
       </tr>
 
       <tr class="row1">
-        <td><%= _('LCR_changed_from') %> <b><%= link_nice_lcr_if_own(@old_lcr_before_partials) %></b> <%= _('to') %>:
+        <td><%= _('LCR_changed_from') %> <b><%= accountant? ? nice_lcr(@old_lcr_before_partials) : link_nice_lcr_if_own(@old_lcr_before_partials) %></b> <%= _('to') %>:
         </td>
-        <td align="right"><%= link_nice_lcr_if_own(@lcr) %> </td>
+        <td align="right"><%= accountant? ? nice_lcr(@lcr) : link_nice_lcr_if_own(@lcr) %> </td>
       </tr>
 
       <tr class="row2">
@@ -323,7 +323,7 @@
                   <%= tooltip(_('Provider'), _('CT_No_tariff_not_active_explanation')) %>
               <% end %>
         >
-          <td align="left" id="provider_id_<%= r['providers_id'] %>" class="<%= text_class %>"><%= b_help_grey if @disabled %><%= prov ? link_nice_provider_if_own(prov) : r['prov_name'].to_s + "/" + r['providers_id'].to_s %></td>
+          <td align="left" id="provider_id_<%= r['providers_id'] %>" class="<%= text_class %>"><%= b_help_grey if @disabled %><%= prov ? (accountant? ? nice_provider(prov) : link_nice_provider_if_own(prov)) : r['prov_name'].to_s + "/" + r['providers_id'].to_s %></td>
           <td align="right" id="cut_<%= r['providers_id'] %>" class="<%= text_class %>"><%= r['cut'] %></td>
           <td align="right" id="add_<%= r['providers_id'] %>" class="<%= text_class %>"><%= r['add'] %></td>
           <td align="right" id="dial_string_<%= r['providers_id'] %>" class="<%= text_class %>"><%= dial_string(prov, @loc_dst, r['cut'], r['add']) %></td>

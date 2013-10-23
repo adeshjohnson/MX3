@@ -20,7 +20,7 @@
       <% @rights.each_with_index { |right, i| %>
           <% gr = acc_group_rights.select { |r| r.acc_right_id == right.id }[0] -%>
           <% unless right.name == "monitorings_manage" and !monitoring_enabled_for(current_user) %>
-              <% js_hash << "#{right.name.downcase}: #{(gr ? gr.value : 0)}" unless ['Active_Calls'].member?(right.permission_group) %>
+              <% js_hash << "#{right.name.downcase}: #{(gr ? gr.value : 0)}" unless ['Functions', 'Active_Calls'].member?(right.permission_group) %>
               <% if right.permission_group != old_group -%>
                   <tr>
                     <th><%= _(right.permission_group) %></th>
@@ -39,7 +39,7 @@
               <% if params[:group_type] != "reseller" %>
                 <td id="read_<%= right.name.downcase %>" align="center"><%= radio_button_tag("right_#{right.id}", 1, gr ? gr.value.to_i == 1 : false, {:id => "#{right.name.downcase}_1", :disabled => right.name.to_s == 'webphone_res'}) %></td>
               <% end %>
-                <td id="write_<%= right.name.downcase %>" align="center"><%= radio_button_tag("right_#{right.id}", 2, gr ? gr.value.to_i == 2 : false, {:id => "#{right.name.downcase}_2", :disabled => (['Active_Calls'].member?(right.permission_group))}) %></td>
+                <td id="write_<%= right.name.downcase %>" align="center"><%= radio_button_tag("right_#{right.id}", 2, gr ? gr.value.to_i == 2 : false, {:id => "#{right.name.downcase}_2", :disabled => (['Functions', 'Active_Calls'].member?(right.permission_group))}) %></td>
               </tr>
               <% old_group = right.permission_group -%>
           <% end %>

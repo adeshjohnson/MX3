@@ -30,6 +30,14 @@ class FunctionsController < ApplicationController
     true
   }
 
+  @@acc_call_tracing_view = [:call_tracing, :call_tracing_user, :call_tracing_device] 
+  before_filter(:only => @@acc_call_tracing_view) { |c| 
+    allow_read, allow_edit = c.check_read_write_permission(@@acc_call_tracing_view, [], {:role => "accountant", :right => :acc_call_tracing_usage, :ignore => true}) 
+    c.instance_variable_set :@allow_read_acc, allow_read 
+    c.instance_variable_set :@allow_edit_acc, allow_edit 
+    true 
+  } 
+
   $date_formats = ["%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M:%S", "%Y,%m,%d %H:%M:%S", "%Y.%m.%d %H:%M:%S", "%d-%m-%Y %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%d,%m,%Y %H:%M:%S", "%d.%m.%Y %H:%M:%S", "%m-%d-%Y %H:%M:%S", "%m/%d/%Y %H:%M:%S", "%m,%d,%Y %H:%M:%S", "%m.%d.%Y %H:%M:%S"]
   $decimal_formats = ['.', ',', ';']
 
@@ -402,7 +410,7 @@ class FunctionsController < ApplicationController
   def call_tracing
     @page_title = _('Call_Tracing')
     @page_icon = 'lightning.png'
-    @users = current_user.find_all_for_select
+    @users = User.find_all_for_select(correct_owner_id)
   end
 
   def call_tracing_ajax
@@ -3509,7 +3517,7 @@ Sets default tax values for users or cardgroups
 
   def call_tracing_user_find_user
     return false unless params[:reseller_user].to_i > 0 or params[:user]
-    if admin?
+    if admin? or accountant?
       if params[:reseller_user] and params[:reseller_user].to_i > 0
         User.includes([:tariff, :devices, :lcr]).where(:id => params[:reseller_user].to_i).first
       else
@@ -3526,7 +3534,7 @@ Sets default tax values for users or cardgroups
 
   def call_tracing_device_find_user
     return false if params[:user].blank?
-    if admin?
+    if admin? or accountant?
       User.includes([:tariff, :devices, :lcr]).where(:id => params[:user]).first
     else
       if current_user.id == params[:user].to_i
