@@ -422,9 +422,7 @@ class AccountingController < ApplicationController
         #          price += incoming_made_calls_price.to_d
         #        end
 
-
         MorLog.my_debug("    Invoice price without subscriptions: #{price.to_s}", 1)
-
         # nasty hack for Balticom to recalculate invoices/balance - DO NOT USE!!!
         #user.balance -= price
         #user.save
@@ -456,9 +454,9 @@ class AccountingController < ApplicationController
             count_subscription = 1
 
             #from which day used?
-            use_start = (sub.activation_start < period_start) ? period_start : sub.activation_start.in_time_zone(User.current.time_zone)
+            use_start = (sub.activation_start < period_start) ? period_start : sub.activation_start
             #till which day used?
-            use_end = (sub.activation_end > period_end) ? period_end : sub.activation_end.in_time_zone(User.current.time_zone)
+            use_end = (sub.activation_end > period_end) ? period_end : sub.activation_end
             start_date = use_start.to_date
             end_date = use_end.to_date
             days_used = end_date - start_date
@@ -489,7 +487,6 @@ class AccountingController < ApplicationController
           end
           MorLog.my_debug("end subscriptions periodic_fee", 1)
           MorLog.my_debug("    Invoice Subscriptions price: #{invd_price.to_s}", 1)
-
 
           if count_subscription == 1
             invoice.invoicedetails.create(:name => service.name.to_s + " - " + sub.memo.to_s, :price => invoice.nice_invoice_number(invd_price.to_d, {:nc=>nc, :apply_rounding=>true}), :quantity => "1")
@@ -1977,13 +1974,13 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
           if sub.activation_start < period_start_with_time
             use_start = period_start_with_time
           else
-            use_start = sub.activation_start.in_time_zone(User.current.time_zone)
+            use_start = sub.activation_start
           end
           #till which day used?
           if sub.activation_end > period_end_with_time
             use_end = period_end_with_time
           else
-            use_end = sub.activation_end.in_time_zone(User.current.time_zone)
+            use_end = sub.activation_end
           end
           start_date = use_start.to_date
           end_date = use_end.to_date

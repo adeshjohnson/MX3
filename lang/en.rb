@@ -4142,6 +4142,7 @@ Localization.define('en') do |l|
   l.store 'not_sold', 'not sold'
   l.store 'Device_location_changed_and_moved_to_another_group', 'Device location changed and moved to another group'
   l.store 'Value_in_system_time_zone', 'Value in system time zone'
+  l.store 'values_in_system_time_zone', 'values in system time zone'  
   l.store 'invalid_api_secret_key', 'Invalid API secret key'
   l.store 'API_Secret_Key_Explanation', 'If API is disabled secret can be blank or at least 6 symbols, when enabled it has to be at least 6 symbols'
   l.store 'Do_not_import_duplicates', 'Do not import duplicates'

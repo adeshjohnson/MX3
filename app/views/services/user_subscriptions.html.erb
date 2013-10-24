@@ -1,4 +1,7 @@
 <% if @subs and @subs.size.to_i > 0 %>
+    <%= b_info %> <%= _('Activation_start') + " and " + _('Activation_end') + " " + _('values_in_system_time_zone') %>: <%= nice_system_time_string %>
+    <br><br>
+
     <table width="100%" class="maintable">
       <tr>
         <th id="h_service" align="left"><%= _('Service') %></th>
@@ -12,8 +15,8 @@
           <tr class="row<%= (i % 2 + 1).to_s %>">
             <td id="name_<%= sub.id %>" align="left"><%= sub.service.name %></td>
             <td id="added_<%= sub.id %>" align="center"> <%= nice_date_time sub.added %> </td>
-            <td id="activation_start_<%= sub.id %>" align="center"> <%= nice_date_time sub.activation_start %> </td>
-            <td id="activation_end_<%= sub.id %>" align="center"> <%= nice_date_time sub.activation_end %> </td>
+            <td id="activation_start_<%= sub.id %>" align="center"> <%= nice_date_time(sub.activation_start, 0) %> </td>
+            <td id="activation_end_<%= sub.id %>" align="center"> <%= nice_date_time(sub.activation_end, 0) %> </td>
             <td id="time_left_<%= sub.id %>" align="center"> <%= nice_time(sub.time_left) if sub.service.servicetype == "flat_rate" %></td>
             <td id="price_<%= sub.id %>" align="right"> <%= nice_number sub.service.price %> <%= current_user.currency.name %></td>
           </tr>
@@ -22,5 +25,3 @@
 <% else %>
     <%= _('No_subscriptions_found') %>
 <% end %>
-
-
