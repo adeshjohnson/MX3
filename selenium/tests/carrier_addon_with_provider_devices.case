@@ -1,0 +1,1638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.66" />
+<title>carrier_addon_with_provider_devices</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">carrier_addon_with_provider_devices</td></tr>
+</thead><tbody>
+<!--server_devices lentoje yra naudojamas servers.id serverproviders lentoje yra naudojamas servers.server_id-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--Sukeliami providers-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=provider_auth_unique/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<!--Prov priskiriami useriams-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=assign_prov_to_user/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<!--Tikrinama kokie sąryšiai-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=server_devices</td>
+</tr>
+<!--SIP prov devices-->
+<!--resellers prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>4302</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>4302</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>10</td>
+</tr>
+<!--admins prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<!--IAX2 prov device-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2303</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2304</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2304</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=serverproviders</td>
+</tr>
+<!--SIP prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<!--IAX2 prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3304</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3305</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<!--Įjungiam CCL addon-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/additional_modules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CCL_Active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ip_address</td>
+	<td>127.0.0.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=host</td>
+	<td>127.0.0.5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Tikrinama kaip pasikeitė sąryšiai-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=server_devices</td>
+</tr>
+<!--SIP prov devices-->
+<!--resellers prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>4302</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>4302</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>10</td>
+</tr>
+<!--admins prov-->
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2001</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<!--IAX2 prov device-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2303</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2304</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=serverproviders</td>
+</tr>
+<!--SIP prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<!--IAX2 prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3304</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3305</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<!--išjungiam CCL addon-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/additional_modules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CCL_Active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Tikrinama kaip pasikeitė sąryšiai-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=server_devices</td>
+</tr>
+<!--SIP prov devices-->
+<!--resellers prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>4302</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>4302</td>
+</tr>
+<!--admins prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>21</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<!--IAX2 prov device-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2303</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>17</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device_id_value</td>
+	<td>2304</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=serverproviders</td>
+</tr>
+<!--SIP prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3006</td>
+</tr>
+<!--IAX2 prov-->
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3304</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=id_value</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=server_id_value</td>
+	<td>16</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_value</td>
+	<td>3305</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body &gt; p</td>
+	<td>Not found</td>
+</tr>
+<!--fix_provider_device_server_dependencies.rb sutvarko server_devices sąryšius, atstato ištrintus.-->
+</tbody></table>
+</body>
+</html>
