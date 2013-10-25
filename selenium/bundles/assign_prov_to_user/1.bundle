@@ -1,0 +1,44 @@
+# assign providers to servers
+# assign providers to Test User #1
+# ----
+# used in carrier_addon_with_provider_devices.case
+# this bundle used after provider_auth_unique/1 bundle
+# ----
+# Admin
+# ----
+# Reseller settings -> Resellers server set as server4302
+settings/reseller/resellers_server_to_server4302.sql
+# ----
+# sip_3002 provider assign to server 4001 
+provider/sip_3002/add_to_server4001.sql
+# sip_3002 provider assign to server 4302 
+provider/sip_3002/add_to_server4302.sql
+# sip_3006 provider assign to server 4001 
+provider/sip_3006/add_to_server4001.sql
+# sip_3006 provider assign to server 4302 
+provider/sip_3006/add_to_server4302.sql
+# iax2_1 provider assign to server 4001 
+provider/iax2_1/add_to_server4001.sql
+# iax2_1 provider assign to server 4302 
+provider/iax2_1/add_to_server4302.sql
+# ----
+# sip_3002 provider assing to Test User #1
+provider/sip_3002/assign_to_user2.sql
+# sip_3006 provider assing to Test User #1
+provider/sip_3006/assign_to_user2.sql
+# iax2_1 provider assing to Test User #1
+provider/iax2_1/assign_to_user2.sql
+# ----
+# Reseller
+# ----
+# sip_3304 provider assign to server 4302 
+provider/sip_3304/add_to_server4302.sql
+# iax2_3305 provider assign to server 4302 
+provider/iax2_3305/add_to_server4302.sql
+# ----
+# sip_3304 provider assing to Test User #1
+provider/sip_3304/assign_to_user5.sql
+# iax2_3305 provider assing to Test User #1
+provider/iax2_3305/assign_to_user5.sql
+# ---
+# bundle loaded
