@@ -32,6 +32,8 @@
         <%= render :partial => "page_select_header" %>
     <% end %>
     <br>
+    <%= b_info %> <%= _('Activation_start') + " and " + _('Activation_end') + " " + _('values_in_system_time_zone') %>: <%= nice_system_time_string %>
+    <br/><br/>
 
     <table width="100%" class="maintable">
       <tr>
@@ -71,8 +73,8 @@
             <% end %>
             <td id="memo_<%= r.id %>"align="left"> <%= r.memo if r.memo %> </td>
             <td id="added_<%= r.id %>" align="center"> <%= nice_date_time r.added %> </td>
-            <td id="activation_start_<%= r.id %>" align="center"> <%= nice_date_time r.activation_start %> </td>
-            <td id="activation_end_<%= r.id %>" align="center"> <%= nice_date_time r.activation_end %> </td>
+            <td id="activation_start_<%= r.id %>" align="center"> <%= nice_date_time(r.activation_start, 0) %> </td>
+            <td id="activation_end_<%= r.id %>" align="center"> <%= nice_date_time(r.activation_end, 0) %> </td>
             <td id="time_left_<%= r.id %>" align="center"> <%= nice_time time_untill_expire(r) if r.servicetype == "flat_rate" %></td>
             <% if session[:acc_manage_subscriptions_opt_1].to_i > 1 or (@allow_edit and session[:usertype] != 'accountant') %>
                 <td id="edit_<%= r.id %>" align="center"><%= link_to(b_edit, {:controller => "services", :action => 'subscription_edit', :id => r.subscription_id}, :id=>"edit_link_" + r.id.to_s) %></td>

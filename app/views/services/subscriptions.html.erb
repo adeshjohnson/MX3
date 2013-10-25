@@ -47,8 +47,11 @@
     <br/>
     <%= raw render :partial => "page_select_header" %>
 <% end %>
-
 <br/>
+
+<%= b_info %> <%= _('Activation_start') + " and " + _('Activation_end') + " " + _('values_in_system_time_zone') %>: <%= nice_system_time_string %>
+<br/><br/>
+
 <table width="100%" class="maintable">
   <tr>
     <th align="left"><%= _('User') %></th>
