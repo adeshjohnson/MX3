@@ -257,6 +257,172 @@
 	<td>id=rate</td>
 	<td>0.100000</td>
 </tr>
+<!--ACC PERMISSIONS GROUP-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<!--Acc call tracing permission-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=call_tracing_usage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--Test user #1, has his tariff set to 'Test Tariff for Users' and device IAX/101 that's location is set to global. do call tracking for this users device IAX2/101 and remote destination that has perfix 000987-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--As expected if device's location is set to global, global location rules will apply - according to it prefix 000987 wil be cut and 54 added. Rates set to Argentina 54 Fix will be applied.-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device</td>
+	<td>IAX2/101</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dest</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=location</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>54</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>54</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=add</td>
+	<td>54</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Tariff changed from Test Tariff for Users to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate</td>
+	<td>0.100000</td>
+</tr>
+<!--loggin as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
 <!--edit IAX2/101 device's properties and set it's location to recently created 'vilnius'-->
 <tr>
 	<td>open</td>
@@ -354,6 +520,125 @@
 	<td>assertText</td>
 	<td>id=rate</td>
 	<td>0.900000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--login-->
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--after changing location do call tracing once more for same user, his device and same destination.-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=Test User #1 (2)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=destination</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--it is expected that if device has some other location than global. and some rule for 'other' location applies for dialed destination it's tariff will be applied. in this case devices location is 'vilnius' and it has a rule to cut perfix 000987, to add 1684 and apply 'WHAT RULE????'-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=device</td>
+	<td>IAX2/10133</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dest</td>
+	<td>000987345678</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=location</td>
+	<td>vilnius</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cut</td>
+	<td>000987</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=add</td>
+	<td>1684</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=rate</td>
+	<td>0.900000</td>
+</tr>
+<!--loggin as admin-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
 </tr>
 <!--Create 2 rates so that reseller could do call tracing for him self(prefixes are 2442 and 16842)-->
 <tr>
