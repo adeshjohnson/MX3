@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.0.139" />
+<title>call_tracing_accountant</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">call_tracing_accountant</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//a[contains(@href, '/billing/functions/call_tracing')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>You are not authorized to view this page</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_groups</td>
+	<td></td>
+</tr>
+<!--naujas permissionas accountantui - call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_call_tracing_usage</td>
+	<td>Call Tracing Usage</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=call_tracing_usage_0</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=call_tracing_usage_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=call_tracing_usage_2</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=call_tracing_usage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=call_tracing_usage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=call_tracing_usage_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--edit provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=provider_tariff_id</td>
+	<td>label=spectariffpro</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add_to_servers_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--edit localization rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tariff</td>
+	<td>label=spectariffre</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>lcr</td>
+	<td>label=speclcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/locations/location_rule_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--set localization rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>device[location_id]</td>
+	<td>label=SpecRules</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[contains(@href, '/billing/functions/call_tracing')]</td>
+	<td></td>
+</tr>
+<!--call trasing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin2 (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>800017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>SpecRules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>applied_rule</td>
+	<td>destrules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>cut</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>add</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>localized_destination</td>
+	<td>93400017219</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>lcr_changed_from_to</td>
+	<td>speclcr</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>tariff_changed_from</td>
+	<td>spectariffre</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>prefix_16</td>
+	<td>9340</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>2.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price_3</td>
+	<td>2.000000</td>
+</tr>
+<!--call tracing without tariff and lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin2 (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>900017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>SpecRules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>applied_rule</td>
+	<td>destrulesfree</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>cut</td>
+	<td>90</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>add</td>
+	<td>6140</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>localized_destination</td>
+	<td>61400017219</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>destination_group_16</td>
+	<td>Australia MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>11.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price_3</td>
+	<td>7.000000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>LCR changed from Primary to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=specpro2/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_3</td>
+	<td>specpro2/3</td>
+</tr>
+<!--call tracing without rules-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin2 (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>297960017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>SUCCESS! Based on given data call will go through!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>297960017219</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>prefix_16</td>
+	<td>29796</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>22.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price_3</td>
+	<td>6.000000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>LCR changed from Primary to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=wholesalereseller (8)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=error</td>
+	<td>ERROR! Call cannot be made. Please check for errors!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=total_devices_explanation</td>
+	<td>User has no devices. He will not be able to dial out.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sql/acc_all_permissions_write</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=call_tracing_usage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user</td>
+	<td>label=user_admin2 (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>destination</td>
+	<td>900017219</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>location</td>
+	<td>SpecRules</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>applied_rule</td>
+	<td>destrulesfree</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>cut</td>
+	<td>90</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>add</td>
+	<td>6140</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>localized_destination</td>
+	<td>61400017219</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>destination_group_16</td>
+	<td>Australia MOB</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price</td>
+	<td>11.000000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>price_3</td>
+	<td>7.000000</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>LCR changed from Primary to:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=specpro2/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_id_3</td>
+	<td>specpro2/3</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=user_admin2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=spectariffre</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=provider_id_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=spectariffre</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=page_title_icon</td>
+	<td>Rates for tariff</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=user_admin2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title_icon</td>
+	<td>User settings: user_admin2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--delete provider-->
+<tr>
+	<td>open</td>
+	<td>/billing/lcrs/providers_list/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--call tracing-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/call_tracing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user</td>
+	<td>label=user_admin2 (16)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>LCR provider was not found</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
