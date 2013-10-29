@@ -75,7 +75,7 @@ class Email < ActiveRecord::Base
         :first_name => user.first_name.to_s,
         :last_name => user.last_name.to_s,
         :full_name => user.first_name.to_s + " " + user.last_name.to_s,
-        :balance => user.balance.to_s,
+        :balance => Email.nice_number(user.balance).to_s,
         :nice_balance => User.current ? Email.nice_number(user.balance * Currency.count_exchange_rate(User.current.currency.name, user.currency.name), {:nice_number_digits => nnd, :global_decimal => options[:global_decimal], :change_decimal => options[:change_decimal]}).to_s : user.currency.name,
         :warning_email_balance => user.warning_email_balance.to_s,
         :nice_warning_email_balance => Email.nice_number(user.warning_email_balance.to_s, {:nice_number_digits => nnd, :global_decimal => options[:global_decimal], :change_decimal => options[:change_decimal]}),
