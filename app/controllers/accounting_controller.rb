@@ -555,13 +555,13 @@ class AccountingController < ApplicationController
     end
     MorLog.my_debug("\n\n========== Generating invoices ============", 1)
 
-    @period_start = session_from_date
-    @period_end = session_till_date
+    @period_start = session[:year_from].to_s + "-" + good_date(session[:month_from].to_s) + "-" + good_date(session[:day_from].to_s)
+    @period_end = session[:year_till].to_s + "-" + good_date(session[:month_till].to_s) + "-" + good_date(session[:day_till].to_s)
     #    # period with time
     period_start = @period_start.to_time
     period_end = (@period_end + " 23:59:59").to_time
-    period_start_with_time = session_from_date + " 00:00:00"
-    period_end_with_time = session_till_date + " 23:59:59"
+    period_start_with_time = @period_start + " 00:00:00"
+    period_end_with_time = @period_end + " 23:59:59"
     total_days =(@period_end.to_date - @period_start.to_date) + 1
 
     if session[:invoices_is_generating].to_i == 1
