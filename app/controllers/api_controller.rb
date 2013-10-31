@@ -673,7 +673,7 @@ class ApiController < ApplicationController
           doc.error("User was not found")
         end
       else
-        doc.error("User was not found")
+        doc.error("Bad login")
         MorApi.create_error_action(params, request, 'API : User not found by login and password')
       end
     send_xml_data(out_string, params[:test].to_i)
