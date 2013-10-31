@@ -106,11 +106,22 @@
 	<td>css=body</td>
 	<td>hash15</td>
 </tr>
-<!--admin ->admin-->
-<!--slaptazodis ignoruojamas-->
+<!--neteisingas username-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=0&amp;hash=${hash12}&amp;test=1</td>
+	<td>/billing/api/user_details?u=neteisingas&amp;user_id=0&amp;hash=${hash12}&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<!--admin ->admin-->
+<!--neteisingas slaptazodis-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_details?u=admin&amp;p=neteisingas&amp;user_id=0&amp;hash=${hash12}&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,54 +140,19 @@
 	<td>USD</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=language</td>
-	<td>en</td>
+	<td>open</td>
+	<td>/billing/api/user_details?u=admin&amp;p=admin1&amp;user_id=0&amp;hash=${hash12}&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=userid</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=account</td>
-	<td>Postpaid</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=balance</td>
-	<td>60.0000 USD</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=credit</td>
-	<td>Unlimited</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=username</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=first_name</td>
-	<td>System</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=agreement_date</td>
-	<td>2007-03-26</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=taxation_country</td>
-	<td>Afghanistan</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=vat_percent</td>
-	<td>18.0</td>
+	<td>css=balance_number</td>
+	<td>60.0</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -634,6 +610,37 @@
 	<td>19.0</td>
 </tr>
 <!--101->101-->
+<!--neteisingas slaptazodis-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_details?u=user_admin&amp;p=neteisingas&amp;user_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_number</td>
+	<td>26.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance_currency</td>
+	<td>USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>2</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/api/user_details?u=user_admin&amp;user_id=2&amp;test=1</td>
@@ -762,6 +769,37 @@
 	<td></td>
 </tr>
 <!--reseller->reseller-->
+<!--neteisingas slaptazodis-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_details?u=reseller&amp;p=neteisingas&amp;user_id=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=userid</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=account</td>
+	<td>Postpaid</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=balance</td>
+	<td>36.0000 USD</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/api/user_details?u=reseller&amp;user_id=3&amp;test=1</td>
@@ -904,6 +942,27 @@
 	<td>19.0</td>
 </tr>
 <!--accountant->reseller-->
+<!--neteisingas slaptazodis-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/user_details?u=accountant&amp;p=neteisingas&amp;user_id=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Personal details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=language</td>
+	<td>en</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=account</td>
+	<td>Postpaid</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/api/user_details?u=accountant&amp;user_id=3&amp;test=1</td>
@@ -967,7 +1026,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User was not found</td>
+	<td>Bad login</td>
 	<td></td>
 </tr>
 <!--with username parameter-->
