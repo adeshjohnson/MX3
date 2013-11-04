@@ -2302,11 +2302,13 @@ Variables: (Names marked with * are required)
     err_link.each { |key, value| flash = value if exception.message.to_s.include?(key) }
 
     if flash.to_s.blank?
+      message = ""
       if exception.class.to_s.include?("Net::SMTPAuthenticationError")
         flash = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#535'
       end
       if exception.class.to_s.include?("SocketError") or exception.class.to_s.include?("Timeout") or exception.class.to_s.include?("Errno::ECONNREFUSED")
         flash = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#Email_SMTP_server_timeout'
+        message = "Connection refused - connect(2)" if exception.class.to_s.include?("Timeout") and exception.message.include?("execution expired")
       end
       if exception.class.to_s.include?("Net::SMTP")
         flash = 'http://wiki.kolmisoft.com/index.php/GUI_Error_-_Email_SMTP#ERROR'
@@ -2326,7 +2328,8 @@ Variables: (Names marked with * are required)
     else
       a_user_id = 0
     end
-    Action.new(:user_id => a_user_id, :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => exception.message.to_s).save if !flash.to_s.blank?
+    message = exception.message.to_s if message.blank?
+    Action.new(:user_id => a_user_id, :date => Time.now.to_s(:db), :action => "error", :data => 'Cant_send_email', :data2 => message).save if !flash.to_s.blank?
     flash
   end
 
