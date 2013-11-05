@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   include SqlExport
 
-  before_filter :check_post_method, :only => [:destroy, :create, :update, :update_personal_details]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :update_personal_details, :user_custom_rate_add_new]
   before_filter :authorize, :except => [:daily_actions]
   before_filter :check_localization, :except => [:daily_actions]
   before_filter { |c|
@@ -146,7 +146,6 @@ class UsersController < ApplicationController
 
     session[:user_list_stats] = @options
   end
-
 
   def reseller_users
     @page_title = _('Reseller_users')
@@ -966,9 +965,7 @@ in before filter : user (:find_user)
     end
   end
 
-=begin
-in before filter : customrate (:find_customrate)
-=end
+#in before filter : customrate (:find_customrate)
   def user_delete_custom_rate
     user_id = @customrate.user_id
     @customrate.destroy_all
@@ -976,9 +973,7 @@ in before filter : customrate (:find_customrate)
     redirect_to :action => 'custom_rates', :id => user_id
   end
 
-=begin
-in before filter : customrate (:find_customrate) ; ards (:find_ard_all)
-=end
+#in before filter : customrate (:find_customrate) ; ards (:find_ard_all)
   def artg_destroy
     dt = params[:dt] ? params[:dt] : ''
 
@@ -999,9 +994,7 @@ in before filter : customrate (:find_customrate) ; ards (:find_ard_all)
     redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
   end
 
-=begin
-in before filter : customrate (:find_customrate)
-=end
+#in before filter : customrate (:find_customrate)
   def ard_manage
     rdetails = @customrate.acustratedetails
     rdaction = params[:rdaction]
@@ -1052,9 +1045,7 @@ in before filter : customrate (:find_customrate)
     redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
   end
 
-=begin
-in before filter : user (:find_user)
-=end
+#in before filter : user (:find_user)
   def user_acustrates_full
     @page_title = _('Custom_rate_details')
     @page_icon = "coins.png"
@@ -1105,9 +1096,7 @@ in before filter : user (:find_user)
     end
   end
 
-=begin
-in before filter : customrate (:find_customrate); ards (:find_ard_all)
-=end
+#in before filter : customrate (:find_customrate); ards (:find_ard_all)
   def user_ard_time_edit
 
     if accountant? and session[:acc_user_create_opt_4].to_i != 2
@@ -1157,9 +1146,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
     redirect_to :action => 'user_acustrates_full', :id => @customrate.user_id, :dg => @customrate.destinationgroup_id
   end
 
-=begin
-in before filter : customrate (:find_customrate); ards (:find_ard_all)
-=end
+#in before filter : customrate (:find_customrate); ards (:find_ard_all)
   def user_acustrates
 
     if accountant? and (session[:acc_user_create_opt_4].to_i != 2 or session[:acc_see_financial_data].to_i != 2)
@@ -1195,9 +1182,7 @@ in before filter : customrate (:find_customrate); ards (:find_ard_all)
 
   end
 
-=begin
-in before filter : ard (:find_ard)
-=end
+#in before filter : ard (:find_ard)
   def user_custom_rate_update
 
     rate = @ard.customrate
