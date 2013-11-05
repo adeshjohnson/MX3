@@ -3,7 +3,7 @@ class ServersController < ApplicationController
 
   layout "callc"
 
-  before_filter :check_post_method, :only => [:destroy, :create, :update, :server_add, :server_update, :delete, :delete_device]
+  before_filter :check_post_method, :only => [:destroy, :create, :update, :server_add, :server_update, :delete, :delete_device, :server_change_status]
   before_filter :check_localization
   before_filter :authorize
   before_filter :find_server, :only => [:server_providers, :add_provider_to_server, :show, :edit, :destroy, :server_change_status, :server_change_gateway_status, :server_test, :server_update, :server_devices_list]
