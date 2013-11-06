@@ -159,7 +159,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -415,7 +415,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -646,7 +646,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -882,7 +882,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -1118,7 +1118,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -1354,7 +1354,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have rights to edit this</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -1631,7 +1631,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User was not found</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -2559,6 +2559,21 @@
 	<td>assertText</td>
 	<td>id=page_title</td>
 	<td>User settings: Test User #1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_custom_rate_add_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>

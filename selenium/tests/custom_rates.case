@@ -64,7 +64,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User was not found</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -960,6 +960,21 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/users/user_custom_rate_add_new/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1102,7 +1117,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>User was not found</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
@@ -1959,6 +1974,21 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/user_custom_rate_add_new/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
 	<td></td>
 </tr>
 <tr>
