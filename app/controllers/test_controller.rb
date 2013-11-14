@@ -126,7 +126,7 @@ class TestController < ApplicationController
     MorLog.my_debug(path)
     # MorLog.my_debug(params[:path].join("/"))
     MorLog.my_debug(File.exist?("#{Rails.root}/config/routes.rb"))
-    filename = "#{Rails.root}/selenium/tests/#{path.to_s.gsub(/[^A-Za-z_\/]/, "")}.sql"
+    filename = "#{Rails.root}/selenium/#{path.to_s.gsub(/[^A-Za-z_\/]/, "")}.sql"
     MorLog.my_debug(filename)
     if File.exist?(filename)
       command = "mysql -u mor -pmor mor < #{filename}"
