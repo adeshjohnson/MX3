@@ -1312,7 +1312,7 @@ class Call < ActiveRecord::Base
       loc_cut = res['cut']
       loc_tariff_id = res['tariff_id']
 
-      if loc_tariff_id.to_i > 0 and user_test_tariff_id.to_i == 0
+      if loc_tariff_id.to_i > 0
         # change tariff because of localization
         tariff = @tariffs_cache["t_#{loc_tariff_id}".to_sym] ||= Tariff.where(:id => loc_tariff_id).first
       end
