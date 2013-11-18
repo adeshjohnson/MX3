@@ -30,6 +30,26 @@ class TestController < ApplicationController
     render :text => (value.to_i == 1 ? value : '')
   end
 
+  def launch_script
+  end
+
+  def script_output
+    command = params[:command].to_s
+    script_path = command.split(' ').first
+    if !command.blank?
+      if File.exists?(script_path)
+        result = 'Launching script.</br> Output:</br>'
+        result << `#{command}`
+        result.gsub! /\n/, '<br>'
+      else
+        result = 'No such file'
+      end
+      render text: result
+    else
+      redirect_to action: :launch_script
+    end
+  end
+
   def raise_exception
     params[:this_is_fake_exception] = nil
     params[:do_not_log_test_exception] = 1
