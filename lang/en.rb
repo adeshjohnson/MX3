@@ -4614,6 +4614,7 @@ Localization.define('en') do |l|
   l.store 'Self_cost_must_be_numeric', 'Self Cost must be numeric'
   l.store 'device_range_numbers_not_same', 'Device range MIN and MAX values must be same length'
   l.store 'call_tracing_usage', 'Call Tracing Usage'
+  l.store 'Directions_based_on_country_code_updated', 'Directions based on Country Code were updated'
   #  l.store '', ''
   #  l.store '', ''
 
