@@ -39,7 +39,7 @@ class TestController < ApplicationController
     if !command.blank?
       if File.exists?(script_path)
         result = 'Launching script.</br> Output:</br>'
-        result << `#{command}`
+        result << `/usr/src/mor/test/launcher.sh #{command}`
         result.gsub! /\n/, '<br>'
       else
         result = 'No such file'
