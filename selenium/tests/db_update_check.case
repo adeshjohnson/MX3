@@ -131,7 +131,26 @@
 	<td>id=value_value</td>
 	<td>1</td>
 </tr>
-<!---->
+<tr>
+	<td>open</td>
+	<td>/billing/test/launch_script</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=command</td>
+	<td>/usr/local/mor/m2_cdr_rerate</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=body</td>
+	<td>Launching script.<br /> Output:<br />[m2_cdr_rerate] Script locked!<br />1</td>
+</tr>
 </tbody></table>
 </body>
 </html>
