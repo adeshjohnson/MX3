@@ -1,0 +1,12 @@
+<div class='simple'>
+  Enter full path to the script, and press Submit to launch it.
+</div>
+</br>
+<div>
+  <%= form_tag action: :script_output do %>
+    <%= text_field_tag :command, '', {size: 40} %>
+    </br>
+    </br>
+    <%= submit_tag _('Submit'), disable_with: _('Processing') %>
+  <% end %>
+</div>
