@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   before_filter :check_send_method, :except => [:simple_balance, :balance]
   before_filter :log_access
   before_filter :find_current_user_for_api, :only => [:user_subscriptions, :user_invoices, :personal_payments, :user_rates, :callflow_edit, :devices_callflow, :user_devices, :main_page, :logout, :cc_by_cli, :create_payment, :payments_list, :show_calling_card_group, :buy_card_from_callingroup, :financial_statements]
-  before_filter :check_api_parrams_with_hash, 
+  before_filter :check_api_parrams_with_hash,
 		:only => [:show_calling_card_group, :buy_card_from_callingroup, :cc_by_cli, :financial_statements, :logout, :user_details, :user_register,
 			  :user_update_api, :callback, :invoices, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
 			  :wholesale_tariff, :device_create, :device_destroy, :device_list, :did_create, :did_assign_device, :did_unassign_device, :ma_activate,
@@ -585,7 +585,7 @@ class ApiController < ApplicationController
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 
       #a bit nasty, huh? there are some issues after disabling session.
-      #if current user is set then currency would be converted to logged 
+      #if current user is set then currency would be converted to logged
       #in user's currency, but tests say it should be default currency and
       #no conversion, hence no User.current should be set
       User.current = nil
@@ -634,7 +634,7 @@ class ApiController < ApplicationController
               doc.main_detail {
                 @user.postpaid == 1 ? doc.account("#{_('Postpaid')}") : doc.account("#{_('Prepaid')}")
                 doc.balance("#{nice_number @user.balance } #{Currency.get_default.name}")
-                #ticket #4913, there's a rumor that api wil be rewriten, thats the only viable 
+                #ticket #4913, there's a rumor that api wil be rewriten, thats the only viable
                 #reason to add these elements, cause this mess wil be thrown away soon
                 doc.balance_number(@user.balance.to_s)
                 doc.balance_currency(Currency.get_default.name)
@@ -690,7 +690,7 @@ class ApiController < ApplicationController
 
 
       @devices = @user.devices
- 
+
       doc.page {
         doc.pagename("#{_('Devices')}")
         doc.language("#{Localization.lang}")
@@ -1046,12 +1046,12 @@ class ApiController < ApplicationController
                   <purpose>user</purpose>
                   <currency>#{@cust_tariff.first.user.currency.name}</currency>
 	          <rates>"
-            
+
               destinations.each do |rates|
                 outstring << " <destination> "
                 outstring << "<destination_group_name>#{CGI::escapeHTML(rates[:dest_group][:name])}</destination_group_name>
                               <destination_group_type>#{CGI::escapeHTML(rates[:dest_group][:desttype])}</destination_group_type>"
-                
+
                 @cust_destinations << {:name => rates[:dest_group][:name], :type => rates[:dest_group][:desttype]}
 
                 rates[:rates].each do |rate|
@@ -1074,7 +1074,7 @@ class ApiController < ApplicationController
                 outstring << "</destination>"
 
               end
-              
+
               outstring << "</rates>"
 
         end
@@ -1100,8 +1100,8 @@ class ApiController < ApplicationController
                             <rates>"
 
             rates.each { |name, type|
-            
-  
+
+
               type.each { |type_name, rate_data|
 
                 next if @cust_destinations.include?({:name => name, :type => type_name})
@@ -1723,41 +1723,46 @@ class ApiController < ApplicationController
           destination = Destination.includes(:destinationgroup).where(:prefix => prefix).order("LENGTH(prefix) DESC").first
           if destination
             dg = destination.destinationgroup
-            rate = Rate.includes([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
-            customrate = Customrate.includes(:acustratedetails).where("customrates.destinationgroup_id = #{dg.id} AND customrates.user_id = #{user.id}").first
-            if customrate and customrate.acustratedetails.size > 0
-              text = "#{customrate.acustratedetails[0].price}\##{destination.name}\##{destination.prefix}"
-              doc.rate text.to_s
-            elsif rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
-              text = "#{rate.aratedetails[0].price}\##{destination.name}\##{destination.prefix}" if rate.aratedetails.size > 0
-              text = "#{rate.ratedetails[0].rate}\##{destination.name}\##{destination.prefix}" if rate.ratedetails.size > 0
-              doc.rate text.to_s
+            if dg
+              rate = Rate.includes([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
+              customrate = Customrate.includes(:acustratedetails).where("customrates.destinationgroup_id = #{dg.id} AND customrates.user_id = #{user.id}").first
+              if customrate and customrate.acustratedetails.size > 0
+                text = "#{customrate.acustratedetails[0].price}\##{destination.name}\##{destination.prefix}"
+                doc.rate text.to_s
+              elsif rate and (rate.ratedetails.size > 0 or rate.aratedetails.size > 0)
+                text = "#{rate.aratedetails[0].price}\##{destination.name}\##{destination.prefix}" if rate.aratedetails.size > 0
+                text = "#{rate.ratedetails[0].rate}\##{destination.name}\##{destination.prefix}" if rate.ratedetails.size > 0
+                doc.rate text.to_s
+              else
+                tariff = user.tariff
+                err = ["MorApi.Rate error: rate not found"]
+                err << "  >> Destination: ID:'#{destination.id}' Name: #{destination.name}, Prefix:#{destination.prefix}"
+                err << "  >> Tariff: ID:#{tariff.id} Name:'#{tariff.name}' Purpose:'#{tariff.purpose}'" if tariff
+                err << "  >> Rate: ID:#{rate.id}" if rate
+                err << "  >> RateDetails: #{rate.ratedetails.size}" if rate and rate.ratedetails
+                err << "  >> aRateDetails: #{rate.aratedetails.size}" if rate and rate.aratedetails
+                MorLog.my_debug(err.join("\n"))
+                doc.error _('Rate_was_not_found') # Rate not found
+              end
             else
-              tariff = user.tariff
-              err = ["MorApi.Rate error: rate not found"]
-              err << "  >> Destination: ID:'#{destination.id}' Name: #{destination.name}, Prefix:#{destination.prefix}"
-              err << "  >> Tariff: ID:#{tariff.id} Name:'#{tariff.name}' Purpose:'#{tariff.purpose}'" if tariff
-              err << "  >> Rate: ID:#{rate.id}" if rate
-              err << "  >> RateDetails: #{rate.ratedetails.size}" if rate and rate.ratedetails
-              err << "  >> aRateDetails: #{rate.aratedetails.size}" if rate and rate.aratedetails
-              MorLog.my_debug(err.join("\n"))
-              doc.error _("Rate_was_not_found") # Rate not found
+              MorLog.my_debug("MorApi.Rate error: destination/prefix was not found")
+              doc.error _('Destinationgroup_was_not_found') # Destination group not found
             end
           else
             MorLog.my_debug("MorApi.Rate error: destination/prefix was not found")
-            doc.error _("Prefix_not_found") # Destination/prefix not found
+            doc.error _('Prefix_not_found') # Destination/prefix not found
           end
         else
           MorLog.my_debug("MorApi.Rate error: user was not found")
-          doc.error _("User_not_found") # User not found
+          doc.error _('User_not_found') # User not found
         end
       else
         MorLog.my_debug("MorApi.Rate error: prefix is blank")
-        doc.error _("Empty_prefix") # empty prefix
+        doc.error _('Empty_prefix') # empty prefix
       end
     else
       MorLog.my_debug("MorApi.Rate error: Feature is disabled")
-      doc.error _("Feature_Disabled")
+      doc.error _('Feature_Disabled')
     end }
     send_xml_data(out_string, params[:test].to_i)
   end
@@ -2614,7 +2619,7 @@ class ApiController < ApplicationController
 
             if !params[:caller_id].to_s.strip.blank?
               callerid = "<#{params[:caller_id].to_s.strip}>"
-              notice = "CallerID_must_be_numeric" unless is_numeric? params[:caller_id].to_s.strip 
+              notice = "CallerID_must_be_numeric" unless is_numeric? params[:caller_id].to_s.strip
               notice = "You_are_not_authorized_to_manage_callerid" if @user.is_accountant? and !@user.accountant_allow_edit('device_edit_opt_4')
             end
 
@@ -2668,7 +2673,7 @@ class ApiController < ApplicationController
       if @user
        if @user.usertype != "user"
         device = Device.where(:id => params[:device_id]).first
-        if device 
+        if device
           user_id = @user.id
           permissions = true
           if @user.is_accountant?
@@ -2678,7 +2683,7 @@ class ApiController < ApplicationController
           did = Did.where(:did => params[:did]).first
           device_user_owner = User.where(:id => device.user_id,:owner_id => user_id).size
           if device_user_owner == 1
-            if permissions 
+            if permissions
               if is_numeric?(params[:did]) and !params[:did].blank?
                  if did
                    did_owner = ( did.reseller_id == user_id ? true : false )
@@ -2717,7 +2722,7 @@ class ApiController < ApplicationController
             end
           else
             doc.error("Your are not authorized to use this Device")
-          end         
+          end
         else
           doc.error("Device was not found")
         end
@@ -2745,7 +2750,7 @@ class ApiController < ApplicationController
             permissions = true if @user.accountant_allow_read('device_manage') and @user.accountant_allow_edit('manage_dids_opt_1') and @user.accountant_allow_read('user_manage')
           end
           did = Did.where(:did => params[:did]).first
-            if permissions 
+            if permissions
               if is_numeric?(params[:did]) and !params[:did].blank? and did
                 did_owner = ( did.reseller_id == user_id ? true : false )
                 if did_owner
@@ -2809,7 +2814,7 @@ class ApiController < ApplicationController
           end
           if @user.usertype == 'reseller'
             query = Confline.get_value('Resellers_can_add_their_own_DIDs',0)
-            query.to_i == 1 ? allow_manage_dids = true : allow_manage_dids = false            
+            query.to_i == 1 ? allow_manage_dids = true : allow_manage_dids = false
           end
           if provider.user_id == user_id
             if allow_manage_dids
@@ -2837,7 +2842,7 @@ class ApiController < ApplicationController
             end
           else
             doc.error("Your are not authorized to use this Provider")
-          end         
+          end
         else
           doc.error("Provider was not found")
         end
@@ -2934,7 +2939,7 @@ class ApiController < ApplicationController
   specific credit note by supplying it's id(credit_note_id=XXX) or filter only
   specific user's credit notes(user_id=YYY). In case user can not see financial
   data it will no be displayed for him.
-  If accountant is allow to read invoices, he may list credit notes. but ha can see 
+  If accountant is allow to read invoices, he may list credit notes. but ha can see
   financial data only if he is also allowed to see financial data.
 
   for instance these would be valid queries, given there is such user and id's
@@ -3080,7 +3085,7 @@ class ApiController < ApplicationController
   to create credit note(in accountant's case user has to be owned by admin). normal
   user cannot use this function, it is available only for admin, accountant and reseller,
   though reseller has to be able to see financial data.
-  Accountant is allow to create credit notes only if he may edit financial data and manage 
+  Accountant is allow to create credit notes only if he may edit financial data and manage
   invoices.
 
   for instance these would be valid queries, given there is such user and id's
@@ -3089,7 +3094,7 @@ class ApiController < ApplicationController
   /api/credit_note_create?u=user&p=user1&user_id=XXX&price=YYY&issue_date=YYYY-MM-DD&comment=CCCCC
   /api/credit_note_create?u=user&p=user1&user_id=XXX&price=YYY&issue_date=YYYY-MM-DD&number=NNN
   /api/credit_note_create?u=user&p=user1&user_id=XXX&price=YYY&issue_date=YYYY-MM-DD&comment=CCCCC&number=NNN
-  
+
   note that credit note cannot be created for admin, hance ..and user.id > 0
   note that is issue_date must be specified, if not we dont event try to save note(cause it would crash)
 =end
@@ -3130,12 +3135,12 @@ class ApiController < ApplicationController
 
 =begin
   If accountant cannot see financial data, manage invoices/payments in read mode,
-  he cannot see financial statements. if accountant has suficient permissions or 
-  user is so other type, he may view his(user) or his users(admin, reseller) 
+  he cannot see financial statements. if accountant has suficient permissions or
+  user is so other type, he may view his(user) or his users(admin, reseller)
   financial statements.
-  Accountant and reseller may filter theyr users by sending valid id. 
-  Valid date range is mandatory parameter. Dates has to be supplied as unix timestamps. 
-  Every user may flter by status. Valid statuses are - paid, unpaid, 'all'. if not 
+  Accountant and reseller may filter theyr users by sending valid id.
+  Valid date range is mandatory parameter. Dates has to be supplied as unix timestamps.
+  Every user may flter by status. Valid statuses are - paid, unpaid, 'all'. if not
   supplied defaults to 'all'.
 
   For instance some posible api commands are:
@@ -3932,13 +3937,13 @@ class ApiController < ApplicationController
                         }
                       end
                     end
-                  rescue Exception => exception 
-                    doc.error(){ 
-                      doc.message{ 
-                        doc.message_id(sms.id) 
-                        doc.sms_status_code_tip(sms.sms_status_code_tip) 
+                  rescue Exception => exception
+                    doc.error(){
+                      doc.message{
+                        doc.message_id(sms.id)
+                        doc.sms_status_code_tip(sms.sms_status_code_tip)
                         doc.error_message(exception.message)
-                      } 
+                      }
                     }
                   end
                 else
