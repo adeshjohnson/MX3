@@ -42,7 +42,7 @@
               <% end %>
             </td>
 
-            <td align="center"><%= nice_time2 camp.start_time %> - <%= nice_time2 camp.stop_time %></td>
+            <td align="center"><%= nice_time_in_user_tz camp.start_time %> - <%= nice_time_in_user_tz camp.stop_time %></td>
 
             <% numbers = camp.adnumbers
                @total_numbers += numbers.size

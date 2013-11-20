@@ -51,7 +51,13 @@ class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   # session :session_key => '_mor_session_id'
 
-  helper_method :convert_curr, :see_providers_in_dids?, :allow_manage_providers?, :allow_manage_dids?, :allow_manage_providers_tariffs?, :correct_owner_id, :pagination_array, :invoice_state, :nice_invoice_number, :nice_invoice_number_digits, :current_user, :can_see_finances?, :hide_finances, :render_email, :session_from_datetime_array, :session_till_datetime_array, :accountant_can_write?, :accountant_can_read?, :nice_date, :nice_date_time, :monitoring_enabled_for, :rs_active?, :rec_active?, :cc_active?, :ad_active?, :ccl_active?, :is_number?, :is_numeric?, :show_user_billsec?, :load_ok?, :send_email_dry, :user_tz
+  helper_method :convert_curr, :see_providers_in_dids?, :allow_manage_providers?, :allow_manage_dids?,
+                :allow_manage_providers_tariffs?, :correct_owner_id, :pagination_array, :invoice_state,
+                :nice_invoice_number, :nice_invoice_number_digits, :current_user, :can_see_finances?, 
+                :hide_finances, :render_email, :session_from_datetime_array, :session_till_datetime_array, 
+                :accountant_can_write?, :accountant_can_read?, :nice_date, :nice_date_time, :monitoring_enabled_for, 
+                :rs_active?, :rec_active?, :cc_active?, :ad_active?, :ccl_active?, :is_number?, :is_numeric?, 
+                :show_user_billsec?, :load_ok?, :send_email_dry, :user_tz, :nice_time_in_user_tz 
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
@@ -3225,7 +3231,28 @@ Variables: (Names marked with * are required)
       redirect_to root_path and return false
     end
   end
-end
+
+  def time_in_local_tz(hours, minutes, seconds='00') 
+    time_str = [hours, minutes, seconds].join(':') 
+     
+    time = Time.zone.parse(time_str).localtime 
+    time 
+  end 
+     
+  def time_in_user_tz(hours, minutes, seconds='00') 
+    time_str = [hours, minutes, seconds].join(':') 
+     
+    time = Time.parse(time_str).in_time_zone(user_tz) 
+    time 
+  end 
+     
+  def nice_time_in_user_tz(time) 
+    hours, minutes, seconds = time.hour, time.min, time.sec 
+    time = time_in_user_tz(hours, minutes, seconds) 
+
+    time.strftime('%H:%M:%S') 
+  end
+end 
 
 module Enumerable
   def dups

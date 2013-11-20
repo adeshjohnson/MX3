@@ -47,8 +47,8 @@
               <% end %>
             </td>
         <% end %>
-        <td id="start_time_<%= camp.id %>" align="center"><%= nice_time2 camp.start_time %></td>
-        <td id="stop_time_<%= camp.id %>" align="center"><%= nice_time2 camp.stop_time %></td>
+        <td id="start_time_<%= camp.id %>" align="center"><%= nice_time_in_user_tz camp.start_time %></td>
+        <td id="stop_time_<%= camp.id %>" align="center"><%= nice_time_in_user_tz camp.stop_time %></td>
         <td id="campaign_numbers_<%= camp.id %>" align="center"><%= link_to b_details, :action => 'campaign_numbers', :id => camp.id %><%= numbers.size.to_s %></td>
         <td id="execute_numbers_<%= camp.id %>" align="center"><%= executed_numbers.to_s %></td>
         <td id="complete_numbers_<%= camp.id %>" align="center"><%= completed_numbers %></td>

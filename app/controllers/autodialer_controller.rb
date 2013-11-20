@@ -89,11 +89,12 @@ class AutodialerController < ApplicationController
       @campaign.errors.add(:max_retries, _('Max_retries_must_be_integer'))
       errors = 1
     end
-    time_from = params[:time_from][:hour] + ":" + params[:time_from][:minute] + ":00"
-    time_till = params[:time_till][:hour] + ":" + params[:time_till][:minute] + ":59"
 
-    @campaign.start_time = time_from
-    @campaign.stop_time = time_till
+    time_from = time_in_local_tz(params[:time_from][:hour], params[:time_from][:minute], '00') 
+    time_till = time_in_local_tz(params[:time_till][:hour], params[:time_till][:minute], '59') 
+
+    @campaign.start_time = time_from.strftime('%H:%M:%S') 
+    @campaign.stop_time = time_till.strftime('%H:%M:%S') 
     #
     #    @campaign.retry_time = 60 if params[:campaign][:retry_time].to_i < 60
     #    @campaign.wait_time = 30 if params[:campaign][:wait_time].to_i < 30
@@ -122,10 +123,15 @@ class AutodialerController < ApplicationController
     @page_title = _('Edit_campaign')
     @page_icon = "edit.png"
     @ctypes = ["simple"]
-    @from_hour = @campaign.start_time.hour
-    @from_min = @campaign.start_time.min
-    @till_hour = @campaign.stop_time.hour
-    @till_min = @campaign.stop_time.min
+    
+    start_time, stop_time = [@campaign.start_time, @campaign.stop_time] 
+
+    from = time_in_user_tz(start_time.hour, start_time.min, '00') 
+    till = time_in_user_tz(stop_time.hour, stop_time.min, '59') 
+
+    @from_hour, @from_min = [from.hour, from.min] 
+    @till_hour, @till_min = [till.hour, till.min] 
+
     @user = current_user
     if current_user.usertype == 'user' or current_user.usertype == 'accountant'
       @devices = current_user.devices.find(:all, :conditions => "device_type != 'FAX'")
@@ -144,8 +150,12 @@ class AutodialerController < ApplicationController
       @campaign.errors.add(:max_retries, _('Max_retries_must_be_integer'))
       errors = 1
     end
-    @campaign.start_time = time_from
-    @campaign.stop_time = time_till
+
+    time_from = time_in_local_tz(params[:time_from][:hour], params[:time_from][:minute], '00') 
+    time_till = time_in_local_tz(params[:time_till][:hour], params[:time_till][:minute], '59') 
+
+    @campaign.start_time = time_from.strftime('%H:%M:%S') 
+    @campaign.stop_time = time_till.strftime('%H:%M:%S') 
 
     #    @campaign.retry_time = 60 if params[:campaign][:retry_time].to_i < 60
     #    @campaign.wait_time = 30 if params[:campaign][:wait_time].to_i < 30
