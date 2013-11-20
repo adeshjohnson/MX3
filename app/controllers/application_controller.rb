@@ -53,11 +53,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :convert_curr, :see_providers_in_dids?, :allow_manage_providers?, :allow_manage_dids?,
                 :allow_manage_providers_tariffs?, :correct_owner_id, :pagination_array, :invoice_state,
-                :nice_invoice_number, :nice_invoice_number_digits, :current_user, :can_see_finances?, 
-                :hide_finances, :render_email, :session_from_datetime_array, :session_till_datetime_array, 
-                :accountant_can_write?, :accountant_can_read?, :nice_date, :nice_date_time, :monitoring_enabled_for, 
-                :rs_active?, :rec_active?, :cc_active?, :ad_active?, :ccl_active?, :is_number?, :is_numeric?, 
-                :show_user_billsec?, :load_ok?, :send_email_dry, :user_tz, :nice_time_in_user_tz 
+                :nice_invoice_number, :nice_invoice_number_digits, :current_user, :can_see_finances?,
+                :hide_finances, :render_email, :session_from_datetime_array, :session_till_datetime_array,
+                :accountant_can_write?, :accountant_can_read?, :nice_date, :nice_date_time, :monitoring_enabled_for,
+                :rs_active?, :rec_active?, :cc_active?, :ad_active?, :ccl_active?, :is_number?, :is_numeric?,
+                :show_user_billsec?, :load_ok?, :send_email_dry, :user_tz, :nice_time_in_user_tz
 
   # addons
   helper_method :callback_active?, :call_shop_active?, :reseller_active?, :payment_gateway_active?, :calling_cards_active?, :sms_active?, :recordings_addon_active?, :monitorings_addon_active?, :skp_active?
@@ -345,7 +345,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    if session[:usertype].to_s != "admin" 
+    if session[:usertype].to_s != "admin"
       c = controller_name.to_s.gsub(/"|'|\\/, '')
       a = action_name.to_s.gsub(/"|'|\\/, '')
       if !session["#{c}_#{a}".intern] or
@@ -789,12 +789,12 @@ class ApplicationController < ActionController::Base
 
         # SIP Proxy support
         if ccl_active? and @device.device_type.to_s == "SIP" and @device.host.to_s == "dynamic"
-          
+
           sip_proxy = Server.where('server_type = "sip_proxy"').first
           if sip_proxy
             Extline.mcreate(default_context, i, default_app, "SIP/mor_server_" + sip_proxy.server_id.to_s + "/" + @device.name + "," + @device.timeout.to_s, @device.extension, device_id)
           end
-        
+
         else
 
           # normal call-flow without sip-proxy
@@ -813,8 +813,8 @@ class ApplicationController < ActionController::Base
           Extline.mcreate(default_context, i, default_app, @device.device_type + "/" + @device.name + trunk + "|#{timeout.to_s}|il", @device.extension, device_id) #il disables transfers
 
         end # sip proxy support
-        
-        
+
+
         busy_ext = 200 + i
         i += 1
         Extline.mcreate(default_context, i, "GotoIf", "$[$[\"${DIALSTATUS}\" = \"CHANUNAVAIL\"]|$[\"${DIALSTATUS}\" = \"CONGESTION\"]]?" + chanunavail_extension.to_s, @device.extension, device_id)
@@ -1391,8 +1391,8 @@ class ApplicationController < ActionController::Base
     nice_number_digits = (confline and confline.to_s.length > 0) ? confline.to_i : 2
     n = ""
     n = sprintf("%0.#{nice_number_digits}f", number.to_d) if number
-    if session 
-      session[:nice_number_digits] = nice_number_digits 
+    if session
+      session[:nice_number_digits] = nice_number_digits
       n = n.gsub('.', session[:global_decimal]) if session[:change_decimal]
     end
     n
@@ -2006,10 +2006,10 @@ Variables: (Names marked with * are required)
         end
 
         if exception_class.include?("Errno::EACCES")
-          flash_notice = _('File_permission_error')                                                                                                                                    
-          flash_help_link = ''                                                                                                                                                         
-          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'File_permission_error', :data2 => exception.message).save          
-        end           
+          flash_notice = _('File_permission_error')
+          flash_help_link = ''
+          Action.new(:user_id => session[:user_id].to_i, :date => Time.now.to_s(:db), :action => "error", :data => 'File_permission_error', :data2 => exception.message).save
+        end
 
         if exception_class.include?("Errno::EHOSTUNREACH") or (exception_class.include?("Errno::ECONNREFUSED") and trace.to_s.include?("rami.rb:380"))
           flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
@@ -2777,16 +2777,16 @@ Variables: (Names marked with * are required)
 
 =begin
   Method to check check whether current user is accountat and has specified write permission
-  Note that this method shouldnt be used only if you want to check whether user has some 
+  Note that this method shouldnt be used only if you want to check whether user has some
   kind of permissions but youre not certain that user is accountant. for instance current user is admin
-  and he has rights to see financial data, but this method would return false because current user is 
+  and he has rights to see financial data, but this method would return false because current user is
   not accountant, hence 'current user IS ACCOUNTANT and has specified write permission'.
-  !!!Note that there's method defined in User class accountant_allow_edit(permission), i believe you should 
+  !!!Note that there's method defined in User class accountant_allow_edit(permission), i believe you should
   use that method!!!
- 
+
   *Params*
   +permission_name+ string containing permission name, note that 'acc_' is added to that string.
- 
+
   *Returns*
   +permited+ boolean value.
 =end
@@ -2797,7 +2797,7 @@ Variables: (Names marked with * are required)
 =begin
   Same thing as for accountant_can_write goes for this method.
   !!!Note that there is(another..?) a bug - if accountant has write permission he should automaticaly have
-  read permission. WRONG, according to this method he doesn't. Note that there's method defined in User 
+  read permission. WRONG, according to this method he doesn't. Note that there's method defined in User
   class accountant_allow_read(permission), i believe you should use that method!!!
 =end
   def accountant_can_read?(permission)
@@ -3062,19 +3062,19 @@ Variables: (Names marked with * are required)
   end
 
   def admin?
-    current_user.usertype == "admin"
+    current_user and current_user.usertype == "admin"
   end
 
   def reseller?
-    current_user.usertype == "reseller"
+    current_user and current_user.usertype == "reseller"
   end
 
   def user?
-    current_user.usertype == "user"
+    current_user and current_user.usertype == "user"
   end
 
   def accountant?
-    current_user.usertype == "accountant"
+    current_user and current_user.usertype == "accountant"
   end
 
   def show_recordings?
@@ -3109,37 +3109,37 @@ Variables: (Names marked with * are required)
     ccl_active = Confline.get_value("CCL_Active") rescue NIL
     (!ccl_active.blank? and ccl_active.to_i == 1)
   end
-  
+
   def user_tz
     current_user.time_zone
   end
-  
-  def user_time_from_params(*date) 
-    keys = [:year, :month, :day, :hour, :minute]       
-    
-    now = Time.now 
-        
-    default_date_hash = { 
-      year: now.year, 
-      month: now.month, 
-      day: now.day, 
-      hour: '00', 
-      minute: '00' 
-    } 
-       
-    date_hash = Hash[keys.zip(date)] 
-     
-    date_hash.each do |key, value| 
-      date_hash[key.intern] = default_date_hash[key.intern] unless value.to_s.match(/^\d+$/) 
-    end 
-        
-    date_time_str = "#{date_hash[:year]}-#{date_hash[:month]}-#{date_hash[:day]} #{date_hash[:hour]}:#{date_hash[:minute]}" 
-         
-    Time.zone.parse(date_time_str) 
-  end 
-  
-  def store_url 
-    session[:url] = "#{request.protocol}#{request.host_with_port}" if session[:url].blank? 
+
+  def user_time_from_params(*date)
+    keys = [:year, :month, :day, :hour, :minute]
+
+    now = Time.now
+
+    default_date_hash = {
+      year: now.year,
+      month: now.month,
+      day: now.day,
+      hour: '00',
+      minute: '00'
+    }
+
+    date_hash = Hash[keys.zip(date)]
+
+    date_hash.each do |key, value|
+      date_hash[key.intern] = default_date_hash[key.intern] unless value.to_s.match(/^\d+$/)
+    end
+
+    date_time_str = "#{date_hash[:year]}-#{date_hash[:month]}-#{date_hash[:day]} #{date_hash[:hour]}:#{date_hash[:minute]}"
+
+    Time.zone.parse(date_time_str)
+  end
+
+  def store_url
+    session[:url] = "#{request.protocol}#{request.host_with_port}" if session[:url].blank?
   end
 
   def last_day_month(date)
@@ -3232,27 +3232,27 @@ Variables: (Names marked with * are required)
     end
   end
 
-  def time_in_local_tz(hours, minutes, seconds='00') 
-    time_str = [hours, minutes, seconds].join(':') 
-     
-    time = Time.zone.parse(time_str).localtime 
-    time 
-  end 
-     
-  def time_in_user_tz(hours, minutes, seconds='00') 
-    time_str = [hours, minutes, seconds].join(':') 
-     
-    time = Time.parse(time_str).in_time_zone(user_tz) 
-    time 
-  end 
-     
-  def nice_time_in_user_tz(time) 
-    hours, minutes, seconds = time.hour, time.min, time.sec 
-    time = time_in_user_tz(hours, minutes, seconds) 
+  def time_in_local_tz(hours, minutes, seconds='00')
+    time_str = [hours, minutes, seconds].join(':')
 
-    time.strftime('%H:%M:%S') 
+    time = Time.zone.parse(time_str).localtime
+    time
   end
-end 
+
+  def time_in_user_tz(hours, minutes, seconds='00')
+    time_str = [hours, minutes, seconds].join(':')
+
+    time = Time.parse(time_str).in_time_zone(user_tz)
+    time
+  end
+
+  def nice_time_in_user_tz(time)
+    hours, minutes, seconds = time.hour, time.min, time.sec
+    time = time_in_user_tz(hours, minutes, seconds)
+
+    time.strftime('%H:%M:%S')
+  end
+end
 
 module Enumerable
   def dups
