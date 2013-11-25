@@ -47,7 +47,7 @@ development: &default_settings
         class: "input"
       validates:
         with: !ruby/regexp '/^[0-9]*(\.?|\,?)[0-9]*$/'
-        message: "gateway_error_numeric"  
+        message: "gateway_error_numeric"
   #
   # fields for standard gateways
   #
@@ -162,7 +162,6 @@ development: &default_settings
   enabled:
     gateways: [authorize_net, bogus, paypal, hsbc_secure_epayments]
     integrations: [two_checkout, bogus, moneybooker]
-    google_checkout: [google_checkout]
     ideal: [ideal]
     osmp: [osmp]
 
@@ -183,7 +182,7 @@ development: &default_settings
           "billing_address_enabled":
             as: "check_box"
             position: 8
-        excludes: 
+        excludes:
       form:
         fields:
           <<: *gateway_form_fields
@@ -454,59 +453,6 @@ development: &default_settings
           <<: *integration_config_fields
         includes:
         excludes:
-      form:
-        fields:
-          <<: *integration_form_fields
-        includes:
-        excludes:
-  google_checkout:
-    google_checkout:
-      settings:
-        name: 'Google Checkout'
-        tax_inclusive: true
-        testing: false
-        external: false
-      config:
-        fields:
-          <<: *integration_config_fields
-        includes:
-          default_geteway_currency:
-            position: 7
-            as: "currency_select"
-          merchant_id:
-            as: "input_field"
-            for: "authentication"
-            position: 8
-            html_options:
-              class: "input"
-          merchant_key:
-            as: "input_field"
-            position: 9
-            for: "authentication"
-            html_options:
-              class: "input"
-          use_sandbox:
-            as: "check_box"
-            for: "authentication"
-            position: 10
-          payment_message:
-            as: "input_field"
-            position: 11
-            html_options:
-              class: "input"
-              value: "MOR balance top-up"
-          payment_confirmation:
-            as: "payment_confirmation_lite"
-            position: 12
-          payment_notification:
-            as: "check_box"
-            position: 13
-            html_options:
-              class: "notification"
-          logo_image:
-            as: "gateway_logo"
-            position: 14
-        excludes: [login, test, payment_confirmation]
       form:
         fields:
           <<: *integration_form_fields

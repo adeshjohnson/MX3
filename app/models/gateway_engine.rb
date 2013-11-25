@@ -22,12 +22,6 @@ class GatewayEngine
   field :integrations, :form, :separator2, {:as => 'separator', :position => 130}
   field :integrations, :form, :default_currency, {:as => 'hidden_field', :position => 140, :html_options => {:value => "USD", :id => "default_currency"}}
 
-  field :google_checkout, :form, :currency, {:as => 'select', :position => 90, :html_options => {:value => Currency.get_active.collect { |c| c.name }}}
-  field :google_checkout, :form, :separator1, {:as => 'separator', :position => 100}
-  field :google_checkout, :form, :without_tax, {:as => 'plain_text', :position => 110, :html_options => {:size => 20, :disabled => "disabled", :class => "input"}, :after => lambda { |g| " in #{g.get(:config, 'default_geteway_currency')}" }}
-  field :google_checkout, :form, :with_tax, {:as => 'plain_text', :position => 120, :html_options => {:size => 10, :disabled => "disabled", :class => "input"}, :after => lambda { |g| " in #{g.get(:config, 'default_geteway_currency')}" }}
-  field :google_checkout, :form, :separator2, {:as => 'separator', :position => 130}
-
   field :ideal, :form, :ideal_bank, {:as => 'ideal_banks', :position => 80}
   field :ideal, :form, :currency, {:as => 'select', :position => 90, :html_options => {:value => Currency.get_active.collect { |c| c.name }}}
   field :ideal, :form, :separator1, {:as => 'separator', :position => 100}
