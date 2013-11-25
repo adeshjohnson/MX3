@@ -51,4 +51,4 @@ gem 'session_off'
 
 gem "recaptcha", :require => "recaptcha/rails"
 
-
+gem 'passenger', "3.0.19"
