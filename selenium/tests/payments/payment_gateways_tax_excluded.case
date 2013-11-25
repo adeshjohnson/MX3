@@ -44,11 +44,6 @@
 </tr>
 <tr>
 	<td>check</td>
-	<td>google_checkout_google_checkout_enabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
 	<td>integrations_bogus_enabled</td>
 	<td></td>
 </tr>
@@ -202,41 +197,11 @@
 	<td>11.00</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>google_checkout_google_checkout_amount</td>
-	<td>10</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>google_checkout_google_checkout_currency</td>
-	<td>label=USD</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>10.00</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>11.00</td>
-	<td></td>
-</tr>
 <!--#Set exclude tax.-->
 <tr>
 	<td>open</td>
 	<td>/billing/payment_gateways/configuration</td>
 	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>google_checkout_google_checkout_tax_in_amount</td>
-	<td>label=Excluded</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -352,31 +317,6 @@
 	<td>select</td>
 	<td>ideal_ideal_currency</td>
 	<td>label=EUR</td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>9.09</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>10.00</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/payment_gateways/google_checkout/google_checkout</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>google_checkout_google_checkout_amount</td>
-	<td>10</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>google_checkout_google_checkout_currency</td>
-	<td>label=USD</td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
