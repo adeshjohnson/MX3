@@ -53,7 +53,7 @@ class Device < ActiveRecord::Base
   after_save :device_after_save#, :prune_device #do not prune devices after save! it abuses AMI and crashes live calls (#11709)! prune_device is done in device_update->configure_extensions->prune_device
 
 =begin
-  #3239 dont know whats the reason to keep two identical fields, but just keep in mind that one is 1/0 
+  #3239 dont know whats the reason to keep two identical fields, but just keep in mind that one is 1/0
   #other yes/no and their values has to be the same
   # MK: subscribemwi is used by Asterisk 1.4, enable_mwi by Asterisk 1.8
 =end
@@ -77,62 +77,62 @@ class Device < ActiveRecord::Base
     end
   end
 
-=begin                                                            
+=begin
   Device may be blocked by core if there are more than one simultaneous call
-                                                                            
-  Returns                                                                   
-  *boolean* true if device can be blocked                                   
-=end                                                                        
-  def block_callerid?                                                       
-    (block_callerid.to_i > 1)                                               
-  end                                                                       
-                                                                            
-=begin                                                                      
-  Only valid arguments for block_callerid is 0 or integer greater than 1    
-  if params  are invalid we set it to 0                                     
-                                                                            
-  Params                                                                    
-  *simalutaneous_calls* limit of simultaneous calls when core should automaticaly 
-    block device                                                                  
-=end                                                                              
-  def block_callerid=(simultaneous_calls)                                         
-    simultaneous_calls = simultaneous_calls.to_s.strip.to_i                       
-    simultaneous_calls = simultaneous_calls < 2 ? 0 : simultaneous_calls          
-    write_attribute(:block_callerid, simultaneous_calls)                          
-  end                                                                             
-                                                                                  
-=begin                                                                            
-  Note that this method is written mostly thinking about using it in views so dont 
-  expect any logic beyound that.                                                   
-                                                                                   
-  Returns                                                                          
-  *simultaneous_calls* if block_callerid is set to smth less than 2 retun empty string 
-    else return that number                                                            
-=end                                                                                   
-  def block_callerid                                                                   
-    simultaneous_calls = read_attribute(:block_callerid).to_i                          
-    simultaneous_calls < 2 ? '' : simultaneous_calls                                   
-  end                  
+
+  Returns
+  *boolean* true if device can be blocked
+=end
+  def block_callerid?
+    (block_callerid.to_i > 1)
+  end
+
+=begin
+  Only valid arguments for block_callerid is 0 or integer greater than 1
+  if params  are invalid we set it to 0
+
+  Params
+  *simalutaneous_calls* limit of simultaneous calls when core should automaticaly
+    block device
+=end
+  def block_callerid=(simultaneous_calls)
+    simultaneous_calls = simultaneous_calls.to_s.strip.to_i
+    simultaneous_calls = simultaneous_calls < 2 ? 0 : simultaneous_calls
+    write_attribute(:block_callerid, simultaneous_calls)
+  end
+
+=begin
+  Note that this method is written mostly thinking about using it in views so dont
+  expect any logic beyound that.
+
+  Returns
+  *simultaneous_calls* if block_callerid is set to smth less than 2 retun empty string
+    else return that number
+=end
+  def block_callerid
+    simultaneous_calls = read_attribute(:block_callerid).to_i
+    simultaneous_calls < 2 ? '' : simultaneous_calls
+  end
 
   def is_trunk?
     return self.istrunk.to_i > 0
   end
 
-=begin                                                                                                     
-  Returs                                                                                                   
-  *boolean* true if srtp encryption is set for device, otherwise false                                     
-=end                                                                                                       
-  def srtp_encryption?                                                                                     
-    self.encryption.to_s == 'yes'                                                                          
-  end                                                                                                      
-                                                                                                           
-=begin                                                                                                     
-  Returs                                                                                                   
-  *boolean* true if t38 support is set for device, otherwise false                                         
-=end                                                                                                       
-  def t38_support?                                                                                         
-    self.t38pt_udptl == "yes"                                                                              
-  end       
+=begin
+  Returs
+  *boolean* true if srtp encryption is set for device, otherwise false
+=end
+  def srtp_encryption?
+    self.encryption.to_s == 'yes'
+  end
+
+=begin
+  Returs
+  *boolean* true if t38 support is set for device, otherwise false
+=end
+  def t38_support?
+    self.t38pt_udptl == "yes"
+  end
 
 =begin
   if username is blank it means that ip authentication is enabled and there's
@@ -306,11 +306,11 @@ class Device < ActiveRecord::Base
         user.primary_device_id = id
         user.save
       end
-      self.update_cid(Confline.get_value("Default_device_cid_name", user.owner_id), Confline.get_value("Default_device_cid_number", user.owner_id))  unless self.callerid 
+      self.update_cid(Confline.get_value("Default_device_cid_name", user.owner_id), Confline.get_value("Default_device_cid_number", user.owner_id))  unless self.callerid
     end
 
     if self.virtual?
-      self.extension = self.username = self.name = 'virtual_' + self.id.to_i.to_s 
+      self.extension = self.username = self.name = 'virtual_' + self.id.to_i.to_s
       self.save
     end
 
@@ -406,7 +406,7 @@ class Device < ActiveRecord::Base
     cid_name = "" if not cid_name
     cid_number = "" if not cid_number
 
-    self.callerid = nil unless self.callerid 
+    self.callerid = nil unless self.callerid
 
     if cid_name.length > 0 and cid_number.length > 0
       self.callerid = "\"" + cid_name.to_s + "\"" + " <" + cid_number.to_s + ">"
@@ -415,7 +415,7 @@ class Device < ActiveRecord::Base
     if cid_name.length > 0 and cid_number.length == 0
       self.callerid = "\"" + cid_name.to_s + "\""
     end
-    
+
     if cid_name.length == 0 and cid_number.length == 0
       self.callerid = ''
     end
@@ -435,7 +435,7 @@ class Device < ActiveRecord::Base
   end
 
   def any_calls
-    Call.where(:src_device_id => self.id).limit(1) 
+    Call.where(:src_device_id => self.id).limit(1)
   end
 
   def calls(type, date_from, date_till)
@@ -751,13 +751,12 @@ class Device < ActiveRecord::Base
   end
 
   def uniqueness_check
-
     if self.provider
       fields	= %w{ username secret ipaddr port device_type }
       matches	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
     else
       fields	= %w{ username } # why only username?
-      matches	= ["host = 'dynamic' AND devices.id != ?", self.id]    
+      matches	= ["host = 'dynamic' AND devices.id != ?", self.id]
     end
 
     query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
@@ -780,29 +779,43 @@ class Device < ActiveRecord::Base
     self.device_ip_authentication_record.to_i == 0 and self.provider and Confline.get_value("Disalow_Duplicate_Device_Usernamess").to_i == 1
   end
 
-  def dynamic? 
-    (ipaddr.blank? or ipaddr.to_s == "0.0.0.0") ? true : false 
+  def dynamic?
+    (ipaddr.blank? or ipaddr.to_s == "0.0.0.0") ? true : false
   end
 
   def ip_must_be_unique_on_save
-
     idi = self.id
     curr_id = User.current ? User.current.id : self.user.owner_id
-    message = (User.current and User.current.usertype == 'admin') ? _("When_IP_Authentication_checked_IP_must_be_unique") : _('This_IP_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
+    message = if User.current and User.current.usertype == 'admin'
+                _('When_IP_Authentication_checked_IP_must_be_unique') + '. ' +
+                _('ip_is_used_by')
+              else
+                _('This_IP_is_not_available') +
+                "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'>" +
+                "<img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
+              end
+
     cond = if ipaddr.blank?
              ['devices.id != ? AND host = ? AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, curr_id]
            else
              ['devices.id != ? AND (host = ? OR ipaddr = ?) AND providers.user_id != ? and ipaddr != "" and ipaddr != "0.0.0.0"', idi, host, ipaddr, curr_id]
            end
 
-    #    check device wihs is provider with providers devices.
-    if self.device_ip_authentication_record.to_i == 1 and self.provider and Device.count(:all, :joins => ['JOIN providers ON (device_id = devices.id)'], :conditions => cond).to_i > 0 and !self.virtual?
+    #    check device wihs is provider with providers devices
+    providers_device_with_ip = Device.joins("JOIN providers ON (providers.device_id = devices.id)").where(cond).first
+
+    if self.device_ip_authentication_record.to_i == 1 and self.provider and providers_device_with_ip and !self.virtual?
+      if User.current.usertype == 'admin'
+        message << " #{nice_device_user(providers_device_with_ip)} in Device: #{nice_device(providers_device_with_ip)}."
+      end
+
       errors.add(:ip_authentication, message)
       return false
     end
 
     #      check self device  or another devices with ip auth on
     condd = self.device_ip_authentication_record.to_i == 1 ? '' : ' and devices.username = "" '
+
     cond22 = if ipaddr.blank?
                #      check device host with another owner devices
                ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd, idi, host, curr_id]
@@ -812,17 +825,28 @@ class Device < ActiveRecord::Base
              end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Device.count(:all, :joins => ['JOIN users ON (user_id = users.id)'], :conditions => cond22).to_i > 0 and !self.dynamic? and !self.virtual?
+    device_with_ip = Device.joins("JOIN users ON (user_id = users.id)").where(cond22).first
+
+    if device_with_ip and !self.dynamic? and !self.virtual?
+      if User.current.usertype == 'admin'
+        message << " #{nice_device_user(device_with_ip)} in Device: #{nice_device(device_with_ip)}."
+      end
+
       errors.add(:ip_authentication, message)
       return false
     end
 
     #    check device IP with another user providers IP's with have ip auth on, 0.0.0.0 not included
-    if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => ["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).to_i > 0 and !self.virtual?
+    provider_with_ip = Provider.joins("JOIN devices ON (providers.device_id = devices.id)").where(["server_ip = ? and devices.username = '' and server_ip != '0.0.0.0' and devices.id != ?  and ipaddr != '' AND providers.user_id != ? and ipaddr != '0.0.0.0'", ipaddr, idi, curr_id]).first
+
+    if provider_with_ip and !self.virtual?
+      if User.current.usertype == 'admin'
+        message << " #{nice_device_user(provider_with_ip)} in Provider: #{nice_provider(provider_with_ip)}."
+      end
+
       errors.add(:ip_authentication, message)
       return false
     end
-
 
     #    check device with providers port, dont allow dublicates in providers and devices combinations
     if self.provider
@@ -847,14 +871,13 @@ class Device < ActiveRecord::Base
               else
                 ['devices.id != ? AND (host = ? OR ipaddr = ?) and ipaddr != "" and ipaddr != "0.0.0.0" and devices.port=?' + condd, idi, host, ipaddr, port]
               end
+
       if Provider.count(:all, :joins => ['JOIN devices ON (device_id = devices.id)'], :conditions => cond3).to_i > 0 and !self.virtual?
         errors.add(:ip_authentication, message2)
         return false
       end
     end
-
   end
-
 
   def set_qualify_if_ip_auth
     if username.to_s.blank?
@@ -1013,7 +1036,7 @@ class Device < ActiveRecord::Base
     if self.used_by_location_rules and notice.blank?
       notice = _('One_or_more_location_rules_are_using_this_device')
     end
-    notice 
+    notice
   end
 
   def destroy_all
@@ -1164,8 +1187,8 @@ class Device < ActiveRecord::Base
   DefaultPort={'SIP' => 5060, 'IAX2' => 4569, 'H323' => 1720}
 
 =begin
-  Check whether port is valid for supplied technology, at this moment only ilegal 
-  ports are those that are less than 1. 
+  Check whether port is valid for supplied technology, at this moment only ilegal
+  ports are those that are less than 1.
 
   *Returns*
   +valid+ true if port is valid, else false
@@ -1198,9 +1221,9 @@ class Device < ActiveRecord::Base
 =begin
   Check whether device belongs to provider. This would mean that
   device cannot have user associated with it.
-  UPDATE: Seems like that's not true, if provider is assigned to user,  
-  then provider device's user_id is set to that user. Support said that 
-  they just check device.name 
+  UPDATE: Seems like that's not true, if provider is assigned to user,
+  then provider device's user_id is set to that user. Support said that
+  they just check device.name
 
   *Returns*
   +boolean+ true if device belongs to provider, othervise false
@@ -1211,8 +1234,8 @@ class Device < ActiveRecord::Base
 
 =begin
   Set time limit per day option for the device. In database it is saved in seconds but this
-  method is expecting minutes tu be passed to it. If negative or none numeric params would be 
-  passed it will be converted to 0. if float would be passed as param, decimal part would be 
+  method is expecting minutes tu be passed to it. If negative or none numeric params would be
+  passed it will be converted to 0. if float would be passed as param, decimal part would be
   striped.
 
   *Params*
@@ -1237,27 +1260,27 @@ class Device < ActiveRecord::Base
   end
 
 =begin
-  Callerid control by cids is concidered enabled if callerid is not 0, cause this value should 
+  Callerid control by cids is concidered enabled if callerid is not 0, cause this value should
   be id of device's clid
 =end
   def control_callerid_by_cids?
     self.control_callerid_by_cids.to_i != 0
   end
 
-=begin 
-  Check whether fax device supports T.38. Keep in mind that calling this method is valid only if 
-  it is fax device, else exception should be rised. 
+=begin
+  Check whether fax device supports T.38. Keep in mind that calling this method is valid only if
+  it is fax device, else exception should be rised.
 =end
   def t38support?
-    #if self.device_type == 'FAX' 
+    #if self.device_type == 'FAX'
     self.t38pt_udptl.to_i == 1
-    #else 
-    #  raise 'Only fax devices support T.38 protocol' 
-    #end 
+    #else
+    #  raise 'Only fax devices support T.38 protocol'
+    #end
   end
 
-  def is_dahdi? 
-    return self.device_type == 'dahdi' 
+  def is_dahdi?
+    return self.device_type == 'dahdi'
   end
 
   def create_server_devices(servers)
@@ -1283,13 +1306,13 @@ class Device < ActiveRecord::Base
     end
   end
 
-  # this method just cleans server from device 
+  # this method just cleans server from device
   # used in device_update action
   # only when device name or server_id changes
   def sip_prune_realtime_peer(device_name, device_server_id)
-    
+
     return if self.device_type != "SIP"
-    
+
     server = Server.find(device_server_id.to_s)
     if server and server.active == 1
       rami_server = Rami::Server.new({'host' => server.server_ip, 'username' => server.ami_username, 'secret' => server.ami_secret})
@@ -1298,9 +1321,9 @@ class Device < ActiveRecord::Base
       rami_server.run
       client = Rami::Client.new(rami_server)
       client.timeout = 3
-      
+
       t = client.command("sip prune realtime peer " + device_name.to_s)
-      
+
       client.respond_to?(:stop) ? client.stop : false
     end
   end
@@ -1369,7 +1392,7 @@ class Device < ActiveRecord::Base
 =end
 
 =begin
-  #ticket #5133 
+  #ticket #5133
 =end
   def cid_number=(value)
     @cid_number = value
@@ -1397,4 +1420,30 @@ class Device < ActiveRecord::Base
     end
   end
 
+  def nice_device(device)
+    dev = ''
+    dev = device.device_type.to_s
+    dev <<  "/" + device.name.to_s if device.name and !dev.include?(device.name.to_s)
+    dev
+  end
+
+  def nice_provider(provider)
+    prov = ''
+    prov = provider.tech.to_s
+    prov <<  "/" + provider.name.to_s if provider.name and !prov.include?(provider.name.to_s)
+    prov
+  end
+
+  def nice_device_user(device)
+    if device.user_id == -1
+      device_prov = Provider.where(:device_id => device.id).first
+      dev_user = device_prov ? "Provider: #{nice_provider(device_prov)}" : "Provider"
+    else
+      device_user = User.where(:id => device.user_id).first
+      dev_user = "User: #{device_user.username.to_s}"
+      dev_user = "User: #{device_user.first_name.to_s} #{device_user.last_name.to_s}" if device_user.first_name.to_s.length + device_user.last_name.to_s.length > 0
+    end
+
+    dev_user
+  end
 end
