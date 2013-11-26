@@ -77,38 +77,26 @@ class Device < ActiveRecord::Base
     end
   end
 
-=begin
-  Device may be blocked by core if there are more than one simultaneous call
-
-  Returns
-  *boolean* true if device can be blocked
-=end
+  # Device may be blocked by core if there are more than one simultaneous call
+  # Returns
+  #*boolean* true if device can be blocked
   def block_callerid?
     (block_callerid.to_i > 1)
   end
 
-=begin
-  Only valid arguments for block_callerid is 0 or integer greater than 1
-  if params  are invalid we set it to 0
-
-  Params
-  *simalutaneous_calls* limit of simultaneous calls when core should automaticaly
-    block device
-=end
+  # Only valid arguments for block_callerid is 0 or integer greater than 1 if params  are invalid we set it to 0
+  #Params
+  #*simalutaneous_calls* limit of simultaneous calls when core should automaticaly block device
   def block_callerid=(simultaneous_calls)
     simultaneous_calls = simultaneous_calls.to_s.strip.to_i
     simultaneous_calls = simultaneous_calls < 2 ? 0 : simultaneous_calls
     write_attribute(:block_callerid, simultaneous_calls)
   end
 
-=begin
-  Note that this method is written mostly thinking about using it in views so dont
-  expect any logic beyound that.
-
-  Returns
-  *simultaneous_calls* if block_callerid is set to smth less than 2 retun empty string
-    else return that number
-=end
+  # Note that this method is written mostly thinking about using it in views so dont
+  # expect any logic beyound that.
+  # Returns
+  # *simultaneous_calls* if block_callerid is set to smth less than 2 retun empty string else return that number
   def block_callerid
     simultaneous_calls = read_attribute(:block_callerid).to_i
     simultaneous_calls < 2 ? '' : simultaneous_calls
@@ -118,10 +106,8 @@ class Device < ActiveRecord::Base
     return self.istrunk.to_i > 0
   end
 
-=begin
-  Returs
-  *boolean* true if srtp encryption is set for device, otherwise false
-=end
+  # Returns
+  # *boolean* true if srtp encryption is set for device, otherwise false
   def srtp_encryption?
     self.encryption.to_s == 'yes'
   end
@@ -752,31 +738,40 @@ class Device < ActiveRecord::Base
 
   def uniqueness_check
     if self.provider
-      fields	= %w{ username secret ipaddr port device_type }
-      matches	= ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
+      fields = %w{ username secret ipaddr port device_type }
+      matches = ["device_id != ? AND providers.user_id != #{User.current.id}", self.id]
     else
-      fields	= %w{ username } # why only username?
-      matches	= ["host = 'dynamic' AND devices.id != ?", self.id]
+      fields = %w{ username } # why only username?
+      matches = ["host = 'dynamic' AND devices.id != ?", self.id]
     end
 
-    query 	= Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
+    query = Hash[fields.map {|field| [field.to_sym, self[field.to_sym].to_s] }]
 
-    filter_active	= Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
-    zero_duplicates	= (
-      Device.where(query)
-      .joins('LEFT JOIN providers on providers.device_id = devices.id')
-      .where(matches)
-      .reject{ |dev| not self.provider and dev.username.blank? }
-      .size.zero?
-    )
+    message = _('Device_Username_Must_Be_Unique')
 
-    if filter_active and not zero_duplicates
-      errors.add(:username, _('Device_Username_Must_Be_Unique')) and return false
+    filter_active = Confline.get_value("Disalow_Duplicate_Device_Usernames", 0).to_i == 1
+
+    dublicate_device = Device.joins('LEFT JOIN providers on providers.device_id = devices.id')
+                             .where(matches).where(query)
+                             .reject{ |dev| not self.provider and dev.username.blank? }.first
+
+    if filter_active and dublicate_device
+      if User.current and User.current.usertype == 'admin'
+        message << ". #{_('ip_is_used_by_user')} " +
+                   " #{nice_device_user(dublicate_device)} in Provider: #{nice_device(dublicate_device)}."
+      end
+
+      message << "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'>" +
+                 "<img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
+
+      errors.add(:username, message)
+
+      return false
     end
   end
 
   def username_must_be_unique_on_creation
-    self.device_ip_authentication_record.to_i == 0 and self.provider and Confline.get_value("Disalow_Duplicate_Device_Usernamess").to_i == 1
+    self.device_ip_authentication_record.to_i == 0 and Confline.get_value("Disalow_Duplicate_Device_Usernamess").to_i == 1 and (!self.provider or self.provider.user_id != User.current.id)
   end
 
   def dynamic?
@@ -785,10 +780,12 @@ class Device < ActiveRecord::Base
 
   def ip_must_be_unique_on_save
     idi = self.id
+
     curr_id = User.current ? User.current.id : self.user.owner_id
+
     message = if User.current and User.current.usertype == 'admin'
                 _('When_IP_Authentication_checked_IP_must_be_unique') + '. ' +
-                _('ip_is_used_by')
+                _('ip_is_used_by_user')
               else
                 _('This_IP_is_not_available') +
                 "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'>" +
@@ -806,21 +803,21 @@ class Device < ActiveRecord::Base
 
     if self.device_ip_authentication_record.to_i == 1 and self.provider and providers_device_with_ip and !self.virtual?
       if User.current.usertype == 'admin'
-        message << " #{nice_device_user(providers_device_with_ip)} in Device: #{nice_device(providers_device_with_ip)}."
+        message << " #{nice_device_user(providers_device_with_ip)} in Provider: #{nice_device(providers_device_with_ip)}."
       end
 
       errors.add(:ip_authentication, message)
       return false
     end
 
-    #      check self device  or another devices with ip auth on
+    # check self device  or another devices with ip auth on
     condd = self.device_ip_authentication_record.to_i == 1 ? '' : ' and devices.username = "" '
 
     cond22 = if ipaddr.blank?
-               #      check device host with another owner devices
+               # check device host with another owner devices
                ['devices.id != ? AND host = ? and users.owner_id != ?  and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd, idi, host, curr_id]
              else
-               #      check device IP and Host with another owner devices
+               # check device IP and Host with another owner devices
                ['devices.id != ? AND (host = ? OR ipaddr = ?) and users.owner_id != ? and user_id != -1 and ipaddr != "" and ipaddr != "0.0.0.0"' + condd, idi, host, ipaddr, curr_id]
              end
 
@@ -848,7 +845,7 @@ class Device < ActiveRecord::Base
       return false
     end
 
-    #    check device with providers port, dont allow dublicates in providers and devices combinations
+    # check device with providers port, dont allow dublicates in providers and devices combinations
     if self.provider
       message2 = (User.current and User.current.usertype == 'admin') ? _("Device_with_such_IP_and_Port_already_exist") + ' ' + _('Please_check_this_link_to_see_how_it_can_be_resolved') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Configure_Provider_which_can_make_calls' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>" : _('This_IP_and_port_is_not_available') + "<a id='exception_info_link' href='http://wiki.kolmisoft.com/index.php/Authentication' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' /></a>"
 
@@ -1420,30 +1417,35 @@ class Device < ActiveRecord::Base
     end
   end
 
-  def nice_device(device)
-    dev = ''
-    dev = device.device_type.to_s
-    dev <<  "/" + device.name.to_s if device.name and !dev.include?(device.name.to_s)
-    dev
+ def nice_device(device)
+    nice_dev = ''
+
+    if device.user_id == -1
+      provider = Provider.where(:device_id => device.id).first
+      nice_dev = provider.tech.to_s
+      nice_dev <<  "/" + provider.name.to_s if provider.name and !nice_dev.include?(provider.name.to_s)
+    else
+      nice_dev = device.device_type.to_s
+      nice_dev <<  "/" + device.name.to_s if device.name and !nice_dev.include?(device.name.to_s)
+    end
+
+    nice_dev
   end
 
-  def nice_provider(provider)
-    prov = ''
-    prov = provider.tech.to_s
-    prov <<  "/" + provider.name.to_s if provider.name and !prov.include?(provider.name.to_s)
-    prov
+ def nice_provider(provider)
+    nice_dev = ''
+    nice_dev = provider.tech.to_s
+    nice_dev <<  "/" + provider.name.to_s if provider.name and !nice_dev.include?(provider.name.to_s)
+    nice_dev
   end
 
   def nice_device_user(device)
     if device.user_id == -1
-      device_prov = Provider.where(:device_id => device.id).first
-      dev_user = device_prov ? "Provider: #{nice_provider(device_prov)}" : "Provider"
-    else
-      device_user = User.where(:id => device.user_id).first
-      dev_user = "User: #{device_user.username.to_s}"
-      dev_user = "User: #{device_user.first_name.to_s} #{device_user.last_name.to_s}" if device_user.first_name.to_s.length + device_user.last_name.to_s.length > 0
+      device = Provider.where(:device_id => device.id).first
     end
-
+    device_user = User.where(:id => device.user_id).first
+    dev_user = device_user.username.to_s
+    dev_user = device_user.first_name.to_s + " " + device_user.last_name.to_s if device_user.first_name.to_s.length + device_user.last_name.to_s.length > 0
     dev_user
   end
 end

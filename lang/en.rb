@@ -1605,7 +1605,7 @@ Localization.define('en') do |l|
   l.store 'Invalid_Device_type', 'Invalid device type'
   l.store 'Device_Extension_Cant_Be_Empty', 'Device Extension cannot be empty'
   l.store 'Device_Extension_Must_Be_Unique', 'Device Extension must be unique'
-  l.store 'Device_Username_Must_Be_Unique', 'Authentication details should be unique <a href="http://wiki.kolmisoft.com/index.php/Authentication" target="_blank"><img alt="Help" src="/billing/assets/icons/help.png" title="Help" /></a>'
+  l.store 'Device_Username_Must_Be_Unique', 'Authentication details should be unique'
   l.store 'Username_Cant_Be_Empty', 'Username cannot be empty'
   l.store 'Host_Cant_Be_Empty', 'Host cannot be empty'
   l.store 'CLI_Name_Cant_Be_Empty', 'CLI Name cannot be empty'
@@ -4615,7 +4615,7 @@ Localization.define('en') do |l|
   l.store 'device_range_numbers_not_same', 'Device range MIN and MAX values must be same length'
   l.store 'call_tracing_usage', 'Call Tracing Usage'
   l.store 'Directions_based_on_country_code_updated', 'Directions based on Country Code were updated'
-  l.store 'ip_is_used_by', 'IP is used by'
+  l.store 'ip_is_used_by_user', 'IP is used by User:'
   #  l.store '', ''
   #  l.store '', ''
 
