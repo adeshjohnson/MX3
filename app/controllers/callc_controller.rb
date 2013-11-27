@@ -222,6 +222,9 @@ class CallcController < ApplicationController
       else
         redirect_to :action => "login"
       end
+    elsif user and user.usertype == 'reseller'
+      link = (Confline.get_value("Logout_link", user.id).to_s.include?("http") ? "" : "http://") + Confline.get_value("Logout_link", user.id).to_s
+      redirect_to link
     else
       link = (Confline.get_value("Logout_link", owner_id).to_s.include?("http") ? "" : "http://") + Confline.get_value("Logout_link", owner_id).to_s
       redirect_to link
@@ -273,7 +276,7 @@ class CallcController < ApplicationController
 
   def main
 
-    @Show_Currency_Selector=1 
+    @Show_Currency_Selector=1
 
     if not session[:user_id]
       redirect_to :action => "login" and return false
@@ -862,10 +865,10 @@ class CallcController < ApplicationController
     if ccl.to_s != ccl_old.to_s and params[:indirect].to_i == 1
       @sd = ServerDevice.all
       @sp = Serverprovider.all
-        
+
         if ccl.to_i == 0
           p_srv_id = Server.where(:server_type => "sip_proxy").first.server_id.to_s rescue nil
-          if !p_srv_id.blank? 
+          if !p_srv_id.blank?
             Server.delete_all(:server_type => "sip_proxy")
             Device.delete_all(:name => "mor_server_" + p_srv_id.to_s)
           end
@@ -925,7 +928,7 @@ class CallcController < ApplicationController
           ip = params[:ip_address]
           host = params[:host]
 
-          if ip.blank? or !check_ip_validity(ip) or not Server.where(server_ip: ip).count.zero? 
+          if ip.blank? or !check_ip_validity(ip) or not Server.where(server_ip: ip).count.zero?
             flash[:notice] = _('Incorrect_Server_IP')
             redirect_to :action => :additional_modules and return false
           elsif host.blank? or !check_hostname_validity(host) or not Server.where(hostname: host).count.zero?
@@ -967,7 +970,7 @@ class CallcController < ApplicationController
             redirect_to :action => :additional_modules and return false
         end
 
-        
+
     end
     redirect_to :action => :additional_modules
   end
