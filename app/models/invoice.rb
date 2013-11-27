@@ -554,7 +554,7 @@ class Invoice < ActiveRecord::Base
               "JOIN devices ON (calls.src_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} " +
             "WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
               " AND card_id = 0 AND (devices.user_id = '#{options[:user].id}'  ) #{options[:zero_calls_sql]}" +
-            "GROUP BY dest_name, dg_type, to_did , calls.user_rate "+
+            "GROUP BY destinations.prefix, dg_type, to_did , calls.user_rate "+
             "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
 
       if options[:user].usertype == "reseller"
@@ -564,7 +564,7 @@ class Invoice < ActiveRecord::Base
                  "LEFT JOIN destinationgroups ON (destinations.destinationgroup_id = destinationgroups.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} "+
                "WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
                  " AND card_id = 0 AND (calls.reseller_id = '#{options[:user].id}' ) #{options[:zero_calls_sql]}" +
-               "GROUP BY dg_name, dg_type, to_did, calls.user_rate "+
+               "GROUP BY destinations.prefix, dg_type, to_did, calls.user_rate "+
                "ORDER BY destinationgroups.name ASC, destinationgroups.desttype ASC"
       end
     else
@@ -578,7 +578,7 @@ class Invoice < ActiveRecord::Base
               "LEFT JOIN directions  ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} " +
             "WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
               "AND card_id = 0 AND (devices.user_id =  '#{options[:user].id}' ) #{options[:zero_calls_sql]} " +
-            "GROUP BY dest_name, dg_type, to_did, calls.user_rate " +
+            "GROUP BY destinations.prefix, dg_type, to_did, calls.user_rate " +
             "ORDER BY directions.name ASC, destinations.name ASC, destinations.subcode ASC"
 
       if options[:user].usertype == "reseller"
@@ -590,7 +590,7 @@ class Invoice < ActiveRecord::Base
                  "LEFT JOIN directions  ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} " +
                "WHERE calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' " +
                  "AND card_id = 0 AND (calls.reseller_id =  '#{options[:user].id}' )  #{options[:zero_calls_sql]} " +
-               "GROUP BY dg_name, dg_type, to_did, calls.user_rate " +
+               "GROUP BY destinations.prefix, dg_type, to_did, calls.user_rate " +
                "ORDER BY directions.name ASC, destinations.name ASC, destinations.subcode ASC"
       end
     end
