@@ -86,8 +86,8 @@
 
     <table width="100%" class="maintable">
       <tr>
-        <th><%= _('Start_Time') %></th>
-        <th><%= _('End_Time') %></th>
+        <th align="center"><%= _('Start_Time') %></th>
+        <th align="center"><%= _('End_Time') %></th>
         <th align="right"><%= _('Rate') %></th>
         <th align="right"><%= _('Connection_Fee') %></th>
         <th align="right"><%= _('Increment') %></th>
@@ -106,8 +106,8 @@
             <td align="center" id="end_time_<%= rd.id %>"><%= nice_time2(rd.end_time) %></td>
             <td align="right" id="rate_<%= rd.id %>"><%= nice_number rd.rate %></td>
             <td align="right" id="connection_fee_<%= rd.id %>"><%= nice_number rd.connection_fee %></td>
-            <td align="right" id="increment_s_<%= rd.id %>"><%= nice_number rd.increment_s %></td>
-            <td align="right" id="min_time_<%= rd.id %>"><%= nice_number rd.min_time %></td>
+            <td align="right" id="increment_s_<%= rd.id %>"><%= rd.increment_s %></td>
+            <td align="right" id="min_time_<%= rd.id %>"><%= rd.min_time %></td>
             <% if @can_edit == true %>
                 <% if @allow_manage == true %>
                     <td align="center" id="edit_<%= rd.id %>"><%= link_to b_edit, {:action => 'ratedetail_edit', :id => rd}, :id => "ratedetail_edit_#{rd.id}" %></td>
@@ -138,8 +138,8 @@
 
     <table width="100%" class="maintable">
       <tr>
-        <th><%= _('Start_Time') %></th>
-        <th><%= _('End_Time') %></th>
+        <th align="center"><%= _('Start_Time') %></th>
+        <th align="center"><%= _('End_Time') %></th>
         <th align="right"><%= _('Rate') %></th>
         <th align="right"><%= _('Connection_Fee') %></th>
         <th align="right"><%= _('Increment') %></th>
@@ -158,8 +158,8 @@
             <td align="center" id="end_time_<%= rd.id %>"><%= nice_time2(rd.end_time) %></td>
             <td align="right" id="rate_<%= rd.id %>"><%= nice_number rd.rate %></td>
             <td align="right" id="connection_fee_<%= rd.id %>"><%= nice_number rd.connection_fee %></td>
-            <td align="right" id="increment_s_<%= rd.id %>"><%= nice_number rd.increment_s %></td>
-            <td align="right" id="min_time_<%= rd.id %>"><%= nice_number rd.min_time %></td>
+            <td align="right" id="increment_s_<%= rd.id %>"><%= rd.increment_s %></td>
+            <td align="right" id="min_time_<%= rd.id %>"><%= rd.min_time %></td>
             <% if @can_edit == true %>
                 <% if @allow_manage == true %>
                     <td align="center" id="edit_<%= rd.id %>"><%= link_to b_edit, {:action => 'ratedetail_edit', :id => rd}, :id => "ratedetail_edit_#{rd.id}" %></td>
