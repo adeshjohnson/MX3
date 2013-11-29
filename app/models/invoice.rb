@@ -71,7 +71,7 @@ class Invoice < ActiveRecord::Base
 
   def calls_price
     price = 0.0
-    for invd in self.invoicedetails
+    self.invoicedetails.each do |invd|
       price += invd.price if invd.invdet_type == 0
     end
     price
@@ -110,20 +110,20 @@ class Invoice < ActiveRecord::Base
     begin
       b = read_attribute(:price)
       (b.to_d + self.get_tax.count_tax_amount(b.to_d).to_d) * exr.to_d
-    rescue # fail safe 
+    rescue # fail safe
       b = read_attribute(:price_with_vat)
       b.to_d * exr.to_d
     end
   end
 
 =begin
-  List of invoice financial data grouped by tryer status. should not be coding 
+  List of invoice financial data grouped by tryer status. should not be coding
   application logic to query(IF(paid=...)), but since i dont like db structure the way it is..
 
   *Params*
-  +owner_id+ owner of users that the user is interested in, but might be nil if 
+  +owner_id+ owner of users that the user is interested in, but might be nil if
      current user if ordinary user
-  +user_id+ user that has invoices generated for him, might be nil if admin, 
+  +user_id+ user that has invoices generated for him, might be nil if admin,
      reseller or accountatn is not interested i certain user, but interested in all his users.
      BUT IF we are generating financial statemens for ordinary users, they cannot see other users
      information and must supply theyr own id
@@ -214,17 +214,17 @@ class Invoice < ActiveRecord::Base
     # x - number of required rows
 
     if items.size <= 16
-      empty_rows_number = 16 - items.size 
-      empty_rows_number -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1 
-      empty_rows_number -= 1 if user.minimal_charge_enabled? 
-      empty_rows_number += 3 if empty_rows_number < 0 
-      (empty_rows_number-4).times { items << [' ', '', '', ''] } if empty_rows_number > 4 
-    elsif items.size == 18 
-      4.times { items << [' ', '', '', ''] } 
-    elsif 26 <= ((items.size - 22) % 31) 
-      empty_rows_number = 31 - ((items.size - 22) % 31) 
-      empty_rows_number.times { items << [' ', '', '', ''] } 
-    end 
+      empty_rows_number = 16 - items.size
+      empty_rows_number -= self.tax ? self.tax.applied_tax_list(self.converted_price(ex), :precision => nc).size : 1
+      empty_rows_number -= 1 if user.minimal_charge_enabled?
+      empty_rows_number += 3 if empty_rows_number < 0
+      (empty_rows_number-4).times { items << [' ', '', '', ''] } if empty_rows_number > 4
+    elsif items.size == 18
+      4.times { items << [' ', '', '', ''] }
+    elsif 26 <= ((items.size - 22) % 31)
+      empty_rows_number = 31 - ((items.size - 22) % 31)
+      empty_rows_number.times { items << [' ', '', '', ''] }
+    end
 
     items << [{:text => _('Minimal_Charge_for_Calls') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => [:top]}, {:text => self.nice_invoice_number(user.converted_minimal_charge(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}] if user.minimal_charge_enabled?
     items << [{:text => _('SUBTOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :borders => (user.minimal_charge_enabled? ? [] : [:top])}, {:text => self.nice_invoice_number(self.converted_price(ex).to_d, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
@@ -273,6 +273,8 @@ class Invoice < ActiveRecord::Base
     options = self.genereate_options(current_user, ex)
     user = options[:user]
     limit = Confline.get_value("Invoice_page_limit", user.owner).to_i
+    max_limit = Confline.get_value("Max_PDF_pages").to_i
+    limit = max_limit if limit > max_limit and max_limit > 0
     hide_dst = (current_user.id == user.id and [2,3,6,7].member? Confline.get_value("Hide_Destination_End", current_user.owner_id).to_i)
     # 71 = number of rows on the page
     page_limit = (71 * limit) - 1
@@ -442,7 +444,7 @@ class Invoice < ActiveRecord::Base
     end
 
     has_calls = 0
-    for invd in invoicedetails
+    invoicedetails.each do |invd|
       has_calls = 1 if invd.invdet_type == 0
     end
 
@@ -631,7 +633,7 @@ class Invoice < ActiveRecord::Base
           aa << {:text => dc} if type == 3
           items << aa
         end
-        tax_amount += self.nice_invoice_number(tax_hash[:tax].to_d, nice_number_hash.merge({:no_repl => 1})).to_d 
+        tax_amount += self.nice_invoice_number(tax_hash[:tax].to_d, nice_number_hash.merge({:no_repl => 1})).to_d
 
       }
       price_with_tax = self.nice_invoice_number(self.converted_price(ex) + tax_amount, nice_number_hash.merge({:no_repl => 1})).to_d
@@ -674,6 +676,12 @@ class Invoice < ActiveRecord::Base
   end
 
   def generate_invoice_by_cid_pdf(current_user, dc, ex, nc, cde, gde, testing_mode = false)
+
+    type = (self.user.postpaid.to_i == 1 or self.user.owner_id != 0) ? "" : "Prepaid_"
+    limit = Confline.get_value("#{type}Invoice_page_limit", user.owner).to_i
+    max_limit = Confline.get_value("Max_PDF_pages").to_i
+    limit = max_limit if limit > max_limit and max_limit > 0
+    page_limit = 38 + 69 * (limit - 1)
     nice_number_hash = {:change_decimal => cde, :global_decimal => gde, :nc => nc}
 
     options = self.genereate_options(current_user, ex)
@@ -686,13 +694,9 @@ class Invoice < ActiveRecord::Base
     dst = options[:email_or_not] ? SqlExport.hide_dst_for_user_sql(options[:user], "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"}) : SqlExport.hide_dst_for_user_sql(current_user, "pdf", SqlExport.column_escape_null("calls.localized_dst"), {:as => "dst"})
     calldate = SqlExport.column_escape_null(SqlExport.nice_date('calls.calldate', {:format => options[:format], :tz => current_user.time_offset}), "calldate")
     ttp = 0
-    for cid in cids
+    cids.each do |cid|
       src = cid["src"]
-#      if cid["did_price"].to_d == 0.to_d and cid["did_inc_price"].to_d == 0.to_d
-        sql = "SELECT #{dst}, #{calldate}, #{options[:billsec_cond]} as billsec, #{options[:did_inc_sql_price]}, #{options[:did_sql_price]}, #{options[:user_rate]}, #{options[:user_price]} as 'user_price', directions.name as 'direction', dids.did as to_did FROM calls #{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN dids on dids.id = calls.did_id LEFT JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED'  AND billsec > 0 AND card_id = 0  AND calls.src = '#{src}' #{options[:zero_calls_sql]} ORDER BY calls.calldate ASC"
- #     else
-  #      sql = "SELECT #{dst}, #{calldate}, #{options[:billsec_cond]} as billsec, #{options[:did_inc_sql_price]}, #{options[:did_sql_price]}, #{options[:user_rate]}, #{options[:user_price]} as 'user_price', directions.name as 'direction' FROM calls #{SqlExport.left_join_reseler_providers_to_calls_sql} JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) WHERE calls.card_id = 0 AND disposition = 'ANSWERED'  AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND devices.user_id = '#{user.id}' AND calls.did_inc_price > 0 AND calls.src = '#{src}' ORDER BY calls.calldate ASC;"
-   #   end
+      sql = "SELECT #{dst}, #{calldate}, #{options[:billsec_cond]} as billsec, #{options[:did_inc_sql_price]}, #{options[:did_sql_price]}, #{options[:user_rate]}, #{options[:user_price]} as 'user_price', directions.name as 'direction', dids.did as to_did FROM calls #{SqlExport.left_join_reseler_providers_to_calls_sql} LEFT JOIN dids on dids.id = calls.did_id LEFT JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED'  AND billsec > 0 AND card_id = 0  AND calls.src = '#{src}' #{options[:zero_calls_sql]} ORDER BY calls.calldate ASC"
       calls = ActiveRecord::Base.connection.select_all(sql)
 
       items << [_('Client_number') + ": ", src, '', '', '', '']
@@ -710,23 +714,19 @@ class Invoice < ActiveRecord::Base
 
       calls.each do |item|
         if item['to_did'].blank?
-		items << [
-		    item['dst'],
-		    item["calldate"],
-		    nice_time(item["billsec"], options[:min_type]),
-		    nice_invoice_number(item["user_rate"], nice_number_hash),
-		    nice_invoice_number(item["user_price"], nice_number_hash),
-		    item["direction"].to_s
-		]
+          items << [
+            item['dst'],
+            item["calldate"],
+            nice_time(item["billsec"], options[:min_type]),
+            nice_invoice_number(item["user_rate"], nice_number_hash),
+            nice_invoice_number(item["user_price"], nice_number_hash),
+            item["direction"].to_s
+          ]
+          break if items.size > page_limit
         end
       end
 
-
-      #if cid["did_price"].to_d == 0.to_d and cid["did_inc_price"].to_d == 0.to_d
-        sql = "SELECT directions.name as 'direction', SUM(#{options[:user_price]}) as 'price', COUNT(calls.src) as 'calls', dids.did as to_did FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did LEFT JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND card_id = 0  AND calls.src = '#{src}' GROUP BY directions.name ORDER BY directions.name ASC"
-      #else
-       # sql = "SELECT directions.name as 'direction', SUM(#{options[:user_price]}) as 'price', COUNT(calls.src) as 'calls' FROM calls JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE calls.card_id = 0 AND disposition = 'ANSWERED'  AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND devices.user_id = '#{user.id}' AND calls.did_inc_price > 0 AND calls.src = '#{src}' GROUP BY directions.name ORDER BY directions.name ASC"
-      #end
+      sql = "SELECT directions.name as 'direction', SUM(#{options[:user_price]}) as 'price', COUNT(calls.src) as 'calls', dids.did as to_did FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did LEFT JOIN devices ON (calls.src_device_id = devices.id) LEFT JOIN destinations ON (calls.prefix = destinations.prefix) LEFT JOIN directions ON (destinations.direction_code = directions.code) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND card_id = 0  AND calls.src = '#{src}' GROUP BY directions.name ORDER BY directions.name ASC"
       directions = ActiveRecord::Base.connection.select_all(sql)
 
       total_price = 0.0
@@ -746,6 +746,7 @@ class Invoice < ActiveRecord::Base
       items << ['', '', '', _('Total') + ":", nice_invoice_number(total_price, nice_number_hash), dc.to_s + " (" + _('Without_VAT') + ")"]
       items << [' ', '', '', '', '', '']
       ttp += total_price.to_d
+      break if items.size > page_limit
     end
 
     sql = "SELECT COUNT(calls.id) as calls_size, SUM(#{options[:billsec_cond]}) as billsec, SUM(#{options[:user_price]}) as 'user_price' FROM calls JOIN devices ON (calls.dst_device_id = devices.id) #{SqlExport.left_join_reseler_providers_to_calls_sql} WHERE devices.user_id = #{user.id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59' AND calls.disposition = 'ANSWERED' AND billsec > 0 AND card_id = 0 #{options[:zero_calls_sql]};"
@@ -758,9 +759,16 @@ class Invoice < ActiveRecord::Base
       ttp += in_calls[0]["user_price"].to_d
       items << [' ', '', '', '', '', '']
     end
- 
+    end_file = -4
+    if (items.size + 10) > page_limit
+      items << [' ', '', '', '', '', '']
+      items << [{:text => "Invoice reached maximum number of #{limit} pages to show.", :colspan => 6}]
+      items << [{:text => 'Please read CSV file to see all the data.', :colspan => 6}]
+      end_file -= 2
+    end
+
     if invoicedetails and invoicedetails.size.to_i > 0
-      for id in invoicedetails
+      invoicedetails.each do |id|
         if (id.invdet_type > 0 or id.name == _("Did_owner_cost")) and id.name != 'Calls'
           if id.invdet_type > 0
             items << ['', {:text => id.nice_inv_name, :colspan => 3}, self.nice_invoice_number((id.quantity * id.converted_price(ex)), nice_number_hash).to_s, dc.to_s + " (" + _('Without_VAT') + ")"]
@@ -770,12 +778,14 @@ class Invoice < ActiveRecord::Base
           ttp += id.price.to_d
         end
       end
+      end_file -= 2
       items << [' ', '', '', '', '', '']
     end
 
     if user.minimal_charge_enabled?
       items << [' ', {:text => _('Minimal_Charge_for_Calls'), :colspan => 3}, nice_cell(self.nice_invoice_number(user.converted_minimal_charge(ex).to_d)), dc.to_s]
       items << [' ', '', '', '', '', '']
+      end_file -= 2
     end
 
     items << ['', {:text => _('SUBTOTAL') + ":", :colspan => 3, :align => :right}, nice_cell(self.nice_invoice_number(self.converted_price(ex))), dc.to_s + " (" + _('Without_VAT') + ")"]
@@ -791,11 +801,12 @@ class Invoice < ActiveRecord::Base
 
     items << [' ', '', '', '', '', ''] if items.size.to_i < 1
 
+    items =  items[0..page_limit] + items[end_file..-1] if items.size > page_limit
     pdf.table(items,
               :width => 550,
               :font_size => 7, :border_width => 0, :vertical_padding => 1,
               :align => {0 => :left, 1 => :right, 2 => :left, 3 => :right},
-              :column_widths => {1=> 100, 2 => 50, 4 => 50})
+              :column_widths => {0 => 100, 1=> 100, 2 => 50, 3 => 100, 4 => 50, 5 => 100})
 
     pdf = pdf_end(pdf, options)
 
