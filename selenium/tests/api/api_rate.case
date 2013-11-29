@@ -404,6 +404,52 @@
 	<td>css=error</td>
 	<td>Destination Group was not found</td>
 </tr>
+<!--Parašyta funkcija kuri kitaip ieško destination group'o. Jei nerado group'o su prefiksu tada ieškomas group'as su vienu vienu skaičiu nuo galo mažesniu prefiksu.-->
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/rates_list/2?page=1&amp;st=U</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=prefix</td>
+	<td>1415</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=price</td>
+	<td>2.326</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Rate was added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=admin&amp;prefix=14153630833&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=rate</td>
+	<td>2.326#USA 415 California#1415</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/rate?username=reseller&amp;prefix=14153630833&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=rate</td>
+	<td>2.326#USA 415 California#1415</td>
+</tr>
 </tbody></table>
 </body>
 </html>
