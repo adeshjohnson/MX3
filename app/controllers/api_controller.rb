@@ -1722,7 +1722,7 @@ class ApiController < ApplicationController
         if user
           destination = Destination.includes(:destinationgroup).where(:prefix => prefix).order("LENGTH(prefix) DESC").first
           if destination
-            dg = destination.destinationgroup
+            dg = find_dg(destination.prefix)
             if dg
               rate = Rate.includes([:ratedetails, :aratedetails]).where(["(rates.destination_id = ? or rates.destinationgroup_id = ?) AND rates.tariff_id = ?", destination.id, dg.id, user.tariff_id]).first
               customrate = Customrate.includes(:acustratedetails).where("customrates.destinationgroup_id = #{dg.id} AND customrates.user_id = #{user.id}").first
@@ -4240,5 +4240,14 @@ class ApiController < ApplicationController
     end
   end
 
+  def find_dg(prefix)
+    return nil if prefix.empty?
+    destination = Destination.where(prefix: prefix).first
+    if destination
+      destination_group = destination.destinationgroup
+      return destination_group if destination_group
+    end
+    find_dg(prefix[0...-1])
+  end
 
 end
