@@ -206,13 +206,8 @@
 	<td>102</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=ip_add_value_d</td>
-	<td>0.0.0.0</td>
-r>
-<tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -432,6 +427,127 @@ r>
 	<td>type</td>
 	<td>id=id</td>
 	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_value</td>
+	<td>ipauth*</td>
+</tr>
+<!--atkeiciamas device i dynamic ir po to vel pakeiciamas i ip auth-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>username</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_value</td>
+	<td>username</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>127.0.0.6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>127.0.0.6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>65</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Provider successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>9</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -722,6 +838,141 @@ r>
 	<td>assertText</td>
 	<td>id=name_value</td>
 	<td>ipauth*</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_value</td>
+	<td>ipauth*</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_password</td>
+	<td>password2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_login</td>
+	<td>username2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Provider successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_ip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ip_authentication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_server_ip</td>
+	<td>0.0.0.4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_ipaddr</td>
+	<td>0.0.0.4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_port</td>
+	<td>5060</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
 </tr>
 <tr>
 	<td>type</td>
