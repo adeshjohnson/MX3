@@ -103,7 +103,7 @@ class Provider < ActiveRecord::Base
       when "dynamic"
         self.server_ip = "dynamic"
         device = self.device
-        self.login.to_s.length > 0 ? device.name = self.login : device.name = "prov" + device.id.to_s
+        self.login.to_s.length > 0 ? device.name = self.login : device.name = "prov_" + self.id.to_s
         device.host = "dynamic"
         device.ipaddr = ""
         self.port = device.port = ""
@@ -230,7 +230,7 @@ class Provider < ActiveRecord::Base
     exceptions = []
     for server in self.servers
       begin
-        server.ami_cmd("sip reload keeprt")            
+        server.ami_cmd("sip reload keeprt")
       rescue Exception => e
         exceptions << e
       end
@@ -431,7 +431,7 @@ class Provider < ActiveRecord::Base
 
     sql = "SELECT #{s.join(' , ')} FROM providers
             #{joins.join(' ')}
-            WHERE #{cond.join(' AND ')} 
+            WHERE #{cond.join(' AND ')}
             GROUP BY providers.id ORDER BY providers.name ASC"
     Provider.find_by_sql(sql)
   end
@@ -489,8 +489,8 @@ class Provider < ActiveRecord::Base
     self.device.max_timeout = timeout
   end
 
-  def is_dahdi? 
-    self.tech == 'dahdi' 
-  end 
+  def is_dahdi?
+    self.tech == 'dahdi'
+  end
 
 end

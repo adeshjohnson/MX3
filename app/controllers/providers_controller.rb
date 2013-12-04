@@ -346,7 +346,7 @@ class ProvidersController < ApplicationController
     params[:provider][:timeout]= params[:provider][:timeout].to_s.strip
     params[:provider][:max_timeout]= params[:provider][:max_timeout].to_s.strip
 
-    #5618#comment:13 if timeout value is invalid(its not positive integer) we discard that value 
+    #5618#comment:13 if timeout value is invalid(its not positive integer) we discard that value
     params[:provider].delete(:timeout) if params[:provider][:timeout] !~ /^[0-9]+$/
     params[:provider].delete(:max_timeout) if params[:provider][:max_timeout] !~ /^[0-9]+$/
 
@@ -355,7 +355,7 @@ class ProvidersController < ApplicationController
 
     params[:provider][:call_limit] = 0 if params[:provider][:call_limit] and params[:provider][:call_limit].to_i < 0
 
-    @provider.set_old   
+    @provider.set_old
 
     # if higher than zero -> do not update provider
     provider_update_errors = 0
@@ -472,15 +472,15 @@ class ProvidersController < ApplicationController
         end
         @device.name = name
       else
-        @device.name = "prov" + @device.id.to_s
+        @device.name = "prov_" + @provider.id.to_s
       end
     else
 #      #ticket 5055. ip auth or dynamic host must checked
 #      if params[:hostname_ip].to_i != 'dynamic' and ['SIP', 'IAX2'].include?(@device.device_type)
 #        flash[:notice] = _("Must_set_either_ip_auth_either_dynamic_host")
 #        redirect_to :action => :edit, :id => @provider.id and return false
-#      end 
-      @device.name = "prov" + @device.id.to_s
+#      end
+      @device.name = "prov_" + @provider.id.to_s
       @device.username = @provider.login.strip
       @device.secret = (@provider.password).strip
     end
@@ -505,11 +505,11 @@ class ProvidersController < ApplicationController
       if @provider.tech == "SIP" or @provider.tech == "IAX2"
         exceptions = @device.prune_device_in_all_servers
         raise exceptions[0] if exceptions and exceptions.size > 0
-        
+
         # reloading sip and keeping realtime peers intact
         exception = @provider.sip_reload_keeprt
         raise exceptions[0] if exceptions and exceptions.size > 0
-        
+
       end
 
       if @provider.tech == "H323"
@@ -639,7 +639,7 @@ class ProvidersController < ApplicationController
         exceptions = device.prune_device_in_all_servers(nil, 0)
         raise exceptions[0] if exceptions.size > 0
       end
-      
+
       if @provider.tech == "H323"
         exceptions = @provider.h323_reload
         raise exceptions[0] if exceptions.size > 0
