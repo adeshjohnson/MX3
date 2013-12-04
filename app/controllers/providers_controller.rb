@@ -471,8 +471,6 @@ class ProvidersController < ApplicationController
           name = @device.generate_rand_name('ipauth', 8)
         end
         @device.name = name
-      else
-        @device.name = "prov_" + @provider.id.to_s
       end
     else
 #      #ticket 5055. ip auth or dynamic host must checked
