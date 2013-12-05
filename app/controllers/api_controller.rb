@@ -2584,7 +2584,7 @@ class ApiController < ApplicationController
     ret += 1 if rate[:rate_type] and ["minute", "event"].include?(rate[:rate_type].to_s)
     ret += 1 if rate[:rate_start_time] and rate[:rate_start_time].to_s !~ /[^0-9.\:]/ and rate[:rate_start_time].to_s.length > 0
     ret += 1 if rate[:rate_end_time] and rate[:rate_end_time].to_s !~ /[^0-9.\:]/ and rate[:rate_end_time].to_s.length > 0
-    ret += 1 if rate[:day_type] and ['', "WD", "FD"].include?(rate[:day_type].to_s)
+    ret += 1 if ['', "WD", "FD"].include?(rate[:day_type].to_s)
     ret += 1 if rate[:rate_duration] and rate[:rate_duration].to_s !~ /[^0-9.\-]/ and rate[:rate_duration].to_s.length > 0
 
     if ret < 7
