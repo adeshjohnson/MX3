@@ -201,6 +201,7 @@ class AccountingController < ApplicationController
               @number += 1
               invoice.sent_email = 1
               invoice.save
+              Action.create_email_sending_action(user, 'email_sent', email)
             else
               Action.create_email_sending_action(user, 'error', email, {:er_type => 1, :err_message => @num})
             end
