@@ -108,17 +108,15 @@ class DevicesController < ApplicationController
       device.insecure = 'no'
     end
     @sip_proxy_server = Server.where("server_type = 'sip_proxy'").first
-    if session[:usertype] == "reseller"
-      if ccl_active? and device.device_type == "SIP" and device.host == "dynamic"
-        device.server_id = @sip_proxy_server.id
-      else
-        first_srv = Server.first.id
-        def_asterisk = Confline.get_value('Resellers_server_id').to_i
-        if def_asterisk.to_i == 0
-          def_asterisk = first_srv
-        end
-        device.server_id = def_asterisk
+    if ccl_active? and device.device_type == "SIP"
+      device.server_id = @sip_proxy_server.id
+    elsif reseller?
+      first_srv = Server.first.id
+      def_asterisk = Confline.get_value('Resellers_server_id').to_i
+      if def_asterisk.to_i == 0
+        def_asterisk = first_srv
       end
+      device.server_id = def_asterisk
     end
 
     #device.port = Confline.get_value("Default_IAX2_device_port", current_user.get_corrected_owner_id) if device.device_type == 'IAX2' and not Device.valid_port? device.port, device.device_type                    
