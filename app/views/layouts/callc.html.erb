@@ -229,9 +229,7 @@
     show_hide_menus2(1);
     <%end%>
     // Firefox disable form cache on reload
-    <% if params[:action] != 'login' %>
-      $j('input,textarea,select').attr('autocomplete', 'off');
-    <% end %>
+    $j('input,textarea,select').attr('autocomplete', 'off');
 </script>
 
 <%= yield :scripts %>
