@@ -46,7 +46,11 @@
               <%= link_to(b_cross(:title => _('Enable')), {:action => 'server_change_status', :id => serv.id}, {:method => :post}) if serv.active == 0 %>
             <% end %>
             </td>
-            <td id="test_<%= serv.id %>" align="center"><%= link_to b_test, {:action => "server_test", :id => serv.id}, :onclick => "window.open(this.href,'new_window','height=200,width=400');return false;" %> </td>
+            <td id="test_<%= serv.id %>" align="center">
+              <% unless serv.server_type.to_s == 'sip_proxy' %> 
+                <%= link_to b_test, {:action => "server_test", :id => serv.id}, :onclick => "window.open(this.href,'new_window','height=200,width=400');return false;" %>
+              <% end %> 
+            </td>
             <td id="server_id_<%= serv.id %>"><%= h serv.server_id %></td>
             <td id="hostname_<%= serv.id %>"><%= h serv.hostname %></td>
             <td id="ip_<%= serv.id %>"><%= h serv.server_ip %></td>

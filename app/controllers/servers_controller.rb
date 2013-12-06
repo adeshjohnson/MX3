@@ -309,19 +309,24 @@ class ServersController < ApplicationController
 
   def server_test
     @help_link = "http://wiki.kolmisoft.com/index.php/Multi_Server_support"
-    session[:flash_not_redirect] = 1
-    session[:server_test_ok] = 0
-    begin
-      @server.ami_cmd("core show version")
-    rescue Exception
-      flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
-      flash[:notice] = _('Cannot_connect_to_asterisk_server')
-      flash[:notice] += "<a href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' />&nbsp;#{_('Click_here_for_more_info')}</a>" if flash_help_link
+    if @server.server_type.to_s == 'sip_proxy' 
+      dont_be_so_smart 
+      redirect_to :root 
+    else 
+      session[:flash_not_redirect] = 1
       session[:server_test_ok] = 0
-    else
-      session[:server_test_ok] = 1
+      begin
+        @server.ami_cmd("core show version")
+      rescue Exception
+        flash_help_link = "http://wiki.kolmisoft.com/index.php/GUI_Error_-_SystemExit"
+        flash[:notice] = _('Cannot_connect_to_asterisk_server')
+        flash[:notice] += "<a href='#{flash_help_link}' target='_blank'><img alt='Help' src='#{Web_Dir}/assets/icons/help.png' title='#{_('Help')}' />&nbsp;#{_('Click_here_for_more_info')}</a>" if flash_help_link
+        session[:server_test_ok] = 0
+      else
+        session[:server_test_ok] = 1
+      end
+      render(:layout => "layouts/mor_min")
     end
-    render(:layout => "layouts/mor_min")
   end
 
   # when ccl_active = 1 shows all devices of a certain server
