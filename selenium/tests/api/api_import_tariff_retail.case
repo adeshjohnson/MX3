@@ -861,32 +861,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[2]/rate_price</td>
+	<td>css=rate_price</td>
 	<td>0.02</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[2]/rate_round_by</td>
+	<td>css=rate_round_by</td>
 	<td>300</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[2]/rate_duration</td>
+	<td>css=rate_duration</td>
 	<td>3</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[2]/rate_type</td>
+	<td>css=rate_type</td>
 	<td>minute</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[2]/rate_start_time</td>
+	<td>css=rate_start_time</td>
 	<td>exact:00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//destination[2]/rate_end_time</td>
+	<td>css=rate_end_time</td>
 	<td>exact:07:59:59</td>
 </tr>
 <!--FROM-->
@@ -1057,22 +1057,22 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=from_244</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>assertText</td>
 	<td>id=from_245</td>
 	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=from_246</td>
-	<td>31</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=from_247</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_248</td>
 	<td>31</td>
 </tr>
 <tr>
@@ -1082,23 +1082,134 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=duration_244</td>
+	<td>id=duration_245</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=duration_245</td>
+	<td>id=duration_246</td>
 	<td>30</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=duration_246</td>
+	<td>id=duration_247</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>id=duration</td>
 	<td>300</td>
+</tr>
+<!--Reitus turi sukelti į vieną dieną-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=admin1&amp;xml=&lt;tariff&gt;&lt;name&gt;test_export_advanced654&lt;/name&gt;&lt;id&gt;129&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.05&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;07:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.02&lt;/rate_price&gt;&lt;rate_round_by&gt;1&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;08:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;12:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;300&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.01&lt;/rate_price&gt;&lt;rate_round_by&gt;301&lt;/rate_round_by&gt;&lt;rate_type&gt;event&lt;/rate_type&gt;&lt;rate_start_time&gt;13:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;0&lt;/rate_duration&gt;&lt;day_type/&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_id</td>
+	<td>21</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_name</td>
+	<td>test_export_advanced654</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_rates_list/21</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Check advanced rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#rates_link_515 &gt; img[alt=&quot;Coins&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=start_time_value_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=end_time_value_0</td>
+	<td>exact:07:59:59</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;View&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Day : Work Day and Free Day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates/515?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Day : Work Day and Free Day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time: 00:00:00 - 07:59:59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>0.05</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates/515?dt=&amp;st=08%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Day : Work Day and Free Day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time: 08:00:00 - 12:59:59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>0.02</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates/515?dt=&amp;st=13%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Day : Work Day and Free Day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time: 13:00:00 - 23:59:59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>0.01</td>
 </tr>
 <!--ATKOMENTUOTI, KAI BUS PADARYTAS TICKET #7455-->
 <!--***** reitai turetu buti puslapyje /billing/tariffs/user_arates/509?dt=&st=00%3A00%3A00 , jei yra naudojama komanda <day_type/>-->
@@ -1113,18 +1224,13 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>21 MOR retail test</td>
+	<td>22 MOR retail test</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_rates_list/21</td>
+	<td>/billing/tariffs/user_rates_list/22</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=price_515</td>
-	<td>Check advanced rates</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1137,13 +1243,18 @@
 	<td>Check advanced rates</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=price_518</td>
+	<td>Check advanced rates</td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_arates/516?dt=WD&amp;st=00%3A00%3A00</td>
+	<td>/billing/tariffs/user_arates/517?dt=WD&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>name=price_262</td>
+	<td>name=price_273</td>
 	<td>0.2982</td>
 </tr>
 <tr>
@@ -1153,7 +1264,7 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>name=round_262</td>
+	<td>name=round_273</td>
 	<td>30</td>
 </tr>
 <tr>
@@ -1163,7 +1274,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_arates/517?dt=WD&amp;st=00%3A00%3A00</td>
+	<td>/billing/tariffs/user_arates/518?dt=WD&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
 <tr>
@@ -1173,12 +1284,12 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>name=price_264</td>
+	<td>name=price_275</td>
 	<td>0.3106</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/tariffs/user_arates/515?dt=WD&amp;st=00%3A00%3A00</td>
+	<td>/billing/tariffs/user_arates/516?dt=WD&amp;st=00%3A00%3A00</td>
 	<td></td>
 </tr>
 <tr>
@@ -1188,8 +1299,23 @@
 </tr>
 <tr>
 	<td>assertValue</td>
-	<td>name=price_260</td>
+	<td>name=price_271</td>
 	<td>0.3106</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;p=zSWB32kggBmz&amp;xml=&nbsp;&nbsp;&lt;tariff&gt;&nbsp;&nbsp;&nbsp;&lt;name&gt;MOR retail test&lt;/name&gt;&nbsp;&nbsp;&nbsp;&lt;id&gt;71&lt;/id&gt;&nbsp;&nbsp;&nbsp;&lt;destinations&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;direction/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_price&gt;0.3106&lt;/rate_price&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_round_by&gt;30&lt;/rate_round_by&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_type&gt;minute&lt;/rate_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;day_type&gt;WD&lt;/day_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_price&gt;0.3106&lt;/rate_price&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_round_by&gt;6&lt;/rate_round_by&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_type&gt;minute&lt;/rate_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_duration&gt;-1&lt;/rate_duration&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;day_type&gt;WD&lt;/day_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/destination&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;direction/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination_group_type&gt;MOB&lt;/destination_group_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_price&gt;0.2982&lt;/rate_price&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_round_by&gt;30&lt;/rate_round_by&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_type&gt;minute&lt;/rate_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;day_type&gt;WD&lt;/day_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_price&gt;0.2982&lt;/rate_price&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_round_by&gt;6&lt;/rate_round_by&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_type&gt;minute&lt;/rate_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_duration&gt;-1&lt;/rate_duration&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;day_type&gt;WD&lt;/day_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/destination&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;direction/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;destination_group_type&gt;NGN&lt;/destination_group_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_price&gt;0.3106&lt;/rate_price&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_round_by&gt;30&lt;/rate_round_by&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_type&gt;minute&lt;/rate_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;day_type&gt;WD&lt;/day_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_price&gt;0.3106&lt;/rate_price&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_round_by&gt;6&lt;/rate_round_by&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_type&gt;minute&lt;/rate_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;rate_duration&gt;-1&lt;/rate_duration&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;day_type&gt;WD&lt;/day_type&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/rates&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/destination&gt;&nbsp;&nbsp;&nbsp;&lt;/destinations&gt;&nbsp;&nbsp;&lt;/tariff&gt;&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=response</td>
+	<td>TARIFF with same name exists, ID:22!!! CHANGE NAME OR ID</td>
 </tr>
 </body>
 </html>
