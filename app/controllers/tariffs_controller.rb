@@ -933,7 +933,6 @@ class TariffsController < ApplicationController
             session[:import_csv_tariffs_import_csv_options] = {}
             session[:import_csv_tariffs_import_csv_options][:sep] = @sep
             session[:import_csv_tariffs_import_csv_options][:dec] = @dec
-            session[:file] = File.open("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", "rb").read
             begin
               session[:file] = File.open("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", "rb").read
             rescue Exception => e
