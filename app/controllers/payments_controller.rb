@@ -4,6 +4,7 @@ class PaymentsController < ApplicationController
   require "digest"
 
   layout "callc"
+  skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn]
   before_filter :check_post_method, :only => [:destroy, :create, :update]
   before_filter :check_localization, :except => [:paypal_ipn, :webmoney_result, :cyberplat_result, :ouroboros_accept, :linkpoint_ipn]
   before_filter :authorize, :except => [:paypal_ipn, :webmoney_result, :cyberplat_result, :ouroboros_accept, :linkpoint_ipn]
@@ -724,9 +725,9 @@ class PaymentsController < ApplicationController
   def manual_payment_finish
 
     if params[:provider_id]
-      
+
       # manual payment for provider
-      
+
       provider = current_user.providers.find(:first, :conditions => ["providers.id = ?", params[:provider_id]])
       amount = params[:amount].to_d * -1.to_d
       real_amount = params[:real_amount].to_d * -1.to_d
@@ -760,9 +761,9 @@ class PaymentsController < ApplicationController
       paym.save
       flash[:status] = _('Payment_added')
     else
-      
+
       #manual payment for user
-      
+
       user = User.find(:first,:include => [:tax], :conditions => ["users.id = ?", params[:user]])
       amount = params[:amount].to_d
       real_amount = params[:real_amount].to_d
