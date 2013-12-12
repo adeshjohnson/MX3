@@ -58,62 +58,60 @@
           </tr>
       <% end %>
 
-      <% if session[:usertype] != "reseller" %>
-          <tr>
-            <td colspan=2>
-              <%= _('Media_control') %> - <%= _('canreinvite') %>:
-              <select id="canreinvite" name="device[canreinvite]">
-                <option value="no" <%= "selected" if device_canreinvite == "no" %>> <%= _('no') %></option>
-                <option value="yes" <%= "selected" if device_canreinvite == "yes" %>> <%= _('yes') %></option>
-                <option value="nonat" <%= "selected" if device_canreinvite == "nonat" %>> <%= _('nonat') %></option>
-                <option value="update" <%= "selected" if device_canreinvite == "update" %>> <%= _('update_small') %></option>
-                <option value="update,nonat" <%= "selected" if device_canreinvite == "update,nonat" %>> <%= _('update_small') %>,<%= _('nonat') %></option>
-              </select>
-            </td>
-          </tr>
-          <script type="text/javascript">
-              //<![CDATA[
-              function disable_media_control_if_necesary(value) {
-                  /*if some other than SIP device type was selected, then disable
-                   canreinvite option completly*/
-                  var canreinvite = $('canreinvite');
-                  var enable = (value != 'SIP');
-                  canreinvite.disabled = enable;
+      <tr>
+        <td colspan=2>
+          <%= _('Media_control') %> - <%= _('canreinvite') %>:
+          <select id="canreinvite" name="device[canreinvite]">
+            <option value="no" <%= "selected" if device_canreinvite == "no" %>> <%= _('no') %></option>
+            <option value="yes" <%= "selected" if device_canreinvite == "yes" %>> <%= _('yes') %></option>
+            <option value="nonat" <%= "selected" if device_canreinvite == "nonat" %>> <%= _('nonat') %></option>
+            <option value="update" <%= "selected" if device_canreinvite == "update" %>> <%= _('update_small') %></option>
+            <option value="update,nonat" <%= "selected" if device_canreinvite == "update,nonat" %>> <%= _('update_small') %>,<%= _('nonat') %></option>
+          </select>
+        </td>
+      </tr>
+      <script type="text/javascript">
+          //<![CDATA[
+          function disable_media_control_if_necesary(value) {
+              /*if some other than SIP device type was selected, then disable
+               canreinvite option completly*/
+              var canreinvite = $('canreinvite');
+              var enable = (value != 'SIP');
+              canreinvite.disabled = enable;
+          }
+
+          /*add event listener for onload event and for onclick event for all device
+           type checkboxes.
+           TODO: should be using jquery to get element by name*/
+          Event.observe(window, 'load', function () {
+              var type = '<%= @device_type.to_s %>';
+              disable_media_control_if_necesary(type);
+
+              if ($('registration_expire') && <%= @device_type == "SIP" %>) {
+                  Event.observe($('ip_authentication_dynamic_2'), 'click', function () {
+                      $('registration_expire').hide();
+                  });
+                  Event.observe($('ip_authentication_dynamic_1'), 'click', function () {
+                      $('registration_expire').show();
+                  })
               }
 
-              /*add event listener for onload event and for onclick event for all device
-               type checkboxes.
-               TODO: should be using jquery to get element by name*/
-              Event.observe(window, 'load', function () {
-                  var type = '<%= @device_type.to_s %>';
-                  disable_media_control_if_necesary(type);
-
-                  if ($('registration_expire') && <%= @device_type == "SIP" %>) {
-                      Event.observe($('ip_authentication_dynamic_2'), 'click', function () {
-                          $('registration_expire').hide();
-                      });
-                      Event.observe($('ip_authentication_dynamic_1'), 'click', function () {
-                          $('registration_expire').show();
-                      })
-                  }
-
-              })
-              //]]>
-          </script>
-      <% end %>
+          })
+          //]]>
+      </script>
 
       <tr>
         <td colspan=2>
           NAT:
           <%= radio_button_tag('device[nat]', 'no', checked = (device_nat == 'no')) %> <%= _('No') %>
           <%= radio_button_tag('device[nat]', 'yes', checked = (device_nat == 'yes')) %> <%= _('Yes') %>
-          <% if ast_18? %> 
-            <%= radio_button_tag('device[nat]', 'force_rport', checked = (device_nat == 'force_rport') ) %> <%= _('force_rport') %> 
-            <%= radio_button_tag('device[nat]', 'comedia', checked = (device_nat == 'comedia') ) %> <%= _('comedia') %> 
-          <% else %> 
+          <% if ast_18? %>
+            <%= radio_button_tag('device[nat]', 'force_rport', checked = (device_nat == 'force_rport') ) %> <%= _('force_rport') %>
+            <%= radio_button_tag('device[nat]', 'comedia', checked = (device_nat == 'comedia') ) %> <%= _('comedia') %>
+          <% else %>
             <%= radio_button_tag('device[nat]', 'never', checked = (device_nat == 'never')) %> <%= _('Never') %>
-            <%= radio_button_tag('device[nat]', 'route', checked = (device_nat == 'route') ) %> <%= _('Route') %> 
-          <% end %> 
+            <%= radio_button_tag('device[nat]', 'route', checked = (device_nat == 'route') ) %> <%= _('Route') %>
+          <% end %>
         </td>
       </tr>
 
