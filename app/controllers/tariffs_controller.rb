@@ -934,6 +934,13 @@ class TariffsController < ApplicationController
             session[:import_csv_tariffs_import_csv_options][:sep] = @sep
             session[:import_csv_tariffs_import_csv_options][:dec] = @dec
             session[:file] = File.open("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", "rb").read
+            begin
+              session[:file] = File.open("/tmp/#{session["temp_tariff_name_csv_#{@tariff.id}".to_sym]}.csv", "rb").read
+            rescue Exception => e
+              MorLog.log_exception(e, Time.now.to_i, params[:controller], params[:action])
+              flash[:notice] = _('Please_upload_file')
+              redirect_to :action => "import_csv2", :id => @tariff.id, :step => "1" and return false
+            end
             Tariff.clean_after_import(session["temp_tariff_name_csv_#{@tariff.id}".to_sym])
             session["temp_tariff_name_csv_#{@tariff.id}".to_sym] = nil
             flash[:notice] = _('MySQL_permission_problem_contact_Kolmisoft_to_solve_it')
