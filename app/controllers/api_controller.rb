@@ -77,6 +77,7 @@ class ApiController < ApplicationController
     end
     if Confline.get_value("API_Login_Redirect_to_Main").to_i == 1 and login_ok
       bad_psw = (params[:p].to_s == 'admin' and @user.id == 0) ? _('ATTENTION!_Please_change_admin_password_from_default_one_Press')+ " <a href='#{Web_Dir}/users/edit/0'> #{_('Here')} </a> " + _('to_do_this') : ''
+      store_url
       flash[:notice] = bad_psw if !bad_psw.blank?
       flash[:status] = _('login_successfully')
       redirect_to :controller => :callc, :action => :main and return false
