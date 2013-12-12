@@ -103,7 +103,7 @@
                 <div class="nb">
                   <b><%= _('Login') %>:</b>
                   <%= form_tag(:controlle => "ccpanel", :action => 'try_to_login') do %>
-                      <% if CC_Single_Login == 1 %>
+                      <% if defined?(CC_Single_Login) and (CC_Single_Login == 1) %>
                           <%= text_field_tag 'login', "", "class" => "input", :size => "15", :maxlength => "20" %>
                       <% else %>
                           <table class="simple">
