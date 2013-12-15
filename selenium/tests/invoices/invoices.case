@@ -1112,7 +1112,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
+	<td>click</td>
 	<td>allow_api</td>
 	<td></td>
 </tr>
@@ -1242,18 +1242,43 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/accounting/user_invoices</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>price_6</td>
-	<td>19.5977</td>
+	<td>19.5977 USD</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>price_with_vat_6</td>
-	<td>36.9926</td>
+	<td>36.9925 USD</td>
 </tr>
 <!--from api-->
 <!--admin-->
@@ -1334,7 +1359,7 @@
 <!--hash2-->
 <tr>
 	<td>open</td>
-	<td>/billing/api/invoices?u=reseller&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;hash=${hash2}</td>
+	<td>/billing/api/invoices?u=reseller&amp;from=1350777600&amp;till=1354233600&amp;file=false&amp;hash=e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4</td>
 	<td></td>
 </tr>
 <tr>
