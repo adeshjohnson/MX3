@@ -813,6 +813,26 @@
 <!--buvo problema, kad prisijungus per api ir paspaudus paypal logo, nucrashina-->
 <tr>
 	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/settings_payments</td>
 	<td></td>
 </tr>
@@ -878,7 +898,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/api/user_login?u=user_admin&amp;p=user_admin1&amp;test=1</td>
+	<td>/billing/api/login?u=user_admin&amp;p=user_admin1&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>

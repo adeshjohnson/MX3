@@ -1,6 +1,6 @@
 INSERT INTO `servers` (`id`, `server_ip`, `stats_url`, `server_type`, `active`, `comment`, `hostname`, `maxcalllimit`, `server_id`, `ami_port`, `ami_secret`, `ami_username`, `port`, `ssh_username`, `ssh_secret`, `ssh_port`, `gateway_active`, `version`, `uptime`) VALUES
-(20, '127.0.0.2', NULL, 'asterisk', 1, 'second serv', '127.0.0.2', 1000, 20, '5038', 'morsecret', 'mor', 5060, 'root', NULL, 22, 0, '', ''),
-(30, '127.0.0.3', NULL, 'asterisk', 1, 'third serv', '127.0.0.3', 1000, 30, '5038', 'morsecret', 'mor', 5060, 'root', NULL, 22, 0, '', '');
+(20, '127.0.0.2', NULL, 'asterisk', 1, 'second serv', '127.0.0.2', 1000, 20, '5038', 'ami_secr', 'ami_user', 5060, 'root', NULL, 22, 0, '', ''),
+(30, '127.0.0.3', NULL, 'asterisk', 1, 'third serv', '127.0.0.3', 1000, 30, '5038', 'ami_secr', 'ami_user', 5060, 'root', NULL, 22, 0, '', '');
 
 INSERT INTO `devicecodecs` (`id`, `device_id`, `codec_id`, `priority`) VALUES
 (30, 20, 1, 0),
