@@ -124,7 +124,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/test/load_delta_sql/tests/sql/servers_correct</td>
+	<td>/billing/test/load_delta_sql/tests/sql/servers</td>
 	<td></td>
 </tr>
 <tr>
@@ -554,6 +554,26 @@
 	<td>assertValue</td>
 	<td>id=device_extension</td>
 	<td>1005</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/servers/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#active_20 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#active_30 &gt; a &gt; img[alt=&quot;Check&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>open</td>
