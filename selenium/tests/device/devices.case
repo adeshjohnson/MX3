@@ -586,6 +586,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/providers/edit/1</td>
 	<td></td>
@@ -891,6 +896,338 @@
 	<td>assertNotEditable</td>
 	<td>id=canreinvite</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=universal_bundles/make_rspro</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=resellers_provider/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3304</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Media control - canreinvite:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=canreinvite</td>
+	<td>no yes nonat update update,nonat</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Provider successfully updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3304</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>yes</td>
+</tr>
+<!--SIP DEVICE-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_SIP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>sip device rs</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Device created</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Media control - canreinvite:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=canreinvite</td>
+	<td>no yes nonat update update,nonat</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>no</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--yes-->
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Device's settings updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>yes</td>
+</tr>
+<!--nonat-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=nonat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>nonat</td>
+</tr>
+<!--update-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=update</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>update</td>
+</tr>
+<!--update, nonat-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=update,nonat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/2305</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>update,nonat</td>
+</tr>
+<!--IAX2 DEVICE-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Media control - canreinvite:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=canreinvite</td>
+	<td>no yes nonat update update,nonat</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>no</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=canreinvite</td>
+	<td>label=yes</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--yes-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=canreinvite</td>
+	<td>no</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=canreinvite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/make_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=table</td>
+	<td>label=devices</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=canreinvite_value</td>
+	<td>update,nonat</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search_devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=canreinvite_value</td>
+	<td>no</td>
 </tr>
 </tbody></table>
 </body>
