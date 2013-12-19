@@ -1269,6 +1269,7 @@ Localization.define('en') do |l|
   l.store 'Paypal_Enabled', 'PayPal enabled'
   l.store 'PayPal_Email', 'PayPal Email'
   l.store 'PayPal_Default_Amount', 'Default amount'
+  l.store 'Paypal_default_amount_not_correct', 'Paypal default amount is invalid'
   l.store 'PayPal_Min_Amount', 'Minimal amount'
   l.store 'PayPal_Test', 'Test'
   l.store 'Paypal_Default_Currency', 'Default currency'

@@ -1526,8 +1526,22 @@ Sets default tax values for users or cardgroups
   def settings_payments_change
     @page_title = _('Payment_Settings')
     @page_icon = 'cog.png'
-    default_amount = (params[:paypal_default_amount].to_d > params[:paypal_max_amount].to_d) ? params[:paypal_max_amount] : params[:paypal_default_amount]
-    default_amount = (params[:paypal_default_amount].to_d < params[:paypal_min_amount].to_d) ? params[:paypal_min_amount] : default_amount
+
+    pp_min = params[:paypal_min_amount].to_d
+    pp_max = params[:paypal_max_amount].to_d
+    pp_default = params[:paypal_default_amount].to_d
+    if pp_default >= pp_min and pp_default <= pp_max and pp_max != 0
+      default_amount = params[:paypal_default_amount]
+    elsif pp_default > pp_max and pp_max != 0
+      default_amount = params[:paypal_max_amount]
+    elsif pp_default < pp_min
+      default_amount = params[:paypal_min_amount]
+    elsif pp_max == 0
+      default_amount = params[:paypal_default_amount]
+    else
+      flash[:notice] = _("Paypal_default_amount_not_correct")
+      redirect_to :action => 'settings_payments' and return false
+    end
 
     #Vouchers
     Confline.set_value("Vouchers_Enabled", params[:vouchers_enabled].to_i, session[:user_id])
