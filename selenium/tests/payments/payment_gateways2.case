@@ -325,7 +325,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Total amount to pay : 5.0000 USD</td>
+	<td>Total amount to pay : 10.0000 USD</td>
 	<td></td>
 </tr>
 <tr>
@@ -673,6 +673,132 @@
 	<td>assertTextPresent</td>
 	<td>An error occurred while saving gateway configuration</td>
 	<td></td>
+</tr>
+<!--paypal default amount ir max amount - buvo problemų su jų išsaugojimu-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_default_amount</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_default_amount</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_max_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_min_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_min_amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_default_amount</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_default_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_default_amount</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_max_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_default_amount</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_default_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_max_amount</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=paypal_min_amount</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_default_amount</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=paypal_min_amount</td>
+	<td>9</td>
 </tr>
 </tbody></table>
 </body>
