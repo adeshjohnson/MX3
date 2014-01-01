@@ -3062,19 +3062,19 @@ Variables: (Names marked with * are required)
   end
 
   def admin?
-    current_user and current_user.to_s.usertype == "admin"
+    current_user.usertype == "admin" if current_user.present?
   end
 
   def reseller?
-    current_user and current_user.to_s.usertype == "reseller"
+    current_user.usertype == "reseller" if current_user.present?
   end
 
   def user?
-    current_user and current_user.to_s.usertype == "user"
+    current_user.usertype == "user" if current_user.present?
   end
 
   def accountant?
-    current_user and current_user.to_s.usertype == "accountant"
+    current_user.usertype == "accountant" if current_user.present?
   end
 
   def show_recordings?
