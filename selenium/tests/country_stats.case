@@ -519,17 +519,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/country_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>/billing/stats/country_stats?date_from[year]=2009&amp;date_from[month]=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -549,7 +539,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>&quot;dg_name&quot;=&gt;&quot;Lithuania&quot;, &quot;dg_type&quot;=&gt;&quot;MOB&quot;, &quot;calls&quot;=&gt;&quot;8&quot;, &quot;billsec&quot;=&gt;&quot;400&quot;, &quot;selfcost&quot;=&gt;&quot;92&quot;, &quot;price&quot;=&gt;&quot;79&quot;, &quot;profit&quot;=&gt;&quot;-13&quot;</td>
+	<td>&quot;dg_name&quot;=&gt;&quot;Lithuania&quot;, &quot;dg_type&quot;=&gt;&quot;MOB&quot;, &quot;calls&quot;=&gt;&quot;10&quot;, &quot;billsec&quot;=&gt;&quot;490&quot;, &quot;selfcost&quot;=&gt;&quot;96&quot;, &quot;price&quot;=&gt;&quot;95&quot;, &quot;profit&quot;=&gt;&quot;-1&quot;</td>
 	<td></td>
 </tr>
 </tbody></table>

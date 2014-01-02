@@ -530,7 +530,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/profit</td>
+	<td>/billing/stats/profit?date_from[year]=2008</td>
 	<td></td>
 </tr>
 <tr>
@@ -542,16 +542,6 @@
 	<td>assertText</td>
 	<td>id=responsible_accountant_id</td>
 	<td>All Test Retail Accountant Test Wholesale Accountant</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>

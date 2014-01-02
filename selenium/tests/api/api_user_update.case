@@ -447,6 +447,16 @@
 <!--change accountant details-->
 <tr>
 	<td>open</td>
+	<td>/billing/test/time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=year</td>
+	<td>current_year</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/users/edit/4</td>
 	<td></td>
 </tr>
@@ -528,12 +538,12 @@
 <tr>
 	<td>select</td>
 	<td>id=block_at_date_year</td>
-	<td>label=2013</td>
+	<td>label=${current_year}</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=agr_date_year</td>
-	<td>label=2013</td>
+	<td>label=${current_year}</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -901,7 +911,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=block_at_date_year</td>
-	<td>2013</td>
+	<td>${current_year}</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -1021,7 +1031,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=agr_date_year</td>
-	<td>2013</td>
+	<td>${current_year}</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>

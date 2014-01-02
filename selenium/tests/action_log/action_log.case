@@ -108,7 +108,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/action_log</td>
+	<td>/billing/stats/action_log?date_till[year]=2008&amp;date_from[year]=2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,21 +124,6 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>fake_passw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2009</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -338,17 +323,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/action_log</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/action_log?date_from[year]=2008</td>
 	<td></td>
 </tr>
 <tr>
