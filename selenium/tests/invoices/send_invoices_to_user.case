@@ -42,11 +42,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/billing/test/load_delta_sql/tests/sql/good_calls</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
 	<td>//body</td>
 	<td></td>
@@ -264,12 +259,12 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2012</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>date_from_month</td>
-	<td>label=May</td>
+	<td>label=January</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -307,6 +302,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/accounting/invoices</td>
 	<td></td>
@@ -324,7 +324,7 @@
 <tr>
 	<td>select</td>
 	<td>//div[@id='invoices_details']/table/tbody/tr/td/select[1]</td>
-	<td>label=2012-05-20</td>
+	<td>label=2010-01-20</td>
 </tr>
 <tr>
 	<td>select</td>
