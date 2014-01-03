@@ -47,29 +47,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_10']/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>csv_decimal</td>
 	<td>.</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>open</td>
@@ -79,7 +59,7 @@
 <tr>
 	<td>select</td>
 	<td>date_from_year</td>
-	<td>label=2007</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -94,7 +74,7 @@
 <tr>
 	<td>select</td>
 	<td>date_till_year</td>
-	<td>label=2012</td>
+	<td>label=2013</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -118,52 +98,52 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Invoices generated: 3</td>
+	<td>Invoices generated: 2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_pdf/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_pdf/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453.2258</td>
+	<td>480.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_pdf/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_pdf/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453.2258</td>
+	<td>480.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>475.2258</td>
+	<td>485.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>4.0000</td>
+	<td>5.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10.0000</td>
+	<td>30.0</td>
 	<td></td>
 </tr>
 <tr>
@@ -173,32 +153,32 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453.2258</td>
+	<td>480.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>24.0</td>
+	<td>5.0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>3</td>
+	<td>1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_destinations_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453.2258</td>
+	<td>480.0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -213,22 +193,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>24.0000</td>
+	<td>30.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10.0000</td>
+	<td>5.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_10']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -253,57 +228,57 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>475,2258</td>
+	<td>485,0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>4,0000</td>
+	<td>5,0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10,0000</td>
+	<td>1.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453,2258</td>
+	<td>480,0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>24,0</td>
+	<td>5,0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>3</td>
+	<td>1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_destinations_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453,2258</td>
+	<td>480,0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,22 +293,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>24,0000</td>
+	<td>30,0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10,0000</td>
+	<td>5,0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
 	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_10']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -358,27 +328,27 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>475.2258</td>
+	<td>485.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_detailed_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_detailed_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>4.0000</td>
+	<td>5.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10.0000</td>
+	<td>30.0</td>
 	<td></td>
 </tr>
 <tr>
@@ -388,32 +358,32 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453.2258</td>
+	<td>480.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_by_cid_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_by_cid_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>24.0</td>
+	<td>5.0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>3</td>
+	<td>1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/accounting/generate_invoice_destinations_csv/2?&amp;test=1</td>
+	<td>/billing/accounting/generate_invoice_destinations_csv/1?&amp;test=1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>453.2258</td>
+	<td>480.0000</td>
 	<td></td>
 </tr>
 <tr>
@@ -428,12 +398,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>24.0000</td>
+	<td>30.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10.0000</td>
+	<td>5.0000</td>
 	<td></td>
 </tr>
 <tr>

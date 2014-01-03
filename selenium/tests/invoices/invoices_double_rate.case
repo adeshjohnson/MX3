@@ -34,21 +34,6 @@
 <!--date fix-->
 <tr>
 	<td>open</td>
-	<td>/billing/stats/show_user_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
 	<td>/billing/tariffs/ratedetail_edit/391</td>
 	<td></td>
 </tr>
@@ -172,6 +157,12 @@
 	<td>Rule added</td>
 	<td></td>
 </tr>
+<!--date fix-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/last_calls_stats?date_from[year]=2006&amp;search_on=1</td>
+	<td></td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/cdr/rerating</td>
@@ -264,12 +255,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Lithuania MOB 3706,0.0,75.0000,3,30.0000,90,15.0000</td>
+	<td>Lithuania MOB 3706,0.0,75.0000,3.0,30.0000,90.0,15.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Lithuania MOB 370630,20.0,100.0000,1,50.0000,50,12.3333</td>
+	<td>Lithuania MOB 370630,20.0,100.0000,1.0,50.0000,50.0,12.3333</td>
 	<td></td>
 </tr>
 <tr>
@@ -280,12 +271,12 @@
 <!--Parsisiųstas csv failas billsec rodo be kablelio-->
 <tr>
 	<td>assertTextPresent</td>
-	<td>Lithuania,MOB,0.0,1,30,5.0000</td>
+	<td>Lithuania,MOB,0.0,1,30.0,5.0000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Lithuania,MOB,20.0,1,50,12.3333</td>
+	<td>Lithuania,MOB,20.0,1,50.0,12.3333</td>
 	<td></td>
 </tr>
 </tbody></table>

@@ -43,6 +43,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/good_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/settings</td>
 	<td></td>
 </tr>
@@ -160,12 +165,12 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -345,22 +350,22 @@
 <tr>
 	<td>assertText</td>
 	<td>id=inv_price_1</td>
-	<td>95.2258</td>
+	<td>363.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_full_price_1</td>
-	<td>95.2258</td>
+	<td>363.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total</td>
-	<td>171.2258</td>
+	<td>439.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total</td>
-	<td>171.2258</td>
+	<td>439.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -479,22 +484,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>5.0</td>
+	<td>00:19:34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>00:01:00</td>
+	<td>5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>5.0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>00:00:30</td>
+	<td>00:20:08</td>
 	<td></td>
 </tr>
 <tr>
@@ -700,12 +700,12 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2008</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2009</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -870,22 +870,22 @@
 <tr>
 	<td>assertText</td>
 	<td>id=inv_price_4</td>
-	<td>95.2258</td>
+	<td>363.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=inv_full_price_4</td>
-	<td>95.2258</td>
+	<td>363.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total</td>
-	<td>171.2258</td>
+	<td>439.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=total_wat</td>
-	<td>171.2258</td>
+	<td>439.3826</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -933,18 +933,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>10.0</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextNotPresent</td>
 	<td>00:01:00</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>10.0</td>
+	<td>8</td>
 	<td></td>
 </tr>
 <tr>
