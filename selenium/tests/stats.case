@@ -165,17 +165,7 @@
 <!--Verify select time-->
 <tr>
 	<td>open</td>
-	<td>billing/stats/first_activity</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2006</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>billing/stats/first_activity?date_from[year]=2006</td>
 	<td></td>
 </tr>
 <tr>
@@ -531,47 +521,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/hangup_cause_codes_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2007</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=June</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=21</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/hangup_cause_codes_stats?date_from[year]=2008&amp;date_till[month]=6&amp;date_till[day]=11&amp;date_till[year]=2010</td>
 	<td></td>
 </tr>
 <tr>
@@ -845,22 +795,6 @@
 	<td>type</td>
 	<td>login_psw</td>
 	<td>admin1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<!--date fix-->
-<tr>
-	<td>open</td>
-	<td>/billing/stats/show_user_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

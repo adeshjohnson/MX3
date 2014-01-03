@@ -36,22 +36,6 @@
 	<td>Successfully logged in</td>
 	<td></td>
 </tr>
-<!--date fix-->
-<tr>
-	<td>open</td>
-	<td>/billing/stats/show_user_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/tests/providers/stats_providers</td>
@@ -59,7 +43,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/stats/providers</td>
+	<td>billing/stats/providers?date_from[year]=2005</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,16 +54,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Failed Locally</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2005</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -694,22 +668,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/providers</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_till_year</td>
-	<td>label=2013</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>/billing/stats/providers?date_from[year]=2008&amp;date_till[year]=2013</td>
 	<td></td>
 </tr>
 <tr>
@@ -769,7 +728,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/providers</td>
+	<td>/billing/stats/providers?date_from[year]=2008&amp;date_from[month]=12&amp;date_till[year]=2013</td>
 	<td></td>
 </tr>
 <tr>

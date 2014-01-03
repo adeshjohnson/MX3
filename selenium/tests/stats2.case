@@ -65,42 +65,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=June</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=21</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/last_calls_stats?date_from[year]=2008&amp;date_from[month]=1&amp;date_from[day]=1&amp;date_till[year]=2010&amp;date_till[month]=6&amp;date_till[day]=21&amp;search_on=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,42 +171,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=June</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=21</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/last_calls_stats?date_from[year]=2008&amp;date_from[month]=1&amp;date_from[day]=1&amp;date_till[year]=2010&amp;date_till[month]=6&amp;date_till[day]=21&amp;search_on=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -297,42 +227,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=June</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=21</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/last_calls_stats?date_from[year]=2008&amp;date_from[month]=1&amp;date_from[day]=1&amp;date_till[year]=2010&amp;date_till[month]=6&amp;date_till[day]=21&amp;search_on=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -370,35 +265,9 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--date fix-->
 <tr>
 	<td>open</td>
-	<td>/billing/stats/show_user_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2005</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/last_calls_stats?date_from[year]=2005&amp;search_on=1</td>
 	<td></td>
 </tr>
 <tr>
@@ -961,57 +830,7 @@
 <!--loss making calls duration-->
 <tr>
 	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>id=date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/loss_making_calls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2007</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_year</td>
-	<td>label=2012</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_month</td>
-	<td>label=December</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_till_day</td>
-	<td>label=31</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
+	<td>/billing/stats/loss_making_calls?date_from[year]=2007&amp;date_from[month]=1&amp;date_from[day]=1&amp;date_till[year]=2012&amp;date_till[month]=12&amp;date_till[day]=31</td>
 	<td></td>
 </tr>
 <tr>

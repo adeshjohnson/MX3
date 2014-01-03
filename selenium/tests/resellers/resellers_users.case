@@ -31,25 +31,9 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<!--date fix-->
 <tr>
 	<td>open</td>
-	<td>/billing/stats/last_calls_stats</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2008</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/load_stats</td>
+	<td>/billing/stats/load_stats?date_from[year]=2005&amp;date_from[month]=1&amp;date_from[day]=5&amp;s_direction=outgoing</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,27 +53,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>date_from_year</td>
-	<td>label=2005</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_month</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>date_from_day</td>
-	<td>label=5</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>s_direction</td>
-	<td>label=Outgoing</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>s_user</td>
+	<td>id=s_user</td>
 	<td>label=User Resellers</td>
 </tr>
 <tr>
@@ -101,6 +65,11 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().Ajax.activeRequestCount == 0</td>
 	<td>10000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#s_user &gt; option[value=&quot;5&quot;]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>

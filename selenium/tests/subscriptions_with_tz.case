@@ -79,12 +79,12 @@
 <tr>
 	<td>select</td>
 	<td>id=activation_start_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=activation_end_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -149,12 +149,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_2</td>
-	<td>2013-01-25 00:00:00</td>
+	<td>2014-01-25 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_2</td>
-	<td>2013-02-25 23:59:00</td>
+	<td>2014-02-25 23:59:00</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -164,7 +164,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=activation_start_year</td>
-	<td>2013</td>
+	<td>2014</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -189,7 +189,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=activation_end_year</td>
-	<td>2013</td>
+	<td>2014</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -269,12 +269,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_2</td>
-	<td>2013-01-25 00:00:00</td>
+	<td>2014-01-25 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_2</td>
-	<td>2013-02-25 23:59:00</td>
+	<td>2014-02-25 23:59:00</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -314,12 +314,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_2</td>
-	<td>2013-01-25 00:00:00</td>
+	<td>2014-01-25 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_2</td>
-	<td>2013-02-25 23:59:00</td>
+	<td>2014-02-25 23:59:00</td>
 </tr>
 <!--pakeiciamas admin timezone-->
 <tr>
@@ -406,7 +406,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=activation_start_year</td>
-	<td>2013</td>
+	<td>2014</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -431,7 +431,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=activation_end_year</td>
-	<td>2013</td>
+	<td>2014</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -471,7 +471,22 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -481,15 +496,15 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_2</td>
-	<td>2013-01-25 00:00:00</td>
+	<td>2014-01-25 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_2</td>
-	<td>2013-02-25 23:59:00</td>
+	<td>2014-02-25 23:59:00</td>
 </tr>
 <!--atkomentuoti, kai bus padarytas #7440-->
-<!--<tr> 	<td>open</td> 	<td>/billing/services/subscription_new/5</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_year</td> 	<td>label=2013</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_year</td> 	<td>label=2013</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_month</td> 	<td>label=February</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_day</td> 	<td>label=31</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_month</td> 	<td>label=March</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_day</td> 	<td>label=31</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_hour</td> 	<td>label=00</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_minute</td> 	<td>label=00</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_hour</td> 	<td>label=23</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_minute</td> 	<td>label=59</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Subscription added</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_start_3</td> 	<td>2013-03-03 00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_end_3</td> 	<td>2013-03-31 23:59:00</td> </tr>-->
+<!--<tr> 	<td>open</td> 	<td>/billing/services/subscription_new/5</td> 	<td></td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_year</td> 	<td>label=2014</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_year</td> 	<td>label=2014</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_month</td> 	<td>label=February</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_day</td> 	<td>label=31</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_month</td> 	<td>label=March</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_day</td> 	<td>label=31</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_hour</td> 	<td>label=00</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_start_minute</td> 	<td>label=00</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_hour</td> 	<td>label=23</td> </tr> <tr> 	<td>select</td> 	<td>id=activation_end_minute</td> 	<td>label=59</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Subscription added</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_start_3</td> 	<td>2014-03-03 00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_end_3</td> 	<td>2014-03-31 23:59:00</td> </tr>-->
 <!--7792 ticket-->
 <tr>
 	<td>open</td>
@@ -734,7 +749,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -749,7 +764,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -819,7 +834,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -834,7 +849,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1059,7 +1074,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1074,7 +1089,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1184,7 +1199,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_from_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1199,7 +1214,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2013</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1405,12 +1420,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_5</td>
-	<td>2013-05-01 00:00:00</td>
+	<td>2014-05-01 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_5</td>
-	<td>2013-05-31 23:59:00</td>
+	<td>2014-05-31 23:59:00</td>
 </tr>
 <!--kitu tipu servisai - onetime ir flatrate su tz atvaizdavimu-->
 <tr>
@@ -1521,7 +1536,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_4</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1579,6 +1594,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=31</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -1587,12 +1612,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_4</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_4</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1601,12 +1626,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 	<td></td>
 </tr>
 <!--<tr> 	<td>assertText</td> 	<td>xpath=(//td[@id='activation_start_2'])[2]</td> 	<td>2015-05-01 00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>xpath=(//td[@id='activation_end_2'])[2]</td> 	<td>2018-05-31 23:59:59</td> </tr>-->
@@ -1633,12 +1658,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_4</td>
-	<td>2013-07-06 03:00:00</td>
+	<td>2014-07-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_4</td>
-	<td>2013-07-06 03:00:00</td>
+	<td>2014-07-06 03:00:00</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1799,7 +1824,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_6</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1859,7 +1884,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2014</td>
+	<td>label=2015</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1874,12 +1899,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_6</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_6</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <!--<tr> 	<td>assertText</td> 	<td>id=activation_start_9</td> 	<td>2015-05-01 00:00:00</td> </tr> <tr> 	<td>assertText</td> 	<td>id=activation_end_9</td> 	<td>2018-05-31 23:59:59</td> </tr>-->
 <tr>
@@ -2087,7 +2112,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_9</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <!--flatrate-->
 <tr>
@@ -2148,7 +2173,7 @@
 <tr>
 	<td>select</td>
 	<td>id=date_till_year</td>
-	<td>label=2014</td>
+	<td>label=2015</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2163,12 +2188,12 @@
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_9</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_9</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -2188,32 +2213,32 @@
 <tr>
 	<td>assertText</td>
 	<td>xpath=(//td[@id='activation_start_5'])[2]</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>xpath=(//td[@id='activation_end_5'])[2]</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_start_5</td>
-	<td>2013-05-01 00:00:00</td>
+	<td>2014-05-01 00:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=activation_end_5</td>
-	<td>2013-05-31 23:59:00</td>
+	<td>2014-05-31 23:59:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>xpath=(//td[@id='activation_start_2'])[5]</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>xpath=(//td[@id='activation_end_2'])[5]</td>
-	<td>2013-12-06 03:00:00</td>
+	<td>2014-12-06 03:00:00</td>
 </tr>
 <tr>
 	<td>assertText</td>
