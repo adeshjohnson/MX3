@@ -851,6 +851,38 @@
 	<td>Provider assigned</td>
 	<td></td>
 </tr>
+<!--istrynus provaideri is devices listo turi dingti sarysis, o ne provaiderio devaisas-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/devices_all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#unassign_link_9 &gt; img[alt=&quot;User_delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Provider unassigned</td>
+</tr>
+<!--buvo problema, jog neleido uzeiti i provaiderio edita, nes truko jo devaiso-->
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=page_title_icon</td>
+	<td>Edit Provider: commonusepro4</td>
+</tr>
 </tbody></table>
 </body>
 </html>
