@@ -984,9 +984,9 @@ class CallcController < ApplicationController
 
   def active_heartbeat_server
     heartbeat_ip = Confline.get_value('Heartbeat_IP').to_s
-    remote_ip = request.env["REMOTE_ADDR"].to_s
+    remote_ip = `/sbin/ifconfig | grep '#{heartbeat_ip} '`
 
-    if !heartbeat_ip.blank? and heartbeat_ip != remote_ip
+    if !heartbeat_ip.blank? and remote_ip.to_s.length == 0
       render :text => "Heartbeat IP incorrect" and return false
     end
 
