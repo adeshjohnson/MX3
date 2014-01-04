@@ -44,7 +44,7 @@ class Backup < ActiveRecord::Base
                 # check if we have correct number of auto backups
                 MorLog.my_debug "Checking for old backups"
                 backups = Backup.where(backuptype: 'auto')
-                while backups.size.to_i >= backup_number.to_i do 
+                while backups.size.to_i >= backup_number.to_i do
                   backup = Backup.where(backuptype: 'auto').order("backuptime ASC").first
                   backup.destroy_all
                   MorLog.my_debug "Old auto backup deleted"

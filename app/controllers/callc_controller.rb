@@ -712,8 +712,9 @@ class CallcController < ApplicationController
         ActiveRecord::Base.connection.delete(sql)
         MorLog.my_debug("Sessions cleaned", 1)
       }
+    else
+      MorLog.my_debug("Backup not made because this server has different IP than Heartbeat IP from Conflines")
     end
-
   end
 
 
@@ -982,13 +983,13 @@ class CallcController < ApplicationController
   end
 
   def active_heartbeat_server
-    ip = Confline.get_value('Heartbeat_IP').to_s
-    unless ip.blank?
-      greped_ip = `/sbin/ifconfig | grep '#{ip} '` # Space is to detect that we match whole IP Example: '192.168.0.16' and '192.168.0.160'
-      if greped_ip.to_s.length == 0
-        render :text => "Heartbeat IP incorrect" and return false
-      end
+    heartbeat_ip = Confline.get_value('Heartbeat_IP').to_s
+    remote_ip = request.env["REMOTE_ADDR"].to_s
+
+    if !heartbeat_ip.blank? and heartbeat_ip != remote_ip
+      render :text => "Heartbeat IP incorrect" and return false
     end
+
     return true
   end
 
