@@ -13,9 +13,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `usertype`, `logged`, `first_
 (53,'user_reseller3','09ded230f7c143810e7dbd890d7cf0fa46cb2fe8','user',0,'UserBE','Resellers4',3,0,0,0,1,1,0,3,0,NULL,0,0,1,0,-1,'','0000000003','2009-03-31','',1,'',19,4,'',3,0,0,'2000-01-01 00:00:00',NULL,NULL,0,0,NULL,NULL,0,0,0,1,0,0,0,0,'2009-01-01',15,0,0,0,NULL,100,0,0,0,3,1,0);
 
 INSERT INTO `subscriptions` (`id`, `service_id`, `user_id`, `device_id`, `activation_start`, `activation_end`, `added`, `memo`) 
-VALUES                      (12,1,21,NULL,'2009-05-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
-                            (13,1,23,NULL,'2009-06-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
-                            (14,1,32,NULL,'2009-03-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
-                            (15,1,41,NULL,'2009-07-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
-                            (16,1,43,NULL,'2009-01-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
-                            (17,1,52,NULL,'2009-06-22 09:25:00','2013-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo');
+VALUES                      (12,1,21,NULL,'2009-05-22 09:25:00','2014-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
+                            (13,1,23,NULL,'2009-06-22 09:25:00','2014-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
+                            (14,1,32,NULL,'2009-03-22 09:25:00','2014-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
+                            (15,1,41,NULL,'2009-07-22 09:25:00','2014-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
+                            (16,1,43,NULL,'2009-01-22 09:25:00','2014-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo'),
+                            (17,1,52,NULL,'2009-06-22 09:25:00','2014-07-22 09:25:00','2009-04-22 09:25:00','Test_preriodic_service_memo');
