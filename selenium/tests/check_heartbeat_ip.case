@@ -211,6 +211,77 @@
 	<td>balance_2</td>
 	<td>-20.0000</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/backup_every_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<!--backupą darys tik tada, kai serverio ip atitinka heartbeat ip-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/global_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=heartbeat_ip</td>
+	<td>127.0.0.24</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Heartbeat IP set</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=html</td>
+	<td>Heartbeat IP incorrect</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/global_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=heartbeat_ip</td>
+	<td>127.0.0.1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='commit'])[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Heartbeat IP set</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.nb &gt; b</td>
+	<td>Mission complete</td>
+</tr>
 </tbody></table>
 </body>
 </html>
