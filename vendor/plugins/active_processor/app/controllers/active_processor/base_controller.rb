@@ -74,6 +74,8 @@ module ActiveProcessor
                 else
                   flash.now[:notice] += "<br/> * ".html_safe + @gateway.payment.response.params["error_message"].to_s
                 end
+              elsif @gateway.name == "paypal"
+                flash.now[:notice] += "<br/> * ".html_safe + @gateway.payment.response.message.to_s
               end
             end
             notice_flash_errors(@gateway.credit_card) if @gateway.credit_card.errors.size > 0
