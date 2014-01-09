@@ -57,6 +57,7 @@ class CallsController < ApplicationController
     end
 
     @options[:order_by], order_by = agregate_order_by(params, @options)
+
     if (@options[:destination_grouping].to_i == 1 and @options[:order_by] == "directions.name") or (@options[:destination_grouping].to_i == 2 and @options[:order_by] == "destinations.name")
       order_by = ""
       @options[:order_by] = ""
@@ -378,8 +379,9 @@ class CallsController < ApplicationController
 
     without = order_by
     order_by = "users.first_name " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", users.last_name" if order_by.to_s == "users.first_name"
-    order_by = "destinations.direction_code " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", destinations.name" if order_by.to_s == "destinations.name"
-    order_by = "destinations.direction_code " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", destinations.subcode" if order_by.to_s == "destinations.name"
+    order_by = "ds.direction_code " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", ds.name" if order_by.to_s == "destinations.name"
+    order_by = "ds.direction_code " + (options[:order_desc] == 1 ? "DESC" : "ASC") + ", ds.subcode" if order_by.to_s == "destinations.name"
+    order_by = "t.name" if order_by.to_s == "terminators.name"
 
     order_by += " ASC" if options[:order_desc] == 0 and order_by != ""
     order_by += " DESC" if options[:order_desc] == 1 and order_by != ""
