@@ -40,7 +40,7 @@ gem 'prototype-rails' #, :git => 'git://github.com/rubychan/prototype-rails.git'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem 'prawn'
+gem 'prawn', "0.12.0"
 gem 'prawn-layout'
 gem 'prawnto'
 
