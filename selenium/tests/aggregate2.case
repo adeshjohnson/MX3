@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/for_aggregate</td>
+	<td></td>
+</tr>
+<!--orderinimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/calls/aggregate?date_from[year]=2006&amp;date_from[month]=1&amp;date_from[day]=1&amp;date_till[year]=2012&amp;date_till[month]=12&amp;date_till[day]=31&amp;search_on=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.0</td>
+	<td>Lithuania FIX Lithuania proper (370)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.0</td>
+	<td>Afghanistan FIX Afghanistan proper (93)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.0</td>
+	<td>Afghanistan FIX Afghanistan proper (93)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.0</td>
+	<td>Lithuania FIX Lithuania proper (370)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Originator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.1</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Originator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.1</td>
+	<td>User Resellers</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Terminator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.2</td>
+	<td>terminator_id_3</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.2</td>
+	<td>terminator_id_1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Terminator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.2</td>
+	<td>terminator_id_1</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.2</td>
+	<td>terminator_id_3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billed_orig &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.3</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.3</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billed_orig &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.3</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.3</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billed_term &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.4</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.4</td>
+	<td>0.00 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billed_term &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.4</td>
+	<td>0.00 USD</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.4</td>
+	<td>0.0000 USD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billsec_orig &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billsec_orig &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billsec_term &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=billed_time_term_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#billsec_term &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Duration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.7</td>
+	<td>exact:00:02:00</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Duration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.7</td>
+	<td>exact:00:02:00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Answered calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.8</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.8</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Answered calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.8</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.8</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Total calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.9</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.9</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Total calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.9</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.9</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ASR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.10</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.10</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ASR</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.10</td>
+	<td>0.0000 %</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.10</td>
+	<td>100.0000 %</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ACD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.11</td>
+	<td>exact:00:00:50</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ACD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.2.11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.maintable.15.11</td>
+	<td>exact:00:00:50</td>
+</tr>
+</tbody></table>
+</body>
+</html>
