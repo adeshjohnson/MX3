@@ -1005,7 +1005,7 @@ in before filter : user (:find_user_from_id_or_session)
           if (params[:test].to_i == 1) and (@user != nil) and (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i != 0)
             render :text => ("#{nice_user(@user).gsub(' ', '_')}_" <<  filename) + test_data.to_s
           elsif params[:test].to_i == 1
-            render :text => filename + test_data.to_s  
+            render :text => filename + test_data.to_s
           elsif (@user == nil) or (Confline.get_value("Show_Usernames_On_Pdf_Csv_Export_Files_In_Last_Calls").to_i == 0)
             file = File.open(filename)
             send_data file.read, :filename => filename
@@ -1815,7 +1815,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     output = []
     output << "<option value='-1'>All</option>"
     output << User.where(cond).map { |u| ["<option value='"+u.id.to_s+"'>"+nice_user(u)+"</option>"] }
-    render :text => output.join 
+    render :text => output.join
   end
 
   def profit
@@ -1828,7 +1828,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     owner = correct_owner_id
     @users = User.find_all_for_select(corrected_user_id)
 
-    if current_user.is_admin? 
+    if current_user.is_admin?
       @responsible_accountants = User.find(:all, :select => 'accountants.*', :joins => ['JOIN users accountants ON(accountants.id = users.responsible_accountant_id)'], :conditions => "accountants.hidden = 0 and accountants.usertype = 'accountant'", :group => 'accountants.id', :order => 'accountants.username')
     end
     up, rp, pp = current_user.get_price_calculation_sqls
@@ -2425,17 +2425,19 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @time_now = Time.now
 
     # this code selects correct calls for admin/reseller/user
-    user_sql = " "
+    hide_active_calls_longer_than = Confline.get_value('Hide_active_calls_longer_than', 0).to_i
+    hide_active_calls_longer_than = 24 if hide_active_calls_longer_than.zero?
+    user_sql = " WHERE (DATE_ADD(activecalls.start_time, INTERVAL #{hide_active_calls_longer_than} HOUR) > NOW()) "
     user_id = session[:usertype] == 'accountant' ? 0 : session[:user_id]
     @user_id = user_id
     if user_id != 0
       #reseller or user
       if session[:usertype] == "reseller"
         #reseller
-        user_sql = " WHERE activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id} OR  activecalls.owner_id = #{user_id} OR dst_usr.owner_id = #{user_id}"
+        user_sql = " AND (activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id} OR  activecalls.owner_id = #{user_id} OR dst_usr.owner_id = #{user_id})"
       else
         #user
-        user_sql = " WHERE activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id} "
+        user_sql = " AND (activecalls.user_id = #{user_id} OR dst_usr.id = #{user_id}) "
       end
     end
 
@@ -2943,7 +2945,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
 
   def hangup_cause_codes_stats
 
-    #ticket 5672 only if reseller pro addon is active, reseller that has own providers can access 
+    #ticket 5672 only if reseller pro addon is active, reseller that has own providers can access
     #hangup cause statistics page.
     if current_user.is_reseller? and !current_user.reseller_allowed_to_view_hgc_stats?
       dont_be_so_smart
@@ -3276,7 +3278,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     sql = "SELECT COUNT(subscriptions.id) AS sub_size  FROM subscriptions
     WHERE activation_start = '#{a1}'"
     @res2 = ActiveRecord::Base.connection.select_all(sql)
-    @res3 = Subscription.select("users.id, users.username, users.first_name, users.last_name, activation_start, activation_end, added, subscriptions.id AS subscription_id, memo, services.name, services.name AS service_name, services.price AS service_price, services.servicetype AS servicetype, services.quantity, #{SqlExport.nice_user_sql}").where("((activation_start < '#{a1}' AND activation_end BETWEEN '#{a1}' AND '#{a2}') OR (activation_start BETWEEN '#{a1}' AND '#{a2}' AND activation_end < 'a2') OR (activation_start > '#{a1}' AND activation_end < '#{a2}') OR (activation_start < '#{a1}' AND activation_end > '#{a2}'))").joins("JOIN users on (subscriptions.user_id = users.id) JOIN services on (services.id = subscriptions.service_id)").order(@options[:order]) 
+    @res3 = Subscription.select("users.id, users.username, users.first_name, users.last_name, activation_start, activation_end, added, subscriptions.id AS subscription_id, memo, services.name, services.name AS service_name, services.price AS service_price, services.servicetype AS servicetype, services.quantity, #{SqlExport.nice_user_sql}").where("((activation_start < '#{a1}' AND activation_end BETWEEN '#{a1}' AND '#{a2}') OR (activation_start BETWEEN '#{a1}' AND '#{a2}' AND activation_end < 'a2') OR (activation_start > '#{a1}' AND activation_end < '#{a2}') OR (activation_start < '#{a1}' AND activation_end > '#{a2}'))").joins("JOIN users on (subscriptions.user_id = users.id) JOIN services on (services.id = subscriptions.service_id)").order(@options[:order])
 
     params[:page] ? @page = params[:page].to_i : (@options[:page] ? @page = @options[:page] : @page = 1)
     @total_pages = (@res3.size.to_d / session[:items_per_page].to_d).ceil
@@ -3353,7 +3355,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     params[:target_type] ? @options[:s_target_type] = params[:target_type].to_s : (params[:clean]) ? @options[:s_target_type] = '' : (@options[:s_target_type]) ? @options[:s_target_type] = session[:action_log_stats_options][:s_target_type] : @options[:s_target_type] = ''
     params[:target_id] ? @options[:s_target_id] = params[:target_id].to_s : (params[:clean]) ? @options[:s_target_id] = '' : (@options[:s_target_id]) ? @options[:s_target_id] = session[:action_log_stats_options][:s_target_id] : @options[:s_target_id] = ''
     params[:did] ? @options[:s_did] = params[:did].to_s : (params[:clean]) ? @options[:s_did] = '' : (@options[:s_did]) ? @options[:s_did] = session[:action_log_stats_options][:s_did] : @options[:s_did] = ''
-    
+
     # order
     params[:order_desc] ? @options[:order_desc] = params[:order_desc].to_i : (@options[:order_desc] = 1 if !@options[:order_desc])
     params[:order_by] ? @options[:order_by] = params[:order_by].to_s : @options[:order_by] == "acc"
@@ -3630,12 +3632,12 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
         :s_reseller => "all",
         :s_source => nil,
         :s_reseller_did => nil,
-        :s_card_number => nil, 
-        :s_card_pin => nil, 
+        :s_card_number => nil,
+        :s_card_pin => nil,
         :s_card_id => nil
     }
     options = ((params[:clear] || !session[:last_calls_stats]) ? default : session[:last_calls_stats])
-    options[:items_per_page] = session[:items_per_page] if session[:items_per_page].to_i > 0 
+    options[:items_per_page] = session[:items_per_page] if session[:items_per_page].to_i > 0
     default.each { |key, value| options[key] = params[key] if params[key] }
 
     change_date_to_present if params[:clear]
