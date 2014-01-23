@@ -1825,21 +1825,277 @@
 	<td>css=#status_0 &gt; span.icon.bullet_green</td>
 	<td></td>
 </tr>
-<!--skambucio, kuris ilgesnis nei 4 h neturi buti-->
+<!--matomi tik 2 calls, nes kiti paslepti-->
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>link=3</td>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>37062699444</td>
+	<td>00:00:00</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>link=4</td>
+	<td>assertText</td>
+	<td>id=dst_0</td>
+	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/settings/conflines/set_infinity_for_hide_active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=answer_time_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#server_0 &gt; a</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_0</td>
+	<td>63727065976&nbsp;&nbsp;DID (37063042438)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_1</td>
+	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_2</td>
+	<td>63727007886&nbsp;&nbsp;DID (37063042438)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_0</td>
+	<td>63727065976&nbsp;&nbsp;DID (37063042438 )</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_1</td>
+	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_2</td>
+	<td>63727007886&nbsp;&nbsp;DID (37063042438 )</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=answer_time_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<!--Tuo atveju, jeigu nėra įrašo conflinuose arba jis lygus 0, tada apribojimas galioja 24 valandoms-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/settings/conflines/set_zero_for_hide_active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=answer_time_0</td>
+	<td>exact:00:00:00</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#server_0 &gt; a</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_0</td>
+	<td>63727065976&nbsp;&nbsp;DID (37063042438)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_1</td>
+	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_2</td>
+	<td>63727007886&nbsp;&nbsp;DID (37063042438)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=active_calls_link</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_0</td>
+	<td>63727065976&nbsp;&nbsp;DID (37063042438 )</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_1</td>
+	<td>63727007887&nbsp;&nbsp;Philippines FIX Philippines proper</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dst_2</td>
+	<td>63727007886&nbsp;&nbsp;DID (37063042438 )</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=answer_time_0</td>
+	<td>exact:00:00:00</td>
 </tr>
 </tbody></table>
 </body>
