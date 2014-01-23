@@ -37,16 +37,18 @@ class Activecall < ActiveRecord::Base
   end
 
   def Activecall.count_for_user(user)
+    hide_active_calls_longer_than = Confline.get_value('Hide_active_calls_longer_than', 0).to_i
+    hide_active_calls_longer_than = 24 if hide_active_calls_longer_than.zero?
     if user and user.id and user.usertype
       if user.usertype == "admin" or user.usertype == 'accountant'
-        return Activecall.count
+        return Activecall.where("(DATE_ADD(activecalls.start_time, INTERVAL #{hide_active_calls_longer_than} HOUR) > NOW())").count
       else
         if user.usertype == "reseller"
           #reseller
-          user_sql = " WHERE activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id} OR  activecalls.owner_id = #{user.id} OR dst_usr.owner_id =  #{user.id} "
+          user_sql = " WHERE (activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id} OR  activecalls.owner_id = #{user.id} OR dst_usr.owner_id =  #{user.id}) AND (DATE_ADD(activecalls.start_time, INTERVAL #{hide_active_calls_longer_than} HOUR) > NOW()) "
         else
           #user
-          user_sql = " WHERE activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id} "
+          user_sql = " WHERE (activecalls.user_id = #{user.id} OR dst_usr.id = #{user.id}) AND (DATE_ADD(activecalls.start_time, INTERVAL #{hide_active_calls_longer_than} HOUR) > NOW()) "
         end
         sql = "
         SELECT COUNT(*)
