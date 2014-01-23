@@ -4617,6 +4617,7 @@ Localization.define('en') do |l|
   l.store 'call_tracing_usage', 'Call Tracing Usage'
   l.store 'Directions_based_on_country_code_updated', 'Directions based on Country Code were updated'
   l.store 'ip_is_used_by_user', 'IP is used by User:'
+  l.store 'email_not_sent', 'Email was not sent'
   #  l.store '', ''
   #  l.store '', ''
 

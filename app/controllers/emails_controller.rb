@@ -303,14 +303,44 @@ class EmailsController < ApplicationController
 
   def EmailsController::send_test(id)
     user = User.find(id)
-    email = Email.find(:first, :conditions => ["name = 'registration_confirmation_for_user' AND owner_id = ?", id])
+    email = Email.where(["name = 'registration_confirmation_for_user' AND owner_id = ?", id]).first
 
     users = []
     users << user
     variables = Email.email_variables(user, nil, {:owner => id})
-    send_email(email, Confline.get_value("Email_from", id), users, variables)
 
-    # redirect_to :controller => "callc", :action => "main" and return false
+    # ticket #9050 - send test_email the same way invoices are sent
+    #send_email(email, Confline.get_value("Email_from", id), users, variables)
+
+    smtp_server = Confline.get_value("Email_Smtp_Server", email[:owner_id].to_i).to_s.strip
+    smtp_user = Confline.get_value("Email_Login", email[:owner_id].to_i).to_s.strip
+    smtp_pass = Confline.get_value("Email_Password", email[:owner_id].to_i).to_s.strip
+    smtp_port = Confline.get_value("Email_Port", email[:owner_id].to_i).to_s.strip
+
+    from = Confline.get_value("Email_from", id).to_s
+    to = variables[:user_email]
+    status = _('email_not_sent')
+    email_body = nice_email_sent(email, variables).gsub("'", "&#8216;")
+
+    if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
+      begin
+        system_call = ApplicationController::send_email_dry(from.to_s, to.to_s, email_body, email.subject.to_s, "'#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}'")
+
+        if defined?(NO_EMAIL) and NO_EMAIL.to_i == 1
+          #do nothing
+        else
+          system(system_call)
+          status = _('Email_sent')
+        end
+      rescue
+        return false
+      end
+    else
+      status = _('Email_disabled')
+    end
+
+    return status
+    # redirect_to :root and return false
   end
 
   def EmailsController::send_to_users_paypal_email(order)
@@ -347,6 +377,25 @@ class EmailsController < ApplicationController
     else
       return _('Email_disabled')
     end
+  end
+
+  def EmailsController::send_email(email, email_from, users, assigns = {})
+    if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
+      email_from.gsub!(' ', '_') #so nasty, but rails has a bug and doest send from_email if it has spaces in it
+      status = Email.send_email(email, users, email_from, 'send_email', {:assigns => assigns, :owner => assigns[:owner]})
+      status.uniq.each { |i| @e = _(i.capitalize) + '<br>' }
+      return @e
+    else
+      return _('Email_disabled')
+    end
+  end
+
+  def EmailsController::nice_email_sent(email, assigns = {})
+    email_builder = ActionView::Base.new(nil, assigns)
+    email_builder.render(
+        :inline => EmailsController::nice_email_body(email.body),
+        :locals => assigns
+    )
   end
 
   def EmailsController::send_invoices(email, to, from, files = [], number = 0)
