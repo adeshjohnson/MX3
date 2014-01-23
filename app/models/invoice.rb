@@ -232,17 +232,25 @@ class Invoice < ActiveRecord::Base
     items_t, up_string, tax_amount, price_with_tax = tax_items(ex, nc, nice_number_hash, 1, dc)
     items += items_t
     items << [{:text => _('TOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 3, :align => :right, :border_width => 0}, {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
+    #Balance Line functionality from 12.126
+    if Confline.get_value("#{prepaid}Invoice_Show_Balance_Line", user.owner_id).to_i == 1
+      balance = owned_balance_from_previous_month
+      to_pay = price_with_tax
+      to_pay += balance[1].to_f if balance
+      items << [{text: '', :background_color => "FFFFFF", :colspan => 3, :align => :right, :border_width => 0}, {:text => self.nice_invoice_number(to_pay, nice_number_hash).to_s, :colspan => 3, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
+    end
 
     pdf.table(items,
               :row_colors => ["FFFFFF", "DDDDDD"], :width => 550,
               :font_size => 10,
               :headers => [_('Service'), _('Units'), _('Price') + " (#{dc})", _('Total') + " (#{dc})"],
-              :align_headers => {0 => :left, 1 => :right, 2 => :right, 3 => :right},
+              :align_headers => {0 => :left, 1 => :right, 2 => :right, 3 => :right, 4 => :right},
               :column_widths => {0 => 300}) do
       column(0).style(:align => :left, :height => 15, :width => 450)
       column(1).style(:align => :right, :height => 15)
       column(2).style(:align => :right, :height => 15)
       column(3).style(:align => :right, :height => 15)
+      column(4).style(:align => :right, :height => 15)
     end
 
     #    if Confline.get_value("#{prepaid}Invoice_show_additional_details_on_separate_page",user.owner_id).to_i == 1
@@ -279,6 +287,7 @@ class Invoice < ActiveRecord::Base
     # 71 = number of rows on the page
     page_limit = (71 * limit) - 1
     page_limit_error = 0
+    prepaid = invoice_type == 'prepaid' ? "#{invoice_type.capitalize}_" : ''
     #    begin
     #
     ###### Generate PDF ########
@@ -399,6 +408,14 @@ class Invoice < ActiveRecord::Base
       items << [{:text => _('TOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :border_width => 0}, nice_cell(total_calls), nice_cell(nice_time(total_time, options[:min_type])), nice_cell(' '), {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
     else
       items << [{:text => _('TOTAL') + " (#{dc})", :background_color => "FFFFFF", :colspan => 2, :align => :right, :border_width => 0}, nice_cell(total_calls), nice_cell(nice_time(total_time, options[:min_type])), {:text => self.nice_invoice_number(price_with_tax, nice_number_hash).to_s, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
+    end
+
+    #Balance Line functionality from 12.126
+    if Confline.get_value("#{prepaid}Invoice_Show_Balance_Line", user.owner_id).to_i == 1
+      balance = owned_balance_from_previous_month
+      to_pay = price_with_tax
+      to_pay += balance[1].to_f if balance
+      items << [{text: '', :background_color => "FFFFFF", :colspan => 2, :align => :right, :border_width => 0}, nice_cell(''), nice_cell(''), {:text => self.nice_invoice_number(to_pay, nice_number_hash).to_s, :colspan => 3, :background_color => "FFFFFF", :align => :right, :border_style => :all}]
     end
 
     if options[:show_avg_rate] == 0
@@ -889,7 +906,7 @@ class Invoice < ActiveRecord::Base
     year = self.period_start.to_s[0, 4]
     month = self.period_start.to_s[5, 2].to_i.to_s #remove leading 0
 
-    if first_day.to_i == 1 and last_day.to_i == Invoice.last_day_of_month(year, month).to_i
+    if first_day.to_i == 1 and last_day.to_i == Invoice.last_day_of_month(year, month)
       # get balance from actions for last month
       action = Action.find(:first, :conditions => "user_id = #{self.user_id} AND action = 'user_balance_at_month_end' AND data = '#{year}-#{month}'")
       if action
@@ -938,24 +955,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def Invoice.last_day_of_month(year, month)
-
-    year = year.to_i
-    month = month.to_i
-
-    if (month == 1) or (month == 3) or (month == 5) or (month == 7) or (month == 8) or (month == 10) or (month == 12)
-      day = "31"
-    else
-      if  (month == 4) or (month == 6) or (month == 9) or (month == 11)
-        day = "30"
-      else
-        if year % 4 == 0
-          day = "29"
-        else
-          day = "28"
-        end
-      end
-    end
-    day
+    Date.new(year.to_i, month.to_i).end_of_month.day
   end
 
 end
