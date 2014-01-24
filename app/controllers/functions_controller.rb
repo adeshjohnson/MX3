@@ -954,7 +954,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       user.create_reseller_emails
     end
     @num = EmailsController.send_test(session[:user_id])
-    @num == "#{_('Email_sent')}" ? flash[:status] = @num : flash[:notice] = @num
+    @num == "#{_('Email_sent')}" ? flash[:status] = @num : flash[:notice] = notice_with_info_help(@num + '.', "http://wiki.kolmisoft.com/index.php/Configuration_from_GUI#Emails")
 
     if session[:usertype] == "admin"
       redirect_to :action => "settings"

@@ -312,6 +312,7 @@ class EmailsController < ApplicationController
     # ticket #9050 - send test_email the same way invoices are sent
     #send_email(email, Confline.get_value("Email_from", id), users, variables)
 
+    status = _('email_not_sent')
     if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
       smtp_server = Confline.get_value("Email_Smtp_Server", id).to_s.strip
       smtp_user = Confline.get_value("Email_Login", id).to_s.strip
@@ -320,19 +321,18 @@ class EmailsController < ApplicationController
 
       from = Confline.get_value("Email_from", id).to_s
       to = variables[:user_email]
-      status = _('email_not_sent')
       email_body = nice_email_sent(email, variables).gsub("'", "&#8216;")
       begin
-        system_call = ApplicationController::send_email_dry(from.to_s, to.to_s, email_body, email.subject.to_s, "'#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}'")
+        system_call = ApplicationController::send_email_dry(from.to_s, to.to_s, email_body, email.subject.to_s, '', "'#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}'")
 
         if defined?(NO_EMAIL) and NO_EMAIL.to_i == 1
           #do nothing
         else
-          system(system_call)
-          status = _('Email_sent')
+          a = system(system_call)
+          status = _('Email_sent') if a
         end
       rescue
-        return false
+        return status
       end
     else
       status = _('Email_disabled')
