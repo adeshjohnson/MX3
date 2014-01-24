@@ -379,22 +379,19 @@ class EmailsController < ApplicationController
     end
   end
 
-  def EmailsController::send_email(email, email_from, users, assigns = {})
-    if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
-      email_from.gsub!(' ', '_') #so nasty, but rails has a bug and doest send from_email if it has spaces in it
-      status = Email.send_email(email, users, email_from, 'send_email', {:assigns => assigns, :owner => assigns[:owner]})
-      status.uniq.each { |i| @e = _(i.capitalize) + '<br>' }
-      return @e
-    else
-      return _('Email_disabled')
-    end
-  end
-
   def EmailsController::nice_email_sent(email, assigns = {})
     email_builder = ActionView::Base.new(nil, assigns)
     email_builder.render(
         :inline => EmailsController::nice_email_body(email.body),
         :locals => assigns
+    )
+  end
+
+  def EmailsController::nice_email_sent(email, assigns = {})
+    email_builder = ActionView::Base.new(nil, assigns)
+    email_builder.render(
+      :inline => EmailsController::nice_email_body(email.body),
+      :locals => assigns
     )
   end
 
