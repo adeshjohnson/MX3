@@ -312,10 +312,10 @@ class EmailsController < ApplicationController
     # ticket #9050 - send test_email the same way invoices are sent
     #send_email(email, Confline.get_value("Email_from", id), users, variables)
 
-    smtp_server = Confline.get_value("Email_Smtp_Server", email[:owner_id].to_i).to_s.strip
-    smtp_user = Confline.get_value("Email_Login", email[:owner_id].to_i).to_s.strip
-    smtp_pass = Confline.get_value("Email_Password", email[:owner_id].to_i).to_s.strip
-    smtp_port = Confline.get_value("Email_Port", email[:owner_id].to_i).to_s.strip
+    smtp_server = Confline.get_value("Email_Smtp_Server", id).to_s.strip
+    smtp_user = Confline.get_value("Email_Login", id).to_s.strip
+    smtp_pass = Confline.get_value("Email_Password", id).to_s.strip
+    smtp_port = Confline.get_value("Email_Port", id).to_s.strip
 
     from = Confline.get_value("Email_from", id).to_s
     to = variables[:user_email]
@@ -387,13 +387,11 @@ class EmailsController < ApplicationController
     )
   end
 
-  def EmailsController::nice_email_sent(email, assigns = {})
-    email_builder = ActionView::Base.new(nil, assigns)
-    email_builder.render(
-      :inline => EmailsController::nice_email_body(email.body),
-      :locals => assigns
-    )
-  end
+  def EmailsController::nice_email_body(email_body) 
+    p = email_body.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s.gsub(/<%=/, '??!!@proc#@').gsub(/%>/, '??!!@proc#$') } 
+    p = p.gsub(/<%=|<%|%>/, '').gsub('??!!@proc#@', '<%=').gsub('??!!@proc#$', '%>') 
+    p.gsub(/(<%=?\s*\S+\s*%>)/) { |s| s if Email::ALLOWED_VARIABLES.include?(s.match(/<%=?\s*(\S+)\s*%>/)[1]) } 
+  end 
 
   def EmailsController::send_invoices(email, to, from, files = [], number = 0)
 
