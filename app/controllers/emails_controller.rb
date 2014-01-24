@@ -312,17 +312,16 @@ class EmailsController < ApplicationController
     # ticket #9050 - send test_email the same way invoices are sent
     #send_email(email, Confline.get_value("Email_from", id), users, variables)
 
-    smtp_server = Confline.get_value("Email_Smtp_Server", id).to_s.strip
-    smtp_user = Confline.get_value("Email_Login", id).to_s.strip
-    smtp_pass = Confline.get_value("Email_Password", id).to_s.strip
-    smtp_port = Confline.get_value("Email_Port", id).to_s.strip
-
-    from = Confline.get_value("Email_from", id).to_s
-    to = variables[:user_email]
-    status = _('email_not_sent')
-    email_body = nice_email_sent(email, variables).gsub("'", "&#8216;")
-
     if Confline.get_value("Email_Sending_Enabled", 0).to_i == 1
+      smtp_server = Confline.get_value("Email_Smtp_Server", id).to_s.strip
+      smtp_user = Confline.get_value("Email_Login", id).to_s.strip
+      smtp_pass = Confline.get_value("Email_Password", id).to_s.strip
+      smtp_port = Confline.get_value("Email_Port", id).to_s.strip
+
+      from = Confline.get_value("Email_from", id).to_s
+      to = variables[:user_email]
+      status = _('email_not_sent')
+      email_body = nice_email_sent(email, variables).gsub("'", "&#8216;")
       begin
         system_call = ApplicationController::send_email_dry(from.to_s, to.to_s, email_body, email.subject.to_s, "'#{smtp_server.to_s}:#{smtp_port.to_s}' -xu '#{smtp_user.to_s}' -xp '#{smtp_pass.to_s}'")
 
