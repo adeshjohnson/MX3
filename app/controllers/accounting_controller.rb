@@ -197,12 +197,13 @@ class AccountingController < ApplicationController
             @num = EmailsController.send_invoices(email, user.email.to_s, email_from, attach, invoice.number.to_s)
 
             MorLog.my_debug @num
-            if @num
+            if @num == "true"
               @number += 1
               invoice.sent_email = 1
               invoice.save
               Action.create_email_sending_action(user, 'email_sent', email)
             else
+              not_sent += 1
               Action.create_email_sending_action(user, 'error', email, {:er_type => 1, :err_message => @num})
             end
           else
