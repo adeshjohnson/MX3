@@ -961,6 +961,92 @@
 	<td>show_zero_calls</td>
 	<td>off</td>
 </tr>
+<!--bad  configuration-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_smtp_server</td>
+	<td>wronginfo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_batch_size</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_port</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link_send_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to send invoices by email?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Invoices were not sent: 1</td>
+</tr>
 </tbody></table>
 </body>
 </html>
