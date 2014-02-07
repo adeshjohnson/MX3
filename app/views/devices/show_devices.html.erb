@@ -67,7 +67,7 @@
     <% elsif session[:usertype] == "reseller" or (session[:usertype] == "accountant" and session[:acc_device_manage].to_i > 0) %>
         <th></th>
     <% end %>
-    <% if rec_active? %>
+    <% if (session[:usertype] == "admin") or (show_recordings?) %>
       <th></th>
     <% end %>
     <th></th>
