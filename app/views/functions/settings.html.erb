@@ -32,7 +32,7 @@
         <tr>
           <td></td>
           <td valign="top"><b><%= _('Copyright_Title') %>:</b></td>
-          <td>      <%= text_area_tag('copyright_title', h(Confline.get_value("Copyright_Title").encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")), "class" => "input", :cols => "32", :rows => "4") %>                </td>
+          <td>      <%= text_area_tag('copyright_title', h(Confline.get_value("Copyright_Title").try( :encode, "UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")), "class" => "input", :cols => "32", :rows => "4") %>                </td>
         </tr>
         <tr>
           <td></td>
