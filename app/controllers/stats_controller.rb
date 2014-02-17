@@ -2560,6 +2560,14 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
   def dids
     @page_title = _('DIDs')
     @page_icon = "did.png"
+
+    #metod change date_time uses params values. view doesn't return hours or mins, but it must be initialized due to Time Zone settings
+    if [:date_from, :date_till].all? {|key| params[key].present?}
+      params[:date_from][:hour] = 0
+      params[:date_from][:minute] = 0
+      params[:date_till][:hour] = 23
+      params[:date_till][:minute] = 59
+    end
     change_date
 
     change_date_to_present if params[:clear]
@@ -2603,7 +2611,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     JOIN calls on (calls.did_id = dids.id)
     JOIN providers on (dids.provider_id = providers.id)
     JOIN users on (dids.user_id = users.id)
-    LEFT JOIN (SELECT data, date FROM actions JOIN (SELECT MAX(id) as id FROM actions WHERE actions.action like 'did_assigned%' group by actions.data)p ON (p.id = actions.id))actions on (dids.id = actions.data)    WHERE calls.calldate BETWEEN '#{session_from_date} 00:00:00' AND '#{session_till_date} 23:59:59' #{user_sql.to_s + provider_sql.to_s + direction.to_s}  GROUP BY dids.id ORDER BY dids.user_id"
+    LEFT JOIN (SELECT data, date FROM actions JOIN (SELECT MAX(id) as id FROM actions WHERE actions.action like 'did_assigned%' group by actions.data)p ON (p.id = actions.id))actions on (dids.id = actions.data)
+    WHERE calls.calldate BETWEEN '#{session_from_datetime}' AND '#{session_till_datetime}' #{user_sql.to_s + provider_sql.to_s + direction.to_s}  GROUP BY dids.id ORDER BY dids.user_id"
     # my_debug sql
     @res = ActiveRecord::Base.connection.select_all(sql)
     @page = 1
