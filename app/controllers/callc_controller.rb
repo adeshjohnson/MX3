@@ -1086,7 +1086,7 @@ class CallcController < ApplicationController
   end
 
   def delete_files_after_csv_import
-    MorLog.my_debug("delete_files_after_csv_import", 1)
+    MorLog.my_debug('delete_files_after_csv_import', 1)
     select = []
     select << "SELECT table_name"
     select << "FROM   INFORMATION_SCHEMA.TABLES"
@@ -1106,9 +1106,13 @@ class CallcController < ApplicationController
   def update_currencies
     begin
       Currency.transaction do
-        my_debug("Trying to update currencies")
-        Currency.update_currency_rates
-        my_debug("Currencies updated")
+        my_debug('Trying to update currencies')
+        notice = Currency.update_currency_rates
+        if notice
+          my_debug('Currencies updated')
+        else
+          my_debug("Currencies NOT updated. Yahoo closed the connection before the transaction was completed.")
+        end
       end
     rescue Exception => e
       my_debug(e)
@@ -1118,7 +1122,7 @@ class CallcController < ApplicationController
   end
 
   def backups_hourly_cronjob
-    redirect_to :controller => "backups", :action => 'backups_hourly_cronjob'
+    redirect_to :controller => 'backups', :action => 'backups_hourly_cronjob'
   end
 
   def block_users
@@ -1130,7 +1134,7 @@ class CallcController < ApplicationController
       user.blocked = 1
       user.save
     end
-    my_debug("Users for blocking checked")
+    my_debug('Users for blocking checked')
   end
 
   def block_users_conditional
@@ -1149,7 +1153,7 @@ class CallcController < ApplicationController
       end
 
     end
-    my_debug("Users for conditional blocking checked")
+    my_debug('Users for conditional blocking checked')
   end
 
   def send_balance_warning

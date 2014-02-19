@@ -71,23 +71,20 @@ class Currency < ActiveRecord::Base
   end
 
   def set_default_currency
+    old_curr = Currency.get_default
     begin
       transaction do
-        old_curr = Currency.get_default
-        temp_curr = old_curr.dup
-        old_curr.name = self.name
-        old_curr.full_name= self.full_name
-        old_curr.exchange_rate = 1
-        old_curr.active = 1
-        old_curr.save(:validate => false)
-        self.name = temp_curr.name
-        self.active = 0
-        self.full_name = temp_curr.full_name
-        self.save(:validate => false)
-        Currency.update_currency_rates
-        return old_curr.name
+        change_default_currency(old_curr, self)
+        notice = Currency.update_currency_rates
+        if notice
+          return old_curr.name
+        else
+          change_default_currency(old_curr, self)
+          return false
+        end
       end
     rescue Exception => e
+      change_default_currency(old_curr, self)
       return false
     end
   end
@@ -99,23 +96,38 @@ class Currency < ActiveRecord::Base
     require 'net/http'
     default_currency = Currency.get_default
     par = []
+    notice = true
     arr= id.to_i > 0 ? {:conditions => ["id=?", id]} : {:conditions => ["curr_update=1 AND id != 1"]}
     currencies = Currency.find(:all, arr)
     if currencies and not currencies.empty?
-      currencies.each { |cur| par << "s=" + default_currency.name.to_s.strip + cur.name.to_s.strip + "=X" }
-      par << "f=l1"
-      Net::HTTP.start("download.finance.yahoo.com") { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s); @file = resp.body }
-      f = @file.split("\r\n")
-      f.each_with_index { |cur, i|
-        currencies[i].exchange_rate= cur.to_d;
-        currencies[i].last_update = Time.now;
-        currencies[i].save
-        if currencies[i].exchange_rate == 0  
-          Action.add_action_hash(User.current ? User.current.id : 0, {:target_id => currencies[i].id, :target_type => "currency", :action => "failed_to_update_currency", :data => currencies[i].exchange_rate})
-        end 
-      }
-      Action.add_action(User.current ? User.current.id : 0, "Currency updated", id)
+      currencies.each { |cur| par << "s=" + default_currency.name.to_s.strip + cur.name.to_s.strip + '=X' }
+      par << 'f=l1'
+      index = 0
+      connection_closed = 'Server Connection Closed'
+
+      begin
+        index += 1
+        Net::HTTP.start('download.finance.yahoo.com') { |http| resp = http.get('/d/quotes.csv?'+par.join('&').to_s); @file = resp.body }
+      end while @file.include?(connection_closed) and index < 5
+
+      if !@file.include?(connection_closed)
+        f = @file.split("\r\n")
+        f.each_with_index { |cur, i|
+          currency = cur.to_d
+          currencies[i].exchange_rate= (currency == 0 ? 1 : currency)
+          currencies[i].last_update = Time.now
+          currencies[i].save
+          if currency == 0
+            Action.add_action_hash(User.current ? User.current.id : 0, {:target_id => currencies[i].id, :target_type => 'currency', :action => 'failed_to_update_currency', :data => currencies[i].exchange_rate})
+          end
+        }
+        Action.add_action(User.current ? User.current.id : 0, 'Currency updated', id)
+      else
+        Action.add_action(User.current ? User.current.id : 0, 'Failed to update currency', id)
+        notice = false
+      end
     end
+    return notice
   end
 
   def update_rate
@@ -134,6 +146,23 @@ class Currency < ActiveRecord::Base
       c.active = 1
       c.save
     end
+  end
+
+  def change_default_currency(old_curr, new_curr)
+          temp_curr = old_curr.dup
+          old_curr.assign_attributes({
+            name: new_curr.name,
+            full_name: new_curr.full_name,
+            exchange_rate: 1,
+            active: 1
+          })
+          old_curr.save(validate: false)
+          new_curr.assign_attributes({
+            name: temp_curr.name,
+            active: 0,
+            full_name: temp_curr.full_name
+          })
+          new_curr.save(validate: false)
   end
 
 end
