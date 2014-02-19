@@ -77,12 +77,14 @@ class CurrenciesController < ApplicationController
   end
 
   def update_currencies_rates
+    updated = true
     if params[:all].to_i == 1
       begin
         Currency.transaction do
-          Currency.update_currency_rates
+          updated = Currency.update_currency_rates
         end
       rescue Exception => e
+        updated = false
       end
     else
       @currency = Currency.find(:first, :conditions => ['id=?', params[:id]])
@@ -90,13 +92,18 @@ class CurrenciesController < ApplicationController
         flash[:notice] = _('Currency_was_not_found')
         redirect_back_or_default("/currencies/currencies")
       end
-      @currency.update_rate
-      if @currency.exchange_rate == 0 
-        flash[:notice] = _('Yahoo_could_not_find_currency') 
-        redirect_to :action => 'currencies' and return false 
-      end 
+      updated = @currency.update_rate
+      if @currency.exchange_rate == 1 and updated
+        flash[:notice] = _('Yahoo_could_not_find_currency')
+        redirect_to :action => 'currencies' and return false
+      end
     end
-    flash[:status] = _('Currencies_rates_updated')
+
+    if updated
+      flash[:status] = _('Currencies_rates_updated')
+    else
+      flash[:notice] = _('Error_Please_Try_Again_Later')
+    end
     redirect_to :action => 'currencies'
   end
 
