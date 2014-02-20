@@ -774,10 +774,11 @@ class CallcController < ApplicationController
     MorLog.my_debug "#{Time.now.to_s(:db)} - #{type} actions starting sleep"
     sleep(rand * 10)
     MorLog.my_debug "#{Time.now.to_s(:db)} - #{type} actions starting sleep end"
-    time = Confline.get_value("#{type}_actions_cooldown_time")
-    # failsafe. If there is error while parsing "time" it will defauilt to Year from now and will not block running the action.
-    time = (Time.now - 2.year).to_s(:db) if time.blank?
-    time_set = Time.parse(time, Time.now - 1.year)
+    begin
+      time_set = Time.parse(Confline.get_value("#{type}_actions_cooldown_time"))
+    rescue ArgumentError
+      time_set = Time.now - 1.year
+    end
     unless time_set and time_set + cooldown > Time.now
       Confline.set_value("#{type}_actions_cooldown_time", Time.now.to_s(:db))
       MorLog.my_debug "#{type} actions starting"
