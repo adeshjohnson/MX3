@@ -979,11 +979,21 @@ class User < ActiveRecord::Base
       stt_month = month_t + "-#{last_day} 23:59:59"
 
       # calls from reseller
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', SUM(calls.reseller_price) AS call_selfcost, SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', " +
+                "SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', " +
+                "SUM(calls.reseller_price) AS call_selfcost, " +
+                "SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) " +
+                "WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND " +
+                "calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', SUM(calls.reseller_price) AS call_selfcost, SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', " +
+                "SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', " +
+                "SUM(calls.reseller_price) AS call_selfcost, " +
+                "SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) " +
+                "WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' " +
+                "AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       month_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -997,11 +1007,21 @@ class User < ActiveRecord::Base
       stt = day_t + " 23:59:59"  # till
 
       # calls from reseller
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', SUM(calls.reseller_price) AS call_selfcost, SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', " +
+                "SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', " +
+                "SUM(calls.reseller_price) AS call_selfcost, " +
+                "SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) " +
+                "WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND " +
+                "calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       #calls from reseller users
-      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', SUM(calls.reseller_price) AS call_selfcost, SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res2 = "SELECT COUNT(calls.id) as 'calls_count', " +
+                "SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', " +
+                "SUM(calls.reseller_price) AS call_selfcost, " +
+                "SUM(calls.user_price + calls.did_inc_price) AS call_cost FROM calls USE INDEX (calldate) " +
+                "WHERE reseller_id = #{self.id} AND calls.disposition= 'ANSWERED' AND " +
+                "calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res2 = ActiveRecord::Base.connection.select_all(sql_res2)
 
       day_calls = res[0]['calls_count'].to_i + res2[0]['calls_count'].to_i
@@ -1012,6 +1032,10 @@ class User < ActiveRecord::Base
     end
 
     if usertype != "admin" and usertype != "reseller"
+      show_user_billsec = (Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1) &&
+                          (usertype == 'user')
+      billsec_sql = show_user_billsec ? "CEIL(user_billsec)" : "IF((billsec = 0 AND real_billsec > 0), " +
+                                                               "CEIL(real_billsec), billsec)"
 
       # ---- month ----
 
@@ -1019,7 +1043,11 @@ class User < ActiveRecord::Base
       stt_month = month_t + "-#{last_day} 23:59:59"
 
       # calls from user
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', SUM(calls.user_price) AS call_selfcost, SUM(calls.user_price) AS call_cost, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(#{billsec_sql}) as 'sum_billsec', " +
+                "SUM(calls.user_price) AS call_selfcost, " +
+                "SUM(calls.user_price) AS call_cost, SUM(calls.did_price) AS did_owner_cost FROM calls " +
+                "USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND " +
+                "calls.calldate BETWEEN '#{self.system_time(stf_month)}' AND '#{self.system_time(stt_month)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       month_calls = res[0]['calls_count'].to_i
@@ -1034,7 +1062,11 @@ class User < ActiveRecord::Base
       stt = day_t + " 23:59:59"  # till
 
       # calls from user
-      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec)) as 'sum_billsec', SUM(calls.user_price) AS call_selfcost, SUM(calls.user_price) AS call_cost, SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
+      sql_res = "SELECT COUNT(calls.id) as 'calls_count', SUM(#{billsec_sql}) as 'sum_billsec', " +
+                "SUM(calls.user_price) AS call_selfcost, SUM(calls.user_price) AS call_cost, " +
+                "SUM(calls.did_price) AS did_owner_cost FROM calls USE INDEX (calldate) " +
+                "WHERE user_id = #{self.id} AND calls.disposition= 'ANSWERED' AND " +
+                "calls.calldate BETWEEN '#{self.system_time(stf)}' AND '#{self.system_time(stt)}';"
       res = ActiveRecord::Base.connection.select_all(sql_res)
 
       day_calls = res[0]['calls_count'].to_i
@@ -1042,7 +1074,6 @@ class User < ActiveRecord::Base
       day_selfcost = res[0]['call_selfcost'].to_d
       day_cost = res[0]['call_cost'].to_d
       day_did_owner_cost = res[0]['did_owner_cost'].to_d
-
     end
 
     return month_calls, month_billsec, month_selfcost, month_cost, month_did_owner_cost, day_calls, day_billsec, day_selfcost, day_cost, day_did_owner_cost
@@ -1057,9 +1088,9 @@ class User < ActiveRecord::Base
     calls_price = 0
     zero_calls_sql = invoice_zero_calls_sql
     up = SqlExport.user_price_sql
-  
+
     val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did WHERE dids.did IS NULL AND disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
-    
+
     #val2 = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.dst_user_id = #{self.id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
 
     #MorLog.my_debug("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls WHERE disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};", 1)
@@ -1084,7 +1115,7 @@ class User < ActiveRecord::Base
     calls_price = 0
     up = SqlExport.user_price_sql
     zero_calls_sql = invoice_zero_calls_sql(up)
-  
+
     val = ActiveRecord::Base.connection.select_all("SELECT count(calls.id) as calls, SUM(#{up}) as price FROM calls LEFT JOIN dids on dids.id = calls.did_id AND calls.dst = dids.did WHERE dids.did IS NOT NULL AND disposition = 'ANSWERED' and calls.user_id = #{id} AND calldate BETWEEN '#{period_start}' AND '#{period_end}' #{zero_calls_sql};")
 
     if val
@@ -1235,7 +1266,7 @@ class User < ActiveRecord::Base
 
     fextension = options[:free_ext]
     device = Device.new({:user_id => id, :devicegroup_id => options[:dev_group].to_i, :context => "mor_local", :device_type => options[:device_type].to_s, :extension => fextension, :pin => options[:pin].to_s, :secret => options[:secret].to_s})
-    device.callerid = options[:callerid].to_s if options[:callerid] 
+    device.callerid = options[:callerid].to_s if options[:callerid]
     device.description = options[:description] if options[:description]
     device.device_ip_authentication_record = options[:device_ip_authentication_record] if options[:device_ip_authentication_record]
     device.username = options[:username] ? options[:username] : fextension
@@ -1316,7 +1347,7 @@ class User < ActiveRecord::Base
 
     device.time_limit_per_day = Confline.get_value("Default_device_time_limit_per_day", owner_id).to_s
     device.transport = Confline.get_value("Default_device_transport", owner_id).to_s
-    device.transport = 'udp' if !['tcp', 'udp', 'tcp,udp', 'udp,tcp'].include?(device.transport) 
+    device.transport = 'udp' if !['tcp', 'udp', 'tcp,udp', 'udp,tcp'].include?(device.transport)
     device.fromdomain = Confline.get_value("Default_device_fromdomain", owner_id).to_s
     device.grace_time = Confline.get_value("Default_device_grace_time", owner_id).to_s
     device.insecure = Confline.get_value("Default_device_insecure", owner_id).to_s
@@ -1440,7 +1471,7 @@ class User < ActiveRecord::Base
     time = time.next_month if user_type == "prepaid" and day.nil?
 
     MorLog.my_debug("  #{time.year}-#{time.month}")
-    #sorry about this nasty.. since i wouldn't want to rewrite mehod 
+    #sorry about this nasty.. since i wouldn't want to rewrite mehod
     #that does who knows what i jus pass day param and check whether
     #is is nil or not. if nil it means we're paying for monthly subscriptions
     #else we're paying daily subscriptions
@@ -2067,7 +2098,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =begin
   TODO: prepaid user cannot have credit set especialy if credit is something invalid
-  like 20, -1 etc. maybe 0 could be set but i doubt that, cause PREPAID USER DOES 
+  like 20, -1 etc. maybe 0 could be set but i doubt that, cause PREPAID USER DOES
   NOT HAVE CREDIT how is it posible to set something one does not have??? well at
   least we should rise exception, if not hide this method. but not today cause this
   might break to many things
@@ -2157,7 +2188,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     user.owner_id = owner.id
     user.acc_group_id = 0
     user.allow_loss_calls = Confline.get_value('Default_User_allow_loss_calls', owner.id)
-    #looking at code below and thinking 'FUBAR'? well mor currencies/money 
+    #looking at code below and thinking 'FUBAR'? well mor currencies/money
     #is FUBAR, that's just a hack to get around. ticket #5041
     user.balance = owner.to_system_currency(owner.to_system_currency(user.balance))
 
@@ -2187,7 +2218,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     address.email = params[:email] if params[:email].to_s != ""
     address.email = nil if address.email.to_s.blank?
     address.save
-    #If registering through API, taxation country by default is same 
+    #If registering through API, taxation country by default is same
     #as country. ticket #5071
     if api == 1
       user.taxation_country = address.direction_id
@@ -2330,8 +2361,8 @@ GROUP BY terminators.id;").map { |t| t.id }
     if (!params[:id] or !u) and notice.blank?
       notice = _('Dont_be_so_smart')
     else
-      if Confline.count(:conditions => "owner_id = #{u.id} AND name LIKE 'Default_User_%'").to_i == 0 
-        notice = _('Default_user_is_not_present') 
+      if Confline.count(:conditions => "owner_id = #{u.id} AND name LIKE 'Default_User_%'").to_i == 0
+        notice = _('Default_user_is_not_present')
       elsif (!Tariff.find(:first, :conditions => {:owner_id => u.id}) or !Tariff.find(:first, :conditions => {:id => Confline.get_value('Default_user_tariff_id', u.id)})) and notice.blank?
         notice = _('Tariff_not_found_cannot_create')
       else
@@ -2411,7 +2442,7 @@ GROUP BY terminators.id;").map { |t| t.id }
         self.credit = 0 if credit < 0
       end
 
-      if postpaid? 
+      if postpaid?
         #prepaid user cannot have minimal charge enabled
         #if minimal charge is 0 it means it is disabled
         #so if minimal charge is not numeric or was not even supplied we convert
@@ -2693,7 +2724,7 @@ GROUP BY terminators.id;").map { |t| t.id }
     if params[:u9] and params[:u9].strip.length < self.minimum_username
       notice = _('Username_must_be_longer', self.minimum_username-1)
     end
-    
+
     params[:user] = params[:user].each_value(&:strip!)
     params[:address] = params[:address].each_value(&:strip!) if params[:address]
 
@@ -3162,7 +3193,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =begin
   Information whether user is postpaid or prepaid in database is saved in database
-  in as int - 0 for prepaid, 1 for postpaid. 
+  in as int - 0 for prepaid, 1 for postpaid.
 =end
   def set_postpaid
     postpaid = 1
@@ -3244,7 +3275,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =begin
   Check whether accountant user has rights to edit specified permission
-  
+
   *Params*
   +permission+ permission name. same name as it is saved in database
 
@@ -3257,7 +3288,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =begin
   Check whether accountant user has rights to read specified permission
-  
+
   *Params*
   +permission+ permission name. same name as it is saved in database
 
@@ -3278,7 +3309,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   +allow_edit+ boolean, true if reseller is allowed to read
 =end
   def reseller_allow_edit(permission)
-    return reseller_right(permission) == 2 
+    return reseller_right(permission) == 2
   end
 
 =begin
@@ -3356,7 +3387,7 @@ GROUP BY terminators.id;").map { |t| t.id }
 
 =begin
   Get users(resellers) that have only common to this user(reseller) providers. If this user has
-  any own providers he it is not posible for him to have providers common with any other user. 
+  any own providers he it is not posible for him to have providers common with any other user.
   If this user is not reseller raise an exception.
 
   *Returns*
@@ -3372,21 +3403,21 @@ GROUP BY terminators.id;").map { |t| t.id }
         #'usertype = 'reseller' AND provider_id IS NULL'
         #and joins them with common use providers of all resellers, hence that nasty
         #JOIN (SELECT ... GROUP BY reseller_id) provider_list
-        #then we can filter only those users that have no own providers(but they have 
+        #then we can filter only those users that have no own providers(but they have
         #common use providers) by comparing 'lists' of common use providers with list
         #of 'self' common use provider 'list'.
-        query = "SELECT users.*, provider_list 
+        query = "SELECT users.*, provider_list
                  FROM   users
                  LEFT JOIN providers ON(users.id = providers.user_id)
-	         JOIN (SELECT reseller_id, 
+	         JOIN (SELECT reseller_id,
                               GROUP_CONCAT(provider_id ORDER BY provider_id) provider_list
-		       FROM   common_use_providers 
+		       FROM   common_use_providers
 		       GROUP BY reseller_id) common_use_providers ON reseller_id = users.id
                  WHERE usertype = 'reseller' AND
                        users.id != #{id} AND
                        providers.id IS NULL AND
-                       provider_list = (SELECT GROUP_CONCAT(provider_id ORDER BY provider_id) 
-                                        FROM   common_use_providers 
+                       provider_list = (SELECT GROUP_CONCAT(provider_id ORDER BY provider_id)
+                                        FROM   common_use_providers
                                         WHERE reseller_id = #{id}
                                         GROUP BY reseller_id)"
         User.find_by_sql(query)
@@ -3509,12 +3540,12 @@ GROUP BY terminators.id;").map { |t| t.id }
     self.blocked = 1
   end
 
-  def allowed_to_assign_did_to_trunk? 
-    (Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1) 
-  end 
+  def allowed_to_assign_did_to_trunk?
+    (Confline.get_value('Resellers_Allow_Assign_DID_To_Trunk').to_i == 1)
+  end
 
 =begin
-  Check whethter accountant can see financial data. 
+  Check whethter accountant can see financial data.
   Note that this method can return valid results only if called on user that
   is accountant, hence if user is not an accountant exception will be risen.
 =end
@@ -3554,7 +3585,7 @@ GROUP BY terminators.id;").map { |t| t.id }
   def accountant_users
     User.find(:all, :conditions => {:responsible_accountant_id => self.id});
   end
-  
+
   def registered_during_period(period_end)
     user_created_at_action = Action.where(:action => 'user_created', :target_id => self.id).first
     # If user doesn't have a creation date, probably means this is a testing environment
@@ -3570,7 +3601,7 @@ GROUP BY terminators.id;").map { |t| t.id }
       return false
     end
   end
-  
+
   def registered_at
     user_created_at_action = Action.where(:action => 'user_created', :target_id => self.id).first
     if !user_created_at_action.nil?
