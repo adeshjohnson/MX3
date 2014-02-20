@@ -1780,12 +1780,7 @@ class ApiController < ApplicationController
           owner = User.where(:uniquehash => params[:id]).first
           if owner
             notice = User.validate_from_registration(params, owner.id)
-            capt = true
-            if Confline.get_value("reCAPTCHA_enabled").to_i == 1
-              usern = User.new
-              capt = verify_recaptcha(usern) ? true : (false; notice = _('Please_enter_captcha'))
-            end
-            if capt and notice.blank?
+            if notice.blank?
               reg_ip = request.remote_ip
               user, send_email_to_user, device, notice2 = User.create_from_registration(params, owner, reg_ip, free_extension(), new_device_pin(), random_password(12), next_agreement_number, 1)
               if notice2.blank?
