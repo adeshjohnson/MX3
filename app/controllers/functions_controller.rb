@@ -2897,6 +2897,8 @@ Sets default tax values for users or cardgroups
               device.permit = "0.0.0.0/0.0.0.0"
               device.host = clean_value_all(r_arr[session[:imp_device_host]].to_s)
               device.port = port
+              device.qualify = Confline.get_value("Default_device_qualify", session[:user_id])  
+              device.call_limit = Confline.get_value("Default_device_call_limit", session[:user_id])
               device.istrunk = 0
               device.ani = 0
               device.callgroup = nil
