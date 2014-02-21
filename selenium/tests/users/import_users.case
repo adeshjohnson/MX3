@@ -38,6 +38,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=call_limit</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=qualify_time</td>
+	<td>1200</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/functions/import_user_data_users</td>
 	<td></td>
 </tr>
@@ -496,6 +516,36 @@
 	<td>assertText</td>
 	<td>id=device_type_13</td>
 	<td>SIP</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_edit/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=call_limit</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=qualify_yes</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=qualify_time</td>
+	<td>1200</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Device's settings updated</td>
 </tr>
 <tr>
 	<td>open</td>
