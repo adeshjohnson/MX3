@@ -595,6 +595,16 @@
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>id=day_did_owner_cost</td>
 	<td>624.9954</td>
 </tr>
@@ -640,6 +650,167 @@
 	<td>1.5037</td>
 </tr>
 <!--<tr> 	<td>assertText</td> 	<td>id=total_did_inc_price</td> 	<td>4.6650</td> </tr>-->
+<!--Show user billsec instead real billsec-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:06:18</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:06:18</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=inv_user_billsec</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:13:13</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:05:35</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:05:35</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:06:55</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:06:55</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -717,6 +888,16 @@
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:06:55</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:06:55</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>id=day_cost</td>
 	<td>505.7989</td>
 </tr>
@@ -744,6 +925,76 @@
 	<td>assertText</td>
 	<td>id=total_profit</td>
 	<td>4.8233</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/reseller_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=inv_user_billsec</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:06:55</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:06:55</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=month_duration</td>
+	<td>exact:00:05:55</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=day_duration</td>
+	<td>exact:00:05:55</td>
 </tr>
 <tr>
 	<td>open</td>
