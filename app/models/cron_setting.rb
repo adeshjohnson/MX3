@@ -29,7 +29,7 @@ class CronSetting < ActiveRecord::Base
       errors.add(:period, _("Please_enter_correct_period"))
       return false
     end
-  end<
+  end
 
   def CronSetting.cron_settings_actions
     [[_('change_tariff'), 'change_tariff'], [_('change_provider_tariff'), 'change_provider_tariff'], [_('change_LCR'), 'change_LCR']]
