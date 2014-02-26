@@ -21,15 +21,15 @@ class CronSetting < ActiveRecord::Base
       self.to_target_class = 'User_LCR'
     end
 
-    if (valid_from > valid_till and next_run_time > valid_till or valid_till.to_time < Time.now) and repeat_forever.to_i == 0
-      errors.add(:period, _("Please_enter_correct_period"))
-      return false
-    end
     if periodic_type.to_i == 0 and valid_from.to_time < Time.now
       errors.add(:period, _("Please_enter_correct_period"))
       return false
     end
-  end
+    if (valid_till.to_time < Time.now or valid_from > valid_till and next_run_time > valid_till) and repeat_forever.to_i == 0
+      errors.add(:period, _("Please_enter_correct_period"))
+      return false
+    end
+  end<
 
   def CronSetting.cron_settings_actions
     [[_('change_tariff'), 'change_tariff'], [_('change_provider_tariff'), 'change_provider_tariff'], [_('change_LCR'), 'change_LCR']]
