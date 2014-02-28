@@ -39,6 +39,151 @@
 	<td></td>
 </tr>
 <!--create cron settings-->
+<!--pradzia-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=year</td>
+	<td>y</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['y']-1}</td>
+	<td>y2</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['y']-(-1)}</td>
+	<td>y3</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=day</td>
+	<td>dayy</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['dayy']-(-1)}</td>
+	<td>d2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cron_setting_name</td>
+	<td>forever</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=cron_setting_repeat_forever</td>
+	<td></td>
+</tr>
+<!--padaro kad nurodoma data butu viena diena i prieki-->
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>${d2}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cron_setting_description</td>
+	<td>vienas vienas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Action saved</td>
+	<td></td>
+</tr>
+<!--create cron settings-->
+<!--sql padaro savaitės senumo cron actiono datą - tik su juo iškyla crash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/for_crashes/cron_action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cron_setting_repeat_forever</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>${y2}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter correct period</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_start_day</td>
+	<td>${d2}</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=activation_end_year</td>
+	<td>${y3}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Action updated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/cron_actions/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_start_year</td>
+	<td>${y}</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=activation_end_year</td>
+	<td>${y3}</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cron_setting_repeat_forever</td>
+	<td>off</td>
+</tr>
+<!--create cron settings-->
 <tr>
 	<td>open</td>
 	<td>/billing/cron_actions/new</td>
@@ -222,23 +367,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_1</td>
+	<td>name_2</td>
 	<td>aaaaaa</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>action_1</td>
+	<td>action_2</td>
 	<td>change_tariff</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>user_1</td>
+	<td>user_2</td>
 	<td></td>
 </tr>
 <!--edit-->
 <tr>
 	<td>open</td>
-	<td>/billing/cron_actions/edit/1</td>
+	<td>/billing/cron_actions/edit/2</td>
 	<td></td>
 </tr>
 <tr>
@@ -302,6 +447,7 @@
 	<td>Test Provider</td>
 	<td></td>
 </tr>
+<!--pabaiga-->
 <!--create second cron settings-->
 <tr>
 	<td>open</td>
@@ -456,17 +602,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_1</td>
+	<td>name_2</td>
 	<td>pakeistas vardas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_2</td>
+	<td>name_3</td>
 	<td>bbbbbb</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_3</td>
+	<td>name_4</td>
 	<td>ccccccccccccccccc</td>
 </tr>
 <!--assert is it not change now-->
@@ -582,27 +728,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=name_4</td>
+	<td>id=name_5</td>
 	<td>Change LCR</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=action_4</td>
+	<td>id=action_5</td>
 	<td>change_LCR</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_4</td>
+	<td>id=user_5</td>
 	<td>Test Reseller</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=provider_4</td>
+	<td>id=provider_5</td>
 	<td></td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cron_actions/edit/4</td>
+	<td>/billing/cron_actions/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -632,12 +778,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=user_4</td>
+	<td>id=user_5</td>
 	<td>System Admin</td>
 </tr>
 <tr>
 	<td>open</td>
-	<td>/billing/cron_actions/edit/4</td>
+	<td>/billing/cron_actions/edit/5</td>
 	<td></td>
 </tr>
 <tr>
@@ -678,17 +824,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_1</td>
+	<td>name_2</td>
 	<td>pakeistas vardas</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_2</td>
+	<td>name_3</td>
 	<td>bbbbbb</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>name_3</td>
+	<td>name_4</td>
 	<td>ccccccccccccccccc</td>
 </tr>
 <tr>
