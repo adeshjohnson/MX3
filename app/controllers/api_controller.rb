@@ -2403,8 +2403,10 @@ class ApiController < ApplicationController
     @daytype = []
     @is_duration_infinity = false
     @is_round_by_bigger_than_from_plus_duration = false
-    bad_rates = ""
+    bad_rates = ''
+    previous_rate_from = 1
     bad_rates_array = []
+
     destination[:rates].each do |rate|
       bad = check_rates_params(rate)
       if bad
@@ -2413,7 +2415,10 @@ class ApiController < ApplicationController
       else
         from_to_create = array_to_create.find_all { |r| r[:start_time] == rate[:rate_start_time] and r[:end_time] == rate[:rate_end_time] and r[:daytype] == rate[:day_type] }.sort_by { |a| a[:from].to_i }.last
         if !from_to_create
-          @from = 1
+          # because of multiple rates importing add previous rate duration near from
+          @from = previous_rate_from
+          duration = rate[:rate_duration] == -1 ? 0 : rate[:rate_duration].to_i
+          previous_rate_from = @from + duration
         else
           #if minute goes after event, 'from' matches
           @from = from_to_create[:from].to_i + from_to_create[:duration].to_i if from_to_create[:artype] != 'event'
@@ -2482,16 +2487,16 @@ class ApiController < ApplicationController
     @daytype = []
     @is_duration_infinity = false
     @is_round_by_bigger_than_from_plus_duration = false
-    bad_rates = ""
-    destination[:rates].each do |rate|
+    bad_rates = ''
 
+    destination[:rates].each do |rate|
       bad = check_rates_params(rate)
+
       if bad
         rate.merge!(:destination_group_name => destination[:destination_group_name], :destination_group_type => destination[:destination_group_type])
         bad_rates_array << rate
       else
         #find last 'from' in that time period
-
         db_from = database_rates.find_all { |r| r.start_time.strftime("%X") == rate[:rate_start_time] and r.end_time.strftime("%X") == rate[:rate_end_time] and r.daytype.to_s == rate[:day_type].to_s }.sort_by { |a| a.from.to_i }.last
         from_to_create = array_to_create.find_all { |r| r[:start_time] == rate[:rate_start_time] and r[:end_time] == rate[:rate_end_time] and r[:daytype] == rate[:day_type] }.sort_by { |a| a[:from].to_i }.last
 
@@ -2573,7 +2578,6 @@ class ApiController < ApplicationController
   end
 
   def check_rates_params(rate)
-
     ret = 0
     ret += 1 if rate[:rate_price] and rate[:rate_price].to_s.length > 0 and rate[:rate_price].to_s !~ /[^0-9.\-\+]/
     ret += 1 if rate[:rate_round_by] and rate[:rate_round_by].to_s !~ /[^0-9]/ and rate[:rate_round_by].to_s.length > 0
