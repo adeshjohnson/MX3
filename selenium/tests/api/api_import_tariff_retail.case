@@ -1227,6 +1227,57 @@
 	<td>22 MOR retail test</td>
 	<td></td>
 </tr>
+<!--vienodi reitai, turi atitinkamai uzdeti trukmes-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/import_tariff_retail?u=admin&amp;xml=&lt;tariff&gt;&lt;name&gt;test_export_advanced_7&lt;/name&gt;&lt;id&gt;66&lt;/id&gt;&lt;destinations&gt;&lt;destination&gt;&lt;direction/&gt;&lt;destination_group_name&gt;Afghanistan&lt;/destination_group_name&gt;&lt;destination_group_type&gt;FIX&lt;/destination_group_type&gt;&lt;rates&gt;&lt;rate_price&gt;0.3106&lt;/rate_price&gt;&lt;rate_round_by&gt;30&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;30&lt;/rate_duration&gt;&lt;day_type&gt;&lt;/day_type&gt;&lt;/rates&gt;&lt;rates&gt;&lt;rate_price&gt;0.3106&lt;/rate_price&gt;&lt;rate_round_by&gt;6&lt;/rate_round_by&gt;&lt;rate_type&gt;minute&lt;/rate_type&gt;&lt;rate_start_time&gt;00:00:00&lt;/rate_start_time&gt;&lt;rate_end_time&gt;23:59:59&lt;/rate_end_time&gt;&lt;rate_duration&gt;-1&lt;/rate_duration&gt;&lt;day_type&gt;&lt;/day_type&gt;&lt;/rates&gt;&lt;/destination&gt;&lt;/destinations&gt;&lt;/tariff&gt;&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_id</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tariff_name</td>
+	<td>test_export_advanced_7</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/tariffs/user_arates/519?dt=&amp;st=00%3A00%3A00</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_277</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=from_278</td>
+	<td>31</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=duration_277</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=check_box</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>name=price_277</td>
+	<td>0.3106</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=price</td>
+	<td>0.3106</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/tariffs/user_rates_list/22</td>
