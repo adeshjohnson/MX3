@@ -1,7 +1,7 @@
 <script type="text/javascript">
     function textCounter(field, cntfield, sms_counter, maxlimit, val) {
         //alert(val);
-        if (sms_counter.value == 1) {
+        //if (sms_counter.value == 1) {
             //alert(val);
             if (/[^\u0000-\u00ff]/.test(val)) {
                 maxlimit = 70;
@@ -11,10 +11,9 @@
                 maxlimit = 160;
                 document.sms.sms_unicode.value = 0
             }
-            ;
-        }
+        //}
         cntfield.value = maxlimit - ((field.value.length % maxlimit));
-        sms_counter.value = parseInt((field.value.length / maxlimit)) + 1;
+        sms_counter.value = parseInt((field.value.length / maxlimit), 10) + 1;
         var price = document.getElementById("price");
         //alert(price);
         var pricee = document.getElementById("sms_counter");
