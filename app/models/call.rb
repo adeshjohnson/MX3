@@ -8,7 +8,7 @@ class Call < ActiveRecord::Base
   has_many :cc_actions
   has_one :recording
   belongs_to :card
-  belongs_to :server, :primary_key => "server_id" 
+  belongs_to :server, :primary_key => "server_id"
 
   has_and_belongs_to_many :cs_invoices
 
@@ -46,8 +46,8 @@ class Call < ActiveRecord::Base
   end
 
   def Call.nice_billsec_sql
-    if User.current.is_user? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1 
-      "CEIL(user_billsec) as 'nice_billsec'" 
+    if User.current.is_user? and Confline.get_value("Invoice_user_billsec_show", User.current.owner.id).to_i == 1
+      "CEIL(user_billsec) as 'nice_billsec'"
     else
       "IF((billsec = 0 AND real_billsec > 0), CEIL(real_billsec), billsec) as 'nice_billsec'"
     end
@@ -721,7 +721,7 @@ class Call < ActiveRecord::Base
     end
     sql += jn.join(' ')
     sql += "LEFT JOIN directions ON (directions.code = destinations.direction_code)"
-    sql += "WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} ORDER BY #{options[:order]} ) as C"
+    sql += "WHERE #{ ActiveRecord::Base.sanitize_sql_array([cond.join(' AND '), *var])} ORDER BY #{options[:order].gsub('nice_user', 'user')} ) as C"
 
     test_content = ""
     if options[:test].to_i == 1
@@ -1841,10 +1841,10 @@ class Call < ActiveRecord::Base
     if options[:did]
       cond << "calls.did_id = ?"
       var << options[:did].id
-    elsif !options[:s_did_pattern].to_s.strip.blank? 
-      cond << "dids.did LIKE ?" 
+    elsif !options[:s_did_pattern].to_s.strip.blank?
+      cond << "dids.did LIKE ?"
       var << options[:s_did_pattern].to_s.strip
-    end 
+    end
 
     #find_calls_only_with_did
     if options[:only_did] and options[:only_did].to_i == 1
@@ -1872,7 +1872,7 @@ class Call < ActiveRecord::Base
       var << options[:source]
     end
     # this is nasty but oh well.
-    
+
     unless options[:s_card_number].to_s.strip.blank?
       cond << "cards.number LIKE ?"
       var << options[:s_card_number]
