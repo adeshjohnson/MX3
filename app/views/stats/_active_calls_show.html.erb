@@ -26,17 +26,17 @@
       </tr>
       <% local_time_now = Time.now.getlocal() %>
       <% @active_calls.each_with_index { |call, i| %>
-
+          <% call_id = call["ac_id"] %>
           <% answer_time = nil
              begin
                answer_time = Time.parse(call["answer_time"].to_s) unless call["answer_time"].to_s.blank?
              rescue
              end %>
           <tr class="row<%= (i % 2 + 1).to_s %>">
-            <td id="status_<%= i %>" align="center" onmouseover="Tip('<%= active_calls_tooltip(call) %>', CLICKCLOSE, true);" onmouseout="UnTip()"><%= active_call_bullet(call) %></td>
-            <td id="answer_time_<%= i %>" align="center"><%= answer_time.blank? ? "" : nice_time_from_date(current_user.user_time(answer_time)) %> </td>
-            <td id="duration_<%= i %>" align="center"><%= answer_time.blank? ? "" : nice_time(local_time_now - answer_time) %></td>
-            <td id="src_<%= i %>" align="left">
+            <td id="status_<%= call_id %>" align="center" onmouseover="Tip('<%= active_calls_tooltip(call) %>', CLICKCLOSE, true);" onmouseout="UnTip()"><%= active_call_bullet(call) %></td>
+            <td id="answer_time_<%= call_id %>" align="center"><%= answer_time.blank? ? "" : nice_time_from_date(current_user.user_time(answer_time)) %> </td>
+            <td id="duration_<%= call_id %>" align="center"><%= answer_time.blank? ? "" : nice_time(local_time_now - answer_time) %></td>
+            <td id="src_<%= call_id %>" align="left">
               <%= call["src"] %>&nbsp;
                <% if call['cc_id'].to_i == 0  %>
               <% if call["user_id"] %>
@@ -56,7 +56,7 @@
               <%end%>
             </td>
 
-            <td id="dst_<%= i %>" align="left">
+            <td id="dst_<%= call_id %>" align="left">
               <%= (@hide_gui_dst and current_user.devices.map(&:id).member?(call["device_id"])) ? call["localized_dst"].to_s[0..-4]+"XXX" : call["localized_dst"].to_s %>&nbsp;
               <% if call["dst_user_id"] %>
 
@@ -96,7 +96,7 @@
                 <td align="right"> <%= call["did"].to_s %></td>
             <% end %>
             <% if session[:usertype] == "admin" or allow_manage_providers? or session[:acc_provider].to_i == 1 %>
-                <td id="provider_<%= i %>" align="left">
+                <td id="provider_<%= call_id %>" align="left">
                   <% if call["provider_id"] %>
                       <% if call["common_use"].to_i == 1 or call["providers_owner_id"].to_i==current_user.id %>
                           <%= nice_provider_from_data(call["provider_name"].to_s, {:link => call["providers_owner_id"].to_i==current_user.id, :provider_id => call["provider_id"].to_s}) %>
@@ -106,7 +106,7 @@
                   <% end %>
                 </td>
                 <% if show_servers and !current_user.is_reseller? %>
-                    <td id="server_<%= i %>" align="right"><%= nice_server_from_data(call["server_id"].to_s, {:link => true, :server_id => call["server_id"].to_i}) %></td>
+                    <td id="server_<%= call_id %>" align="right"><%= nice_server_from_data(call["server_id"].to_s, {:link => true, :server_id => call["server_id"].to_i}) %></td>
                 <% end %>
             <% end %>
             <% if @ma_active and not @chanspy_disabled %>
@@ -122,7 +122,7 @@
             <% end %>
             <% if session[:usertype] == "admin" or allow_manage_providers? %>
                 <% if !call["channel"].to_s.blank? %>
-                    <td id="hangup_<%= i %>" align="center"><%= link_to b_hangup, {:controller => "calls", :action => "active_call_soft_hangup", :channel => call["channel"].to_s, :server_id => call["server_id"].to_s}, :onclick => "if (confirm('#{_('are_you_sure')}')) { window.open(this.href,'new_window','height=50,width=200');return false;} else { return false }" if call["providers_owner_id"].to_i==current_user.id or call["common_use"].to_i == 1 %></td>
+                    <td id="hangup_<%= call_id %>" align="center"><%= link_to b_hangup, {:controller => "calls", :action => "active_call_soft_hangup", :channel => call["channel"].to_s, :server_id => call["server_id"].to_s}, :onclick => "if (confirm('#{_('are_you_sure')}')) { window.open(this.href,'new_window','height=50,width=200');return false;} else { return false }" if call["providers_owner_id"].to_i==current_user.id or call["common_use"].to_i == 1 %></td>
                 <% else %>
                     <td></td>
                 <% end %>
