@@ -107,3 +107,6 @@ This converts old paypal paymens this way:<br/>
     <br/>
     <%= submit_tag _('Change_Time_zone_to_all_users'), :onclick => "return confirm('#{_('Are_you_sure')}');", :confirm => _("Are you sure?"), :disable_with => _('Processing..') %>
 <% end %>
+
+<br/>
+<%= link_to b_edit + _('Default_currency'), :controller => :currencies, :action => 'change_default' %>

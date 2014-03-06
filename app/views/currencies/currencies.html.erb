@@ -40,4 +40,8 @@
 </table>
 <br/>
 <br/>
-<%= link_to b_edit + _('Default_currency'), :action => 'change_default' %>
+<% if Confline.get_value('unhide_default_currency_page', 0).to_i == 1%>
+    <%= link_to b_edit + _('Default_currency'), :action => 'change_default' %>
+<% else %>
+    <%= _('default_currency_is') + " #{session[:default_currency].to_s}" %>
+<% end %>
