@@ -39,6 +39,9 @@
 </tr>
 <!--Creata hacking attempt by going to /billing/callc/logout-->
 <!--Action log-->
+<!--...Verify values-->
+<!--Verify select time-->
+<!--Verify select time-->
 <!--...Verify that all search fields are being stored-->
 <tr>
 	<td>open</td>
@@ -165,7 +168,17 @@
 <!--Verify select time-->
 <tr>
 	<td>open</td>
-	<td>billing/stats/first_activity?date_from[year]=2006</td>
+	<td>/billing/stats/first_activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>date_from_year</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,7 +204,7 @@
 <!--pagination-->
 <tr>
 	<td>open</td>
-	<td>billing/functions/settings</td>
+	<td>/billing/functions/settings</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,7 +219,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/stats/first_activity</td>
+	<td>/billing/stats/first_activity</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +239,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/stats/first_activity?page=5</td>
+	<td>/billing/stats/first_activity?page=5</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +249,7 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>billing/stats/first_activity?page=-1</td>
+	<td>/billing/stats/first_activity?page=-1</td>
 	<td></td>
 </tr>
 <tr>
@@ -1200,7 +1213,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>duration_0</td>
+	<td>duration_2</td>
 	<td></td>
 </tr>
 <tr>
