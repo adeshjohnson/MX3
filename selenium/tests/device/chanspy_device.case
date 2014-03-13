@@ -53,6 +53,11 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/settings/conflines/set_infinity_for_hide_active_calls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/tests/device/active_call_accountant</td>
 	<td></td>
 </tr>
@@ -122,18 +127,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>ChanSpy Device:</td>
+	<td></td>
+</tr>
+<tr>
 	<td>selectWindow</td>
 	<td>null</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementPresent</td>
 	<td>id=user_spy_device_id</td>
-	<td>Not selected IAX2/101 IAX2/1002 IAX2/103 IAX2/104 SIP/1003</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>ChanSpy Device:</td>
 	<td></td>
 </tr>
 <tr>
