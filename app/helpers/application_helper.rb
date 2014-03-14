@@ -1451,16 +1451,16 @@ conf_name - name of confline that will be represented by checkbox.
     end
   end
 
-=begin 
-  Optional parameter `currency` should be supplied if you want to convert users credit 
-  to some particular currency. Note that currency is actualy currency name, not currency object 
-=end  
-  def nice_credit(user, currency=nil) 
+=begin
+  Optional parameter `currency` should be supplied if you want to convert users credit
+  to some particular currency. Note that currency is actualy currency name, not currency object
+=end
+  def nice_credit(user, currency=nil)
     if user.credit and user.postpaid?
-      if user.credit_unlimited?  
-        credit = _('Unlimited') 
-      else 
-        exchange_rate = currency ? Currency.count_exchange_rate(user.currency.name, currency) : 1 
+      if user.credit_unlimited?
+        credit = _('Unlimited')
+      else
+        exchange_rate = currency ? Currency.count_exchange_rate(user.currency.name, currency) : 1
         credit = nice_number(exchange_rate * user.credit)
       end
     else
@@ -1478,7 +1478,7 @@ conf_name - name of confline that will be represented by checkbox.
   def nice_user_tooltip(user)
     if user
       user_details = raw "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('LCR')}:</b> #{user.try(:lcr_name)}<br> <b>#{_('Credit')}:</b> #{nice_credit(user)}".html_safe
-      reseller_user_details = raw "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('Credit')}:</b> #{nice_credit(user)}".html_safe 
+      reseller_user_details = raw "<b>#{_('Tariff')}:</b> #{user.try(:tariff_name)} <br> <b>#{_('Credit')}:</b> #{nice_credit(user)}".html_safe
       user_details = reseller_user_details if current_user.usertype == "reseller" and Lcr.where(:id => user.lcr_id).first.user_id != current_user.id
       address_details = raw "<br> <b>#{_('Country')}:</b> #{user.try(:county)}<br> <b>#{_('City')}:</b> #{user.try(:city)}".html_safe
       tooltip('User details', (user_details + address_details).html_safe)
@@ -1581,8 +1581,8 @@ conf_name - name of confline that will be represented by checkbox.
   end
 
 
-  def spy_channel_icon(channel, id)
-    link_to image_tag('icons/sound.png', :title => _('Spy_Channel')), {:controller => "functions", :action => "spy_channel", :id => id, :channel => channel}, :onclick => "window.open(this.href,'new_window','height=40,width=300');return false;".html_safe
+  def spy_channel_icon(channel, id, active_call_id = nil)
+    link_to image_tag('icons/sound.png', :title => _('Spy_Channel'), :id => active_call_id), {:controller => "functions", :action => "spy_channel", :id => id, :channel => channel}, :onclick => "window.open(this.href,'new_window','height=40,width=300');return false;".html_safe
   end
 
   def nice_card(card)
