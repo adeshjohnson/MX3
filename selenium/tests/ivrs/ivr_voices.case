@@ -127,7 +127,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=path_141</td>
-	<td>test_Front_Left.wav</td>
+	<td>regexp:test_Front_Left\d*.wav</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -534,13 +534,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=data2_12</td>
-	<td>/home/mor/public/ivr_voices/test/${cepstralwav}</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=data2_13</td>
+	<td>assertTextPresent</td>
 	<td>/home/mor/public/ivr_voices/test/${cepstralmp}</td>
 </tr>
 <tr>
