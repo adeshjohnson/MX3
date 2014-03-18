@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>./basic.case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">./basic.case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<!--WARNING BALANCE-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details/0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>email1@yahoo.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_smtp_server</td>
+	<td>mg-smtp.kava.lt</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=email_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_from</td>
+	<td>no-reply@kolmisoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Settings saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=email_test_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Email sent</td>
+</tr>
+<!--1. *****************-->
+<!--email1-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>email5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_responsible_accountant_id</td>
+	<td>label=Test Accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_email</td>
+	<td>email4</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=warning_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user_warning_email_balance</td>
+	<td>-10.0000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>-10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Payment added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<!--0. *****************-->
+<!--no emails-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<!--CHECK EMAIL - dar neturi gauti, nes turi buti maziau uz -10-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Payment added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<!--CHECK EMAIL - turi gauti tik useris-->
+<!--2. *****************-->
+<!--email4-->
+<!--Pakilus ir nukritus, vėl turi visi gauti po 1 email. -->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>40</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Payment added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<!--CHECK EMAIL - niekas neturi gauti email-->
+<tr>
+	<td>open</td>
+	<td>/billing/payments/manual_payment?user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=amount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount</td>
+	<td>-40</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Payment added</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/hourly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Mission complete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<!--CHECK EMAIL - user turi gauti 1 email-->
+<!--3. *****************-->
+<!--email4-->
+<!--INVOICES-->
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=i8</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/accounting/generate_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_day</td>
+	<td>label=18</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_month</td>
+	<td>label=February</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_day</td>
+	<td>label=18</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_till_year</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice_type_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_id</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Invoices generated: 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=link_send_invoices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_period_start&quot;]</td>
+	<td>label=2009-02-18</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; select[name=&quot;s_period_end&quot;]</td>
+	<td>label=2015-02-18</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#invoices_details &gt; table.simple &gt; tbody &gt; tr &gt; td &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to send invoices by email?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Invoices sent: 1</td>
+</tr>
+<!--CHECK EMAIL - turejo ateiti invoisai-->
+<!--4. *****************-->
+<!-- email4-->
+<!--Templeitas-->
+<tr>
+	<td>open</td>
+	<td>/billing/emails/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_body</td>
+	<td>&lt;%= server_ip %&gt; - server IP where your users should register their SIP/IAX2 devices.<br />&lt;%= device_type %&gt; - shows the user's primary device type. (The device is set as the primary device after user registration).<br />&lt;%= device_username %&gt; - shows the user's primary device username. (The device is set as the primary device after user registration).<br />&lt;%= device_password %&gt; - shows the user's primary device password. (The device is set as the primary device after user registration).<br />&lt;%= login_url %&gt; - GUI login url.<br />&lt;%= login_username %&gt; - user's username to login to GUI.<br />&lt;%= username %&gt; - same as login_username.<br />&lt;%= first_name %&gt; - first name of the user.<br />&lt;%= last_name %&gt; - last name of the user.<br />&lt;%= full_name %&gt; - first name and last name of the user.<br />&lt;%= balance %&gt; - user's balance.<br />&lt;%= nice_balance %&gt; - formated user's balance.<br />&lt;%= warning_email_balance %&gt; - amount below which user should be warned with email.<br />&lt;%= nice_warning_email_balance %&gt; - formated amount below which user should be warned with email.<br />&lt;%= currency %&gt; - default system currency's short name (USD).<br />&lt;%= user_email %&gt; - user's email address.<br />&lt;%= company_email %&gt; - company email address.<br />&lt;%= email %&gt; - company email address.<br />&lt;%= company %&gt; - company title.<br />&lt;%= primary_device_pin %&gt; - PIN of user's default device. The fault device is created the moment the user registers, so this variable can be used universally.<br />&lt;%= calldate %&gt; - used only from api request email_send.<br />&lt;%= source %&gt; - used only from api request email_send.<br />&lt;%= destination %&gt; - used only from api request email_send.<br />&lt;%= billsec %&gt; - used only from api request email_send.<br />[edit]After registration<br />These variables are only available to email templates which are used to send emails after user's successful registration.<br />&lt;%= login_password %&gt; - user's password to login to GUI.<br />&lt;%= user_ip %&gt; - user's IP address.<br />[edit]Cyberplat payment report<br />&lt;%= currency %&gt; - payment currency.<br />&lt;%= amount %&gt; - payment amount.<br />&lt;%= date %&gt; - payment date.<br />&lt;%= auth_code %&gt; - authorization code.<br />&lt;%= transaction_id %&gt; - payment transaction ID provided by Cyberplat.<br />&lt;%= customer_name %&gt; - payment customer name provided by Cyberplat.<br />&lt;%= description %&gt; - payment details provided by Cyberplat.<br />[edit]Calling Card purchase<br />&lt;%= cc_purchase_details %&gt; - cards list (Number, Pin, Price).</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Email successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Email_go&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=to_be_sent_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Email sent</td>
+</tr>
+<!--CHECK EMAIL - turejo ateiti template su variables-->
+<!--5. *****************-->
+<!-- email4-->
+<!--API-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=allow_get_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_secret_key</td>
+	<td>321656546</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_registration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_allow_payments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_payment_confirmation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=api_disable_hash_checking</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/send_email?u=admin&amp;email_name=callerid_blocked&amp;user_id=2&amp;device_id=2&amp;caller_id=55555555&amp;date=2012-07-07&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=email_sending_status</td>
+	<td>Email sent</td>
+</tr>
+<!--CHECK EMAIL - turejo ateiti pranešimas-->
+<!--6. *****************-->
+<!--email1@yahoo.com-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/monthly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test_periodic_service 10.0000 -25.0000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<!--CHECK EMAIL - turejo ateiti pranešimas apie subscriptionus-->
+<!--7. *****************-->
+<!--email1@yahoo.com-->
+<!--registration_confirmation_for_user -->
+<tr>
+	<td>open</td>
+	<td>/billing/users/default_user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Default User saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>newuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>newuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password2</td>
+	<td>newuser1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=first_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=last_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>email2@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit_f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Registration successful</td>
+</tr>
+<!--CHECK EMAIL - turejo ateiti pranešimai apie registraciją-->
+<!--8.9. *****************-->
+<!--geriankava, email1-->
+<!--password reminder-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<!--password reminder-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=show_forgot_password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Forgot Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email_c</td>
+	<td>email2@gmail.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=click_commit</td>
+	<td></td>
+</tr>
+<!--CHECK EMAIL - turejo ateiti password-->
+<!--10. *****************-->
+<!--geriankava-->
+<!--TOTALS: -->
+<!--email1 (viso 4 emailai): 1 thank you for registering, 1 new user registered,  1 callerid blocked, 1 subscriptions report-->
+<!--email2@gmail.com (viso 2):1 thank you for registering, 1 password reminder-->
+<!--email4 (viso 4 emailai): 2 warning balance emailai, 1 no subject, 1 invoices-->
+</tbody></table>
+</body>
+</html>
