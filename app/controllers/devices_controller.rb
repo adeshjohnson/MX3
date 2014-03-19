@@ -1180,7 +1180,7 @@ class DevicesController < ApplicationController
                      joins("JOIN devices on (devices.id = callerids.device_id)").
                      joins("JOIN users on (users.id = devices.user_id)").
                      joins("LEFT JOIN ivrs on (ivrs.id = callerids.ivr_id)").
-                     where(["callerids.id > 0 " << cond << " AND users.id = devices.user_id and users.owner_id = ?", @current_user_id])
+                     where("callerids.id > 0 " << cond << " AND users.id = devices.user_id and users.owner_id = #{@current_user_id}")
 
 
     @users = User.where(:owner_id => @current_user_id).order("first_name ASC, last_name ASC")
