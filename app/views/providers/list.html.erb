@@ -60,7 +60,9 @@
     <th align="left"><%= nice_list_order('password', _('Password'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
     <th align="left"><%= nice_list_order('server_ip', _('Hostname') + "/" + _('Server_IP'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
     <th align="left"><%= nice_list_order('tariff', _('Tariff'), @options, {:s_hidden => @options[:s_hidden]}) %></th>
-    <th align="center"><%= _('Test') %></th>
+    <% if Confline.get_value("unhide_providers_test_icon").to_i == 1 %>
+      <th align="center"><%= _('Test') %></th>
+    <% end %>
     <th align="center"><%= _('Rules') %></th>
     <th align="center"><%= _('Calls') %></th>
     <th></th>
