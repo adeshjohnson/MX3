@@ -5,7 +5,7 @@
    end
 %>
 <% if defined?(provider) and !provider.new_record? %>
-    <% if Confline.get_value("unhide_providers_test_icon").to_i == 1 %>
+    <% if @unhide_providers_test_icon %>
         <<%= col %> id="test_<%= provider.id %>" align="center" <%= @n_class %>>
         <%= link_to(b_test, {:action => 'provider_test', :id => provider}, :onclick => "window.open(this.href,'new_window','height=200,width=400');return false;", :id => "test_link_"+provider.id.to_s) if provider.tech == "SIP" and provider.server_ip.to_s.length > 0 %>
         </<%= col %>>

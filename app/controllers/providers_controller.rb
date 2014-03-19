@@ -71,6 +71,8 @@ class ProvidersController < ApplicationController
     session[:providers_list_options] = @options
     session[:back] = params
     store_location
+
+    @unhide_providers_test_icon = (Confline.get_value("unhide_providers_test_icon").to_i == 1)
   end
 
   # in before filter : provider (find_provider)
