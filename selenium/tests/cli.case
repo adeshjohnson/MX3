@@ -1307,6 +1307,268 @@
 	<td>CLI was not created</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI must be numeric</td>
+	<td></td>
+</tr>
+<!--* validate CLI uniqueness on registration (phone)-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/signup_start/hfttv7bcqt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>cli_test11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password2</td>
+	<td>cli_test11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first_name</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last_name</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vat_number</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>client_id</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>address</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>state</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>county</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>city</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>postcode</td>
+	<td>cli_test1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>370006</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email</td>
+	<td>tes12341234t@kol23451g5misoft.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User with such phone number already exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>3700061</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mob_phone</td>
+	<td>37000688888</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User with such mobile phone number already exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>phone</td>
+	<td>3700061</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>mob_phone</td>
+	<td>37000688889</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fax</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User with such fax number already exists</td>
+	<td></td>
+</tr>
+<!--Check if unable to save empty CLI.-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>cli</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI was not created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=ssettings_menu53</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_cli</td>
+	<td>betkur ?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR. - ID: 20140319170209 - ActiveRecord::PreparedStatementInvalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_description</td>
+	<td>betkur ?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR. - ID: 20140319170209 - ActiveRecord::PreparedStatementInvalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=s_description</td>
+	<td>betkur ?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>INTERNAL ERROR. - ID: 20140319170209 - ActiveRecord::PreparedStatementInvalid</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>
