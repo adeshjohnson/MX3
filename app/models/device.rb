@@ -320,15 +320,28 @@ class Device < ActiveRecord::Base
 
   def create_codecs
     owner = self.user_id > 0 ? self.user.owner_id : 0
-    for codec in Codec.all
-      if Confline.get_value("Default_device_codec_#{codec.name}", owner).to_i == 1
+
+    # If device is fax always auto set ulaw and alaw. #9351
+    if self.device_type.to_s == 'FAX'
+      (0..1).each do | index |
         pc = Devicecodec.new
-        pc.codec_id = codec.id
+        pc.codec_id = index + 1
         pc.device_id = self.id
-        pc.priority = Confline.get_value2("Default_device_codec_#{codec.name}", owner).to_i
+        pc.priority = index
         pc.save
       end
+    else
+      for codec in Codec.all
+        if Confline.get_value("Default_device_codec_#{codec.name}", owner).to_i == 1
+          pc = Devicecodec.new
+          pc.codec_id = codec.id
+          pc.device_id = self.id
+          pc.priority = Confline.get_value2("Default_device_codec_#{codec.name}", owner).to_i
+          pc.save
+        end
+      end
     end
+
     self.update_codecs
   end
 
@@ -363,9 +376,14 @@ class Device < ActiveRecord::Base
 
   def update_codecs(ifsave = true)
     cl = []
-    self.codecs.each { |codec| cl << codec.name }
-    cl << "all" if cl.size.to_i == 0
-    self.allow = cl.join(';')
+    # If device is fax always auto set ulaw and alaw. #9351
+    if self.device_type.to_s == 'FAX'
+      self.allow = 'alaw;ulaw'
+    else
+      self.codecs.each { |codec| cl << codec.name }
+      cl << "all" if cl.size.to_i == 0
+      self.allow = cl.join(';')
+    end
     self.save if ifsave
   end
 
