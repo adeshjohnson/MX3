@@ -202,6 +202,62 @@
 	<td>id=codec_ulaw</td>
 	<td>on</td>
 </tr>
+<!--defoult device be codecu-->
+<tr>
+	<td>open</td>
+	<td>/billing/devices/default_device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_description</td>
+	<td>fax2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Device created</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/devices/default_device</td>
@@ -210,6 +266,11 @@
 <tr>
 	<td>click</td>
 	<td>id=device_device_type_FAX</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=codec_alaw</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,7 +377,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_alaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -336,7 +397,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>name=device[server_id]</td>
-	<td>ID: 30, IP: 127.0.0.3 (third serv)</td>
+	<td>ID: 1, IP: 127.0.0.1 (main system)</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -346,7 +407,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_alaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -421,7 +482,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -446,7 +507,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -709,28 +770,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=tr.row1 &gt; td</td>
-	<td>FAX/1007</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#fax_info_img_2 &gt; img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseOver</td>
-	<td>css=#fax_info_img_2 &gt; img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>File does not exist in a file system</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseOut</td>
-	<td>css=#fax_info_img_2 &gt; img</td>
+	<td>assertTextPresent</td>
+	<td>No data</td>
 	<td></td>
 </tr>
 </tbody></table>
