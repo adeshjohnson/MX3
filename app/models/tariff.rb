@@ -375,8 +375,8 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
             nice_number(con_fee, session).gsub(".", dec),
             r["increment_s"],
             r["min_time"],
-            r["start_time"].blank? ? '00:00:00' : r["start_time"].strftime('%H:%M:%S'),
-            r["end_time"].blank? ? '23:59:59' : r["end_time"].strftime('%H:%M:%S'),
+            r["start_time"].blank? ? '' : r["start_time"].strftime('%H:%M:%S'),
+            r["end_time"].blank? ? '' : r["end_time"].strftime('%H:%M:%S'),
             r["daytype"]
         ]
       end
