@@ -48,6 +48,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=fax_device_enabled</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
 	<td></td>
 </tr>
@@ -622,6 +632,52 @@
 <tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/tests/device/fax_device</td>
+	<td></td>
+</tr>
+<!--reikia patikrinti ar leidzia pasiekti nuoroda-->
+<tr>
+	<td>open</td>
+	<td>/billing/stats/faxes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/stats/faxes_list/3?fstatus=good')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Reseller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/faxes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/stats/faxes_list/0?fstatus=good')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>System Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/faxes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, '/billing/stats/faxes_list/5?fstatus=good')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User Resellers</td>
 	<td></td>
 </tr>
 <tr>
