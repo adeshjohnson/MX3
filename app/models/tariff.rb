@@ -375,8 +375,8 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
             nice_number(con_fee, session).gsub(".", dec),
             r["increment_s"],
             r["min_time"],
-            r["start_time"].strftime('%H:%M:%S'),
-            r["end_time"].strftime('%H:%M:%S'),
+            r["start_time"].blank? ? '00:00:00' : r["start_time"].strftime('%H:%M:%S'),
+            r["end_time"].blank? ? '23:59:59' : r["end_time"].strftime('%H:%M:%S'),
             r["daytype"]
         ]
       end
@@ -416,16 +416,16 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       a1, a2 = options[:time_from_hour].to_s + ":" + options[:time_from_minute].to_s + ":" + options[:time_from_second].to_s, options[:time_till_hour].to_s + ":" + options[:time_till_minute].to_s + ":" + options[:time_till_second].to_s
     end
     day_type = ["wd", "fd",].include?(options[:rate_day_type].to_s) ? options[:rate_day_type].to_s : ''
-    #In case new rate detail's time and daytype is identical to allready existing rate details it will 
+    #In case new rate detail's time and daytype is identical to allready existing rate details it will
     #be updated so we don't think it is a collision
     #In case new rate details time is WD and there already is FD there cannot be time collisions. and vice versa
-    #In all other cases we need to check for time colissions. Note bug that was originaly here - function does not 
+    #In all other cases we need to check for time colissions. Note bug that was originaly here - function does not
     #work if time wraps around e.g. period is between 23:00 and 01:00
-    #UPDATE mor has peculiar way to check for time collisions - if at least a minute is set for all days, no other 
+    #UPDATE mor has peculiar way to check for time collisions - if at least a minute is set for all days, no other
     #tariff detail can be set to fd/wd and vice versa
-    ratesd = Ratedetail.find(:all, :joins => "LEFT JOIN rates ON (ratedetails.rate_id = rates.id)", :conditions => ["rates.tariff_id = '#{id}' AND 
-      CASE 
-        WHEN daytype = '#{day_type}' AND start_time = '#{a1}' AND end_time = '#{a2}' THEN 0 
+    ratesd = Ratedetail.find(:all, :joins => "LEFT JOIN rates ON (ratedetails.rate_id = rates.id)", :conditions => ["rates.tariff_id = '#{id}' AND
+      CASE
+        WHEN daytype = '#{day_type}' AND start_time = '#{a1}' AND end_time = '#{a2}' THEN 0
         WHEN '#{day_type}' IN ('WD', 'FD') AND daytype IN ('WD', 'FD') AND daytype != '#{day_type}' THEN 0
         WHEN (daytype = '' AND '#{day_type}' != '') OR (daytype IN ('WD', 'FD') AND '#{day_type}' NOT IN ('WD', 'FD')) THEN 1
         ELSE ('#{a1}' BETWEEN start_time AND end_time) OR ('#{a2}' BETWEEN start_time AND end_time) OR (start_time BETWEEN '#{a1}' AND '#{a2}') OR (end_time BETWEEN '#{a1}' AND '#{a2}')
@@ -491,16 +491,16 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     end
 
     if ActiveRecord::Base.connection.tables.include?(name)
-    #ticket #5808 -> since now we dont check for time collisions, 
-    #just import anything if posible. else user will be notified 
-    #in the last step about rates that was not posible to import 
+    #ticket #5808 -> since now we dont check for time collisions,
+    #just import anything if posible. else user will be notified
+    #in the last step about rates that was not posible to import
     #due to time collision.
     day_type = ["wd", "fd",].include?(options[:imp_date_day_type].to_s) ? options[:imp_date_day_type].to_s : ''
-    start_time = options[:imp_time_from_type] 
+    start_time = options[:imp_time_from_type]
     end_time = options[:imp_time_till_type]
-    ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) JOIN rates ON (rates.destination_id = destinations.id) JOIN ratedetails ON (ratedetails.rate_id = rates.id) SET f_error = 1, nice_error = 15 WHERE rates.tariff_id = '#{id}' AND 
-      CASE 
-        WHEN daytype = '#{day_type}' AND start_time = '#{start_time}' AND end_time = '#{end_time}' THEN 0 
+    ActiveRecord::Base.connection.execute("UPDATE #{name} JOIN destinations ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) JOIN rates ON (rates.destination_id = destinations.id) JOIN ratedetails ON (ratedetails.rate_id = rates.id) SET f_error = 1, nice_error = 15 WHERE rates.tariff_id = '#{id}' AND
+      CASE
+        WHEN daytype = '#{day_type}' AND start_time = '#{start_time}' AND end_time = '#{end_time}' THEN 0
         WHEN '#{day_type}' IN ('WD', 'FD') AND daytype IN ('WD', 'FD') AND daytype != '#{day_type}' THEN 0
         WHEN (daytype = '' AND '#{day_type}' != '') OR (daytype IN ('WD', 'FD') AND '#{day_type}' NOT IN ('WD', 'FD')) THEN 1
         ELSE ('#{start_time}' BETWEEN start_time AND end_time) OR ('#{end_time}' BETWEEN start_time AND end_time) OR (start_time BETWEEN '#{start_time}' AND '#{end_time}') OR (end_time BETWEEN '#{start_time}' AND '#{end_time}')
@@ -529,7 +529,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE (destinations.subcode != replace(col_#{options[:imp_subcode]}, '\\r', '') OR (destinations.subcode IS NULL AND LENGTH(col_#{options[:imp_subcode]}) > 0 ) )")  if ActiveRecord::Base.connection.tables.include?(name)
     end
 
-    if options[:imp_update_directions].to_i == 1 
+    if options[:imp_update_directions].to_i == 1
       ActiveRecord::Base.connection.execute("UPDATE #{name} join directions on (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)SET ned_update = ned_update + 4 WHERE destinations.direction_code != directions.code")   if ActiveRecord::Base.connection.tables.include?(name)
     end
 
@@ -538,7 +538,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     arr[:destinations_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE f_error = 0 AND not_found_in_db = 1").to_i
     arr[:destinations_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
     arr[:subcodes_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
-    arr[:directions_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (4, 5, 6, 7)").to_i if options[:imp_update_directions].to_i == 1 
+    arr[:directions_to_update] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS d_all FROM #{name} WHERE ned_update IN (4, 5, 6, 7)").to_i if options[:imp_update_directions].to_i == 1
     arr[:new_rates_to_create] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) AS r_all FROM #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) LEFT join rates on (destinations.id = rates.destination_id and rates.tariff_id = #{id}) WHERE rates.id IS NULL").to_i + arr[:destinations_to_create].to_i
     arr[:new_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 1").to_i
     arr[:existing_destinations_in_csv_file] = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE not_found_in_db = 0 AND f_error = 0").to_i
@@ -640,9 +640,9 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     MorLog.my_debug("CSV update_destinations #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i
 
-    sql ="UPDATE destinations 
-         JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) 
-         SET name = replace(col_#{options[:imp_dst]}, '\\r', '') 
+    sql ="UPDATE destinations
+         JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
+         SET name = replace(col_#{options[:imp_dst]}, '\\r', '')
          WHERE ned_update IN (1, 3, 5, 7)"
     ActiveRecord::Base.connection.update(sql)
     CsvImportDb.log_swap('update_destinations_end')
@@ -654,9 +654,9 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     MorLog.my_debug("CSV update_destination_groups #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}").to_i
 
-    sql ="UPDATE destinations 
+    sql ="UPDATE destinations
          JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
-         JOIN destinationgroups ON destinationgroups.desttype = destinations.subcode AND flag = LOWER(direction_code) 
+         JOIN destinationgroups ON destinationgroups.desttype = destinations.subcode AND flag = LOWER(direction_code)
          SET destinations.destinationgroup_id = destinationgroups.id"
 
     ActiveRecord::Base.connection.update(sql)
@@ -669,7 +669,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     MorLog.my_debug("CSV update_subcodes #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (2, 3, 6, 7)").to_i
 
-    sql ="UPDATE destinations 
+    sql ="UPDATE destinations
          JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
          SET subcode = replace(col_#{options[:imp_subcode]}, '\\r', '')
          WHERE ned_update IN (2, 3, 6, 7)"
@@ -682,9 +682,9 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     CsvImportDb.log_swap('update_directions_start')
     MorLog.my_debug("CSV update_directions #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (4, 5, 6, 7)").to_i
-    
-    sql ="UPDATE destinations 
-         JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) 
+
+    sql ="UPDATE destinations
+         JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
          JOIN directions on directions.code = replace(col_#{options[:imp_cc]}, '\\r', '')
          SET destinations.direction_code = replace(col_#{options[:imp_cc]}, '\\r', '')
          WHERE ned_update IN (4, 5, 6, 7)"
@@ -742,7 +742,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
             SET ghost_min_perc = #{ghost_percent}
             WHERE destinations.id = rates.destination_id AND replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix AND rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0"
     ActiveRecord::Base.connection.update(sql)
-     
+
     sql = "UPDATE ratedetails, (SELECT rates.id AS nrate_id, #{name}.* FROM rates join destinations ON (destinations.id = rates.destination_id) JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) where rates.tariff_id = #{id} AND f_error = 0 AND not_found_in_db = 0) AS temp
             SET ratedetails.rate = replace(replace(replace(col_#{options[:imp_rate]}, '\\r', ''), '#{options[:dec]}', '.'), '$', ''),
                 ratedetails.connection_fee = #{conection_fee},
@@ -825,10 +825,10 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
       s << s1
       ss << col
     }
-    #ticket #4845. im not joining ratedetails based only on rate_id table cause it might return more than 
+    #ticket #4845. im not joining ratedetails based only on rate_id table cause it might return more than
     #1 row for each rate and in that case multiple new rates might be imported. Instead im joining on rate_id,
     #daytype, start/end time to exclude rate details that has to be updated, not inserted as new.
-    #Note that i'm relying 100% that checks were made to ensure that after inserting new ratedetails there cannot 
+    #Note that i'm relying 100% that checks were made to ensure that after inserting new ratedetails there cannot
     #be any duplications,  we should pray for that.
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name}
     join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
