@@ -834,6 +834,11 @@ module ApplicationHelper
     link_to nice_device(device), :controller => "devices", :action => "user_device_edit", :id => device.id
   end
 
+  def link_nice_user_by_id(user_id)
+    user = User.where(:id => user_id).first
+    link_nice_user(user)
+  end
+
   def link_nice_device(device)
     if device.user_id != -1
       raw link_to nice_device(device).html_safe, :controller => "devices", :action => "device_edit", :id => device.id

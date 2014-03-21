@@ -22,11 +22,7 @@
   <% @res.each_with_index { |r, i| %>
       <tr class="row<%= (i % 2 + 1).to_s %>">
         <td id="row_<%= i %>_user" align="left">
-          <% if r["first_name"].length + r["last_name"].length > 0 %>
-              <%= h r["first_name"] %> <%= h r["last_name"] %>
-          <% else %>
-              <%= h r["username"] %>
-          <% end %>
+          <%= link_nice_user_by_id(r['id']) %> 
         </td>
         <% if can_see_finances? %>
             <td id="row_<%= i %>_balance" align="right"><%= nice_number @curr_balance[(r["id"]).to_i] %> </td>
