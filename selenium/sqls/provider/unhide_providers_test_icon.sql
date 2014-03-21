@@ -1,0 +1,1 @@
+INSERT INTO `conflines` (`name`, `value`) VALUES ('unhide_providers_test_icon', 1);
