@@ -2293,9 +2293,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_icon = "printer.png"
     change_date
     if session[:usertype] == "admin"
-      @users = User.find(:all, :conditions => "hidden = 0", :order => "username ASC ")
+      @users = User.find(:all, :conditions => "hidden = 0 AND usertype = 'user'", :order => "username ASC ")
     else
-      @users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ?", correct_owner_id], :order => "username ASC ")
+      @users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ? AND usertype = 'user'", correct_owner_id], :order => "username ASC ")
     end
 
     @search = 0
@@ -2532,6 +2532,12 @@ LEFT JOIN directions ON (directions.code = destinations.direction_code)
 in before filter : user (:find_user_from_id_or_session, :authorize_user)
 =end
   def missed_calls
+
+    selected_user = User.where(id: params[:id]).first
+    unless selected_user.try(:is_user?)
+      dont_be_so_smart
+      redirect_to :root and return false
+    end
 
     change_date
 
