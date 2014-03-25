@@ -2350,12 +2350,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_icon = "printer.png"
     change_date
 
-    selected_user = User.where(id: params[:id]).first
-    unless selected_user.try(:is_user?)
-      dont_be_so_smart
-      redirect_to :root and return false
-    end
-
     if session[:usertype] == "admin"
       @user = User.find(:first, :conditions => ["id = ?", params[:id].to_i])
       if params[:id].to_i >= 0 and @user == nil
