@@ -2350,7 +2350,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_icon = "printer.png"
     change_date
 
-    if session[:usertype] == "admin"
+    if ['admin', 'accountant'].include?(session[:usertype])
       @user = User.find(:first, :conditions => ["id = ?", params[:id].to_i])
       if params[:id].to_i >= 0 and @user == nil
         flash[:notice] = _('User_not_found')

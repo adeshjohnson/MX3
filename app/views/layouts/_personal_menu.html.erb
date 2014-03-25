@@ -37,9 +37,9 @@
     <%# if !current_user.reseller_allow_providers_tariff? or ad_active? %>
     personal_menu.add(16, 0, '<%= _('Various') %>');
     <%# end %>
-    <%if !current_user.is_reseller? %> 
-      personal_menu.add(17,16,'<%= _('DIDs') %>','<%= Web_Dir %>/dids/personal_dids'); 
-    <%end%> 
+    <%if !current_user.is_reseller? %>
+      personal_menu.add(17,16,'<%= _('DIDs') %>','<%= Web_Dir %>/dids/personal_dids');
+    <%end%>
     personal_menu.add(18, 16, '<%= _('CLIs') %>', '<%= Web_Dir %>/devices/user_device_clis');
     <%if !current_user.reseller_allow_providers_tariff?%>
     personal_menu.add(19, 16, '<%= _('PhoneBook') %>', '<%= Web_Dir %>/phonebooks/list');
@@ -47,7 +47,7 @@
     personal_menu.add(20, 16, '<%= _('Quick_Forwards') %>', '<%= Web_Dir %>/dids/quickforwarddids');
     <% if !current_user.reseller_allow_providers_tariff? or ad_active? %>
     <% if session[:fax_device_enabled]%>
-    personal_menu.add(<%= i %>, <%= ii%>, '<%= _('Faxes') %>', '<%= Web_Dir %>/stats/faxes_list/<%= session[:user_id]%>');
+    personal_menu.add(<%= i %>, <%= ii%>, '<%= _('Faxes') %>', '<%= Web_Dir %>/stats/faxes');
     <% i += 1 %>
     <% end %>
 
