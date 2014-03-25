@@ -47,7 +47,7 @@
     personal_menu.add(20, 16, '<%= _('Quick_Forwards') %>', '<%= Web_Dir %>/dids/quickforwarddids');
     <% if !current_user.reseller_allow_providers_tariff? or ad_active? %>
     <% if session[:fax_device_enabled]%>
-    personal_menu.add(<%= i %>, <%= ii%>, '<%= _('Faxes') %>', '<%= Web_Dir %>/stats/faxes');
+    personal_menu.add(<%= i %>, <%= ii%>, '<%= _('Faxes') %>', '<%= Web_Dir %>/stats/faxes_list/<%= session[:user_id] %>');
     <% i += 1 %>
     <% end %>
 

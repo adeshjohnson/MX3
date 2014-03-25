@@ -2293,7 +2293,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_icon = "printer.png"
     change_date
     if session[:usertype] == "admin"
-      @users = User.find(:all, :conditions => "hidden = 0 AND usertype = 'user'", :order => "username ASC ")
+      @users = User.find(:all, :conditions => "hidden = 0", :order => "username ASC ")
     else
       @users = User.find(:all, :conditions => ["hidden = 0 AND owner_id = ? AND usertype = 'user'", correct_owner_id], :order => "username ASC ")
     end
