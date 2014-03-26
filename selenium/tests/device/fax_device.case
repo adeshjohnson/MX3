@@ -97,35 +97,41 @@
 	<td>label=ID: 20, IP: 127.0.0.2 (second serv)</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>id=dev_ind_0</td>
+	<td>G.711 A-law</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=dev_ind_1</td>
+	<td>G.711 u-law</td>
+</tr>
+<!--pasirinkus fax, codekai jau parinkti ir needitinami-->
+<tr>
 	<td>assertValue</td>
 	<td>id=codec_alaw</td>
 	<td>on</td>
 </tr>
-<!--<tr> 	<td>assertValue</td> 	<td>id=codec_ulaw</td> 	<td>on</td> </tr>-->
 <tr>
-	<td>uncheck</td>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
 	<td>id=codec_ulaw</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>assertNotEditable</td>
+	<td>id=codec_alaw</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>assertValue</td> 	<td>id=codec_ulaw</td> 	<td>on</td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/device_edit/31</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>name=device[server_id]</td>
-	<td>ID: 20, IP: 127.0.0.2 (second serv)</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -140,17 +146,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>uncheck</td>
-	<td>id=codec_alaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=codec_ulaw</td>
-	<td></td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
@@ -167,52 +163,7 @@
 	<td>Device's settings updated</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/31</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=codec_alaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/31</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
-	<td>on</td>
-</tr>
-<!--defoult device be codecu-->
+<!--defoult device sip bet kruiamas fax, turi likti abu codekai -->
 <tr>
 	<td>open</td>
 	<td>/billing/devices/default_device</td>
@@ -269,6 +220,17 @@
 	<td>on</td>
 </tr>
 <tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<!--defoult device fax-->
+<tr>
 	<td>open</td>
 	<td>/billing/devices/default_device</td>
 	<td></td>
@@ -286,6 +248,16 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_alaw</td>
 	<td></td>
 </tr>
 <tr>
@@ -308,22 +280,17 @@
 	<td>id=codec_alaw</td>
 	<td>on</td>
 </tr>
-<!--<tr> 	<td>assertValue</td> 	<td>id=codec[ulaw]</td> 	<td>on</td> </tr>-->
 <tr>
-	<td>check</td>
+	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>uncheck</td>
-	<td>id=codec_alaw</td>
-	<td></td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
 </tr>
+<!--<tr> 	<td>assertValue</td> 	<td>id=codec[ulaw]</td> 	<td>on</td> </tr>-->
 <tr>
 	<td>assertTextPresent</td>
 	<td>Settings saved</td>
@@ -390,6 +357,16 @@
 	<td>on</td>
 </tr>
 <tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -427,41 +404,11 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_alaw</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
 	<td>on</td>
 </tr>
 <tr>
-	<td>uncheck</td>
-	<td>id=codec_ulaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=codec_alaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -525,6 +472,16 @@
 	<td>on</td>
 </tr>
 <tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_alaw</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/devices/default_device</td>
 	<td></td>
@@ -537,96 +494,6 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=codec_ulaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=codec_alaw</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/new?return_to_action=list&amp;return_to_controller=users&amp;user_id=2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=device_device_type_FAX</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=device_description</td>
-	<td>FAX_device2</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device created</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Device's settings updated</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/34</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
 	<td>on</td>
 </tr>
 <tr>
@@ -717,7 +584,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//a[contains(text(),'5')])[2]</td>
+	<td>xpath=(//a[contains(@href, '/billing/stats/faxes_list/2')])[4]</td>
 	<td></td>
 </tr>
 <tr>
@@ -851,13 +718,13 @@
 	<td>label=January</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
+	<td>assertTextPresent</td>
+	<td>FAX/1007 </td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>No data</td>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
 <tr>

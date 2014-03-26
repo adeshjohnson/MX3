@@ -155,7 +155,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>uncheck</td>
@@ -185,17 +185,12 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_alaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
 	<td>on</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=codec_alaw</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -206,21 +201,6 @@
 	<td>assertTextPresent</td>
 	<td>Device's settings updated</td>
 	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/devices/device_edit/31</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_alaw</td>
-	<td>on</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>id=codec_ulaw</td>
-	<td>on</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -235,6 +215,26 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_alaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=codec_ulaw</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_ulaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>id=codec_alaw</td>
 	<td></td>
 </tr>
 <tr>
@@ -372,7 +372,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_alaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -380,12 +380,12 @@
 	<td>on</td>
 </tr>
 <tr>
-	<td>uncheck</td>
+	<td>assertNotEditable</td>
 	<td>id=codec_ulaw</td>
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
+	<td>assertNotEditable</td>
 	<td>id=codec_alaw</td>
 	<td></td>
 </tr>
@@ -402,7 +402,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -482,7 +482,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=codec_ulaw</td>
-	<td>off</td>
+	<td>on</td>
 </tr>
 <tr>
 	<td>check</td>
