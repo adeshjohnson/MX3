@@ -17,14 +17,14 @@
       <% if @device_type == "FAX" %>
           <tr>
             <td>
-              <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @audio_codecs[0, 2], :ctype => "audio"} %>
+              <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @audio_codecs[0, 2], :ctype => "audio", :device_type => @device_type} %>
               <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller => :devices, :ctype => "audio", :action => :devicecodecs_sort, :id => params[:action] != 'default_device' ? @device.id : -1}) %>
             </td>
           </tr>
       <% else %>
           <tr>
             <td>
-              <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @audio_codecs, :ctype => "audio"} %>
+              <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @audio_codecs, :ctype => "audio", :device_type => @device_type} %>
               <%= sortable_element('audio_sortable_list', :tag => 'li', :update => 'audio_items', :url => {:controller => :devices, :ctype => "audio", :action => :devicecodecs_sort, :id => params[:action] != 'default_device' ? @device.id : -1}) %>
             </td>
           </tr>
@@ -41,7 +41,7 @@
           </tr>
           <tr>
             <td>
-              <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @video_codecs, :ctype => "video"} %>
+              <%= render :partial => "/devices/device_codecs", :locals => {:device => @device, :codecs => @video_codecs, :ctype => "video", :device_type => @device_type} %>
               <%= sortable_element('video_sortable_list', :tag => 'li', :update => 'video_items', :url => {:controller => :devices, :ctype => "video", :action => :devicecodecs_sort, :id => params[:action] != 'default_device' ? @device.id : -1}) %>
             </td>
           </tr>
