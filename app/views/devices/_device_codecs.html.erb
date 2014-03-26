@@ -21,7 +21,8 @@
   <% end %>
 </ul>
 
-<%= hidden_field_tag 'codec[ulaw]', '1' %>
-<%= hidden_field_tag 'codec[alaw]', '1' %>
-
+<% if device_type == 'FAX' %>
+  <%= hidden_field_tag 'codec[ulaw]', '1' %>
+  <%= hidden_field_tag 'codec[alaw]', '1' %>
+<% end %>
 
