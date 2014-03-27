@@ -43,14 +43,12 @@
     </div>
 <% end %>
 
-<% if @total_pages > 1 %>
-    <br/>
-    <%= raw render :partial => "page_select_header" %>
-<% end %>
-<br/>
-
 <%= b_info %> <%= _('Activation_start') + " and " + _('Activation_end') + " " + _('values_in_system_time_zone') %>: <%= nice_system_time_string %>
 <br/><br/>
+
+<% if @total_pages > 1 %>
+    <%= page_select_header(@page, @total_pages, {st: @st, until_canceled: @until_canceled, search_memo: @search_memo, search_service: @search_service, search_user: @search_user, search_device: @search_device }) %>
+<% end %>
 
 <table width="100%" class="maintable">
   <tr>
@@ -88,3 +86,8 @@
       </tr>
   <% } %>
 </table>
+
+<% if @total_pages > 1 %>
+    <br/>
+    <%= page_select_header(@page, @total_pages, {st: @st, until_canceled: @until_canceled, search_memo: @search_memo, search_service: @search_service, search_user: @search_user, search_device: @search_device }) %>
+<% end %>
