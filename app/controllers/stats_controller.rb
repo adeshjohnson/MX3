@@ -325,9 +325,8 @@ class StatsController < ApplicationController
 
   end
 
-=begin
-in before filter : user (:find_user_from_id_or_session, :authorize_user)
-=end
+
+# in before filter : user (:find_user_from_id_or_session, :authorize_user)
   def reseller_all_user_stats
 
     unless session[:usertype] == 'reseller'
@@ -932,9 +931,8 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     redirect_to :controller => "stats", :action => "call_list", :id => @user.id, :call_type => @call_type, :date_from_link => @date_from, :date_till_link => @date_till, :direction => "outgoing" #and return false
   end
 
-=begin
-in before filter : user (:find_user_from_id_or_session)
-=end
+
+# in before filter : user (:find_user_from_id_or_session)
   def last_calls_stats
     @page_title = _('Last_calls')
     @page_icon = "call.png"
@@ -1030,9 +1028,7 @@ in before filter : user (:find_user_from_id_or_session)
     redirect_to :controller => :callc, :action => :main and return false
   end
 
-=begin
-in before filter : user (:find_user_from_id_or_session, :authorize_user)
-=end
+# in before filter : user (:find_user_from_id_or_session, :authorize_user)
   def last_calls
     redirect_to :action => "last_calls_stats"
   end

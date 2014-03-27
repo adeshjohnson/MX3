@@ -342,12 +342,12 @@ class AccountingController < ApplicationController
       total_subscriptions = 0
       total_subscriptions = subscriptions.size if subscriptions
       MorLog.my_debug("  Total subscriptions this period: #{total_subscriptions}", 1)
-      
-      # check whether the user registered during the invoice generation period 
-      reg_during_period = user.registered_during_period(@period_end) 
+
+      # check whether the user registered during the invoice generation period
+      reg_during_period = user.registered_during_period(@period_end)
 
       # -- Minimal charge -----
-      # Minimal charge is counted for whole month(s), but only for postpaid users. To get a 
+      # Minimal charge is counted for whole month(s), but only for postpaid users. To get a
       # better understang of what is a 'whole month' look at month_difference method
       minimal_charge_amount = 0
       if user.postpaid?
@@ -610,10 +610,10 @@ class AccountingController < ApplicationController
       MorLog.my_debug("subscriptions end", 1)
       total_subscriptions = 0
       total_subscriptions = subscriptions.size if subscriptions
-      
-      # check whether the user registered during the invoice generation period 
+
+      # check whether the user registered during the invoice generation period
       reg_during_period = user.registered_during_period(@period_end)
-      
+
       if ((outgoing_calls_price > 0) or
         (outgoing_calls_by_users_price + incoming_calls_by_users_price > 0) or
         (incoming_received_calls_price > 0) or
@@ -1004,10 +1004,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[0] != 2) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
-      dont_be_so_smart
+    status = (@i[0] == 2)
+
+    if not_authorized_generate_pdf_or_csv(user, status)
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => :callc, :action => :main and return false
     end
+
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
@@ -1046,10 +1049,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[2] != 8) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
-      dont_be_so_smart
+    status = (@i[2] == 8)
+
+    if not_authorized_generate_pdf_or_csv(user, status)
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => :callc, :action => :main and return false
     end
+
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
 
     # Hide from prepaid manual payments
@@ -1060,7 +1066,7 @@ class AccountingController < ApplicationController
 
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
-    show_avg_rate = 1 
+    show_avg_rate = 1
     pdf, arr_t = invoice.generate_invoice_detailed_pdf(current_user, dc, ex, nice_invoice_number_digits(type), session[:change_decimal], session[:global_decimal], show_avg_rate, params[:test].to_i == 1)
 
     if params[:email_or_not]
@@ -1108,10 +1114,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[4] != 32) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
-      dont_be_so_smart
+    status = (@i[4] == 32)
+
+    if not_authorized_generate_pdf_or_csv(user, status)
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => :callc, :action => :main and return false
     end
+
     type = (user.postpaid.to_i == 1 or invoice.user.owner_id != 0) ? "postpaid" : "prepaid"
 
     # Hide from prepaid manual payments
@@ -1182,10 +1191,13 @@ class AccountingController < ApplicationController
 
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[1] != 4) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
-      dont_be_so_smart
+    status = (@i[1] == 4)
+
+    if not_authorized_generate_pdf_or_csv(user, status)
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => :callc, :action => :main and return false
     end
+
     sep, dec = user.csv_params
     nice_number_hash  = {:change_decimal => session[:change_decimal], :global_decimal => session[:global_decimal]}
 
@@ -1224,8 +1236,10 @@ class AccountingController < ApplicationController
     idetails = invoice.invoicedetails
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[3] != 16) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
-      dont_be_so_smart
+    status = (@i[3] == 16)
+
+    if not_authorized_generate_pdf_or_csv(user, status)
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1526,8 +1540,10 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     dc = current_user.currency.name
     user = invoice.user
     @i = user.get_invoices_status
-    if (@i[6] != 128) and ["user", "reseller"].include?(user.usertype) and !["admin", "accountant"].include?(session[:usertype]) and (user.owner_id != session[:user_id])
-      dont_be_so_smart
+    status = (@i[6] == 128)
+
+    if not_authorized_generate_pdf_or_csv(user, status)
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1660,7 +1676,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     end
 
     #invoces do not have price with vat calculated so this method returns information
-    #abount paid and unpaid invoices, we just have to convert currency FROM USER 
+    #abount paid and unpaid invoices, we just have to convert currency FROM USER
     #CURRENCY TO USER'S SELECTED CURRENCY
     @paid_invoice, @unpaid_invoice = Invoice.financial_statements(owner_id, @user_id, @status, @issue_from_date, @issue_till_date, ordinary_user)
     @paid_invoice.price = @paid_invoice.price.to_d * count_exchange_rate(current_user.currency.name, session[:show_currency])
@@ -1671,10 +1687,20 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     #there is no need to convert to user currency because method does it by itself
     @paid_payment, @unpaid_payment = Payment.financial_statements(owner_id, @user_id, @status, @issue_from_date, @issue_till_date, ordinary_user, session[:show_currency])
 
-    #TODO rename to session options 
+    #TODO rename to session options
     session[:accounting_statement_options] = @options
   end
 
+  def not_authorized_generate_pdf_or_csv(user, status)
+    return (
+       # its user and he has permission to generate this pdf/csv
+       !(((user.id == session[:user_id]) && status) ||
+        # its users owner
+       (user.owner_id == session[:user_id]) ||
+       # its accountant and pdf/csv belongs to admins user
+       (accountant? && (user.owner_id == 0)))
+      )
+  end
 
   private
 
@@ -1682,7 +1708,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   Based on what params user selected or if they were not passed based on params saved in session
   return user_id, that should be filtered for financial statements. if user passed clear as param
   return nil
-  
+
   *Params*
   +session_options+ hash including :user_id, might be nil
 
@@ -1724,7 +1750,7 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 =begin
   convert prices in statements from default system currency to
   currency that is set in session
- 
+
   *Params*
   +statement+ iterable of financial stement data(they rices should be in system currency)
 
@@ -1744,11 +1770,11 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   financial data returned by invoice, credit notes or payments may lack some information,
   this method's purpose is to retrieve information from part of financial statement(let's
   say financial stetement is devided in three parts: credit note, invoice and payments) about
-  paid/unpaid financial data. if there is no such data return default, default meaning that 
+  paid/unpaid financial data. if there is no such data return default, default meaning that
   there is no paid/unpaid part, so it's count and price is 0.
   TODO should rename valiable names, cause they dont make much sense. maybe event method name
   should be renamed
-  Note that price and price including taxes will be converted from default system currency to 
+  Note that price and price including taxes will be converted from default system currency to
   user selected
 
   *Params*
@@ -1843,9 +1869,6 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
 
     return incoming_received_calls, incoming_received_calls_price, incoming_made_calls, incoming_made_calls_price, outgoing_calls_price, outgoing_calls_by_users_price, outgoing_calls, outgoing_calls_price, outgoing_calls_by_users, incoming_calls_by_users, incoming_calls_by_users_price, outgoing_calls_to_dids, outgoing_calls_price_to_dids
   end
-
-#  def calls_to_invoice()
-#  end
 
   def regenerate_invoice_price(invoice)
 
@@ -1988,25 +2011,25 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
           end_date = use_end.to_date
           days_used = use_end.to_date - use_start.to_date
 
-          if service.periodtype == 'day' 
+          if service.periodtype == 'day'
             invd_price = service.price * (days_used.to_i + 1)
-          elsif service.periodtype == 'month' 
-            if start_date.month == end_date.month and start_date.year == end_date.year 
+          elsif service.periodtype == 'month'
+            if start_date.month == end_date.month and start_date.year == end_date.year
               total_days = start_date.to_time.end_of_month.day.to_i
               invd_price = service.price / total_days * (days_used.to_i + 1)
-            else 
-              invd_price = 0 
-              if months_between(start_date, end_date) > 1 
-                # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu 
-                invd_price += (months_between(start_date, end_date)-1) * service.price 
-              end 
-              #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas 
-              last_day_of_month = start_date.to_time.end_of_month.to_date 
+            else
+              invd_price = 0
+              if months_between(start_date, end_date) > 1
+                # jei daugiau nei 1 menuo. Tarpe yra sveiku menesiu kuriem nereikia papildomai skaiciuoti intervalu
+                invd_price += (months_between(start_date, end_date)-1) * service.price
+              end
+              #suskaiciuojam pirmo menesio pabaigos ir antro menesio pradzios datas
+              last_day_of_month = start_date.to_time.end_of_month.to_date
               last_day_of_month2 = end_date.to_time.end_of_month.to_date
               if (start_date.day - end_date.day) == 1
                 invd_price += service.price
               else
-                invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i 
+                invd_price += service.price/last_day_of_month.day * (last_day_of_month - start_date+1).to_i
                 invd_price += service.price/last_day_of_month2.day * (end_date.day)
               end
             end
