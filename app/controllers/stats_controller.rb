@@ -2472,7 +2472,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     LEFT JOIN dids ON (activecalls.did_id = dids.id)
     LEFT JOIN (SELECT * FROM (SELECT dids.did, destinations.direction_code FROM  dids
                   JOIN destinations on (prefix=SUBSTRING(dids.did, 1, LENGTH(prefix)))
-                  WHERE dids.id IN (SELECT did_id FROM activecalls)
+                  JOIN activecalls ON (dids.id = activecalls.did_id)
                   ORDER BY LENGTH(destinations.prefix) DESC) AS v
                   GROUP BY did) AS g ON (g.did = dids.did)
     #{user_sql}
