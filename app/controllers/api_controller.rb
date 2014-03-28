@@ -1400,18 +1400,18 @@ class ApiController < ApplicationController
   end
 
   def user_calls_get
-
     allow, values =MorApi.check_params_with_all_keys(params, request)
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
-    if allow == true
 
+    if allow == true
       username = params[:u].to_s
       password = params[:p].to_s
-
       @user_logged = check_user(username, password)
+
       if @user_logged
         @options = last_calls_stats_parse_params
+
         if @user_logged.usertype.to_s == "user"
           user = @user_logged
           device = Device.where(:id => @options[:s_device]).first if @options[:s_device] != "all" and !@options[:s_device].blank?
@@ -1421,6 +1421,7 @@ class ApiController < ApplicationController
           user = User.where(:id => @options[:s_user], :owner_id => @user_logged.id).first if @options[:s_user] =~ /^[0-9]+$/
           user = @user_logged if @options[:s_user].to_i == @user_logged.id.to_i
           device = Device.where(:id => @options[:s_device]).first if @options[:s_device] != "all" and !@options[:s_device].blank?
+
           if Confline.get_value('Show_HGC_for_Resellers').to_i == 1
             hgc = Hangupcausecode.where(:id => @options[:s_hgc]).first if @options[:s_hgc].to_i > 0
           end
@@ -1428,6 +1429,7 @@ class ApiController < ApplicationController
           if @user_logged.reseller_allow_providers_tariff?
             if @options[:s_provider].to_i > 0
               provider = Provider.where(:id => @options[:s_provider]).first
+
               unless provider
                 provider = nil
               end
@@ -1435,7 +1437,6 @@ class ApiController < ApplicationController
           else
             provider = nil
           end
-
         end
 
         if ["admin", "accountant"].include?(@user_logged.usertype.to_s)
@@ -1447,7 +1448,6 @@ class ApiController < ApplicationController
         end
 
         if user or @options[:s_user] == "all"
-
           @options[:from] = values[:period_start] ? Time.at(values[:period_start]).to_s(:db) : Time.mktime(Time.now.year, Time.now.month, Time.now.day, 0, 0, 0).to_s(:db)
           @options[:till] = values[:period_end] ? Time.at(values[:period_end]).to_s(:db) : Time.mktime(Time.now.year, Time.now.month, Time.now.day, 23, 59, 59).to_s(:db)
           @options[:exchange_rate] = 1 #exchange_rate
@@ -1455,7 +1455,6 @@ class ApiController < ApplicationController
           options[:current_user] = @user_logged
 
           calls, test_content = Call.last_calls_csv(options.merge({:pdf => 1, :api => 1}))
-
 
           doc.page {
             doc.pagename("Calls")
@@ -1477,16 +1476,16 @@ class ApiController < ApplicationController
               doc.show_hgc(((@options[:s_hgc].to_i > 0) ? @options[:s_hgc].to_i : 'all')) if !@options[:s_hgc].blank?
               doc.show_did(@options[:s_did]) if !@options[:s_did].blank?
               doc.show_destination(@options[:s_destination]) if !@options[:s_destination].blank?
+
               if calls and calls.size.to_i > 0
                 doc.calls {
-                  for call in calls
+                  calls.each do |call|
                     doc.call {
                       call.attributes.sort.each { |key, value|
                         case key.to_s
                           when 'calldate2'
                             doc.tag!(key, nice_date_time(value, 0))
-                            Time.zone = Rails.configuration.time_zone
-                            doc.timezone(Time.zone)
+                            doc.timezone(Time.now.strftime("GMT %:z"))
                           when 'dst'
                             doc.tag!(key, hide_dst_for_user(@user_logged, "gui", value))
                           else
@@ -1513,14 +1512,9 @@ class ApiController < ApplicationController
     send_xml_data(out_string, params[:test].to_i)
   end
 
-=begin rdoc
-*Post*/*Get* *params*:
-* monitoring_id - monitoring id
-* users - user id list separated by commas
-* email - true/false send or do not send emails
-* block - true/false block ar do not block users
-=end
-
+  # users - user id list separated by commas
+  # email - true/false send or do not send emails
+  # block - true/false block ar do not block users
   def ma_activate
     doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
     users = []
@@ -4170,9 +4164,8 @@ class ApiController < ApplicationController
     return @user
   end
 
-=begin
- Log method. Used for all API requests.
-=end
+
+ # Log method. Used for all API requests.
   def log_access
     MorLog.my_debug(" ********************** API ACCESS : #{params[:action]} **********************", 1)
     MorLog.my_debug request.url.to_s
