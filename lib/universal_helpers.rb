@@ -152,8 +152,8 @@ module UniversalHelpers
     ((amount.to_f * 100).ceil.to_f / 100)
   end
 
-  def format_money(amount, currency = nil)
-    [sprintf("%.2f", round_to_cents(amount.to_f)), currency].compact.join(" ")
+  def format_money(amount, currency = nil, decimal_digits = 2)
+    [sprintf("%0.#{decimal_digits}f", round_to_cents(amount.to_d)), currency].compact.join(" ")
   end
 
   def page_select_header(page, total_pages, page_select_params = {}, options = {}, return_type = "table")

@@ -238,7 +238,7 @@ class CallshopController < ApplicationController
         invoices = @invoices.map { |invoice|
           {:id => invoice.id,
            :issue_date => invoice.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-           :amount => format_money(invoice.balance, @currency),
+           :amount => format_money(invoice.balance, @currency, session[:nice_number_digits]),
            :status => invoice_state(invoice),
            :comment => invoice.comment,
            :user_type => invoice.invoice_type}
