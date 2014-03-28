@@ -85,7 +85,7 @@ class FunctionsController < ApplicationController
 
         src_channel = "Local/#{src}@mor_cb_src/n"
 
-        extension = @channel.split('-')[0]
+        extension = @channel
 
         @spy_device = nice_device(device)
 
