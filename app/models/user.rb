@@ -1761,13 +1761,10 @@ class User < ActiveRecord::Base
     invoice = send_invoice_types
 
     if (invoice % 2) ==1
-      if prepaid?
-        prepaid = "Prepaid_"
-      else
-        prepaid= ""
-      end
+      prepaid = prepaid? ? 'Prepaid_' : ''
       invoice = Confline.get_value("#{prepaid}Invoice_default").to_i
     end
+
     invoice >= 256 ? i8= 256 : i8=0
     invoice = invoice - i8
     invoice >= 128 ? i7= 128 : i7=0

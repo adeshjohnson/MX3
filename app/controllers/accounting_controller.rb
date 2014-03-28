@@ -995,19 +995,18 @@ class AccountingController < ApplicationController
 
   def generate_invoice_pdf
     invoice = Invoice.includes([:tax, :user, :invoicedetails]).where({:id => params[:id]}).first
-    idetails = invoice.invoicedetails if invoice
 
     unless invoice
       flash[:notice] = _('Invoice_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
 
+    idetails = invoice.invoicedetails
     user = invoice.user
     @i = user.get_invoices_status
     status = (@i[0] == 2)
 
-    if not_authorized_generate_pdf_or_csv(user, status)
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1039,20 +1038,15 @@ class AccountingController < ApplicationController
     invoice = Invoice.where(:id => params[:id]).includes([:tax, :user]).first
 
     unless invoice
-      if params[:action] == "generate_invoice_detailed_pdf"
-        flash[:notice] = _("Invoice_not_found")
-        redirect_to :controller => :callc, :action => :main and return false
-      else
-        raise "Invoice_not_found"
-      end
+      flash[:notice] = _('Invoice_not_found')
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     user = invoice.user
     @i = user.get_invoices_status
     status = (@i[2] == 8)
 
-    if not_authorized_generate_pdf_or_csv(user, status)
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1107,17 +1101,11 @@ class AccountingController < ApplicationController
       redirect_to :controller => :callc, :action => :main and return false
     end
 
-    if invoice.user_id != current_user.id and invoice.user.owner_id != current_user.get_corrected_owner_id
-      dont_be_so_smart
-      redirect_to :controller => :callc, :action => :main and return false
-    end
-
     user = invoice.user
     @i = user.get_invoices_status
     status = (@i[4] == 32)
 
-    if not_authorized_generate_pdf_or_csv(user, status)
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1184,17 +1172,15 @@ class AccountingController < ApplicationController
     invoice = Invoice.includes([:tax, :user]).where(:id => params[:id]).first
 
     unless invoice
-      flash[:notice] = _('Invoice_was_not_found')
+      flash[:notice] = _('Invoice_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
-
 
     user = invoice.user
     @i = user.get_invoices_status
     status = (@i[1] == 4)
 
-    if not_authorized_generate_pdf_or_csv(user, status)
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1206,9 +1192,6 @@ class AccountingController < ApplicationController
 
     csv_string = ["number#{sep}user_id#{sep}period_start#{sep}period_end#{sep}issue_date#{sep}price (#{dc})#{sep}price_with_tax (#{dc})#{sep}accounting_number"]
     csv_string << "#{invoice.number.to_s}#{sep}#{invoice.user_id}#{sep}#{nice_date(invoice.period_start, 0)}#{sep}#{nice_date(invoice.period_end, 0)}#{sep}#{nice_date(invoice.issue_date)}#{sep}#{invoice.nice_invoice_number(invoice.converted_price(ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{invoice.nice_invoice_number(invoice.converted_price_with_vat(ex), nice_number_hash).to_s.gsub(".", dec).to_s}#{sep}#{user.accounting_number}"
-
-
-
 
     #  my_debug csv_string
     prepaid, prep = invoice_type(invoice, user)
@@ -1229,7 +1212,7 @@ class AccountingController < ApplicationController
     invoice = Invoice.includes([:tax, :user]).where(:id => params[:id]).first
 
     unless invoice
-      flash[:notice] = _('Invoice_was_not_found')
+      flash[:notice] = _('Invoice_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1238,8 +1221,7 @@ class AccountingController < ApplicationController
     @i = user.get_invoices_status
     status = (@i[3] == 16)
 
-    if not_authorized_generate_pdf_or_csv(user, status)
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1248,7 +1230,6 @@ class AccountingController < ApplicationController
         flash[:notice] = _("Dont_be_so_smart")
         redirect_to :controller => :callc, :action => :main and return false
     end
-
 
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
     ex = Currency.count_exchange_rate(session[:default_currency], dc)
@@ -1385,11 +1366,17 @@ class AccountingController < ApplicationController
 
     idetails = invoice.invoicedetails
     user = invoice.user
+    @i = user.get_invoices_status
+    status = (@i[5] == 64)
+
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
+      redirect_to :controller => :callc, :action => :main and return false
+    end
 
     # Hide from prepaid manual payments
     if invoice.invoice_type.downcase == "prepaid" and idetails.first and idetails.first.name == "Manual Payment"
-        flash[:notice] = _("Dont_be_so_smart")
-        redirect_to :controller => :callc, :action => :main and return false
+      flash[:notice] = _("Dont_be_so_smart")
+      redirect_to :controller => :callc, :action => :main and return false
     end
 
     dc = params[:email_or_not] ? user.currency.name : session[:show_currency]
@@ -1531,19 +1518,12 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
         redirect_to :controller => :callc, :action => :main and return false
     end
 
-
-    if invoice.user_id != current_user.id and invoice.user.owner_id != current_user.get_corrected_owner_id
-      dont_be_so_smart
-      redirect_to :controller => :callc, :action => :main and return false
-    end
-
     dc = current_user.currency.name
     user = invoice.user
     @i = user.get_invoices_status
     status = (@i[6] == 128)
 
-    if not_authorized_generate_pdf_or_csv(user, status)
-      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+    if not_authorized_generate_pdf_or_csv(user, status) == 1
       redirect_to :controller => :callc, :action => :main and return false
     end
 
@@ -1692,29 +1672,37 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
   end
 
   def not_authorized_generate_pdf_or_csv(user, status)
-    return (
-       # its user and he has permission to generate this pdf/csv
-       !(((user.id == session[:user_id]) && status) ||
-        # its users owner
-       (user.owner_id == session[:user_id]) ||
-       # its accountant and pdf/csv belongs to admins user
-       (accountant? && (user.owner_id == 0)))
-      )
+    err = 1
+      # its user and he has permission to generate this pdf/csv
+    if !(((user.id == session[:user_id]) && status) ||
+      # its users owner
+      (user.owner_id == session[:user_id]) ||
+      # its accountant and pdf/csv belongs to admins user (not for admin)
+      (accountant? && (user.owner_id == 0) && user.usertype != 'admin'))
+      flash[:notice] = _('You_are_not_authorized_to_view_this_page')
+
+      if user.id != session[:user_id]
+        flash[:notice] = _('Invoice_not_found')
+      end
+    else
+      err = 0
+    end
+
+    return err
   end
 
   private
 
-=begin
-  Based on what params user selected or if they were not passed based on params saved in session
-  return user_id, that should be filtered for financial statements. if user passed clear as param
-  return nil
 
-  *Params*
-  +session_options+ hash including :user_id, might be nil
+  # Based on what params user selected or if they were not passed based on params saved in session
+  # return user_id, that should be filtered for financial statements. if user passed clear as param
+  # return nil
 
-  *Return*
-  +user_id+ integer or nil
-=end
+  # *Params*
+  # +session_options+ hash including :user_id, might be nil
+
+  # *Return*
+  # +user_id+ integer or nil
   def financial_statements_user_id(session_options)
     if current_user.usertype == 'user'
       user_id = current_user.id
