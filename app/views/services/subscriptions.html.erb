@@ -47,7 +47,7 @@
 <br/><br/>
 
 <% if @total_pages > 1 %>
-    <%= page_select_header(@page, @total_pages, {st: @st, until_canceled: @until_canceled, search_memo: @search_memo, search_service: @search_service, search_user: @search_user, search_device: @search_device }) %>
+    <%= page_select_header(@page, @total_pages, {st: @st, search_memo: @search_memo, search_service: @search_service, search_user: @search_user, search_device: @search_device }) %>
 <% end %>
 
 <table width="100%" class="maintable">
@@ -89,5 +89,5 @@
 
 <% if @total_pages > 1 %>
     <br/>
-    <%= page_select_header(@page, @total_pages, {st: @st, until_canceled: @until_canceled, search_memo: @search_memo, search_service: @search_service, search_user: @search_user, search_device: @search_device }) %>
+    <%= page_select_header(@page, @total_pages, {st: @st, search_memo: @search_memo, search_service: @search_service, search_user: @search_user, search_device: @search_device }) %>
 <% end %>
