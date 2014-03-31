@@ -19,6 +19,41 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=system_tz</td>
+	<td>time_zone</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
 	<td>reseller</td>
 </tr>
 <tr>
@@ -143,7 +178,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Activation start and Activation end values in system time zone: (GMT+02:00) EET</td>
+	<td>Activation start and Activation end values in system time zone: ${time_zone}</td>
 	<td></td>
 </tr>
 <tr>
@@ -223,7 +258,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Activation start and Activation end values in system time zone: (GMT+02:00) EET</td>
+	<td>Activation start and Activation end values in system time zone: ${time_zone}</td>
 	<td></td>
 </tr>
 <tr>
@@ -263,7 +298,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Activation start and Activation end values in system time zone: (GMT+02:00) EET</td>
+	<td>Activation start and Activation end values in system time zone: ${time_zone}</td>
 	<td></td>
 </tr>
 <tr>
@@ -308,7 +343,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Activation start and Activation end values in system time zone: (GMT+02:00) EET</td>
+	<td>Activation start and Activation end values in system time zone: ${time_zone}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1339,7 +1374,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Activation start and Activation end values in system time zone: (GMT+02:00) EET</td>
+	<td>Activation start and Activation end values in system time zone: ${time_zone}</td>
 	<td></td>
 </tr>
 <tr>
@@ -1364,7 +1399,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Activation start and Activation end values in system time zone: (GMT+02:00) EET</td>
+	<td>Activation start and Activation end values in system time zone: ${time_zone}</td>
 	<td></td>
 </tr>
 <tr>

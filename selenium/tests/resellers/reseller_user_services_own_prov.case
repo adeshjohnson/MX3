@@ -514,33 +514,28 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>activation_end_year</td>
-	<td>label=2020</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_end_hour</td>
-	<td>label=19</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_start_hour</td>
-	<td>label=02</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_start_day</td>
-	<td>label=30</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>activation_end_day</td>
-	<td>label=16</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>activation_start_month</td>
 	<td>label=June</td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>activation_start_day</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>activation_start_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
+	<td>activation_start_minute</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>activation_end_year</td>
+	<td>label=2020</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -548,14 +543,19 @@
 	<td>label=November</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>activation_start_minute</td>
-	<td>label=00</td>
+	<td>assertNotEditable</td>
+	<td>activation_end_day</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>assertNotEditable</td>
+	<td>activation_end_hour</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotEditable</td>
 	<td>activation_end_minute</td>
-	<td>label=00</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
