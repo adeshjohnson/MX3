@@ -1677,8 +1677,8 @@ LEFT JOIN destinations ON (destinations.prefix = calls.prefix)
     if !(((user.id == session[:user_id]) && status) ||
       # its users owner
       (user.owner_id == session[:user_id]) ||
-      # its accountant and pdf/csv belongs to admins user (not for admin)
-      (accountant? && (user.owner_id == 0) && user.usertype != 'admin'))
+      # its accountant and pdf/csv belongs to admins user
+      (accountant? && (user.owner_id == 0)))
       flash[:notice] = _('You_are_not_authorized_to_view_this_page')
 
       if user.id != session[:user_id]
