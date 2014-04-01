@@ -159,12 +159,12 @@
 <tr>
 	<td>assertValue</td>
 	<td>id=service_price</td>
-	<td>10.0</td>
+	<td>10.0000</td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>id=service_selfcost_price</td>
-	<td>5.0</td>
+	<td>5.0000</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -505,6 +505,16 @@
 	<td>assertText</td>
 	<td>id=data2_16</td>
 	<td>7.0</td>
+</tr>
+<tr>
+	<td>storeSelectedLabel</td>
+	<td>id=date_from_year</td>
+	<td>current_date</td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>id=date_from_month</td>
+	<td>current_month</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1023,6 +1033,61 @@
 	<td></td>
 </tr>
 <tr>
+	<td>store</td>
+	<td>2012</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>1</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>-6</td>
+	<td>-6</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>5</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>12</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['current_date'] - storedVars['2012']}</td>
+	<td>years</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>months</td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>storedVars[ &quot;months&quot; ] &lt; (${current_month})</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars[ &quot;months&quot; ]++}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{storedVars['5']*(storedVars['12']*storedVars['years']+storedVars['months'] - storedVars['1']) - (storedVars['-6'])}</td>
+	<td>current_balance</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/users/list</td>
 	<td></td>
@@ -1030,7 +1095,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=balance_2</td>
-	<td>101.0000</td>
+	<td>${current_balance}.0*</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1115,7 +1180,7 @@
 <tr>
 	<td>assertText</td>
 	<td>id=balance_2</td>
-	<td>101.0000</td>
+	<td>${current_balance}.0*</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1147,7 +1212,6 @@
 	<td>added</td>
 	<td></td>
 </tr>
-<!---->
 </tbody></table>
 </body>
 </html>
