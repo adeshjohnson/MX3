@@ -17,6 +17,7 @@
   </tr>
   <tr>
     <td id="system_time_zone"><%= @time.strftime("GMT %:z") %></td>
+    <td id="system_time_zone_no_space"><%= @time.strftime("GMT%:z") %></td>
   </tr>
 </table>
 <table>

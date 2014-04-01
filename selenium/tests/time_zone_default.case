@@ -138,6 +138,16 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/test/time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=system_time_zone_no_space</td>
+	<td>time_zone</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/users/edit/0</td>
 	<td></td>
 </tr>
@@ -149,7 +159,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT+02:00) Athens</td>
+	<td>regexp:(${time_zone})*</td>
 </tr>
 <tr>
 	<td>assertNotSelectedLabel</td>
@@ -169,7 +179,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT+02:00) Athens</td>
+	<td>regexp:(${time_zone})*</td>
 </tr>
 <tr>
 	<td>assertNotSelectedLabel</td>
@@ -189,12 +199,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT+02:00) Athens</td>
-</tr>
-<tr>
-	<td>assertNotSelectedLabel</td>
-	<td>id=user_time_zone</td>
-	<td>(GMT+03:00) Baghdad</td>
+	<td>regexp:(${time_zone})*</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -209,7 +214,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>id=user_time_zone</td>
-	<td>(GMT+02:00) Athens</td>
+	<td>regexp:(${time_zone})*</td>
 </tr>
 <tr>
 	<td>assertNotSelectedLabel</td>
