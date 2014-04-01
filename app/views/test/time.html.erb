@@ -15,6 +15,9 @@
     <td id="hour"><%= @time.hour %></td>
     <td id="system_tz"><%= nice_system_time_string %></td>
   </tr>
+  <tr>
+    <td id="system_time_zone"><%= @time.strftime("GMT %:z") %></td>
+  </tr>
 </table>
 <table>
   <tr>
