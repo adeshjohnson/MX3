@@ -67,9 +67,9 @@ class Did < ActiveRecord::Base
       end
     end
     if self.device and self.device.is_trunk? and User.current.is_reseller? and not User.current.allowed_to_assign_did_to_trunk? and not self.closing
-      self.errors.add(:device, _('DID_cannot_be_assigned_to_trunk')) 
-      return false 
-    end 
+      self.errors.add(:device, _('DID_cannot_be_assigned_to_trunk'))
+      return false
+    end
   end
 
   def validate_user
@@ -200,12 +200,12 @@ class Did < ActiveRecord::Base
 
   def Did::get_dids_price(user_id, period_start = nil, period_end = nil)
     if period_start and period_end
-      sqlDid = "SELECT dids.did AS 'did', SUM(calls.did_price) AS 'did_price', COUNT(*) as 'quantity' 
-                FROM calls JOIN dids ON calls.dst = dids.did 
+      sqlDid = "SELECT dids.did AS 'did', SUM(calls.did_price) AS 'did_price', COUNT(*) as 'quantity'
+                FROM calls JOIN dids ON calls.dst = dids.did
                 WHERE did_price > 0 AND calls.user_id = #{user_id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' GROUP BY dids.did"
     else
-      sqlDid = "SELECT dids.did AS 'did', SUM(calls.did_price) AS 'did_price', COUNT(*) as 'quantity' 
-                FROM calls JOIN dids ON calls.dst = dids.did 
+      sqlDid = "SELECT dids.did AS 'did', SUM(calls.did_price) AS 'did_price', COUNT(*) as 'quantity'
+                FROM calls JOIN dids ON calls.dst = dids.did
                 WHERE did_price > 0 AND calls.user_id = #{user_id} AND calls.disposition = 'ANSWERED' GROUP BY dids.did"
     end
     dids = Call.find_by_sql(sqlDid)
@@ -214,11 +214,11 @@ class Did < ActiveRecord::Base
   def Did::get_dids(user_id, period_start = nil, period_end = nil)
     if period_start and period_end
       sqlDid = "SELECT *
-                FROM calls JOIN dids ON calls.dst = dids.did 
+                FROM calls JOIN dids ON calls.dst = dids.did
                 WHERE did_price > 0 AND calls.user_id = #{user_id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' GROUP BY dids.did"
     else
       sqlDid = "SELECT *
-                FROM calls JOIN dids ON calls.dst = dids.did 
+                FROM calls JOIN dids ON calls.dst = dids.did
                 WHERE did_price > 0 AND calls.user_id = #{user_id} AND calls.disposition = 'ANSWERED' GROUP BY dids.did"
     end
     dids = Call.find_by_sql(sqlDid)
@@ -227,11 +227,11 @@ class Did < ActiveRecord::Base
   # returns sum of did_inc_price for a particular user
   def Did::get_did_inc_price_sum(user_id, period_start = nil, period_end = nil)
     if period_start and period_end
-      sqlDid = "SELECT SUM(calls.did_inc_price) AS 'did_inc_price', COUNT(*) as 'quantity' 
+      sqlDid = "SELECT SUM(calls.did_inc_price) AS 'did_inc_price', COUNT(*) as 'quantity'
                 FROM calls
                 WHERE did_inc_price > 0 AND calls.user_id = #{user_id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' "
     else
-      sqlDid = "SELECT SUM(calls.did_inc_price) AS 'did_inc_price', COUNT(*) as 'quantity' 
+      sqlDid = "SELECT SUM(calls.did_inc_price) AS 'did_inc_price', COUNT(*) as 'quantity'
                 FROM calls
                 WHERE did_inc_price > 0 AND calls.user_id = #{user_id} AND calls.disposition = 'ANSWERED' "
     end
@@ -240,11 +240,11 @@ class Did < ActiveRecord::Base
 
   def Did::get_did_inc(user_id, period_start = nil, period_end = nil)
     if period_start and period_end
-      sqlDid = "SELECT * 
+      sqlDid = "SELECT *
                 FROM calls
                 WHERE did_inc_price > 0 AND calls.user_id = #{user_id} AND calls.calldate BETWEEN '#{period_start} 00:00:00' AND '#{period_end} 23:59:59'  AND calls.disposition = 'ANSWERED' "
     else
-      sqlDid = "SELECT * 
+      sqlDid = "SELECT *
                 FROM calls
                 WHERE did_inc_price > 0 AND calls.user_id = #{user_id} AND calls.disposition = 'ANSWERED' "
     end
@@ -294,7 +294,7 @@ class Did < ActiveRecord::Base
   def cc_tariff_id=(value)
     write_attribute(:cc_tariff_id, value.to_i)
   end
-  
+
   def reseller_did_creation
     if User.current.usertype.downcase == "reseller"
       did = self.did
@@ -302,7 +302,7 @@ class Did < ActiveRecord::Base
       if rules.size > 0
         errors.add(:prefix,_('Collisions_with_Quickforwards_Rules_rs'))
         return false
-      end    
+      end
     end
   end
 
@@ -336,7 +336,7 @@ class Did < ActiveRecord::Base
            counter += 1
          else
            next
-         end 
+         end
        end
      end
      return counter
@@ -354,7 +354,7 @@ class Did < ActiveRecord::Base
 
 
     #------------ Analyze ------------------------------------
-    # strip all DIDs
+    # striping all DIDs
     ActiveRecord::Base.connection.execute("UPDATE #{name} set did = REPLACE( #{name}.did, ' ', '' )")
 
     # set error flag on duplicates | code : 1
@@ -369,8 +369,8 @@ class Did < ActiveRecord::Base
     # set error flag on not int numbers | code : 3
     ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\r', '') REGEXP '^[0-9]+$' = 0")
 
-    # set error flag on numbers which comtains \r | code : 3 
-    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\\\r', '') REGEXP '^[0-9]+$' = 0") 
+    # set error flag on numbers which comtains \r | code : 3
+    ActiveRecord::Base.connection.execute("UPDATE #{name} SET f_error = 3 WHERE replace(#{name}.did, '\\\\r', '') REGEXP '^[0-9]+$' = 0")
 
     # set error flag on collisions with QF | code : 4
     all_dids = ActiveRecord::Base.connection.select_all("SELECT * FROM #{name} WHERE f_error = 0").each(&:symbolize_keys!).collect{|v| v[:did]}
