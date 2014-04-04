@@ -449,8 +449,17 @@ class ApplicationController < ActionController::Base
   end
 
   def change_date_to_present
+    change_date_from_to_present
+    change_date_till_to_present
+  end
+
+  def change_date_from_to_present
     t = current_user.user_time(Time.now)
     session[:year_from], session[:month_from], session[:day_from], session[:hour_from], session[:minute_from] = t.year, t.month, t.day, 0, 0
+  end
+
+  def change_date_till_to_present
+    t = current_user.user_time(Time.now)
     session[:year_till], session[:month_till], session[:day_till], session[:hour_till], session[:minute_till] = t.year, t.month, t.day, 23, 59
   end
 
@@ -471,15 +480,18 @@ class ApplicationController < ActionController::Base
         session[:day_from] = params[:date_from][:day]
         session[:hour_from] = params[:date_from][:hour] if params[:date_from][:hour]
         session[:minute_from] = params[:date_from][:minute] if params[:date_from][:minute]
+
+        # Reset session date till if invalid params were given
+
+        begin
+          session_from_datetime
+        rescue => e
+          change_date_from_to_present
+        end
       end
     end
     if not session[:year_from]
-      t = current_user.user_time(Time.now)
-      session[:year_from] = t.year
-      session[:month_from] = t.month
-      session[:day_from] = t.day
-      session[:hour_from] = t.hour
-      session[:minute_from] = t.min
+      change_date_from_to_present
     end
   end
 
@@ -500,16 +512,18 @@ class ApplicationController < ActionController::Base
         session[:day_till] = params[:date_till][:day]
         session[:hour_till] = params[:date_till][:hour] if params[:date_till][:hour]
         session[:minute_till] = params[:date_till][:minute] if params[:date_till][:minute]
+
+        # Reset session date till if invalid params were given
+        begin
+          session_till_datetime
+        rescue => e
+          change_date_till_to_present
+        end
       end
     end
 
     if not session[:year_till]
-      t = current_user.user_time(Time.now)
-      session[:year_till] = t.year
-      session[:month_till] = t.month
-      session[:day_till] = t.day
-      session[:hour_till] = t.hour
-      session[:minute_till] = t.min
+      change_date_till_to_present
     end
   end
 
