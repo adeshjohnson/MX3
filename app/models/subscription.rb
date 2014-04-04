@@ -153,7 +153,8 @@ class Subscription < ActiveRecord::Base
         start_date, end_date = subscription_period(period_start, period_end)
         days_used = end_date - start_date
         total_days = start_date.to_time.end_of_month.day
-        amount = Rational(service.price / total_days) * (days_used+1)
+        service_price = (service.price.nil? ? 0 : service.price)
+        amount = Rational(service_price / total_days.to_i) * (days_used.to_i + 1)
       when "one_time_fee"
         amount = price_for_period(Time.now, Time.now.end_of_month.change(:hour => 23, :min => 59, :sec => 59)).to_d
       when "periodic_fee"
