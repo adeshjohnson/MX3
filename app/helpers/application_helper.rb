@@ -796,7 +796,7 @@ module ApplicationHelper
     d = ""
     if device
       d = nice_device_type(device, opts) + "/"
-      d += device.name.to_s if !device.username.blank? and device.device_type != "FAX"
+      d += device.name.to_s.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '') if !device.username.blank? and device.device_type != "FAX"
       d += device.extension.to_s if device.device_type == "FAX"  or !device.name or device.name.length == 0 or device.username.blank?
     end
 
