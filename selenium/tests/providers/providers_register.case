@@ -321,6 +321,121 @@
 	<td>register =&gt; testinis:testinis@22.33.44.55:4569/#@$%^򊂤</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=register</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=register</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/user/reseller_3/make_rspro</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/tariff/provider_12301/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/provider/sip_3304/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3304</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>provider_reg_extension</td>
+	<td>#@$%^&amp;#565412</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3304</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=register</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=hostname_ip_dynamic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/providers/edit/3304</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=register</td>
+	<td>off</td>
+</tr>
 </tbody></table>
 </body>
 </html>
