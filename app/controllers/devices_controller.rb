@@ -1184,6 +1184,7 @@ class DevicesController < ApplicationController
 
 
     @users = User.where(:owner_id => @current_user_id).order("first_name ASC, last_name ASC")
+    @users.sort_by!{ |user| nice_user(user).downcase }
 
     @ivrs = Ivr.select("DISTINCT(callerids.ivr_id), ivrs.name, ivrs.id").
                 joins("LEFT JOIN callerids ON (ivrs.id = callerids.ivr_id)").
