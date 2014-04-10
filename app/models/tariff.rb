@@ -518,20 +518,20 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     end
 
     # set flags
-    self.csv_import_prefix_analize(name, options)   if ActiveRecord::Base.connection.tables.include?(name)
+    self.csv_import_prefix_analize(name, options) if ActiveRecord::Base.connection.tables.include?(name)
 
     if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 ") if ActiveRecord::Base.connection.tables.include?(name) #WHERE (destinations.name != replace(col_#{options[:imp_dst]}, '\\r', '') OR (destinations.name IS NULL AND LENGTH(col_#{options[:imp_dst]}) > 0 )  ) ")
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 WHERE replace(col_#{options[:imp_dst]}, '\\r', '') != IFNULL(original_destination_name,destinations.name)") if ActiveRecord::Base.connection.tables.include?(name)
     end
 
     if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE (destinations.subcode != replace(col_#{options[:imp_subcode]}, '\\r', '') OR (destinations.subcode IS NULL AND LENGTH(col_#{options[:imp_subcode]}) > 0 ) )")  if ActiveRecord::Base.connection.tables.include?(name)
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = ned_update + 2 WHERE (destinations.subcode != replace(col_#{options[:imp_subcode]}, '\\r', '') OR (destinations.subcode IS NULL AND LENGTH(col_#{options[:imp_subcode]}) > 0 ) )") if ActiveRecord::Base.connection.tables.include?(name)
     end
 
     if options[:imp_update_directions].to_i == 1
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join directions on (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)SET ned_update = ned_update + 4 WHERE destinations.direction_code != directions.code")   if ActiveRecord::Base.connection.tables.include?(name)
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join directions on (replace(col_#{options[:imp_cc]}, '\\r', '') = directions.code) join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)SET ned_update = ned_update + 4 WHERE destinations.direction_code != directions.code") if ActiveRecord::Base.connection.tables.include?(name)
     end
 
     if ActiveRecord::Base.connection.tables.include?(name)

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class TariffsController < ApplicationController
- 
+
   require 'iconv'
 
   require 'csv'
@@ -211,7 +211,7 @@ class TariffsController < ApplicationController
     @directions_first_letters = Rate.select('directions.name').where("rates.tariff_id = #{@tariff.id}").joins("JOIN destinations ON destinations.id = rates.destination_id JOIN directions ON (directions.code = destinations.direction_code)").order("directions.name ASC").group("SUBSTRING(directions.name,1,1)").all
 
     @directions_first_letters.map! { |rate| rate.name[0..0] }
-    @st = (params[:st] ? params[:st].upcase : @directions_first_letters[0]) 
+    @st = (params[:st] ? params[:st].upcase : @directions_first_letters[0])
 
     @st = @st.to_s
 
@@ -241,7 +241,7 @@ class TariffsController < ApplicationController
         @rates = []
       end
     else
-      condition = ["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"] 
+      condition = ["rates.tariff_id=? AND directions.name like ?", @tariff.id, @st+"%"]
       includes = [:ratedetails, {:destination => :direction}, :tariff]
       rate_count = Rate.includes(includes).where(condition).count
       @rates = Rate.includes(includes).where(condition).order("directions.name ASC, destinations.prefix ASC").offset(record_offset).limit(session[:items_per_page].to_i).all
@@ -523,12 +523,12 @@ class TariffsController < ApplicationController
 
     @tariff = @rate.tariff
     @destination = @rate.destination
-    #every rate should have destination assigned, but since it is common to have 
+    #every rate should have destination assigned, but since it is common to have
     #broken relational itegrity, we should check whether destination is not nil
     unless @destination
       flash[:notice] = _('Rate_does_not_have_destination_assigned')
-      redirect_to :controller => :callc, :action => :main 
-    end 
+      redirect_to :controller => :callc, :action => :main
+    end
     @can_edit = true
 
     if current_user.usertype == 'reseller' and @tariff.owner_id != current_user.id and CommonUseProvider.find(:first, :conditions => ["reseller_id = ? AND tariff_id = ?", current_user.id, @tariff.id])
@@ -1005,12 +1005,15 @@ class TariffsController < ApplicationController
                 @optins[:imp_dst] = params[:destination_id].to_i
 
                 # Saving old Destination names before import
-		check_destination_names = "select count(original_destination_name) as notnull from " + session["tariff_name_csv_#{@tariff.id}".to_sym].to_s + " where original_destination_name is not NULL"
-		if (ActiveRecord::Base.connection.select(check_destination_names).first["notnull"].to_i rescue 0) == 0
-	          sql = "UPDATE " + session["tariff_name_csv_#{@tariff.id}".to_sym].to_s + " JOIN destinations ON (replace(col_1, '\\r', '') = destinations.prefix) SET original_destination_name = destinations.name WHERE ned_update IN (1, 2, 3, 4)"
-		  ActiveRecord::Base.connection.execute(sql)
-		end
-
+		            check_destination_names = "select count(original_destination_name) as notnull from " +
+                                          session["tariff_name_csv_#{@tariff.id}".to_sym].to_s +
+                                          " where original_destination_name is not NULL"
+		            if (ActiveRecord::Base.connection.select(check_destination_names).first["notnull"].to_i rescue 0) == 0
+      	          sql = "UPDATE " + session["tariff_name_csv_#{@tariff.id}".to_sym].to_s +
+                        " JOIN destinations ON (replace(col_1, '\\r', '') = destinations.prefix) " +
+                        "SET original_destination_name = destinations.name WHERE ned_update IN (1, 2, 3, 4)"
+      		        ActiveRecord::Base.connection.execute(sql)
+            		end
               else
                 flash[:notice] = _('Please_Select_Columns_destination')
                 redirect_to :action => "import_csv2", :id => @tariff.id, :step => "2" and return false
@@ -1213,7 +1216,7 @@ class TariffsController < ApplicationController
     else
       @tariff_id = params[:tariff_id].to_i
       if ActiveRecord::Base.connection.tables.include?(session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym])
-        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, IFNULL(original_destination_name,destinations.name) as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) ")
+        @dst = ActiveRecord::Base.connection.select_all("SELECT destinations.prefix, col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_dst]} as new_name, IFNULL(original_destination_name,destinations.name) as dest_name FROM destinations JOIN #{session["tariff_name_csv_#{params[:tariff_id].to_i}".to_sym]} ON (replace(col_#{session["tariff_import_csv2_#{@tariff_id}".to_sym][:imp_prefix]}, '\\r', '') = prefix)  WHERE ned_update IN (1, 3, 5, 7) AND col_2 != IFNULL(original_destination_name,destinations.name)")
       end
     end
     render(:layout => "layouts/mor_min")
@@ -1278,21 +1281,21 @@ class TariffsController < ApplicationController
 =end
   def tariff_dstgroups_with_rates(tariff_id)
     query = "SELECT destinationgroups.name   FROM destinationgroups  JOIN rates ON (rates.destinationgroup_id = destinationgroups.id )  WHERE rates.tariff_id = #{tariff_id}  GROUP BY destinationgroups.id   ORDER BY destinationgroups.name, destinationgroups.desttype ASC;"
-    res = ActiveRecord::Base.connection.select_all(query) 
-    res.map! { |rate| rate['name'][0..0] } 
+    res = ActiveRecord::Base.connection.select_all(query)
+    res.map! { |rate| rate['name'][0..0] }
     res.uniq
-  end 
+  end
 
   def dstgroup_name_first_letters
-    query = "SELECT destinationgroups.name  
-             FROM   destinations 
-             JOIN   destinationgroups ON (destinationgroups.id = destinations.destinationgroup_id) 
-             GROUP BY destinations.destinationgroup_id 
-             ORDER BY destinationgroups.name, destinationgroups.desttype ASC" 
-    res = ActiveRecord::Base.connection.select_all(query) 
+    query = "SELECT destinationgroups.name
+             FROM   destinations
+             JOIN   destinationgroups ON (destinationgroups.id = destinations.destinationgroup_id)
+             GROUP BY destinations.destinationgroup_id
+             ORDER BY destinationgroups.name, destinationgroups.desttype ASC"
+    res = ActiveRecord::Base.connection.select_all(query)
     res.map! {|dstgroup| dstgroup['name'][0..0].upcase}
     res.uniq
-  end 
+  end
 
   # =============== RATES FOR USER ==================
   # before_filter : tariff(find_taririff_from_id)
@@ -1314,12 +1317,12 @@ class TariffsController < ApplicationController
     @letter_select_header_id = @tariff.id
 
     #dst groups are rendered in 'pages' according to they name's first letter
-    #if no letter is specified in params, by default we show page full of 
+    #if no letter is specified in params, by default we show page full of
     #dst groups
     @directions_first_letters = tariff_dstgroups_with_rates(@tariff.id)
     @st = (params[:st] ? params[:st].upcase : (@directions_first_letters[0] || 'A'))
 
-    #needed to know whether to make link to sertain letter or not 
+    #needed to know whether to make link to sertain letter or not
     #when rendering letter_select_header
     @directions_defined = dstgroup_name_first_letters()
 
@@ -1797,7 +1800,7 @@ class TariffsController < ApplicationController
           rate = Rate.new
           rate.tariff_id = @tariff.id
           rate.destinationgroup_id = dg.id
-          rate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i 
+          rate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i
           rate.save
 
           ard = Aratedetail.new
@@ -1840,7 +1843,7 @@ class TariffsController < ApplicationController
         end
       else
         if rrate
-          rrate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i 
+          rrate.ghost_min_perc = params[("gch" + dg.id.to_s).intern].to_i
           rrate.save
         end
       end
@@ -1962,7 +1965,7 @@ class TariffsController < ApplicationController
 
     if @ards.first.daytype.to_s == ""
       @WDFD = true
-      
+
       sql = "SELECT * FROM #{r_details} WHERE daytype = '' AND #{r_ident} = '#{r_id}' GROUP BY start_time ORDER BY start_time ASC"
       @day_arr = ActiveRecord::Base.connection.select_all(sql)
     else
