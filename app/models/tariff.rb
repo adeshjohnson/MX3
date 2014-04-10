@@ -9,6 +9,7 @@ class Tariff < ActiveRecord::Base
   has_many :common_use_providers
 
   validates_uniqueness_of :name, :message => _('Name_must_be_unique'), :scope => [:owner_id]
+  validates_presence_of :name, :message => _('Name_cannot_be_blank')
 
   def real_currency
     Currency.find(:first, :conditions => ['name = ?', self.currency])
