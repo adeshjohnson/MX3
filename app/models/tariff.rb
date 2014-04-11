@@ -522,7 +522,7 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
 
     if options[:imp_update_dest_names].to_i == 1 and options[:imp_dst] >= 0
       # set flag on destination name update
-      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 WHERE replace(col_#{options[:imp_dst]}, '\\r', '') != IFNULL(original_destination_name,destinations.name)") if ActiveRecord::Base.connection.tables.include?(name)
+      ActiveRecord::Base.connection.execute("UPDATE #{name} join destinations on (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) SET ned_update = 1 WHERE BINARY replace(replace(TRIM(col_#{options[:imp_dst]}), '\r', ''), '  ', ' ') != IFNULL(original_destination_name,destinations.name)") if ActiveRecord::Base.connection.tables.include?(name)
     end
 
     if options[:imp_update_subcodes].to_i == 1 and options[:imp_subcode] >= 0
@@ -641,10 +641,10 @@ WHERE rates.tariff_id = #{self.id} AND tmp_dest_groups.rate = ratedetails.rate
     MorLog.my_debug("CSV update_destinations #{name}", 1)
     count = ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{name} WHERE ned_update IN (1, 3, 5, 7)").to_i
 
-    sql ="UPDATE destinations
-         JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix)
-         SET name = replace(col_#{options[:imp_dst]}, '\\r', '')
-         WHERE ned_update IN (1, 3, 5, 7)"
+    sql = "UPDATE destinations " +
+          "JOIN #{name} ON (replace(col_#{options[:imp_prefix]}, '\\r', '') = destinations.prefix) " +
+          "SET name = replace(replace(TRIM(col_#{options[:imp_dst]}), '\\r', ''), '  ', ' ') " +
+          "WHERE ned_update IN (1, 3, 5, 7)"
     ActiveRecord::Base.connection.update(sql)
     CsvImportDb.log_swap('update_destinations_end')
     return count
