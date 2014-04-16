@@ -4002,10 +4002,15 @@ class ApiController < ApplicationController
                   user = @user
                 end
                 if user
-                  users = [user]  # hack
                   variables = Email.map_variables_for_api(params)
-                  num = EmailsController.send_email(email, @user.address.email, users, variables.merge({:owner => @user.owner_id}))
-                  doc.email_sending_status(num.to_s.gsub('<br>', ''))
+                  if params[:test].to_i == 1
+                    email_body = nice_email_sent(email, variables).gsub("'", "&#8216;")
+                    doc.email_sending_status(email_body)
+                  else
+                    users = [user]  # hack
+                    num = EmailsController.send_email(email, @user.address.email, users, variables.merge({:owner => @user.owner_id}))
+                    doc.email_sending_status(num.to_s.gsub('<br>', ''))
+                  end
                 else
                   doc = MorApi.return_error("User not found", doc)
                 end
