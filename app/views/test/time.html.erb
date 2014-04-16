@@ -1,30 +1,56 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-  <title>Time values</title>
-</head>
-<body>
-<table>
-  <tr>
-    <td id="year"><%= @time.year %></td>
-    <td id="month"><%= @time.month %></td>
-    <td id="month"><%= @time.month %></td>
-    <td id="day"><%= @time.day %></td>
-    <td id="nice_time"><%= nice_date_time(@time) %></td>
-    <td id="nice_date"><%= nice_date(@time) %></td>
-    <td id="hour"><%= @time.hour %></td>
-    <td id="system_tz"><%= nice_system_time_string %></td>
-  </tr>
-  <tr>
-    <td id="system_time_zone"><%= @time.strftime("GMT %:z") %></td>
-    <td id="system_time_zone_no_space"><%= @time.strftime("GMT%:z") %></td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td id="server_ip"><%= Web_URL %></td>
-    <td id="server_dir"><%= Web_Dir %></td>
-  </tr>
-</table>
-</body>
+    <head>
+      <title>Time values</title>
+    </head>
+
+    <body>
+        <table style='font-size: 14px'>
+          <tr>
+            <td id='year'><%= @time.strftime('%Y') %></td>
+          </tr>
+          <tr>
+            <td id='zero_month'><%= @time.strftime('%m') %></td>
+          </tr>
+          <tr>
+            <td id='zero_day'><%= @time.strftime('%d') %></td>
+          </tr>
+          <tr>
+            <td id='zero_hour'><%= @time.strftime('%H') %></td>
+          </tr>
+          <tr>
+            <td id='month'><%= @time.month.to_i %></td>
+          </tr>
+          <tr>
+            <td id='day'><%= @time.day.to_i %></td>
+          </tr>
+          <tr>
+            <td id='hour'><%= @time.hour.to_i %></td>
+          </tr>
+          <tr>
+            <td id='nice_time'><%= nice_date_time(@time) %></td>
+          </tr>
+          <tr>
+            <td id='nice_date'><%= nice_date(@time) %></td>
+          </tr>
+          <tr>
+            <td id='year_month'><%= @time.strftime('%Y-%m') %></td>
+          </tr>
+          <tr>
+            <td id='system_tz'><%= nice_system_time_string %></td>
+          </tr>
+          <tr>
+            <td id='system_time_zone'><%= @time.strftime('GMT %:z') %></td>
+          </tr>
+          <tr>
+            <td id='system_time_zone_no_space'><%= @time.strftime('GMT%:z') %></td>
+          </tr>
+          <tr>
+            <td id='server_ip'><%= Web_URL %></td>
+          </tr>
+          <tr>
+            <td id='server_dir'><%= Web_Dir %></td>
+          </tr>
+        </table>
+    </body>
 </html>
