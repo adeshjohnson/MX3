@@ -4003,7 +4003,7 @@ class ApiController < ApplicationController
                 end
                 if user
                   variables = Email.map_variables_for_api(params)
-                  if params[:test].to_i == 1
+                  if params[:test_body].to_i == 1
                     email_body = nice_email_sent(email, variables).gsub("'", "&#8216;")
                     doc.email_sending_status(email_body)
                   else
