@@ -1988,7 +1988,7 @@ Variables: (Names marked with * are required)
     #    MorLog.my_debug exception.backtrace.to_yaml
     time = Time.now()
     id = time.strftime("%Y%m%d%H%M%S")
-    address = 'crashemail1@gmail.com'
+    address = 'gui_crashes@kolmisoft.com'
     extra_info = ""
     swap = nil
     begin
