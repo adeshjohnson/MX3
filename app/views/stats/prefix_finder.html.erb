@@ -1,6 +1,6 @@
 <script type="text/javascript">
     function get_prefix(value) {
-        new Ajax.Updater('results', '<%= Web_Dir %>/stats/prefix_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+        new Ajax.Updater('results', '<%= Web_Dir %>/stats/prefix_finder_find?prefix=' + escape(value), {asynchronous:true, evalScripts:true, onComplete:function (request) {
             Element.hide('spinner');
             Element.toggle('spinner2');
         }, onLoading:function (request) {
@@ -9,7 +9,7 @@
         } })
     }
     function get_country(value) {
-        new Ajax.Updater('country_results', '<%= Web_Dir %>/stats/prefix_finder_find_country?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+        new Ajax.Updater('country_results', '<%= Web_Dir %>/stats/prefix_finder_find_country?prefix=' + escape(value), {asynchronous:true, evalScripts:true, onComplete:function (request) {
             Element.hide('spinner');
             Element.toggle('spinner2');
         }, onLoading:function (request) {
@@ -18,7 +18,7 @@
         } })
     }
     function get_rate(value) {
-        new Ajax.Updater('rate_results', '<%= Web_Dir %>/stats/rate_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true, onComplete:function (request) {
+        new Ajax.Updater('rate_results', '<%= Web_Dir %>/stats/rate_finder_find?prefix=' + escape(value), {asynchronous:true, evalScripts:true, onComplete:function (request) {
             Element.hide('spinner');
             Element.toggle('spinner2');
         }, onLoading:function (request) {
