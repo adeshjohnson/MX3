@@ -689,6 +689,31 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/cdr/rerating</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user</td>
+	<td>label=Test User #1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_pdf/2?call_type=answered&amp;date_from=2009-02-01+00%3A00%3A00&amp;date_till=2014-04-30+23%3A59%3A59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/call_list_to_csv/2?call_type=answered&amp;date_from=2009-02-01+00%3A00%3A00&amp;date_till=2014-04-30+23%3A59%3A59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/tariffs/generate_provider_rates_pdf/1</td>
 	<td></td>
 </tr>
