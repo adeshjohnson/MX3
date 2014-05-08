@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class AccountingController < ApplicationController
 
-
   layout "callc"
   before_filter :check_post_method, :only => [:invoice_recalculate, :comment_invoice, :invoice_delete]
   before_filter :check_localization
