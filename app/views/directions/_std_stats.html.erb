@@ -53,7 +53,7 @@
             so.addVariable("path", "<%= Web_Dir %>/swf/");
             so.addVariable("settings_file", escape("<%= Web_Dir %>/swf/pie3.xml"));
             so.addParam("wmode", "transparent");
-            so.addVariable("chart_data", <%=  @Calls_graph %>);
+            so.addVariable("chart_data", escape(<%= raw @Calls_graph %>));
             so.addVariable("additional_chart_settings", "<settings><labels><label><x>0</x><y>20</y><rotate>false</rotate><align>center</align><text_size>15</text_size><text><![CDATA[<b></b>]]></text></label></settings>");
             so.write("flashcontent1");
             // ]]>
