@@ -4619,6 +4619,7 @@ Localization.define('en') do |l|
   l.store 'ip_is_used_by_user', 'IP is used by User:'
   l.store 'email_not_sent', 'Email was not sent'
   l.store 'default_currency_is', 'Default Currency is'
+  l.store 'Busy_IVR', 'Busy IVR'
   #  l.store '', ''
   #  l.store '', ''
 

@@ -33,6 +33,22 @@
         </select>
         </td>
       </tr>
+      <% if Confline.get_value('hidden_functionality').to_i == 1 %>
+        <tr>
+        <td></td>
+        <td><b><%= _('Busy_IVR') %></b></td>
+          <td>
+            <select name='busy_ivr'>
+              <option value="0"><%= _('None') %></option>
+              <% @busy_ivrs.each do |busy_ivr| %>
+                <option value="<%= busy_ivr.id %>" <%= 'selected' if busy_ivr.id == Confline.get_value('Busy_IVR').to_i %>>
+                  <%= busy_ivr.name.to_s %>
+                </option>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+      <% end %>
       <tr>
         <td></td>
         <td class="bottom_border" colspan=1 <%=raw tooltip('CID for legA', _('legA_info')) %>><br/><big><b>CID for legA</b></big> <%= b_info %></td>

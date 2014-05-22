@@ -30,13 +30,13 @@ class FunctionsController < ApplicationController
     true
   }
 
-  @@acc_call_tracing_view = [:call_tracing, :call_tracing_user, :call_tracing_device] 
-  before_filter(:only => @@acc_call_tracing_view) { |c| 
-    allow_read, allow_edit = c.check_read_write_permission(@@acc_call_tracing_view, [], {:role => "accountant", :right => :acc_call_tracing_usage, :ignore => true}) 
-    c.instance_variable_set :@allow_read_acc, allow_read 
-    c.instance_variable_set :@allow_edit_acc, allow_edit 
-    true 
-  } 
+  @@acc_call_tracing_view = [:call_tracing, :call_tracing_user, :call_tracing_device]
+  before_filter(:only => @@acc_call_tracing_view) { |c|
+    allow_read, allow_edit = c.check_read_write_permission(@@acc_call_tracing_view, [], {:role => "accountant", :right => :acc_call_tracing_usage, :ignore => true})
+    c.instance_variable_set :@allow_read_acc, allow_read
+    c.instance_variable_set :@allow_edit_acc, allow_edit
+    true
+  }
 
   $date_formats = ["%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M:%S", "%Y,%m,%d %H:%M:%S", "%Y.%m.%d %H:%M:%S", "%d-%m-%Y %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%d,%m,%Y %H:%M:%S", "%d.%m.%Y %H:%M:%S", "%m-%d-%Y %H:%M:%S", "%m/%d/%Y %H:%M:%S", "%m,%d,%Y %H:%M:%S", "%m.%d.%Y %H:%M:%S"]
   $decimal_formats = ['.', ',', ';']
@@ -146,7 +146,7 @@ class FunctionsController < ApplicationController
         server = 1 if server == 0
 
         @cb_ok = 1
-        
+
         channel = "Local/#{@src}@mor_cb_src/n"
         if @dst.length > 0
           st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, legB_cid, "MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
@@ -688,7 +688,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       rr['providers_id'] = prov.id
       rr['tech'] = prov.tech
       rr['server_ip'] = prov.server_ip
-      rr['user_id'] = prov.device.user_id 
+      rr['user_id'] = prov.device.user_id
 
       sql = "SELECT `add`, cut FROM providerrules WHERE provider_id = #{prov.id} AND enabled = 1 AND pr_type = 'dst' AND LENGTH('#{dst}') BETWEEN minlen AND maxlen AND (SUBSTRING('#{dst}',1,LENGTH(cut)) = cut OR LENGTH(cut) = 0 OR ISNULL(cut)) ORDER BY LENGTH(cut) DESC LIMIT 1;"
       res = ActiveRecord::Base.connection.select_one(sql)
@@ -784,7 +784,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
 
       @res_prov << rr
       @not_disabled_prov += 1 if prov.active?(@lcr.id) == 1
-      @active_prov += 1 if rr['rate'] and rr['prefix'] and prov.active?(@lcr.id) == 1 and (prov.device.user_id.to_i != @user.id.to_i) 
+      @active_prov += 1 if rr['rate'] and rr['prefix'] and prov.active?(@lcr.id) == 1 and (prov.device.user_id.to_i != @user.id.to_i)
 
     end
 
@@ -863,7 +863,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       flash[:notice] = _('User_was_not_found')
       redirect_to :action => :index and return false
     end
-  
+
     owner_id = accountant? ? 0 : current_user.id
     if @user.owner_id.to_i != owner_id or (accountant? and (@user.id.to_i.zero? or not accountant_can_write?('user_manage')))
       dont_be_so_smart
@@ -872,7 +872,7 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     @login_ok = true
 
     renew_session(@user)
-    
+
     store_url
 
     flash[:status] = _('Logged_as') + ": " + nice_user(@user)
@@ -1044,8 +1044,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     update_confline("Invoice_Bank_Details_Line3", params[:invoice_bank_details_line3])
     update_confline("Invoice_Bank_Details_Line4", params[:invoice_bank_details_line4])
     update_confline("Invoice_Bank_Details_Line5", params[:invoice_bank_details_line5])
-    update_confline("Invoice_Bank_Details_Line6", params[:invoice_bank_details_line6]) 
-    update_confline("Invoice_Bank_Details_Line7", params[:invoice_bank_details_line7]) 
+    update_confline("Invoice_Bank_Details_Line6", params[:invoice_bank_details_line6])
+    update_confline("Invoice_Bank_Details_Line7", params[:invoice_bank_details_line7])
     update_confline("Invoice_Bank_Details_Line8", params[:invoice_bank_details_line8])
     update_confline("Invoice_Balance_Line", params[:invoice_balance_line], session[:user_id])
     update_confline("Invoice_To_Pay_Line", params[:invoice_to_pay_line], session[:user_id])
@@ -1330,11 +1330,11 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
     Dialplan.change_tell_balance_value(params[:tell_balance].to_i) if tb != params[:tell_balance].to_i
     Dialplan.change_tell_time_value(params[:tell_time].to_i) if tt != params[:tell_time].to_i
 
-    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i                                                                                                            
-    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i                                                                                                         
-    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i                                                                                                         
-    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)                                                                                                                    
-    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)                                                                                                                  
+    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i
+    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i
+    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i
+    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
     Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
 
     Confline.set_value('LCR_priority_using_drag_and_drop', params[:lcr_priority_using_drag_and_drop])
@@ -1955,13 +1955,13 @@ Sets default tax values for users or cardgroups
     Confline.set_value('API_Secret_Key', params[:api_secret_key], current_user.id)
     Confline.set_value('API_Disable_hash_checking', params[:api_disable_hash_checking].to_i, current_user.id)
 
-    #DEVICE 
-    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i                                                                                                            
-    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i                                                                                                         
-    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i                                                                                                         
-    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)                                                                                                                    
-    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)                                                                                                                  
-    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)                 
+    #DEVICE
+    sip_port = params[:default_sip_device_port].to_i == 0 ? 5060 : params[:default_sip_device_port].to_i
+    iax2_port = params[:default_iax2_device_port].to_i == 0 ? 4569 : params[:default_iax2_device_port].to_i
+    h323_port = params[:default_h323_device_port].to_i == 0 ? 1720 : params[:default_h323_device_port].to_i
+    Confline.set_value('Default_SIP_device_port', sip_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_IAX2_device_port', iax2_port, current_user.get_corrected_owner_id)
+    Confline.set_value('Default_H323_device_port', h323_port, current_user.get_corrected_owner_id)
 
 
     renew_session(current_user)
@@ -2897,7 +2897,7 @@ Sets default tax values for users or cardgroups
               device.permit = "0.0.0.0/0.0.0.0"
               device.host = clean_value_all(r_arr[session[:imp_device_host]].to_s)
               device.port = port
-              device.qualify = Confline.get_value("Default_device_qualify", session[:user_id])  
+              device.qualify = Confline.get_value("Default_device_qualify", session[:user_id])
               device.call_limit = Confline.get_value("Default_device_call_limit", session[:user_id])
               device.istrunk = 0
               device.ani = 0
@@ -3216,6 +3216,7 @@ Sets default tax values for users or cardgroups
   def callback_settings
     @page_title = _('Callback_settings')
     @servers = Server.order("server_id ASC").all
+    @busy_ivrs = Ivr.order('name ASC').all
   end
 
   def callback_settings_update
@@ -3229,6 +3230,7 @@ Sets default tax values for users or cardgroups
     Confline.set_value("CB_WaitTime", params[:cb_waittime])
 
     Confline.set_value("Web_Callback_Server", params[:web_callback_server])
+    Confline.set_value('Busy_IVR', params[:busy_ivr].to_i) if params[:busy_ivr]
     Confline.set_value("Callback_legB_CID", params[:CID]['legB'], 0) if params[:CID] and params[:CID].key? 'legB'
     Confline.set_value("Callback_legA_CID", params[:CID]['legA'], 0) if params[:CID] and params[:CID].key? 'legA'
     Confline.set_value2("Callback_legB_CID", params[:legB_send_custom])
@@ -3307,10 +3309,10 @@ Sets default tax values for users or cardgroups
 
     if !current_user.is_admin?
       redirect_to :action => :main and return false
-    end    
- 
+    end
+
     @servers = Server.where(:server_type=> "asterisk")
- 
+
   end
 
   def ccl_settings_update
@@ -3318,8 +3320,8 @@ Sets default tax values for users or cardgroups
       dont_be_so_smart
       redirect_to :controller => "callc", :action => "main" and return false
     end
-    if params[:indirect].to_i == 1 
-      if !params[:s_id].blank? 
+    if params[:indirect].to_i == 1
+      if !params[:s_id].blank?
         Confline.set_value("Default_asterisk_server", params[:s_id], current_user.get_corrected_owner_id)
         flash[:status] = _('Settings_saved')
         redirect_to :action => :ccl_settings
