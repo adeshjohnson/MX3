@@ -457,10 +457,9 @@ class ProvidersController < ApplicationController
       @device.port = 0
     end
 
-    @device.fullcontact = ""
+    @device.fullcontact = ''
 
-    (params[:register].to_s == '1') and (params[:hostname_ip].to_s != 'dynamic') ?
-       @provider.register = 1 : @provider.register = 0
+    @provider.register = params[:register] && (params[:hostname_ip].to_s != 'dynamic') ? 1 : 0
 
     if params[:ip_authentication].to_i == 1
 
