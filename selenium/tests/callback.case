@@ -1156,6 +1156,86 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=busy_ivr</td>
+	<td>label=None</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>IVR Deleted</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_name</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>IVR created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=busy_ivr</td>
+	<td>label=test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/test/load_delta_sql/tests/sql/hidden_functionality_off</td>
 	<td></td>
 </tr>
