@@ -437,11 +437,24 @@ class IvrController < ApplicationController
   end
 
   def destroy
-    if !current_user.dialplans.find(:first, :conditions => ["dptype = 'ivr' and (data2 = ? or data4 = ? or data6 = ? or data7 = ? )", @ivr.id, @ivr.id, @ivr.id, @ivr.id])
+    is_ivr_in_use = current_user.
+                    dialplans.
+                    find(:first,
+                         :conditions => ["dptype = 'ivr' and (data2 = ? or data4 = ? or data6 = ? or data7 = ? )",
+                         @ivr.id, @ivr.id, @ivr.id, @ivr.id]
+                         )
+
+    is_ivr_in_use_callback = (Confline.get_value('hidden_functionality').to_i == 1 &&
+                              Confline.get_value('Busy_IVR').to_i == @ivr.id)
+    @ivr.errors.add(:assigned_to_callback, _('assigned_to_callback')) if is_ivr_in_use_callback
+
+    if is_ivr_in_use
+      flash[:notice] = _("IVR_Is_In_Use")
+    elsif is_ivr_in_use_callback
+      flash_errors_for(_('IVR_Was_Not_Deleted'), @ivr)
+    else
       @ivr.destroy
       flash[:status] = _("IVR_Deleted")
-    else
-      flash[:notice] = _("IVR_Is_In_Use")
     end
     redirect_to :controller => :ivr, :action => :index
   end
