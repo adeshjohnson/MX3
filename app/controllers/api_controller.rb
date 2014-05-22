@@ -144,6 +144,9 @@ class ApiController < ApplicationController
             legA_cid = src if legA_cid.blank?
             legB_cid = src if legB_cid.blank?
 
+            legA_cid ||= params[:cli_lega]
+            legB_cid ||= params[:cli_legb]
+
             separator = (ast_18? ? "," : "|")
 
             server = Confline.get_value("Web_Callback_Server").to_i
