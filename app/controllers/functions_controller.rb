@@ -1155,6 +1155,8 @@ ORDER BY LENGTH(cut) DESC ) AS A ON ( #{usable_location}) WHERE devices.id = #{@
       flash[:notice] = _("device_range_numbers_not_same")
       redirect_to :action => 'settings' and return false
     end
+    update_confline('do_not_block_users_when_balance_below_zero_on_subscription',
+                    params[:do_not_block_users_when_balance_below_zero_on_subscription])
     #/Various
 
     #Tax

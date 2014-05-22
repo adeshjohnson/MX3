@@ -3756,7 +3756,7 @@ Localization.define('en') do |l|
   l.store 'Please_select_period_without_collisions', 'Please select period without collisions'
   l.store 'Tariff_import_incorrect_time', 'Tariff import incorrect time'
   l.store 'Where_to_route_incoming_calls_from_this_Provider', 'Where to route incoming calls from this Provider?'
-  l.store 'Disallow_prepaid_user_balance_drop_below_zero', 'Do not allow prepaid user balance drop below zero'
+  l.store 'Disallow_prepaid_user_balance_drop_below_zero', ' Do not allow PREPAID User balance drop below zero (block them instead)'
   l.store 'Cannot_send_test_email_because_main_parameters_empty', 'Cannot send test email because main parameters are empty'
   l.store 'Cannot_send_test_email_because_sending_disabled', 'Cannot send test email because sending is disabled'
   l.store 'IVR_Block_Was_Not_Found', 'IVR block was not found'
@@ -4620,6 +4620,7 @@ Localization.define('en') do |l|
   l.store 'email_not_sent', 'Email was not sent'
   l.store 'default_currency_is', 'Default Currency is'
   l.store 'Busy_IVR', 'Busy IVR'
+  l.store 'do_not_block_users_when_balance_below_zero_on_subscription', 'Do not block POSTPAID User when balance goes bellow zero on subscription count'
   #  l.store '', ''
   #  l.store '', ''
 

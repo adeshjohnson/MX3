@@ -1488,13 +1488,21 @@ class User < ActiveRecord::Base
     MorLog.my_debug("  period_start_with_time : #{period_start_with_time}")
     MorLog.my_debug("  period_end_with_time : #{period_end_with_time}")
     b=0
+    # if setting does not allow dropping bellow zero and balance got bellow 0
+    setting_disallow_balance_drop_below_zero = Confline.get_value("Disallow_prepaid_user_balance_drop_below_zero", owner_id)
+
+    hidden_functionality = Confline.get_value('hidden_functionality').to_i == 1
+    do_not_block_when_below_zero = if hidden_functionality
+                                     Confline.get_value('do_not_block_users_when_balance_below_zero_on_subscription').to_i
+                                   else
+                                     0
+                                   end
+
     subscriptions.each { |sub|
       if !Action.find(:first, :conditions => ["action = 'subscription_paid' AND user_id = ? AND data = ? AND target_id = ?", id, "#{time.year}-#{time.month}#{('-' + time.day.to_s) if day}", sub.id])
         changed = 1
         sub_price = sub.price_for_period(period_start_with_time, period_end_with_time)
 
-        # if setting does not allow dropping bellow zero and balance got bellow 0
-        setting_disallow_balance_drop_below_zero = Confline.get_value("Disallow_prepaid_user_balance_drop_below_zero", owner_id)
         balance_left = balance - sub_price
         if user_type == "prepaid" and balance_left.to_d < 0.to_d and setting_disallow_balance_drop_below_zero.to_i == 1
           # and block user
@@ -1518,7 +1526,7 @@ class User < ActiveRecord::Base
       end
     }
     self.balance -= b
-    if self.postpaid? and (balance + credit < 0) and not self.credit_unlimited?
+    if self.postpaid? and (balance + credit < 0) and not self.credit_unlimited? and do_not_block_when_below_zero == 0
       changed = 1
       MorLog.my_debug("  Blocking postpaid user and sending email")
       self.block_and_send_email
