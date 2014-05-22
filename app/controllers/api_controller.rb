@@ -144,8 +144,8 @@ class ApiController < ApplicationController
             legA_cid = src if legA_cid.blank?
             legB_cid = src if legB_cid.blank?
 
-            legA_cid ||= params[:cli_lega]
-            legB_cid ||= params[:cli_legb]
+            legA_cid = params[:cli_lega] || legA_cid
+            legB_cid = params[:cli_legb] || legB_cid
 
             separator = (ast_18? ? "," : "|")
 
