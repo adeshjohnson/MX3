@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Do not allow PREPAID User balance drop below zero (block them instead):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Do not block POSTPAID User when balance goes bellow zero on subscription count:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/hidden_functionality</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Do not allow PREPAID User balance drop below zero (block them instead):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Do not block POSTPAID User when balance goes bellow zero on subscription count:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td>off</td>
+</tr>
+<!--Jei postpaid - turi neblokuoti, jei prepaid - turi blokuoti. -->
+<!--useris yra POSTPAID-->
+<tr>
+	<td>check</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=disallow_prepaid_user_balance_drop_below_zero</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/monthly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>-10.0000 USD</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_blocked_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_blocked_2</td>
+	<td>off</td>
+</tr>
+<!--Jei useris bus prepaid, jį turi užblokuoti-->
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>User's settings successfully changed: Test User #1</td>
+</tr>
+<!--Išvaloma, kad vėl suveiktų monthly actions-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_from_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/monthly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/users/edit/2</td>
+	<td></td>
+</tr>
+<!--Useris prepaid ir vietoje to, kad nuskaitytų subscription, jį užblokavo, ką ir sako setingas-->
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>-10.0000 USD</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_blocked_1</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Exclamation&quot;]</td>
+	<td></td>
+</tr>
+<!--Atblokuojamas useris ir padaromas postpaid-->
+<tr>
+	<td>click</td>
+	<td>id=user_blocked_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user_postpaid_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<!--Turės užblokuoti, nes NUžymėtas setingas ir useris POSTPAID (tuo pačiu nužymimas prepaid setingas, kad tikrai blokuotų tik dėl POSTPAID setingo)-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=disallow_prepaid_user_balance_drop_below_zero</td>
+	<td></td>
+</tr>
+<tr>
+	<td>uncheck</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_from_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/monthly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>-20.0000 USD</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_postpaid_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Exclamation&quot;]</td>
+	<td></td>
+</tr>
+<!--useris atblokuojamas-->
+<tr>
+	<td>click</td>
+	<td>id=user_blocked_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>User's settings successfully changed: Test User #1</td>
+</tr>
+<!--Setingas pažymimas tam, kad disablinus optioną jis tikrai neveiktų-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--Išjungiamas funkcionalumas - turi blokuoti nukritus balansui-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/hidden_functionality_off</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_4 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Do not allow PREPAID User balance drop below zero (block them instead):</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Do not block POSTPAID User when balance goes bellow zero on subscription count:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=do_not_block_users_when_balance_below_zero_on_subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_from_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/monthly_actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/delete_conflines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<!--Useris užblokuotas, taip ir turėjo būti. -->
+<tr>
+	<td>open</td>
+	<td>billing/users/edit/2</td>
+	<td></td>
+</tr>
+<!--balansas sumažėja, nes pirmiau nuskaito, o po to blokuoja-->
+<tr>
+	<td>assertText</td>
+	<td>id=user_balance_value</td>
+	<td>-30.0000 USD</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_blocked_2</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=user_postpaid_1</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=img[alt=&quot;Exclamation&quot;]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
