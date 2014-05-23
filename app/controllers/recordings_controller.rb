@@ -144,9 +144,9 @@ class RecordingsController < ApplicationController
 
 =begin rdoc
  Plays recording in new popup window.
- 
+
  *Params*:
- 
+
  +id+ - Recording ID.
 =end
 
@@ -172,7 +172,7 @@ class RecordingsController < ApplicationController
   end
 
 =begin rdoc
- Lists recordings for admin and reseller. 
+ Lists recordings for admin and reseller.
 =end
 
   def list
@@ -286,14 +286,24 @@ class RecordingsController < ApplicationController
 
 
     @search = 0 if params[:clear].to_i == 1
-    conditions_str << "((recordings.user_id = ? AND visible_to_user = 1) OR (recordings.dst_user_id = ? AND visible_to_dst_user = 1))"
-    conditions_var += [@user.id, @user.id]
 
+    join = ''
 
-    @size = Recording.where([conditions_str.join(' AND ')] +conditions_var).count.to_i
+    if reseller?
+      join = <<-SQL
+        LEFT JOIN users AS src_user ON recordings.user_id = src_user.id AND src_user.owner_id = #{current_user.id}
+        LEFT JOIN users AS dst_user ON recordings.dst_user_id = dst_user.id AND dst_user.owner_id = #{current_user.id}
+      SQL
+      conditions_str << "((src_user.id IS NOT NULL) OR (dst_user.id IS NOT NULL) OR (recordings.user_id = #{current_user.id}))"
+    else
+      conditions_str << "((recordings.user_id = ? AND visible_to_user = 1) OR (recordings.dst_user_id = ? AND visible_to_dst_user = 1))"
+      conditions_var += [@user.id, @user.id]
+    end
+
+    @size = Recording.joins(join).where([conditions_str.join(' AND ')] +conditions_var).count.to_i
     @items_per_page = Confline.get_value("Items_Per_Page").to_i
     @total_pages = (@size.to_d / @items_per_page.to_d).ceil
-    @recordings = Recording.includes(:call).where([conditions_str.join(' AND ')] +conditions_var).limit(@items_per_page).offset((@page-1)*@items_per_page).order("calls.calldate DESC").all
+    @recordings = Recording.includes(:call).where([conditions_str.join(' AND ')] +conditions_var).joins(join).limit(@items_per_page).offset((@page-1)*@items_per_page).order("calls.calldate DESC").all
     @page_select_params = {
         :s_source => @search_source,
         :s_destination => @search_destination
@@ -380,7 +390,7 @@ class RecordingsController < ApplicationController
   end
 
 =begin rdoc
-  
+
 =end
 
   def list_users
@@ -522,7 +532,7 @@ class RecordingsController < ApplicationController
   end
 
 =begin  rdoc
-  
+
 =end
 
   def list_users_update
@@ -582,7 +592,7 @@ class RecordingsController < ApplicationController
 
 
 =begin rdoc
- Destroys recording. 
+ Destroys recording.
 =end
 
   def destroy
@@ -714,15 +724,15 @@ class RecordingsController < ApplicationController
     end
     return true
   end
-  
+
   def res_authorization
     if reseller?
       device = Device.where(id: params[:show_rec]).try(:first)
       user = device.user if device
-      if user and (user.owner_id != current_user.id)  
-        flash[:notice] = _('You_have_no_view_permission') 
-        redirect_to :root and return false 
+      if user and (user.owner_id != current_user.id)
+        flash[:notice] = _('You_have_no_view_permission')
+        redirect_to :root and return false
       end
     end
-  end 
+  end
 end
