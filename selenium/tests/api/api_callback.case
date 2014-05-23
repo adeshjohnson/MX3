@@ -152,6 +152,98 @@
 	<td>Ok</td>
 	<td></td>
 </tr>
+<!--Nauji parametrai: cli_lega, cli_legb-->
+<!--patikrinama, jog įeina į hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_lega=5&amp;cli_legb=6&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=error</td>
+	<td>Incorrect hash</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=6&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=error</td>
+	<td>Incorrect hash</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_lega=5&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=error</td>
+	<td>Incorrect hash</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_lega=blobblob&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=test_device&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=test_device&amp;cli_lega=blobblob&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_lega=blobblob&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>Ok</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=test_device&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>Ok</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=test_device&amp;test=1&amp;cli_lega=blobblob&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>Ok</td>
+</tr>
 <!--be hash-->
 <tr>
 	<td>open</td>
@@ -222,6 +314,37 @@
 	<td>assertTextPresent</td>
 	<td>Ok</td>
 	<td></td>
+</tr>
+<!--cli_lega, cli_legb veikia ir be hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_lega=blobblob&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>Ok</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=test_device&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>Ok</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/callback?u=admin&amp;device=5&amp;src=306984327343&amp;dst=351915017343&amp;cli_legb=test_device&amp;test=1&amp;cli_lega=blobblob</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=status</td>
+	<td>Ok</td>
 </tr>
 </tbody></table>
 </body>
