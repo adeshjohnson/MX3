@@ -786,7 +786,8 @@ class Call < ActiveRecord::Base
     c2 = Call.find(:all, :conditions => [cond.join(' AND ').to_s] + var, :select => 'calldate, duration')
     cond << "disposition = 'ANSWERED'"
     calls1 = Call.find(:all, :conditions => [cond.join(' AND ').to_s] + var, :select => 'calldate, duration')
-    return calls1, c2
+    highest_duration = Call.where([cond.join(' AND ')] + var).maximum(:duration)
+    return calls1, c2, highest_duration
   end
 
   def Call.country_stats(options={})

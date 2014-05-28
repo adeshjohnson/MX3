@@ -3431,6 +3431,9 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @page_title = _('Load_stats')
     @page_icon = "chart_bar.png"
 
+    #Load stats are shown for one day only
+    params[:date_till] = params[:date_from]
+
     change_date
 
     @providers = current_user.providers.find(:all, :conditions => ['hidden=?', 0])
@@ -3440,11 +3443,6 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @dids = Did.find(:all)
       @servers = Server.find(:all)
     end
-
-    session[:hour_from] = "00"
-    session[:minute_from] = "00"
-    session[:hour_till] = "23"
-    session[:minute_till] = "59"
 
     @default = {:s_user => -1, :s_provider => -1, :s_did => -1, :s_device => -1, :s_direction => -1, :s_server => -1, :s_reseller => -1}
     session[:stats_load_stats_options] ? @options = session[:stats_load_stats_options] : @options = @default
@@ -3456,10 +3454,10 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
     @options[:s_provider] = params[:s_provider] if params[:s_provider]
     @options[:s_direction] = params[:s_direction] if params[:s_direction]
     @options[:s_server] = params[:s_server] if params[:s_server] and current_user.usertype != 'reseller'
-    @options[:a1] ="#{(session_from_datetime.to_s)}"
-    @options[:a2] ="#{(session_till_datetime.to_s)}"
+    @options[:a1] = session_from_datetime
+    @options[:a2] = session_till_datetime
     @options[:current_user] = current_user
-    @calls_answered, @calls_all =Call.calls_for_laod_stats(@options)
+    @calls_answered, @calls_all, highest_duration =Call.calls_for_laod_stats(@options)
 
     #    logger.info @calls_answered.size.to_i
     #    logger.info @calls_all.size.to_i
@@ -3473,48 +3471,48 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       i+=1
     end
 
-    if  @calls_all.size.to_i >0
-      for cal in @calls_all
-        h = cal.calldate.strftime("%H")
-        m = cal.calldate.strftime("%M")
+    if @calls_all.count >0
+      @calls_all.each do |call|
+        h = call.calldate.strftime("%H")
+        m = call.calldate.strftime("%M")
         h = h.to_i * 60
         m = h.to_i + m.to_i
         min2[m.to_i]+=1
       end
     end
 
-    if @calls_answered.size.to_i >0
-      for cal in @calls_answered
-        h = cal.calldate.strftime("%H")
-        m = cal.calldate.strftime("%M")
+    if @calls_answered.count >0
+      @calls_answered.each do |call|
+        h = call.calldate.strftime("%H")
+        m = call.calldate.strftime("%M")
         h = h.to_i * 60
         m = h.to_i + m.to_i
         #min2[m]+=1
-        d = cal.duration.to_i / 60
-        if (cal.duration.to_i % 60) > 0
-          d+= 1
+        d = call.duration.to_i / 60
+        if (call.duration.to_i % 60) > 0
+          d += 1
         end
-        i = m.to_i
-        d.times do
-          if i.to_i < 1440
-            min1[i.to_i]+=1
-            i=i+1
-          end
+        from = m.to_i
+        to = from + d
+        to = 1339 if to >= 1440
+        (from..to).each do |index|
+          min1[index] += 1
         end
       end
     end
 
 
-    @Call_answered_graph=""
-    i=0
-    n.times do
-      h2 = (i / 60)
-      m2 = (i % 60)
+    @Call_answered_graph= ''
+    (0..n).each do |minute|
+      h2 = (minute / 60)
+      m2 = (minute % 60)
       time = Time.mktime(session[:year_from], session[:month_from], session[:day_from], h2, m2, 0).strftime("%H:%M")
-      @Call_answered_graph += time.to_s + ";" + min1[i].to_s + ";"+ min2[i].to_s + "\\n"
-      i+=1
+      @Call_answered_graph << "#{time};#{min1[minute]};#{min2[minute]}\\n"
     end
 
+    if highest_duration > 36000
+      flash[:notice] = _('db_error_broken_call_duration')
+    end
   end
 
 
