@@ -1055,6 +1055,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementNotPresent</td>
+	<td>name=failed_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Failed IVR</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/test/load_delta_sql/tests/sql/hidden_functionality</td>
 	<td></td>
@@ -1194,6 +1204,17 @@
 	<td>id=status</td>
 	<td>IVR Deleted</td>
 </tr>
+<!--Failed IVR-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=failed_ivr</td>
+	<td>None</td>
+</tr>
 <tr>
 	<td>open</td>
 	<td>/billing/ivr/new</td>
@@ -1202,7 +1223,147 @@
 <tr>
 	<td>type</td>
 	<td>id=ivr_name</td>
-	<td>test</td>
+	<td>failed test ivr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>IVR created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=failed_ivr</td>
+	<td>None</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=failed_ivr</td>
+	<td>None failed test ivr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=failed_ivr</td>
+	<td>label=failed test ivr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=failed_ivr</td>
+	<td>failed test ivr</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IVR was not deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>it is assigned to Callback</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/functions/callback_settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=failed_ivr</td>
+	<td>label=None</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>IVR Deleted</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_name</td>
+	<td>busy test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>IVR created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/ivr/new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ivr_name</td>
+	<td>failed test</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1222,7 +1383,12 @@
 <tr>
 	<td>select</td>
 	<td>name=busy_ivr</td>
-	<td>label=test</td>
+	<td>label=busy test</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=failed_ivr</td>
+	<td>label=failed test</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1260,6 +1426,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementNotPresent</td>
+	<td>name=failed_ivr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Failed IVR</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/ivr</td>
 	<td></td>
@@ -1278,6 +1454,31 @@
 	<td>assertText</td>
 	<td>id=status</td>
 	<td>IVR Deleted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>IVR Deleted</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>failed test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>busy test</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
