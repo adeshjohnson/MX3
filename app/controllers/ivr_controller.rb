@@ -444,8 +444,9 @@ class IvrController < ApplicationController
                          @ivr.id, @ivr.id, @ivr.id, @ivr.id]
                          )
 
-    is_ivr_in_use_callback = (Confline.get_value('hidden_functionality').to_i == 1 &&
-                              Confline.get_value('Busy_IVR').to_i == @ivr.id)
+    is_ivr_in_use_callback = (Confline.get_value('hidden_functionality').to_i == 1) &&
+                              ((Confline.get_value('Busy_IVR').to_i == @ivr.id) ||
+                                (Confline.get_value('Failed_IVR').to_i == @ivr.id))
     @ivr.errors.add(:assigned_to_callback, _('assigned_to_callback')) if is_ivr_in_use_callback
 
     if is_ivr_in_use

@@ -4621,6 +4621,7 @@ Localization.define('en') do |l|
   l.store 'email_not_sent', 'Email was not sent'
   l.store 'default_currency_is', 'Default Currency is'
   l.store 'Busy_IVR', 'Busy IVR'
+  l.store 'Failed_IVR', 'Failed IVR'
   l.store 'assigned_to_callback', 'it is assigned to Callback'
   l.store 'do_not_block_users_when_balance_below_zero_on_subscription', 'Do not block POSTPAID User when balance goes bellow zero on subscription count'
   #  l.store '', ''

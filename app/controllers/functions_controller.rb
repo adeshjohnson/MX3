@@ -3218,7 +3218,7 @@ Sets default tax values for users or cardgroups
   def callback_settings
     @page_title = _('Callback_settings')
     @servers = Server.order("server_id ASC").all
-    @busy_ivrs = Ivr.order('name ASC').all
+    @ivrs = Ivr.order('name ASC').all
   end
 
   def callback_settings_update
@@ -3233,6 +3233,7 @@ Sets default tax values for users or cardgroups
 
     Confline.set_value("Web_Callback_Server", params[:web_callback_server])
     Confline.set_value('Busy_IVR', params[:busy_ivr].to_i) if params[:busy_ivr]
+    Confline.set_value('Failed_IVR', params[:failed_ivr].to_i) if params[:failed_ivr]
     Confline.set_value("Callback_legB_CID", params[:CID]['legB'], 0) if params[:CID] and params[:CID].key? 'legB'
     Confline.set_value("Callback_legA_CID", params[:CID]['legA'], 0) if params[:CID] and params[:CID].key? 'legA'
     Confline.set_value2("Callback_legB_CID", params[:legB_send_custom])
