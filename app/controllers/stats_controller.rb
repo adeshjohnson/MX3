@@ -3510,7 +3510,7 @@ in before filter : user (:find_user_from_id_or_session, :authorize_user)
       @Call_answered_graph << "#{time};#{min1[minute]};#{min2[minute]}\\n"
     end
 
-    if highest_duration > 36000
+    if highest_duration.to_i > 36000
       flash[:notice] = _('db_error_broken_call_duration')
     end
   end
