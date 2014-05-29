@@ -147,15 +147,18 @@ class ApiController < ApplicationController
             legA_cid = params[:cli_lega] || legA_cid
             legB_cid = params[:cli_legb] || legB_cid
 
+            #Unique callback id generated from system time in milliseconds and four random numbers
+            callback_id = Time.now.strftime('%s%3N') + rand(1000..9999).to_s
+
             separator = (ast_18? ? "," : "|")
 
             server = Confline.get_value("Web_Callback_Server").to_i
             server = 1 if server == 0
 
             if dst.length > 0
-              st = originate_call(device.id, src, channel, "mor_cb_dst", dst, legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
+              st = originate_call(device.id, src, channel, "mor_cb_dst", dst, legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}#{separator}MOR_CB_ID=#{callback_id}", server)
             else
-              st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
+              st = originate_call(device.id, src, channel, "mor_cb_dst_ask", "123", legB_cid, "MOR_CB_LEGA_DST=#{src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}#{separator}MOR_CB_ID=#{callback_id}", server)
             end
             doc.status(st.to_i == 0 ? "Ok" : _('Cannot_connect_to_asterisk_server'))
           else
