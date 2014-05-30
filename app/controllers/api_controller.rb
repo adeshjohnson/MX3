@@ -18,7 +18,7 @@ class ApiController < ApplicationController
 			  :user_update_api, :callback, :invoices, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
 			  :wholesale_tariff, :device_create, :device_destroy, :device_list, :did_create, :did_assign_device, :did_unassign_device, :ma_activate,
 			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update, :credit_note_create, :credit_note_delete,
-			  :create_payment, :send_sms, :send_email, :cli_delete]
+			  :create_payment, :send_sms, :send_email, :cli_delete, :cli_add]
 
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
@@ -4107,6 +4107,58 @@ class ApiController < ApplicationController
           doc.error('Access Denied')
         end
       end
+    end
+
+    send_xml_data(out_string, params[:test].to_i)
+  end
+
+  def cli_add
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+
+    doc.page do
+
+      user = User.where(username: params[:u]).first
+      User.current = user
+      ivr_id = params[:ivr_id]
+      device_id = params[:device_id]
+      device = Device.where(id: device_id).first
+      ivr = Ivr.where(id: params[:ivr_id]).first
+
+      errors = []
+      errors << 'Access Denied' if user.blank?
+      if user && user.is_accountant?
+        errors << 'You are not authorized to view this page' unless user.accountant_allow_edit('device_manage')
+        errors << 'You do not have rights to edit this'      unless user.accountant_allow_edit('cli_ivr')
+      end
+      errors << 'CLI Number cannot be empty' if params[:cli_number].blank?
+      errors << 'Device ID cannot be empty'  if device_id.blank?
+      if device.blank? || (device.user.try(:owner_id) != user.id) || (user.is_admin? && device.user.is_reseller?)
+        errors << 'Device was not found'
+      end
+
+      errors << 'IVR was not found' if ivr.blank? && ivr_id
+
+      if errors.size > 0
+        doc.status { doc.error(errors.first) }
+      else
+        device = Device.where(id: device_id.to_i).first
+
+        cli = Callerid.new(:cli => params[:cli_number], :device_id => device_id, :comment => params[:comment].to_s, :banned => params[:banned].to_i, :added_at => Time.now)
+        cli.description = params[:description] if params[:description]
+        cli.ivr_id = ivr_id if ivr_id
+
+        if cli.save
+          doc.status(_('CLI_created'))
+        else
+          doc.status do
+            cli.errors.each do |key, value|
+              doc.error(value.gsub(/<\/?a.*?>/, ''))
+            end if cli.respond_to?(:errors)
+          end
+        end
+      end
+
     end
 
     send_xml_data(out_string, params[:test].to_i)
