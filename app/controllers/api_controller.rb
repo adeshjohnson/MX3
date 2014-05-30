@@ -18,7 +18,7 @@ class ApiController < ApplicationController
 			  :user_update_api, :callback, :invoices, :user_balance_change, :rate, :get_tariff, :import_tariff_retail,
 			  :wholesale_tariff, :device_create, :device_destroy, :device_list, :did_create, :did_assign_device, :did_unassign_device, :ma_activate,
 			  :phonebooks, :phonebook_edit, :payments_list, :credit_notes, :credit_note_update, :credit_note_create, :credit_note_delete,
-			  :create_payment, :send_sms, :send_email]
+			  :create_payment, :send_sms, :send_email, :cli_delete]
 
   before_filter :check_calling_card_addon, :only => [:show_calling_card_group, :cc_by_cli, :buy_card_from_callingroup]
   before_filter :check_sms_addon, :only => [:send_sms]
@@ -4071,6 +4071,44 @@ class ApiController < ApplicationController
         doc.error("Bad login")
       end
     }
+    send_xml_data(out_string, params[:test].to_i)
+  end
+
+  def cli_delete
+    doc = Builder::XmlMarkup.new(:target => out_string = "", :indent => 2)
+    doc.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
+
+    check_user(params[:u])
+
+    doc.page do
+      doc.status do
+        if @user && !@user.is_user?
+          if (!@user.is_accountant?) || (@user.is_accountant? && @user.accountant_allow_edit('device_manage'))
+            cli = Callerid.where(cli: params[:cli_number]).first
+            if cli
+              allowed_to_delete = false
+              if check_owner_for_device(cli.device.try(:user), 0, @user)
+                if cli.destroy
+                  doc.status('CLI successfully deleted')
+                else
+                  doc.error(cli.errors.full_messages.join(','))
+                end
+              else
+                dont_be_so_smart(@user.id)
+                doc.error('CLI was not found')
+              end
+            else
+              doc.error('CLI was not found')
+            end
+          else
+            doc.error('You are not authorised to use this functionality')
+          end
+        else
+          doc.error('Access Denied')
+        end
+      end
+    end
+
     send_xml_data(out_string, params[:test].to_i)
   end
 
