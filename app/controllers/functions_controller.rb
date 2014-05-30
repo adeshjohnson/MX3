@@ -3260,6 +3260,17 @@ Sets default tax values for users or cardgroups
     if error.to_i == 0
       flash[:status] = _('Settings_saved')
     end
+
+    if params[:busy_ivr] || params[:failed_ivr]
+      begin
+        Server.where(server_type: 'asterisk').each { |server| server.ami_cmd("mor reload") }
+        redirect_to :action => "callback_settings" and return false
+      rescue => e
+        flash[:notice] = e.to_s
+        redirect_to :action => "callback_settings" and return false
+      end
+    end
+
     redirect_to :action => 'callback_settings' and return false
   end
 
