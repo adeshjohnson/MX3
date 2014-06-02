@@ -4124,16 +4124,18 @@ class ApiController < ApplicationController
       device_id = params[:device_id]
       device = Device.where(id: device_id).first
       ivr = Ivr.where(id: params[:ivr_id]).first
+      device_user = device.try(:user)
 
       errors = []
       errors << 'Access Denied' if user.blank?
       if user && user.is_accountant?
-        errors << 'You are not authorized to view this page' unless user.accountant_allow_edit('device_manage')
-        errors << 'You do not have rights to edit this'      unless user.accountant_allow_edit('cli_ivr')
+        errors << 'You are not authorized to view this page' if !user.accountant_allow_edit('device_manage')
+        errors << 'You do not have rights to edit this'      if ivr_id && !user.accountant_allow_edit('cli_ivr')
       end
       errors << 'CLI Number cannot be empty' if params[:cli_number].blank?
       errors << 'Device ID cannot be empty'  if device_id.blank?
-      if device.blank? || (device.user.try(:owner_id) != user.id) || (user.is_admin? && device.user.is_reseller?)
+      correct_owner = user.is_accountant? ? 0 : user.id
+      if device.blank? || (device_user.try(:owner_id) != correct_owner) || (user.is_admin? && device_user.is_reseller?)
         errors << 'Device was not found'
       end
 
@@ -4142,8 +4144,6 @@ class ApiController < ApplicationController
       if errors.size > 0
         doc.status { doc.error(errors.first) }
       else
-        device = Device.where(id: device_id.to_i).first
-
         cli = Callerid.new(:cli => params[:cli_number], :device_id => device_id, :comment => params[:comment].to_s, :banned => params[:banned].to_i, :added_at => Time.now)
         cli.description = params[:description] if params[:description]
         cli.ivr_id = ivr_id if ivr_id
