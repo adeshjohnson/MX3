@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>cli_create</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cli_create</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=api_tests/enable_api</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<!--Calculate hash and send cli_add command with incorrect hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=accountant&amp;user_id=3&amp;test=1&amp;hash=9a9d292176f7b8adb10d0d037732446bae1ef4dd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;test=1&amp;hash=38282ca5e65e63746498ef5b39a2fe71c644000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Incorrect hash</td>
+	<td></td>
+</tr>
+<!--cli_add, with device id-->
+<!--#hash1-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=1234&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=1234&amp;test=1&amp;hash=${hash1}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device ID cannot be empty</td>
+	<td></td>
+</tr>
+<!-- invalid device ID-->
+<!--#hash2-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=1234&amp;device_id=invalid&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=1234&amp;device_id=invalid&amp;test=1&amp;hash=${hash2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device was not found</td>
+	<td></td>
+</tr>
+<!--cli_add with only with wrong cli number-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=abc&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=abc&amp;device_id=2&amp;test=1&amp;hash=443e795df9867f78b36f9e58957ba29377b019aa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI must be numeric</td>
+	<td></td>
+</tr>
+<!--cli_add with only with device and cli number-->
+<!--#hash3-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=1234&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash3</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=1234&amp;device_id=2&amp;test=1&amp;hash=${hash3}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cli</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>name=ivr</td>
+	<td>Not assigned</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=email_callback</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=banned</td>
+	<td>off</td>
+</tr>
+<!--Same CLi number, neturi sukurti -->
+<!--#hash4-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=1234&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash4</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=1234&amp;device_id=2&amp;test=1&amp;hash=${hash4}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Such CLI exist</td>
+	<td></td>
+</tr>
+<!--su komentarais/fax device-->
+<!--#hash5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=12345&amp;comment=komentaras&amp;device_id=3&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=12345&amp;comment=komentaras&amp;device_id=3&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cli</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=comment</td>
+	<td>komentaras</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>FAX/102</td>
+	<td></td>
+</tr>
+<!--komentarais ir descriptionu-->
+<!--#hash5-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=12346&amp;description=vienetukas&amp;comment=komentaras&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash6</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=12346&amp;description=vienetukas&amp;comment=komentaras&amp;device_id=2&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=description</td>
+	<td>vienetukas</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cli</td>
+	<td>12346</td>
+</tr>
+<!--IVR-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/ivr_list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=123467&amp;description=vienetukas&amp;comment=komentaras&amp;ivr_id=2&amp;device_id=2&amp;test=1&amp;hash=c5451cd7067ebbd9f76e0f5cbb600a51b2674e36</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>name=ivr</td>
+	<td>aaaaivrs</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cli</td>
+	<td>123467</td>
+</tr>
+<!--IVR blogas -->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=123467&amp;description=vienetukas&amp;comment=komentaras&amp;ivr_id=4789&amp;device_id=2&amp;test=1&amp;hash=c5451cd7067ebbd9f76e0f5cbb600a51b2674e36</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>IVR was not found</td>
+	<td></td>
+</tr>
+<!--comment,description, ivr, blocked-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=1234678&amp;description=vienetukas&amp;comment=komentaras&amp;ivr_id=2&amp;banned=1&amp;device_id=2&amp;test=1&amp;hash=f4e91be346b55776ee342e5863b3803dc69c3627</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=banned</td>
+	<td>on</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?user_id=2&amp;cli_number=12346&amp;description=vienetukas&amp;comment=komentaras&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash6</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?user_id=2&amp;cli_number=12346&amp;description=vienetukas&amp;comment=komentaras&amp;device_id=2&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access denied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=12346&amp;description=vienetukas&amp;comment=komentaras&amp;&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash7</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=12346&amp;description=vienetukas&amp;comment=komentaras&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device ID cannot be empty</td>
+	<td></td>
+</tr>
+<!--bandyma su useriu hacker-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=hacker&amp;user_id=2&amp;cli_number=321&amp;description=vienetukas&amp;comment=komentaras&amp;ivr_id=2&amp;banned=1&amp;device_id=2&amp;test=1&amp;hash=5cf228109aa7b65d4d14161f7003cd04d9d5799e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Bad login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=reseller&amp;user_id=2&amp;cli_number=186&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=reseller&amp;user_id=2&amp;cli_number=186&amp;device_id=2&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Device was not found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=accountant&amp;s_user=5&amp;cli_number=376377device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash5</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=accountant&amp;s_user=5&amp;cli_number=376377device_id=2&amp;test=1&amp;hash=${hash5}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;s_user=5&amp;cli_number=376371device_id=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=body</td>
+	<td>hash6</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=accountant&amp;s_user=5&amp;cli_number=376371device_id=7&amp;test=1&amp;hash=${hash6}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You are not authorized to view this page</td>
+	<td></td>
+</tr>
+<!--reseleriui hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=5&amp;cli_number=321&amp;device_id=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash7</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=5&amp;cli_number=&amp;device_id=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash9</td>
+</tr>
+<!--Login as administrator-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=reseller&amp;user_id=5&amp;cli_number=321&amp;device_id=7&amp;test=1&amp;hash=${hash7}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=reseller&amp;user_id=5&amp;cli_number=&amp;device_id=7&amp;test=1&amp;hash=${hash9}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI Number cannot be empty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/cli_edit/6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=cli</td>
+	<td>321</td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=api_tests/device_create/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/permissions/edit/11?group_type=accountant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recordings_manage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/test_api?u=admin&amp;user_id=2&amp;cli_number=15454&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=html</td>
+	<td>hash8</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<!--accountant-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=accountant&amp;user_id=2&amp;cli_number=15454&amp;device_id=2&amp;test=1&amp;hash=${hash8}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/device_clis/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>15454 </td>
+	<td></td>
+</tr>
+<!--API commands without hash-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_bundle_sql/?path=api_tests/disable_hash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td># bundle loaded</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=accountant&amp;user_id=2&amp;cli_number=154544&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/device_create?u=reseller&amp;user_id=2&amp;cli_number=15454&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Access Denied</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=154454&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;user_id=2&amp;cli_number=154454&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Such CLI exist</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=reseller&amp;user_id=0&amp;cli_number=154454&amp;device_id=2&amp;test=1</td>
+	<td></td>
+</tr>
+<!--test=1 formato testavimas - iki siol buvo tik html-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/settings/api/enable_xml</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=reseller&amp;user_id=5&amp;description=desription1&amp;cli_number=9&amp;device_id=7=88&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=page</td>
+	<td>CLI created</td>
+</tr>
+</tbody></table>
+</body>
+</html>
