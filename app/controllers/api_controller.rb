@@ -4089,7 +4089,7 @@ class ApiController < ApplicationController
               allowed_to_delete = false
               if check_owner_for_device(cli.device.try(:user), 0, @user)
                 if cli.destroy
-                  doc.status('CLI successfully deleted')
+                  doc.success('CLI successfully deleted')
                 else
                   doc.error(cli.errors.full_messages.join(','))
                 end
