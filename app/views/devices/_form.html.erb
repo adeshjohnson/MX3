@@ -64,7 +64,7 @@
                 <%= render :partial => "device_form_debug" %>
             <% end %>
         <% end %>
-        <% if not @new_device and @device_type != "FAX" and rec_active? %>
+        <% if not @new_device and @device_type != "FAX" and (current_user.recording_enabled.to_i == 1 or (admin? or accountant?)) %>
             <% @owner = @user.owner_id if !@owner %>
             <%= render :partial => "device_recordings" %>
         <% end %>
