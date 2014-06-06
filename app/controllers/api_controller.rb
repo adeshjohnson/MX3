@@ -4123,7 +4123,7 @@ class ApiController < ApplicationController
       ivr_id = params[:ivr_id]
       device_id = params[:device_id]
       device = Device.where(id: device_id).first
-      ivr = Ivr.where(id: params[:ivr_id]).first
+      ivr = user.ivrs.where(id: params[:ivr_id]).first
       device_user = device.try(:user)
 
       errors = []
@@ -4141,23 +4141,23 @@ class ApiController < ApplicationController
 
       errors << 'IVR was not found' if ivr.blank? && ivr_id
 
-      if errors.size > 0
-        doc.status { doc.error(errors.first) }
-      else
-        cli = Callerid.new(:cli => params[:cli_number], :device_id => device_id, :comment => params[:comment].to_s, :banned => params[:banned].to_i, :added_at => Time.now)
-        cli.description = params[:description] if params[:description]
-        cli.ivr_id = ivr_id if ivr_id
-
-        if cli.save
-          doc.status(_('CLI_created'))
+      doc.status {
+        if errors.size > 0
+          doc.error(errors.first)
         else
-          doc.status do
+          cli = Callerid.new(:cli => params[:cli_number], :device_id => device_id, :comment => params[:comment].to_s, :banned => params[:banned].to_i, :added_at => Time.now)
+          cli.description = params[:description] if params[:description]
+          cli.ivr_id = ivr_id if ivr_id
+
+          if cli.save
+            doc.success(_('CLI_created'))
+          else
             cli.errors.each do |key, value|
               doc.error(value.gsub(/<\/?a.*?>/, ''))
             end if cli.respond_to?(:errors)
           end
         end
-      end
+      }
 
     end
 

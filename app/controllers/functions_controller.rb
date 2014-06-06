@@ -3282,6 +3282,7 @@ Sets default tax values for users or cardgroups
         @query_values = Hash.new
         begin
           CGI::parse(URI.parse(@api_link).query).each { |key, value| @query_values[key.to_sym] = value[0] }
+          @query_values[:api_path] = URI.parse(@api_link).path
           flash[:notice] = nil
         rescue
           flash[:notice] = _("failed_to_parse_uri") + ' ' + @api_link
