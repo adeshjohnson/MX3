@@ -4123,7 +4123,7 @@ class ApiController < ApplicationController
       ivr_id = params[:ivr_id]
       device_id = params[:device_id]
       device = Device.where(id: device_id).first
-      ivr = user.ivrs.where(id: params[:ivr_id]).first
+      ivr = user.ivrs.where(id: params[:ivr_id]).first if user
       device_user = device.try(:user)
 
       errors = []
