@@ -4146,7 +4146,7 @@ class ApiController < ApplicationController
           doc.error(errors.first)
         else
           cli = Callerid.new(:cli => params[:cli_number], :device_id => device_id, :comment => params[:comment].to_s, :banned => params[:banned].to_i, :added_at => Time.now)
-          cli.description = params[:description] if params[:description]
+          cli.description = params[:cli_description] if params[:cli_description]
           cli.ivr_id = ivr_id if ivr_id
 
           if cli.save

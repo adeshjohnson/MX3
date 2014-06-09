@@ -158,8 +158,6 @@ class MorApi
         "call_list", 'email_name', 'email_to_user_id', 'caller_id', 'device_id', "calldate", "source", "destination",
         "billsec", 'calls_string', 'cli_number']
 
-      hash_param_order.delete("description") if params[:api_path].to_s.include? 'cli_add'
-
       hash_param_order.each { |key|
         MorLog.my_debug key if ret[key.to_sym]
         string << ret[key.to_sym].to_s
