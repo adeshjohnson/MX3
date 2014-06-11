@@ -143,9 +143,9 @@ class Lcr < ActiveRecord::Base
         options[:order_by] ? order_by = "name" : order_by = "name"
         options[:order_desc] = 1
     end
-    order_by += " ASC" if options[:order_desc].to_i == 0 and order_by != ""
-    order_by += " DESC" if options[:order_desc].to_i == 1 and order_by != ""
-    return order_by
+    order_by += " ASC" if options[:order_desc].to_i == 0 and order_by.present?
+    order_by += " DESC" if options[:order_desc].to_i == 1 and order_by.present?
+    return order_by.to_s
 
   end
 
@@ -228,7 +228,7 @@ class Lcr < ActiveRecord::Base
     end
 
     filename = "Make_LCR_tariff-#{SqlExport.clean_filename(name)}-#{options[:curr]}-#{Time.now().to_i}_#{options[:rand]}"
-    sql = "SELECT dir_name, name, subcode, prefix, 
+    sql = "SELECT dir_name, name, subcode, prefix,
                   #{SqlExport.replace_dec('rate_min', options[:column_dem], 'rate_min')},
                   #{SqlExport.replace_dec('rate_max', options[:column_dem], 'rate_max')} "
     if options[:test] != 1
@@ -263,19 +263,19 @@ class Lcr < ActiveRecord::Base
   end
 
 =begin
-  Create identical lcrs - clone all lcrs from resellerA and assign them to resellerB. As well as 
+  Create identical lcrs - clone all lcrs from resellerA and assign them to resellerB. As well as
   information associated with lcr - data in lcr_partials and lcrproviders tables. In case both
-  resellers does not have identical list of providers or one of them does not have any providers 
-  at all return false, i dont think it's necesary to raise an exception, though it would be an option. 
-  Note: three insert into .. select .. statements would be enough for this operation but, since there 
+  resellers does not have identical list of providers or one of them does not have any providers
+  at all return false, i dont think it's necesary to raise an exception, though it would be an option.
+  Note: three insert into .. select .. statements would be enough for this operation but, since there
   is no way to identify which ones lcrs are new and whats theyr id so at this moment we have to generate
-  queries in a loop. Though doing it this way is more rails/oo way, butto do this task in only three 
+  queries in a loop. Though doing it this way is more rails/oo way, butto do this task in only three
   queries would be posible if say lcr.name would be unique for each user.
 
   *Params*
   +resellerA+ User instance where usertype == reseller, reseller who's lcrs should be cloned.
   +resellerB+ User instance where usertype == reseller, reseller to who new lcrs should be assigned
-  +lcr_list+ array of lcr_ids ie array containing numbers greater than 0. any non numeric thing or 
+  +lcr_list+ array of lcr_ids ie array containing numbers greater than 0. any non numeric thing or
     number less than 1 will be silently ignored.
 
   *Retuns*
@@ -322,9 +322,9 @@ class Lcr < ActiveRecord::Base
 
 =begin
   Check whether no failover provider should be used for this lcr
-  
+
   *Returns*
-  +boolean+ - true if no failover providers should be user, false otherwise 
+  +boolean+ - true if no failover providers should be user, false otherwise
 
 =end
   def no_failover?
