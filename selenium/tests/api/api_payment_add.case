@@ -914,6 +914,26 @@
 </tr>
 <tr>
 	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_16</td>
+	<td>From_api :</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_ptype</td>
+	<td>From_api :</td>
+</tr>
+<tr>
+	<td>open</td>
 	<td>/billing/callc/logout</td>
 	<td></td>
 </tr>
@@ -1293,6 +1313,112 @@
 	<td>assertTextPresent</td>
 	<td>ok 22 0.0000 0.0000 0.0000</td>
 	<td></td>
+</tr>
+<!--search-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/payments/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_10</td>
+	<td>From_api :</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_15</td>
+	<td>From_api : manual</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_19</td>
+	<td>From_api : gateways_paypal</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_ptype</td>
+	<td>label=From_api :</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_ptype</td>
+	<td>From_api :</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_10</td>
+	<td>From_api :</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_ptype</td>
+	<td>label=From_api : gateways_paypal</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=s_ptype</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_ptype</td>
+	<td>From_api : gateways_paypal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_22</td>
+	<td>From_api : gateways_paypal</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=s_ptype</td>
+	<td>label=From_api : manual</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=paymenttype_15</td>
+	<td>From_api : manual</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>id=s_ptype</td>
+	<td>From_api : manual</td>
 </tr>
 </tbody></table>
 </body>
