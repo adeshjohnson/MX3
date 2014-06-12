@@ -219,14 +219,16 @@ class FunctionsController < ApplicationController
         server = Confline.get_value("Web_Callback_Server").to_i
         server = 1 if server == 0
 
+    #Unique callback id generated from system time in milliseconds and four random numbers
+    callback_id = Time.now.strftime('%s%3N') + rand(1000..9999).to_s
 
     if @src.length > 0
 
       channel = "Local/#{@src}@mor_cb_src/n"
       if @dst.length > 0
-        st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, legB_cid, "MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
+        st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, legB_cid, "MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}MOR_CB_ID=#{callback_id}", server)
       else
-        st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", legB_cid,"MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}", server)
+        st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", legB_cid,"MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}MOR_CB_ID=#{callback_id}", server)
       end
 
 
