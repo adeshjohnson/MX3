@@ -226,9 +226,9 @@ class FunctionsController < ApplicationController
 
       channel = "Local/#{@src}@mor_cb_src/n"
       if @dst.length > 0
-        st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, legB_cid, "MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}MOR_CB_ID=#{callback_id}", server)
+        st = originate_call(@acc, @src, channel, "mor_cb_dst", @dst, legB_cid, "MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}#{separator}MOR_CB_ID=#{callback_id}", server)
       else
-        st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", legB_cid,"MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}MOR_CB_ID=#{callback_id}", server)
+        st = originate_call(@acc, @src, channel, "mor_cb_dst_ask", "123", legB_cid,"MOR_CB_LEGA_DST=#{@src}#{separator}MOR_CB_LEGA_CID=#{legA_cid}#{separator}MOR_CB_LEGB_CID=#{legB_cid}#{separator}MOR_CB_ID=#{callback_id}", server)
       end
 
 
