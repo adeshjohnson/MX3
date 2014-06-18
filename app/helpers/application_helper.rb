@@ -840,15 +840,19 @@ module ApplicationHelper
   end
 
   def link_nice_device(device)
-    if device.user_id != -1
-      raw link_to nice_device(device).html_safe, :controller => "devices", :action => "device_edit", :id => device.id
-    else
+    if device
+      if device.user_id != -1
+        raw link_to nice_device(device).html_safe, :controller => "devices", :action => "device_edit", :id => device.id
+      else
 
-      provider = device.provider
-      if provider
-        link_to nice_device(device), :controller => "providers", :action => "edit", :id => provider.id
+        provider = device.provider
+        if provider
+          link_to nice_device(device), :controller => "providers", :action => "edit", :id => provider.id
+        end
+
       end
-
+    else
+      ''
     end
   end
 

@@ -15,17 +15,17 @@ if @calls
     if loc.longitude != 0 and loc.latitude != 0 and loc2.latitude != 0 and loc2.longitude != 0
       device = call.src_device
       provider = call.provider
-      tool_tip = (_("Caller")+":<br / >"+link_nice_device(device)).html_safe
-      tool_tip += ("<br />"+link_nice_user(device.user)).html_safe
+      tool_tip = (_('Caller')+':<br / >'+link_nice_device(device)).html_safe
+      tool_tip += ('<br />'+link_nice_user(device.user)).html_safe if device
       page << "google.maps.event.addListener(map, 'tilesloaded', addActiveDeviceMarker(#{loc.latitude}, #{loc.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
       city = ""
-      city = loc2.city.to_s if loc2.city and loc2.city != ""
-      tool_tip = _("Country")+": " +loc2.country.to_s
-      tool_tip += "<br />"+city if city != ""
-      tool_tip += "<br />"+_("Provider")+": "+provider.name if provider
-      #tool_tip +="<br />"+_("Prefix")+": " +call.prefix
-      tool_tip += "<br />"+_("Number")+": " +call.dst if call.dst
-      tool_tip += "<br />"+_("Duration")+": "+nice_time(Time.now - call.start_time).to_s+"<br />. "
+      city = loc2.city.to_s if loc2.city and loc2.city != ''
+      tool_tip = _('Country')+': ' +loc2.country.to_s
+      tool_tip += '<br />'+city if city != ''
+      tool_tip += '<br />'+_('Provider')+': '+provider.name if provider
+      #tool_tip +='<br />'+_('Prefix')+': ' +call.prefix
+      tool_tip += '<br />'+_('Number')+': ' +call.dst if call.dst
+      tool_tip += '<br />'+_('Duration')+': '+nice_time(Time.now - call.start_time).to_s+'<br />. '
       page << "google.maps.event.addListener(map, 'tilesloaded', addDestinationMarker(#{loc2.latitude}, #{loc2.longitude}, escape('#{tool_tip.gsub(/\n/, "<br />").html_safe}')));"
       page << "line = new google.maps.Polyline({path: [new google.maps.LatLng(#{loc.latitude},#{loc.longitude}),new google.maps.LatLng(#{loc2.latitude},#{loc2.longitude})],map: map,strokeColor: '#ff0000',strokeOpacity: 1.0,strokeWeight: 2});"
       page << "lines_array.push(line);"
