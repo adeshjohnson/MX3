@@ -769,11 +769,11 @@ in before filter : tariff (:find_tariff_from_id)
 
   # Prefix Finder ################################################################
   def prefix_finder_find
-    @phrase = params[:prefix].to_s.gsub(/\D/, "")
+    @phrase = params[:prefix].to_s
     sql = "SELECT destinations.*, directions.name as dirname FROM destinations
            Join sms_rates on (sms_rates.prefix = destinations.prefix)
            LEFT Join directions on (directions.code = destinations.direction_code)
-           WHERE destinations.prefix = SUBSTRING(#{q(@phrase)}, 1, LENGTH(destinations.prefix))
+           WHERE destinations.prefix = SUBSTRING('#{(@phrase)}', 1, LENGTH(destinations.prefix))
            Order by LENGTH(destinations.prefix) DESC
            LIMIT 1"
     @dest = Destination.find_by_sql(sql) if @phrase != ''
