@@ -79,7 +79,7 @@
 <tr>
 	<td>type</td>
 	<td>email_smtp_server</td>
-	<td>smtp.gmail.com</td>
+	<td>localhost</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -89,22 +89,17 @@
 <tr>
 	<td>type</td>
 	<td>email_password</td>
-	<td>kolmisoft9</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>email_login</td>
-	<td>kolmitest998@gmail.com</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>email_login</td>
-	<td>kolmitest998@gmail.com</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>email_from</td>
-	<td>kolmitest998@gmail.com</td>
+	<td>test@test.com</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -129,7 +124,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>email_smtp_server</td>
-	<td>smtp.gmail.com</td>
+	<td>localhost</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -139,12 +134,12 @@
 <tr>
 	<td>assertValue</td>
 	<td>email_login</td>
-	<td>kolmitest998@gmail.com</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>email_password</td>
-	<td>kolmisoft9</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -154,7 +149,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>email_from</td>
-	<td>kolmitest998@gmail.com</td>
+	<td>test@test.com</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -750,7 +745,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>email_smtp_server</td>
-	<td>smtp.gmail.com</td>
+	<td>localhost</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -775,7 +770,7 @@
 <tr>
 	<td>assertValue</td>
 	<td>email_from</td>
-	<td>kolmitest998@gmail.com</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -797,7 +792,7 @@
 <tr>
 	<td>type</td>
 	<td>email_smtp_server</td>
-	<td>smtp.gmail.com</td>
+	<td>localhost</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -844,31 +839,7 @@
 	<td>Test email will be sent to: test2@kolmisoft.com</td>
 	<td></td>
 </tr>
-<tr>
-	<td>setTimeout</td>
-	<td>60000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>email_test_link</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Email was not sent. Press here for more info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=img[alt=&quot;Help&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>setTimeout</td> 	<td>60000</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>email_test_link</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Email was not sent. Press here for more info</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>css=img[alt=&quot;Help&quot;]</td> 	<td></td> </tr> <tr> 	<td>setTimeout</td> 	<td>10000</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
@@ -1847,31 +1818,7 @@
 	<td>commit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>setTimeout</td>
-	<td>60000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Email_go']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=notice</td>
-	<td>Email was not sent. Press here for more info</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=img[alt=&quot;Help&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>setTimeout</td>
-	<td>10000</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>setTimeout</td> 	<td>60000</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>//img[@alt='Email_go']</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=notice</td> 	<td>Email was not sent. Press here for more info</td> </tr> <tr> 	<td>assertText</td> 	<td>css=img[alt=&quot;Help&quot;]</td> 	<td></td> </tr> <tr> 	<td>setTimeout</td> 	<td>10000</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/reseller_settings</td>
@@ -1880,7 +1827,7 @@
 <tr>
 	<td>type</td>
 	<td>email_smtp_server</td>
-	<td>smtp.gmail.com</td>
+	<td>localhost</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1890,12 +1837,12 @@
 <tr>
 	<td>type</td>
 	<td>email_login</td>
-	<td>kolmitest</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>email_password</td>
-	<td>kolmitest99</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
