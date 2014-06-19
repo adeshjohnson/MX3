@@ -1,0 +1,1738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://192.168.233" />
+<title>sms2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">sms2</td></tr>
+</thead><tbody>
+<!--adminas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Naujas useris-->
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/sqls/user/user_1004/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Not Found</td>
+	<td></td>
+</tr>
+<!--sms tarifai-->
+<!--provaiderio-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>provider</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tariff[tariff_type]</td>
+	<td>label=Provider</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Tariff created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Tariff updated</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=prov_name_1</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>provider_tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Tariff updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/1?page=6&amp;st=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_5780</td>
+	<td>0.0001</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_rates</td>
+	<td></td>
+</tr>
+<!--userio-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tariff_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Tariff updated</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=user_name_2</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/tariff_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tariff_name</td>
+	<td>user_tariff</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/2?page=6&amp;st=L</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_5780</td>
+	<td>0.0002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_rates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/rate_new/1?st=A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11338</td>
+	<td>0.03</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_11339</td>
+	<td>0.04</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rate_45</td>
+	<td>0.05</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_rates</td>
+	<td></td>
+</tr>
+<!--1 sms provider sms email tipo-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>provider1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prov_type</td>
+	<td>label=sms email</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_sms_provider_domain</td>
+	<td>test1@providerdomain.com</td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>id=provider_pay_sms_receiver</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_1</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>sms_provider1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider updated</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_type_1</td>
+	<td>sms_email</td>
+</tr>
+<!--sms lcr-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>LCR successfully created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_1</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>LCR successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_edit/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lcr_name</td>
+	<td>sms_lcr</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>LCR successfully updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--subscribe user-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=user_id</td>
+	<td>label=testuser</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>User subscribed to SMS service: testuser</td>
+</tr>
+<!--subscribe userio prisijungimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>testuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Successfully logged in</td>
+</tr>
+<!--sms tikrinimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<!--įrašius % meta crasha-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>text</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>-37063749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>937</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Afghanistan MOB Afghanistan Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%9$3#7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>35538</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Albania MOB Albania Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--adminas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--nustatymas: sms from front page-->
+<tr>
+	<td>open</td>
+	<td>/billing/functions/settings_addons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tabTabdhtmlgoodies_tabView1_2 &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=send_sms_from_front_page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Settings saved</td>
+</tr>
+<!--subscribe userio prisijungimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>testuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Successfully logged in</td>
+</tr>
+<!--sms tikrinimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<!--įrašius % meta crasha-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>text</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>-37063749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>937</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Afghanistan MOB Afghanistan Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%9$3#7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>35538</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Albania MOB Albania Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--Clickatell provaiderio patikrinimas-->
+<!--adminas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--2 sms provider Clickatell tipo-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>provider2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prov_type</td>
+	<td>label=Clickatell</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_sms_from</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider created</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=name_2</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>sms_provider2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider updated</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_type_link_2</td>
+	<td>clickatell</td>
+</tr>
+<!--lcr su clickatell provaideriu-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--subscribe userio prisijungimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>testuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Successfully logged in</td>
+</tr>
+<!--sms tikrinimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<!--įrašius % meta crasha-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>text</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>-37063749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>937</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Afghanistan MOB Afghanistan Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%9$3#7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>35538</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Albania MOB Albania Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--API provaiderio patikrinimas-->
+<!--adminas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--3 sms provider API tipo-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/provider_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=provider_name</td>
+	<td>sms_provider3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=prov_type</td>
+	<td>label=API</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_string</td>
+	<td>http://google.com?user=username&amp;password=userpassword&amp;api_id=ID&amp;to=&lt;%= DST %&gt;&amp;src=&lt;%= CALLERID %&gt;&amp;text=&lt;%= MSG %&gt;&amp;from_name=&lt;%= USRLASTNAME %&gt; </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=api_good_keywords</td>
+	<td>ok</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=provider_type_3</td>
+	<td>api</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>SMS Provider created</td>
+</tr>
+<!--lcr su clickatell provaideriu-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--subscribe userio prisijungimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>testuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Successfully logged in</td>
+</tr>
+<!--sms tikrinimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<!--įrašius % meta crasha-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>text</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>-37063749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>937</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Afghanistan MOB Afghanistan Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%9$3#7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>35538</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Albania MOB Albania Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--sms lcr su visais provaideriais-->
+<!--adminas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--lcr su visų tipų provaideriais-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/lcr_providers/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=select_prov</td>
+	<td>label=sms_provider3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--subscribe userio prisijungimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>testuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Successfully logged in</td>
+</tr>
+<!--sms tikrinimas-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/sms</td>
+	<td></td>
+</tr>
+<!--įrašius % meta crasha-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>%</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>$3*7*0#63749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>text</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--Neturėtų rasti Lithuania prefixo-->
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>-37063749908</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=search</td>
+	<td>37063749908</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>01232ąčęė!@#$%^*()?сти́льную صباح الخير</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=38</td>
+	<td>Labas!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>937</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Afghanistan MOB Afghanistan Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>%9$3#7</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Unable to send SMS - no rate for this Destination</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>35538</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=search</td>
+	<td>w</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=results</td>
+	<td>Albania MOB Albania Mobile - Unable to send SMS - no rate for this Destination</td>
+</tr>
+<!--adminas-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<!--Unsubscribinti userį-->
+<tr>
+	<td>open</td>
+	<td>/billing/sms/users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img[alt=&quot;Delete&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<!--Prisijungti su useriu-->
+<!--unsubscribed user-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_username</td>
+	<td>testuser</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login_psw</td>
+	<td>testuser1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Successfully logged in</td>
+</tr>
+<!--SMS langas nerodomas, bet balansas lieka-->
+<tr>
+	<td>assertNotText</td>
+	<td>id=hello</td>
+	<td>Hello, testukas <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> Number: <br /><br /> <br /> Message: <br /> Characters left SMS Number</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=SMS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/personal_details</td>
+	<td></td>
+</tr>
+<!--assertText Balance-->
+</tbody></table>
+</body>
+</html>
