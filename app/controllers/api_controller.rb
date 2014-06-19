@@ -4087,7 +4087,7 @@ class ApiController < ApplicationController
             cli = Callerid.where(cli: params[:cli_number]).first
             if cli
               allowed_to_delete = false
-              if check_owner_for_device(cli.device.try(:user), 0, @user)
+              if check_owner_for_device(cli.device.try(:user), 0, @user) || @user.is_admin?
                 if cli.destroy
                   doc.success('CLI successfully deleted')
                 else
@@ -4135,7 +4135,8 @@ class ApiController < ApplicationController
       errors << 'CLI Number cannot be empty' if params[:cli_number].blank?
       errors << 'Device ID cannot be empty'  if device_id.blank?
       correct_owner = user && user.is_accountant? ? 0 : user.try(:id)
-      if device.blank? || (device_user.try(:owner_id) != correct_owner) || (user.is_admin? && device_user.is_reseller?)
+      is_admin = user.try(:is_admin?)
+      if device.blank? || (device_user.try(:owner_id) != correct_owner && !is_admin) || (is_admin && device_user.is_reseller?)
         errors << 'Device was not found'
       end
 
