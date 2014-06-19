@@ -47,31 +47,7 @@
 	<td></td>
 </tr>
 <!--TIME ZONES-->
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>id=email_sending_enabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=email_from</td>
-	<td>test@test.com</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Settings saved</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>check</td> 	<td>id=email_sending_enabled</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_from</td> 	<td>test@test.com</td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Settings saved</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/0</td>
@@ -417,46 +393,7 @@
 	<td>css=#confirm_without_message &gt; input[name=&quot;commit&quot;]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/billing/functions/settings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=email_from</td>
-	<td>no-reply@kolmisoft.com</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=email_sending_enabled</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/callc/hourly_actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Mission complete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/billing/stats/action_log</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Cant_send_email</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>open</td> 	<td>/billing/functions/settings</td> 	<td></td> </tr> <tr> 	<td>type</td> 	<td>id=email_from</td> 	<td>no-reply@kolmisoft.com</td> </tr> <tr> 	<td>click</td> 	<td>id=email_sending_enabled</td> 	<td></td> </tr> <tr> 	<td>clickAndWait</td> 	<td>name=commit</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/callc/hourly_actions</td> 	<td></td> </tr> <tr> 	<td>assertTextPresent</td> 	<td>Mission complete</td> 	<td></td> </tr> <tr> 	<td>open</td> 	<td>/billing/stats/action_log</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>Cant_send_email</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/functions/integrity_check</td>
