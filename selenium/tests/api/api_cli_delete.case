@@ -451,6 +451,52 @@
 	<td>/billing/api/cli_delete?u=accountant&amp;cli_number=378375&amp;test=1</td>
 	<td></td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;cli_number=37096464&amp;device_id=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<!--adminas turi galėti trinti reselerio userių cli-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_delete?u=admin&amp;cli_number=37096464&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI successfully deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>37096464</td>
+	<td></td>
+</tr>
 <!--test=1 formato testavimas - iki siol buvo tik html-->
 <tr>
 	<td>open</td>

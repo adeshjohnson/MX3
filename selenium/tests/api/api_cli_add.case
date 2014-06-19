@@ -887,6 +887,52 @@
 	<td>/billing/api/cli_add?u=reseller&amp;user_id=0&amp;cli_number=154454&amp;device_id=2&amp;test=1</td>
 	<td></td>
 </tr>
+<!--adminas turi galėti kurti cli reselerio useriams-->
+<tr>
+	<td>open</td>
+	<td>/billing/api/cli_add?u=admin&amp;cli_number=37096464&amp;device_id=7&amp;test=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>CLI created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/user_device_clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>37096464</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=tr.row2 &gt; td</td>
+	<td>IAX2/105</td>
+</tr>
 <!--test=1 formato testavimas - iki siol buvo tik html-->
 <tr>
 	<td>open</td>
@@ -906,6 +952,16 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/devices/clis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>37096464</td>
 	<td></td>
 </tr>
 <tr>
