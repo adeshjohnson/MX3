@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
     function textCounter(field, cntfield, sms_counter, maxlimit, val) {
         //alert(val);
         //if (sms_counter.value == 1) {
@@ -35,7 +35,7 @@
     }
     //<![CDATA[
     function get_prefix(value) {
-        new Ajax.Updater('results', '<%= Web_Dir %>/sms/prefix_finder_find?prefix=' + value, {asynchronous:true, evalScripts:true})
+        new Ajax.Updater('results', '<%= Web_Dir %>/sms/prefix_finder_find?prefix=' + encodeURI(escape(value)), {asynchronous:true, evalScripts:true})
     }
     //]]>
 </script>
