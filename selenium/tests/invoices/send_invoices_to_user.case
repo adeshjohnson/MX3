@@ -157,16 +157,15 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='tabTabdhtmlgoodies_tabView1_4']/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertValue</td>
 	<td>email_sending_enabled</td>
 	<td>off</td>
 </tr>
-<!--<tr> 	<td>click</td> 	<td>email_sending_enabled</td> 	<td></td> </tr>-->
+<tr>
+	<td>click</td>
+	<td>id=email_sending_enabled</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>id=email_from</td>
@@ -197,21 +196,7 @@
 	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
 	<td></td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to send invoices by email?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>INTERNAL ERROR</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure you want to send invoices by email?</td> 	<td></td> </tr> <tr> 	<td>assertTextNotPresent</td> 	<td>INTERNAL ERROR</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/callc/logout</td>
@@ -327,16 +312,7 @@
 	<td>//div[@id='invoices_details']/table/tbody/tr/td/select[2]</td>
 	<td>label=2013-05-20</td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to send invoices by email?</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure you want to send invoices by email?</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/5</td>
@@ -702,16 +678,7 @@
 	<td>//div[@id='invoices_details']/table/tbody/tr/td/select[1]</td>
 	<td>label=2012-05-20</td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to send invoices by email?</td>
-	<td></td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure you want to send invoices by email?</td> 	<td></td> </tr>-->
 <tr>
 	<td>open</td>
 	<td>/billing/users/edit/12</td>
@@ -1028,21 +995,7 @@
 	<td>link_send_invoices</td>
 	<td></td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to send invoices by email?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=notice</td>
-	<td>Invoices were not sent: 1</td>
-</tr>
+<!--<tr> 	<td>clickAndWait</td> 	<td>//input[@name='commit' and @value='Send Invoices over Email to Users']</td> 	<td></td> </tr> <tr> 	<td>assertConfirmation</td> 	<td>Are you sure you want to send invoices by email?</td> 	<td></td> </tr> <tr> 	<td>assertText</td> 	<td>id=notice</td> 	<td>Invoices were not sent: 1</td> </tr>-->
 </tbody></table>
 </body>
 </html>
