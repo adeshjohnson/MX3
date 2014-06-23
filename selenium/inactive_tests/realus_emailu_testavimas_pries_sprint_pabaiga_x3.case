@@ -521,6 +521,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=to_be_sent_0</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -529,6 +534,11 @@
 	<td>assertText</td>
 	<td>id=status</td>
 	<td>Email sent</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=1</td>
+	<td>1</td>
 </tr>
 <!--CHECK EMAIL - turejo ateiti template su variables-->
 <!--5. *****************-->
@@ -1366,6 +1376,16 @@
 	<td>css=email_sending_status</td>
 	<td>Email sent</td>
 </tr>
+<tr>
+	<td>open</td>
+	<td>/billing/emails/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#emails_test &gt; a</td>
+	<td>1</td>
+</tr>
 <!--CHECK EMAIL - turejo ateiti callerid blocked-->
 <!--16. *****************-->
 <!--email4-->
@@ -1458,6 +1478,66 @@
 	<td>click</td>
 	<td>id=click_commit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/stats/action_log</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_89</td>
+	<td>email_sent</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_31</td>
+	<td>email_sent</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_46</td>
+	<td>email_sent</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=type_30</td>
+	<td>error</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=data_30</td>
+	<td>Cant_send_email</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#target_97 &gt; a</td>
+	<td>Test Reseller</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=test test</td>
+	<td>test test</td>
 </tr>
 <!--CHECK EMAIL - turejo ateiti password-->
 <!--19. *****************-->
