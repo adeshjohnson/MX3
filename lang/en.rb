@@ -3927,8 +3927,8 @@ Localization.define('en') do |l|
   l.store 'Paypal_return_url', 'Return URL on successful payment'
   l.store 'Paypal_cancel_url', 'Return URL on canceled payment'
   l.store 'PayPal_Custom_redirect_Explanation', 'Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address.'
-  l.store 'Paypal_return_url_Explanation', 'Set return address after successful payment. If not set, system will use ' + Web_URL + Web_Dir + "/payments/personal_payments"
-  l.store 'Paypal_cancel_url_Explanation', 'Set return address after canceled payment. If not set, system will use ' + Web_URL + Web_Dir + "/callc/main"
+  l.store 'Paypal_return_url_Explanation', 'Set return address after successful payment. If not set, system will use /payments/personal_payments'
+  l.store 'Paypal_cancel_url_Explanation', 'Set return address after canceled payment. If not set, system will use /callc/main'
   l.store 'gateway_PayPal_Custom_redirect', 'PayPal custom redirect'
   l.store 'gateway_Paypal_return_url', 'Return URL on successful payment'
   l.store 'gateway_Paypal_cancel_url', 'Return URL on canceled payment'
@@ -3939,8 +3939,8 @@ Localization.define('en') do |l|
   l.store 'collision_Please_start_over', 'Collision in file import. Please start over and do one import at a time.'
   l.store 'dialplan_def_device', 'Default Device for Pass-through Calls'
   l.store 'dialplan_def_device_explanation', 'ATTENTION! Use this feature with great understanding what it is used for. It allows all calls pass over this Dial Plan and assigns such calls to selected Device. Consult Manual for more information.'
-  l.store "Bad_number_interval_max", "PIN is too short for this interval. You can create maximum "
-  l.store "cards", "cards"
+  l.store 'Bad_number_interval_max', 'PIN is too short for this interval. You can create maximum '
+  l.store 'cards', 'cards'
   l.store 'Short_Card_pin_not_safe', 'ATTENTION! It is not safe to use PIN shorter than 6 symbols.'
   l.store 'Bad_number_interval_no_pin_left', 'Not enough unique PIN left. Try to use longer PIN. Now You can create maximum '
   l.store 'First_provider_percent_limit', 'First Providers percent limit'

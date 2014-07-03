@@ -3,7 +3,7 @@ Mor::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
-  config.cache_classes = false # turi buti true !!! reikia lang revorko !
+  config.cache_classes = true # turi buti true !!!
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local = false
@@ -32,7 +32,7 @@ Mor::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]

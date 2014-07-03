@@ -3907,8 +3907,8 @@ Localization.define('cz') do |l|
   l.store 'Paypal_return_url', 'Return URL on successful payment'
   l.store 'Paypal_cancel_url', 'Return URL on canceled payment'
   l.store 'PayPal_Custom_redirect_Explanation', 'Option to manually set return address from successful or canceled PayPal payment. If not checked, system will use default address.'
-  l.store 'Paypal_return_url_Explanation', 'Set return address after successful payment. If not set, system will use ' + Web_URL
-  l.store 'Paypal_cancel_url_Explanation', 'Set return address after canceled payment. If not set, system will use ' + Web_URL
+  l.store 'Paypal_return_url_Explanation', 'Set return address after successful payment.'
+  l.store 'Paypal_cancel_url_Explanation', 'Set return address after canceled payment.'
   l.store 'gateway_PayPal_Custom_redirect', 'PayPal custom redirect'
   l.store 'gateway_Paypal_return_url', 'Return URL on successful payment'
   l.store 'gateway_Paypal_cancel_url', 'Return URL on canceled payment'
