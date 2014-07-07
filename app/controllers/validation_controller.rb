@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ValidationController < ApplicationController
+  before_filter :check_localization
 
   def validate
     user_stats = validate_users
@@ -66,7 +67,7 @@ class ValidationController < ApplicationController
           MorLog.my_debug("VALIDATED DEVICE: #{device.id}")
         else
           str = ""
-          device.errors.each { |key, value| str += " " + value.to_s }
+          device.errors.each { |key, value| str += " " + _(value.to_s) }
           Action.new(:date => Time.now.to_s(:db), :target_id => device.id, :target_type => "device", :action => "error", :data => ("Device_still_invalid. " + str)[0..255], :processed => 0).save
           MorLog.my_debug("NOT VALIDATED DEVICE: #{device.id}")
           @still_invalid += 1

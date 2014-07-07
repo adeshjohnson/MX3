@@ -4154,7 +4154,19 @@ class ApiController < ApplicationController
             doc.success(_('CLI_created'))
           else
             cli.errors.each do |key, value|
-              doc.error(value.gsub(/<\/?a.*?>/, ''))
+              message = case value
+                        when 'Such_CLI_exists'
+                          'Such CLI exists'
+                        when 'Please_enter_details'
+                          'Please enter details'
+                        when 'CLI_must_be_number'
+                          'CLI must be numeric'
+                        when 'CID_is_assigned_to_Device'
+                          'CID is assigned to Device'
+                        else
+                          value.to_s
+                        end
+              doc.error(message)
             end if cli.respond_to?(:errors)
           end
         end
