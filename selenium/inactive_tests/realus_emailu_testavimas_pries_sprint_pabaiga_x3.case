@@ -42,10 +42,11 @@
 	<td>/billing/users/personal_details/0</td>
 	<td></td>
 </tr>
+<!--email 1-->
 <tr>
 	<td>type</td>
 	<td>id=address_email</td>
-	<td>email1@yahoo.com</td>
+	<td>admynas@hotmail.com</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -62,10 +63,11 @@
 	<td>id=email_sending_enabled</td>
 	<td></td>
 </tr>
+<!--mg-smtp.kava.lt * uzblokuotas -->
 <tr>
 	<td>type</td>
 	<td>id=email_smtp_server</td>
-	<td>mg-smtp.kava.lt</td>
+	<td>localhost</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -114,10 +116,11 @@
 	<td>/billing/users/edit/4</td>
 	<td></td>
 </tr>
+<!--email 2-->
 <tr>
 	<td>type</td>
 	<td>id=address_email</td>
-	<td>email2</td>
+	<td>reseleris@yandex.com</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -134,10 +137,11 @@
 	<td>id=user_responsible_accountant_id</td>
 	<td>label=Test Accountant</td>
 </tr>
+<!--email 3 -->
 <tr>
 	<td>type</td>
 	<td>id=address_email</td>
-	<td>email3</td>
+	<td>accountantas@yandex.com</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -676,10 +680,11 @@
 	<td>id=last_name</td>
 	<td>test</td>
 </tr>
+<!--email 4-->
 <tr>
 	<td>type</td>
 	<td>id=email</td>
-	<td>email4</td>
+	<td>japhagasob@voidbay.com</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -741,10 +746,11 @@
 	<td>link=Forgot Password</td>
 	<td></td>
 </tr>
+<!--email 4-->
 <tr>
 	<td>type</td>
 	<td>id=email_c</td>
-	<td>email4</td>
+	<td>japhagasob@voidbay.com</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -834,10 +840,11 @@
 	<td>/billing/users/personal_details/3</td>
 	<td></td>
 </tr>
+<!--email 4-->
 <tr>
 	<td>type</td>
 	<td>id=address_email</td>
-	<td>email4</td>
+	<td>japhagasob@voidbay.com</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -902,10 +909,11 @@
 	<td>/billing/users/edit/5</td>
 	<td></td>
 </tr>
+<!--email 5-->
 <tr>
 	<td>type</td>
 	<td>id=address_email</td>
-	<td>email5</td>
+	<td>kaprolumic@voidbay.com</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1440,10 +1448,11 @@
 	<td>id=last_name</td>
 	<td>test</td>
 </tr>
+<!--email 2-->
 <tr>
 	<td>type</td>
 	<td>id=email</td>
-	<td>email2</td>
+	<td>reseleris@yandex.com</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1469,10 +1478,11 @@
 	<td>link=Forgot Password</td>
 	<td></td>
 </tr>
+<!--email 2-->
 <tr>
 	<td>type</td>
 	<td>id=email_c</td>
-	<td>email2</td>
+	<td>reseleris@yandex.com</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1487,12 +1497,12 @@
 <tr>
 	<td>type</td>
 	<td>login_username</td>
-	<td>reseller</td>
+	<td>admin</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>login_psw</td>
-	<td>reseller1</td>
+	<td>admin1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1505,49 +1515,31 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=type_89</td>
-	<td>email_sent</td>
+	<td>assertTextPresent</td>
+	<td>email_sent </td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=type_31</td>
-	<td>email_sent</td>
+	<td>assertTextPresent</td>
+	<td>email_sent </td>
+	<td></td>
 </tr>
+<!--email6-->
 <tr>
-	<td>assertText</td>
-	<td>id=type_46</td>
-	<td>email_sent</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=type_30</td>
-	<td>error</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>id=data_30</td>
-	<td>Cant_send_email</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=#target_97 &gt; a</td>
-	<td>Test Reseller</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>link=test test</td>
-	<td>test test</td>
+	<td>open</td>
+	<td>billing/api/user_register?id=hfttv7bcqt&amp;username=aaaaaa&amp;password=11111111&amp;password2=11111111&amp;first_name=asasas&amp;last_name=sasasa&amp;country_id=2&amp;email=sisludretr@voidbay.com&amp;device_type=SIP&amp;test=1</td>
+	<td></td>
 </tr>
 <!--CHECK EMAIL - turejo ateiti password-->
 <!--19. *****************-->
 <!--email2-->
 <!--TOTALS: -->
-<!--email1 - 4: callerid blocked (mail delivery spame), thank you for registering, subscriptions report, new user registered-->
-<!--email4: 5 (2x thank you for registering, password reminder, callerid blocked, new user registered)-->
-<!--email3: 4 ( 2x warning -15 ir -15,  no subject, invoices attached)-->
-<!--email5: 4 (2x warning balance -50 ir -70, invoices attached, no subject test template)-->
-<!--email2: 2 (password reminder, thank you for registering)-->
+<!--email1 - 6: callerid blocked (mail delivery spame), thank you for registering, subscriptions report, new user registered/admyn-->
+<!--email4: 5 (2x thank you for registering, password reminder, callerid blocked, new user registered) throwaway -->
+<!--email3: 4 ( 2x warning -15 ir -15,  no subject, invoices attached) /accountnats -->
+<!--email5: 4 (2x warning balance -50 ir -70, invoices attached, no subject test template) throwaway -->
+<!--email2: 2 (password reminder, thank you for registering) /reseller-->
+<!--email6: 1 Thank you for registering  throwaway-->
 </tbody></table>
 </body>
 </html>
