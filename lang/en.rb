@@ -4625,6 +4625,7 @@ Localization.define('en') do |l|
   l.store 'assigned_to_callback', 'it is assigned to Callback'
   l.store 'do_not_block_users_when_balance_below_zero_on_subscription', 'Do not block POSTPAID User when balance goes bellow zero on subscription count'
   l.store 'db_error_broken_call_duration', 'Database Error: Broken Call Duration'
+  l.store 'Voucher_is_inactive_please_contact_system_Administrator', 'Voucher is inactive. Please contact System Administrator'
   #  l.store '', ''
   #  l.store '', ''
 

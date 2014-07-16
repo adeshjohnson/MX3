@@ -250,6 +250,11 @@ class VouchersController < ApplicationController
       flash[:notice] = _('Voucher_not_found')
       redirect_to :controller => :callc, :action => :main and return false
     end
+    unless @voucher.active.to_i == 1
+      flash[:notice] = _('Voucher_is_inactive_please_contact_system_Administrator')
+      redirect_to :root and return false
+    end
+
     @user = User.where(:id => session[:user_id]).first
 
     if  @user.vouchers_disabled_till > Time.now
