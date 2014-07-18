@@ -727,6 +727,202 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>id=deactivate_link_12</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=number_12</td>
+	<td>resellers</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=number_3</td>
+	<td>admins</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<!--deaktyvuoto voucherio numeris - neturi leisti naudoti tokio-->
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>${admins}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Voucher is inactive. Please contact System Administrator</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>${resellers}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Voucher is inactive. Please contact System Administrator</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>${resellers}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Voucher is inactive. Please contact System Administrator</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>accountant</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>accountant1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>${admins}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=notice</td>
+	<td>Voucher is inactive. Please contact System Administrator</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/billing/vouchers/bulk_management</td>
 	<td></td>
