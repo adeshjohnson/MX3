@@ -265,6 +265,7 @@ class VouchersController < ApplicationController
     if @voucher
       @credit_without_vat = @voucher.get_tax.count_amount_without_tax(@voucher.credit_with_vat)
       @credit_in_default_currency = @credit_without_vat * count_exchange_rate(@voucher.currency, session[:default_currency])
+      @balance_after_use = (@user.raw_balance + @credit_in_default_currency) * count_exchange_rate(session[:default_currency], @user.currency)
     else
       session[:voucher_attempt] += 1
     end
