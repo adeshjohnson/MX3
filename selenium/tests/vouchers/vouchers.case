@@ -1855,6 +1855,11 @@
 	<td>label=2018</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=currency</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>commit</td>
 	<td></td>
@@ -1873,6 +1878,26 @@
 	<td>storeText</td>
 	<td>number_22</td>
 	<td>skaicius2</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/users/edit/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=user_currency_id</td>
+	<td>label=DZD</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=sbmt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>User's settings successfully changed: Test User #1</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -1925,14 +1950,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>10.0000 USD</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=credit_with_tax</td>
+	<td>10.0000 ALL</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=credit_without_tax</td>
-	<td>5.2977 USD</td>
+	<td>5.2977 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_default_curr</td>
+	<td>2.6489 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_before</td>
+	<td>42.3819 DZD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_after</td>
+	<td>52.9773 DZD</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1995,14 +2035,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>10.0000 USD</td>
-	<td></td>
+	<td>assertText</td>
+	<td>id=credit_with_tax</td>
+	<td>10.0000 ALL</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>id=credit_without_tax</td>
-	<td>5.2977 USD</td>
+	<td>5.2977 ALL</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2237,6 +2277,247 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Voucher was not found</td>
+	<td></td>
+</tr>
+<!--Kai default currency kitoks-->
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/currencies/change_default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=img[alt=&quot;Cross&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Currencies rates updated</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/test/load_delta_sql/tests/sql/update_currencies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=amount_total</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=credit</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=currency</td>
+	<td>label=ALL</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=date_from_year</td>
+	<td>label=2017</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=status</td>
+	<td>Vouchers created</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=number_314</td>
+	<td>admins</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=number_315</td>
+	<td>resellers</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>number</td>
+	<td>${admins}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_with_tax</td>
+	<td>10.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_without_tax</td>
+	<td>5.2977 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_default_curr</td>
+	<td>2.6489 EUR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_before</td>
+	<td>63.5728 DZD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_after</td>
+	<td>74.1683 DZD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>user_reseller</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>user_reseller1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Successfully logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/vouchers/voucher_use</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>number</td>
+	<td>${resellers}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_with_tax</td>
+	<td>10.0000 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_without_tax</td>
+	<td>5.2977 ALL</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=credit_default_curr</td>
+	<td>2.6489 EUR</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_before</td>
+	<td>27.8131 USD</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=balance_after</td>
+	<td>29.1375 USD</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/billing/callc/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>login_psw</td>
+	<td>admin1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
 	<td></td>
 </tr>
 <tr>
