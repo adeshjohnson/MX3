@@ -8,7 +8,7 @@
   <br>
   <% @user_map = @users.map { |u| [nice_user(u), u.id.to_s] } %>
   <%= form_tag :action => 'profit' do %>
-    <%= _('User') %>: 
+    <%= _('User') %>:
       <span id='user_select'>
         <%= select_tag("user_id", options_for_select([[_('All'), "-1"]] + @user_map, @user_id.to_i.to_s)) %>
       </span>
@@ -182,7 +182,7 @@
     <%= hidden_field_tag 'average_call_duration', @average_call_duration %>
     <%= hidden_field_tag 'total_call_price', @total_call_price %>
     <%= hidden_field_tag 'total_percent', @total_percent %>
-    <%= hidden_field_tag 'active_users', @active_users %>
+    <%= hidden_field_tag 'active_users', @total_users %>
     <%= hidden_field_tag 'total_call_selfprice', @total_call_selfprice %>
     <%= hidden_field_tag 'total_selfcost_percent', @total_selfcost_percent %>
     <%= hidden_field_tag 'total_profit', @total_profit %>
